@@ -1,12 +1,30 @@
 using UnityEngine;
-using System.Collections;
+using UnityEngine.Video;
 
 public class SplashManager : MonoBehaviour
 {
-    IEnumerator Start()
-    {
-        yield return new WaitForSeconds(2f);
+    public VideoPlayer videoPlayer;
 
+    void Start()
+    {
+        videoPlayer.loopPointReached += FimDoVideo;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PularVideo();
+        }
+    }
+
+    void FimDoVideo(VideoPlayer vp)
+    {
+        GameManager.Instance.LoadScene("MenuPrincipal");
+    }
+
+    void PularVideo()
+    {
         GameManager.Instance.LoadScene("MenuPrincipal");
     }
 }
