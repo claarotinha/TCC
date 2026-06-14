@@ -4,7 +4,7 @@ public class MainMenu : MonoBehaviour
 {
     public void StartGame()
     {
-        GameManager.Instance.LoadScene("MENU");
+        GameManager.Instance.LoadScene("Escola");
     }
 
     public void ExitGame()
