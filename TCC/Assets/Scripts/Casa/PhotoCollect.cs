@@ -69,17 +69,17 @@ public class PhotoCollect : MonoBehaviour
         {
             case 1:
                 infoText.text =
-                    "Uma foto de família.\n\nNão lembro de termos tirado tantas fotos assim.";
+                    "Uma foto de família. Não lembro de termos tirado tantas fotos assim.";
                 break;
 
             case 2:
                 infoText.text =
-                    "Essa casa parece diferente.\n\nSerá que foi tirada há muito tempo?";
+                    "Essa casa parece diferente. Será que foi tirada há muito tempo?";
                 break;
 
             case 3:
                 infoText.text =
-                    "Duas meninas...\n\nElas são tão parecidas.\n\nSerá que eram irmãs?";
+                    "Duas meninas...Elas são tão parecidas.";
                 break;
         }
     }
