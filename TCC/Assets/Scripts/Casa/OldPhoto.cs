@@ -52,7 +52,7 @@ public class OldPhoto : MonoBehaviour
             // Usa o texto que você escreveu no Inspector
             investigationText.text = photoText;
             investigationText.color = Color.white;
-            investigationText.fontSize = 32;
+            investigationText.fontSize = 20;
 
             collectHint.SetActive(false);
 

@@ -88,7 +88,7 @@ public class DiaryWithCutscene : MonoBehaviour
         investigationText.gameObject.SetActive(true);
         investigationText.text = diaryText;
         investigationText.color = Color.white;
-        investigationText.fontSize = 32;
+        investigationText.fontSize = 20;
         collectHint.SetActive(false);
         StartCoroutine(EnableClose());
     }
