@@ -15,10 +15,12 @@ public class PlayerAnimation : MonoBehaviour
     {
         float speed = Mathf.Abs(rb.linearVelocity.x);
 
-        bool isWalking = speed > 0.1f;
-        bool isRunning = Input.GetKey(KeyCode.LeftShift) && isWalking;
+        bool isMoving = speed > 0.1f;
 
-        animator.SetBool("IsWalking", isWalking);
+        // ✔ NÃO depende de velocidade pra corrida
+        bool isRunning = Input.GetKey(KeyCode.LeftShift) && Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f;
+
+        animator.SetBool("IsWalking", isMoving);
         animator.SetBool("IsRunning", isRunning);
     }
 }

@@ -1502,7 +1502,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5
   runSpeed: 8
-  jumpForce: 8
   groundCheck: {fileID: 1566464611}
   groundRadius: 0.2
   groundLayer:
@@ -2047,9 +2046,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1412625533}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.94, y: -6.67, z: 0.0518}
-  m_LocalScale: {x: 0.5738, y: 0.5738, z: 0.5738}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.4628, y: -6.0943, z: 0.0518}
+  m_LocalScale: {x: -0.9683803, y: 0.91304946, z: 0.91304946}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1055357811}
@@ -2103,7 +2102,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2425645001220786861, guid: 410bcd0d621742042ab14ba9e9859689, type: 3}
+  m_Sprite: {fileID: -3846487595514147800, guid: 865bb02cce4f81b4eac528c7b57430de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
