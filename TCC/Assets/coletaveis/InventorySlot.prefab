@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
   icon: {fileID: 5167830459104221042}
+  highlight: {fileID: 0}
 --- !u!1 &4317202852323740962
 GameObject:
   m_ObjectHideFlags: 0

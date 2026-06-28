@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movimentação")]
@@ -13,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     private Rigidbody2D rb;
+    private Animator animator;
 
     private float horizontalInput;
     private bool isRunning;
@@ -21,12 +23,14 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
         HandleInput();
         CheckGround();
+        UpdateAnimations();
     }
 
     private void FixedUpdate()
@@ -57,5 +61,16 @@ public class PlayerMovement : MonoBehaviour
             groundRadius,
             groundLayer
         );
+    }
+
+    private void UpdateAnimations()
+    {
+        float speed = Mathf.Abs(rb.linearVelocity.x);
+
+        bool isMoving = speed > 0.1f;
+        bool running = isRunning && isMoving;
+
+        animator.SetBool("IsWalking", isMoving);
+        animator.SetBool("IsRunning", running);
     }
 }

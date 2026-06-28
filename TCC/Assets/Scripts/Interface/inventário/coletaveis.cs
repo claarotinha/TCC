@@ -4,33 +4,13 @@ public class CollectableItem : MonoBehaviour
 {
     [SerializeField] private ItemData itemData;
 
-    private void OnMouseEnter()
-    {
-        if (CursorManager.Instance != null)
-        {
-            CursorManager.Instance.SetLupa();
-        }
-    }
-
-    private void OnMouseExit()
-    {
-        if (CursorManager.Instance != null)
-        {
-            CursorManager.Instance.SetNormal();
-        }
-    }
-
     private void OnMouseDown()
     {
-        Debug.Log("=== TESTE DE COLETA ===");
-
-        Debug.Log("InventoryManager.Instance = " + InventoryManager.Instance);
-
-        Debug.Log("itemData = " + itemData);
+        Debug.Log("=== COLETA ===");
 
         if (InventoryManager.Instance == null)
         {
-            Debug.LogError("Não existe InventoryManager na cena!");
+            Debug.LogError("InventoryManager não existe na cena!");
             return;
         }
 
@@ -41,6 +21,8 @@ public class CollectableItem : MonoBehaviour
         }
 
         InventoryManager.Instance.AddItem(itemData);
+
+        Debug.Log(itemData.itemName + " coletado com sucesso!");
 
         Destroy(gameObject);
     }

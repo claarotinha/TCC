@@ -23,16 +23,12 @@ public class InventoryUI : MonoBehaviour
     public void Refresh()
     {
         foreach (Transform child in content)
-        {
             Destroy(child.gameObject);
-        }
 
         foreach (ItemData item in InventoryManager.Instance.Items)
         {
             GameObject slot = Instantiate(slotPrefab, content);
-
-            slot.GetComponent<InventorySlot>()
-                .Setup(item);
+            slot.GetComponent<InventorySlot>().Setup(item);
         }
     }
 }

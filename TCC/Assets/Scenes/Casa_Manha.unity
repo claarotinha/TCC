@@ -2441,8 +2441,8 @@ GameObject:
   - component: {fileID: 716483946}
   - component: {fileID: 716483945}
   - component: {fileID: 716483944}
-  - component: {fileID: 716483943}
   - component: {fileID: 716483947}
+  - component: {fileID: 716483948}
   m_Layer: 0
   m_Name: Mari
   m_TagString: Player
@@ -2465,20 +2465,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1034833894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &716483943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 716483941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd465ed222f8bec44bd0bcb44189b5b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 5
-  runSpeed: 8
 --- !u!61 &716483944
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2633,6 +2619,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &716483948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716483941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba7c5782a0ab5e4fbda0c57a7edacf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  walkSpeed: 5
+  runSpeed: 8
+  groundCheck: {fileID: 1303560399}
+  groundRadius: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &817238784
 GameObject:
   m_ObjectHideFlags: 0
@@ -3593,6 +3598,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2b7ab6712f5824ea51d5e32f91269b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
+  combinations:
+  - {fileID: 11400000, guid: b978c9c9b0851ad479f89963bc408037, type: 2}
 --- !u!4 &1156762114
 Transform:
   m_ObjectHideFlags: 0
