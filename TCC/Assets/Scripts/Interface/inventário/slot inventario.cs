@@ -61,7 +61,8 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
 
     private void UpdateAllSlots()
     {
-        InventorySlot[] slots = FindObjectsOfType<InventorySlot>();
+        // 🔥 CORRIGIDO: Usa FindObjectsByType em vez de FindObjectsOfType
+        InventorySlot[] slots = FindObjectsByType<InventorySlot>(FindObjectsSortMode.None);
 
         foreach (var s in slots)
             s.UpdateVisual();

@@ -2,17 +2,18 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class ExamineObject : MonoBehaviour
+public class ExamineAndCollect : MonoBehaviour
 {
     public GameObject examinePanel;
     public TMP_Text examineText;
     public Button closeButton;
-
+    
+    [SerializeField] private ItemData itemData;
     [TextArea]
     public string message;
 
     private bool isShowing = false;
-    private static ExamineObject currentExaminingObject = null;
+    private static ExamineAndCollect currentExaminingObject = null;
 
     void Start()
     {
@@ -42,6 +43,7 @@ public class ExamineObject : MonoBehaviour
         else
         {
             HidePanel();
+            CollectItem();
         }
     }
 
@@ -82,9 +84,29 @@ public class ExamineObject : MonoBehaviour
         Debug.Log("🔒 Painel fechado: " + gameObject.name);
     }
 
+    private void CollectItem()
+    {
+        if (itemData == null)
+        {
+            Debug.LogWarning("⚠ ItemData não atribuído!");
+            return;
+        }
+
+        if (InventoryManager.Instance == null)
+        {
+            Debug.LogError("❌ InventoryManager não existe!");
+            return;
+        }
+
+        InventoryManager.Instance.AddItem(itemData);
+        Debug.Log("✅ " + itemData.itemName + " coletado!");
+        Destroy(gameObject);
+    }
+
     // CORRIGIDO: Agora verifica se o painel está ativo
     public static bool IsShowing()
     {
+        // Verifica se o currentExaminingObject existe e se o painel dele está ativo
         if (currentExaminingObject != null && currentExaminingObject.examinePanel != null)
         {
             return currentExaminingObject.examinePanel.activeSelf;
