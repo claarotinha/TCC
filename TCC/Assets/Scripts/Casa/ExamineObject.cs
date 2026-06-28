@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ExamineObject : MonoBehaviour
 {
@@ -9,48 +10,99 @@ public class ExamineObject : MonoBehaviour
     [TextArea]
     public string message;
 
-    private bool isShowing = false;
+    private static bool isShowing = false;
+    private static ExamineObject currentObject = null;
 
-    private void OnMouseEnter()
+    void Start()
+    {
+        if (examinePanel != null)
+        {
+            examinePanel.SetActive(false);
+            
+            // ADICIONA O ClosePanelOnClick AUTOMATICAMENTE
+            AddClickDetector();
+        }
+    }
+
+    void Update()
+    {
+        // Clique em 2D
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+            if (hit.collider != null && hit.collider.gameObject == gameObject)
+            {
+                // Clicou no objeto
+                if (currentObject != null && currentObject != this)
+                {
+                    currentObject.HidePanel();
+                }
+
+                if (!isShowing)
+                {
+                    ShowPanel();
+                    currentObject = this;
+                }
+                else
+                {
+                    HidePanel();
+                    currentObject = null;
+                }
+            }
+        }
+    }
+
+    void OnMouseEnter()
     {
         if (CursorManager.Instance != null)
-        {
             CursorManager.Instance.SetLupa();
-        }
     }
 
-    private void OnMouseExit()
+    void OnMouseExit()
     {
         if (CursorManager.Instance != null)
-        {
             CursorManager.Instance.SetNormal();
-        }
     }
 
-    private void OnMouseDown()
+    void AddClickDetector()
     {
-        if (!isShowing)
+        // Remove detector antigo se existir
+        ClosePanelOnClick oldDetector = examinePanel.GetComponent<ClosePanelOnClick>();
+        if (oldDetector != null)
         {
-            if (examinePanel != null)
-            {
-                examinePanel.SetActive(true);
-            }
-
-            if (examineText != null)
-            {
-                examineText.text = message;
-            }
-
-            isShowing = true;
+            Destroy(oldDetector);
         }
-        else
+
+        // Adiciona novo detector
+        ClosePanelOnClick detector = examinePanel.AddComponent<ClosePanelOnClick>();
+        detector.SetExamineObject(this);
+        Debug.Log("✅ ClosePanelOnClick adicionado ao painel!");
+    }
+
+    public void ShowPanel()
+    {
+        if (examinePanel != null)
         {
-            if (examinePanel != null)
-            {
-                examinePanel.SetActive(false);
-            }
-
-            isShowing = false;
+            examinePanel.SetActive(true);
+            Debug.Log("✅ Painel ABERTO por: " + gameObject.name);
         }
+        if (examineText != null)
+        {
+            examineText.text = message;
+        }
+        isShowing = true;
+    }
+
+    public void HidePanel()
+    {
+        if (examinePanel != null)
+        {
+            examinePanel.SetActive(false);
+            Debug.Log("❌ Painel FECHADO por: " + gameObject.name);
+        }
+        isShowing = false;
+        if (currentObject == this) currentObject = null;
     }
 }
