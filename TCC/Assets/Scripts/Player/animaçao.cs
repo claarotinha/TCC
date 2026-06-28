@@ -17,7 +17,6 @@ public class PlayerAnimation : MonoBehaviour
 
         bool isMoving = speed > 0.1f;
 
-        // ✔ NÃO depende de velocidade pra corrida
         bool isRunning = Input.GetKey(KeyCode.LeftShift) && Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f;
 
         animator.SetBool("IsWalking", isMoving);
