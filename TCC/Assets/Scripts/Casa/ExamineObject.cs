@@ -18,7 +18,7 @@ public class ExamineObject : MonoBehaviour
         if (examinePanel != null)
         {
             examinePanel.SetActive(false);
-            
+
             // ADICIONA O ClosePanelOnClick AUTOMATICAMENTE
             AddClickDetector();
         }
@@ -26,6 +26,10 @@ public class ExamineObject : MonoBehaviour
 
     void Update()
     {
+        // NÃO PERMITE INTERAÇÃO SE O JOGO ESTIVER PAUSADO
+        if (PauseManager.IsPaused)
+            return;
+
         // Clique em 2D
         if (Input.GetMouseButtonDown(0))
         {
@@ -56,6 +60,10 @@ public class ExamineObject : MonoBehaviour
 
     void OnMouseEnter()
     {
+        // NÃO MUDA O CURSOR DURANTE O PAUSE
+        if (PauseManager.IsPaused)
+            return;
+
         if (CursorManager.Instance != null)
             CursorManager.Instance.SetLupa();
     }
@@ -83,15 +91,21 @@ public class ExamineObject : MonoBehaviour
 
     public void ShowPanel()
     {
+        // NÃO ABRE PAINEL DURANTE O PAUSE
+        if (PauseManager.IsPaused)
+            return;
+
         if (examinePanel != null)
         {
             examinePanel.SetActive(true);
             Debug.Log("✅ Painel ABERTO por: " + gameObject.name);
         }
+
         if (examineText != null)
         {
             examineText.text = message;
         }
+
         isShowing = true;
     }
 
@@ -102,7 +116,10 @@ public class ExamineObject : MonoBehaviour
             examinePanel.SetActive(false);
             Debug.Log("❌ Painel FECHADO por: " + gameObject.name);
         }
+
         isShowing = false;
-        if (currentObject == this) currentObject = null;
+
+        if (currentObject == this)
+            currentObject = null;
     }
 }

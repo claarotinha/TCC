@@ -44,6 +44,10 @@ public class MotherDialogue : MonoBehaviour
 
     private void Update()
     {
+        // NÃO PERMITE AVANÇAR O DIÁLOGO DURANTE O PAUSE
+        if (PauseManager.IsPaused)
+            return;
+
         if (inConversation)
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
@@ -55,6 +59,10 @@ public class MotherDialogue : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        // NÃO MUDA O CURSOR DURANTE O PAUSE
+        if (PauseManager.IsPaused)
+            return;
+
         if (CursorManager.Instance != null)
         {
             CursorManager.Instance.SetLupa();
@@ -71,6 +79,10 @@ public class MotherDialogue : MonoBehaviour
 
     private void OnMouseDown()
     {
+        // NÃO PERMITE ABRIR DIÁLOGO DURANTE O PAUSE
+        if (PauseManager.IsPaused)
+            return;
+
         if (dialogueOpen)
             return;
 

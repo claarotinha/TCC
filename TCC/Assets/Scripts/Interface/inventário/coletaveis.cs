@@ -6,6 +6,10 @@ public class CollectableItem : MonoBehaviour
 
     void Update()
     {
+        // Não permite coletar itens durante o pause
+        if (PauseManager.IsPaused)
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -20,6 +24,10 @@ public class CollectableItem : MonoBehaviour
 
     void Collect()
     {
+        // Segurança extra: impede coleta caso este método seja chamado por outro script
+        if (PauseManager.IsPaused)
+            return;
+
         if (InventoryManager.Instance == null)
         {
             Debug.LogError("InventoryManager não encontrado!");
