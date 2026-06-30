@@ -4,44 +4,41 @@ public class CollectableItem : MonoBehaviour
 {
     [SerializeField] private ItemData itemData;
 
-    void Update()
+    private void OnMouseDown()
     {
-        // Não permite coletar itens durante o pause
-        if (PauseManager.IsPaused)
-            return;
-
-        if (Input.GetMouseButtonDown(0))
+        // Verifica se está examinando algo
+        if (ExamineObject.IsShowing() || CollectableExamine.IsShowing())
         {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-
-            if (hit.collider != null && hit.collider.gameObject == gameObject)
-            {
-                Collect();
-            }
-        }
-    }
-
-    void Collect()
-    {
-        // Segurança extra: impede coleta caso este método seja chamado por outro script
-        if (PauseManager.IsPaused)
-            return;
-
-        if (InventoryManager.Instance == null)
-        {
-            Debug.LogError("InventoryManager não encontrado!");
+            Debug.Log("⛔ Não é possível coletar enquanto examina um objeto.");
             return;
         }
 
         if (itemData == null)
         {
-            Debug.LogError("ItemData não atribuído!");
+            Debug.LogError("❌ ItemData não atribuído!");
+            return;
+        }
+
+        if (InventoryManager.Instance == null)
+        {
+            Debug.LogError("❌ InventoryManager não existe!");
             return;
         }
 
         InventoryManager.Instance.AddItem(itemData);
-        Debug.Log("📦 " + itemData.itemName + " coletado!");
+        Debug.Log("✅ " + itemData.itemName + " coletado com sucesso!");
         Destroy(gameObject);
+    }
+
+    void OnMouseEnter()
+    {
+        if (CursorManager.Instance != null)
+            CursorManager.Instance.SetLupa();
+    }
+
+    void OnMouseExit()
+    {
+        if (CursorManager.Instance != null)
+            CursorManager.Instance.SetNormal();
     }
 }

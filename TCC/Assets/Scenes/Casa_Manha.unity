@@ -840,7 +840,6 @@ GameObject:
   - component: {fileID: 102327918}
   - component: {fileID: 102327921}
   - component: {fileID: 102327920}
-  - component: {fileID: 102327919}
   - component: {fileID: 102327922}
   m_Layer: 0
   m_Name: pou
@@ -864,19 +863,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1185381340}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &102327919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 102327917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d88a07facba769e40bda1bdbbe654d1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CollectableItem
-  itemData: {fileID: 11400000, guid: 6f1074d0ccac01d469b08102d6117d2b, type: 2}
 --- !u!61 &102327920
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -991,12 +977,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 102327917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Script: {fileID: 11500000, guid: bd40efab3aa8dd244b2aee6a826a74e4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  m_EditorClassIdentifier: Assembly-CSharp::CollectableExamine
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: pp
+  itemData: {fileID: 11400000, guid: 6f1074d0ccac01d469b08102d6117d2b, type: 2}
+  message: fbffbv
 --- !u!1 &107028819
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,7 +1300,6 @@ GameObject:
   - component: {fileID: 126653014}
   - component: {fileID: 126653017}
   - component: {fileID: 126653016}
-  - component: {fileID: 126653015}
   - component: {fileID: 126653018}
   m_Layer: 0
   m_Name: cachorro
@@ -1337,19 +1323,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1185381340}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &126653015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 126653013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d88a07facba769e40bda1bdbbe654d1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CollectableItem
-  itemData: {fileID: 11400000, guid: 053fd5e2f246b6d4cad6b60ec2a1d684, type: 2}
 --- !u!61 &126653016
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1464,12 +1437,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 126653013}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Script: {fileID: 11500000, guid: bd40efab3aa8dd244b2aee6a826a74e4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  m_EditorClassIdentifier: Assembly-CSharp::CollectableExamine
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: 'blz '
+  itemData: {fileID: 11400000, guid: 053fd5e2f246b6d4cad6b60ec2a1d684, type: 2}
+  message: ghyhh
 --- !u!1 &174458791
 GameObject:
   m_ObjectHideFlags: 0
@@ -4082,7 +4056,6 @@ GameObject:
   - component: {fileID: 1082521759}
   - component: {fileID: 1082521762}
   - component: {fileID: 1082521761}
-  - component: {fileID: 1082521760}
   - component: {fileID: 1082521763}
   m_Layer: 0
   m_Name: chave
@@ -4106,19 +4079,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1185381340}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1082521760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082521758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d88a07facba769e40bda1bdbbe654d1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CollectableItem
-  itemData: {fileID: 11400000, guid: 48f3c933435bfbe449faee3d20e99340, type: 2}
 --- !u!61 &1082521761
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4233,12 +4193,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1082521758}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Script: {fileID: 11500000, guid: bd40efab3aa8dd244b2aee6a826a74e4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  m_EditorClassIdentifier: Assembly-CSharp::CollectableExamine
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: ok
+  itemData: {fileID: 11400000, guid: 48f3c933435bfbe449faee3d20e99340, type: 2}
+  message: vvfvffb
 --- !u!1 &1101390405
 GameObject:
   m_ObjectHideFlags: 0

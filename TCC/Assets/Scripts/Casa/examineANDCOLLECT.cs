@@ -2,16 +2,17 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class ExamineObject : MonoBehaviour
+public class CollectableExamine : MonoBehaviour
 {
     public GameObject examinePanel;
     public TMP_Text examineText;
-
+    
+    [SerializeField] private ItemData itemData;
     [TextArea]
     public string message;
 
     private bool isShowing = false;
-    private static ExamineObject currentObject = null;
+    private static CollectableExamine currentObject = null;
 
     void Start()
     {
@@ -34,20 +35,22 @@ public class ExamineObject : MonoBehaviour
 
             if (hit.collider != null && hit.collider.gameObject == gameObject)
             {
-                if (currentObject != null && currentObject != this)
+                // Se o painel está mostrando, fecha E coleta
+                if (isShowing && currentObject == this)
                 {
-                    currentObject.HidePanel();
-                }
-
-                if (!isShowing)
-                {
-                    ShowPanel();
-                    currentObject = this;
+                    HidePanel();
+                    CollectItem();
                 }
                 else
                 {
-                    HidePanel();
-                    currentObject = null;
+                    // Se outro objeto está mostrando, fecha ele
+                    if (currentObject != null && currentObject != this)
+                    {
+                        currentObject.HidePanel();
+                    }
+                    
+                    ShowPanel();
+                    currentObject = this;
                 }
             }
         }
@@ -112,6 +115,26 @@ public class ExamineObject : MonoBehaviour
 
         if (currentObject == this)
             currentObject = null;
+    }
+
+    private void CollectItem()
+    {
+        if (itemData == null)
+        {
+            Debug.LogWarning("⚠ ItemData não atribuído em: " + gameObject.name);
+            return;
+        }
+
+        if (InventoryManager.Instance == null)
+        {
+            Debug.LogError("❌ InventoryManager não existe!");
+            return;
+        }
+
+        InventoryManager.Instance.AddItem(itemData);
+        Debug.Log("✅ " + itemData.itemName + " coletado com sucesso!");
+        
+        Destroy(gameObject);
     }
 
     // CORRIGIDO: Agora verifica se o painel está ativo
