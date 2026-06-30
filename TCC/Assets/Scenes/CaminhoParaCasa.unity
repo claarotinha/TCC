@@ -315,8 +315,8 @@ Transform:
   m_GameObject: {fileID: 148699945}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -423.78, y: -82.22, z: 1.5774436}
-  m_LocalScale: {x: 24.558, y: 0.5, z: 1}
+  m_LocalPosition: {x: -423.78, y: -82.2553, z: 1.5774436}
+  m_LocalScale: {x: 24.558, y: 0.42938754, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 927545898}
@@ -592,8 +592,8 @@ GameObject:
   - component: {fileID: 397812801}
   - component: {fileID: 397812800}
   - component: {fileID: 397812799}
-  - component: {fileID: 397812798}
   - component: {fileID: 397812802}
+  - component: {fileID: 397812804}
   - component: {fileID: 397812803}
   m_Layer: 0
   m_Name: Mari
@@ -611,26 +611,12 @@ Transform:
   m_GameObject: {fileID: 397812796}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -433.06, y: -80.18, z: 1.5774436}
+  m_LocalPosition: {x: -431.96, y: -80.72, z: 1.5774436}
   m_LocalScale: {x: 0.586, y: 0.586, z: 0.586}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 731963906}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &397812798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 397812796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd465ed222f8bec44bd0bcb44189b5b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 2
-  runSpeed: 8
 --- !u!61 &397812799
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -665,7 +651,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.19273865}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -675,7 +661,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.03, y: 5.53}
+  m_Size: {x: 3.03, y: 4.7188673}
   m_EdgeRadius: 0
 --- !u!50 &397812800
 Rigidbody2D:
@@ -794,9 +780,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 397812796}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ee240c50dfae674e9afad48d38e14f9, type: 3}
+  m_Script: {fileID: 11500000, guid: f919147c78d41ef46b32d543cc855e29, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
+--- !u!114 &397812804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397812796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba7c5782a0ab5e4fbda0c57a7edacf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  walkSpeed: 5
+  runSpeed: 8
+  groundCheck: {fileID: 148699946}
+  groundRadius: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &412012991
 GameObject:
   m_ObjectHideFlags: 0
