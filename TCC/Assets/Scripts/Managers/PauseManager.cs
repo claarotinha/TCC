@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
@@ -12,6 +13,17 @@ public class PauseManager : MonoBehaviour
     [Header("Confirmation")]
     public GameObject confirmPanel;
 
+    [Header("Controls")]
+    public GameObject controlsPanel;
+
+    [Header("Settings")]
+    public GameObject settingsPanel;
+
+    public Slider masterVolumeSlider;
+    public Slider musicVolumeSlider;
+    public Slider sfxVolumeSlider;
+    public Toggle fullscreenToggle;
+
     private bool isPaused = false;
 
     void Start()
@@ -20,14 +32,43 @@ public class PauseManager : MonoBehaviour
 
         if (confirmPanel != null)
             confirmPanel.SetActive(false);
+
+        if (controlsPanel != null)
+            controlsPanel.SetActive(false);
+
+        if (settingsPanel != null)
+            settingsPanel.SetActive(false);
+
+        // Valores iniciais
+        if (masterVolumeSlider != null)
+            masterVolumeSlider.value = AudioListener.volume;
+
+        if (musicVolumeSlider != null)
+            musicVolumeSlider.value = 1f;
+
+        if (sfxVolumeSlider != null)
+            sfxVolumeSlider.value = 1f;
+
+        if (fullscreenToggle != null)
+            fullscreenToggle.isOn = Screen.fullScreen;
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // Se a confirmação estiver aberta,
-            // ESC fecha apenas a confirmação.
+            if (settingsPanel != null && settingsPanel.activeSelf)
+            {
+                CloseSettings();
+                return;
+            }
+
+            if (controlsPanel != null && controlsPanel.activeSelf)
+            {
+                CloseControls();
+                return;
+            }
+
             if (confirmPanel != null && confirmPanel.activeSelf)
             {
                 CloseConfirmation();
@@ -59,23 +100,27 @@ public class PauseManager : MonoBehaviour
 
             if (confirmPanel != null)
                 confirmPanel.SetActive(false);
+
+            if (controlsPanel != null)
+                controlsPanel.SetActive(false);
+
+            if (settingsPanel != null)
+                settingsPanel.SetActive(false);
         }
     }
 
     // ===========================
-    // BOTÃO MENU PRINCIPAL
+    // MENU PRINCIPAL
     // ===========================
 
     public void OpenConfirmation()
     {
-        if (confirmPanel != null)
-            confirmPanel.SetActive(true);
+        confirmPanel.SetActive(true);
     }
 
     public void CloseConfirmation()
     {
-        if (confirmPanel != null)
-            confirmPanel.SetActive(false);
+        confirmPanel.SetActive(false);
     }
 
     public void GoToMainMenu()
@@ -84,6 +129,54 @@ public class PauseManager : MonoBehaviour
         IsPaused = false;
 
         SceneManager.LoadScene("MenuPrincipal");
+    }
+
+    // ===========================
+    // CONTROLES
+    // ===========================
+
+    public void OpenControls()
+    {
+        controlsPanel.SetActive(true);
+    }
+
+    public void CloseControls()
+    {
+        controlsPanel.SetActive(false);
+    }
+
+    // ===========================
+    // CONFIGURAÇÕES
+    // ===========================
+
+    public void OpenSettings()
+    {
+        settingsPanel.SetActive(true);
+    }
+
+    public void CloseSettings()
+    {
+        settingsPanel.SetActive(false);
+    }
+
+    public void SetMasterVolume(float value)
+    {
+        AudioListener.volume = value;
+    }
+
+    public void SetMusicVolume(float value)
+    {
+        Debug.Log("Volume da música: " + value);
+    }
+
+    public void SetSFXVolume(float value)
+    {
+        Debug.Log("Volume dos efeitos: " + value);
+    }
+
+    public void ToggleFullscreen(bool value)
+    {
+        Screen.fullScreen = value;
     }
 
     private void OnDisable()
