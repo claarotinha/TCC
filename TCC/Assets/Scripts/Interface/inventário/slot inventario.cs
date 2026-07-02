@@ -13,9 +13,14 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
     private Vector3 normalScale = Vector3.one;
     private Vector3 selectedScale = Vector3.one * 1.1f;
 
+    private void Awake()
+    {
+        targetScale = normalScale;
+        transform.localScale = normalScale;
+    }
+
     private void Update()
     {
-        // animação suave de escala
         transform.localScale = Vector3.Lerp(
             transform.localScale,
             targetScale,
@@ -26,19 +31,26 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
     public void Setup(ItemData newItem)
     {
         item = newItem;
-        icon.sprite = item.icon;
-
+        if (icon != null && item.icon != null)
+        {
+            icon.sprite = item.icon;
+        }
         UpdateVisualInstant();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        InventoryManager.Instance.SelectItem(item);
-        UpdateAllSlots();
+        if (InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.SelectItem(item);
+            UpdateAllSlots();
+        }
     }
 
     public void UpdateVisual()
     {
+        if (InventoryManager.Instance == null) return;
+        
         bool selected = InventoryManager.Instance.SelectedItem == item;
 
         if (highlight != null)
@@ -49,22 +61,25 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
 
     private void UpdateVisualInstant()
     {
+        if (InventoryManager.Instance == null) return;
+        
         bool selected = InventoryManager.Instance.SelectedItem == item;
 
         if (highlight != null)
             highlight.enabled = selected;
 
         targetScale = selected ? selectedScale : normalScale;
-
         transform.localScale = targetScale;
     }
 
     private void UpdateAllSlots()
     {
-        // 🔥 CORRIGIDO: Usa FindObjectsByType em vez de FindObjectsOfType
         InventorySlot[] slots = FindObjectsByType<InventorySlot>(FindObjectsSortMode.None);
 
         foreach (var s in slots)
-            s.UpdateVisual();
+        {
+            if (s != null)
+                s.UpdateVisual();
+        }
     }
 }

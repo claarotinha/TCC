@@ -1,34 +1,35 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ClosePanelOnClick : MonoBehaviour, IPointerClickHandler
+public class PanelClickHandler : MonoBehaviour, IPointerClickHandler
 {
-    private ExamineObject examineObject;
-    private bool isDestroyed = false;
+    private MonoBehaviour examineObject;
 
-    private void OnDestroy()
+    public void SetExamineObject(MonoBehaviour obj)
     {
-        isDestroyed = true;
-        examineObject = null;
-    }
-
-    public void SetExamineObject(ExamineObject obj)
-    {
-        if (isDestroyed) return;
-        
         examineObject = obj;
-        Debug.Log("🔗 ClosePanelOnClick vinculado a: " + (obj != null ? obj.name : "null"));
+        Debug.Log("🔗 PanelClickHandler vinculado a: " + (obj != null ? obj.name : "null"));
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (isDestroyed || examineObject == null)
+        Debug.Log("🖱 CLICOU NO PAINEL!");
+        
+        if (examineObject == null)
         {
-            Debug.LogWarning("⚠ Não foi possível fechar - ExamineObject é null ou foi destruído");
+            Debug.LogWarning("⚠ examineObject é NULL! Não foi possível fechar.");
             return;
         }
-        
-        Debug.Log("🖱 CLICOU NO PAINEL! Fechando: " + examineObject.name);
-        examineObject.HidePanel();
+
+        if (examineObject is ExamineObject only)
+        {
+            only.HidePanel();
+            Debug.Log("🔒 Painel fechado (ExamineObject)");
+        }
+        else if (examineObject is CollectableExamine collect)
+        {
+            collect.HidePanel();
+            Debug.Log("🔒 Painel fechado (CollectableExamine)");
+        }
     }
 }

@@ -6,29 +6,39 @@ public class CollectableItem : MonoBehaviour
 
     private void OnMouseDown()
     {
-        // Verifica se o painel de exame está aberto
-        if (ExamineObject.IsShowing())
+        // Verifica se está examinando algo
+        if (ExamineObject.IsShowing() || CollectableExamine.IsShowing())
         {
             Debug.Log("⛔ Não é possível coletar enquanto examina um objeto.");
             return;
         }
 
-        Debug.Log("=== COLETA ===");
-
-        if (InventoryManager.Instance == null)
+        if (itemData == null)
         {
-            Debug.LogError("❌ InventoryManager não existe na cena!");
+            Debug.LogError("❌ ItemData não atribuído!");
             return;
         }
 
-        if (itemData == null)
+        if (InventoryManager.Instance == null)
         {
-            Debug.LogError("❌ ItemData não foi atribuído ao coletável!");
+            Debug.LogError("❌ InventoryManager não existe!");
             return;
         }
 
         InventoryManager.Instance.AddItem(itemData);
         Debug.Log("✅ " + itemData.itemName + " coletado com sucesso!");
         Destroy(gameObject);
+    }
+
+    void OnMouseEnter()
+    {
+        if (CursorManager.Instance != null)
+            CursorManager.Instance.SetLupa();
+    }
+
+    void OnMouseExit()
+    {
+        if (CursorManager.Instance != null)
+            CursorManager.Instance.SetNormal();
     }
 }
