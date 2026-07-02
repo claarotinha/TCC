@@ -234,8 +234,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34
-  m_fontSizeBase: 34
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -127.9462, y: 0, z: -116.51416, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -313,7 +313,7 @@ Transform:
   m_GameObject: {fileID: 331695513}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.61, y: -5.39, z: 0.0518}
+  m_LocalPosition: {x: -13.29, y: -5.64, z: 0.0518}
   m_LocalScale: {x: 0.7922, y: 0.7922, z: 0.7922}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -444,7 +444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -420, y: 70}
+  m_AnchoredPosition: {x: -545, y: 65}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &451553001
@@ -918,6 +918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2b7ab6712f5824ea51d5e32f91269b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combinations: []
 --- !u!4 &592245474
 Transform:
   m_ObjectHideFlags: 0
@@ -1386,8 +1387,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8028a47883a8a3c46a8de46bf26f55f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryPanel: {fileID: 1220124591}
-  itemsText: {fileID: 1516327033}
 --- !u!4 &787215982
 Transform:
   m_ObjectHideFlags: 0
@@ -1643,8 +1642,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 120}
-  m_SizeDelta: {x: 1600, y: 250}
+  m_AnchoredPosition: {x: 94, y: 110.68}
+  m_SizeDelta: {x: 1773.45, y: 221.355}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &922702839
 MonoBehaviour:
@@ -1659,7 +1658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.7647059}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1743,8 +1742,8 @@ Transform:
   m_GameObject: {fileID: 1113331820}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.8635, y: -5.18, z: 0.05181725}
-  m_LocalScale: {x: 1.6179682, y: 1, z: 1}
+  m_LocalPosition: {x: -7.9723, y: -5.1316, z: 0.0518}
+  m_LocalScale: {x: 1.6905679, y: 1.0448709, z: 1.0448709}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 350363236}
@@ -1842,7 +1841,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -782, y: 25}
+  m_AnchoredPosition: {x: -543, y: 32}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1201674346
@@ -1892,8 +1891,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1931,7 +1930,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -280.93115, w: 0}
+  m_margin: {x: 0, y: 0, z: -403.68225, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2047,7 +2046,7 @@ Transform:
   m_GameObject: {fileID: 1412625533}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.4628, y: -6.0943, z: 0.0518}
+  m_LocalPosition: {x: -3.22, y: -6.28, z: 0.0518}
   m_LocalScale: {x: -0.9683803, y: 0.91304946, z: 0.91304946}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2560,8 +2559,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a94c5aaa58a5da148af0d8a3c1acc50e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionMessage: encontrou chave
-  item: {fileID: 11400000, guid: 5f26943b66619304c85277482b97ea15, type: 2}
 --- !u!61 &1821841391
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2778,7 +2775,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1951159946
 RectTransform:
   m_ObjectHideFlags: 0
