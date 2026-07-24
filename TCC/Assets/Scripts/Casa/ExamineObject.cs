@@ -23,6 +23,10 @@ public class ExamineObject : MonoBehaviour
 
     void Update()
     {
+        // Bloqueia qualquer interação se o jogo estiver pausado
+        if (PauseHelper.BlockInput())
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -50,10 +54,9 @@ public class ExamineObject : MonoBehaviour
                         currentObject = null;
                     }
                 }
-                // Se clicou em OUTRO objeto (não neste)
+                // Se clicou em OUTRO objeto
                 else
                 {
-                    // Fecha o painel se estiver aberto
                     if (isShowing && currentObject == this)
                     {
                         HidePanel();
@@ -61,10 +64,9 @@ public class ExamineObject : MonoBehaviour
                     }
                 }
             }
-            // Se clicou no VAZIO (nenhum objeto)
+            // Se clicou no vazio
             else
             {
-                // Fecha o painel se estiver aberto
                 if (isShowing && currentObject == this)
                 {
                     HidePanel();
@@ -76,6 +78,9 @@ public class ExamineObject : MonoBehaviour
 
     void OnMouseEnter()
     {
+        if (PauseHelper.BlockInput())
+            return;
+
         if (CursorManager.Instance != null)
             CursorManager.Instance.SetLupa();
     }
@@ -95,11 +100,15 @@ public class ExamineObject : MonoBehaviour
         {
             detector = examinePanel.AddComponent<PanelClickHandler>();
         }
+
         detector.SetExamineObject(this);
     }
 
     public void ShowPanel()
     {
+        if (PauseHelper.BlockInput())
+            return;
+
         if (examinePanel != null)
         {
             examinePanel.SetActive(true);
@@ -134,6 +143,7 @@ public class ExamineObject : MonoBehaviour
         {
             return currentObject.examinePanel.activeSelf;
         }
+
         return false;
     }
 
@@ -142,11 +152,13 @@ public class ExamineObject : MonoBehaviour
         if (examinePanel != null)
         {
             PanelClickHandler detector = examinePanel.GetComponent<PanelClickHandler>();
+
             if (detector != null)
             {
                 Destroy(detector);
             }
         }
+
         if (currentObject == this)
         {
             currentObject = null;

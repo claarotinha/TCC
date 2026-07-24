@@ -44,6 +44,9 @@ public class MotherDialogue : MonoBehaviour
 
     private void Update()
     {
+        if (PauseHelper.BlockInput())
+            return;
+
         if (inConversation)
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
@@ -55,6 +58,9 @@ public class MotherDialogue : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (PauseHelper.BlockInput())
+            return;
+
         if (CursorManager.Instance != null)
         {
             CursorManager.Instance.SetLupa();
@@ -71,6 +77,9 @@ public class MotherDialogue : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (PauseHelper.BlockInput())
+            return;
+
         if (dialogueOpen)
             return;
 
