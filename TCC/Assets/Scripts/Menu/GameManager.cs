@@ -34,13 +34,23 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
 
-        if (sceneName == "MenuPrincipal")
+        switch (sceneName)
         {
-            ChangeState(GameState.MenuPrincipal);
-        }
-        else if (sceneName == "menu")
-        {
-            ChangeState(GameState.Gameplay);
+            case "Boot":
+                ChangeState(GameState.Iniciando);
+                break;
+
+            case "Intro":
+                ChangeState(GameState.Iniciando);
+                break;
+
+            case "MenuPrincipal":
+                ChangeState(GameState.MenuPrincipal);
+                break;
+
+            case "menu":
+                ChangeState(GameState.Gameplay);
+                break;
         }
     }
 }

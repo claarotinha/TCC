@@ -28,6 +28,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        // Se o jogo estiver pausado, não lê nenhum comando
+        if (UniversalPauseManager.IsPaused)
+            return;
+
         HandleInput();
         CheckGround();
         UpdateAnimations();
@@ -35,6 +39,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Se estiver pausado, garante que a Mari fique totalmente parada
+        if (UniversalPauseManager.IsPaused)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
         Move();
     }
 

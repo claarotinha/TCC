@@ -2,8 +2,15 @@ using UnityEngine;
 
 public class BootLoader : MonoBehaviour
 {
-    void Start()
+    private void Start()
     {
-        GameManager.Instance.LoadScene("Splash");
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.LoadScene("Intro");
+        }
+        else
+        {
+            Debug.LogError("GameManager não encontrado!");
+        }
     }
 }

@@ -20,6 +20,9 @@ public class OldPhoto : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (PauseHelper.BlockInput())
+            return;
+
         if (!collected && CursorManager.Instance != null)
         {
             CursorManager.Instance.SetLupa();
@@ -36,8 +39,10 @@ public class OldPhoto : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (PauseHelper.BlockInput())
+            return;
+
         // Se o diálogo estiver aberto, não faz nada aqui.
-        // O fechamento é controlado pelo Update.
         if (collected)
             return;
 
@@ -49,7 +54,7 @@ public class OldPhoto : MonoBehaviour
             investigationPanel.SetActive(true);
             investigationText.gameObject.SetActive(true);
 
-            // Usa o texto que você escreveu no Inspector
+            // Usa o texto escrito no Inspector
             investigationText.text = photoText;
             investigationText.color = Color.white;
             investigationText.fontSize = 20;
@@ -68,6 +73,9 @@ public class OldPhoto : MonoBehaviour
 
     private void Update()
     {
+        if (PauseHelper.BlockInput())
+            return;
+
         // Fecha com clique ou espaço,
         // mas somente depois que o painel já apareceu.
         if (dialogueOpen &&
