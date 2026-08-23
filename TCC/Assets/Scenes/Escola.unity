@@ -1781,7 +1781,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1055357811
 Transform:
   m_ObjectHideFlags: 0
@@ -2732,6 +2732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389b779c0f20d744a973c072ca0fecb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 0}
   portraitImage: {fileID: 1951159947}
   nameText: {fileID: 451553001}
   dialogueText: {fileID: 163591773}
@@ -2739,6 +2740,8 @@ MonoBehaviour:
   mariPortrait: {fileID: 2425645001220786861, guid: 410bcd0d621742042ab14ba9e9859689, type: 3}
   fadeImage: {fileID: 673421102}
   fadeDuration: 1
+  initialDelay: 10
+  dialogueDuration: 5
 --- !u!1 &1937494364
 GameObject:
   m_ObjectHideFlags: 0

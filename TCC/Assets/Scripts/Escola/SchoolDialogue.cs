@@ -6,54 +6,85 @@ using System.Collections;
 
 public class SchoolDialogue : MonoBehaviour
 {
+    [Header("UI")]
+    public GameObject dialoguePanel;
     public Image portraitImage;
     public TMP_Text nameText;
     public TMP_Text dialogueText;
 
+    [Header("Portraits")]
     public Sprite professoraPortrait;
     public Sprite mariPortrait;
 
+    [Header("Fade")]
     public Image fadeImage;
     public float fadeDuration = 1f;
 
-    private int currentDialogue = 0;
+    [Header("Timing")]
+    public float initialDelay = 10f;
+    public float dialogueDuration = 5f;
 
-    void Start()
+    private void Start()
     {
-        ShowDialogue();
+        // O painel começa desativado
+        dialoguePanel.SetActive(false);
+
+        // Garante que o Fade começa transparente
+        Color color = fadeImage.color;
+        color.a = 0f;
+        fadeImage.color = color;
+
+        // Inicia a sequência automaticamente
+        StartCoroutine(PlaySchoolScene());
     }
 
-    void Update()
+    IEnumerator PlaySchoolScene()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-        {
-            currentDialogue++;
+        // =====================================================
+        // ESPERA INICIAL DE 10 SEGUNDOS
+        // =====================================================
 
-            if (currentDialogue < 2)
-            {
-                ShowDialogue();
-            }
-            else
-            {
-                StartCoroutine(FadeAndLoadScene());
-            }
-        }
-    }
+        yield return new WaitForSeconds(initialDelay);
 
-    void ShowDialogue()
-    {
-        if (currentDialogue == 0)
-        {
-            portraitImage.sprite = professoraPortrait;
-            nameText.text = "Professora";
-            dialogueText.text = "Pessoal, o próximo trabalho será sobre a história das suas famílias.";
-        }
-        else if (currentDialogue == 1)
-        {
-            portraitImage.sprite = mariPortrait;
-            nameText.text = "Mari";
-            dialogueText.text = "Árvore genealógica...? Acho que vou precisar procurar algumas fotos em casa.";
-        }
+        // =====================================================
+        // ATIVA O PAINEL E MOSTRA A FALA DA PROFESSORA
+        // =====================================================
+
+        dialoguePanel.SetActive(true);
+
+        portraitImage.sprite = professoraPortrait;
+        nameText.text = "Professora";
+
+        dialogueText.text =
+            "... Bem, turma, nossa aula chegou ao fim, mas só reforçando " +
+            "o que estava sendo dito anteriormente, o trabalho de história " +
+            "vai valer como nota da prova. Vocês precisam pesquisar sobre a " +
+            "árvore genealógica da sua família. É para a sexta, então recomendo " +
+            "que, quem ainda não começou, comece imediatamente! Estão dispensados, " +
+            "até amanhã!";
+
+        // Espera a professora terminar
+        yield return new WaitForSeconds(dialogueDuration);
+
+        // =====================================================
+        // PENSAMENTO DA MARI
+        // =====================================================
+
+        portraitImage.sprite = mariPortrait;
+        nameText.text = "Mari (pensamento)";
+
+        dialogueText.text =
+            "Droga! Dormi a aula inteira. Ainda bem que a professora explicou " +
+            "a atividade novamente. É melhor eu ir para casa.";
+
+        // Espera o pensamento terminar
+        yield return new WaitForSeconds(dialogueDuration);
+
+        // =====================================================
+        // FINAL DA CENA
+        // =====================================================
+
+        yield return StartCoroutine(FadeAndLoadScene());
     }
 
     IEnumerator FadeAndLoadScene()
@@ -72,6 +103,7 @@ public class SchoolDialogue : MonoBehaviour
             yield return null;
         }
 
+        // Vai para a cena do caminho para casa
         SceneManager.LoadScene("CaminhoParaCasa");
     }
 }

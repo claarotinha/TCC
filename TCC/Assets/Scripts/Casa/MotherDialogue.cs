@@ -24,8 +24,8 @@ public class MotherDialogue : MonoBehaviour
     private bool dialogueOpen = false;
     private bool inConversation = false;
 
-    private bool conversou = false;
-    private bool perguntouTrabalho = false;
+    private bool reclamouNome = false;
+    private bool falouTrabalho = false;
 
     private string[] currentLines;
     private Sprite[] currentPortraits;
@@ -49,7 +49,7 @@ public class MotherDialogue : MonoBehaviour
 
         if (inConversation)
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 NextLine();
             }
@@ -83,8 +83,52 @@ public class MotherDialogue : MonoBehaviour
         if (dialogueOpen)
             return;
 
-        OpenChoices();
+        OpenInitialDialogue();
     }
+
+    // =========================================================
+    // DIÁLOGO INICIAL
+    // =========================================================
+
+    void OpenInitialDialogue()
+    {
+        dialogueOpen = true;
+        inConversation = true;
+
+        canvasGroup.alpha = 1;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+
+        currentLines = new string[]
+        {
+            "Ah… Oi, Maria Gabriely! Ainda bem que você já chegou da escola, minha filha. Venha me ajudar a preparar a janta.",
+            "Detesto quando ela me chama assim! Talvez eu devesse falar sobre o trabalho… ou só ir para o meu quarto mesmo."
+        };
+
+        currentPortraits = new Sprite[]
+        {
+            motherPortrait,
+            mariPortrait
+        };
+
+        currentNames = new string[]
+        {
+            "Mãe",
+            "Mari (pensamento)"
+        };
+
+        currentLine = 0;
+
+        choice1.gameObject.SetActive(false);
+        choice2.gameObject.SetActive(false);
+        choice3.gameObject.SetActive(false);
+
+        ShowLine();
+    }
+
+    // =========================================================
+    // ESCOLHAS
+    // =========================================================
 
     void OpenChoices()
     {
@@ -97,58 +141,113 @@ public class MotherDialogue : MonoBehaviour
 
         portraitImage.sprite = motherPortrait;
         characterNameText.text = "Mãe";
-        dialogueText.text = "O que foi, Mari?";
+        dialogueText.text = "...";
 
-        if (!conversou)
+        // OPÇÃO 1
+        if (!reclamouNome)
         {
             choice1.gameObject.SetActive(true);
 
-            choice1.GetComponentInChildren<TMP_Text>().text = "Conversar";
+            choice1.GetComponentInChildren<TMP_Text>().text =
+                "Reclamar do nome";
 
             choice1.onClick.RemoveAllListeners();
-            choice1.onClick.AddListener(Conversar);
+            choice1.onClick.AddListener(ReclamarNome);
         }
         else
         {
             choice1.gameObject.SetActive(false);
         }
 
-        if (!perguntouTrabalho)
+        // OPÇÃO 2
+        if (!falouTrabalho)
         {
             choice2.gameObject.SetActive(true);
 
             choice2.GetComponentInChildren<TMP_Text>().text =
-                "Perguntar sobre o trabalho";
+                "Falar sobre o trabalho";
 
             choice2.onClick.RemoveAllListeners();
-            choice2.onClick.AddListener(PerguntarTrabalho);
+            choice2.onClick.AddListener(FalarTrabalho);
         }
         else
         {
             choice2.gameObject.SetActive(false);
         }
 
+        // OPÇÃO 3
         choice3.gameObject.SetActive(true);
 
-        choice3.GetComponentInChildren<TMP_Text>().text = "Sair";
+        choice3.GetComponentInChildren<TMP_Text>().text =
+            "Sair";
 
         choice3.onClick.RemoveAllListeners();
         choice3.onClick.AddListener(FecharDialogo);
     }
 
-    void Conversar()
+    // =========================================================
+    // OPÇÃO 1 - RECLAMAR DO NOME
+    // =========================================================
+
+    void ReclamarNome()
     {
-        conversou = true;
+        reclamouNome = true;
 
         currentLines = new string[]
         {
-            "Como foi a escola hoje, filha? Você parece pensativa.",
-            "Foi normal... Só estou pensando nesse trabalho sobre a árvore genealógica.",
-            "Talvez seja uma boa oportunidade para descobrir coisas que você ainda não conhece sobre a nossa família."
+            "Argh… Já pedi para me chamar de Mari, mãe!",
+            "Tudo bem, minha filha, mas que coisa! Deveria ter orgulho do seu nome! Sua avó e sua Bisa também eram Marias!"
         };
 
         currentPortraits = new Sprite[]
         {
+            mariPortrait,
+            motherPortrait
+        };
+
+        currentNames = new string[]
+        {
+            "Mari",
+            "Mãe"
+        };
+
+        StartConversation();
+    }
+
+    // =========================================================
+    // OPÇÃO 2 - FALAR SOBRE O TRABALHO
+    // =========================================================
+
+    void FalarTrabalho()
+    {
+        falouTrabalho = true;
+
+        currentLines = new string[]
+        {
+            "Tudo bem, mãe, mas antes… Eu queria saber se a senhora não poderia me ajudar com um trabalho escolar para o final da semana.",
+
+            "Que tipo de trabalho, \"Mari\"?",
+
+            "Eu preciso montar uma árvore genealógica e falar um pouco sobre o passado da nossa família, sobre a nossa história. Talvez eu devesse falar sobre a vovó? Ou melhor, sobre a Bisa.",
+
+            "Querida… Eu gostaria que minha mãe ainda estivesse aqui para ela mesma conversar com você, mas eu posso te ajudar, sim, minha filha. E sobre a sua Bisa… você sabe que ela não tem mais condições de falar sobre muitas das coisas que já viveu. Não lembra da maior parte.",
+
+            "Tudo bem, mãe… Eu só estava pensando que talvez fosse divertido falar sobre como era a vida na época da minha bisavó. Eu mesma não sei de nada.",
+
+            "Eu sei, meu benzinho. Eu não estou dizendo que você não pode procurar sobre isso, mas a sua Bisa nunca foi muito de conversar. Então, nem mesmo eu consigo te falar muita coisa. Mas que tal você olhar lá no quartinho da bagunça? Eu sei que sua avó trouxe algumas coisas da mãe dela antes de falecer. Quem sabe você encontre algo!",
+
+            "Certo! Obrigada, mãe… Vou agora mesmo.",
+
+            "Antes, venha me ajudar com o jantar, Maria Gabriely!"
+        };
+
+        currentPortraits = new Sprite[]
+        {
+            mariPortrait,
+            motherPortrait,
+            mariPortrait,
+            motherPortrait,
+            mariPortrait,
             motherPortrait,
             mariPortrait,
             motherPortrait
@@ -156,6 +255,11 @@ public class MotherDialogue : MonoBehaviour
 
         currentNames = new string[]
         {
+            "Mari",
+            "Mãe",
+            "Mari",
+            "Mãe",
+            "Mari",
             "Mãe",
             "Mari",
             "Mãe"
@@ -164,33 +268,9 @@ public class MotherDialogue : MonoBehaviour
         StartConversation();
     }
 
-    void PerguntarTrabalho()
-    {
-        perguntouTrabalho = true;
-
-        currentLines = new string[]
-        {
-            "Mãe... você acha que pode me ajudar com esse trabalho?",
-            "Claro. Temos algumas fotografias antigas guardadas em casa.",
-            "Vou procurar depois. Obrigada."
-        };
-
-        currentPortraits = new Sprite[]
-        {
-            mariPortrait,
-            motherPortrait,
-            mariPortrait
-        };
-
-        currentNames = new string[]
-        {
-            "Mari",
-            "Mãe",
-            "Mari"
-        };
-
-        StartConversation();
-    }
+    // =========================================================
+    // INICIAR CONVERSA
+    // =========================================================
 
     void StartConversation()
     {
@@ -204,12 +284,20 @@ public class MotherDialogue : MonoBehaviour
         ShowLine();
     }
 
+    // =========================================================
+    // MOSTRAR FALA
+    // =========================================================
+
     void ShowLine()
     {
         portraitImage.sprite = currentPortraits[currentLine];
         characterNameText.text = currentNames[currentLine];
         dialogueText.text = currentLines[currentLine];
     }
+
+    // =========================================================
+    // AVANÇAR
+    // =========================================================
 
     void NextLine()
     {
@@ -223,6 +311,10 @@ public class MotherDialogue : MonoBehaviour
 
         ShowLine();
     }
+
+    // =========================================================
+    // FECHAR
+    // =========================================================
 
     void FecharDialogo()
     {
