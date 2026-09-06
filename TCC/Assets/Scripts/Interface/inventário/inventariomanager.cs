@@ -5,15 +5,15 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
-    public static Action OnInventoryChanged;
 
-    [SerializeField] private ItemCombination[] combinations;
-
-    private List<ItemData> items = new();
+    [Header("Inventário")]
+    [SerializeField] private List<ItemData> items = new List<ItemData>();
 
     public IReadOnlyList<ItemData> Items => items;
 
     public ItemData SelectedItem { get; private set; }
+
+    public static event Action OnInventoryChanged;
 
     private void Awake()
     {
@@ -24,82 +24,85 @@ public class InventoryManager : MonoBehaviour
         }
 
         Instance = this;
+
         DontDestroyOnLoad(gameObject);
     }
 
+    // =========================================================
+    // ADICIONAR ITEM
+    // =========================================================
+
     public void AddItem(ItemData item)
     {
-        if (item == null) return;
+        if (item == null)
+            return;
 
         items.Add(item);
-        Debug.Log(item.itemName + " coletado");
+
+        Debug.Log("Item adicionado: " + item.itemName);
 
         OnInventoryChanged?.Invoke();
     }
+
+    // =========================================================
+    // REMOVER ITEM
+    // =========================================================
 
     public void RemoveItem(ItemData item)
     {
-        if (item == null) return;
+        if (item == null)
+            return;
 
-        items.Remove(item);
+        if (items.Contains(item))
+        {
+            items.Remove(item);
 
-        if (SelectedItem == item)
-            SelectedItem = null;
+            if (SelectedItem == item)
+                SelectedItem = null;
+
+            OnInventoryChanged?.Invoke();
+        }
+    }
+
+    // =========================================================
+    // SELECIONAR ITEM
+    // =========================================================
+
+    public void SelectItem(ItemData item)
+    {
+        if (item == null)
+            return;
+
+        SelectedItem = item;
+
+        Debug.Log("Item selecionado: " + item.itemName);
 
         OnInventoryChanged?.Invoke();
     }
 
-    public void SelectItem(ItemData item)
-    {
-        if (item == null) return;
-
-        // primeiro clique
-        if (SelectedItem == null)
-        {
-            SelectedItem = item;
-            Debug.Log("Selecionado: " + item.itemName);
-            return;
-        }
-
-        // mesmo item desmarca
-        if (SelectedItem == item)
-        {
-            SelectedItem = null;
-            return;
-        }
-
-        TryCombine(SelectedItem, item);
-    }
-
-    private void TryCombine(ItemData a, ItemData b)
-    {
-        foreach (var combo in combinations)
-        {
-            bool match =
-                (combo.itemA == a && combo.itemB == b) ||
-                (combo.itemA == b && combo.itemB == a);
-
-            if (match)
-            {
-                RemoveItem(a);
-                RemoveItem(b);
-
-                AddItem(combo.result);
-
-                SelectedItem = null;
-
-                Debug.Log("✔ Combinado!");
-                return;
-            }
-        }
-
-        Debug.Log("✖ Não combina");
-
-        SelectedItem = b;
-    }
+    // =========================================================
+    // DESELECIONAR
+    // =========================================================
 
     public void Deselect()
     {
         SelectedItem = null;
+
+        Debug.Log("Item deselecionado.");
+
+        OnInventoryChanged?.Invoke();
+    }
+
+    // =========================================================
+    // COMBINAÇÃO
+    // =========================================================
+
+    public bool TryCombine(ItemData first, ItemData second)
+    {
+        if (first == null || second == null)
+            return false;
+
+        // Coloque aqui seu sistema de combinação
+        return false;
     }
 }

@@ -1,85 +1,70 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using System.Collections;
 
 public class InventorySlot : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Image icon;
-    [SerializeField] private Image highlight;
+    [SerializeField] private GameObject highlight;
 
     private ItemData item;
-
-    private Vector3 targetScale;
-    private Vector3 normalScale = Vector3.one;
-    private Vector3 selectedScale = Vector3.one * 1.1f;
-
-    private void Awake()
-    {
-        targetScale = normalScale;
-        transform.localScale = normalScale;
-    }
-
-    private void Update()
-    {
-        transform.localScale = Vector3.Lerp(
-            transform.localScale,
-            targetScale,
-            Time.deltaTime * 12f
-        );
-    }
 
     public void Setup(ItemData newItem)
     {
         item = newItem;
-        if (icon != null && item.icon != null)
+
+        if (icon != null)
         {
             icon.sprite = item.icon;
+            icon.enabled = true;
         }
-        UpdateVisualInstant();
+
+        if (highlight != null)
+            highlight.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (InventoryManager.Instance != null)
-        {
-            InventoryManager.Instance.SelectItem(item);
-            UpdateAllSlots();
-        }
-    }
+        if (item == null)
+            return;
 
-    public void UpdateVisual()
-    {
-        if (InventoryManager.Instance == null) return;
-        
-        bool selected = InventoryManager.Instance.SelectedItem == item;
+        InventoryManager.Instance.SelectItem(item);
 
-        if (highlight != null)
-            highlight.enabled = selected;
+        UpdateAllSlots();
 
-        targetScale = selected ? selectedScale : normalScale;
-    }
-
-    private void UpdateVisualInstant()
-    {
-        if (InventoryManager.Instance == null) return;
-        
-        bool selected = InventoryManager.Instance.SelectedItem == item;
-
-        if (highlight != null)
-            highlight.enabled = selected;
-
-        targetScale = selected ? selectedScale : normalScale;
-        transform.localScale = targetScale;
+        StartCoroutine(SelectedAnimation());
     }
 
     private void UpdateAllSlots()
     {
-        InventorySlot[] slots = FindObjectsByType<InventorySlot>(FindObjectsSortMode.None);
+        InventorySlot[] slots =
+            FindObjectsByType<InventorySlot>(
+                FindObjectsInactive.Include,
+                FindObjectsSortMode.None
+            );
 
-        foreach (var s in slots)
+        foreach (InventorySlot slot in slots)
         {
-            if (s != null)
-                s.UpdateVisual();
+            if (slot.highlight != null)
+            {
+                bool selected =
+                    InventoryManager.Instance.SelectedItem ==
+                    slot.item;
+
+                slot.highlight.SetActive(selected);
+            }
         }
+    }
+
+    private IEnumerator SelectedAnimation()
+    {
+        Vector3 originalScale = transform.localScale;
+
+        transform.localScale = originalScale * 1.1f;
+
+        yield return new WaitForSeconds(0.1f);
+
+        transform.localScale = originalScale;
     }
 }

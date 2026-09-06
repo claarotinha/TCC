@@ -4,17 +4,30 @@ using TMPro;
 public class SimpleInteraction : MonoBehaviour
 {
     public GameObject interactionText;
+    public string interactionMessage = "EITAA ENCONTREI UMA ARVORE RSRS";
 
     private bool playerNearby = false;
+    private bool hasInteracted = false;
 
     void Update()
     {
-        if (playerNearby && Input.GetKeyDown(KeyCode.E))
-        {
-            interactionText.SetActive(true);
+        // SE O DIÁLOGO ESTIVER ABERTO, NÃO INTERAGE
+        if (NPCDialogue.IsShowing())
+            return;
 
-            interactionText.GetComponent<TMP_Text>().text =
-                "EITAA ENCONTREI UMA ARVORE RSRS";
+        if (playerNearby && Input.GetKeyDown(KeyCode.E) && !hasInteracted)
+        {
+            hasInteracted = true;
+            
+            if (interactionText != null)
+            {
+                interactionText.SetActive(true);
+                TMP_Text text = interactionText.GetComponent<TMP_Text>();
+                if (text != null)
+                {
+                    text.text = interactionMessage;
+                }
+            }
         }
     }
 
@@ -23,19 +36,21 @@ public class SimpleInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerNearby = true;
+            hasInteracted = false;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
-{
-    if (other.CompareTag("Player"))
     {
-        playerNearby = false;
-
-        if (interactionText != null)
+        if (other.CompareTag("Player"))
         {
-            interactionText.SetActive(false);
+            playerNearby = false;
+            hasInteracted = false;
+
+            if (interactionText != null)
+            {
+                interactionText.SetActive(false);
+            }
         }
     }
-}
 }
