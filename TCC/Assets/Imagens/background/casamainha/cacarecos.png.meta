@@ -1,28 +1,28 @@
 fileFormatVersion: 2
-guid: 8b6e4dadb0a0991458c29af53dc0c6aa
+guid: bc95a1e792131d04b8c8012a2d2874b5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1606135632050992926
-    second: "tranqueirosquartinhoDaBagun\xE7a_0"
+      213: -7464441539458937732
+    second: cacarecos_0
   - first:
-      213: -6776734185088979563
-    second: "tranqueirosquartinhoDaBagun\xE7a_1"
+      213: 3995033306442536610
+    second: cacarecos_1
   - first:
-      213: -6109308015318516253
-    second: "tranqueirosquartinhoDaBagun\xE7a_2"
+      213: 4328777499033961896
+    second: cacarecos_2
   - first:
-      213: 5307633808388477591
-    second: "tranqueirosquartinhoDaBagun\xE7a_3"
+      213: 3284817585428131787
+    second: cacarecos_3
   - first:
-      213: -673530100837206803
-    second: "tranqueirosquartinhoDaBagun\xE7a_4"
+      213: 3289739875486904963
+    second: cacarecos_4
   - first:
-      213: 7214651794349167007
-    second: "tranqueirosquartinhoDaBagun\xE7a_5"
+      213: 3398274117280849291
+    second: cacarecos_5
   - first:
-      213: 1186809908724315921
-    second: "tranqueirosquartinhoDaBagun\xE7a_6"
+      213: -1782442056049313767
+    second: cacarecos_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -69,7 +69,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 180
+  spritePixelsToUnits: 120
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -118,7 +118,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "tranqueirosquartinhoDaBagun\xE7a_0"
+      name: cacarecos_0
       rect:
         serializedVersion: 2
         x: 319
@@ -133,14 +133,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e173f7109d32a4610800000000000000
-      internalID: 1606135632050992926
+      spriteID: c7c41e9d7f9f86890800000000000000
+      internalID: -7464441539458937732
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "tranqueirosquartinhoDaBagun\xE7a_1"
+      name: cacarecos_1
       rect:
         serializedVersion: 2
         x: 1329
@@ -155,14 +155,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 59d6680d92434f1a0800000000000000
-      internalID: -6776734185088979563
+      spriteID: 2a69c5820a5317730800000000000000
+      internalID: 3995033306442536610
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "tranqueirosquartinhoDaBagun\xE7a_2"
+      name: cacarecos_2
       rect:
         serializedVersion: 2
         x: 1589
@@ -177,14 +177,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3ed3e738ab0673ba0800000000000000
-      internalID: -6109308015318516253
+      spriteID: 8a58f955338e21c30800000000000000
+      internalID: 4328777499033961896
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "tranqueirosquartinhoDaBagun\xE7a_3"
+      name: cacarecos_3
       rect:
         serializedVersion: 2
         x: 1699
@@ -199,14 +199,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 79259d2e3d088a940800000000000000
-      internalID: 5307633808388477591
+      spriteID: bcf6663b034069d20800000000000000
+      internalID: 3284817585428131787
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "tranqueirosquartinhoDaBagun\xE7a_4"
+      name: cacarecos_4
       rect:
         serializedVersion: 2
         x: 1939
@@ -221,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: de4b01a11f327a6f0800000000000000
-      internalID: -673530100837206803
+      spriteID: 382b5d9acf087ad20800000000000000
+      internalID: 3289739875486904963
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "tranqueirosquartinhoDaBagun\xE7a_5"
+      name: cacarecos_5
       rect:
         serializedVersion: 2
         x: 129
@@ -243,14 +243,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f91115405979f1460800000000000000
-      internalID: 7214651794349167007
+      spriteID: b8ddde90e48192f20800000000000000
+      internalID: 3398274117280849291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "tranqueirosquartinhoDaBagun\xE7a_6"
+      name: cacarecos_6
       rect:
         serializedVersion: 2
         x: 199
@@ -265,8 +265,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1173d61f255687010800000000000000
-      internalID: 1186809908724315921
+      spriteID: 918b670d46e7347e0800000000000000
+      internalID: -1782442056049313767
       vertices: []
       indices: 
       edges: []
@@ -285,13 +285,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "tranqueirosquartinhoDaBagun\xE7a_0": 1606135632050992926
-      "tranqueirosquartinhoDaBagun\xE7a_1": -6776734185088979563
-      "tranqueirosquartinhoDaBagun\xE7a_2": -6109308015318516253
-      "tranqueirosquartinhoDaBagun\xE7a_3": 5307633808388477591
-      "tranqueirosquartinhoDaBagun\xE7a_4": -673530100837206803
-      "tranqueirosquartinhoDaBagun\xE7a_5": 7214651794349167007
-      "tranqueirosquartinhoDaBagun\xE7a_6": 1186809908724315921
+      cacarecos_0: -7464441539458937732
+      cacarecos_1: 3995033306442536610
+      cacarecos_2: 4328777499033961896
+      cacarecos_3: 3284817585428131787
+      cacarecos_4: 3289739875486904963
+      cacarecos_5: 3398274117280849291
+      cacarecos_6: -1782442056049313767
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
