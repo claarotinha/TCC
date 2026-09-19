@@ -22,7 +22,9 @@ public class SchoolDialogue : MonoBehaviour
 
     [Header("Timing")]
     public float initialDelay = 10f;
-    public float dialogueDuration = 5f;
+
+    private int currentDialogue = 0;
+    private bool waitingForClick = false;
 
     private void Start()
     {
@@ -46,45 +48,77 @@ public class SchoolDialogue : MonoBehaviour
 
         yield return new WaitForSeconds(initialDelay);
 
-        // =====================================================
-        // ATIVA O PAINEL E MOSTRA A FALA DA PROFESSORA
-        // =====================================================
-
         dialoguePanel.SetActive(true);
 
         portraitImage.sprite = professoraPortrait;
         nameText.text = "Professora";
 
-        dialogueText.text =
-            "... Bem, turma, nossa aula chegou ao fim, mas só reforçando " +
-            "o que estava sendo dito anteriormente, o trabalho de história " +
-            "vai valer como nota da prova. Vocês precisam pesquisar sobre a " +
-            "árvore genealógica da sua família. É para a sexta, então recomendo " +
-            "que, quem ainda não começou, comece imediatamente! Estão dispensados, " +
-            "até amanhã!";
+        currentDialogue = 0;
+        waitingForClick = true;
 
-        // Espera a professora terminar
-        yield return new WaitForSeconds(dialogueDuration);
+        ShowProfessorDialogue();
+
+        // Espera o jogador clicar para avançar pelas falas
+        while (currentDialogue < 3)
+        {
+            yield return null;
+
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+            {
+                currentDialogue++;
+
+                if (currentDialogue < 3)
+                {
+                    ShowProfessorDialogue();
+                }
+            }
+        }
 
         // =====================================================
-        // PENSAMENTO DA MARI
+        // FALA DA MARI
         // =====================================================
 
         portraitImage.sprite = mariPortrait;
         nameText.text = "Mari (pensamento)";
 
         dialogueText.text =
-            "Droga! Dormi a aula inteira. Ainda bem que a professora explicou " +
-            "a atividade novamente. É melhor eu ir para casa.";
+            "Ainda bem que a professora explicou a atividade novamente. " +
+            "É melhor eu ir para casa e procurar algumas fotos da minha família.";
 
-        // Espera o pensamento terminar
-        yield return new WaitForSeconds(dialogueDuration);
+        waitingForClick = true;
+
+        // Espera o jogador clicar para continuar
+        yield return new WaitUntil(() =>
+            Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)
+        );
 
         // =====================================================
         // FINAL DA CENA
         // =====================================================
 
         yield return StartCoroutine(FadeAndLoadScene());
+    }
+
+    void ShowProfessorDialogue()
+    {
+        if (currentDialogue == 0)
+        {
+            dialogueText.text =
+                "... Bem, turma, nossa aula chegou ao fim.";
+        }
+        else if (currentDialogue == 1)
+        {
+            dialogueText.text =
+                "Só reforçando o que foi dito anteriormente: " +
+                "o trabalho de história vai valer como nota da prova.";
+        }
+        else if (currentDialogue == 2)
+        {
+            dialogueText.text =
+                "Vocês precisam pesquisar sobre a árvore genealógica da sua família. " +
+                "É para a sexta, então recomendo que quem ainda não começou, comece imediatamente! " +
+                "Estão dispensados, até amanhã!";
+        }
     }
 
     IEnumerator FadeAndLoadScene()
