@@ -20,11 +20,11 @@ public class SchoolDialogue : MonoBehaviour
     public Image fadeImage;
     public float fadeDuration = 1f;
 
-    [Header("Timing")]
-    public float initialDelay = 10f;
+    [Header("Áudio")]
+    public AudioSource alarmSound;
+    public AudioSource schoolAmbient;
 
     private int currentDialogue = 0;
-    private bool waitingForClick = false;
 
     private void Start()
     {
@@ -36,17 +36,30 @@ public class SchoolDialogue : MonoBehaviour
         color.a = 0f;
         fadeImage.color = color;
 
-        // Inicia a sequência automaticamente
+        // Inicia a sequência
         StartCoroutine(PlaySchoolScene());
     }
 
     IEnumerator PlaySchoolScene()
     {
         // =====================================================
-        // ESPERA INICIAL DE 10 SEGUNDOS
+        // ALARME ESCOLAR
         // =====================================================
 
-        yield return new WaitForSeconds(initialDelay);
+        alarmSound.Play();
+
+        // Espera o alarme terminar
+        yield return new WaitForSeconds(alarmSound.clip.length);
+
+        // =====================================================
+        // SOM AMBIENTE
+        // =====================================================
+
+        schoolAmbient.Play();
+
+        // =====================================================
+        // PROFESSORA
+        // =====================================================
 
         dialoguePanel.SetActive(true);
 
@@ -54,11 +67,10 @@ public class SchoolDialogue : MonoBehaviour
         nameText.text = "Professora";
 
         currentDialogue = 0;
-        waitingForClick = true;
 
         ShowProfessorDialogue();
 
-        // Espera o jogador clicar para avançar pelas falas
+        // Espera o jogador avançar pelas falas
         while (currentDialogue < 3)
         {
             yield return null;
@@ -75,7 +87,7 @@ public class SchoolDialogue : MonoBehaviour
         }
 
         // =====================================================
-        // FALA DA MARI
+        // MARI
         // =====================================================
 
         portraitImage.sprite = mariPortrait;
@@ -85,12 +97,19 @@ public class SchoolDialogue : MonoBehaviour
             "Ainda bem que a professora explicou a atividade novamente. " +
             "É melhor eu ir para casa e procurar algumas fotos da minha família.";
 
-        waitingForClick = true;
+        // =====================================================
+        // ESPERA O JOGADOR AVANÇAR
+        // =====================================================
 
-        // Espera o jogador clicar para continuar
-        yield return new WaitUntil(() =>
-            Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)
-        );
+        while (true)
+        {
+            yield return null;
+
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+            {
+                break;
+            }
+        }
 
         // =====================================================
         // FINAL DA CENA
@@ -137,7 +156,6 @@ public class SchoolDialogue : MonoBehaviour
             yield return null;
         }
 
-        // Vai para a cena do caminho para casa
         SceneManager.LoadScene("CaminhoParaCasa");
     }
 }
