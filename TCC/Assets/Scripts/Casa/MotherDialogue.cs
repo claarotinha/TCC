@@ -27,6 +27,8 @@ public class MotherDialogue : MonoBehaviour
     private bool reclamouNome = false;
     private bool falouTrabalho = false;
 
+    public static bool FalouSobreTrabalho { get; private set; } = false;
+
     private string[] currentLines;
     private Sprite[] currentPortraits;
     private string[] currentNames;
@@ -49,7 +51,8 @@ public class MotherDialogue : MonoBehaviour
 
         if (inConversation)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            // Avança a fala com clique esquerdo
+            if (Input.GetMouseButtonDown(0))
             {
                 NextLine();
             }
@@ -85,10 +88,6 @@ public class MotherDialogue : MonoBehaviour
 
         OpenInitialDialogue();
     }
-
-    // =========================================================
-    // DIÁLOGO INICIAL
-    // =========================================================
 
     void OpenInitialDialogue()
     {
@@ -126,10 +125,6 @@ public class MotherDialogue : MonoBehaviour
         ShowLine();
     }
 
-    // =========================================================
-    // ESCOLHAS
-    // =========================================================
-
     void OpenChoices()
     {
         dialogueOpen = true;
@@ -143,7 +138,7 @@ public class MotherDialogue : MonoBehaviour
         characterNameText.text = "Mãe";
         dialogueText.text = "...";
 
-        // OPÇÃO 1
+        // OPÇÃO 1 — Reclamar do nome
         if (!reclamouNome)
         {
             choice1.gameObject.SetActive(true);
@@ -159,7 +154,7 @@ public class MotherDialogue : MonoBehaviour
             choice1.gameObject.SetActive(false);
         }
 
-        // OPÇÃO 2
+        // OPÇÃO 2 — Falar sobre o trabalho
         if (!falouTrabalho)
         {
             choice2.gameObject.SetActive(true);
@@ -175,7 +170,7 @@ public class MotherDialogue : MonoBehaviour
             choice2.gameObject.SetActive(false);
         }
 
-        // OPÇÃO 3
+        // OPÇÃO 3 — Sair
         choice3.gameObject.SetActive(true);
 
         choice3.GetComponentInChildren<TMP_Text>().text =
@@ -184,10 +179,6 @@ public class MotherDialogue : MonoBehaviour
         choice3.onClick.RemoveAllListeners();
         choice3.onClick.AddListener(FecharDialogo);
     }
-
-    // =========================================================
-    // OPÇÃO 1 - RECLAMAR DO NOME
-    // =========================================================
 
     void ReclamarNome()
     {
@@ -214,10 +205,6 @@ public class MotherDialogue : MonoBehaviour
         StartConversation();
     }
 
-    // =========================================================
-    // OPÇÃO 2 - FALAR SOBRE O TRABALHO
-    // =========================================================
-
     void FalarTrabalho()
     {
         falouTrabalho = true;
@@ -225,19 +212,12 @@ public class MotherDialogue : MonoBehaviour
         currentLines = new string[]
         {
             "Tudo bem, mãe, mas antes… Eu queria saber se a senhora não poderia me ajudar com um trabalho escolar para o final da semana.",
-
             "Que tipo de trabalho, \"Mari\"?",
-
             "Eu preciso montar uma árvore genealógica e falar um pouco sobre o passado da nossa família, sobre a nossa história. Talvez eu devesse falar sobre a vovó? Ou melhor, sobre a Bisa.",
-
             "Querida… Eu gostaria que minha mãe ainda estivesse aqui para ela mesma conversar com você, mas eu posso te ajudar, sim, minha filha. E sobre a sua Bisa… você sabe que ela não tem mais condições de falar sobre muitas das coisas que já viveu. Não lembra da maior parte.",
-
             "Tudo bem, mãe… Eu só estava pensando que talvez fosse divertido falar sobre como era a vida na época da minha bisavó. Eu mesma não sei de nada.",
-
             "Eu sei, meu benzinho. Eu não estou dizendo que você não pode procurar sobre isso, mas a sua Bisa nunca foi muito de conversar. Então, nem mesmo eu consigo te falar muita coisa. Mas que tal você olhar lá no quartinho da bagunça? Eu sei que sua avó trouxe algumas coisas da mãe dela antes de falecer. Quem sabe você encontre algo!",
-
             "Certo! Obrigada, mãe… Vou agora mesmo.",
-
             "Antes, venha me ajudar com o jantar, Maria Gabriely!"
         };
 
@@ -268,10 +248,6 @@ public class MotherDialogue : MonoBehaviour
         StartConversation();
     }
 
-    // =========================================================
-    // INICIAR CONVERSA
-    // =========================================================
-
     void StartConversation()
     {
         inConversation = true;
@@ -284,10 +260,6 @@ public class MotherDialogue : MonoBehaviour
         ShowLine();
     }
 
-    // =========================================================
-    // MOSTRAR FALA
-    // =========================================================
-
     void ShowLine()
     {
         portraitImage.sprite = currentPortraits[currentLine];
@@ -295,26 +267,23 @@ public class MotherDialogue : MonoBehaviour
         dialogueText.text = currentLines[currentLine];
     }
 
-    // =========================================================
-    // AVANÇAR
-    // =========================================================
-
     void NextLine()
     {
         currentLine++;
 
         if (currentLine >= currentLines.Length)
         {
+            if (falouTrabalho)
+            {
+                FalouSobreTrabalho = true;
+            }
+
             OpenChoices();
             return;
         }
 
         ShowLine();
     }
-
-    // =========================================================
-    // FECHAR
-    // =========================================================
 
     void FecharDialogo()
     {

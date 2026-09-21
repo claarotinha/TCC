@@ -28,38 +28,30 @@ public class SchoolDialogue : MonoBehaviour
 
     private void Start()
     {
-        // O painel começa desativado
         dialoguePanel.SetActive(false);
 
-        // Garante que o Fade começa transparente
         Color color = fadeImage.color;
         color.a = 0f;
         fadeImage.color = color;
 
-        // Inicia a sequência
         StartCoroutine(PlaySchoolScene());
     }
 
     IEnumerator PlaySchoolScene()
     {
-        // =====================================================
-        // ALARME ESCOLAR
-        // =====================================================
+        // Espera 5 segundos antes de tocar o alarme
+        yield return new WaitForSeconds(5f);
 
-        alarmSound.Play();
+        if (alarmSound != null)
+            alarmSound.Play();
 
         // Espera o alarme terminar
-        yield return new WaitForSeconds(alarmSound.clip.length);
+        if (alarmSound != null && alarmSound.clip != null)
+            yield return new WaitForSeconds(alarmSound.clip.length);
 
-        // =====================================================
-        // SOM AMBIENTE
-        // =====================================================
-
-        schoolAmbient.Play();
-
-        // =====================================================
-        // PROFESSORA
-        // =====================================================
+        // Começa o som ambiente da escola
+        if (schoolAmbient != null)
+            schoolAmbient.Play();
 
         dialoguePanel.SetActive(true);
 
@@ -67,29 +59,24 @@ public class SchoolDialogue : MonoBehaviour
         nameText.text = "Professora";
 
         currentDialogue = 0;
-
         ShowProfessorDialogue();
 
-        // Espera o jogador avançar pelas falas
+        // Diálogos da professora
         while (currentDialogue < 3)
         {
             yield return null;
 
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+            // Avança com clique
+            if (Input.GetMouseButtonDown(0))
             {
                 currentDialogue++;
 
                 if (currentDialogue < 3)
-                {
                     ShowProfessorDialogue();
-                }
             }
         }
 
-        // =====================================================
-        // MARI
-        // =====================================================
-
+        // Pensamento da Mari
         portraitImage.sprite = mariPortrait;
         nameText.text = "Mari (pensamento)";
 
@@ -97,23 +84,14 @@ public class SchoolDialogue : MonoBehaviour
             "Ainda bem que a professora explicou a atividade novamente. " +
             "É melhor eu ir para casa e procurar algumas fotos da minha família.";
 
-        // =====================================================
-        // ESPERA O JOGADOR AVANÇAR
-        // =====================================================
-
+        // Espera clique
         while (true)
         {
             yield return null;
 
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
-            {
+            if (Input.GetMouseButtonDown(0))
                 break;
-            }
         }
-
-        // =====================================================
-        // FINAL DA CENA
-        // =====================================================
 
         yield return StartCoroutine(FadeAndLoadScene());
     }
