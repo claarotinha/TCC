@@ -11,12 +11,8 @@ public class QuartoBaguncaDoor : MonoBehaviour
     public Button buttonSim;
     public Button buttonNao;
 
-    private ExamineObject examineObject;
-
     private void Start()
     {
-        examineObject = GetComponent<ExamineObject>();
-
         if (confirmPanel != null)
             confirmPanel.SetActive(false);
     }
@@ -36,34 +32,7 @@ public class QuartoBaguncaDoor : MonoBehaviour
             CursorManager.Instance.SetNormal();
     }
 
-    private void OnMouseDown()
-    {
-        if (PauseHelper.BlockInput())
-            return;
-
-        // ==========================================
-        // ANTES DA CONVERSA
-        // ==========================================
-
-        if (!MotherDialogue.FalouSobreTrabalho)
-        {
-            return;
-        }
-
-        // ==========================================
-        // DEPOIS DA CONVERSA
-        // ==========================================
-
-        if (examineObject != null)
-        {
-            examineObject.HidePanel();
-            examineObject.enabled = false;
-        }
-
-        AbrirConfirmacao();
-    }
-
-    private void AbrirConfirmacao()
+    public void AbrirConfirmacao()
     {
         if (confirmPanel == null)
             return;

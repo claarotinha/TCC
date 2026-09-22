@@ -54,8 +54,17 @@ public class ExamineObject : MonoBehaviour
 
         // Verifica se o clique realmente aconteceu
         // dentro do Collider DESTE objeto.
-        if (!myCollider.OverlapPoint(mousePosition))
+        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+        if (hit.collider != myCollider)
             return;
+
+        QuartoBaguncaDoor door = GetComponent<QuartoBaguncaDoor>();
+        if (door != null && MotherDialogue.FalouSobreTrabalho)
+        {
+            HidePanel();
+            door.AbrirConfirmacao();
+            return;
+        }
 
         // Se outro objeto estava aberto, fecha.
         if (currentObject != null &&

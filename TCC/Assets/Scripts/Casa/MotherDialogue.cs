@@ -37,6 +37,7 @@ public class MotherDialogue : MonoBehaviour
 
     private void Start()
     {
+        FalouSobreTrabalho = false;
         motherCollider = GetComponent<Collider2D>();
 
         canvasGroup = dialoguePanel.GetComponent<CanvasGroup>();
@@ -131,36 +132,12 @@ public class MotherDialogue : MonoBehaviour
 
         currentLines = new string[]
         {
-            "Ah… Oi, Maria Gabriely!",
-            "Ainda bem que você já chegou da escola, minha filha.",
-            "Venha me ajudar a preparar a janta.",
-
-            "Detesto quando ela me chama assim!",
-            "Talvez eu devesse falar sobre o trabalho…",
-            "ou só ir para o meu quarto mesmo."
+            "Ah… Oi, Maria Gabriely! Ainda bem que você já chegou da escola, minha filha. Venha me ajudar a preparar a janta.",
+            "Detesto quando ela me chama assim! Talvez eu devesse falar sobre o trabalho… ou só ir para o meu quarto mesmo."
         };
 
-        currentPortraits = new Sprite[]
-        {
-            motherPortrait,
-            motherPortrait,
-            motherPortrait,
-
-            mariPortrait,
-            mariPortrait,
-            mariPortrait
-        };
-
-        currentNames = new string[]
-        {
-            "Mãe",
-            "Mãe",
-            "Mãe",
-
-            "Mari (pensamento)",
-            "Mari (pensamento)",
-            "Mari (pensamento)"
-        };
+        currentPortraits = new Sprite[] { motherPortrait, mariPortrait };
+        currentNames = new string[] { "Mãe", "Mari (pensamento)" };
 
         currentLine = 0;
 
@@ -226,29 +203,11 @@ public class MotherDialogue : MonoBehaviour
         currentLines = new string[]
         {
             "Argh… Já pedi para me chamar de Mari, mãe!",
-
-            "Tudo bem, minha filha, mas que coisa!",
-            "Deveria ter orgulho do seu nome!",
-            "Sua avó e sua Bisa também eram Marias!"
+            "Tudo bem, minha filha, mas que coisa! Deveria ter orgulho do seu nome! Sua avó e sua Bisa também eram Marias!"
         };
 
-        currentPortraits = new Sprite[]
-        {
-            mariPortrait,
-
-            motherPortrait,
-            motherPortrait,
-            motherPortrait
-        };
-
-        currentNames = new string[]
-        {
-            "Mari",
-
-            "Mãe",
-            "Mãe",
-            "Mãe"
-        };
+        currentPortraits = new Sprite[] { mariPortrait, motherPortrait };
+        currentNames = new string[] { "Mari", "Mãe" };
 
         StartConversation();
     }
@@ -263,171 +222,27 @@ public class MotherDialogue : MonoBehaviour
 
         currentLines = new string[]
         {
-            "Tudo bem, mãe, mas antes…",
-
-            "Eu queria saber se a senhora não poderia me ajudar",
-            "com um trabalho escolar para o final da semana.",
-
+            "Tudo bem, mãe, mas antes… Eu queria saber se a senhora não poderia me ajudar com um trabalho escolar para o final da semana.",
             "Que tipo de trabalho, \"Mari\"?",
-
-            "Eu preciso montar uma árvore genealógica",
-            "e falar um pouco sobre o passado da nossa família,",
-            "sobre a nossa história.",
-
-            "Talvez eu devesse falar sobre a vovó?",
-            "Ou melhor, sobre a Bisa.",
-
-            "Querida…",
-
-            "Eu gostaria que minha mãe ainda estivesse aqui",
-            "para ela mesma conversar com você,",
-            "mas eu posso te ajudar, sim, minha filha.",
-
-            "E sobre a sua Bisa…",
-
-            "você sabe que ela não tem mais condições",
-            "de falar sobre muitas das coisas que já viveu.",
-
-            "Não lembra da maior parte.",
-
-            "Tudo bem, mãe…",
-
-            "Eu só estava pensando que talvez fosse divertido",
-            "falar sobre como era a vida na época da minha bisavó.",
-
-            "Eu mesma não sei de nada.",
-
-            "Eu sei, meu benzinho.",
-
-            "Eu não estou dizendo que você não pode procurar sobre isso,",
-            "mas a sua Bisa nunca foi muito de conversar.",
-
-            "Então, nem mesmo eu consigo te falar muita coisa.",
-
-            "Mas que tal você olhar lá no quartinho da bagunça?",
-
-            "Eu sei que sua avó trouxe algumas coisas",
-            "da mãe dela antes de falecer.",
-
-            "Quem sabe você encontre algo!",
-
-            "Certo! Obrigada, mãe…",
-
-            "Vou agora mesmo.",
-
+            "Eu preciso montar uma árvore genealógica e falar um pouco sobre o passado da nossa família, sobre a nossa história. Talvez eu devesse falar sobre a vovó? Ou melhor, sobre a Bisa.",
+            "Querida… Eu gostaria que minha mãe ainda estivesse aqui para ela mesma conversar com você, mas eu posso te ajudar, sim, minha filha.",
+            "E sobre a sua Bisa… você sabe que ela não tem mais condições de falar sobre muitas das coisas que já viveu. Não lembra da maior parte.",
+            "Tudo bem, mãe… Eu só estava pensando que talvez fosse divertido falar sobre como era a vida na época da minha bisavó. Eu mesma não sei de nada.",
+            "Eu sei, meu benzinho. Eu não estou dizendo que você não pode procurar sobre isso, mas a sua Bisa nunca foi muito de conversar. Então, nem mesmo eu consigo te falar muita coisa.",
+            "Mas que tal você olhar lá no quartinho da bagunça? Eu sei que sua avó trouxe algumas coisas da mãe dela antes de falecer. Quem sabe você encontre algo!",
+            "Certo! Obrigada, mãe… Vou agora mesmo.",
             "Antes, venha me ajudar com o jantar, Maria Gabriely!"
         };
 
         currentPortraits = new Sprite[]
         {
-            mariPortrait,
-            mariPortrait,
-            mariPortrait,
-
-            motherPortrait,
-
-            mariPortrait,
-            mariPortrait,
-            mariPortrait,
-
-            mariPortrait,
-            mariPortrait,
-
-            motherPortrait,
-
-            motherPortrait,
-            motherPortrait,
-            motherPortrait,
-
-            motherPortrait,
-
-            motherPortrait,
-            motherPortrait,
-
-            motherPortrait,
-
-            mariPortrait,
-
-            mariPortrait,
-            mariPortrait,
-
-            mariPortrait,
-
-            motherPortrait,
-
-            motherPortrait,
-            motherPortrait,
-
-            motherPortrait,
-
-            motherPortrait,
-
-            motherPortrait,
-            motherPortrait,
-
-            motherPortrait,
-
-            mariPortrait,
-
-            mariPortrait,
-
-            motherPortrait
+            mariPortrait, motherPortrait, mariPortrait, motherPortrait,
+            motherPortrait, mariPortrait, motherPortrait, motherPortrait,
+            mariPortrait, motherPortrait
         };
-
         currentNames = new string[]
         {
-            "Mari",
-            "Mari",
-            "Mari",
-
-            "Mãe",
-
-            "Mari",
-            "Mari",
-            "Mari",
-
-            "Mari",
-            "Mari",
-
-            "Mãe",
-
-            "Mãe",
-            "Mãe",
-            "Mãe",
-
-            "Mãe",
-
-            "Mãe",
-            "Mãe",
-
-            "Mãe",
-
-            "Mari",
-
-            "Mari",
-            "Mari",
-
-            "Mari",
-
-            "Mãe",
-
-            "Mãe",
-            "Mãe",
-
-            "Mãe",
-
-            "Mãe",
-
-            "Mãe",
-            "Mãe",
-
-            "Mãe",
-
-            "Mari",
-
-            "Mari",
-
-            "Mãe"
+            "Mari", "Mãe", "Mari", "Mãe", "Mãe", "Mari", "Mãe", "Mãe", "Mari", "Mãe"
         };
 
         StartConversation();
@@ -476,7 +291,7 @@ public class MotherDialogue : MonoBehaviour
             // libera o quartinho.
             if (currentNames.Length > 0 &&
                 currentNames[0] == "Mari" &&
-                currentLines.Length > 10)
+                currentLines.Length == 10)
             {
                 // Essa verificação identifica a conversa
                 // longa do trabalho.
