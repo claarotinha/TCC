@@ -291,7 +291,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &148699947
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -348,6 +348,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!61 &148699948
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -442,7 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -471,6 +472,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -589,7 +591,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &213791769
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -646,6 +648,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!224 &213791770
 RectTransform:
   m_ObjectHideFlags: 0
@@ -662,7 +665,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -364.02542, y: -190.94}
+  m_AnchoredPosition: {x: -382.54544, y: -185.89993}
   m_SizeDelta: {x: 9.8851, y: 1.3599}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &213791771
@@ -700,7 +703,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &246150336
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -757,6 +760,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!224 &246150337
 RectTransform:
   m_ObjectHideFlags: 0
@@ -773,7 +777,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -377.65195, y: -190.0908}
+  m_AnchoredPosition: {x: -396.17197, y: -185.05072}
   m_SizeDelta: {x: 3.6991, y: 2.9493}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &246150338
@@ -969,7 +973,7 @@ Transform:
   m_GameObject: {fileID: 451904689}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -436.3, y: -81.45, z: 1.5774436}
+  m_LocalPosition: {x: -412.63, y: -79.86, z: 1.5774436}
   m_LocalScale: {x: 0.6051788, y: 0.6051788, z: 0.6051788}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1091,7 +1095,7 @@ Rigidbody2D:
   m_Constraints: 4
 --- !u!212 &451904695
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1148,6 +1152,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!1 &462980470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,7 +1173,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &462980471
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1225,6 +1230,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!224 &462980472
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1241,7 +1247,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -368.40527, y: -193.31999}
+  m_AnchoredPosition: {x: -386.92532, y: -188.2799}
   m_SizeDelta: {x: 19.995, y: 3.3179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &462980473
@@ -1279,7 +1285,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &507886155
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1336,6 +1342,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!224 &507886156
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1352,7 +1359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -360.8862, y: -191.3105}
+  m_AnchoredPosition: {x: -379.40622, y: -186.27042}
   m_SizeDelta: {x: 1.6996, y: 1.3246}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &507886157
@@ -1390,7 +1397,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &532114508
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1447,6 +1454,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!224 &532114509
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1463,7 +1471,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -384.57016, y: -188.68115}
+  m_AnchoredPosition: {x: -403.09018, y: -183.64108}
   m_SizeDelta: {x: 19.995, y: 8.5729}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &532114510
@@ -1635,7 +1643,7 @@ Animator:
   m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &719601366
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1692,6 +1700,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!4 &719601367
 Transform:
   m_ObjectHideFlags: 0
@@ -1701,7 +1710,7 @@ Transform:
   m_GameObject: {fileID: 719601364}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.65, y: 0.13, z: 0}
+  m_LocalPosition: {x: 6.55, y: 0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1945,7 +1954,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &802313580
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2002,6 +2011,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!224 &802313581
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2018,7 +2028,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -364.85516, y: -188.5412}
+  m_AnchoredPosition: {x: -383.37515, y: -183.50113}
   m_SizeDelta: {x: 19.995, y: 8.5729}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &802313582
@@ -2056,7 +2066,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &838485570
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2113,6 +2123,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!224 &838485571
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2129,7 +2140,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -356.58725, y: -193.32391}
+  m_AnchoredPosition: {x: -375.10727, y: -188.28384}
   m_SizeDelta: {x: 19.995, y: 3.3179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &838485572
@@ -2590,7 +2601,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &1067075632
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2647,6 +2658,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!224 &1067075633
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2663,7 +2675,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -356.0774, y: -189.19644}
+  m_AnchoredPosition: {x: -374.59744, y: -184.15634}
   m_SizeDelta: {x: 6.1297, y: 4.8863}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1067075634
@@ -2758,6 +2770,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -2828,7 +2841,7 @@ Animator:
   m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &1162776113
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2885,6 +2898,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!4 &1162776114
 Transform:
   m_ObjectHideFlags: 0
@@ -2894,7 +2908,7 @@ Transform:
   m_GameObject: {fileID: 1162776111}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.72, y: 1.24, z: 0}
+  m_LocalPosition: {x: 9.08, y: 2.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2969,7 +2983,7 @@ MonoBehaviour:
   message: uma bola
 --- !u!212 &1262295923
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3026,6 +3040,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!4 &1262295924
 Transform:
   m_ObjectHideFlags: 0
@@ -3118,7 +3133,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &1472228770
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3175,6 +3190,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!224 &1472228771
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3191,7 +3207,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -385.21, y: -193.26}
+  m_AnchoredPosition: {x: -403.73, y: -188.2199}
   m_SizeDelta: {x: 19.995, y: 3.4429}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1472228772
@@ -3305,7 +3321,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!212 &1482467540
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3362,6 +3378,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!1 &1512575058
 GameObject:
   m_ObjectHideFlags: 0
@@ -3420,7 +3437,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &1595663553
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3477,6 +3494,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!224 &1595663554
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3493,7 +3511,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -382.58072, y: -189.10106}
+  m_AnchoredPosition: {x: -401.10074, y: -184.06097}
   m_SizeDelta: {x: 19.995, y: 5.4486}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1595663555
@@ -3743,7 +3761,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &1904659727
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3800,6 +3818,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!224 &1904659728
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3816,7 +3835,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -368.66425, y: -191.21053}
+  m_AnchoredPosition: {x: -387.18423, y: -186.17044}
   m_SizeDelta: {x: 1.0747, y: 1.2621}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1904659729
@@ -3859,7 +3878,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &1953929559
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3916,6 +3935,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!224 &1953929560
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3932,7 +3952,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.0164232, y: 6.4996758}
+  m_AnchoredPosition: {x: -363.6706, y: -183.3699}
   m_SizeDelta: {x: 19.995, y: 8.5729}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1953929561
@@ -4103,7 +4123,7 @@ GameObject:
   m_IsActive: 1
 --- !u!212 &2025000048
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4160,6 +4180,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!224 &2025000049
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4176,7 +4197,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -369.9579, y: -189.10106}
+  m_AnchoredPosition: {x: -388.47794, y: -184.06097}
   m_SizeDelta: {x: 5.3174, y: 5.4486}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2025000050
