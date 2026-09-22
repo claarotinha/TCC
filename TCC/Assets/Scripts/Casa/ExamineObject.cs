@@ -16,20 +16,24 @@ public class ExamineObject : MonoBehaviour
 
     private static ExamineObject currentObject = null;
 
+    private Collider2D myCollider;
+
     private void Start()
     {
+        myCollider = GetComponent<Collider2D>();
+
         if (examinePanel != null)
         {
             examinePanel.SetActive(false);
             AddClickDetector();
         }
 
-        // Garante que o objeto tenha uma área de clique
-        if (GetComponent<Collider2D>() == null)
+        if (myCollider == null)
         {
             Debug.LogWarning(
-                "O objeto " + gameObject.name +
-                " não possui Collider2D. Adicione um Box Collider 2D."
+                "ExamineObject: " +
+                gameObject.name +
+                " não possui Collider2D."
             );
         }
     }
@@ -42,62 +46,34 @@ public class ExamineObject : MonoBehaviour
         if (!Input.GetMouseButtonDown(0))
             return;
 
-        if (Camera.main == null)
+        if (Camera.main == null || myCollider == null)
             return;
 
         Vector2 mousePosition =
             Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        // Procura TODOS os colliders naquele ponto
-        Collider2D[] hits =
-            Physics2D.OverlapPointAll(mousePosition);
-
-        ExamineObject objetoEncontrado = null;
-
-        foreach (Collider2D hit in hits)
-        {
-            // Procura o ExamineObject no próprio objeto
-            objetoEncontrado =
-                hit.GetComponent<ExamineObject>();
-
-            if (objetoEncontrado != null)
-                break;
-
-            // Também procura no objeto pai
-            objetoEncontrado =
-                hit.GetComponentInParent<ExamineObject>();
-
-            if (objetoEncontrado != null)
-                break;
-        }
-
-        // Nenhum objeto investigável foi clicado
-        if (objetoEncontrado == null)
-        {
-            if (isShowing && currentObject == this)
-            {
-                HidePanel();
-            }
-
+        // Verifica se o clique realmente aconteceu
+        // dentro do Collider DESTE objeto.
+        if (!myCollider.OverlapPoint(mousePosition))
             return;
-        }
 
-        // Se clicou em outro objeto
+        // Se outro objeto estava aberto, fecha.
         if (currentObject != null &&
-            currentObject != objetoEncontrado)
+            currentObject != this)
         {
             currentObject.HidePanel();
         }
 
-        // Abre ou fecha
-        if (!objetoEncontrado.isShowing)
+        // Abre
+        if (!isShowing)
         {
-            objetoEncontrado.ShowPanel();
-            currentObject = objetoEncontrado;
+            ShowPanel();
+            currentObject = this;
         }
+        // Se clicar novamente no mesmo objeto, fecha.
         else
         {
-            objetoEncontrado.HidePanel();
+            HidePanel();
             currentObject = null;
         }
     }
@@ -108,13 +84,17 @@ public class ExamineObject : MonoBehaviour
             return;
 
         if (CursorManager.Instance != null)
+        {
             CursorManager.Instance.SetLupa();
+        }
     }
 
     private void OnMouseExit()
     {
         if (CursorManager.Instance != null)
+        {
             CursorManager.Instance.SetNormal();
+        }
     }
 
     private void AddClickDetector()
@@ -140,14 +120,10 @@ public class ExamineObject : MonoBehaviour
             return;
 
         if (examinePanel != null)
-        {
             examinePanel.SetActive(true);
-        }
 
         if (examineText != null)
-        {
             examineText.text = message;
-        }
 
         isShowing = true;
     }
@@ -155,16 +131,12 @@ public class ExamineObject : MonoBehaviour
     public void HidePanel()
     {
         if (examinePanel != null)
-        {
             examinePanel.SetActive(false);
-        }
 
         isShowing = false;
 
         if (currentObject == this)
-        {
             currentObject = null;
-        }
     }
 
     public static bool IsShowing()
@@ -186,14 +158,10 @@ public class ExamineObject : MonoBehaviour
                 examinePanel.GetComponent<PanelClickHandler>();
 
             if (detector != null)
-            {
                 Destroy(detector);
-            }
         }
 
         if (currentObject == this)
-        {
             currentObject = null;
-        }
     }
 }

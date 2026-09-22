@@ -11,8 +11,12 @@ public class QuartoBaguncaDoor : MonoBehaviour
     public Button buttonSim;
     public Button buttonNao;
 
+    private ExamineObject examineObject;
+
     private void Start()
     {
+        examineObject = GetComponent<ExamineObject>();
+
         if (confirmPanel != null)
             confirmPanel.SetActive(false);
     }
@@ -37,14 +41,25 @@ public class QuartoBaguncaDoor : MonoBehaviour
         if (PauseHelper.BlockInput())
             return;
 
-        // ANTES de falar com a mãe:
-        // não faz absolutamente nada aqui.
-        // O ExamineObject será responsável pela investigação.
-        if (!MotherDialogue.FalouSobreTrabalho)
-            return;
+        // ==========================================
+        // ANTES DA CONVERSA
+        // ==========================================
 
-        // DEPOIS de falar com a mãe:
-        // abre o painel de vestígios.
+        if (!MotherDialogue.FalouSobreTrabalho)
+        {
+            return;
+        }
+
+        // ==========================================
+        // DEPOIS DA CONVERSA
+        // ==========================================
+
+        if (examineObject != null)
+        {
+            examineObject.HidePanel();
+            examineObject.enabled = false;
+        }
+
         AbrirConfirmacao();
     }
 
@@ -58,21 +73,14 @@ public class QuartoBaguncaDoor : MonoBehaviour
         if (confirmText != null)
             confirmText.text = "Quer procurar vestígios?";
 
-        if (buttonSim != null)
-        {
-            buttonSim.gameObject.SetActive(true);
+        buttonSim.gameObject.SetActive(true);
+        buttonNao.gameObject.SetActive(true);
 
-            buttonSim.onClick.RemoveAllListeners();
-            buttonSim.onClick.AddListener(EntrarNoQuartinho);
-        }
+        buttonSim.onClick.RemoveAllListeners();
+        buttonNao.onClick.RemoveAllListeners();
 
-        if (buttonNao != null)
-        {
-            buttonNao.gameObject.SetActive(true);
-
-            buttonNao.onClick.RemoveAllListeners();
-            buttonNao.onClick.AddListener(FecharConfirmacao);
-        }
+        buttonSim.onClick.AddListener(EntrarNoQuartinho);
+        buttonNao.onClick.AddListener(FecharConfirmacao);
     }
 
     private void EntrarNoQuartinho()
