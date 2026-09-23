@@ -25,8 +25,6 @@ public class MotherDialogue : MonoBehaviour
     private bool dialogueOpen = false;
     private bool inConversation = false;
 
-    private bool reclamouNome = false;
-
     public static bool FalouSobreTrabalho { get; private set; } = false;
 
     private string[] currentLines;
@@ -202,8 +200,6 @@ public class MotherDialogue : MonoBehaviour
 
     private void ReclamarNome()
     {
-        reclamouNome = true;
-
         EsconderOpcoes();
 
         currentLines = new string[]
