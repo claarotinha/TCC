@@ -160,6 +160,12 @@ public class CollectableExamine : MonoBehaviour
         return false;
     }
 
+    public static void HideCurrentPanel()
+    {
+        if (currentObject != null)
+            currentObject.HidePanel();
+    }
+
     private void OnDestroy()
     {
         if (examinePanel != null)

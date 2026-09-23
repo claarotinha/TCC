@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class QuartoBaguncaDoor : MonoBehaviour
 {
+    private static int lastClickFrame = -1;
+
     [Header("Painel de Confirmação")]
     public GameObject confirmPanel;
     public TMP_Text confirmText;
@@ -30,6 +32,17 @@ public class QuartoBaguncaDoor : MonoBehaviour
     {
         if (CursorManager.Instance != null)
             CursorManager.Instance.SetNormal();
+    }
+
+    // A cena contém duas áreas do quartinho sobrepostas. Um clique deve
+    // acionar apenas uma delas, inclusive antes da conversa com a mãe.
+    public bool TryHandleClick()
+    {
+        if (lastClickFrame == Time.frameCount)
+            return false;
+
+        lastClickFrame = Time.frameCount;
+        return true;
     }
 
     public void AbrirConfirmacao()

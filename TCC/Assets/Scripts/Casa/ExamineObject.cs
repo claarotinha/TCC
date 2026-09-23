@@ -54,11 +54,13 @@ public class ExamineObject : MonoBehaviour
 
         // Verifica se o clique realmente aconteceu
         // dentro do Collider DESTE objeto.
-        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-        if (hit.collider != myCollider)
+        if (!myCollider.OverlapPoint(mousePosition))
             return;
 
         QuartoBaguncaDoor door = GetComponent<QuartoBaguncaDoor>();
+        if (door != null && !door.TryHandleClick())
+            return;
+
         if (door != null && MotherDialogue.FalouSobreTrabalho)
         {
             HidePanel();
@@ -157,6 +159,12 @@ public class ExamineObject : MonoBehaviour
         }
 
         return false;
+    }
+
+    public static void HideCurrentPanel()
+    {
+        if (currentObject != null)
+            currentObject.HidePanel();
     }
 
     private void OnDestroy()

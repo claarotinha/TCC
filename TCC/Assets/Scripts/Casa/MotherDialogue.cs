@@ -46,6 +46,12 @@ public class MotherDialogue : MonoBehaviour
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
 
+        // O texto da cena tem altura fixa; ajuste o tamanho para que as
+        // falas agrupadas caibam inteiras no painel existente.
+        dialogueText.enableAutoSizing = true;
+        dialogueText.fontSizeMin = 14;
+        dialogueText.fontSizeMax = 21;
+
         if (motherCollider == null)
         {
             Debug.LogWarning(
