@@ -323,7 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: fogo
+  message: O fogão está pronto para preparar a janta.
 --- !u!61 &30532405
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -428,7 +428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: 555555555
+  message: O banheiro está vazio. Posso voltar aqui depois.
 --- !u!61 &79696716
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -662,7 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: Talvez eu possa procurar alguma coisa velha por aqui depois
+  message: O quartinho da bagunça está cheio de coisas antigas. Talvez eu procure por aqui depois.
 --- !u!61 &95950137
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -972,7 +972,7 @@ MonoBehaviour:
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
   itemData: {fileID: 11400000, guid: 6f1074d0ccac01d469b08102d6117d2b, type: 2}
-  message: pao
+  message: Um pão. Vou guardar para mais tarde.
 --- !u!1 &120361311 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5291345947944064673, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
@@ -1165,7 +1165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: 55555
+  message: O sofá parece confortável. Dá vontade de sentar um pouco.
 --- !u!1 &338247653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,7 +1798,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: lkijnj
+  message: Será que tem alguma coisa para comer na geladeira?
 --- !u!61 &633732072
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2674,7 +2674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: Talvez eu possa procurar alguma coisa velha por aqui depois
+  message: Melhor não mexer nas coisas do quarto de Mainha.
 --- !u!61 &1072692674
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2876,7 +2876,7 @@ MonoBehaviour:
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
   itemData: {fileID: 11400000, guid: 48f3c933435bfbe449faee3d20e99340, type: 2}
-  message: ovo
+  message: Um ovo. Pode ser útil na cozinha.
 --- !u!114 &1103893478 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4421622556070828372, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
@@ -3427,7 +3427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: num quero
+  message: O quartinho da bagunça está cheio de coisas antigas. Talvez eu procure por aqui depois.
 --- !u!1 &1532151125
 GameObject:
   m_ObjectHideFlags: 0
@@ -3642,7 +3642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: Talvez eu possa procurar alguma coisa velha por aqui depois
+  message: Alguns livros guardados aqui. Talvez algum tenha algo interessante.
 --- !u!61 &1606141892
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3736,7 +3736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: janela
+  message: Da janela consigo ver o lado de fora da casa.
 --- !u!61 &1625797347
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4288,7 +4288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: kkkkkkkkkkkkkkkkkk
+  message: Minha cama parece convidativa, mas ainda tenho coisas para fazer.
 --- !u!61 &1969619171
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4751,6 +4751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   target: {fileID: 716483942}
   smoothSpeed: 5
+  levelBounds: {fileID: 1965256462}
 --- !u!114 &2070831614
 MonoBehaviour:
   m_ObjectHideFlags: 0

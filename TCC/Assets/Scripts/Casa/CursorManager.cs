@@ -23,15 +23,20 @@ public class CursorManager : MonoBehaviour
         }
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-        if (hit.collider != null &&
-            (hit.collider.GetComponent<ExamineObject>() != null ||
-             hit.collider.GetComponent<CollectableExamine>() != null ||
-             hit.collider.GetComponent<QuartoBaguncaDoor>() != null ||
-             hit.collider.GetComponent<MotherDialogue>() != null))
-            SetLupa();
-        else
-            SetNormal();
+        Collider2D[] hits = Physics2D.OverlapPointAll(mousePosition);
+        foreach (Collider2D hit in hits)
+        {
+            if (hit.GetComponent<ExamineObject>() != null ||
+                hit.GetComponent<CollectableExamine>() != null ||
+                hit.GetComponent<QuartoBaguncaDoor>() != null ||
+                hit.GetComponent<MotherDialogue>() != null)
+            {
+                SetLupa();
+                return;
+            }
+        }
+
+        SetNormal();
     }
 
     public void SetLupa()
