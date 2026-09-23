@@ -14,22 +14,16 @@ public class PanelClickHandler : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("🖱 CLICOU NO PAINEL!");
-        
-        if (examineObject == null)
+
+        if (ExamineObject.IsShowing())
         {
-            Debug.LogWarning("⚠ examineObject é NULL! Não foi possível fechar.");
+            ExamineObject.HideCurrentPanel();
             return;
         }
 
-        if (examineObject is ExamineObject only)
+        if (CollectableExamine.IsShowing())
         {
-            only.HidePanel();
-            Debug.Log("🔒 Painel fechado (ExamineObject)");
-        }
-        else if (examineObject is CollectableExamine collect)
-        {
-            collect.HidePanel();
-            Debug.Log("🔒 Painel fechado (CollectableExamine)");
+            CollectableExamine.HideCurrentPanel();
         }
     }
 }
