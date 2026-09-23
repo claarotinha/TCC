@@ -22,6 +22,7 @@ public class InventoryUI : MonoBehaviour
 
     public void Refresh()
     {
+        if (content == null || slotPrefab == null || InventoryManager.Instance == null) return;
         foreach (Transform child in content)
             Destroy(child.gameObject);
 

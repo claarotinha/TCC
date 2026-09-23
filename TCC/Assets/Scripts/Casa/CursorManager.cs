@@ -29,7 +29,8 @@ public class CursorManager : MonoBehaviour
             if (hit.GetComponent<ExamineObject>() != null ||
                 hit.GetComponent<CollectableExamine>() != null ||
                 hit.GetComponent<QuartoBaguncaDoor>() != null ||
-                hit.GetComponent<MotherDialogue>() != null)
+                hit.GetComponent<MotherDialogue>() != null ||
+                hit.GetComponent<CasaKeychain>() != null)
             {
                 SetLupa();
                 return;

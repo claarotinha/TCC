@@ -10,6 +10,23 @@ public class CameraFollow : MonoBehaviour
     private float fixedZ;
     private Camera sceneCamera;
 
+    // A área jogável corresponde aos cenários visíveis, e não ao antigo collider maior.
+    public static Bounds GetArtBounds(Collider2D fallback)
+    {
+        GameObject background = GameObject.Find("Background");
+        if (background != null)
+        {
+            SpriteRenderer[] parts = background.GetComponentsInChildren<SpriteRenderer>();
+            if (parts.Length > 0)
+            {
+                Bounds visible = parts[0].bounds;
+                foreach (SpriteRenderer part in parts) visible.Encapsulate(part.bounds);
+                return visible;
+            }
+        }
+        return fallback != null ? fallback.bounds : new Bounds(Vector3.zero, Vector3.one * 100f);
+    }
+
     void Start()
     {
         fixedY = transform.position.y;
@@ -26,7 +43,7 @@ public class CameraFollow : MonoBehaviour
         if (levelBounds != null && sceneCamera != null && sceneCamera.orthographic)
         {
             float halfWidth = sceneCamera.orthographicSize * sceneCamera.aspect;
-            Bounds bounds = levelBounds.bounds;
+            Bounds bounds = GetArtBounds(levelBounds);
             float minX = bounds.min.x + halfWidth;
             float maxX = bounds.max.x - halfWidth;
             desiredX = minX <= maxX
@@ -50,7 +67,7 @@ public class CameraFollow : MonoBehaviour
         if (levelBounds != null && sceneCamera != null && sceneCamera.orthographic)
         {
             float halfWidth = sceneCamera.orthographicSize * sceneCamera.aspect;
-            Bounds bounds = levelBounds.bounds;
+            Bounds bounds = GetArtBounds(levelBounds);
             float minX = bounds.min.x + halfWidth;
             float maxX = bounds.max.x - halfWidth;
             Vector3 position = transform.position;
