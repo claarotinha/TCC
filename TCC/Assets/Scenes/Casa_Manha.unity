@@ -176,8 +176,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.4, y: 4.8}
-    newSize: {x: 4.51, y: 6}
+    oldSize: {x: 7.36, y: 5.48}
+    newSize: {x: 7.36, y: 5.48}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -233,15 +233,15 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 3662405223508897419, guid: 7c80256b5eb86fa4baac767b03333a45, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 66cde2383cd7f9a4ba12d9c3b59d37dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.51, y: 6}
+  m_Size: {x: 7.36, y: 5.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!4 &12436861
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: O fogão está pronto para preparar a janta.
+  message: "O fog\xE3o est\xE1 pronto para preparar a janta."
 --- !u!61 &30532405
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -354,7 +354,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -428,7 +428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: O banheiro está vazio. Posso voltar aqui depois.
+  message: "O banheiro est\xE1 vazio. Posso voltar aqui depois."
 --- !u!61 &79696716
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -662,7 +662,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: O quartinho da bagunça está cheio de coisas antigas. Talvez eu procure por aqui depois.
+  message: "O quartinho da bagun\xE7a est\xE1 cheio de coisas antigas. Talvez eu
+    procure por aqui depois."
 --- !u!61 &95950137
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -972,106 +973,12 @@ MonoBehaviour:
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
   itemData: {fileID: 11400000, guid: 6f1074d0ccac01d469b08102d6117d2b, type: 2}
-  message: Um pão. Vou guardar para mais tarde.
+  message: "Um p\xE3o. Vou guardar para mais tarde."
 --- !u!1 &120361311 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5291345947944064673, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
   m_PrefabInstance: {fileID: 3701899249500309357}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &163134218
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 163134221}
-  - component: {fileID: 163134220}
-  - component: {fileID: 163134219}
-  m_Layer: 0
-  m_Name: InvestigacaoMesa
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!61 &163134219
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 163134218}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &163134220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 163134218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 0}
-  examineText: {fileID: 0}
-  message: 
---- !u!4 &163134221
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 163134218}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.53888, y: 2.30228, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &168212624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,7 +1072,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: O sofá parece confortável. Dá vontade de sentar um pouco.
+  message: "O sof\xE1 parece confort\xE1vel. D\xE1 vontade de sentar um pouco."
 --- !u!1 &338247653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,7 +1222,7 @@ Transform:
   m_GameObject: {fileID: 343056401}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.73, y: 2.17, z: 0}
+  m_LocalPosition: {x: 3.68, y: 4.82, z: 0}
   m_LocalScale: {x: 0.38496658, y: 0.34563348, z: 0.34563348}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1530,7 +1437,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.12, y: 6.96}
+    oldSize: {x: 7.36, y: 6}
     newSize: {x: 4.51, y: 6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1587,7 +1494,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -3382637633492864493, guid: 8c9d94dc1ebc27a4c9c29b6d964f055a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 26f4f202f0b4bdd43836c9e9564067bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1798,7 +1705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: Será que tem alguma coisa para comer na geladeira?
+  message: "Ser\xE1 que tem alguma coisa para comer na geladeira?"
 --- !u!61 &633732072
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2675,7 +2582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: Melhor não mexer nas coisas do quarto de Mainha.
+  message: "Melhor n\xE3o mexer nas coisas do quarto de Mainha."
 --- !u!61 &1072692674
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2877,7 +2784,7 @@ MonoBehaviour:
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
   itemData: {fileID: 11400000, guid: 48f3c933435bfbe449faee3d20e99340, type: 2}
-  message: Um ovo. Pode ser útil na cozinha.
+  message: "Um ovo. Pode ser \xFAtil na cozinha."
 --- !u!114 &1103893478 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4421622556070828372, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
@@ -3000,6 +2907,7 @@ Transform:
   - {fileID: 633732070}
   - {fileID: 30532403}
   - {fileID: 1625797345}
+  - {fileID: 1378713408}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1226928273
@@ -3262,6 +3170,100 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &1378713407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1378713408}
+  - component: {fileID: 1378713410}
+  - component: {fileID: 1378713409}
+  m_Layer: 0
+  m_Name: chaveiro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1378713408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378713407}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.04, y: -0.72, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1185381340}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1378713409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378713407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 120361311}
+  examineText: {fileID: 1103893478}
+  message: Um chaveiro com algumas chaves
+--- !u!61 &1378713410
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378713407}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.46574354, y: 0.39579064}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.2883291, y: 1.1978952}
+  m_EdgeRadius: 0
 --- !u!1 &1458756524 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8758403939130173519, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
@@ -3428,7 +3430,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: O quartinho da bagunça está cheio de coisas antigas. Talvez eu procure por aqui depois.
+  message: "O quartinho da bagun\xE7a est\xE1 cheio de coisas antigas. Talvez eu
+    procure por aqui depois."
 --- !u!1 &1532151125
 GameObject:
   m_ObjectHideFlags: 0
@@ -3457,7 +3460,7 @@ Transform:
   m_GameObject: {fileID: 1532151125}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.26, y: 2.33, z: 0}
+  m_LocalPosition: {x: 21.58, y: 2.33, z: 0}
   m_LocalScale: {x: 0.4637963, y: 0.40887234, z: 0.38173124}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3496,7 +3499,7 @@ BoxCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
+  m_LayerOverridePriority: -2147483648
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -3517,7 +3520,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.15, y: 3.94}
+    oldSize: {x: 4.51, y: 6}
     newSize: {x: 4.51, y: 6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3574,7 +3577,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -3527272168396299630, guid: e40999b991889964b9ccb83eab346118, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f74af8d72a4bde341a9ce031d64dc331, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3582,7 +3585,7 @@ SpriteRenderer:
   m_Size: {x: 4.51, y: 6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!114 &1602438537 stripped
@@ -5565,4 +5568,3 @@ SceneRoots:
   - {fileID: 1106729091}
   - {fileID: 1965256463}
   - {fileID: 1981426198}
-  - {fileID: 163134221}
