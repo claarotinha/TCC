@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movimentação")]
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float runSpeed = 8f;
+    [SerializeField] private Collider2D movementBounds;
 
     [Header("Ground Check")]
     [SerializeField] private Transform groundCheck;
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
+    private Collider2D bodyCollider;
 
     private float horizontalInput;
     private bool isRunning;
@@ -24,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        bodyCollider = GetComponent<Collider2D>();
     }
 
     private void Update()
@@ -47,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Move();
+        KeepInsideBounds();
     }
 
     private void HandleInput()
@@ -67,11 +71,33 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckGround()
     {
+        if (groundCheck == null)
+            return;
+
         isGrounded = Physics2D.OverlapCircle(
             groundCheck.position,
             groundRadius,
             groundLayer
         );
+    }
+
+    private void KeepInsideBounds()
+    {
+        if (movementBounds == null)
+            return;
+
+        float halfWidth = bodyCollider != null ? bodyCollider.bounds.extents.x : 0f;
+        float minX = movementBounds.bounds.min.x + halfWidth;
+        float maxX = movementBounds.bounds.max.x - halfWidth;
+        float clampedX = minX <= maxX
+            ? Mathf.Clamp(rb.position.x, minX, maxX)
+            : movementBounds.bounds.center.x;
+
+        if (!Mathf.Approximately(clampedX, rb.position.x))
+        {
+            rb.position = new Vector2(clampedX, rb.position.y);
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+        }
     }
 
     private void UpdateAnimations()
