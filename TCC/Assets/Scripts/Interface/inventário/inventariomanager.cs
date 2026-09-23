@@ -9,8 +9,6 @@ public class InventoryManager : MonoBehaviour
     [Header("Inventário")]
     [SerializeField] private List<ItemData> items = new List<ItemData>();
 
-    [SerializeField] private List<ItemCombination> combinations = new List<ItemCombination>();
-
     public IReadOnlyList<ItemData> Items => items;
 
     public ItemData SelectedItem { get; private set; }
@@ -104,20 +102,7 @@ public class InventoryManager : MonoBehaviour
         if (first == null || second == null)
             return false;
 
-        if (first == second || !items.Contains(first) || !items.Contains(second)) return false;
-        foreach (ItemCombination combination in combinations)
-        {
-            if (combination == null || combination.result == null) continue;
-            bool matches = (combination.itemA == first && combination.itemB == second) ||
-                           (combination.itemA == second && combination.itemB == first);
-            if (!matches) continue;
-            items.Remove(first);
-            items.Remove(second);
-            items.Add(combination.result);
-            SelectedItem = null;
-            OnInventoryChanged?.Invoke();
-            return true;
-        }
+        // Coloque aqui seu sistema de combinação
         return false;
     }
 }

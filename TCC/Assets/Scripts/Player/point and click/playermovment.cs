@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         // Se o jogo estiver pausado, não lê nenhum comando
-        if (PauseHelper.BlockInput())
+        if (UniversalPauseManager.IsPaused)
             return;
 
         HandleInput();
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // Se estiver pausado, garante que a Mari fique totalmente parada
-        if (PauseHelper.BlockInput())
+        if (UniversalPauseManager.IsPaused)
         {
             rb.linearVelocity = Vector2.zero;
             return;
@@ -87,12 +87,11 @@ public class PlayerMovement : MonoBehaviour
             return;
 
         float halfWidth = bodyCollider != null ? bodyCollider.bounds.extents.x : 0f;
-        Bounds bounds = CameraFollow.GetArtBounds(movementBounds);
-        float minX = bounds.min.x + halfWidth;
-        float maxX = bounds.max.x - halfWidth;
+        float minX = movementBounds.bounds.min.x + halfWidth;
+        float maxX = movementBounds.bounds.max.x - halfWidth;
         float clampedX = minX <= maxX
             ? Mathf.Clamp(rb.position.x, minX, maxX)
-            : bounds.center.x;
+            : movementBounds.bounds.center.x;
 
         if (!Mathf.Approximately(clampedX, rb.position.x))
         {
