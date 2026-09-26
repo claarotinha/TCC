@@ -56,7 +56,7 @@ public class InventorySlot : MonoBehaviour,
         dragIcon.transform.SetAsLastSibling();
 
         RectTransform rect = dragIcon.GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(72, 72);
+        rect.sizeDelta = new Vector2(120, 120);
 
         Image dragImage = dragIcon.GetComponent<Image>();
         dragImage.sprite = item.icon;

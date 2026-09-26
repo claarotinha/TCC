@@ -40,10 +40,10 @@ public class ExamineObject : MonoBehaviour
 
     private void Update()
     {
-        if (PauseHelper.BlockInput())
+        if (!Input.GetMouseButtonDown(0))
             return;
 
-        if (!Input.GetMouseButtonDown(0))
+        if (InvestigationGuard.Blocked)
             return;
 
         if (Camera.main == null || myCollider == null)
@@ -62,7 +62,7 @@ public class ExamineObject : MonoBehaviour
             return;
 
         if (door != null &&
-         (MotherDialogue.FalouSobreTrabalho || QuartoBaguncaDoor.Unlocked))
+            (MotherDialogue.FalouSobreTrabalho || QuartoBaguncaDoor.Unlocked))
         {
             HidePanel();
             door.AbrirConfirmacao();
@@ -80,7 +80,6 @@ public class ExamineObject : MonoBehaviour
         if (!isShowing)
         {
             ShowPanel();
-            currentObject = this;
         }
         // Se clicar novamente no mesmo objeto, fecha.
         else
@@ -92,7 +91,7 @@ public class ExamineObject : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (PauseHelper.BlockInput())
+        if (InvestigationGuard.Blocked)
             return;
 
         if (CursorManager.Instance != null)
@@ -128,16 +127,22 @@ public class ExamineObject : MonoBehaviour
 
     public void ShowPanel()
     {
-        if (PauseHelper.BlockInput())
-            return;
+        ShowMessage(message);
+    }
+
+    public void ShowMessage(string text)
+    {
+        if (currentObject != null && currentObject != this)
+            currentObject.HidePanel();
 
         if (examinePanel != null)
             examinePanel.SetActive(true);
 
         if (examineText != null)
-            examineText.text = message;
+            examineText.text = text;
 
         isShowing = true;
+        currentObject = this;
     }
 
     public void HidePanel()
@@ -149,6 +154,8 @@ public class ExamineObject : MonoBehaviour
 
         if (currentObject == this)
             currentObject = null;
+
+        InvestigationGuard.BlockCurrentClick();
     }
 
     public static bool IsShowing()

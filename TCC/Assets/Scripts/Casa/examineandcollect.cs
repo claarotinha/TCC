@@ -26,6 +26,11 @@ public class CollectableExamine : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            // O segundo clique no próprio objeto ainda confirma a coleta;
+            // outros objetos ficam bloqueados enquanto o painel está aberto.
+            if (InvestigationGuard.Blocked && !(isShowing && currentObject == this))
+                return;
+
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
 

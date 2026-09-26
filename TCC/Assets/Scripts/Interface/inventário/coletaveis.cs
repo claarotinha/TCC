@@ -7,7 +7,7 @@ public class CollectableItem : MonoBehaviour
     private void OnMouseDown()
     {
         // Verifica se está examinando algo
-        if (ExamineObject.IsShowing() || CollectableExamine.IsShowing())
+        if (InvestigationGuard.Blocked)
         {
             Debug.Log("⛔ Não é possível coletar enquanto examina um objeto.");
             return;

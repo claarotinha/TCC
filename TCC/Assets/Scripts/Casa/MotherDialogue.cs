@@ -24,6 +24,8 @@ public class MotherDialogue : MonoBehaviour
 
     private bool dialogueOpen = false;
     private bool inConversation = false;
+    private static MotherDialogue activeDialogue;
+    public static bool IsShowing => activeDialogue != null && activeDialogue.dialogueOpen;
 
     private bool reclamouNome = false;
 
@@ -89,6 +91,9 @@ public class MotherDialogue : MonoBehaviour
         if (!Input.GetMouseButtonDown(0))
             return;
 
+        if (InvestigationGuard.Blocked)
+            return;
+
         if (motherCollider == null)
             return;
 
@@ -130,6 +135,7 @@ public class MotherDialogue : MonoBehaviour
     private void OpenInitialDialogue()
     {
         dialogueOpen = true;
+        activeDialogue = this;
         inConversation = true;
 
         canvasGroup.alpha = 1;
@@ -159,6 +165,7 @@ public class MotherDialogue : MonoBehaviour
     private void OpenChoices()
     {
         dialogueOpen = true;
+        activeDialogue = this;
         inConversation = false;
 
         canvasGroup.alpha = 1;
@@ -340,6 +347,9 @@ public class MotherDialogue : MonoBehaviour
 
         dialogueOpen = false;
         inConversation = false;
+        if (activeDialogue == this)
+            activeDialogue = null;
+        InvestigationGuard.BlockCurrentClick();
 
         EsconderOpcoes();
     }

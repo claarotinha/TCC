@@ -16,7 +16,7 @@ public class InteractionManager : MonoBehaviour
 
     private void DetectInteraction()
     {
-        if (!Input.GetMouseButtonDown(0))
+        if (!Input.GetMouseButtonDown(0) || InvestigationGuard.Blocked)
             return;
 
         Vector2 mousePosition =

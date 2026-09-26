@@ -15,6 +15,7 @@ public class PhotoCollect : MonoBehaviour
     private bool examined = false;
     private bool collected = false;
     private bool dialogueOpen = false;
+    public bool IsDialogOpen => dialogueOpen;
 
     void Update()
     {
@@ -53,7 +54,7 @@ public class PhotoCollect : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (collected || dialogueOpen)
+        if (collected || dialogueOpen || InvestigationGuard.Blocked)
             return;
 
         ShowDialogue();

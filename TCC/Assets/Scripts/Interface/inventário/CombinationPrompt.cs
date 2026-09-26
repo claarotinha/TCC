@@ -74,6 +74,7 @@ public class CombinationPrompt : MonoBehaviour
 
     private void Close()
     {
+        InvestigationGuard.BlockCurrentClick();
         combinePanel.SetActive(false);
         first = null;
         second = null;

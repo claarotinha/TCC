@@ -90,6 +90,7 @@ public class CollectPrompt : MonoBehaviour
 
     private void Close()
     {
+        InvestigationGuard.BlockCurrentClick();
         if (collectPanel != null)
             collectPanel.SetActive(false);
 

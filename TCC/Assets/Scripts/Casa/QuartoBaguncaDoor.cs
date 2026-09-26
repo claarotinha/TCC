@@ -52,6 +52,14 @@ public class QuartoBaguncaDoor : MonoBehaviour
 
     public void AbrirConfirmacao()
     {
+        if (!unlocked)
+        {
+            ExamineObject examine = GetComponent<ExamineObject>();
+            if (examine != null)
+                examine.ShowMessage("Esse quarto está trancado.");
+            return;
+        }
+
         if (confirmPanel == null || confirmText == null ||
             buttonSim == null || buttonNao == null)
             return;
@@ -63,26 +71,14 @@ public class QuartoBaguncaDoor : MonoBehaviour
 
         TMP_Text noText = buttonNao.GetComponentInChildren<TMP_Text>();
 
-        if (!unlocked)
-        {
-            confirmText.text = "Esse quarto está trancado.";
-            buttonSim.gameObject.SetActive(false);
-            buttonNao.gameObject.SetActive(true);
+        confirmText.text = "Quer procurar vestígios?";
+        buttonSim.gameObject.SetActive(true);
+        buttonNao.gameObject.SetActive(true);
 
-            if (noText != null)
-                noText.text = "Fechar";
-        }
-        else
-        {
-            confirmText.text = "Quer procurar vestígios?";
-            buttonSim.gameObject.SetActive(true);
-            buttonNao.gameObject.SetActive(true);
+        if (noText != null)
+            noText.text = "Não";
 
-            if (noText != null)
-                noText.text = "Não";
-
-            buttonSim.onClick.AddListener(EntrarNoQuartinho);
-        }
+        buttonSim.onClick.AddListener(EntrarNoQuartinho);
 
         buttonNao.onClick.AddListener(FecharConfirmacao);
     }
@@ -104,5 +100,7 @@ public class QuartoBaguncaDoor : MonoBehaviour
     {
         if (confirmPanel != null)
             confirmPanel.SetActive(false);
+
+        InvestigationGuard.BlockCurrentClick();
     }
 }

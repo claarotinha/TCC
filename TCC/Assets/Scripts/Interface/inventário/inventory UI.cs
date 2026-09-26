@@ -25,7 +25,10 @@ public class InventoryUI : MonoBehaviour
         }
 
         foreach (Transform child in content)
+        {
+            child.gameObject.SetActive(false);
             Destroy(child.gameObject);
+        }
 
         if (InventoryManager.Instance == null)
             return;

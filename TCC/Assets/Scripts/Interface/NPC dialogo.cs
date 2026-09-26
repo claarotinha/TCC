@@ -77,6 +77,9 @@ public class NPCDialogue : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (InvestigationGuard.Blocked)
+            return;
+
         if (!isShowing)
         {
             if (currentObject != null && currentObject != this)

@@ -21,6 +21,7 @@ public class DiaryWithCutscene : MonoBehaviour
     public string playerTag = "Player";
 
     private bool dialogueOpen = false;
+    public bool IsDialogOpen => dialogueOpen;
     private bool canClose = false;
     private bool collected = false;
 
@@ -63,7 +64,8 @@ public class DiaryWithCutscene : MonoBehaviour
         }
 
         // Primeiro clique: abre diálogo
-        if (hittingThis && Input.GetMouseButtonDown(0) && !dialogueOpen && !cutsceneWatched)
+        if (hittingThis && Input.GetMouseButtonDown(0) &&
+            !InvestigationGuard.Blocked && !dialogueOpen && !cutsceneWatched)
         {
             OpenDialogue();
         }

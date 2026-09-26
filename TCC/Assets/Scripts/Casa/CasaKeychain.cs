@@ -31,11 +31,10 @@ public class CasaKeychain : MonoBehaviour
         }
 
         if (collected || keyItem == null ||
-            PauseHelper.BlockInput() ||
             !Input.GetMouseButtonDown(0) ||
             Camera.main == null ||
             InventoryTabController.Instance == null ||
-            InventoryTabController.Instance.IsOpen)
+            InvestigationGuard.Blocked)
             return;
 
         Vector2 mousePosition =

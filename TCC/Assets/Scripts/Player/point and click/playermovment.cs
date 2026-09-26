@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float runSpeed = 8f;
     [SerializeField] private Collider2D movementBounds;
+    [SerializeField] private SpriteRenderer[] movementBackground;
 
     [Header("Ground Check")]
     [SerializeField] private Transform groundCheck;
@@ -83,15 +84,36 @@ public class PlayerMovement : MonoBehaviour
 
     private void KeepInsideBounds()
     {
-        if (movementBounds == null)
+        Bounds bounds = default;
+        bool hasBounds = movementBounds != null;
+        if (hasBounds)
+            bounds = movementBounds.bounds;
+        else if (movementBackground != null)
+        {
+            foreach (SpriteRenderer piece in movementBackground)
+            {
+                if (piece == null || piece.sprite == null)
+                    continue;
+
+                if (!hasBounds)
+                {
+                    bounds = piece.bounds;
+                    hasBounds = true;
+                }
+                else
+                    bounds.Encapsulate(piece.bounds);
+            }
+        }
+
+        if (!hasBounds)
             return;
 
         float halfWidth = bodyCollider != null ? bodyCollider.bounds.extents.x : 0f;
-        float minX = movementBounds.bounds.min.x + halfWidth;
-        float maxX = movementBounds.bounds.max.x - halfWidth;
+        float minX = bounds.min.x + halfWidth;
+        float maxX = bounds.max.x - halfWidth;
         float clampedX = minX <= maxX
             ? Mathf.Clamp(rb.position.x, minX, maxX)
-            : movementBounds.bounds.center.x;
+            : bounds.center.x;
 
         if (!Mathf.Approximately(clampedX, rb.position.x))
         {

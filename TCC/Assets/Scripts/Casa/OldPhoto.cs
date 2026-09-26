@@ -14,6 +14,7 @@ public class OldPhoto : MonoBehaviour
     public GameObject collectHint;
 
     private bool dialogueOpen = false;
+    public bool IsDialogOpen => dialogueOpen;
     private bool examined = false;
     private bool collected = false;
     private bool canClose = false;
@@ -39,7 +40,7 @@ public class OldPhoto : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (PauseHelper.BlockInput())
+        if (InvestigationGuard.Blocked)
             return;
 
         // Se o diálogo estiver aberto, não faz nada aqui.

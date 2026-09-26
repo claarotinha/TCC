@@ -16,7 +16,7 @@ public class ItemDiscovery : MonoBehaviour
         if (!Input.GetMouseButtonDown(0) || Camera.main == null ||
             itemCollider == null || item == null ||
             InventoryTabController.Instance == null ||
-            InventoryTabController.Instance.IsOpen)
+            InvestigationGuard.Blocked)
             return;
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

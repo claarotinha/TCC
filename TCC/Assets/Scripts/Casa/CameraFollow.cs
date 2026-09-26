@@ -5,16 +5,56 @@ public class CameraFollow : MonoBehaviour
     public Transform target;
     public float smoothSpeed = 5f;
     public Collider2D levelBounds;
+    [SerializeField] private SpriteRenderer[] backgroundPieces;
 
     private float fixedY;
     private float fixedZ;
     private Camera sceneCamera;
+    private Bounds cameraBounds;
+    private bool hasBounds;
 
     void Start()
     {
         fixedY = transform.position.y;
         fixedZ = transform.position.z;
         sceneCamera = GetComponent<Camera>();
+
+        if (levelBounds != null)
+        {
+            cameraBounds = levelBounds.bounds;
+            hasBounds = true;
+        }
+        else if (backgroundPieces != null)
+        {
+            foreach (SpriteRenderer piece in backgroundPieces)
+            {
+                if (piece == null || piece.sprite == null)
+                    continue;
+
+                if (!hasBounds)
+                {
+                    cameraBounds = piece.bounds;
+                    hasBounds = true;
+                }
+                else
+                    cameraBounds.Encapsulate(piece.bounds);
+            }
+        }
+
+        // Começa no trecho onde a personagem está, sem mostrar a área vazia.
+        if (target != null)
+            transform.position = new Vector3(ClampX(target.position.x), fixedY, fixedZ);
+    }
+
+    private float ClampX(float x)
+    {
+        if (!hasBounds || sceneCamera == null || !sceneCamera.orthographic)
+            return x;
+
+        float halfWidth = sceneCamera.orthographicSize * sceneCamera.aspect;
+        float minX = cameraBounds.min.x + halfWidth;
+        float maxX = cameraBounds.max.x - halfWidth;
+        return minX <= maxX ? Mathf.Clamp(x, minX, maxX) : cameraBounds.center.x;
     }
 
     void LateUpdate()
@@ -22,17 +62,7 @@ public class CameraFollow : MonoBehaviour
         if (target == null)
             return;
 
-        float desiredX = target.position.x;
-        if (levelBounds != null && sceneCamera != null && sceneCamera.orthographic)
-        {
-            float halfWidth = sceneCamera.orthographicSize * sceneCamera.aspect;
-            Bounds bounds = levelBounds.bounds;
-            float minX = bounds.min.x + halfWidth;
-            float maxX = bounds.max.x - halfWidth;
-            desiredX = minX <= maxX
-                ? Mathf.Clamp(desiredX, minX, maxX)
-                : bounds.center.x;
-        }
+        float desiredX = ClampX(target.position.x);
 
         Vector3 desiredPosition = new Vector3(
             desiredX,
@@ -47,17 +77,8 @@ public class CameraFollow : MonoBehaviour
         );
 
         // A interpolação não pode deixar a câmera parcialmente fora do cenário.
-        if (levelBounds != null && sceneCamera != null && sceneCamera.orthographic)
-        {
-            float halfWidth = sceneCamera.orthographicSize * sceneCamera.aspect;
-            Bounds bounds = levelBounds.bounds;
-            float minX = bounds.min.x + halfWidth;
-            float maxX = bounds.max.x - halfWidth;
-            Vector3 position = transform.position;
-            position.x = minX <= maxX
-                ? Mathf.Clamp(position.x, minX, maxX)
-                : bounds.center.x;
-            transform.position = position;
-        }
+        Vector3 position = transform.position;
+        position.x = ClampX(position.x);
+        transform.position = position;
     }
 }

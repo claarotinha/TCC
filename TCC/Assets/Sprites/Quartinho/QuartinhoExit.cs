@@ -38,14 +38,12 @@ public class QuartinhoExit : MonoBehaviour
 
     private void Update()
     {
-        if (PauseHelper.BlockInput() ||
-            !Input.GetMouseButtonDown(0) ||
+        if (!Input.GetMouseButtonDown(0) ||
             Camera.main == null ||
             doorCollider == null ||
             exitPanel == null ||
             exitPanel.activeSelf ||
-            (InventoryTabController.Instance != null &&
-             InventoryTabController.Instance.IsOpen))
+            InvestigationGuard.Blocked)
             return;
 
         Vector2 mousePosition =
@@ -67,6 +65,7 @@ public class QuartinhoExit : MonoBehaviour
 
     private void Close()
     {
+        InvestigationGuard.BlockCurrentClick();
         if (exitPanel != null)
             exitPanel.SetActive(false);
     }
