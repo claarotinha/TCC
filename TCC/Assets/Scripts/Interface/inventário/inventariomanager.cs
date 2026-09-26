@@ -6,11 +6,9 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
-    [Header("Inventário")]
     [SerializeField] private List<ItemData> items = new List<ItemData>();
 
     public IReadOnlyList<ItemData> Items => items;
-
     public ItemData SelectedItem { get; private set; }
 
     public static event Action OnInventoryChanged;
@@ -24,85 +22,75 @@ public class InventoryManager : MonoBehaviour
         }
 
         Instance = this;
-
         DontDestroyOnLoad(gameObject);
     }
 
-    // =========================================================
-    // ADICIONAR ITEM
-    // =========================================================
-
     public void AddItem(ItemData item)
     {
-        if (item == null)
-            return;
+        if (item == null) return;
 
         items.Add(item);
-
-        Debug.Log("Item adicionado: " + item.itemName);
-
         OnInventoryChanged?.Invoke();
     }
-
-    // =========================================================
-    // REMOVER ITEM
-    // =========================================================
 
     public void RemoveItem(ItemData item)
     {
-        if (item == null)
-            return;
+        if (item == null || !items.Remove(item)) return;
 
-        if (items.Contains(item))
-        {
-            items.Remove(item);
-
-            if (SelectedItem == item)
-                SelectedItem = null;
-
-            OnInventoryChanged?.Invoke();
-        }
-    }
-
-    // =========================================================
-    // SELECIONAR ITEM
-    // =========================================================
-
-    public void SelectItem(ItemData item)
-    {
-        if (item == null)
-            return;
-
-        SelectedItem = item;
-
-        Debug.Log("Item selecionado: " + item.itemName);
+        if (SelectedItem == item)
+            SelectedItem = null;
 
         OnInventoryChanged?.Invoke();
     }
 
-    // =========================================================
-    // DESELECIONAR
-    // =========================================================
+    public void SelectItem(ItemData item)
+    {
+        if (item == null) return;
+
+        SelectedItem = item;
+        OnInventoryChanged?.Invoke();
+    }
 
     public void Deselect()
     {
         SelectedItem = null;
-
-        Debug.Log("Item deselecionado.");
-
         OnInventoryChanged?.Invoke();
     }
 
-    // =========================================================
-    // COMBINAÇÃO
-    // =========================================================
-
-    public bool TryCombine(ItemData first, ItemData second)
+    public bool TryCombine(ItemData first, ItemData second, ItemCombination recipe)
     {
-        if (first == null || second == null)
+        if (first == null || second == null || recipe == null ||
+            recipe.result == null)
             return false;
 
-        // Coloque aqui seu sistema de combinação
-        return false;
+        bool matches =
+            (recipe.itemA == first && recipe.itemB == second) ||
+            (recipe.itemA == second && recipe.itemB == first);
+
+        if (!matches || !items.Contains(first))
+            return false;
+
+        // Se os dois slots representam o mesmo ItemData, precisamos
+        // de duas unidades desse item no inventário.
+        if (first == second)
+        {
+            int quantity = 0;
+            foreach (ItemData current in items)
+                if (current == first) quantity++;
+
+            if (quantity < 2) return false;
+        }
+        else if (!items.Contains(second))
+        {
+            return false;
+        }
+
+        items.Remove(first);
+        items.Remove(second);
+        items.Add(recipe.result);
+        SelectedItem = null;
+
+        OnInventoryChanged?.Invoke();
+        return true;
     }
 }

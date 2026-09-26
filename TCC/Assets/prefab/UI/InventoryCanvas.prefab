@@ -1260,6 +1260,7 @@ GameObject:
   - component: {fileID: 8252330378465671279}
   - component: {fileID: 1636722229260288851}
   - component: {fileID: 4792119873410394895}
+  - component: {fileID: 6024669336428926691}
   m_Layer: 5
   m_Name: InventoryCanvas
   m_TagString: Untagged
@@ -1383,6 +1384,24 @@ MonoBehaviour:
   collectText: {fileID: 2046994931432872314}
   yesButton: {fileID: 3733803540599406818}
   noButton: {fileID: 8949263715945859516}
+--- !u!114 &6024669336428926691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3105571907722419084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bb97c5d93f416c43a8b92da80378f39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombinationPrompt
+  combinePanel: {fileID: 3784902376062404559}
+  combineText: {fileID: 2982474652130723472}
+  yesButton: {fileID: 2437173132216038415}
+  noButton: {fileID: 459745502855180605}
+  recipes:
+  - {fileID: 11400000, guid: b978c9c9b0851ad479f89963bc408037, type: 2}
 --- !u!1 &3186820727070142286
 GameObject:
   m_ObjectHideFlags: 0

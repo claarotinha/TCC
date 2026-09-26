@@ -61,7 +61,8 @@ public class ExamineObject : MonoBehaviour
         if (door != null && !door.TryHandleClick())
             return;
 
-        if (door != null && MotherDialogue.FalouSobreTrabalho)
+        if (door != null &&
+         (MotherDialogue.FalouSobreTrabalho || QuartoBaguncaDoor.Unlocked))
         {
             HidePanel();
             door.AbrirConfirmacao();
