@@ -28,15 +28,15 @@ Transform:
   m_GameObject: {fileID: 7973582278529758504}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -403.43, y: -80.51, z: 1.5774436}
-  m_LocalScale: {x: 0.49664524, y: 0.4665759, z: 1}
+  m_LocalPosition: {x: 4.36, y: -0.37, z: 1.5774436}
+  m_LocalScale: {x: 0.38380745, y: 0.51920563, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &796971491206183397
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -93,6 +93,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!61 &6775887959607626394
 BoxCollider2D:
   m_ObjectHideFlags: 0

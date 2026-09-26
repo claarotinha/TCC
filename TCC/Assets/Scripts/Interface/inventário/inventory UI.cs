@@ -8,6 +8,7 @@ public class InventoryUI : MonoBehaviour
     private void OnEnable()
     {
         InventoryManager.OnInventoryChanged += Refresh;
+        Refresh();
     }
 
     private void OnDisable()
@@ -15,15 +16,19 @@ public class InventoryUI : MonoBehaviour
         InventoryManager.OnInventoryChanged -= Refresh;
     }
 
-    private void Start()
-    {
-        Refresh();
-    }
-
     public void Refresh()
     {
+        if (content == null || slotPrefab == null)
+        {
+            Debug.LogError("InventoryUI: Content ou Slot Prefab não configurado.");
+            return;
+        }
+
         foreach (Transform child in content)
             Destroy(child.gameObject);
+
+        if (InventoryManager.Instance == null)
+            return;
 
         foreach (ItemData item in InventoryManager.Instance.Items)
         {
