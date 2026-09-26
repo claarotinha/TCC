@@ -134,6 +134,8 @@ public class CollectableExamine : MonoBehaviour
 
         if (currentObject == this)
             currentObject = null;
+
+        InvestigationGuard.BlockCurrentClick();
     }
 
     private void CollectItem()
@@ -173,14 +175,7 @@ public class CollectableExamine : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (examinePanel != null)
-        {
-            PanelClickHandler detector = examinePanel.GetComponent<PanelClickHandler>();
-            if (detector != null)
-            {
-                Destroy(detector);
-            }
-        }
+        // O painel de mensagens é compartilhado entre os objetos da cena.
         if (currentObject == this)
         {
             currentObject = null;

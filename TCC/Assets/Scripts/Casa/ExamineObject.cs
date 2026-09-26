@@ -43,6 +43,15 @@ public class ExamineObject : MonoBehaviour
         if (!Input.GetMouseButtonDown(0))
             return;
 
+        // Um clique fecha a mensagem atual antes de qualquer outra investigação.
+        // O bloqueio abaixo continua impedindo abrir outro objeto no mesmo clique.
+        if (currentObject == this && isShowing && examinePanel != null &&
+            examinePanel.activeInHierarchy)
+        {
+            HidePanel();
+            return;
+        }
+
         if (InvestigationGuard.Blocked)
             return;
 
@@ -76,17 +85,7 @@ public class ExamineObject : MonoBehaviour
             currentObject.HidePanel();
         }
 
-        // Abre
-        if (!isShowing)
-        {
-            ShowPanel();
-        }
-        // Se clicar novamente no mesmo objeto, fecha.
-        else
-        {
-            HidePanel();
-            currentObject = null;
-        }
+        ShowPanel();
     }
 
     private void OnMouseEnter()
@@ -177,15 +176,7 @@ public class ExamineObject : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (examinePanel != null)
-        {
-            PanelClickHandler detector =
-                examinePanel.GetComponent<PanelClickHandler>();
-
-            if (detector != null)
-                Destroy(detector);
-        }
-
+        // O painel é compartilhado; outro objeto ainda precisa do clique nele.
         if (currentObject == this)
             currentObject = null;
     }
