@@ -7,6 +7,8 @@ public class InventoryTabController : MonoBehaviour
 
     [SerializeField] private GameObject inventoryPanel;
 
+    public bool IsOpen => inventoryPanel != null && inventoryPanel.activeSelf;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)

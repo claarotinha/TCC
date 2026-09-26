@@ -4,10 +4,23 @@ using UnityEngine;
 public class ItemDiscovery : MonoBehaviour
 {
     [SerializeField] private ItemData item;
+    private Collider2D itemCollider;
 
-    private void OnMouseDown()
+    private void Awake()
     {
-        if (item == null || InventoryTabController.Instance == null)
+        itemCollider = GetComponent<Collider2D>();
+    }
+
+    private void Update()
+    {
+        if (!Input.GetMouseButtonDown(0) || Camera.main == null ||
+            itemCollider == null || item == null ||
+            InventoryTabController.Instance == null ||
+            InventoryTabController.Instance.IsOpen)
+            return;
+
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (!itemCollider.OverlapPoint(mousePosition))
             return;
 
         CollectPrompt prompt =
