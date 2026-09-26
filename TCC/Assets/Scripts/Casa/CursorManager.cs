@@ -26,7 +26,8 @@ public class CursorManager : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapPointAll(mousePosition);
         foreach (Collider2D hit in hits)
         {
-            if (hit.GetComponent<ExamineObject>() != null ||
+            if ((hit.TryGetComponent(out ExamineObject examine) && examine.isActiveAndEnabled) ||
+                (hit.TryGetComponent(out QuartinhoExit roomExit) && roomExit.isActiveAndEnabled) ||
                 hit.GetComponent<CollectableExamine>() != null ||
                 hit.GetComponent<QuartoBaguncaDoor>() != null ||
                 hit.GetComponent<MotherDialogue>() != null)
