@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Collider2D))]
 public class ItemDiscovery : MonoBehaviour
@@ -8,10 +7,6 @@ public class ItemDiscovery : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (EventSystem.current != null &&
-            EventSystem.current.IsPointerOverGameObject())
-            return;
-
         if (item == null || InventoryTabController.Instance == null)
             return;
 
