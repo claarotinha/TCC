@@ -6,42 +6,34 @@ public class TutorialInvestigationTrigger : MonoBehaviour
 {
     [SerializeField] private bool isCryingBoy;
 
-    private Collider2D objectCollider;
     private ExamineObject examineObject;
 
-    private void Awake()
+    private void OnEnable()
     {
-        objectCollider = GetComponent<Collider2D>();
         examineObject = GetComponent<ExamineObject>();
+        examineObject.Opened += HandleInvestigation;
     }
 
-    private void LateUpdate()
+    private void OnDisable()
+    {
+        if (examineObject != null)
+            examineObject.Opened -= HandleInvestigation;
+    }
+
+    private void HandleInvestigation()
     {
         TutorialManager tutorial = TutorialManager.Instance;
-
-        if (tutorial == null ||
-            !Input.GetMouseButtonDown(0) ||
-            Camera.main == null ||
-            examineObject.examinePanel == null ||
-            !examineObject.examinePanel.activeInHierarchy ||
-            examineObject.examineText == null ||
-            examineObject.examineText.text != examineObject.message ||
-            !ExamineObject.IsShowing())
+        if (tutorial == null)
             return;
 
-        Vector2 mousePosition =
-            Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        if (!objectCollider.OverlapPoint(mousePosition))
-            return;
-
-        if (isCryingBoy &&
-            tutorial.CurrentStep == TutorialManager.TutorialStep.CryingBoy)
+        if (isCryingBoy)
         {
+            if (tutorial.CurrentStep == TutorialManager.TutorialStep.Investigate)
+                tutorial.ReportInvestigation();
+
             tutorial.ReportCryingBoy();
         }
-        else if (!isCryingBoy &&
-                 tutorial.CurrentStep == TutorialManager.TutorialStep.Investigate)
+        else
         {
             tutorial.ReportInvestigation();
         }

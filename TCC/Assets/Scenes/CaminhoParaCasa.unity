@@ -317,7 +317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
-  message: vou ajudar os meninos antes de entrar em casa
+  message: "Lá está minha casa. Antes de entrar, quero entender por que o garoto está chorando."
 --- !u!61 &140007376
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1935,7 +1935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5b9f628564b4b84fb3bedce5ba85780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialInvestigationTrigger
-  isCryingBoy: 0
+  isCryingBoy: 1
 --- !u!114 &719601371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1950,8 +1950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
-  message: "Minha bola sumiu! Eu estava brincando com os outros garotos e n\xE3o
-    sei onde ela foi parar. Talvez eles tenham visto alguma coisa..."
+  message: "O garoto enxuga as lágrimas e diz que perdeu a bola enquanto brincava. Talvez os outros meninos saibam para onde ela foi."
 --- !u!1 &743135153
 GameObject:
   m_ObjectHideFlags: 0
@@ -3128,7 +3127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1262295921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3543,7 +3542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
-  message: uma arvore
+  message: "Há marcas antigas no tronco. As crianças costumam brincar perto desta árvore."
 --- !u!1 &1512575058
 GameObject:
   m_ObjectHideFlags: 0
@@ -3643,7 +3642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
-  message: vou sair de bike depois
+  message: "Uma bicicleta encostada. Talvez seu dono tenha ido brincar com as outras crianças."
 --- !u!61 &1564865589
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3990,7 +3989,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4033,6 +4032,10 @@ PrefabInstance:
     - target: {fileID: 362172159632923114, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -169.413
+      objectReference: {fileID: 0}
+    - target: {fileID: 905714418435719204, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 593797566582638119, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
       propertyPath: m_Name
@@ -4962,7 +4965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
-  message: vou sair de bike depois
+  message: "O cheiro de pão fresco vem da padaria. Logo adiante fica o caminho para casa."
 --- !u!61 &2131980644
 BoxCollider2D:
   m_ObjectHideFlags: 0

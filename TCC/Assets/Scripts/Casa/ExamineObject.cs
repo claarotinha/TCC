@@ -3,6 +3,8 @@ using TMPro;
 
 public class ExamineObject : MonoBehaviour
 {
+    public event System.Action Opened;
+
     [Header("Painel")]
     public GameObject examinePanel;
 
@@ -142,6 +144,7 @@ public class ExamineObject : MonoBehaviour
 
         isShowing = true;
         currentObject = this;
+        Opened?.Invoke();
     }
 
     public void HidePanel()
