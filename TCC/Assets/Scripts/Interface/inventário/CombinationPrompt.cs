@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class CombinationPrompt : MonoBehaviour
 {
+    public bool IsOpen => combinePanel != null && combinePanel.activeInHierarchy;
+
     [SerializeField] private GameObject combinePanel;
     [SerializeField] private TMP_Text combineText;
     [SerializeField] private Button yesButton;

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class CollectPrompt : MonoBehaviour
 {
+    public bool IsOpen => collectPanel != null && collectPanel.activeInHierarchy;
+
     [SerializeField] private GameObject collectPanel;
     [SerializeField] private Image itemImage;
     [SerializeField] private TMP_Text collectText;

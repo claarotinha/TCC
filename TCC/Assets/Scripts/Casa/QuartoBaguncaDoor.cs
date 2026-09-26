@@ -7,8 +7,10 @@ public class QuartoBaguncaDoor : MonoBehaviour
 {
     private static int lastClickFrame = -1;
     private static bool unlocked;
+    private static GameObject openedPanel;
 
     public static bool Unlocked => unlocked;
+    public static bool IsPanelOpen => openedPanel != null && openedPanel.activeInHierarchy;
 
     [Header("Painel de confirmação")]
     public GameObject confirmPanel;
@@ -21,6 +23,7 @@ public class QuartoBaguncaDoor : MonoBehaviour
     {
         unlocked = false;
         lastClickFrame = -1;
+        openedPanel = null;
     }
 
     private void Start()
@@ -65,6 +68,7 @@ public class QuartoBaguncaDoor : MonoBehaviour
             return;
 
         confirmPanel.SetActive(true);
+        openedPanel = confirmPanel;
 
         buttonSim.onClick.RemoveAllListeners();
         buttonNao.onClick.RemoveAllListeners();
@@ -100,6 +104,9 @@ public class QuartoBaguncaDoor : MonoBehaviour
     {
         if (confirmPanel != null)
             confirmPanel.SetActive(false);
+
+        if (openedPanel == confirmPanel)
+            openedPanel = null;
 
         InvestigationGuard.BlockCurrentClick();
     }

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Collider2D))]
 public class QuartinhoExit : MonoBehaviour
 {
+    private static GameObject openedPanel;
+    public static bool IsPanelOpen => openedPanel != null && openedPanel.activeInHierarchy;
+
     [SerializeField] private GameObject exitPanel;
     [SerializeField] private TMP_Text exitText;
     [SerializeField] private Button yesButton;
@@ -56,6 +59,7 @@ public class QuartinhoExit : MonoBehaviour
             exitText.text = "Você quer voltar para a casa?";
 
         exitPanel.SetActive(true);
+        openedPanel = exitPanel;
     }
 
     private void ReturnHome()
@@ -68,6 +72,9 @@ public class QuartinhoExit : MonoBehaviour
         InvestigationGuard.BlockCurrentClick();
         if (exitPanel != null)
             exitPanel.SetActive(false);
+
+        if (openedPanel == exitPanel)
+            openedPanel = null;
     }
 
     private void OnMouseEnter()

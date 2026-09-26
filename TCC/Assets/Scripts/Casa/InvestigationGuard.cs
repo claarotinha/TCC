@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public static class InvestigationGuard
@@ -15,11 +14,15 @@ public static class InvestigationGuard
     {
         get
         {
+            InventoryTabController inventory = InventoryTabController.Instance;
             if (PauseHelper.BlockInput() || lastPanelClickFrame == Time.frameCount ||
                 ExamineObject.IsShowing() || CollectableExamine.IsShowing() ||
                 NPCDialogue.IsShowing() || MotherDialogue.IsShowing ||
-                (InventoryTabController.Instance != null &&
-                 InventoryTabController.Instance.IsOpen))
+                QuartoBaguncaDoor.IsPanelOpen || QuartinhoExit.IsPanelOpen ||
+                (inventory != null &&
+                 (inventory.IsOpen ||
+                  inventory.GetComponent<CollectPrompt>()?.IsOpen == true ||
+                  inventory.GetComponent<CombinationPrompt>()?.IsOpen == true)))
                 return true;
 
             foreach (PhotoCollect photo in UnityEngine.Object.FindObjectsByType<PhotoCollect>(
@@ -33,24 +36,6 @@ public static class InvestigationGuard
             foreach (DiaryWithCutscene diary in
                 UnityEngine.Object.FindObjectsByType<DiaryWithCutscene>(FindObjectsSortMode.None))
                 if (diary.IsDialogOpen) return true;
-
-            // Os painéis das cenas e do inventário compartilham esta regra.
-            // Só procuramos quando há uma tentativa de interação, não por frame.
-            foreach (Canvas canvas in UnityEngine.Object.FindObjectsByType<Canvas>(
-                FindObjectsSortMode.None))
-            {
-                foreach (RectTransform rect in
-                    canvas.GetComponentsInChildren<RectTransform>())
-                {
-                    if (rect == canvas.transform)
-                        continue;
-
-                    string panelName = rect.gameObject.name;
-                    if (panelName.EndsWith("Panel", StringComparison.OrdinalIgnoreCase) ||
-                        panelName.StartsWith("Painel", StringComparison.OrdinalIgnoreCase))
-                        return true;
-                }
-            }
 
             return false;
         }
