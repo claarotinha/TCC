@@ -81,10 +81,28 @@ public class InventorySlot : MonoBehaviour,
 
         dragIcon = null;
 
-        if (!wasDragging || item == null || Camera.main == null)
+        if (!wasDragging || item == null)
             return;
 
-        // Soltar dentro do inventário não usa o item no cenário.
+        // Primeiro, verifica se o item foi solto sobre outro slot.
+        GameObject dropObject = eventData.pointerCurrentRaycast.gameObject;
+        InventorySlot otherSlot = dropObject != null
+            ? dropObject.GetComponentInParent<InventorySlot>()
+            : null;
+
+        if (otherSlot != null)
+        {
+            if (otherSlot != this && otherSlot.item != null)
+            {
+                CombinationPrompt prompt = GetComponentInParent<CombinationPrompt>();
+                if (prompt != null)
+                    prompt.Show(item, otherSlot.item);
+            }
+
+            return;
+        }
+
+        // Soltar no restante do inventário não usa o item no cenário.
         InventoryUI inventoryUI = GetComponentInParent<InventoryUI>();
         RectTransform inventoryRect = inventoryUI != null
             ? inventoryUI.GetComponentInParent<RectTransform>()
@@ -93,6 +111,9 @@ public class InventorySlot : MonoBehaviour,
         if (inventoryRect != null &&
             RectTransformUtility.RectangleContainsScreenPoint(
                 inventoryRect, eventData.position, null))
+            return;
+
+        if (Camera.main == null)
             return;
 
         Vector2 worldPoint = Camera.main.ScreenToWorldPoint(eventData.position);
