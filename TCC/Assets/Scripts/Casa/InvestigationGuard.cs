@@ -36,6 +36,7 @@ public static class InvestigationGuard
             if (ExamineObject.IsShowing()) return "investigação";
             if (CollectableExamine.IsShowing()) return "coleta";
             if (NPCDialogue.IsShowing()) return "diálogo dos NPCs";
+            if (TutorialBoysDialogue.IsShowing) return "diálogo dos garotos";
             if (MotherDialogue.IsShowing) return "diálogo da mãe";
             if (QuartoBaguncaDoor.IsPanelOpen) return "porta do quartinho";
             if (QuartinhoExit.IsPanelOpen) return "saída do quartinho";

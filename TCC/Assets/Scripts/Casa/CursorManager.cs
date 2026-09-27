@@ -33,6 +33,17 @@ public class CursorManager : MonoBehaviour
                 tutorial.CurrentStep < TutorialManager.TutorialStep.CryingBoy)
                 continue;
 
+            if (hit.TryGetComponent(out TutorialBoysDialogue boys))
+            {
+                if (tutorial != null && tutorial.CurrentStep == TutorialManager.TutorialStep.Boys &&
+                    boys.isActiveAndEnabled)
+                {
+                    SetLupa();
+                    return;
+                }
+                continue;
+            }
+
             if ((hit.TryGetComponent(out ExamineObject examine) && examine.isActiveAndEnabled) ||
                 (hit.TryGetComponent(out QuartinhoExit roomExit) && roomExit.isActiveAndEnabled) ||
                 hit.GetComponent<CollectableExamine>() != null ||
