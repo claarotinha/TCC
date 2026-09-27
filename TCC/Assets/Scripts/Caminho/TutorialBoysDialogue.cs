@@ -1,75 +1,98 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider2D))]
 [DefaultExecutionOrder(500)]
 public class TutorialBoysDialogue : MonoBehaviour
 {
     private static TutorialBoysDialogue current;
-    public static bool IsShowing => current != null &&
-                                    current.dialoguePanel != null &&
-                                    current.dialoguePanel.activeInHierarchy;
+
+    public static bool IsShowing =>
+        current != null &&
+        current.dialogueUI != null &&
+        current.dialogueUI.activeInHierarchy;
+
+    [Header("DialogueUI da cena")]
+    [SerializeField] private GameObject dialogueUI;
+    [SerializeField] private TMP_Text dialogueText;
+    [SerializeField] private TMP_Text characterNameText;
+    [SerializeField] private Image portraitImage;
+    [SerializeField] private GameObject choicesContainer;
+
+    [Header("Retrato opcional")]
+    [SerializeField] private Sprite mariPortrait;
 
     private readonly string[] lines =
     {
-        "Mari: O menino ali está chorando. Vocês sabem o que aconteceu com a bola dele?",
-        "Garotos: A bola escapou quando estávamos brincando perto da padaria.",
-        "Garotos: Talvez tenha rolado para a calçada. Você pode procurar e trazê-la de volta?"
+        "O menino ali está chorando. Vocês sabem o que aconteceu com a bola dele?",
+        "A bola escapou quando estávamos brincando perto da padaria.",
+        "Talvez tenha rolado para a calçada. Você pode procurar e trazê-la de volta?"
     };
 
-    [SerializeField] private GameObject dialoguePanel;
-    [SerializeField] private TMP_Text dialogueText;
-
     private Collider2D clickCollider;
+    private SpriteRenderer boysSprite;
     private int lineIndex;
     private int openedFrame;
 
     private void Awake()
     {
         clickCollider = GetComponent<Collider2D>();
+        boysSprite = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
     {
-        if (dialoguePanel == null || dialogueText == null)
+        if (dialogueUI == null || dialogueText == null ||
+            characterNameText == null)
         {
-            Debug.LogError("Garotos: painel ou texto não configurado no Inspector.", this);
+            Debug.LogError(
+                "Garotos: configure DialogueUI, DialogueText e CharacterName no Inspector.",
+                this
+            );
             return;
         }
 
-        dialoguePanel.SetActive(false);
+        if (choicesContainer != null)
+            choicesContainer.SetActive(false);
+
+        dialogueUI.SetActive(false);
     }
 
     private void Update()
     {
-        if (current == this && Input.GetMouseButtonDown(0) &&
+        if (current == this &&
+            Input.GetMouseButtonDown(0) &&
             Time.frameCount > openedFrame)
+        {
             NextLine();
+        }
     }
 
     private void LateUpdate()
     {
-        if (current == this || !Input.GetMouseButtonDown(0) ||
-            Camera.main == null || clickCollider == null)
+        if (current == this ||
+            !Input.GetMouseButtonDown(0) ||
+            Camera.main == null ||
+            clickCollider == null)
             return;
 
-        Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mouse =
+            Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         if (!clickCollider.OverlapPoint(mouse))
             return;
 
         TutorialManager tutorial = TutorialManager.Instance;
-        if (tutorial == null || tutorial.CurrentStep != TutorialManager.TutorialStep.Boys)
-        {
-#if UNITY_EDITOR
-            Debug.Log("Garotos: etapa atual = " +
-                      (tutorial != null ? tutorial.CurrentStep.ToString() : "sem TutorialManager") + ".", this);
-#endif
-            return;
-        }
 
-        if (dialoguePanel == null || dialogueText == null)
+        if (tutorial == null ||
+            tutorial.CurrentStep != TutorialManager.TutorialStep.Boys)
+            return;
+
+        if (dialogueUI == null || dialogueText == null ||
+            characterNameText == null)
         {
-            Debug.LogError("Garotos: painel ou texto não configurado.", this);
+            Debug.LogError("Garotos: referências da DialogueUI ausentes.", this);
             return;
         }
 
@@ -77,36 +100,54 @@ public class TutorialBoysDialogue : MonoBehaviour
             return;
 
         string blockedBy = InvestigationGuard.OpenPanelReason;
+
         if (blockedBy != null)
         {
             if (blockedBy == "investigação")
                 ExamineObject.HideCurrentPanel();
             else if (blockedBy == "coleta")
                 CollectableExamine.HideCurrentPanel();
-#if UNITY_EDITOR
-            Debug.Log("Garotos: feche " + blockedBy + " e clique novamente.", this);
-#endif
+
+            // Um clique fecha a mensagem anterior; o próximo abre a conversa.
             return;
         }
 
         current = this;
         lineIndex = 0;
         openedFrame = Time.frameCount;
+
+        if (choicesContainer != null)
+            choicesContainer.SetActive(false);
+
+        // Mantém o diálogo acima dos outros painéis desse Canvas.
+        dialogueUI.transform.SetAsLastSibling();
+
         ShowLine();
-        dialoguePanel.SetActive(true);
-#if UNITY_EDITOR
-        Debug.Log("Garotos: painel de investigação aberto com o diálogo.", this);
-#endif
+        dialogueUI.SetActive(true);
     }
 
     private void ShowLine()
     {
+        bool mariSpeaking = lineIndex == 0;
+
+        characterNameText.text = mariSpeaking ? "Mari" : "Garotos";
         dialogueText.text = lines[lineIndex];
+
+        if (portraitImage != null)
+        {
+            Sprite portrait = mariSpeaking
+                ? mariPortrait
+                : boysSprite != null ? boysSprite.sprite : null;
+
+            portraitImage.sprite = portrait;
+            portraitImage.enabled = portrait != null;
+        }
     }
 
     private void NextLine()
     {
         lineIndex++;
+
         if (lineIndex < lines.Length)
         {
             ShowLine();
@@ -115,15 +156,13 @@ public class TutorialBoysDialogue : MonoBehaviour
 
         Close();
         TutorialManager.Instance?.ReportBoysClue();
-#if UNITY_EDITOR
-        Debug.Log("Garotos: pista da bola recebida; coleta liberada.", this);
-#endif
     }
 
     private void Close()
     {
-        if (dialoguePanel != null)
-            dialoguePanel.SetActive(false);
+        if (dialogueUI != null)
+            dialogueUI.SetActive(false);
+
         current = null;
         InvestigationGuard.BlockCurrentClick();
     }
