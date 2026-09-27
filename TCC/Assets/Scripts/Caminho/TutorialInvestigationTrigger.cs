@@ -6,13 +6,18 @@ public class TutorialInvestigationTrigger : MonoBehaviour
 {
     [SerializeField] private bool isCryingBoy;
 
+    public bool IsCryingBoy => isCryingBoy;
+
     private ExamineObject examineObject;
     private SpriteRenderer visibleSprite;
+    private Collider2D clickCollider;
+    private bool boyPanelOpen;
 
     private void OnEnable()
     {
         examineObject = GetComponent<ExamineObject>();
         visibleSprite = GetComponent<SpriteRenderer>();
+        clickCollider = GetComponent<Collider2D>();
         examineObject.Opened += HandleInvestigation;
     }
 
@@ -24,29 +29,63 @@ public class TutorialInvestigationTrigger : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!isCryingBoy || !Input.GetMouseButtonDown(0) ||
-            visibleSprite == null || visibleSprite.sprite == null ||
-            Camera.main == null || PauseHelper.BlockInput())
+        // O botão do próprio painel também pode fechá-lo pelo PanelClickHandler.
+        if (isCryingBoy && boyPanelOpen &&
+            (examineObject.examinePanel == null ||
+             !examineObject.examinePanel.activeInHierarchy))
+        {
+            boyPanelOpen = false;
+            return;
+        }
+
+        if (!isCryingBoy || !Input.GetMouseButtonDown(0) || Camera.main == null)
             return;
 
-        TutorialManager tutorial = TutorialManager.Instance;
-        if (tutorial == null ||
-            (tutorial.CurrentStep != TutorialManager.TutorialStep.CryingBoy &&
-             tutorial.CurrentStep != TutorialManager.TutorialStep.Investigate))
+        // O painel do garoto é fechado pelo clique seguinte, inclusive fora dele.
+        if (boyPanelOpen)
+        {
+            boyPanelOpen = false;
+            if (examineObject.examinePanel != null && examineObject.examinePanel.activeSelf)
+                examineObject.HidePanel();
             return;
+        }
 
-        // A mensagem anterior pode ter sido fechada neste mesmo clique.
-        // A trava de um quadro impede o Update normal de abrir a fala do garoto,
-        // mas um painel que ainda esteja aberto continua bloqueando a interação.
-        if (InvestigationGuard.PanelOpen)
+        if (PauseHelper.BlockInput())
             return;
 
         Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Bounds hitArea = visibleSprite.bounds;
-        hitArea.Expand(new Vector3(0.45f, 0.35f, 0f));
+        bool hit = clickCollider != null && clickCollider.OverlapPoint(mouse);
+        if (!hit && visibleSprite != null && visibleSprite.sprite != null)
+        {
+            Bounds hitArea = visibleSprite.bounds;
+            hitArea.Expand(new Vector3(0.45f, 0.35f, 0f));
+            hit = hitArea.Contains(new Vector3(mouse.x, mouse.y, hitArea.center.z));
+        }
 
-        if (hitArea.Contains(new Vector3(mouse.x, mouse.y, hitArea.center.z)))
-            examineObject.ShowPanel();
+        if (!hit)
+            return;
+
+        // A mensagem anterior pode ter sido fechada neste mesmo clique.
+        // Só um painel que ainda esteja visível impede abrir a fala do garoto.
+        if (InvestigationGuard.PanelOpen)
+        {
+#if UNITY_EDITOR
+            Debug.Log("Garoto: clique recebido, mas há outro painel aberto.", this);
+#endif
+            return;
+        }
+
+        if (examineObject.examinePanel == null || examineObject.examineText == null)
+        {
+            Debug.LogError("Garoto: painel ou texto de investigação não configurado.", this);
+            return;
+        }
+
+        boyPanelOpen = true;
+        examineObject.ShowPanel();
+#if UNITY_EDITOR
+        Debug.Log("Garoto: painel aberto e tutorial atualizado.", this);
+#endif
     }
 
     private void HandleInvestigation()

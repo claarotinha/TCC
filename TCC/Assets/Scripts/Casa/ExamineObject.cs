@@ -45,6 +45,12 @@ public class ExamineObject : MonoBehaviour
         if (!Input.GetMouseButtonDown(0))
             return;
 
+        // O garoto do tutorial recebe o clique pelo próprio componente.
+        // Assim o painel compartilhado não é aberto e fechado por dois scripts.
+        TutorialInvestigationTrigger tutorial = GetComponent<TutorialInvestigationTrigger>();
+        if (tutorial != null && tutorial.IsCryingBoy)
+            return;
+
         // Um clique fecha a mensagem atual antes de qualquer outra investigação.
         // O bloqueio abaixo continua impedindo abrir outro objeto no mesmo clique.
         if (currentObject == this && isShowing && examinePanel != null &&
@@ -165,7 +171,7 @@ public class ExamineObject : MonoBehaviour
         if (currentObject != null &&
             currentObject.examinePanel != null)
         {
-            return currentObject.examinePanel.activeSelf;
+            return currentObject.examinePanel.activeInHierarchy;
         }
 
         return false;
