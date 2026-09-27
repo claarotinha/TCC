@@ -26,13 +26,19 @@ public class TutorialInvestigationTrigger : MonoBehaviour
     {
         if (!isCryingBoy || !Input.GetMouseButtonDown(0) ||
             visibleSprite == null || visibleSprite.sprite == null ||
-            Camera.main == null || InvestigationGuard.Blocked)
+            Camera.main == null || PauseHelper.BlockInput())
             return;
 
         TutorialManager tutorial = TutorialManager.Instance;
         if (tutorial == null ||
             (tutorial.CurrentStep != TutorialManager.TutorialStep.CryingBoy &&
              tutorial.CurrentStep != TutorialManager.TutorialStep.Investigate))
+            return;
+
+        // A mensagem anterior pode ter sido fechada neste mesmo clique.
+        // A trava de um quadro impede o Update normal de abrir a fala do garoto,
+        // mas um painel que ainda esteja aberto continua bloqueando a interação.
+        if (InvestigationGuard.PanelOpen)
             return;
 
         Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);

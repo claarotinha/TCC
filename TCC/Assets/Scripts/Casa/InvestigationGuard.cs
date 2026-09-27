@@ -14,9 +14,18 @@ public static class InvestigationGuard
     {
         get
         {
+            return PauseHelper.BlockInput() || lastPanelClickFrame == Time.frameCount ||
+                   PanelOpen;
+        }
+    }
+
+    // Distingue um painel ainda aberto do bloqueio do clique que acabou de fechá-lo.
+    public static bool PanelOpen
+    {
+        get
+        {
             InventoryTabController inventory = InventoryTabController.Instance;
-            if (PauseHelper.BlockInput() || lastPanelClickFrame == Time.frameCount ||
-                ExamineObject.IsShowing() || CollectableExamine.IsShowing() ||
+            if (ExamineObject.IsShowing() || CollectableExamine.IsShowing() ||
                 NPCDialogue.IsShowing() || MotherDialogue.IsShowing ||
                 QuartoBaguncaDoor.IsPanelOpen || QuartinhoExit.IsPanelOpen ||
                 (inventory != null &&
