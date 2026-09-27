@@ -14,10 +14,14 @@ public class CollectableExamine : MonoBehaviour
     private bool isShowing = false;
     private static CollectableExamine currentObject = null;
     private Collider2D myCollider;
+    private SpriteRenderer ballSprite;
 
     void Start()
     {
         myCollider = GetComponent<Collider2D>();
+        if (isTutorialBall)
+            ballSprite = GetComponent<SpriteRenderer>();
+
         if (examinePanel != null)
         {
             examinePanel.SetActive(false);
@@ -27,9 +31,20 @@ public class CollectableExamine : MonoBehaviour
 
     void Update()
     {
+        TutorialManager tutorial = isTutorialBall ? TutorialManager.Instance : null;
+        if (tutorial != null)
+        {
+            bool canFindBall = tutorial.CurrentStep == TutorialManager.TutorialStep.Investigate ||
+                               tutorial.CurrentStep == TutorialManager.TutorialStep.FindBall;
+            if (ballSprite != null)
+                ballSprite.enabled = canFindBall;
+
+            if (!canFindBall)
+                return;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
-            TutorialManager tutorial = isTutorialBall ? TutorialManager.Instance : null;
             if (tutorial != null && tutorial.CurrentStep <= TutorialManager.TutorialStep.Run)
             {
 #if UNITY_EDITOR
@@ -109,7 +124,13 @@ public class CollectableExamine : MonoBehaviour
 
     void OnMouseEnter()
     {
-        if (CursorManager.Instance != null)
+        TutorialManager tutorial = isTutorialBall ? TutorialManager.Instance : null;
+        if (tutorial != null &&
+            tutorial.CurrentStep != TutorialManager.TutorialStep.Investigate &&
+            tutorial.CurrentStep != TutorialManager.TutorialStep.FindBall)
+            return;
+
+        if (!InvestigationGuard.Blocked && CursorManager.Instance != null)
             CursorManager.Instance.SetLupa();
     }
 
@@ -141,7 +162,10 @@ public class CollectableExamine : MonoBehaviour
 
         if (examineText != null)
         {
-            examineText.text = message;
+            examineText.text = isTutorialBall && TutorialManager.Instance != null &&
+                    TutorialManager.Instance.CurrentStep == TutorialManager.TutorialStep.FindBall
+                    ? "Encontrei a bola dos garotos. Quero pegá-la?"
+                    : message;
         }
 
         isShowing = true;
@@ -171,17 +195,35 @@ public class CollectableExamine : MonoBehaviour
             return;
         }
 
+        if (isTutorialBall)
+        {
+            InventoryTabController inventory = InventoryTabController.Instance;
+            CollectPrompt prompt = inventory != null
+                ? inventory.GetComponent<CollectPrompt>()
+                : null;
+
+            if (prompt == null)
+            {
+                Debug.LogError("Bola: painel de confirmação não encontrado no InventoryCanvas.", this);
+                return;
+            }
+
+            prompt.Show(itemData, () =>
+            {
+                TutorialManager.Instance?.ReportBallCollected();
+                Destroy(gameObject);
+            });
+            return;
+        }
+
         if (InventoryManager.Instance == null)
         {
-            Debug.LogError("❌ InventoryManager não existe!");
+            Debug.LogError("InventoryManager não existe!", this);
             return;
         }
 
         InventoryManager.Instance.AddItem(itemData);
-        Debug.Log("✅ " + itemData.itemName + " coletado com sucesso!");
-        if (isTutorialBall && TutorialManager.Instance != null)
-            TutorialManager.Instance.ReportBallCollected();
-        
+        Debug.Log(itemData.itemName + " coletado com sucesso!", this);
         Destroy(gameObject);
     }
 
@@ -192,6 +234,22 @@ public class CollectableExamine : MonoBehaviour
             return currentObject.examinePanel.activeInHierarchy;
         }
         return false;
+    }
+
+    public static void HandleCurrentPanelClick()
+    {
+        if (currentObject == null)
+            return;
+
+        CollectableExamine item = currentObject;
+        bool canCollectBall = item.isTutorialBall &&
+            TutorialManager.Instance != null &&
+            TutorialManager.Instance.CurrentStep == TutorialManager.TutorialStep.FindBall;
+
+        item.HidePanel();
+
+        if (canCollectBall)
+            item.CollectItem();
     }
 
     public static void HideCurrentPanel()

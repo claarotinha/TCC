@@ -23,7 +23,7 @@ public class PanelClickHandler : MonoBehaviour, IPointerClickHandler
 
         if (CollectableExamine.IsShowing())
         {
-            CollectableExamine.HideCurrentPanel();
+            CollectableExamine.HandleCurrentPanelClick();
         }
     }
 }
