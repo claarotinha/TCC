@@ -2587,6 +2587,12 @@ MonoBehaviour:
   tutorialText: {fileID: 992152391}
   player: {fileID: 451904690}
   requiredDistance: 0.5
+  investigationTargets:
+  - {fileID: 1482467536}
+  - {fileID: 1564865585}
+  - {fileID: 2131980640}
+  - {fileID: 140007372}
+  - {fileID: 1262295920}
 --- !u!4 &989216632
 Transform:
   m_ObjectHideFlags: 0
@@ -3127,7 +3133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1262295921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3143,7 +3149,8 @@ MonoBehaviour:
   examinePanel: {fileID: 395252508}
   examineText: {fileID: 1274580126}
   itemData: {fileID: 11400000, guid: 6fc0f984454c60b48a915b9620fa24f2, type: 2}
-  message: uma bola
+  isTutorialBall: 1
+  message: "Uma bola esquecida perto da calçada. É melhor perguntar às crianças de quem ela é antes de pegá-la."
 --- !u!212 &1262295923
 SpriteRenderer:
   serializedVersion: 3
@@ -3400,6 +3407,7 @@ GameObject:
   - component: {fileID: 1482467540}
   - component: {fileID: 1482467539}
   - component: {fileID: 1482467541}
+  - component: {fileID: 1482467542}
   m_Layer: 0
   m_Name: Arvore
   m_TagString: Untagged
@@ -3543,6 +3551,19 @@ MonoBehaviour:
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
   message: "Há marcas antigas no tronco. As crianças costumam brincar perto desta árvore."
+--- !u!114 &1482467542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482467536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5b9f628564b4b84fb3bedce5ba85780, type: 3}
+  m_Name: ""
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialInvestigationTrigger
+  isCryingBoy: 0
 --- !u!1 &1512575058
 GameObject:
   m_ObjectHideFlags: 0

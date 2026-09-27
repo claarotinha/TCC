@@ -7,14 +7,17 @@ public class CollectableExamine : MonoBehaviour
     public TMP_Text examineText;
     
     [SerializeField] private ItemData itemData;
+    [SerializeField] private bool isTutorialBall;
     [TextArea]
     public string message;
 
     private bool isShowing = false;
     private static CollectableExamine currentObject = null;
+    private Collider2D myCollider;
 
     void Start()
     {
+        myCollider = GetComponent<Collider2D>();
         if (examinePanel != null)
         {
             examinePanel.SetActive(false);
@@ -26,25 +29,45 @@ public class CollectableExamine : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            TutorialManager tutorial = isTutorialBall ? TutorialManager.Instance : null;
+            if (tutorial != null && tutorial.CurrentStep <= TutorialManager.TutorialStep.Run)
+            {
+#if UNITY_EDITOR
+                if (Camera.main != null && myCollider != null &&
+                    myCollider.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
+                    Debug.Log("Bola: investigue após aprender A/D e Shift.", this);
+#endif
+                return;
+            }
+
             // O segundo clique no próprio objeto ainda confirma a coleta;
             // outros objetos ficam bloqueados enquanto o painel está aberto.
             if (InvestigationGuard.Blocked && !(isShowing && currentObject == this))
                 return;
 
+            if (Camera.main == null) return;
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+            // A bola pode estar na frente de um collider do cenário.
+            bool clickedThis = isTutorialBall
+                ? myCollider != null && myCollider.OverlapPoint(mousePos)
+                : hit.collider != null && hit.collider.gameObject == gameObject;
 
             // Verifica se clicou em UM objeto
-            if (hit.collider != null)
+            if (hit.collider != null || clickedThis)
             {
                 // Se clicou neste objeto
-                if (hit.collider.gameObject == gameObject)
+                if (clickedThis)
                 {
-                    // Se o painel está mostrando, fecha E coleta
+                    // Antes da pista dos garotos, a bola pode ser investigada,
+                    // mas não pode entrar no inventário.
                     if (isShowing && currentObject == this)
                     {
                         HidePanel();
-                        CollectItem();
+                        if (!isTutorialBall ||
+                            (tutorial != null &&
+                             tutorial.CurrentStep == TutorialManager.TutorialStep.FindBall))
+                            CollectItem();
                     }
                     else
                     {
@@ -56,6 +79,8 @@ public class CollectableExamine : MonoBehaviour
                         
                         ShowPanel();
                         currentObject = this;
+                        if (tutorial != null)
+                            tutorial.ReportInvestigation(gameObject);
                     }
                 }
                 // Se clicou em OUTRO objeto (não neste)
@@ -154,6 +179,8 @@ public class CollectableExamine : MonoBehaviour
 
         InventoryManager.Instance.AddItem(itemData);
         Debug.Log("✅ " + itemData.itemName + " coletado com sucesso!");
+        if (isTutorialBall && TutorialManager.Instance != null)
+            TutorialManager.Instance.ReportBallCollected();
         
         Destroy(gameObject);
     }

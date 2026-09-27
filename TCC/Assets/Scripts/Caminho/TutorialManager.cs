@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -21,12 +22,14 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private TMP_Text tutorialText;
     [SerializeField] private Transform player;
     [SerializeField] private float requiredDistance = 0.5f;
+    [SerializeField] private GameObject[] investigationTargets;
 
     public TutorialStep CurrentStep { get; private set; }
     public bool IsCompleted => CurrentStep == TutorialStep.Completed;
 
     private float lastPlayerX;
     private float distanceInStep;
+    private readonly HashSet<GameObject> investigated = new HashSet<GameObject>();
 
     private void Awake()
     {
@@ -44,6 +47,9 @@ public class TutorialManager : MonoBehaviour
 
         if (player != null)
             lastPlayerX = player.position.x;
+
+        if (investigationTargets == null || investigationTargets.Length != 5)
+            Debug.LogError("Tutorial: configure os cinco objetos investigáveis no TutorialManager.", this);
 
         SetStep(TutorialStep.Move);
     }
@@ -85,10 +91,33 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    public void ReportInvestigation()
+    public void ReportInvestigation(GameObject target)
     {
-        if (CurrentStep == TutorialStep.Investigate)
+        if (CurrentStep != TutorialStep.Investigate || target == null)
+            return;
+
+        if (investigationTargets == null || System.Array.IndexOf(investigationTargets, target) < 0)
+        {
+            Debug.LogWarning("Tutorial: objeto fora da lista de investigação: " + target.name, target);
+            return;
+        }
+
+        if (!investigated.Add(target))
+        {
+#if UNITY_EDITOR
+            Debug.Log("Tutorial: " + target.name + " já foi investigado.", target);
+#endif
+            return;
+        }
+
+#if UNITY_EDITOR
+        Debug.Log("Tutorial: " + target.name + " investigado (" +
+                  investigated.Count + "/" + investigationTargets.Length + ").", target);
+#endif
+        if (investigated.Count == investigationTargets.Length)
             SetStep(TutorialStep.CryingBoy);
+        else
+            ShowInvestigationProgress();
     }
 
     public void ReportCryingBoy()
@@ -146,7 +175,7 @@ public class TutorialManager : MonoBehaviour
                 tutorialText.text = "Segure Shift enquanto anda para correr.";
                 break;
             case TutorialStep.Investigate:
-                tutorialText.text = "Clique em um objeto do cenário para investigar.";
+                ShowInvestigationProgress();
                 break;
             case TutorialStep.CryingBoy:
                 tutorialText.text = "Clique no garoto que está chorando.";
@@ -167,6 +196,17 @@ public class TutorialManager : MonoBehaviour
                 tutorialText.text = "Os garotos agradeceram. Agora você pode entrar em casa.";
                 break;
         }
+
+#if UNITY_EDITOR
+        Debug.Log("Tutorial: etapa atual = " + nextStep + ".", this);
+#endif
+    }
+
+    private void ShowInvestigationProgress()
+    {
+        if (tutorialText != null)
+            tutorialText.text = "Investigue árvore, bicicleta, padaria, casa e bola (" +
+                                investigated.Count + "/5). Clique com o mouse.";
     }
 
     private void OnDestroy()

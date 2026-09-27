@@ -15,6 +15,8 @@ public class ExamineObject : MonoBehaviour
     public string message;
 
     private bool isShowing = false;
+    private int lastClosedFrame = -1;
+    public bool ClosedThisFrame => lastClosedFrame == Time.frameCount;
 
     private static ExamineObject currentObject = null;
 
@@ -50,6 +52,19 @@ public class ExamineObject : MonoBehaviour
         TutorialInvestigationTrigger tutorial = GetComponent<TutorialInvestigationTrigger>();
         if (tutorial != null && tutorial.IsCryingBoy)
             return;
+
+        TutorialManager tutorialManager = TutorialManager.Instance;
+        if (tutorialManager != null &&
+            tutorialManager.CurrentStep <= TutorialManager.TutorialStep.Run)
+        {
+#if UNITY_EDITOR
+            if (Camera.main != null && myCollider != null &&
+                myCollider.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
+                Debug.Log("Investigação bloqueada em " + name +
+                          ": conclua A/D e Shift primeiro.", this);
+#endif
+            return;
+        }
 
         // Um clique fecha a mensagem atual antes de qualquer outra investigação.
         // O bloqueio abaixo continua impedindo abrir outro objeto no mesmo clique.
@@ -155,6 +170,7 @@ public class ExamineObject : MonoBehaviour
 
     public void HidePanel()
     {
+        lastClosedFrame = Time.frameCount;
         if (examinePanel != null)
             examinePanel.SetActive(false);
 

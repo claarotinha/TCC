@@ -16,7 +16,9 @@ public class CursorManager : MonoBehaviour
 
     private void Update()
     {
-        if (PauseHelper.BlockInput() || Camera.main == null)
+        TutorialManager tutorial = TutorialManager.Instance;
+        if (PauseHelper.BlockInput() || Camera.main == null ||
+            (tutorial != null && tutorial.CurrentStep <= TutorialManager.TutorialStep.Run))
         {
             SetNormal();
             return;
@@ -26,6 +28,11 @@ public class CursorManager : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapPointAll(mousePosition);
         foreach (Collider2D hit in hits)
         {
+            TutorialInvestigationTrigger trigger = hit.GetComponent<TutorialInvestigationTrigger>();
+            if (trigger != null && trigger.IsCryingBoy && tutorial != null &&
+                tutorial.CurrentStep < TutorialManager.TutorialStep.CryingBoy)
+                continue;
+
             if ((hit.TryGetComponent(out ExamineObject examine) && examine.isActiveAndEnabled) ||
                 (hit.TryGetComponent(out QuartinhoExit roomExit) && roomExit.isActiveAndEnabled) ||
                 hit.GetComponent<CollectableExamine>() != null ||

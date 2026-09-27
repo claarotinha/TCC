@@ -29,8 +29,14 @@ public class TutorialInvestigationTrigger : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!isCryingBoy)
+        {
+            TryInvestigateObject();
+            return;
+        }
+
         // O botão do próprio painel também pode fechá-lo pelo PanelClickHandler.
-        if (isCryingBoy && boyPanelOpen &&
+        if (boyPanelOpen &&
             (examineObject.examinePanel == null ||
              !examineObject.examinePanel.activeInHierarchy))
         {
@@ -38,7 +44,7 @@ public class TutorialInvestigationTrigger : MonoBehaviour
             return;
         }
 
-        if (!isCryingBoy || !Input.GetMouseButtonDown(0) || Camera.main == null)
+        if (!Input.GetMouseButtonDown(0) || Camera.main == null)
             return;
 
         // O painel do garoto é fechado pelo clique seguinte, inclusive fora dele.
@@ -65,6 +71,15 @@ public class TutorialInvestigationTrigger : MonoBehaviour
         if (!hit)
             return;
 
+        TutorialManager tutorial = TutorialManager.Instance;
+        if (tutorial != null && tutorial.CurrentStep < TutorialManager.TutorialStep.CryingBoy)
+        {
+#if UNITY_EDITOR
+            Debug.Log("Garoto: conclua as cinco investigações primeiro.", this);
+#endif
+            return;
+        }
+
         // A mensagem anterior pode ter sido fechada neste mesmo clique.
         // Só um painel que ainda esteja visível impede abrir a fala do garoto.
         string blockingPanel = InvestigationGuard.OpenPanelReason;
@@ -89,6 +104,37 @@ public class TutorialInvestigationTrigger : MonoBehaviour
 #endif
     }
 
+    private void TryInvestigateObject()
+    {
+        TutorialManager tutorial = TutorialManager.Instance;
+        if (tutorial == null ||
+            tutorial.CurrentStep != TutorialManager.TutorialStep.Investigate ||
+            !Input.GetMouseButtonDown(0) || Camera.main == null ||
+            clickCollider == null || PauseHelper.BlockInput())
+            return;
+
+        Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (!clickCollider.OverlapPoint(mouse))
+            return;
+
+        // O clique para fechar a própria mensagem não deve abri-la outra vez.
+        if (examineObject.ClosedThisFrame)
+            return;
+
+        // Complementa o clique genérico se outro objeto acabou de fechar
+        // a mensagem neste quadro. Nunca abre por cima de um painel visível.
+        if (InvestigationGuard.PanelOpen)
+            return;
+
+        if (examineObject.examinePanel == null || examineObject.examineText == null)
+        {
+            Debug.LogError("Tutorial: painel não configurado em " + name + ".", this);
+            return;
+        }
+
+        examineObject.ShowPanel();
+    }
+
     private void HandleInvestigation()
     {
         TutorialManager tutorial = TutorialManager.Instance;
@@ -97,14 +143,11 @@ public class TutorialInvestigationTrigger : MonoBehaviour
 
         if (isCryingBoy)
         {
-            if (tutorial.CurrentStep == TutorialManager.TutorialStep.Investigate)
-                tutorial.ReportInvestigation();
-
             tutorial.ReportCryingBoy();
         }
         else
         {
-            tutorial.ReportInvestigation();
+            tutorial.ReportInvestigation(gameObject);
         }
     }
 }
