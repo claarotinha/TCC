@@ -317,7 +317,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
-  message: "Lá está minha casa. Antes de entrar, quero entender por que o garoto está chorando."
+  message: "L\xE1 est\xE1 minha casa. Antes de entrar, quero entender por que o garoto
+    est\xE1 chorando."
 --- !u!61 &140007376
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -908,11 +909,115 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5291345947944064673, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
   m_PrefabInstance: {fileID: 1877905290}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2100000011 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 593797566582638119, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
-  m_PrefabInstance: {fileID: 1877905290}
-  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &280959775
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105571907722419084, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_Name
+      value: InventoryCanvas
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
 --- !u!1001 &384034852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1089,7 +1194,7 @@ Transform:
   m_GameObject: {fileID: 451904689}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -411.98, y: -80.15, z: 1.5774436}
+  m_LocalPosition: {x: -410.4, y: -81.06, z: 1.5774436}
   m_LocalScale: {x: 0.6051788, y: 0.6051788, z: 0.6051788}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1600,8 +1705,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -407.75, y: -178.0112}
-  m_SizeDelta: {x: 19.995, y: 8.5729}
+  m_AnchoredPosition: {x: -408.82, y: -178.11005}
+  m_SizeDelta: {x: 20.885, y: 8.5729}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &532114510
 MonoBehaviour:
@@ -1841,7 +1946,7 @@ Transform:
   m_GameObject: {fileID: 719601364}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.08, y: -0.24, z: 0}
+  m_LocalPosition: {x: -21.08, y: -0.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1955,7 +2060,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
-  message: "O garoto enxuga as lágrimas e diz que perdeu a bola enquanto brincava. Talvez os outros meninos saibam para onde ela foi."
+  message: "O garoto enxuga as l\xE1grimas e diz que perdeu a bola enquanto brincava.
+    Talvez os outros meninos saibam para onde ela foi."
 --- !u!1 &743135153
 GameObject:
   m_ObjectHideFlags: 0
@@ -2187,7 +2293,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -388.90518, y: -177.87125}
+  m_AnchoredPosition: {x: -389.27, y: -177.98}
   m_SizeDelta: {x: 19.995, y: 8.5729}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &802313582
@@ -2380,7 +2486,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.5
+  orthographic size: 4.3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2405,7 +2511,7 @@ Transform:
   m_GameObject: {fileID: 885290996}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.37, z: -10}
+  m_LocalPosition: {x: 0, y: -3.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3084,7 +3190,7 @@ Transform:
   m_GameObject: {fileID: 1162776111}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.46, y: 0.66, z: 0}
+  m_LocalPosition: {x: -4.46, y: 0.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3128,10 +3234,11 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
+    oldSize: {x: 4, y: 4}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
+    adaptiveTiling: 0
   m_AutoTiling: 0
   m_Size: {x: 2.4, y: 2.2}
   m_EdgeRadius: 0
@@ -3145,7 +3252,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37d590a1c11249d2b932e235de6073a1, type: 3}
-  m_Name: ""
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialBoysDialogue
   dialogueCanvas: {fileID: 2100000011}
 --- !u!1 &1189262292
@@ -3215,7 +3322,8 @@ MonoBehaviour:
   examineText: {fileID: 1274580126}
   itemData: {fileID: 11400000, guid: 6fc0f984454c60b48a915b9620fa24f2, type: 2}
   isTutorialBall: 1
-  message: "Uma bola esquecida perto da calçada. É melhor perguntar às crianças de quem ela é antes de pegá-la."
+  message: "Uma bola esquecida perto da cal\xE7ada. \xC9 melhor perguntar \xE0s crian\xE7as
+    de quem ela \xE9 antes de peg\xE1-la."
 --- !u!212 &1262295923
 SpriteRenderer:
   serializedVersion: 3
@@ -3285,7 +3393,7 @@ Transform:
   m_GameObject: {fileID: 1262295920}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -418.81, y: -82.02, z: 1.5774436}
+  m_LocalPosition: {x: -419.11, y: -83.07, z: 1.5774436}
   m_LocalScale: {x: 0.39772204, y: 0.39772204, z: 0.39772204}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3489,7 +3597,7 @@ Transform:
   m_GameObject: {fileID: 1482467536}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -425.68, y: -80.27, z: 1.5774436}
+  m_LocalPosition: {x: -426.59, y: -81.26, z: 1.5774436}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3615,7 +3723,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
-  message: "Há marcas antigas no tronco. As crianças costumam brincar perto desta árvore."
+  message: "H\xE1 marcas antigas no tronco. As crian\xE7as costumam brincar perto
+    desta \xE1rvore."
 --- !u!114 &1482467542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3626,7 +3735,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5b9f628564b4b84fb3bedce5ba85780, type: 3}
-  m_Name: ""
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialInvestigationTrigger
   isCryingBoy: 0
 --- !u!1 &1512575058
@@ -3728,7 +3837,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
-  message: "Uma bicicleta encostada. Talvez seu dono tenha ido brincar com as outras crianças."
+  message: "Uma bicicleta encostada. Talvez seu dono tenha ido brincar com as outras
+    crian\xE7as."
 --- !u!61 &1564865589
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4119,10 +4229,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -169.413
       objectReference: {fileID: 0}
-    - target: {fileID: 905714418435719204, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 593797566582638119, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
       propertyPath: m_Name
       value: "CanvasINTERA\xC7OES"
@@ -4142,6 +4248,10 @@ PrefabInstance:
     - target: {fileID: 643355758858263336, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 38.016
+      objectReference: {fileID: 0}
+    - target: {fileID: 905714418435719204, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2518909024425570021, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
       propertyPath: m_margin.w
@@ -4273,7 +4383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5291345947944064673, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5794291359701208100, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4666,7 +4776,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -369.20062, y: -177.74002}
+  m_AnchoredPosition: {x: -369.27, y: -177.84}
   m_SizeDelta: {x: 19.995, y: 8.5729}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1953929561
@@ -4990,6 +5100,11 @@ MonoBehaviour:
   player: {fileID: 451904690}
   parallaxStrength: 0.1
   smoothTime: 0.3
+--- !u!1 &2100000011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 593797566582638119, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+  m_PrefabInstance: {fileID: 1877905290}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2131980640
 GameObject:
   m_ObjectHideFlags: 0
@@ -5051,7 +5166,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
-  message: "O cheiro de pão fresco vem da padaria. Logo adiante fica o caminho para casa."
+  message: "O cheiro de p\xE3o fresco vem da padaria. Logo adiante fica o caminho
+    para casa."
 --- !u!61 &2131980644
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5086,7 +5202,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.07171929, y: -0.27492464}
+  m_Offset: {x: -0.07171929, y: -0.69089067}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5096,7 +5212,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.6256402, y: 1.4064095}
+  m_Size: {x: 2.6256402, y: 1.4332459}
   m_EdgeRadius: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -5116,3 +5232,4 @@ SceneRoots:
   - {fileID: 202638856}
   - {fileID: 384034852}
   - {fileID: 1877905290}
+  - {fileID: 280959775}
