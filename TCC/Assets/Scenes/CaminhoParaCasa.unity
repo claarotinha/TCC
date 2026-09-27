@@ -908,6 +908,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5291345947944064673, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
   m_PrefabInstance: {fileID: 1877905290}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2100000011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 593797566582638119, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+  m_PrefabInstance: {fileID: 1877905290}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &384034852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3142,6 +3147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d590a1c11249d2b932e235de6073a1, type: 3}
   m_Name: ""
   m_EditorClassIdentifier: Assembly-CSharp::TutorialBoysDialogue
+  dialogueCanvas: {fileID: 2100000011}
 --- !u!1 &1189262292
 GameObject:
   m_ObjectHideFlags: 0

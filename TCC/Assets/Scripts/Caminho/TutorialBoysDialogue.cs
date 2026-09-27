@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider2D))]
+[DefaultExecutionOrder(500)]
 public class TutorialBoysDialogue : MonoBehaviour
 {
     private static TutorialBoysDialogue current;
@@ -17,6 +18,7 @@ public class TutorialBoysDialogue : MonoBehaviour
     };
 
     private Collider2D clickCollider;
+    [SerializeField] private GameObject dialogueCanvas;
     private GameObject dialogueUI;
     private GameObject choicesContainer;
     private TMP_Text dialogueText;
@@ -31,8 +33,9 @@ public class TutorialBoysDialogue : MonoBehaviour
         clickCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        GameObject canvas = GameObject.Find("CanvasINTERAÇÕES") ??
-                            GameObject.Find("CanvasINTERACOES");
+        GameObject canvas = dialogueCanvas;
+        if (canvas == null)
+            canvas = GameObject.Find("CanvasINTERAÇÕES") ?? GameObject.Find("CanvasINTERACOES");
         Transform panel = canvas != null ? canvas.transform.Find("DialogueUI/DialoguePanel") : null;
         if (panel == null)
         {
@@ -63,21 +66,56 @@ public class TutorialBoysDialogue : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && Time.frameCount > openedFrame)
                 NextLine();
-            return;
         }
+    }
+
+    private void LateUpdate()
+    {
+        if (current == this)
+            return;
 
         if (!Input.GetMouseButtonDown(0) || Camera.main == null ||
-            clickCollider == null || dialogueUI == null ||
-            InvestigationGuard.Blocked)
-            return;
-
-        TutorialManager tutorial = TutorialManager.Instance;
-        if (tutorial == null || tutorial.CurrentStep != TutorialManager.TutorialStep.Boys)
+            clickCollider == null)
             return;
 
         Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (!clickCollider.OverlapPoint(mouse))
             return;
+
+        TutorialManager tutorial = TutorialManager.Instance;
+        if (tutorial == null || tutorial.CurrentStep != TutorialManager.TutorialStep.Boys)
+        {
+#if UNITY_EDITOR
+            Debug.Log("Garotos: clique recebido; etapa atual = " +
+                      (tutorial != null ? tutorial.CurrentStep.ToString() : "sem TutorialManager") + ".", this);
+#endif
+            return;
+        }
+
+        if (dialogueUI == null || dialogueText == null || nameText == null)
+        {
+            Debug.LogError("Garotos: painel de diálogo não configurado.", this);
+            return;
+        }
+
+        if (PauseHelper.BlockInput())
+            return;
+
+        // O clique que fechou o painel anterior ainda tem a trava do quadro.
+        // Verificamos o painel que continua aberto depois de todos os Updates.
+        string blockedBy = InvestigationGuard.OpenPanelReason;
+        if (blockedBy != null)
+        {
+            if (blockedBy == "investigação")
+                ExamineObject.HideCurrentPanel();
+            else if (blockedBy == "coleta")
+                CollectableExamine.HideCurrentPanel();
+#if UNITY_EDITOR
+            Debug.Log("Garotos: clique recebido; bloqueado por " + blockedBy +
+                      ". Feche o painel e clique novamente.", this);
+#endif
+            return;
+        }
 
         current = this;
         lineIndex = 0;
