@@ -25,7 +25,10 @@ public class MotherDialogue : MonoBehaviour
     private bool dialogueOpen = false;
     private bool inConversation = false;
     private static MotherDialogue activeDialogue;
-    public static bool IsShowing => activeDialogue != null && activeDialogue.dialogueOpen;
+    public static bool IsShowing => activeDialogue != null && activeDialogue.dialogueOpen &&
+                                    activeDialogue.canvasGroup != null &&
+                                    activeDialogue.canvasGroup.gameObject.activeInHierarchy &&
+                                    activeDialogue.canvasGroup.alpha > 0f;
 
     private bool reclamouNome = false;
 

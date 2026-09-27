@@ -24,29 +24,45 @@ public static class InvestigationGuard
     {
         get
         {
+            return OpenPanelReason != null;
+        }
+    }
+
+    // Indica qual interface está impedindo a investigação quando não há painel visível.
+    public static string OpenPanelReason
+    {
+        get
+        {
+            if (ExamineObject.IsShowing()) return "investigação";
+            if (CollectableExamine.IsShowing()) return "coleta";
+            if (NPCDialogue.IsShowing()) return "diálogo dos NPCs";
+            if (MotherDialogue.IsShowing) return "diálogo da mãe";
+            if (QuartoBaguncaDoor.IsPanelOpen) return "porta do quartinho";
+            if (QuartinhoExit.IsPanelOpen) return "saída do quartinho";
+
             InventoryTabController inventory = InventoryTabController.Instance;
-            if (ExamineObject.IsShowing() || CollectableExamine.IsShowing() ||
-                NPCDialogue.IsShowing() || MotherDialogue.IsShowing ||
-                QuartoBaguncaDoor.IsPanelOpen || QuartinhoExit.IsPanelOpen ||
-                (inventory != null &&
-                 (inventory.IsOpen ||
-                  inventory.GetComponent<CollectPrompt>()?.IsOpen == true ||
-                  inventory.GetComponent<CombinationPrompt>()?.IsOpen == true)))
-                return true;
+            if (inventory != null)
+            {
+                if (inventory.IsOpen) return "inventário";
+                if (inventory.GetComponent<CollectPrompt>()?.IsOpen == true)
+                    return "confirmação de coleta";
+                if (inventory.GetComponent<CombinationPrompt>()?.IsOpen == true)
+                    return "combinação";
+            }
 
             foreach (PhotoCollect photo in UnityEngine.Object.FindObjectsByType<PhotoCollect>(
                 FindObjectsSortMode.None))
-                if (photo.IsDialogOpen) return true;
+                if (photo.IsDialogOpen) return "fotografia";
 
             foreach (OldPhoto photo in UnityEngine.Object.FindObjectsByType<OldPhoto>(
                 FindObjectsSortMode.None))
-                if (photo.IsDialogOpen) return true;
+                if (photo.IsDialogOpen) return "fotografia antiga";
 
             foreach (DiaryWithCutscene diary in
                 UnityEngine.Object.FindObjectsByType<DiaryWithCutscene>(FindObjectsSortMode.None))
-                if (diary.IsDialogOpen) return true;
+                if (diary.IsDialogOpen) return "diário";
 
-            return false;
+            return null;
         }
     }
 }

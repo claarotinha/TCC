@@ -162,7 +162,7 @@ public class CollectableExamine : MonoBehaviour
     {
         if (currentObject != null && currentObject.examinePanel != null)
         {
-            return currentObject.examinePanel.activeSelf;
+            return currentObject.examinePanel.activeInHierarchy;
         }
         return false;
     }

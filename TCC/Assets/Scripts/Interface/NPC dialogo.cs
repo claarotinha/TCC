@@ -260,7 +260,8 @@ public class NPCDialogue : MonoBehaviour
 
     public static bool IsShowing()
     {
-        return currentObject != null && currentObject.isShowing;
+        return currentObject != null && currentObject.isShowing &&
+               currentObject.dialogueUI != null && currentObject.dialogueUI.activeInHierarchy;
     }
 
     private void OnMouseEnter()

@@ -67,10 +67,11 @@ public class TutorialInvestigationTrigger : MonoBehaviour
 
         // A mensagem anterior pode ter sido fechada neste mesmo clique.
         // Só um painel que ainda esteja visível impede abrir a fala do garoto.
-        if (InvestigationGuard.PanelOpen)
+        string blockingPanel = InvestigationGuard.OpenPanelReason;
+        if (blockingPanel != null)
         {
 #if UNITY_EDITOR
-            Debug.Log("Garoto: clique recebido, mas há outro painel aberto.", this);
+            Debug.Log("Garoto: clique bloqueado por " + blockingPanel + ".", this);
 #endif
             return;
         }
