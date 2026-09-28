@@ -34,6 +34,12 @@ public class TutorialBoysDialogue : MonoBehaviour
     private SpriteRenderer boysSprite;
     private int lineIndex;
     private int openedFrame;
+    private bool thanking;
+
+    public bool CanReceiveBall =>
+        TutorialManager.Instance != null &&
+        TutorialManager.Instance.CurrentStep == TutorialManager.TutorialStep.ReturnBall &&
+        current == null;
 
     private void Awake()
     {
@@ -113,6 +119,7 @@ public class TutorialBoysDialogue : MonoBehaviour
         }
 
         current = this;
+        thanking = false;
         lineIndex = 0;
         openedFrame = Time.frameCount;
 
@@ -128,10 +135,12 @@ public class TutorialBoysDialogue : MonoBehaviour
 
     private void ShowLine()
     {
-        bool mariSpeaking = lineIndex == 0;
+        bool mariSpeaking = !thanking && lineIndex == 0;
 
         characterNameText.text = mariSpeaking ? "Mari" : "Garotos";
-        dialogueText.text = lines[lineIndex];
+        dialogueText.text = thanking
+            ? "Encontrou a nossa bola! Muito obrigado, Mari. Agora podemos voltar a brincar."
+            : lines[lineIndex];
 
         if (portraitImage != null)
         {
@@ -146,6 +155,13 @@ public class TutorialBoysDialogue : MonoBehaviour
 
     private void NextLine()
     {
+        if (thanking)
+        {
+            Close();
+            TutorialManager.Instance?.ReportBallReturned();
+            return;
+        }
+
         lineIndex++;
 
         if (lineIndex < lines.Length)
@@ -158,12 +174,32 @@ public class TutorialBoysDialogue : MonoBehaviour
         TutorialManager.Instance?.ReportBoysClue();
     }
 
+    public void OnBallReturned()
+    {
+        if (!CanReceiveBall || dialogueUI == null || dialogueText == null ||
+            characterNameText == null)
+            return;
+
+        InventoryTabController.Instance?.Close();
+        current = this;
+        thanking = true;
+        openedFrame = Time.frameCount;
+
+        if (choicesContainer != null)
+            choicesContainer.SetActive(false);
+
+        dialogueUI.transform.SetAsLastSibling();
+        ShowLine();
+        dialogueUI.SetActive(true);
+    }
+
     private void Close()
     {
         if (dialogueUI != null)
             dialogueUI.SetActive(false);
 
         current = null;
+        thanking = false;
         InvestigationGuard.BlockCurrentClick();
     }
 

@@ -48,6 +48,12 @@ public class InventoryTabController : MonoBehaviour
             inventoryPanel.SetActive(!inventoryPanel.activeSelf);
     }
 
+    public void Close()
+    {
+        if (inventoryPanel != null)
+            inventoryPanel.SetActive(false);
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (inventoryPanel != null)

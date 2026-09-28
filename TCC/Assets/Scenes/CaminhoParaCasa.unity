@@ -203,8 +203,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 42
+  m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2584,7 +2584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2684,11 +2684,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1068642304}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000043135, y: -123}
-  m_SizeDelta: {x: 998.427, y: 101.604}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -24, y: -32}
+  m_SizeDelta: {x: 1200, y: 150}
+  m_Pivot: {x: 1, y: 1}
 --- !u!4 &1038750111 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8218292396265208208, guid: a5ee1d61772c9714590e34093bb375b4, type: 3}
@@ -2925,6 +2925,7 @@ GameObject:
   - component: {fileID: 1162776112}
   - component: {fileID: 1162776115}
   - component: {fileID: 1162776116}
+  - component: {fileID: 2200000021}
   m_Layer: 0
   m_Name: "crian\xE7as npcs"
   m_TagString: Untagged
@@ -3087,12 +3088,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d590a1c11249d2b932e235de6073a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialBoysDialogue
-  dialogueUI: {fileID: 0}
-  dialogueText: {fileID: 0}
-  characterNameText: {fileID: 0}
-  portraitImage: {fileID: 0}
-  choicesContainer: {fileID: 0}
+  dialogueUI: {fileID: 2200000011}
+  dialogueText: {fileID: 2200000012}
+  characterNameText: {fileID: 2200000013}
+  portraitImage: {fileID: 2200000014}
+  choicesContainer: {fileID: 2200000015}
   mariPortrait: {fileID: 0}
+--- !u!114 &2200000021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162776111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110eee3e0f263e848a065907976dfd6b, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ItemUseTarget
+  requiredItem: {fileID: 11400000, guid: 6fc0f984454c60b48a915b9620fa24f2, type: 2}
+  consumeOnUse: 1
+  onUsed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1189262292
 GameObject:
   m_ObjectHideFlags: 0
@@ -3156,8 +3174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1530c93bf5d28c84992fab9e5aec225d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectableExamine
-  examinePanel: {fileID: 0}
-  examineText: {fileID: 0}
+  examinePanel: {fileID: 257591534}
+  examineText: {fileID: 473169253}
   itemData: {fileID: 11400000, guid: 6fc0f984454c60b48a915b9620fa24f2, type: 2}
   isTutorialBall: 1
   message: "Uma bola esquecida perto da cal\xE7ada. \xC9 melhor perguntar \xE0s crian\xE7as
@@ -4756,6 +4774,49 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 4.1424336, y: 1.8999517}
   m_EdgeRadius: 0
+--- !u!1 &2200000011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 905714418435719204, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+  m_PrefabInstance: {fileID: 1877905290}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2200000012 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2518909024425570021, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+  m_PrefabInstance: {fileID: 1877905290}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+--- !u!114 &2200000013 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7382483691494415612, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+  m_PrefabInstance: {fileID: 1877905290}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+--- !u!114 &2200000014 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4312439680773646354, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+  m_PrefabInstance: {fileID: 1877905290}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+--- !u!1 &2200000015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8461600522048470007, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+  m_PrefabInstance: {fileID: 1877905290}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

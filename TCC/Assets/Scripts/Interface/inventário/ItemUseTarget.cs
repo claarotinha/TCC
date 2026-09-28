@@ -14,6 +14,10 @@ public class ItemUseTarget : MonoBehaviour
             InventoryManager.Instance == null)
             return false;
 
+        TutorialBoysDialogue boys = GetComponent<TutorialBoysDialogue>();
+        if (boys != null && !boys.CanReceiveBall)
+            return false;
+
         bool owned = false;
         foreach (ItemData inventoryItem in InventoryManager.Instance.Items)
         {
@@ -31,6 +35,8 @@ public class ItemUseTarget : MonoBehaviour
             InventoryManager.Instance.RemoveItem(item);
 
         onUsed?.Invoke();
+        if (boys != null)
+            boys.OnBallReturned();
         Debug.Log("Item usado: " + item.itemName);
         return true;
     }

@@ -193,7 +193,7 @@ public class TutorialManager : MonoBehaviour
                 tutorialText.text = "Arraste a bola do inventário até os garotos.";
                 break;
             case TutorialStep.Completed:
-                tutorialText.text = "Os garotos agradeceram. Agora você pode entrar em casa.";
+                tutorialText.text = "Os garotos agradeceram. Clique na porta para entrar em casa.";
                 break;
         }
 

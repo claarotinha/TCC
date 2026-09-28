@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 
+[DefaultExecutionOrder(-100)]
 public class HouseEntrance : MonoBehaviour
 {
     public GameObject doorText;
@@ -12,11 +13,35 @@ public class HouseEntrance : MonoBehaviour
 
     private bool playerNearby = false;
     private bool isTransitioning = false;
+    private Collider2D doorCollider;
+
+    private void Awake()
+    {
+        doorCollider = GetComponent<Collider2D>();
+    }
 
     void Update()
     {
-        if (playerNearby && !isTransitioning && Input.GetKeyDown(KeyCode.E))
+        if (!playerNearby || isTransitioning || PauseHelper.BlockInput())
+            return;
+
+        TutorialManager tutorial = TutorialManager.Instance;
+        if (tutorial == null)
         {
+            // Mantém o comportamento das outras cenas que usam este prefab.
+            if (Input.GetKeyDown(KeyCode.E))
+                StartCoroutine(FadeAndLoadScene());
+            return;
+        }
+
+        if (!tutorial.IsCompleted || !Input.GetMouseButtonDown(0) ||
+            InvestigationGuard.Blocked || Camera.main == null || doorCollider == null)
+            return;
+
+        Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (doorCollider.OverlapPoint(mouse))
+        {
+            InvestigationGuard.BlockCurrentClick();
             StartCoroutine(FadeAndLoadScene());
         }
     }

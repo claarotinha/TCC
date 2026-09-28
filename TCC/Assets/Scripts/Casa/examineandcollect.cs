@@ -16,6 +16,10 @@ public class CollectableExamine : MonoBehaviour
     private Collider2D myCollider;
     private SpriteRenderer ballSprite;
 
+    public bool CanInteract => !isTutorialBall || TutorialManager.Instance == null ||
+        TutorialManager.Instance.CurrentStep == TutorialManager.TutorialStep.Investigate ||
+        TutorialManager.Instance.CurrentStep == TutorialManager.TutorialStep.FindBall;
+
     void Start()
     {
         myCollider = GetComponent<Collider2D>();

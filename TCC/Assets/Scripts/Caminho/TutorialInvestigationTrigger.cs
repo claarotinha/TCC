@@ -72,7 +72,7 @@ public class TutorialInvestigationTrigger : MonoBehaviour
             return;
 
         TutorialManager tutorial = TutorialManager.Instance;
-        if (tutorial != null && tutorial.CurrentStep < TutorialManager.TutorialStep.CryingBoy)
+        if (tutorial != null && tutorial.CurrentStep != TutorialManager.TutorialStep.CryingBoy)
         {
 #if UNITY_EDITOR
             Debug.Log("Garoto: conclua as cinco investigações primeiro.", this);

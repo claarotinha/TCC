@@ -17,7 +17,7 @@ public class CursorManager : MonoBehaviour
     private void Update()
     {
         TutorialManager tutorial = TutorialManager.Instance;
-        if (PauseHelper.BlockInput() || Camera.main == null ||
+        if (InvestigationGuard.Blocked || Camera.main == null ||
             (tutorial != null && tutorial.CurrentStep <= TutorialManager.TutorialStep.Run))
         {
             SetNormal();
@@ -46,7 +46,8 @@ public class CursorManager : MonoBehaviour
 
             if ((hit.TryGetComponent(out ExamineObject examine) && examine.isActiveAndEnabled) ||
                 (hit.TryGetComponent(out QuartinhoExit roomExit) && roomExit.isActiveAndEnabled) ||
-                hit.GetComponent<CollectableExamine>() != null ||
+                (hit.TryGetComponent(out CollectableExamine collectible) &&
+                 collectible.CanInteract) ||
                 hit.GetComponent<QuartoBaguncaDoor>() != null ||
                 hit.GetComponent<MotherDialogue>() != null)
             {
