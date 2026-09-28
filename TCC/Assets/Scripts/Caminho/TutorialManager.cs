@@ -184,7 +184,7 @@ public class TutorialManager : MonoBehaviour
                 tutorialText.text = "Converse com o grupo de garotos.";
                 break;
             case TutorialStep.FindBall:
-                tutorialText.text = "Procure a bola e escolha se deseja coletá-la.";
+                tutorialText.text = "Procure a bola e escolha se deseja guarda-la.";
                 break;
             case TutorialStep.OpenInventory:
                 tutorialText.text = "Pressione TAB para abrir o inventário.";
@@ -193,7 +193,7 @@ public class TutorialManager : MonoBehaviour
                 tutorialText.text = "Arraste a bola do inventário até os garotos.";
                 break;
             case TutorialStep.Completed:
-                tutorialText.text = "Os garotos agradeceram. Clique na porta para entrar em casa.";
+                tutorialText.text = "Clique na porta para entrar em casa.";
                 break;
         }
 
@@ -205,7 +205,7 @@ public class TutorialManager : MonoBehaviour
     private void ShowInvestigationProgress()
     {
         if (tutorialText != null)
-            tutorialText.text = "Investigue árvore, bicicleta, padaria, casa e bola (" +
+            tutorialText.text = "Investigue árvore, padaria, bola, casa e bicicleta (" +
                                 investigated.Count + "/5). Clique com o mouse.";
     }
 
