@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: b8f3ef2a992d7a14ea3a1d7f730a5cc1
+guid: ac569e7664da6d847a97610594759983
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2841501871964099027
-    second: prota idle (1)2_0
+      213: 9069050019444494918
+    second: aviso npc3_0
+  - first:
+      213: 577821356666799984
+    second: aviso npc3_1
+  - first:
+      213: 9177629681346496362
+    second: aviso npc3_2
+  - first:
+      213: -3420025599477946118
+    second: aviso npc3_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 160
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -84,19 +93,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -111,6 +107,19 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -178,13 +187,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: prota idle (1)2_0
+      name: aviso npc3_0
       rect:
         serializedVersion: 2
-        x: 239
-        y: 169
-        width: 182
-        height: 382
+        x: 249
+        y: 379
+        width: 72
+        height: 122
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,8 +202,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d2ee8f43a15f098d0800000000000000
-      internalID: -2841501871964099027
+      spriteID: 6421d3b51fcbbdd70800000000000000
+      internalID: 9069050019444494918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aviso npc3_1
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 339
+        width: 72
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07742c36675d40800800000000000000
+      internalID: 577821356666799984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aviso npc3_2
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 319
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a674dbce19d7d5f70800000000000000
+      internalID: 9177629681346496362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aviso npc3_3
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 289
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af8ef5c56d0a980d0800000000000000
+      internalID: -3420025599477946118
       vertices: []
       indices: 
       edges: []
@@ -213,7 +288,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      prota idle (1)2_0: -2841501871964099027
+      aviso npc3_0: 9069050019444494918
+      aviso npc3_1: 577821356666799984
+      aviso npc3_2: 9177629681346496362
+      aviso npc3_3: -3420025599477946118
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
