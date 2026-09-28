@@ -782,7 +782,7 @@ Transform:
   m_GameObject: {fileID: 97086225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2257, y: 0.66, z: 0}
+  m_LocalPosition: {x: -0.15, y: 0.66, z: 0}
   m_LocalScale: {x: 0.99370974, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1003,6 +1003,7 @@ MonoBehaviour:
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
   itemData: {fileID: 11400000, guid: 6f1074d0ccac01d469b08102d6117d2b, type: 2}
+  isTutorialBall: 0
   message: "Um p\xE3o. Vou guardar para mais tarde."
 --- !u!1 &120361311 stripped
 GameObject:
@@ -2041,7 +2042,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2425645001220786861, guid: 410bcd0d621742042ab14ba9e9859689, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2129,8 +2130,8 @@ Transform:
   m_LocalScale: {x: 1.3647122, y: 1.3647122, z: 1.3647122}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 97086226}
   - {fileID: 1312306402}
+  - {fileID: 97086226}
   - {fileID: 1009137942}
   - {fileID: 706491612}
   - {fileID: 947622582}
@@ -2684,6 +2685,7 @@ MonoBehaviour:
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
   itemData: {fileID: 11400000, guid: 48f3c933435bfbe449faee3d20e99340, type: 2}
+  isTutorialBall: 0
   message: "Um ovo. Pode ser \xFAtil na cozinha."
 --- !u!114 &1103893478 stripped
 MonoBehaviour:
@@ -3049,7 +3051,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: -547865176509615082, guid: 3ed9dddb28ea3284bae89055f9d3c3cd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4475,7 +4477,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 3.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
