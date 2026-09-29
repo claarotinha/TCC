@@ -15,16 +15,20 @@ public class ExamineObject : MonoBehaviour
     public string message;
 
     private bool isShowing = false;
+    private bool showingTutorialLupa = false;
     private int lastClosedFrame = -1;
+
     public bool ClosedThisFrame => lastClosedFrame == Time.frameCount;
 
     private static ExamineObject currentObject = null;
 
     private Collider2D myCollider;
+    private TutorialInvestigationTrigger investigationTrigger;
 
     private void Start()
     {
         myCollider = GetComponent<Collider2D>();
+        investigationTrigger = GetComponent<TutorialInvestigationTrigger>();
 
         if (examinePanel != null)
         {
@@ -35,45 +39,80 @@ public class ExamineObject : MonoBehaviour
         if (myCollider == null)
         {
             Debug.LogWarning(
-                "ExamineObject: " +
-                gameObject.name +
-                " não possui Collider2D."
+                "ExamineObject: " + gameObject.name +
+                " não possui Collider2D.",
+                this
             );
         }
     }
 
+    private bool TutorialInvestigationBlocked()
+    {
+        TutorialManager tutorialManager = TutorialManager.Instance;
+
+        return investigationTrigger != null &&
+               !investigationTrigger.IsCryingBoy &&
+               tutorialManager != null &&
+               tutorialManager.CurrentStep !=
+                   TutorialManager.TutorialStep.Investigate;
+    }
+
     private void Update()
     {
+        // Se a etapa terminou enquanto o mouse estava sobre o objeto,
+        // retira imediatamente a lupa.
+        if (showingTutorialLupa && TutorialInvestigationBlocked())
+        {
+            showingTutorialLupa = false;
+
+            if (CursorManager.Instance != null)
+                CursorManager.Instance.SetNormal();
+        }
+
         if (!Input.GetMouseButtonDown(0))
             return;
 
-        // O garoto do tutorial recebe o clique pelo próprio componente.
-        // Assim o painel compartilhado não é aberto e fechado por dois scripts.
-        TutorialInvestigationTrigger tutorial = GetComponent<TutorialInvestigationTrigger>();
-        if (tutorial != null && tutorial.IsCryingBoy)
+        // O garoto chorando controla o próprio painel.
+        if (investigationTrigger != null &&
+            investigationTrigger.IsCryingBoy)
             return;
 
         TutorialManager tutorialManager = TutorialManager.Instance;
+
         if (tutorialManager != null &&
             tutorialManager.CurrentStep <= TutorialManager.TutorialStep.Run)
         {
 #if UNITY_EDITOR
-            if (Camera.main != null && myCollider != null &&
-                myCollider.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
-                Debug.Log("Investigação bloqueada em " + name +
-                          ": conclua A/D e Shift primeiro.", this);
+            if (Camera.main != null &&
+                myCollider != null &&
+                myCollider.OverlapPoint(
+                    Camera.main.ScreenToWorldPoint(Input.mousePosition)))
+            {
+                Debug.Log(
+                    "Investigação bloqueada em " + name +
+                    ": conclua A/D e Shift primeiro.",
+                    this
+                );
+            }
 #endif
             return;
         }
 
-        // Um clique fecha a mensagem atual antes de qualquer outra investigação.
-        // O bloqueio abaixo continua impedindo abrir outro objeto no mesmo clique.
-        if (currentObject == this && isShowing && examinePanel != null &&
+        // Permite fechar uma mensagem que já estava aberta,
+        // inclusive quando a etapa de investigação acabou.
+        if (currentObject == this &&
+            isShowing &&
+            examinePanel != null &&
             examinePanel.activeInHierarchy)
         {
             HidePanel();
             return;
         }
+
+        // Os cinco objetos do tutorial só podem ser investigados
+        // durante a etapa Investigate. Isso inclui casamari.
+        if (TutorialInvestigationBlocked())
+            return;
 
         if (InvestigationGuard.Blocked)
             return;
@@ -84,50 +123,48 @@ public class ExamineObject : MonoBehaviour
         Vector2 mousePosition =
             Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        // Verifica se o clique realmente aconteceu
-        // dentro do Collider DESTE objeto.
         if (!myCollider.OverlapPoint(mousePosition))
             return;
 
         QuartoBaguncaDoor door = GetComponent<QuartoBaguncaDoor>();
+
         if (door != null && !door.TryHandleClick())
             return;
 
         if (door != null &&
-            (MotherDialogue.FalouSobreTrabalho || QuartoBaguncaDoor.Unlocked))
+            (MotherDialogue.FalouSobreTrabalho ||
+             QuartoBaguncaDoor.Unlocked))
         {
             HidePanel();
             door.AbrirConfirmacao();
             return;
         }
 
-        // Se outro objeto estava aberto, fecha.
-        if (currentObject != null &&
-            currentObject != this)
-        {
+        if (currentObject != null && currentObject != this)
             currentObject.HidePanel();
-        }
 
         ShowPanel();
     }
 
     private void OnMouseEnter()
     {
-        if (InvestigationGuard.Blocked)
+        if (TutorialInvestigationBlocked() ||
+            InvestigationGuard.Blocked)
             return;
 
         if (CursorManager.Instance != null)
         {
             CursorManager.Instance.SetLupa();
+            showingTutorialLupa = true;
         }
     }
 
     private void OnMouseExit()
     {
+        showingTutorialLupa = false;
+
         if (CursorManager.Instance != null)
-        {
             CursorManager.Instance.SetNormal();
-        }
     }
 
     private void AddClickDetector()
@@ -139,10 +176,7 @@ public class ExamineObject : MonoBehaviour
             examinePanel.GetComponent<PanelClickHandler>();
 
         if (detector == null)
-        {
-            detector =
-                examinePanel.AddComponent<PanelClickHandler>();
-        }
+            detector = examinePanel.AddComponent<PanelClickHandler>();
 
         detector.SetExamineObject(this);
     }
@@ -171,6 +205,7 @@ public class ExamineObject : MonoBehaviour
     public void HidePanel()
     {
         lastClosedFrame = Time.frameCount;
+
         if (examinePanel != null)
             examinePanel.SetActive(false);
 
@@ -201,7 +236,6 @@ public class ExamineObject : MonoBehaviour
 
     private void OnDestroy()
     {
-        // O painel é compartilhado; outro objeto ainda precisa do clique nele.
         if (currentObject == this)
             currentObject = null;
     }

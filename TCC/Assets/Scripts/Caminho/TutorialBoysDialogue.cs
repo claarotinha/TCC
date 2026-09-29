@@ -1,5 +1,3 @@
-
-
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -71,7 +69,6 @@ public class TutorialBoysDialogue : MonoBehaviour
             return;
         }
 
-        // No prefab, o CanvasGroup fica no filho DialoguePanel.
         panelGroup = dialogueUI.GetComponentInChildren<CanvasGroup>(true);
 
         choice1 = FindChoice("Choice1");
@@ -134,8 +131,6 @@ public class TutorialBoysDialogue : MonoBehaviour
             Close();
             TutorialManager.Instance?.ReportBallReturned();
         }
-
-        // Enquanto as escolhas aparecem, somente os botões respondem.
     }
 
     private void LateUpdate()
@@ -186,7 +181,6 @@ public class TutorialBoysDialogue : MonoBehaviour
             else if (blockedBy == "coleta")
                 CollectableExamine.HideCurrentPanel();
 
-            // Primeiro fecha o painel anterior; o próximo clique conversa.
             return;
         }
 
@@ -226,14 +220,11 @@ public class TutorialBoysDialogue : MonoBehaviour
 
         SetLine(
             "Mari",
-            "O menino está chorando. E melhor tentar entender o que aconteceu",
+            "O menino está chorando. O que aconteceu com a bola dele?",
             mariPortrait
         );
 
         choicesContainer.SetActive(true);
-
-        // Antes de descobrir o ocorrido, Mari ainda não pode
-        // encerrar a conversa e sair à procura da bola.
         choice3.interactable = heardWhatHappened;
     }
 
@@ -245,7 +236,8 @@ public class TutorialBoysDialogue : MonoBehaviour
         heardWhatHappened = true;
 
         ShowAnswer(
-            "A bola escapou enquanto brincávamos perto da padaria. Ele ficou muito triste porque não conseguimos encontrá-la. "
+            "A bola escapou enquanto brincávamos perto da padaria. " +
+            "Ele ficou muito triste porque não conseguimos encontrá-la."
         );
     }
 
@@ -279,7 +271,7 @@ public class TutorialBoysDialogue : MonoBehaviour
 
         SetLine(
             "Garotos",
-            answer + "\n\nClique para continuar.",
+            answer,
             boysSprite != null ? boysSprite.sprite : null
         );
     }
@@ -317,7 +309,7 @@ public class TutorialBoysDialogue : MonoBehaviour
         SetLine(
             "Garotos",
             "Encontrou a nossa bola! Muito obrigado, Mari. " +
-            "Agora podemos voltar a brincar.\n\nClique para continuar.",
+            "Agora podemos voltar a brincar.",
             boysSprite != null ? boysSprite.sprite : null
         );
     }
@@ -355,4 +347,3 @@ public class TutorialBoysDialogue : MonoBehaviour
             current = null;
     }
 }
-

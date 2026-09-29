@@ -1,18 +1,25 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections;
 
 [DefaultExecutionOrder(-100)]
 public class HouseEntrance : MonoBehaviour
 {
-    public GameObject doorText;
+    [Header("Confirmação")]
+    public GameObject confirmPanel;
+    public TMP_Text confirmText;
+    public Button buttonSim;
+    public Button buttonNao;
 
+    [Header("Transição")]
+    public GameObject doorText;
     public Image fadeImage;
     public float fadeDuration = 1f;
 
-    private bool playerNearby = false;
-    private bool isTransitioning = false;
+    private bool playerNearby;
+    private bool isTransitioning;
     private Collider2D doorCollider;
 
     private void Awake()
@@ -20,30 +27,78 @@ public class HouseEntrance : MonoBehaviour
         doorCollider = GetComponent<Collider2D>();
     }
 
-    void Update()
+    private void Start()
     {
-        if (!playerNearby || isTransitioning || PauseHelper.BlockInput())
+        if (confirmPanel != null)
+            confirmPanel.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (!playerNearby ||
+            isTransitioning ||
+            confirmPanel == null ||
+            confirmPanel.activeInHierarchy ||
+            PauseHelper.BlockInput() ||
+            !Input.GetMouseButtonDown(0) ||
+            Camera.main == null ||
+            doorCollider == null)
             return;
 
         TutorialManager tutorial = TutorialManager.Instance;
-        if (tutorial == null)
-        {
-            // Mantém o comportamento das outras cenas que usam este prefab.
-            if (Input.GetKeyDown(KeyCode.E))
-                StartCoroutine(FadeAndLoadScene());
-            return;
-        }
 
-        if (!tutorial.IsCompleted || !Input.GetMouseButtonDown(0) ||
-            InvestigationGuard.Blocked || Camera.main == null || doorCollider == null)
+        if (tutorial == null || !tutorial.IsCompleted)
             return;
 
-        Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (InvestigationGuard.Blocked)
+            return;
+
+        Vector2 mouse =
+            Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         if (doorCollider.OverlapPoint(mouse))
+            AbrirConfirmacao();
+    }
+
+    private void AbrirConfirmacao()
+    {
+        if (confirmText == null ||
+            buttonSim == null ||
+            buttonNao == null)
         {
-            InvestigationGuard.BlockCurrentClick();
-            StartCoroutine(FadeAndLoadScene());
+            Debug.LogError(
+                "PortaCasa: ligue o texto e os botões Sim/Não.",
+                this
+            );
+            return;
         }
+
+        confirmText.text = "Deseja entrar em casa?";
+
+        buttonSim.onClick.RemoveAllListeners();
+        buttonNao.onClick.RemoveAllListeners();
+
+        buttonSim.onClick.AddListener(ConfirmarEntrada);
+        buttonNao.onClick.AddListener(FecharConfirmacao);
+
+        confirmPanel.SetActive(true);
+        InvestigationGuard.BlockCurrentClick();
+    }
+
+    private void ConfirmarEntrada()
+    {
+        if (isTransitioning)
+            return;
+
+        confirmPanel.SetActive(false);
+        InvestigationGuard.BlockCurrentClick();
+        StartCoroutine(FadeAndLoadScene());
+    }
+
+    private void FecharConfirmacao()
+    {
+        confirmPanel.SetActive(false);
+        InvestigationGuard.BlockCurrentClick();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -53,9 +108,7 @@ public class HouseEntrance : MonoBehaviour
             playerNearby = true;
 
             if (doorText != null)
-            {
                 doorText.SetActive(true);
-            }
         }
     }
 
@@ -66,20 +119,16 @@ public class HouseEntrance : MonoBehaviour
             playerNearby = false;
 
             if (doorText != null)
-            {
                 doorText.SetActive(false);
-            }
         }
     }
 
-    IEnumerator FadeAndLoadScene()
+    private IEnumerator FadeAndLoadScene()
     {
         isTransitioning = true;
 
         if (doorText != null)
-        {
             doorText.SetActive(false);
-        }
 
         float timer = 0f;
 
@@ -90,7 +139,11 @@ public class HouseEntrance : MonoBehaviour
             if (fadeImage != null)
             {
                 Color color = fadeImage.color;
-                color.a = Mathf.Lerp(0f, 1f, timer / fadeDuration);
+                color.a = Mathf.Lerp(
+                    0f,
+                    1f,
+                    timer / fadeDuration
+                );
                 fadeImage.color = color;
             }
 
