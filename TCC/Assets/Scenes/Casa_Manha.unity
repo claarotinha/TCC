@@ -643,7 +643,7 @@ Transform:
   m_GameObject: {fileID: 97086225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.15, y: 0.66, z: 0}
+  m_LocalPosition: {x: -0.15, y: 0.54, z: 0}
   m_LocalScale: {x: 0.99370974, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2402,7 +2402,7 @@ Transform:
   m_GameObject: {fileID: 1009137941}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.45, y: 0.22, z: 0}
+  m_LocalPosition: {x: 25.43, y: 0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5183,6 +5183,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -12.272
       objectReference: {fileID: 0}
+    - target: {fileID: 4386148939683963835, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4421622556070828372, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
       propertyPath: m_fontSize
       value: 22
@@ -5415,6 +5419,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 8836689840552876174, guid: d00783200aa5b7c4c939fb0cbe83a13b, type: 3}
+    - target: {fileID: 8498465065270607214, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

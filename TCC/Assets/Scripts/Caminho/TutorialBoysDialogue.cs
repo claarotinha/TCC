@@ -245,8 +245,7 @@ public class TutorialBoysDialogue : MonoBehaviour
         heardWhatHappened = true;
 
         ShowAnswer(
-            "A bola escapou enquanto brincávamos perto da padaria. " +
-            "Ele ficou muito triste porque não conseguimos encontrá-la."
+            "A bola escapou enquanto brincávamos perto da padaria. Ele ficou muito triste porque não conseguimos encontrá-la. "
         );
     }
 
