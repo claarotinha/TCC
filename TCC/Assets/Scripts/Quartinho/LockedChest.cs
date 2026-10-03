@@ -3,11 +3,12 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class LockedChest : MonoBehaviour
 {
-    [Header("Gerenciador da senha")]
     [SerializeField]
     private ChestCodePanelController codeController;
 
-    [Header("Investigação depois de destrancar")]
+    [SerializeField]
+    private ChestContentsController contentsController;
+
     [SerializeField]
     private ExamineObject unlockedExamine;
 
@@ -16,7 +17,7 @@ public class LockedChest : MonoBehaviour
     public bool CanInteract =>
         isActiveAndEnabled &&
         codeController != null &&
-        !codeController.Unlocked;
+        contentsController != null;
 
     private void Awake()
     {
@@ -25,7 +26,7 @@ public class LockedChest : MonoBehaviour
         if (unlockedExamine == null)
             unlockedExamine = GetComponent<ExamineObject>();
 
-        // A investigação normal só será liberada depois da senha.
+        // O novo painel assume toda a interação do baú.
         if (unlockedExamine != null)
             unlockedExamine.enabled = false;
     }
@@ -35,22 +36,21 @@ public class LockedChest : MonoBehaviour
         if (codeController == null)
             codeController = ChestCodePanelController.Instance;
 
-        if (codeController == null || unlockedExamine == null)
+        if (contentsController == null)
+            contentsController = ChestContentsController.Instance;
+
+        if (codeController == null || contentsController == null)
         {
             Debug.LogError(
-                "LockedChest: preencha Code Controller e " +
-                "Unlocked Examine no objeto " + name + ".",
+                "LockedChest: preencha Code Controller " +
+                "e Contents Controller.",
                 this
             );
-
             enabled = false;
             return;
         }
 
         codeController.ChestUnlocked += HandleUnlocked;
-
-        if (codeController.Unlocked)
-            HandleUnlocked();
     }
 
     private void Update()
@@ -66,17 +66,19 @@ public class LockedChest : MonoBehaviour
         Vector2 mousePosition =
             Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        // O chão e a personagem não interceptam esse teste.
         if (!interactionCollider.OverlapPoint(mousePosition))
             return;
 
-        codeController.Open();
+        if (codeController.Unlocked)
+            contentsController.Open();
+        else
+            codeController.Open();
     }
 
     private void HandleUnlocked()
     {
-        if (unlockedExamine != null)
-            unlockedExamine.enabled = true;
+        GameProgress.Instance?.MarkChestOpened();
+        contentsController.Open();
     }
 
     private void OnDestroy()

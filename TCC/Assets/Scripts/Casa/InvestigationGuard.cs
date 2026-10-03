@@ -9,32 +9,27 @@ public static class InvestigationGuard
         lastPanelClickFrame = Time.frameCount;
     }
 
-    public static bool Blocked
-    {
-        get
-        {
-            return PauseHelper.BlockInput() ||
-                   lastPanelClickFrame == Time.frameCount ||
-                   PanelOpen;
-        }
-    }
+    public static bool Blocked =>
+        PauseHelper.BlockInput() ||
+        lastPanelClickFrame == Time.frameCount ||
+        PanelOpen;
 
-    public static bool PanelOpen
-    {
-        get
-        {
-            return OpenPanelReason != null;
-        }
-    }
+    public static bool PanelOpen =>
+        OpenPanelReason != null;
 
     public static string OpenPanelReason
     {
         get
         {
-            // Impede investigar o cenário enquanto a senha está aberta.
+            // Conteúdo, investigação e confirmação do diário.
+            if (ChestContentsController.IsOpen)
+                return "conteúdo do baú";
+
+            // Painel de combinação do cadeado.
             if (ChestCodePanelController.IsOpen)
-             return "senha do baú";
-            // Bloqueia a investigação enquanto uma foto está aberta.
+                return "senha do baú";
+
+            // Fotografias escondidas nos objetos.
             if (HiddenPhoto.IsPanelOpen)
                 return "fotografia encontrada";
 
