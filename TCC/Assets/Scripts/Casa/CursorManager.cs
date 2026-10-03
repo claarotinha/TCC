@@ -44,7 +44,8 @@ public class CursorManager : MonoBehaviour
                 continue;
             }
 
-            if ((hit.TryGetComponent(out HiddenPhoto hiddenPhoto) && hiddenPhoto.isActiveAndEnabled) ||
+           if ((hit.TryGetComponent(out LockedChest chest) && chest.CanInteract) ||
+    (hit.TryGetComponent(out HiddenPhoto hiddenPhoto) && hiddenPhoto.isActiveAndEnabled) ||
     (hit.TryGetComponent(out ExamineObject examine) && examine.isActiveAndEnabled) ||
                 (hit.TryGetComponent(out QuartinhoExit roomExit) && roomExit.isActiveAndEnabled) ||
                 (hit.TryGetComponent(out CollectableExamine collectible) &&

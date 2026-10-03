@@ -31,6 +31,9 @@ public static class InvestigationGuard
     {
         get
         {
+            // Impede investigar o cenário enquanto a senha está aberta.
+            if (ChestCodePanelController.IsOpen)
+             return "senha do baú";
             // Bloqueia a investigação enquanto uma foto está aberta.
             if (HiddenPhoto.IsPanelOpen)
                 return "fotografia encontrada";
