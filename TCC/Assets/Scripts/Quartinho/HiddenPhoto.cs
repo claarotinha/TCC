@@ -1,4 +1,5 @@
 using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,6 +7,8 @@ using UnityEngine.UI;
 public class HiddenPhoto : MonoBehaviour
 {
     private static HiddenPhoto current;
+    private Collider2D interactionCollider;
+    private readonly List<RaycastResult> uiHits = new List<RaycastResult>();
 
     public static bool IsPanelOpen =>
         current != null &&
@@ -30,7 +33,8 @@ public class HiddenPhoto : MonoBehaviour
 
     private void Awake()
     {
-        if (GetComponent<Collider2D>() == null)
+        interactionCollider = GetComponent<Collider2D>();
+        if (interactionCollider == null)
         {
             Debug.LogError(
                 "HiddenPhoto: " + name + " precisa de um Collider2D.",
@@ -54,17 +58,49 @@ public class HiddenPhoto : MonoBehaviour
             CursorManager.Instance.SetNormal();
     }
 
-    private void OnMouseDown()
+    private void Update()
     {
-        if (InvestigationGuard.Blocked)
+        if (!Input.GetMouseButtonDown(0) || InvestigationGuard.Blocked ||
+            Camera.main == null || interactionCollider == null ||
+            !interactionCollider.enabled)
             return;
 
-        // Não investiga o cenário quando o clique está sobre a interface.
-        if (EventSystem.current != null &&
-            EventSystem.current.IsPointerOverGameObject())
+        // Testa o collider do objeto diretamente. O collider do chão ou
+        // da personagem não pode interceptar o clique como em OnMouseDown.
+        Vector2 mousePosition =
+            Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        if (!interactionCollider.OverlapPoint(mousePosition))
+            return;
+
+        // Painéis abertos são bloqueados pelo InvestigationGuard.
+        // Imagens/textos decorativos não devem bloquear o cenário inteiro.
+        if (PointerOverControl())
             return;
 
         OpenPhoto();
+    }
+
+    private bool PointerOverControl()
+    {
+        if (EventSystem.current == null)
+            return false;
+
+        var pointer = new PointerEventData(EventSystem.current)
+        {
+            position = Input.mousePosition
+        };
+
+        uiHits.Clear();
+        EventSystem.current.RaycastAll(pointer, uiHits);
+        foreach (RaycastResult hit in uiHits)
+        {
+            Selectable control = hit.gameObject.GetComponentInParent<Selectable>();
+            if (control != null && control.isActiveAndEnabled)
+                return true;
+        }
+
+        return false;
     }
 
     private void OpenPhoto()
