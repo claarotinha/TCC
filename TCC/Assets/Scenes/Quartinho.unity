@@ -2551,7 +2551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &938476242
 Transform:
   m_ObjectHideFlags: 0
@@ -2832,6 +2832,7 @@ GameObject:
   - component: {fileID: 1094572751}
   - component: {fileID: 1094572754}
   - component: {fileID: 1094572753}
+  - component: {fileID: 1094572755}
   m_Layer: 0
   m_Name: caixa
   m_TagString: Untagged
@@ -2861,7 +2862,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094572750}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
   m_Name: 
@@ -2916,6 +2917,26 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 12.117228, y: 1.8584652}
   m_EdgeRadius: 0
+--- !u!114 &1094572755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094572750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2999fa71f2ab13439378f08eec6d4f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HiddenPhoto
+  photoId: 1
+  photoSprite: {fileID: -503755357443992719, guid: ef2098e4548aa414aa11f773a7d8ddc0, type: 3}
+  inscription: Marias, 10 anos
+  photoPanel: {fileID: 1147316564}
+  panelImage: {fileID: 1413396596}
+  panelText: {fileID: 1738958203}
+  readButton: {fileID: 651252539}
+  closeButton: {fileID: 1841025543}
 --- !u!1 &1094939406
 GameObject:
   m_ObjectHideFlags: 0
@@ -4364,6 +4385,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1001 &1709830316
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5493536511727512684, guid: b6c04563513ca8f4386c9efc9f228e13, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.73308
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493536511727512684, guid: b6c04563513ca8f4386c9efc9f228e13, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.90114
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493536511727512684, guid: b6c04563513ca8f4386c9efc9f228e13, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493536511727512684, guid: b6c04563513ca8f4386c9efc9f228e13, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493536511727512684, guid: b6c04563513ca8f4386c9efc9f228e13, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493536511727512684, guid: b6c04563513ca8f4386c9efc9f228e13, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493536511727512684, guid: b6c04563513ca8f4386c9efc9f228e13, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493536511727512684, guid: b6c04563513ca8f4386c9efc9f228e13, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493536511727512684, guid: b6c04563513ca8f4386c9efc9f228e13, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493536511727512684, guid: b6c04563513ca8f4386c9efc9f228e13, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8793866522150346966, guid: b6c04563513ca8f4386c9efc9f228e13, type: 3}
+      propertyPath: m_Name
+      value: GameProgress
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b6c04563513ca8f4386c9efc9f228e13, type: 3}
 --- !u!1 &1738958201
 GameObject:
   m_ObjectHideFlags: 0
@@ -5992,3 +6070,4 @@ SceneRoots:
   - {fileID: 427388492}
   - {fileID: 8800000001}
   - {fileID: 938476242}
+  - {fileID: 1709830316}
