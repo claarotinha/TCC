@@ -44,6 +44,9 @@ public static class InvestigationGuard
 
             if (TutorialBoysDialogue.IsShowing)
                 return "diálogo dos garotos";
+            
+            if (MotherDiaryDialogue.IsShowing)
+                return "conversa sobre o diário";
 
             if (MotherDialogue.IsShowing)
                 return "diálogo da mãe";
