@@ -25,6 +25,21 @@ public class InventoryManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void ReplaceItems(System.Collections.Generic.IEnumerable<ItemData> restoredItems)
+    {
+        items.Clear();
+        if (restoredItems != null)
+            foreach (ItemData item in restoredItems)
+                if (item != null) items.Add(item);
+        SelectedItem = null;
+        OnInventoryChanged?.Invoke();
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
+    }
+
     public void AddItem(ItemData item)
     {
         if (item == null) return;

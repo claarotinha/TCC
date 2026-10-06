@@ -4,6 +4,16 @@ public class CollectableItem : MonoBehaviour
 {
     [SerializeField] private ItemData itemData;
 
+    private string progressId;
+
+    private void Awake() => progressId = GameProgress.ObjectId(gameObject);
+
+    private void Start()
+    {
+        if (GameProgress.Instance != null && GameProgress.Instance.WasObjectCollected(progressId))
+            gameObject.SetActive(false);
+    }
+
     private void OnMouseDown()
     {
         // Verifica se está examinando algo
@@ -27,6 +37,7 @@ public class CollectableItem : MonoBehaviour
 
         InventoryManager.Instance.AddItem(itemData);
         Debug.Log("✅ " + itemData.itemName + " coletado com sucesso!");
+        GameProgress.Instance?.MarkObjectCollected(progressId);
         Destroy(gameObject);
     }
 
@@ -42,3 +53,4 @@ public class CollectableItem : MonoBehaviour
             CursorManager.Instance.SetNormal();
     }
 }
+

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
@@ -8,9 +9,13 @@ using UnityEngine.SceneManagement;
 [Serializable]
 public class GameSaveFile
 {
-    public int version = 1;
+    public int version = 2;
     public string checkpointScene;
     public GameProgressData progress;
+    public List<string> inventoryItemIds = new List<string>();
+    public bool inventoryCaptured;
+    public bool hasPlayerPosition;
+    public Vector3 playerPosition;
 }
 
 public class GameSaveSystem : MonoBehaviour
@@ -24,11 +29,39 @@ public class GameSaveSystem : MonoBehaviour
 
     private bool knownTutorialCompleted;
     private bool knownChestOpened;
+    private bool knownMotherWorkCompleted;
+    private bool knownKeyCollected;
+    private bool knownQuartinhoUnlocked;
     private bool knownDiaryCollected;
     private bool knownMotherConversationCompleted;
     private bool knownNightCompleted;
 
     private bool waitingForMorningScene;
+    private string pendingCheckpointScene;
+    private GameSaveFile pendingRestore;
+    private List<ItemData> pendingInventory;
+
+    public static bool IsRestoring
+    {
+        get
+        {
+            if (GameProgress.Instance == null) return false;
+            GameSaveSystem system = GameProgress.Instance.GetComponent<GameSaveSystem>();
+            return system != null && system.pendingRestore != null;
+        }
+    }
+
+    private void Awake()
+    {
+        progress = GetComponent<GameProgress>();
+    }
+
+    // Chamado antes de LoadScene, depois de validar todos os itens do arquivo.
+    public void PrepareRestore(GameSaveFile save, List<ItemData> restoredItems)
+    {
+        pendingRestore = save;
+        pendingInventory = restoredItems;
+    }
 
     public string SavePath =>
         Path.Combine(
@@ -99,6 +132,11 @@ public class GameSaveSystem : MonoBehaviour
         bool nightJustCompleted =
             data.nightCompleted && !knownNightCompleted;
 
+        bool houseCheckpoint =
+            (data.motherWorkConversationCompleted && !knownMotherWorkCompleted) ||
+            (data.keyCollected && !knownKeyCollected) ||
+            (data.quartinhoUnlocked && !knownQuartinhoUnlocked);
+
         RememberProgress();
 
         if (!data.tutorialCompleted)
@@ -118,7 +156,7 @@ public class GameSaveSystem : MonoBehaviour
             return;
         }
 
-        if (chestJustOpened ||
+        if (houseCheckpoint || chestJustOpened ||
             diaryJustCollected ||
             conversationJustCompleted)
         {
@@ -137,6 +175,9 @@ public class GameSaveSystem : MonoBehaviour
 
         knownTutorialCompleted = data.tutorialCompleted;
         knownChestOpened = data.chestOpened;
+        knownMotherWorkCompleted = data.motherWorkConversationCompleted;
+        knownKeyCollected = data.keyCollected;
+        knownQuartinhoUnlocked = data.quartinhoUnlocked;
         knownDiaryCollected = data.diaryCollected;
 
         knownMotherConversationCompleted =
@@ -147,13 +188,61 @@ public class GameSaveSystem : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (!IsOwner ||
-            !waitingForMorningScene ||
-            mode != LoadSceneMode.Single)
-            return;
+        if (!IsOwner || mode != LoadSceneMode.Single) return;
 
-        waitingForMorningScene = false;
-        SaveCheckpoint(scene.name);
+        if (pendingRestore != null && scene.name == pendingRestore.checkpointScene)
+        {
+            StartCoroutine(RestoreAfterSceneStart(scene));
+            return;
+        }
+
+        if (waitingForMorningScene || pendingCheckpointScene == scene.name)
+        {
+            waitingForMorningScene = false;
+            pendingCheckpointScene = null;
+            StartCoroutine(SaveAfterSceneStart(scene));
+        }
+    }
+
+    private IEnumerator SaveAfterSceneStart(Scene scene)
+    {
+        // Aguarda a inicialização da personagem na cena de destino.
+        yield return null;
+        if (IsOwner && SceneManager.GetActiveScene() == scene)
+            SaveCheckpoint(scene.name);
+    }
+
+    private IEnumerator RestoreAfterSceneStart(Scene scene)
+    {
+        yield return null;
+        if (!IsOwner || SceneManager.GetActiveScene() != scene) yield break;
+
+        GameSaveFile save = pendingRestore;
+        if (InventoryManager.Instance == null)
+            new GameObject("InventoryManager").AddComponent<InventoryManager>();
+        InventoryManager.Instance.ReplaceItems(pendingInventory);
+        pendingInventory = null;
+
+        if (save.hasPlayerPosition)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null && player.scene == scene)
+            {
+                player.transform.position = save.playerPosition;
+                Rigidbody2D body = player.GetComponent<Rigidbody2D>();
+                if (body != null)
+                {
+                    body.position = new Vector2(save.playerPosition.x, save.playerPosition.y);
+                    body.linearVelocity = Vector2.zero;
+                    body.angularVelocity = 0f;
+                }
+                Physics2D.SyncTransforms();
+            }
+        }
+
+        pendingRestore = null;
+        InvestigationGuard.BlockCurrentClick();
+        Debug.Log("Checkpoint carregado: " + scene.name, this);
     }
 
     public void SaveCheckpoint(string checkpointScene)
@@ -193,11 +282,32 @@ public class GameSaveSystem : MonoBehaviour
             return false;
         }
 
+        if (!InventorySaveCatalog.TryCapture(out List<string> inventoryIds, out string inventoryError))
+        {
+            Debug.LogError(inventoryError, this);
+            ShowResult(false);
+            return false;
+        }
+
         GameSaveFile save = new GameSaveFile
         {
             checkpointScene = checkpointScene,
-            progress = progress.Data
+            progress = progress.Data,
+            inventoryItemIds = inventoryIds,
+            inventoryCaptured = true
         };
+
+        Scene activeScene = SceneManager.GetActiveScene();
+        // Quando o checkpoint aponta para outra cena, usa o ponto inicial dela.
+        if (activeScene.name == checkpointScene)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null && player.scene == activeScene)
+            {
+                save.hasPlayerPosition = true;
+                save.playerPosition = player.transform.position;
+            }
+        }
 
         string temporaryPath = SavePath + ".tmp";
 
@@ -230,6 +340,7 @@ public class GameSaveSystem : MonoBehaviour
                 this
             );
 
+            pendingCheckpointScene = activeScene.name != checkpointScene ? checkpointScene : null;
             ShowResult(true);
             return true;
         }

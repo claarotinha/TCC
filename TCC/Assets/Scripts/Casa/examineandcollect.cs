@@ -20,8 +20,16 @@ public class CollectableExamine : MonoBehaviour
         TutorialManager.Instance.CurrentStep == TutorialManager.TutorialStep.Investigate ||
         TutorialManager.Instance.CurrentStep == TutorialManager.TutorialStep.FindBall;
 
+    private string progressId;
+    private void Awake() => progressId = GameProgress.ObjectId(gameObject);
+
     void Start()
     {
+        if (GameProgress.Instance != null && GameProgress.Instance.WasObjectCollected(progressId))
+        {
+            gameObject.SetActive(false);
+            return;
+        }
         myCollider = GetComponent<Collider2D>();
         if (isTutorialBall)
             ballSprite = GetComponent<SpriteRenderer>();
@@ -214,6 +222,7 @@ public class CollectableExamine : MonoBehaviour
 
             prompt.Show(itemData, () =>
             {
+                GameProgress.Instance?.MarkObjectCollected(progressId);
                 TutorialManager.Instance?.ReportBallCollected();
                 Destroy(gameObject);
             });
@@ -228,6 +237,7 @@ public class CollectableExamine : MonoBehaviour
 
         InventoryManager.Instance.AddItem(itemData);
         Debug.Log(itemData.itemName + " coletado com sucesso!", this);
+        GameProgress.Instance?.MarkObjectCollected(progressId);
         Destroy(gameObject);
     }
 
@@ -271,3 +281,4 @@ public class CollectableExamine : MonoBehaviour
         }
     }
 }
+

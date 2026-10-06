@@ -9,7 +9,11 @@ public class QuartoBaguncaDoor : MonoBehaviour
     private static bool unlocked;
     private static GameObject openedPanel;
 
-    public static bool Unlocked => unlocked;
+    public static bool Unlocked => GameProgress.Instance != null
+        ? GameProgress.Instance.Data.quartinhoUnlocked
+        : unlocked;
+
+    public static void ResetSession() => ResetState();
     public static bool IsPanelOpen => openedPanel != null && openedPanel.activeInHierarchy;
 
     [Header("Painel de confirmação")]
@@ -55,7 +59,7 @@ public class QuartoBaguncaDoor : MonoBehaviour
 
     public void AbrirConfirmacao()
     {
-        if (!unlocked)
+        if (!Unlocked)
         {
             ExamineObject examine = GetComponent<ExamineObject>();
             if (examine != null)
@@ -91,12 +95,13 @@ public class QuartoBaguncaDoor : MonoBehaviour
     public void Unlock()
     {
         unlocked = true;
+        GameProgress.Instance?.UnlockQuartinho();
         FecharConfirmacao();
     }
 
     private void EntrarNoQuartinho()
     {
-        if (unlocked)
+        if (Unlocked)
             SceneManager.LoadScene("Quartinho");
     }
 
@@ -111,3 +116,4 @@ public class QuartoBaguncaDoor : MonoBehaviour
         InvestigationGuard.BlockCurrentClick();
     }
 }
+

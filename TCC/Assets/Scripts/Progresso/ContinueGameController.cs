@@ -17,7 +17,8 @@ public class ContinueGameController : MonoBehaviour
     private void Start()
     {
         if (continueButton == null || gameProgressPrefab == null ||
-            gameProgressPrefab.GetComponent<GameProgress>() == null)
+            gameProgressPrefab.GetComponent<GameProgress>() == null ||
+            gameProgressPrefab.GetComponent<GameSaveSystem>() == null)
         {
             Debug.LogError("ContinueGameController: configure o botão e o prefab GameProgress.", this);
             if (continueButton != null) continueButton.interactable = false;
@@ -54,7 +55,7 @@ public class ContinueGameController : MonoBehaviour
         try
         {
             save = JsonUtility.FromJson<GameSaveFile>(File.ReadAllText(SavePath));
-            if (save == null || save.version != 1 || save.progress == null ||
+            if (save == null || (save.version != 1 && save.version != 2) || save.progress == null ||
                 !save.progress.tutorialCompleted)
             {
                 error = "o arquivo não contém um checkpoint válido.";
@@ -68,7 +69,14 @@ public class ContinueGameController : MonoBehaviour
                 return false;
             }
 
-            return true;
+            if (save.hasPlayerPosition &&
+                (!Finite(save.playerPosition.x) || !Finite(save.playerPosition.y) || !Finite(save.playerPosition.z)))
+            {
+                error = "a posição salva da personagem é inválida.";
+                return false;
+            }
+
+            return InventorySaveCatalog.TryResolve(save, out _, out error);
         }
         catch (Exception exception)
         {
@@ -79,6 +87,11 @@ public class ContinueGameController : MonoBehaviour
 
     private IEnumerator LoadCheckpoint(GameSaveFile save)
     {
+        if (!InventorySaveCatalog.TryResolve(save, out List<ItemData> restoredItems, out string error))
+        {
+            Debug.LogError("Não foi possível restaurar o inventário: " + error, this);
+            yield break;
+        }
         loading = true;
         continueButton.interactable = false;
         if (UniversalPauseManager.Instance != null)
@@ -98,19 +111,27 @@ public class ContinueGameController : MonoBehaviour
         progressObject.name = "GameProgress";
         GameProgress restoredProgress = progressObject.GetComponent<GameProgress>();
         JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(save.progress), restoredProgress.Data);
-        NormalizeLists(restoredProgress.Data);
+        restoredProgress.NormalizeData();
+        if (save.version == 1)
+        {
+            // Os saves antigos ainda não registravam a chave e a porta.
+            GameProgressData data = restoredProgress.Data;
+            if (data.chestOpened || data.diaryCollected || data.foundPhotos.Count > 0)
+            {
+                data.quartinhoUnlocked = true;
+                data.motherWorkConversationCompleted = true;
+                data.keyCollected = true;
+            }
+            Debug.Log("Save antigo: inventário e posição não estavam registrados; usando o início do checkpoint.", this);
+        }
+        progressObject.GetComponent<GameSaveSystem>().PrepareRestore(save, restoredItems);
 
         if (GameManager.Instance != null)
             GameManager.Instance.ChangeState(GameState.Gameplay);
         SceneManager.LoadScene(save.checkpointScene);
     }
 
-    private static void NormalizeLists(GameProgressData data)
-    {
-        if (data.foundPhotos == null) data.foundPhotos = new List<int>();
-        if (data.readPhotos == null) data.readPhotos = new List<int>();
-        if (data.unlockedDiaryPages == null) data.unlockedDiaryPages = new List<string>();
-    }
+    private static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);
 
     private void OnDestroy()
     {
@@ -118,3 +139,4 @@ public class ContinueGameController : MonoBehaviour
             continueButton.onClick.RemoveListener(ContinueGame);
     }
 }
+

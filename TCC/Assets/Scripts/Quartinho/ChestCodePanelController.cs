@@ -30,7 +30,10 @@ public class ChestCodePanelController : MonoBehaviour
     private UnityEngine.Events.UnityAction[] upActions;
     private UnityEngine.Events.UnityAction[] downActions;
 
-    public bool Unlocked { get; private set; }
+    private bool unlockedThisSession;
+    public bool Unlocked => GameProgress.Instance != null
+        ? GameProgress.Instance.Data.chestOpened
+        : unlockedThisSession;
     public event System.Action ChestUnlocked;
 
     private bool configured;
@@ -173,7 +176,8 @@ public class ChestCodePanelController : MonoBehaviour
             return;
         }
 
-        Unlocked = true;
+        unlockedThisSession = true;
+        GameProgress.Instance?.MarkChestOpened();
         Close();
 
         Debug.Log("Baú destrancado.", this);

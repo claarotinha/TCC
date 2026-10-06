@@ -5,10 +5,18 @@ public class ItemDiscovery : MonoBehaviour
 {
     [SerializeField] private ItemData item;
     private Collider2D itemCollider;
+    private string progressId;
 
     private void Awake()
     {
         itemCollider = GetComponent<Collider2D>();
+        progressId = GameProgress.ObjectId(gameObject);
+    }
+
+    private void Start()
+    {
+        if (GameProgress.Instance != null && GameProgress.Instance.WasObjectCollected(progressId))
+            gameObject.SetActive(false);
     }
 
     private void Update()
@@ -32,6 +40,11 @@ public class ItemDiscovery : MonoBehaviour
             return;
         }
 
-        prompt.Show(item, () => Destroy(gameObject));
+        prompt.Show(item, () =>
+        {
+            GameProgress.Instance?.MarkObjectCollected(progressId);
+            Destroy(gameObject);
+        });
     }
 }
+

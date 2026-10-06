@@ -32,7 +32,12 @@ public class MotherDialogue : MonoBehaviour
 
     private bool reclamouNome = false;
 
-    public static bool FalouSobreTrabalho { get; private set; } = false;
+    private static bool talkedThisSession;
+    public static bool FalouSobreTrabalho => GameProgress.Instance != null
+        ? GameProgress.Instance.Data.motherWorkConversationCompleted
+        : talkedThisSession;
+
+    public static void ResetSession() => talkedThisSession = false;
 
     private string[] currentLines;
     private Sprite[] currentPortraits;
@@ -42,7 +47,6 @@ public class MotherDialogue : MonoBehaviour
 
     private void Start()
     {
-        FalouSobreTrabalho = false;
         motherCollider = GetComponent<Collider2D>();
 
         canvasGroup = dialoguePanel.GetComponent<CanvasGroup>();
@@ -108,7 +112,10 @@ public class MotherDialogue : MonoBehaviour
 
         if (motherCollider.OverlapPoint(mousePosition))
         {
-            OpenInitialDialogue();
+            if (FalouSobreTrabalho)
+                OpenChoices();
+            else
+                OpenInitialDialogue();
         }
     }
 
@@ -313,7 +320,8 @@ public class MotherDialogue : MonoBehaviour
                 // longa do trabalho.
                 if (currentLines[0].StartsWith("Tudo bem, mãe"))
                 {
-                    FalouSobreTrabalho = true;
+                    talkedThisSession = true;
+                    GameProgress.Instance?.MarkMotherWorkConversationCompleted();
                 }
             }
 
@@ -357,3 +365,4 @@ public class MotherDialogue : MonoBehaviour
         EsconderOpcoes();
     }
 }
+

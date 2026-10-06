@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b4e9eb51454f68b5c253a4ca03cc51, type: 3}
+  m_Name: InventorySaveCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::InventorySaveCatalog
+  entries:
+  - id: 053fd5e2f246b6d4cad6b60ec2a1d684
+    item: {fileID: 11400000, guid: 053fd5e2f246b6d4cad6b60ec2a1d684, type: 2}
+  - id: 48f3c933435bfbe449faee3d20e99340
+    item: {fileID: 11400000, guid: 48f3c933435bfbe449faee3d20e99340, type: 2}
+  - id: 6f1074d0ccac01d469b08102d6117d2b
+    item: {fileID: 11400000, guid: 6f1074d0ccac01d469b08102d6117d2b, type: 2}
+  - id: 6fc0f984454c60b48a915b9620fa24f2
+    item: {fileID: 11400000, guid: 6fc0f984454c60b48a915b9620fa24f2, type: 2}
+  - id: 774b529bb44367146ac65a5af215f775
+    item: {fileID: 11400000, guid: 774b529bb44367146ac65a5af215f775, type: 2}

@@ -15,6 +15,12 @@ public class CasaKeychain : MonoBehaviour
         examineObject = GetComponent<ExamineObject>();
     }
 
+    private void Start()
+    {
+        collected = GameProgress.Instance != null &&
+            (GameProgress.Instance.Data.keyCollected || QuartoBaguncaDoor.Unlocked);
+    }
+
     private void Update()
     {
         // Antes da conversa, o ExamineObject que já está no
@@ -52,7 +58,11 @@ public class CasaKeychain : MonoBehaviour
             return;
         }
 
-        prompt.Show(keyItem, () => collected = true);
+        prompt.Show(keyItem, () =>
+        {
+            collected = true;
+            GameProgress.Instance?.MarkKeyCollected();
+        });
     }
 
     private void OnMouseEnter()
@@ -67,3 +77,4 @@ public class CasaKeychain : MonoBehaviour
             CursorManager.Instance.SetNormal();
     }
 }
+

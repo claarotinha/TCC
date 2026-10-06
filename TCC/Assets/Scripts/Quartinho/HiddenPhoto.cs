@@ -127,7 +127,8 @@ public class HiddenPhoto : MonoBehaviour
 
         panelImage.sprite = photoSprite;
         panelImage.preserveAspect = true;
-        panelText.text = "";
+        panelText.text = GameProgress.Instance != null &&
+            GameProgress.Instance.HasReadPhoto(photoId) ? inscription : "";
 
         readButton.gameObject.SetActive(true);
         closeButton.gameObject.SetActive(true);
@@ -186,3 +187,4 @@ public class HiddenPhoto : MonoBehaviour
             ClosePhoto();
     }
 }
+

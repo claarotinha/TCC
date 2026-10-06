@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         // Se o jogo estiver pausado, não lê nenhum comando
-        if (UniversalPauseManager.IsPaused)
+        if (PauseHelper.BlockInput())
             return;
 
         HandleInput();
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // Se estiver pausado, garante que a Mari fique totalmente parada
-        if (UniversalPauseManager.IsPaused)
+        if (PauseHelper.BlockInput())
         {
             rb.linearVelocity = Vector2.zero;
             return;
