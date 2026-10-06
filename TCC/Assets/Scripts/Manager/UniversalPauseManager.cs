@@ -18,7 +18,7 @@ public class UniversalPauseManager : MonoBehaviour
     [SerializeField] private Button controlsButton;
     [SerializeField] private Button mainMenuButton;
 
-    [Header("Subpainéis — preencher nos próximos passos")]
+    [Header("Subpainéis")]
     [SerializeField] private GameObject diaryPanel;
     [SerializeField] private GameObject soundPanel;
     [SerializeField] private GameObject controlsPanel;
@@ -37,6 +37,7 @@ public class UniversalPauseManager : MonoBehaviour
                 "Existe mais de um UniversalPauseManager ativo.",
                 this
             );
+
             enabled = false;
             return;
         }
@@ -53,6 +54,7 @@ public class UniversalPauseManager : MonoBehaviour
                 "e Pause Window.",
                 this
             );
+
             enabled = false;
             return;
         }
@@ -82,6 +84,9 @@ public class UniversalPauseManager : MonoBehaviour
 
     private void Update()
     {
+        if (SleepBed.IsSleeping)
+            return;
+
         RefreshButtons();
 
         if (!Input.GetKeyDown(KeyCode.Escape))
@@ -112,6 +117,9 @@ public class UniversalPauseManager : MonoBehaviour
 
     public void TogglePause()
     {
+        if (SleepBed.IsSleeping)
+            return;
+
         if (IsPaused)
             ResumeGame();
         else
@@ -120,7 +128,10 @@ public class UniversalPauseManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (IsPaused || pausePanel == null || pauseWindow == null)
+        if (SleepBed.IsSleeping ||
+            IsPaused ||
+            pausePanel == null ||
+            pauseWindow == null)
             return;
 
         previousTimeScale = Time.timeScale;
@@ -180,7 +191,7 @@ public class UniversalPauseManager : MonoBehaviour
 
     private void OpenSubpanel(GameObject panel)
     {
-        if (!IsPaused || panel == null)
+        if (!IsPaused || panel == null || SleepBed.IsSleeping)
             return;
 
         HideSubpanels();
@@ -214,6 +225,9 @@ public class UniversalPauseManager : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        if (SleepBed.IsSleeping)
+            return;
+
         if (!Application.CanStreamedLevelBeLoaded(mainMenuScene))
         {
             Debug.LogError(

@@ -7,7 +7,8 @@ public class InventoryTabController : MonoBehaviour
 
     [SerializeField] private GameObject inventoryPanel;
 
-    public bool IsOpen => inventoryPanel != null && inventoryPanel.activeInHierarchy;
+    public bool IsOpen =>
+        inventoryPanel != null && inventoryPanel.activeInHierarchy;
 
     private void Awake()
     {
@@ -26,10 +27,11 @@ public class InventoryTabController : MonoBehaviour
 
     private void Start()
     {
-        // Permite iniciar o teste diretamente por uma cena que não tenha
-        // o objeto antigo "inventaru".
         if (InventoryManager.Instance == null)
-            new GameObject("InventoryManager").AddComponent<InventoryManager>();
+        {
+            new GameObject("InventoryManager")
+                .AddComponent<InventoryManager>();
+        }
     }
 
     private void OnEnable()
@@ -44,8 +46,15 @@ public class InventoryTabController : MonoBehaviour
 
     private void Update()
     {
-        if (inventoryPanel != null && Input.GetKeyDown(KeyCode.Tab))
+        if (SleepBed.IsSleeping || PauseHelper.BlockInput())
+            return;
+
+        if (inventoryPanel != null &&
+            Input.GetKeyDown(KeyCode.Tab))
+        {
             inventoryPanel.SetActive(!inventoryPanel.activeSelf);
+            InvestigationGuard.BlockCurrentClick();
+        }
     }
 
     public void Close()
@@ -56,7 +65,12 @@ public class InventoryTabController : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (inventoryPanel != null)
-            inventoryPanel.SetActive(false);
+        Close();
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
     }
 }

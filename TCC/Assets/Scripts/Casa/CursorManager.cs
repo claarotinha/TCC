@@ -10,48 +10,75 @@ public class CursorManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
+        SetNormal();
     }
 
     private void Update()
     {
         TutorialManager tutorial = TutorialManager.Instance;
-        if (InvestigationGuard.Blocked || Camera.main == null ||
-            (tutorial != null && tutorial.CurrentStep <= TutorialManager.TutorialStep.Run))
+
+        if (InvestigationGuard.Blocked ||
+            Camera.main == null ||
+            (tutorial != null &&
+             tutorial.CurrentStep <= TutorialManager.TutorialStep.Run))
         {
             SetNormal();
             return;
         }
 
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Collider2D[] hits = Physics2D.OverlapPointAll(mousePosition);
+        Vector2 mousePosition =
+            Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Collider2D[] hits =
+            Physics2D.OverlapPointAll(mousePosition);
+
         foreach (Collider2D hit in hits)
         {
-            TutorialInvestigationTrigger trigger = hit.GetComponent<TutorialInvestigationTrigger>();
-            if (trigger != null && trigger.IsCryingBoy && tutorial != null &&
+            TutorialInvestigationTrigger trigger =
+                hit.GetComponent<TutorialInvestigationTrigger>();
+
+            if (trigger != null &&
+                trigger.IsCryingBoy &&
+                tutorial != null &&
                 tutorial.CurrentStep < TutorialManager.TutorialStep.CryingBoy)
                 continue;
 
             if (hit.TryGetComponent(out TutorialBoysDialogue boys))
             {
-                if (tutorial != null && tutorial.CurrentStep == TutorialManager.TutorialStep.Boys &&
+                if (tutorial != null &&
+                    tutorial.CurrentStep == TutorialManager.TutorialStep.Boys &&
                     boys.isActiveAndEnabled)
                 {
                     SetLupa();
                     return;
                 }
+
                 continue;
             }
 
-           if ((hit.TryGetComponent(out LockedChest chest) && chest.CanInteract) ||
-    (hit.TryGetComponent(out HiddenPhoto hiddenPhoto) && hiddenPhoto.isActiveAndEnabled) ||
-    (hit.TryGetComponent(out ExamineObject examine) && examine.isActiveAndEnabled) ||
-                (hit.TryGetComponent(out QuartinhoExit roomExit) && roomExit.isActiveAndEnabled) ||
+            if (
+                (hit.TryGetComponent(out SleepBed bed) &&
+                 bed.CanInteract) ||
+
+                (hit.TryGetComponent(out LockedChest chest) &&
+                 chest.CanInteract) ||
+
+                (hit.TryGetComponent(out HiddenPhoto hiddenPhoto) &&
+                 hiddenPhoto.isActiveAndEnabled) ||
+
+                (hit.TryGetComponent(out ExamineObject examine) &&
+                 examine.isActiveAndEnabled) ||
+
+                (hit.TryGetComponent(out QuartinhoExit roomExit) &&
+                 roomExit.isActiveAndEnabled) ||
+
                 (hit.TryGetComponent(out CollectableExamine collectible) &&
                  collectible.CanInteract) ||
+
                 hit.GetComponent<QuartoBaguncaDoor>() != null ||
-                hit.GetComponent<MotherDialogue>() != null)
+
+                hit.GetComponent<MotherDialogue>() != null
+            )
             {
                 SetLupa();
                 return;
@@ -69,5 +96,11 @@ public class CursorManager : MonoBehaviour
     public void SetNormal()
     {
         Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
     }
 }

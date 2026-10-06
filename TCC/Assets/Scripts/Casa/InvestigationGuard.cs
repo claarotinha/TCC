@@ -21,15 +21,18 @@ public static class InvestigationGuard
     {
         get
         {
-            // Conteúdo, investigação e confirmação do diário.
+            if (SleepBed.IsSleeping)
+                return "sequência de dormir";
+
+            if (SleepBed.IsPanelOpen)
+                return "confirmação de dormir";
+
             if (ChestContentsController.IsOpen)
                 return "conteúdo do baú";
 
-            // Painel de combinação do cadeado.
             if (ChestCodePanelController.IsOpen)
                 return "senha do baú";
 
-            // Fotografias escondidas nos objetos.
             if (HiddenPhoto.IsPanelOpen)
                 return "fotografia encontrada";
 
@@ -44,7 +47,7 @@ public static class InvestigationGuard
 
             if (TutorialBoysDialogue.IsShowing)
                 return "diálogo dos garotos";
-            
+
             if (MotherDiaryDialogue.IsShowing)
                 return "conversa sobre o diário";
 
