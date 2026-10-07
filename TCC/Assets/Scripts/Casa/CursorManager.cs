@@ -54,6 +54,13 @@ public class CursorManager : MonoBehaviour
 
     private void Update()
     {
+        if (ChestContentsController.Instance != null &&
+            ChestContentsController.Instance.PointerOverItem())
+        {
+            SetLupa();
+            return;
+        }
+
         TutorialManager tutorial = TutorialManager.Instance;
 
         if (InvestigationGuard.Blocked ||
@@ -119,6 +126,9 @@ public class CursorManager : MonoBehaviour
 
                 (hit.TryGetComponent(out ItemDiscovery discovery) &&
                  discovery.isActiveAndEnabled) ||
+
+                (hit.TryGetComponent(out HouseEntrance entrance) &&
+                 entrance.CanInteract) ||
 
                 hit.GetComponent<QuartoBaguncaDoor>() != null ||
 

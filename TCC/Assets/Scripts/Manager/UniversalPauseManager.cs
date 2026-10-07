@@ -84,7 +84,7 @@ public class UniversalPauseManager : MonoBehaviour
 
     private void Update()
     {
-        if (SleepBed.IsSleeping)
+        if (SleepBed.IsSleeping || HouseEntrance.IsChangingScene)
             return;
 
         RefreshButtons();
@@ -117,7 +117,7 @@ public class UniversalPauseManager : MonoBehaviour
 
     public void TogglePause()
     {
-        if (SleepBed.IsSleeping)
+        if (SleepBed.IsSleeping || HouseEntrance.IsChangingScene)
             return;
 
         if (IsPaused)
@@ -128,7 +128,7 @@ public class UniversalPauseManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (SleepBed.IsSleeping ||
+        if (SleepBed.IsSleeping || HouseEntrance.IsChangingScene ||
             IsPaused ||
             pausePanel == null ||
             pauseWindow == null)
@@ -225,7 +225,7 @@ public class UniversalPauseManager : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        if (SleepBed.IsSleeping)
+        if (SleepBed.IsSleeping || HouseEntrance.IsChangingScene)
             return;
 
         if (!Application.CanStreamedLevelBeLoaded(mainMenuScene))

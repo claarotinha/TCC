@@ -21,6 +21,12 @@ public static class InvestigationGuard
     {
         get
         {
+            if (HouseEntrance.IsChangingScene)
+                return "entrada em casa";
+
+            if (HouseEntrance.IsPanelOpen)
+                return "confirmação de entrar em casa";
+
             if (SleepBed.IsSleeping)
                 return "sequência de dormir";
 
