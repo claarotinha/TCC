@@ -49,6 +49,8 @@ public class CollectPrompt : MonoBehaviour
         pendingItem = item;
         onCollected = afterCollect;
 
+        itemImage.gameObject.SetActive(true);
+        itemImage.color = Color.white;
         itemImage.sprite = item.icon;
         itemImage.enabled = item.icon != null;
         itemImage.preserveAspect = true;
@@ -106,3 +108,4 @@ public class CollectPrompt : MonoBehaviour
         onCollected = null;
     }
 }
+

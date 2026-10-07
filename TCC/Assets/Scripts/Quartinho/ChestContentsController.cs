@@ -29,10 +29,8 @@ public class ChestContentsController : MonoBehaviour
     [SerializeField] private Button backButton;
     [SerializeField] private Button collectDiaryButton;
 
-    [Header("Confirmação do diário")]
+    [Header("Painel antigo (mantido fechado)")]
     [SerializeField] private GameObject diaryConfirmPanel;
-    [SerializeField] private Button yesButton;
-    [SerializeField] private Button noButton;
 
     private bool configured;
     private bool diaryCollectedThisSession;
@@ -78,9 +76,7 @@ public class ChestContentsController : MonoBehaviour
 
         closeContentsButton.onClick.AddListener(Close);
         backButton.onClick.AddListener(BackToContents);
-        collectDiaryButton.onClick.AddListener(AskToCollect);
-        yesButton.onClick.AddListener(ConfirmDiary);
-        noButton.onClick.AddListener(CancelCollection);
+        collectDiaryButton.onClick.AddListener(ConfirmDiary);
 
         RefreshDiary();
     }
@@ -94,9 +90,6 @@ public class ChestContentsController : MonoBehaviour
             itemText == null ||
             backButton == null ||
             collectDiaryButton == null ||
-            diaryConfirmPanel == null ||
-            yesButton == null ||
-            noButton == null ||
             itemButtons == null || itemButtons.Length != 3 ||
             itemSprites == null || itemSprites.Length != 3 ||
             descriptions == null || descriptions.Length != 3)
@@ -160,7 +153,8 @@ public class ChestContentsController : MonoBehaviour
         itemImage.preserveAspect = true;
         itemText.text = descriptions[index];
 
-        diaryConfirmPanel.SetActive(false);
+        if (diaryConfirmPanel != null)
+            diaryConfirmPanel.SetActive(false);
         collectDiaryButton.gameObject.SetActive(index == 0);
         backButton.interactable = true;
 
@@ -173,37 +167,13 @@ public class ChestContentsController : MonoBehaviour
 
     private void BackToContents()
     {
-        if (PanelActive(diaryConfirmPanel))
-            return;
-
         Open();
-    }
-
-    private void AskToCollect()
-    {
-        if (selectedItem != 0 || DiaryCollected)
-            return;
-
-        diaryConfirmPanel.transform.SetAsLastSibling();
-        diaryConfirmPanel.SetActive(true);
-
-        collectDiaryButton.interactable = false;
-        backButton.interactable = false;
-        BlockClick();
-    }
-
-    private void CancelCollection()
-    {
-        diaryConfirmPanel.SetActive(false);
-        collectDiaryButton.interactable = true;
-        backButton.interactable = true;
-        BlockClick();
     }
 
     private void ConfirmDiary()
     {
         if (selectedItem != 0 ||
-            !PanelActive(diaryConfirmPanel) ||
+            !PanelActive(itemPanel) ||
             DiaryCollected)
             return;
 
@@ -221,7 +191,8 @@ public class ChestContentsController : MonoBehaviour
         GameProgress.Instance.MarkDiaryCollected();
         diaryCollectedThisSession = true;
 
-        diaryConfirmPanel.SetActive(false);
+        if (diaryConfirmPanel != null)
+            diaryConfirmPanel.SetActive(false);
         collectDiaryButton.gameObject.SetActive(false);
         collectDiaryButton.interactable = true;
         backButton.interactable = true;
@@ -277,9 +248,7 @@ public class ChestContentsController : MonoBehaviour
 
             closeContentsButton.onClick.RemoveListener(Close);
             backButton.onClick.RemoveListener(BackToContents);
-            collectDiaryButton.onClick.RemoveListener(AskToCollect);
-            yesButton.onClick.RemoveListener(ConfirmDiary);
-            noButton.onClick.RemoveListener(CancelCollection);
+            collectDiaryButton.onClick.RemoveListener(ConfirmDiary);
         }
 
         if (Instance == this)

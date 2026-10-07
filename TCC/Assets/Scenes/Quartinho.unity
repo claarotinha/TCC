@@ -4029,8 +4029,6 @@ MonoBehaviour:
   backButton: {fileID: 441223719}
   collectDiaryButton: {fileID: 1541362497}
   diaryConfirmPanel: {fileID: 1124719749}
-  yesButton: {fileID: 1306436427}
-  noButton: {fileID: 710773262}
 --- !u!4 &542433653
 Transform:
   m_ObjectHideFlags: 0
@@ -9964,7 +9962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1124719750
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18872,3 +18870,4 @@ SceneRoots:
   - {fileID: 925492939}
   - {fileID: 1363923016}
   - {fileID: 716626424}
+

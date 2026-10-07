@@ -11935,22 +11935,6 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8802214860481872710, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8802214860481872710, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8802214860481872710, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8802214860481872710, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11980,3 +11964,4 @@ SceneRoots:
   - {fileID: 1666423874}
   - {fileID: 778963561}
   - {fileID: 805986833}
+

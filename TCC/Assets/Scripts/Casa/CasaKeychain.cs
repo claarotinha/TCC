@@ -9,6 +9,9 @@ public class CasaKeychain : MonoBehaviour
     private ExamineObject examineObject;
     private bool collected;
 
+    public bool CanInteract => isActiveAndEnabled &&
+        MotherDialogue.FalouSobreTrabalho && keyItem != null && !collected;
+
     private void Awake()
     {
         keychainCollider = GetComponent<Collider2D>();
@@ -77,4 +80,5 @@ public class CasaKeychain : MonoBehaviour
             CursorManager.Instance.SetNormal();
     }
 }
+
 
