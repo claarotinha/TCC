@@ -3765,7 +3765,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2425645001220786861, guid: 410bcd0d621742042ab14ba9e9859689, type: 3}
+  m_Sprite: {fileID: -3846487595514147800, guid: 865bb02cce4f81b4eac528c7b57430de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3789,7 +3789,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 3e622fe267c772a46bcb030e2622b132, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0

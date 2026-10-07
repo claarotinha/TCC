@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
+    private SpriteRenderer visual;
     private Collider2D bodyCollider;
 
     private float horizontalInput;
@@ -27,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        animator.applyRootMotion = false;
+        visual = GetComponent<SpriteRenderer>();
         bodyCollider = GetComponent<Collider2D>();
     }
 
@@ -34,7 +37,13 @@ public class PlayerMovement : MonoBehaviour
     {
         // Se o jogo estiver pausado, não lê nenhum comando
         if (PauseHelper.BlockInput())
+        {
+            horizontalInput = 0f;
+            isRunning = false;
+            animator.SetBool("IsWalking", false);
+            animator.SetBool("IsRunning", false);
             return;
+        }
 
         HandleInput();
         CheckGround();
@@ -58,6 +67,9 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         isRunning = Input.GetKey(KeyCode.LeftShift);
+
+        if (visual != null && horizontalInput != 0f)
+            visual.flipX = horizontalInput < 0f;
     }
 
     private void Move()
