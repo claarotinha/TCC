@@ -14,6 +14,19 @@ public class ContinueGameController : MonoBehaviour
     private bool loading;
     private string SavePath => Path.Combine(Application.persistentDataPath, "currais-save.json");
 
+    private void Awake()
+    {
+        if (continueButton != null)
+            continueButton.gameObject.SetActive(false);
+    }
+
+    private void SetContinueAvailable(bool available)
+    {
+        if (continueButton == null) return;
+        continueButton.interactable = available;
+        continueButton.gameObject.SetActive(available);
+    }
+
     private void Start()
     {
         if (continueButton == null || gameProgressPrefab == null ||
@@ -21,11 +34,11 @@ public class ContinueGameController : MonoBehaviour
             gameProgressPrefab.GetComponent<GameSaveSystem>() == null)
         {
             Debug.LogError("ContinueGameController: configure o botão e o prefab GameProgress.", this);
-            if (continueButton != null) continueButton.interactable = false;
+            SetContinueAvailable(false);
             return;
         }
 
-        continueButton.interactable = TryReadSave(out _, out _);
+        SetContinueAvailable(TryReadSave(out _, out _));
         continueButton.onClick.AddListener(ContinueGame);
     }
 
@@ -35,7 +48,7 @@ public class ContinueGameController : MonoBehaviour
         if (!TryReadSave(out GameSaveFile save, out string error))
         {
             Debug.LogError("Não foi possível continuar: " + error, this);
-            continueButton.interactable = false;
+            SetContinueAvailable(false);
             return;
         }
 
@@ -90,6 +103,7 @@ public class ContinueGameController : MonoBehaviour
         if (!InventorySaveCatalog.TryResolve(save, out List<ItemData> restoredItems, out string error))
         {
             Debug.LogError("Não foi possível restaurar o inventário: " + error, this);
+            SetContinueAvailable(false);
             yield break;
         }
         loading = true;
@@ -139,4 +153,5 @@ public class ContinueGameController : MonoBehaviour
             continueButton.onClick.RemoveListener(ContinueGame);
     }
 }
+
 

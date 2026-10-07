@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   videoPlayer: {fileID: 240700029}
+  skipIndicator: {fileID: 1036386551}
 --- !u!1 &240700028
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,7 +431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1036386552
 RectTransform:
   m_ObjectHideFlags: 0
@@ -874,3 +875,4 @@ SceneRoots:
   - {fileID: 220167618}
   - {fileID: 240700030}
   - {fileID: 998935554}
+
