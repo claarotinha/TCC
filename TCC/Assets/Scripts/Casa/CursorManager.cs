@@ -34,7 +34,7 @@ public class CursorManager : MonoBehaviour
         Color[] sourcePixels = source.GetPixels(
             Mathf.RoundToInt(rect.x), Mathf.RoundToInt(rect.y),
             sourceWidth, sourceHeight);
-        const int size = 32;
+        const int size = 64;
         float scale = (float)size / Mathf.Max(sourceWidth, sourceHeight);
         int width = Mathf.Max(1, Mathf.RoundToInt(sourceWidth * scale));
         int height = Mathf.Max(1, Mathf.RoundToInt(sourceHeight * scale));
@@ -136,7 +136,7 @@ public class CursorManager : MonoBehaviour
     public void SetLupa()
     {
         Cursor.SetCursor(preparedLupa != null ? preparedLupa : lupaCursor,
-            Vector2.zero, CursorMode.Auto);
+            Vector2.zero, CursorMode.ForceSoftware);
     }
 
     public void SetNormal()
