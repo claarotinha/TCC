@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(10000)]
 public class CursorManager : MonoBehaviour
 {
     public static CursorManager Instance;
@@ -8,9 +10,15 @@ public class CursorManager : MonoBehaviour
     public Texture2D lupaCursor;
     [SerializeField] private Sprite lupaSprite;
     private Texture2D preparedLupa;
+    private readonly List<Collider2D> hoverHits = new List<Collider2D>();
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            enabled = false;
+            return;
+        }
         Instance = this;
         PrepareLupa();
         SetNormal();
@@ -52,7 +60,8 @@ public class CursorManager : MonoBehaviour
         preparedLupa.Apply(false, false);
     }
 
-    private void Update()
+    // A câmera e os scripts dos objetos terminam antes da decisão do cursor.
+    private void LateUpdate()
     {
         if (ChestContentsController.Instance != null &&
             ChestContentsController.Instance.PointerOverItem())
@@ -75,21 +84,30 @@ public class CursorManager : MonoBehaviour
         Vector2 mousePosition =
             Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Collider2D[] hits =
-            Physics2D.OverlapPointAll(mousePosition);
+        // Inclui triggers explicitamente e não deixa o chão interceptar a lupa.
+        hoverHits.Clear();
+        Physics2D.OverlapPoint(mousePosition, new ContactFilter2D().NoFilter(), hoverHits);
+        var hits = hoverHits;
 
         foreach (Collider2D hit in hits)
         {
+            // A porta liberada substitui a investigação inicial da casa.
+            if (TryActive(hit, out HouseEntrance readyEntrance) && readyEntrance.CanInteract)
+            {
+                SetLupa();
+                return;
+            }
             TutorialInvestigationTrigger trigger =
-                hit.GetComponent<TutorialInvestigationTrigger>();
+                hit.GetComponentInParent<TutorialInvestigationTrigger>();
 
-            if (trigger != null &&
-                trigger.IsCryingBoy &&
-                tutorial != null &&
-                tutorial.CurrentStep < TutorialManager.TutorialStep.CryingBoy)
+            if (trigger != null && tutorial != null &&
+                (trigger.IsCryingBoy
+                    ? tutorial.CurrentStep != TutorialManager.TutorialStep.CryingBoy
+                    : tutorial.CurrentStep != TutorialManager.TutorialStep.Investigate))
                 continue;
 
-            if (hit.TryGetComponent(out TutorialBoysDialogue boys))
+            TutorialBoysDialogue boys = hit.GetComponentInParent<TutorialBoysDialogue>();
+            if (boys != null)
             {
                 if (tutorial != null &&
                     tutorial.CurrentStep == TutorialManager.TutorialStep.Boys &&
@@ -103,36 +121,39 @@ public class CursorManager : MonoBehaviour
             }
 
             if (
-                (hit.TryGetComponent(out SleepBed bed) &&
+                (TryActive(hit, out SleepBed bed) &&
                  bed.CanInteract) ||
 
-                (hit.TryGetComponent(out LockedChest chest) &&
+                (TryActive(hit, out LockedChest chest) &&
                  chest.CanInteract) ||
 
-                (hit.TryGetComponent(out HiddenPhoto hiddenPhoto) &&
+                (TryActive(hit, out HiddenPhoto hiddenPhoto) &&
                  hiddenPhoto.isActiveAndEnabled) ||
 
-                (hit.TryGetComponent(out ExamineObject examine) &&
+                (TryActive(hit, out ExamineObject examine) &&
                  examine.isActiveAndEnabled) ||
 
-                (hit.TryGetComponent(out QuartinhoExit roomExit) &&
+                (TryActive(hit, out QuartinhoExit roomExit) &&
                  roomExit.isActiveAndEnabled) ||
 
-                (hit.TryGetComponent(out CollectableExamine collectible) &&
+                (TryActive(hit, out CollectableExamine collectible) &&
                  collectible.CanInteract) ||
 
-                (hit.TryGetComponent(out CasaKeychain keychain) &&
+                (TryActive(hit, out CasaKeychain keychain) &&
                  keychain.CanInteract) ||
 
-                (hit.TryGetComponent(out ItemDiscovery discovery) &&
+                (TryActive(hit, out ItemDiscovery discovery) &&
                  discovery.isActiveAndEnabled) ||
 
-                (hit.TryGetComponent(out HouseEntrance entrance) &&
+                (TryActive(hit, out HouseEntrance entrance) &&
                  entrance.CanInteract) ||
 
-                hit.GetComponent<QuartoBaguncaDoor>() != null ||
-
-                hit.GetComponent<MotherDialogue>() != null
+                TryActive(hit, out QuartoBaguncaDoor roomDoor) ||
+                TryActive(hit, out MotherDialogue mother) ||
+                TryActive(hit, out MotherDiaryDialogue diaryMother) ||
+                TryActive(hit, out NPCDialogue npc) ||
+                TryActive(hit, out PhotoCollect photo) ||
+                TryActive(hit, out OldPhoto oldPhoto)
             )
             {
                 SetLupa();
@@ -143,15 +164,28 @@ public class CursorManager : MonoBehaviour
         SetNormal();
     }
 
+    private static bool TryActive<T>(Collider2D hit, out T component) where T : Behaviour
+    {
+        component = hit.GetComponentInParent<T>();
+        return component != null && component.isActiveAndEnabled;
+    }
+
     public void SetLupa()
     {
+        if (Instance != this || !isActiveAndEnabled) return;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         Cursor.SetCursor(preparedLupa != null ? preparedLupa : lupaCursor,
             Vector2.zero, CursorMode.ForceSoftware);
     }
 
     public void SetNormal()
     {
-        Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
+        if (Instance != this) return;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        // O cursor normal é o ponteiro do sistema, nunca o PNG inteiro da lupa.
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 
     private void OnDestroy()
