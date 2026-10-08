@@ -7569,7 +7569,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Dentro do baú"
+  m_text: "Dentro do ba\xFA"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11450,7 +11450,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.34, y: 4.46}
+    oldSize: {x: 2.42, y: 4.12}
     newSize: {x: 2.34, y: 4.46}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -11507,7 +11507,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -6998868420510805783, guid: d25332ecc6a0cc64ab57a0fe38f278be, type: 3}
+  m_Sprite: {fileID: -4937645274124169306, guid: 2dc8225b6f321594892efa93f234383d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -12890,7 +12890,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Clique em um objeto para examiná-lo."
+  m_text: "Clique em um objeto para examin\xE1-lo."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 128598e5a1eaabb449da6fa20c7c3ea7, type: 2}
   m_sharedMaterial: {fileID: 2174272508325277590, guid: 128598e5a1eaabb449da6fa20c7c3ea7, type: 2}
@@ -18661,8 +18661,8 @@ Transform:
   m_GameObject: {fileID: 9000000001}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.24, y: -2.65, z: 0}
-  m_LocalScale: {x: 0.6404194, y: 0.6404194, z: 0.6404194}
+  m_LocalPosition: {x: 22.52, y: -2.21, z: 0}
+  m_LocalScale: {x: 1.2649565, y: 1.2649565, z: 1.2649565}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -18701,17 +18701,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.039959818, y: 0.010160685}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.03, y: 5.53}
+    oldSize: {x: 1.1375, y: 2.45}
     newSize: {x: 3.03, y: 5.53}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.03, y: 5.53}
+  m_Size: {x: 1.5115392, y: 2.886353}
   m_EdgeRadius: 0
 --- !u!50 &9000000004
 Rigidbody2D:
@@ -18866,4 +18866,3 @@ SceneRoots:
   - {fileID: 925492939}
   - {fileID: 1363923016}
   - {fileID: 716626424}
-

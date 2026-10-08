@@ -3637,8 +3637,8 @@ Transform:
   m_GameObject: {fileID: 716483941}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.30687, y: -2.29561, z: 0}
-  m_LocalScale: {x: 0.6404194, y: 0.6404194, z: 0.6404194}
+  m_LocalPosition: {x: -7.1066, y: -1.864, z: 0}
+  m_LocalScale: {x: 0.9927382, y: 0.9927382, z: 0.9927382}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3681,13 +3681,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.03, y: 5.53}
+    oldSize: {x: 1.1375, y: 2.45}
     newSize: {x: 3.03, y: 5.53}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.03, y: 5.53}
+  m_Size: {x: 1.359529, y: 2.725996}
   m_EdgeRadius: 0
 --- !u!50 &716483945
 Rigidbody2D:
@@ -11845,7 +11845,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1237554592160466560, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000040959072
+      value: -0.000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 2154447245069276746, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
       propertyPath: m_AnchorMax.y
@@ -11935,6 +11935,22 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8802214860481872710, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802214860481872710, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802214860481872710, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802214860481872710, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11964,4 +11980,3 @@ SceneRoots:
   - {fileID: 1666423874}
   - {fileID: 778963561}
   - {fileID: 805986833}
-
