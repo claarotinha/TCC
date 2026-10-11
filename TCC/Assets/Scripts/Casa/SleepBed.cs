@@ -114,8 +114,7 @@ public class SleepBed : MonoBehaviour
 
         questionText.text = CanSleep
             ? "Você quer dormir agora?"
-            : "Ainda preciso terminar minha investigação " +
-              "e conversar com minha mãe.";
+            : "Não quero dormir agora.";
 
         yesButton.gameObject.SetActive(CanSleep);
 
