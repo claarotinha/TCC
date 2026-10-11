@@ -68,9 +68,21 @@ public class MotherDialogue : MonoBehaviour
     // A mesma fonte é usada antes e depois de encontrar o diário.
     public void ConfigureDialogueText()
     {
-        if (dialogueText == null) return;
-        dialogueText.enableAutoSizing = false;
-        dialogueText.fontSize = 18f;
+        if (dialogueText != null)
+        {
+            dialogueText.enableAutoSizing = false;
+            dialogueText.fontSize = 18f;
+            dialogueText.alignment = TextAlignmentOptions.TopLeft;
+            dialogueText.margin = Vector4.zero;
+        }
+
+        if (characterNameText != null)
+        {
+            characterNameText.enableAutoSizing = false;
+            characterNameText.fontSize = 15f;
+            characterNameText.alignment = TextAlignmentOptions.TopLeft;
+            characterNameText.margin = Vector4.zero;
+        }
     }
 
     private void Update()
@@ -178,6 +190,7 @@ public class MotherDialogue : MonoBehaviour
 
     private void OpenChoices()
     {
+        ConfigureDialogueText();
         dialogueOpen = true;
         activeDialogue = this;
         inConversation = false;
@@ -295,6 +308,7 @@ public class MotherDialogue : MonoBehaviour
 
     private void ShowLine()
     {
+        ConfigureDialogueText();
         portraitImage.sprite = currentPortraits[currentLine];
 
         characterNameText.text =
