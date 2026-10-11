@@ -55,11 +55,7 @@ public class MotherDialogue : MonoBehaviour
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
 
-        // O texto da cena tem altura fixa; ajuste o tamanho para que as
-        // falas agrupadas caibam inteiras no painel existente.
-        dialogueText.enableAutoSizing = true;
-        dialogueText.fontSizeMin = 14;
-        dialogueText.fontSizeMax = 21;
+        ConfigureDialogueText();
 
         if (motherCollider == null)
         {
@@ -67,6 +63,14 @@ public class MotherDialogue : MonoBehaviour
                 "MotherDialogue: a mãe não possui Collider2D."
             );
         }
+    }
+
+    // A mesma fonte é usada antes e depois de encontrar o diário.
+    public void ConfigureDialogueText()
+    {
+        if (dialogueText == null) return;
+        dialogueText.enableAutoSizing = false;
+        dialogueText.fontSize = 18f;
     }
 
     private void Update()

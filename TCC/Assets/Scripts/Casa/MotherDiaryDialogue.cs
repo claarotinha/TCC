@@ -106,9 +106,7 @@ public class MotherDiaryDialogue : MonoBehaviour
         group.interactable = true;
         group.blocksRaycasts = true;
 
-        original.dialogueText.enableAutoSizing = true;
-        original.dialogueText.fontSizeMin = 14;
-        original.dialogueText.fontSizeMax = 21;
+        original.ConfigureDialogueText();
 
         bool alreadyTalked =
             GameProgress.Instance.Data.motherNightConversationCompleted;

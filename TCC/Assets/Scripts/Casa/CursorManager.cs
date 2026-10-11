@@ -42,7 +42,7 @@ public class CursorManager : MonoBehaviour
         Color[] sourcePixels = source.GetPixels(
             Mathf.RoundToInt(rect.x), Mathf.RoundToInt(rect.y),
             sourceWidth, sourceHeight);
-        const int size = 64;
+        const int size = 32;
         float scale = (float)size / Mathf.Max(sourceWidth, sourceHeight);
         int width = Mathf.Max(1, Mathf.RoundToInt(sourceWidth * scale));
         int height = Mathf.Max(1, Mathf.RoundToInt(sourceHeight * scale));
