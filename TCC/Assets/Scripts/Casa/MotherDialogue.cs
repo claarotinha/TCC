@@ -163,7 +163,7 @@ public class MotherDialogue : MonoBehaviour
         };
 
         currentPortraits = new Sprite[] { motherPortrait, mariPortrait };
-        currentNames = new string[] { "Mãe", "Mari (pensamento)" };
+        currentNames = new string[] { "Mãe", "Mari(pensamento)" };
 
         currentLine = 0;
 
@@ -197,14 +197,14 @@ public class MotherDialogue : MonoBehaviour
 
         // RECLAMAR DO NOME
         choice1.GetComponentInChildren<TMP_Text>().text =
-            "Reclamar do nome";
+            "Reclamar";
 
         choice1.onClick.RemoveAllListeners();
         choice1.onClick.AddListener(ReclamarNome);
 
         // FALAR SOBRE O TRABALHO
         choice2.GetComponentInChildren<TMP_Text>().text =
-            "Falar sobre o trabalho";
+            "O trabalho";
 
         choice2.onClick.RemoveAllListeners();
         choice2.onClick.AddListener(FalarTrabalho);

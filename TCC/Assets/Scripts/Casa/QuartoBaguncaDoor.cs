@@ -79,7 +79,7 @@ public class QuartoBaguncaDoor : MonoBehaviour
 
         TMP_Text noText = buttonNao.GetComponentInChildren<TMP_Text>();
 
-        confirmText.text = "Quer procurar vestígios?";
+        confirmText.text = "Quer entrar no quartinho?";
         buttonSim.gameObject.SetActive(true);
         buttonNao.gameObject.SetActive(true);
 

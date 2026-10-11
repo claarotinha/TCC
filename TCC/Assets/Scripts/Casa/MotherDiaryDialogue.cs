@@ -17,6 +17,7 @@ public class MotherDiaryDialogue : MonoBehaviour
 
     private bool open;
     private bool ready;
+    private bool discussedDiary;
 
     private void Start()
     {
@@ -38,6 +39,7 @@ public class MotherDiaryDialogue : MonoBehaviour
                 "do MotherDialogue e o Collider2D da mãe.",
                 this
             );
+
             enabled = false;
             return;
         }
@@ -45,9 +47,7 @@ public class MotherDiaryDialogue : MonoBehaviour
         group = original.dialoguePanel.GetComponent<CanvasGroup>();
 
         if (group == null)
-        {
             group = original.dialoguePanel.AddComponent<CanvasGroup>();
-        }
 
         ready = true;
 
@@ -66,8 +66,8 @@ public class MotherDiaryDialogue : MonoBehaviour
             GameProgress.Instance != null &&
             GameProgress.Instance.Data.diaryCollected;
 
-        // Antes do diário, mantém a conversa original.
-        // Depois, este script assume os cliques na mãe.
+        // Antes de coletar o diário, usa a conversa original.
+        // Depois da coleta, este script assume a interação.
         original.enabled = !hasDiary;
     }
 
@@ -85,23 +85,25 @@ public class MotherDiaryDialogue : MonoBehaviour
             InvestigationGuard.Blocked ||
             Camera.main == null ||
             !motherCollider.enabled)
+        {
             return;
+        }
 
         Vector2 mousePosition =
             Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (!motherCollider.OverlapPoint(mousePosition))
-            return;
-
-        OpenDialogue();
+        if (motherCollider.OverlapPoint(mousePosition))
+            OpenDialogue();
     }
 
     private void OpenDialogue()
     {
         open = true;
+        discussedDiary = false;
         current = this;
 
         original.dialoguePanel.SetActive(true);
+
         group.alpha = 1f;
         group.interactable = true;
         group.blocksRaycasts = true;
@@ -113,18 +115,42 @@ public class MotherDiaryDialogue : MonoBehaviour
 
         ShowMother(alreadyTalked
             ? "Guarde esse diário com cuidado, minha filha. " +
-              "Depois você pode continuar lendo. Já está na hora de descansar."
+              "Você encontrou uma parte da história da nossa família."
             : "E então, minha filha? Encontrou alguma coisa no quartinho?");
 
-        SetChoice(original.choice1, "Mostrar o diário", ShowDiary);
-        SetChoice(original.choice2, "Posso ler agora?", AskToRead);
-        SetChoice(original.choice3, "Voltar", Close);
+        ShowChoices();
 
         InvestigationGuard.BlockCurrentClick();
     }
 
-    private void ShowDiary()
+    private void ShowChoices()
     {
+        SetChoice(
+            original.choice1,
+            "Diário",
+            TellAboutDiary
+        );
+
+        SetChoice(
+            original.choice2,
+            "ler",
+            AskToRead
+        );
+
+        SetChoice(
+            original.choice3,
+            "Sair",
+            LeaveDialogue
+        );
+    }
+
+    private void TellAboutDiary()
+    {
+        if (!open || current != this)
+            return;
+
+        discussedDiary = true;
+
         ShowMother(
             "Mari: Encontrei um diário dentro daquele baú. " +
             "Talvez ele ajude no meu trabalho.\n\n" +
@@ -132,56 +158,29 @@ public class MotherDiaryDialogue : MonoBehaviour
             "Essas coisas fazem parte da nossa história."
         );
 
-        SetChoice(original.choice1, "E sobre a leitura?", AskToRead);
-        original.choice2.gameObject.SetActive(false);
-        SetChoice(original.choice3, "Encerrar a conversa", FinishConversation);
+        ShowChoices();
+        InvestigationGuard.BlockCurrentClick();
     }
 
     private void AskToRead()
     {
+        if (!open || current != this)
+            return;
+
+        discussedDiary = true;
+
         ShowMother(
-            "Você pode olhar um pouco, mas já está ficando tarde. " +
+            "Pode ler um pouco, minha filha, mas já está ficando tarde. " +
             "É bom ir dormir e continuar a leitura depois."
         );
 
-        SetChoice(
-            original.choice1,
-            "Vou olhar o diário primeiro",
-            ChooseRead
-        );
-
-        SetChoice(
-            original.choice2,
-            "Tudo bem, vou descansar",
-            FinishConversation
-        );
-
-        original.choice3.gameObject.SetActive(false);
-    }
-
-    private void ChooseRead()
-    {
-        RecordConversation();
-        Close();
-
-        // A leitura continua pelo menu de pausa.
-        if (UniversalPauseManager.Instance != null)
-            UniversalPauseManager.Instance.PauseGame();
-    }
-
-    private void FinishConversation()
-    {
-        RecordConversation();
-        Close();
-    }
-
-    private void RecordConversation()
-    {
-        GameProgress.Instance.MarkMotherNightConversationCompleted();
+        ShowChoices();
+        InvestigationGuard.BlockCurrentClick();
     }
 
     private void ShowMother(string text)
     {
+        original.ConfigureDialogueText();
         original.portraitImage.sprite = original.motherPortrait;
         original.characterNameText.text = "Mãe";
         original.dialogueText.text = text;
@@ -193,13 +192,31 @@ public class MotherDiaryDialogue : MonoBehaviour
         UnityEngine.Events.UnityAction action)
     {
         button.gameObject.SetActive(true);
+        button.interactable = true;
 
-        TMP_Text text = button.GetComponentInChildren<TMP_Text>(true);
+        TMP_Text text =
+            button.GetComponentInChildren<TMP_Text>(true);
+
         if (text != null)
             text.text = label;
 
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(action);
+    }
+
+    private void LeaveDialogue()
+    {
+        if (!open || current != this)
+            return;
+
+        // Só registra a conversa se o jogador falou sobre o diário.
+        if (discussedDiary && GameProgress.Instance != null)
+        {
+            GameProgress.Instance
+                .MarkMotherNightConversationCompleted();
+        }
+
+        Close();
     }
 
     private void Close()
@@ -213,6 +230,7 @@ public class MotherDiaryDialogue : MonoBehaviour
         original.choice3.gameObject.SetActive(false);
 
         open = false;
+        discussedDiary = false;
 
         if (current == this)
             current = null;
