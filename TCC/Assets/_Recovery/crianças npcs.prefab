@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1364135142140851486}
   - component: {fileID: 3065175605707982594}
   - component: {fileID: 5866004182694568655}
+  - component: {fileID: 870000000000000001}
   m_Layer: 0
   m_Name: "crian\xE7as npcs"
   m_TagString: Untagged
@@ -199,3 +200,29 @@ MonoBehaviour:
   onUsed:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &870000000000000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6740655653079933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05f2b8c579c6484890d950659397625a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoysTaskVisual
+  noticeFrames:
+  - {fileID: 710000000000000001, guid: bd0c1c85a5bb24d4b80533f7d7cce536, type: 3}
+  - {fileID: 710000000000000002, guid: 451ced98d99aab24d9493ef57ee27f94, type: 3}
+  - {fileID: 710000000000000003, guid: ac569e7664da6d847a97610594759983, type: 3}
+  - {fileID: 710000000000000004, guid: f85cfc36136ac5b4b9c0e9c0f3ca02ed, type: 3}
+  - {fileID: 710000000000000005, guid: fd24416c3e956e6409552304ea3fe889, type: 3}
+  happyFrames:
+  - {fileID: 720000000000000001, guid: a1d19dd2db4ee87459962f741ef11b2d, type: 3}
+  - {fileID: 720000000000000002, guid: 537100947e98faf448b807849485b5eb, type: 3}
+  - {fileID: 720000000000000003, guid: edb62e783bbe7ed4e99dd9c8b080c91c, type: 3}
+  - {fileID: 720000000000000004, guid: 50184554a418e464098a027e31c579d2, type: 3}
+  - {fileID: 720000000000000005, guid: 1010cd017666186428ff4624ff1a13fb, type: 3}
+  - {fileID: 720000000000000006, guid: ab00039c3c340ab4fa4ee85f20156e8c, type: 3}
+  framesPerSecond: 7.5

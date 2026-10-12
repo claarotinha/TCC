@@ -71,7 +71,7 @@ public class MotherDialogue : MonoBehaviour
         if (dialogueText != null)
         {
             dialogueText.enableAutoSizing = false;
-            dialogueText.fontSize = 18f;
+            dialogueText.fontSize = 16f;
             dialogueText.alignment = TextAlignmentOptions.TopLeft;
             dialogueText.margin = Vector4.zero;
         }

@@ -153,7 +153,7 @@ public class MotherDiaryDialogue : MonoBehaviour
 
         ShowMother(
             "Mari: Encontrei um diário dentro daquele baú. " +
-            "Talvez ele ajude no meu trabalho.\n\n" +
+            "Talvez ele ajude no meu trabalho.\n" +
             "Mãe: Pode ser, minha filha. Guarde com cuidado. " +
             "Essas coisas fazem parte da nossa história."
         );

@@ -19,6 +19,12 @@ public class QuartinhoExit : MonoBehaviour
     private void Awake()
     {
         doorCollider = GetComponent<Collider2D>();
+        if (exitPanel != null)
+        {
+            exitPanel.SetActive(false);
+            Canvas canvas = exitPanel.GetComponentInParent<Canvas>(true);
+            if (canvas != null) canvas.gameObject.SetActive(true);
+        }
     }
 
     private void Start()
@@ -45,7 +51,7 @@ public class QuartinhoExit : MonoBehaviour
             Camera.main == null ||
             doorCollider == null ||
             exitPanel == null ||
-            exitPanel.activeSelf ||
+            exitPanel.activeInHierarchy ||
             InvestigationGuard.Blocked)
             return;
 
@@ -58,7 +64,9 @@ public class QuartinhoExit : MonoBehaviour
         if (exitText != null)
             exitText.text = "Você quer voltar para a casa?";
 
+        exitPanel.transform.SetAsLastSibling();
         exitPanel.SetActive(true);
+        InvestigationGuard.BlockCurrentClick();
         openedPanel = exitPanel;
     }
 
@@ -75,6 +83,11 @@ public class QuartinhoExit : MonoBehaviour
 
         if (openedPanel == exitPanel)
             openedPanel = null;
+    }
+
+    private void OnDestroy()
+    {
+        if (openedPanel == exitPanel) openedPanel = null;
     }
 
     private void OnMouseEnter()

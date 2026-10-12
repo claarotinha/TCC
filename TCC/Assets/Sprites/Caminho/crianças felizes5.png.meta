@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: -7118297005992144600
     second: "crian\xE7as felizes5_2"
+  - first:
+      213: 720000000000000005
+    second: GrupoFeliz
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -43,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -81,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -94,7 +97,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -171,6 +174,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: GrupoFeliz
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 159
+        width: 302
+        height: 312
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4358974358974359}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0202020202020202020202020202005
+      internalID: 720000000000000005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -185,6 +210,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      GrupoFeliz: 720000000000000005
       "crian\xE7as felizes5_0": 7161167673561771326
       "crian\xE7as felizes5_1": -4637233544739861845
       "crian\xE7as felizes5_2": -7118297005992144600
