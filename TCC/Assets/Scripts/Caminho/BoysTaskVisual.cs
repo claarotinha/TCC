@@ -7,6 +7,9 @@ public class BoysTaskVisual : MonoBehaviour
     [SerializeField] private Sprite[] happyFrames;
     [SerializeField] private float framesPerSecond = 7.5f;
 
+    [SerializeField] private float noticeScale = 0.18f;
+    [SerializeField] private float noticeGap = 0.03f;
+
     private SpriteRenderer boys;
     private Animator originalAnimation;
     private SpriteRenderer notice;
@@ -19,7 +22,7 @@ public class BoysTaskVisual : MonoBehaviour
         originalAnimation = GetComponent<Animator>();
         GameObject marker = new GameObject("AvisoTask");
         marker.transform.SetParent(transform, false);
-        marker.transform.localScale = Vector3.one * 0.35f;
+        marker.transform.localScale = Vector3.one * noticeScale;
         notice = marker.AddComponent<SpriteRenderer>();
         notice.sharedMaterial = boys.sharedMaterial;
         notice.sortingLayerID = boys.sortingLayerID;
@@ -39,20 +42,13 @@ public class BoysTaskVisual : MonoBehaviour
         if (!UniversalPauseManager.IsPaused)
             elapsed += Time.deltaTime;
 
-        // Completed só acontece depois de devolver a bola e fechar o agradecimento.
-        bool completed = tutorial.IsCompleted;
-        if (completed && !happy)
-        {
-            happy = true;
-            elapsed = 0f;
-            if (originalAnimation != null)
-                originalAnimation.enabled = false;
-        }
+        if (tutorial.IsCompleted && !happy)
+            BallDelivered();
 
         if (happy && happyFrames != null && happyFrames.Length > 0)
             boys.sprite = happyFrames[Frame(happyFrames.Length)];
 
-        bool showNotice = !completed &&
+        bool showNotice = !happy &&
             tutorial.CurrentStep >= TutorialManager.TutorialStep.Boys &&
             noticeFrames != null && noticeFrames.Length > 0;
 
@@ -63,8 +59,20 @@ public class BoysTaskVisual : MonoBehaviour
         Bounds bounds = boys.bounds;
         notice.transform.position = new Vector3(
             bounds.center.x,
-            bounds.max.y + 0.2f + notice.bounds.extents.y,
+            bounds.max.y + noticeGap + notice.bounds.extents.y,
             transform.position.z);
+    }
+
+    public void BallDelivered()
+    {
+        if (happy) return;
+        happy = true;
+        elapsed = 0f;
+        if (originalAnimation != null)
+            originalAnimation.enabled = false;
+        if (happyFrames != null && happyFrames.Length > 0)
+            boys.sprite = happyFrames[0];
+        notice.gameObject.SetActive(false);
     }
 
     private int Frame(int count) =>

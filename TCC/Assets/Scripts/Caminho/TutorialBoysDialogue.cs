@@ -297,6 +297,7 @@ public class TutorialBoysDialogue : MonoBehaviour
             panelGroup == null)
             return;
 
+        GetComponent<BoysTaskVisual>()?.BallDelivered();
         InventoryTabController.Instance?.Close();
 
         current = this;
