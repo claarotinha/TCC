@@ -66,6 +66,17 @@ public class TutorialManager : MonoBehaviour
         if (UniversalPauseManager.IsPaused || NPCDialogue.IsShowing())
             return;
 
+        // A última investigação só termina depois de fechar sua mensagem.
+        // Isso funciona com qualquer ordem dos cinco objetos, inclusive a bola por último.
+        if (CurrentStep == TutorialStep.Investigate &&
+            investigationTargets != null &&
+            investigated.Count == investigationTargets.Length &&
+            !ExamineObject.IsShowing() && !CollectableExamine.IsShowing())
+        {
+            SetStep(TutorialStep.CryingBoy);
+            return;
+        }
+
         bool walking = Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0f;
 
         if (CurrentStep == TutorialStep.Move && walking)
@@ -114,10 +125,7 @@ public class TutorialManager : MonoBehaviour
         Debug.Log("Tutorial: " + target.name + " investigado (" +
                   investigated.Count + "/" + investigationTargets.Length + ").", target);
 #endif
-        if (investigated.Count == investigationTargets.Length)
-            SetStep(TutorialStep.CryingBoy);
-        else
-            ShowInvestigationProgress();
+        ShowInvestigationProgress();
     }
 
     public void ReportCryingBoy()

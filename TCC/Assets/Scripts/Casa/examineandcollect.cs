@@ -14,7 +14,6 @@ public class CollectableExamine : MonoBehaviour
     private bool isShowing = false;
     private static CollectableExamine currentObject = null;
     private Collider2D myCollider;
-    private SpriteRenderer ballSprite;
 
     public bool CanInteract => !isTutorialBall || TutorialManager.Instance == null ||
         TutorialManager.Instance.CurrentStep == TutorialManager.TutorialStep.Investigate ||
@@ -31,8 +30,6 @@ public class CollectableExamine : MonoBehaviour
             return;
         }
         myCollider = GetComponent<Collider2D>();
-        if (isTutorialBall)
-            ballSprite = GetComponent<SpriteRenderer>();
 
         if (examinePanel != null)
         {
@@ -48,11 +45,14 @@ public class CollectableExamine : MonoBehaviour
         {
             bool canFindBall = tutorial.CurrentStep == TutorialManager.TutorialStep.Investigate ||
                                tutorial.CurrentStep == TutorialManager.TutorialStep.FindBall;
-            if (ballSprite != null)
-                ballSprite.enabled = canFindBall;
-
+            // A bola permanece no cenário até a confirmação da coleta.
+            // Fora destas etapas ela apenas deixa de aceitar investigação.
             if (!canFindBall)
+            {
+                if (isShowing && currentObject == this)
+                    HidePanel();
                 return;
+            }
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -201,6 +201,11 @@ public class CollectableExamine : MonoBehaviour
 
     private void CollectItem()
     {
+        // A mensagem inicial nunca concede o item, mesmo por outro caminho de clique.
+        if (isTutorialBall &&
+            (TutorialManager.Instance == null ||
+             TutorialManager.Instance.CurrentStep != TutorialManager.TutorialStep.FindBall))
+            return;
         if (itemData == null)
         {
             Debug.LogWarning("⚠ ItemData não atribuído em: " + gameObject.name);
