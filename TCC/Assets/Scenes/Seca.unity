@@ -10247,6 +10247,7 @@ GameObject:
   - component: {fileID: 2125664714}
   - component: {fileID: 2125664713}
   - component: {fileID: 2125664712}
+  - component: {fileID: 2125664715}
   m_Layer: 0
   m_Name: Mesa
   m_TagString: Untagged
@@ -10361,13 +10362,13 @@ MonoBehaviour:
   onMealCompleted:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2125664709}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 2125664715}
+        m_TargetAssemblyTypeName: SecaMealProgress, Assembly-CSharp
+        m_MethodName: RegisterMeal
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -10434,6 +10435,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2125664715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125664709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087e3570b7598bf4e955ae47c21d4481, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SecaMealProgress
+  mealDialogue: {fileID: 2125664712}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
