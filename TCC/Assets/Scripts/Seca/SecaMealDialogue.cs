@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(ExamineObject))]
@@ -27,15 +28,28 @@ public class SecaMealDialogue : MonoBehaviour
     [SerializeField] private Sprite mariquinhaPortrait;
     [SerializeField] private Sprite mariPortrait;
 
+    [Header("Escolhas da refeição")]
+    [SerializeField] private Button[] choiceButtons = new Button[3];
+
+    [Header("Após terminar a refeição")]
+    [SerializeField] private UnityEvent onMealCompleted = new UnityEvent();
+
     public bool IntroCompleted { get; private set; }
+    public bool MealCompleted { get; private set; }
+
+    // -1: sem escolha; 0: comer; 1: Baleia; 2: irmã.
+    public int FoodChoiceIndex { get; private set; } = -1;
 
     private ExamineObject tableInteraction;
     private Rigidbody2D playerBody;
+    private UnityAction[] choiceActions;
 
     private bool configured;
     private bool started;
     private bool running;
     private bool waitingForSilence;
+    private bool showingChoices;
+    private bool showingResponse;
     private bool movementWasEnabled;
     private bool movementLocked;
 
@@ -44,19 +58,8 @@ public class SecaMealDialogue : MonoBehaviour
 
     private readonly string[] names =
     {
-        "Pai",
-        "Mãe",
-        "Pai",
-        "Mãe",
-        "Pai",
-        "Mãe",
-        "Pai",
-        "Mãe",
-        "Pai",
-        "Mãe",
-        "Pai",
-        "Mariquinha",
-        "Mãe",
+        "Pai", "Mãe", "Pai", "Mãe", "Pai", "Mãe", "Pai",
+        "Mãe", "Pai", "Mãe", "Pai", "Mariquinha", "Mãe",
         "Mari (pensamento)"
     };
 
@@ -97,6 +100,13 @@ public class SecaMealDialogue : MonoBehaviour
         "O que eu faço com a pouca comida que me resta?"
     };
 
+    private readonly string[] choiceLabels =
+    {
+        "Comer tudo",
+        "Dividir com Baleia",
+        "Dividir com a irmã"
+    };
+
     private void Awake()
     {
         tableInteraction = GetComponent<ExamineObject>();
@@ -112,15 +122,52 @@ public class SecaMealDialogue : MonoBehaviour
             lugarMari != null &&
             dialogueUI != null &&
             dialoguePanel != null &&
+            choicesContainer != null &&
             characterNameText != null &&
-            dialogueText != null;
+            dialogueText != null &&
+            choiceButtons != null &&
+            choiceButtons.Length == 3;
+
+        if (configured)
+        {
+            for (int i = 0; i < choiceButtons.Length; i++)
+            {
+                if (choiceButtons[i] == null ||
+                    choiceButtons[i].GetComponentInChildren<TMP_Text>(true) == null)
+                {
+                    configured = false;
+                    break;
+                }
+
+                for (int j = 0; j < i; j++)
+                {
+                    if (choiceButtons[i] == choiceButtons[j])
+                        configured = false;
+                }
+            }
+        }
 
         if (!configured)
         {
             Debug.LogError(
-                "SecaMealDialogue: preencha as referências da mesa no Inspector.",
+                "SecaMealDialogue: confira as referências e os três botões distintos.",
                 this
             );
+            return;
+        }
+
+        choiceActions = new UnityAction[3];
+
+        for (int i = 0; i < choiceButtons.Length; i++)
+        {
+            int index = i;
+
+            choiceButtons[i]
+                .GetComponentInChildren<TMP_Text>(true)
+                .text = choiceLabels[i];
+
+            choiceActions[i] = () => SelectFood(index);
+            choiceButtons[i].onClick.AddListener(choiceActions[i]);
         }
     }
 
@@ -135,22 +182,33 @@ public class SecaMealDialogue : MonoBehaviour
             tableInteraction.enabled = true;
         }
 
-        if (!running || waitingForSilence || Time.timeScale == 0f)
-            return;
-
-        if (Time.frameCount > displayedFrame &&
-            Input.GetMouseButtonDown(0))
+        if (!running || waitingForSilence ||
+            showingChoices || Time.timeScale == 0f)
         {
-            currentLine++;
-
-            if (currentLine >= lines.Length)
-            {
-                FinishIntro();
-                return;
-            }
-
-            ShowLine();
+            return;
         }
+
+        if (Time.frameCount <= displayedFrame ||
+            !Input.GetMouseButtonDown(0))
+        {
+            return;
+        }
+
+        if (showingResponse)
+        {
+            FinishMeal();
+            return;
+        }
+
+        currentLine++;
+
+        if (currentLine >= lines.Length)
+        {
+            ShowChoices();
+            return;
+        }
+
+        ShowLine();
     }
 
     private void BeginMeal()
@@ -168,13 +226,13 @@ public class SecaMealDialogue : MonoBehaviour
         movementLocked = true;
 
         playerBody = playerMovement.GetComponent<Rigidbody2D>();
-
         Vector3 destination = lugarMari.position;
 
         if (playerBody != null)
         {
             playerBody.linearVelocity = Vector2.zero;
-            playerBody.position = new Vector2(destination.x, destination.y);
+            playerBody.position =
+                new Vector2(destination.x, destination.y);
         }
 
         playerMovement.transform.position = destination;
@@ -193,8 +251,7 @@ public class SecaMealDialogue : MonoBehaviour
         ShowCanvasGroup(dialogueUI);
         ShowCanvasGroup(dialoguePanel);
 
-        if (choicesContainer != null)
-            choicesContainer.SetActive(false);
+        choicesContainer.SetActive(false);
 
         running = true;
         StartCoroutine(InitialSilence());
@@ -221,33 +278,105 @@ public class SecaMealDialogue : MonoBehaviour
     {
         characterNameText.text = names[currentLine];
         dialogueText.text = lines[currentLine];
+        SetPortrait(names[currentLine]);
+        displayedFrame = Time.frameCount;
+    }
 
-        if (portraitImage != null)
+    private void ShowChoices()
+    {
+        IntroCompleted = true;
+        showingChoices = true;
+
+        choicesContainer.SetActive(true);
+        ShowCanvasGroup(choicesContainer);
+
+        foreach (Button button in choiceButtons)
         {
-            Sprite portrait = null;
+            button.gameObject.SetActive(true);
+            button.interactable = true;
+        }
+    }
 
-            switch (names[currentLine])
-            {
-                case "Pai":
-                    portrait = paiPortrait;
-                    break;
-                case "Mãe":
-                    portrait = maePortrait;
-                    break;
-                case "Mariquinha":
-                    portrait = mariquinhaPortrait;
-                    break;
-                default:
-                    portrait = mariPortrait;
-                    break;
-            }
+    private void SelectFood(int index)
+    {
+        if (!running || !showingChoices ||
+            index < 0 || index >= 3 || Time.timeScale == 0f)
+        {
+            return;
+        }
 
-            portraitImage.sprite = portrait;
-            portraitImage.enabled = portrait != null;
-            portraitImage.preserveAspect = true;
+        FoodChoiceIndex = index;
+        showingChoices = false;
+        showingResponse = true;
+
+        choicesContainer.SetActive(false);
+
+        switch (index)
+        {
+            case 0:
+                characterNameText.text = "Mari (pensamento)";
+                dialogueText.text =
+                    "Estou com muita fome… Vou comer o que restou.";
+                SetPortrait("Mari");
+                break;
+
+            case 1:
+                characterNameText.text = "Mari";
+                dialogueText.text =
+                    "Vem, Baleia. Tem um pedacinho para você também.";
+                SetPortrait("Mari");
+                break;
+
+            case 2:
+                characterNameText.text = "Mariquinha";
+                dialogueText.text =
+                    "Obrigada, Zefinha… Pode ficar com um pouco do meu também.";
+                SetPortrait("Mariquinha");
+                break;
         }
 
         displayedFrame = Time.frameCount;
+    }
+
+    private void FinishMeal()
+    {
+        running = false;
+        showingResponse = false;
+        MealCompleted = true;
+
+        choicesContainer.SetActive(false);
+        dialogueUI.SetActive(false);
+
+        RestoreMovement();
+        onMealCompleted.Invoke();
+    }
+
+    private void SetPortrait(string speaker)
+    {
+        if (portraitImage == null)
+            return;
+
+        Sprite portrait;
+
+        switch (speaker)
+        {
+            case "Pai":
+                portrait = paiPortrait;
+                break;
+            case "Mãe":
+                portrait = maePortrait;
+                break;
+            case "Mariquinha":
+                portrait = mariquinhaPortrait;
+                break;
+            default:
+                portrait = mariPortrait;
+                break;
+        }
+
+        portraitImage.sprite = portrait;
+        portraitImage.enabled = portrait != null;
+        portraitImage.preserveAspect = true;
     }
 
     private void FixedUpdate()
@@ -258,14 +387,6 @@ public class SecaMealDialogue : MonoBehaviour
         Vector2 velocity = playerBody.linearVelocity;
         velocity.x = 0f;
         playerBody.linearVelocity = velocity;
-    }
-
-    private void FinishIntro()
-    {
-        running = false;
-        IntroCompleted = true;
-        dialogueUI.SetActive(false);
-        RestoreMovement();
     }
 
     private void RestoreMovement()
@@ -295,10 +416,17 @@ public class SecaMealDialogue : MonoBehaviour
     {
         StopAllCoroutines();
 
-        if (running && dialogueUI != null)
-            dialogueUI.SetActive(false);
+        if (running)
+        {
+            if (choicesContainer != null)
+                choicesContainer.SetActive(false);
+
+            if (dialogueUI != null)
+                dialogueUI.SetActive(false);
+        }
 
         running = false;
+        showingChoices = false;
         RestoreMovement();
     }
 
@@ -306,5 +434,18 @@ public class SecaMealDialogue : MonoBehaviour
     {
         if (tableInteraction != null)
             tableInteraction.Opened -= BeginMeal;
+
+        if (choiceActions == null || choiceButtons == null)
+            return;
+
+        for (int i = 0; i < choiceActions.Length; i++)
+        {
+            if (i < choiceButtons.Length &&
+                choiceButtons[i] != null &&
+                choiceActions[i] != null)
+            {
+                choiceButtons[i].onClick.RemoveListener(choiceActions[i]);
+            }
+        }
     }
 }
