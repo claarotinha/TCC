@@ -94,6 +94,13 @@ public class PlayerMovement : MonoBehaviour
         );
     }
 
+    // A Seca troca de ambiente sem recarregar a cena.
+    public void SetMovementBounds(Collider2D bounds)
+    {
+        movementBounds = bounds;
+        movementBackground = new SpriteRenderer[0];
+    }
+
     private void KeepInsideBounds()
     {
         Bounds bounds = default;
@@ -145,3 +152,4 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsRunning", running);
     }
 }
+

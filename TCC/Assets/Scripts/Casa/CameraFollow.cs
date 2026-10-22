@@ -46,6 +46,19 @@ public class CameraFollow : MonoBehaviour
             transform.position = new Vector3(ClampX(target.position.x), fixedY, fixedZ);
     }
 
+    // Atualiza o limite ao trocar de ambiente na mesma cena.
+    public void SetLevelBounds(Collider2D bounds, bool snapToTarget = true)
+    {
+        levelBounds = bounds;
+        hasBounds = bounds != null;
+        if (hasBounds)
+            cameraBounds = bounds.bounds;
+        if (sceneCamera == null)
+            sceneCamera = GetComponent<Camera>();
+        if (snapToTarget && target != null)
+            transform.position = new Vector3(ClampX(target.position.x), fixedY, fixedZ);
+    }
+
     private float ClampX(float x)
     {
         if (!hasBounds || sceneCamera == null || !sceneCamera.orthographic)

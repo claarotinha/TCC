@@ -14,6 +14,8 @@ public class SecaFarewellSequence : MonoBehaviour
     [SerializeField] private GameObject despedidaCasa;
     [SerializeField] private Transform lugarMariDespedida;
 
+    [SerializeField] private Collider2D despedidaBounds;
+
     [Header("Personagem")]
     [SerializeField] private PlayerMovement playerMovement;
 
@@ -106,6 +108,8 @@ public class SecaFarewellSequence : MonoBehaviour
 
         despedidaCasa.SetActive(true);
         salaCozinha.SetActive(false);
+        if (despedidaBounds != null)
+            playerMovement.SetMovementBounds(despedidaBounds);
 
         Vector3 destination = lugarMariDespedida.position;
 
@@ -125,6 +129,12 @@ public class SecaFarewellSequence : MonoBehaviour
             visual.flipX = false;
 
         Physics2D.SyncTransforms();
+        if (despedidaBounds != null && Camera.main != null)
+        {
+            CameraFollow follow = Camera.main.GetComponent<CameraFollow>();
+            if (follow != null)
+                follow.SetLevelBounds(despedidaBounds);
+        }
 
         // Aguarda a câmera existente acompanhar a nova posição.
         yield return new WaitForSeconds(0.8f);
