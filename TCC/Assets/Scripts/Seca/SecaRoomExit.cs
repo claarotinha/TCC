@@ -15,8 +15,6 @@ public class SecaRoomExit : MonoBehaviour
     [SerializeField] private Transform entradaSala;
     [SerializeField] private PlayerMovement playerMovement;
 
-    [SerializeField] private Collider2D salaBounds;
-
     [Header("Ao entrar na sala")]
     [SerializeField] private UnityEvent onEnteredRoom = new UnityEvent();
 
@@ -118,8 +116,6 @@ public class SecaRoomExit : MonoBehaviour
         examineObject.HidePanel();
 
         salaCozinha.SetActive(true);
-        if (salaBounds != null)
-            playerMovement.SetMovementBounds(salaBounds);
 
         Vector3 destination = entradaSala.position;
 
@@ -134,13 +130,6 @@ public class SecaRoomExit : MonoBehaviour
         playerMovement.transform.position = destination;
 
         quarto.SetActive(false);
-        Physics2D.SyncTransforms();
-        if (salaBounds != null && Camera.main != null)
-        {
-            CameraFollow follow = Camera.main.GetComponent<CameraFollow>();
-            if (follow != null)
-                follow.SetLevelBounds(salaBounds);
-        }
 
         if (CursorManager.Instance != null)
             CursorManager.Instance.SetNormal();
