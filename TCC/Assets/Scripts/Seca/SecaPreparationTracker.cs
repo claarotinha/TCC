@@ -22,6 +22,7 @@ public class SecaPreparationTracker : MonoBehaviour
         CollectedCount == 5;
 
     private bool configured;
+    private bool objectiveHidden;
     private bool requestWasCompleted;
 
     private void OnEnable()
@@ -86,13 +87,21 @@ public class SecaPreparationTracker : MonoBehaviour
             Refresh();
     }
 
+    public void HideObjective()
+    {
+        objectiveHidden = true;
+
+        if (objectiveText != null)
+            objectiveText.gameObject.SetActive(false);
+    }
+
     private void Refresh()
     {
         if (!configured)
             return;
 
         requestWasCompleted = preparationRequest.RequestCompleted;
-        objectiveText.gameObject.SetActive(requestWasCompleted);
+        objectiveText.gameObject.SetActive(requestWasCompleted && !objectiveHidden);
 
         CollectedCount = 0;
         bool[] found = new bool[requiredItems.Length];
