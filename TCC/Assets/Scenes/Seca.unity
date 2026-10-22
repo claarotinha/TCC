@@ -6947,7 +6947,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1912402517}
         m_TargetAssemblyTypeName: UniversalPauseManager, Assembly-CSharp
         m_MethodName: BackToPause
         m_Mode: 1
@@ -7820,7 +7820,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 479344094161c0740a7c1d933ed41f9b, type: 2}
   - {fileID: 11400000, guid: 2dad17489245bec4eb0392999801e8bd, type: 2}
   - {fileID: 11400000, guid: 290faf3e464dc4c4f97c0f50675e5395, type: 2}
-  objectiveText: {fileID: 0}
+  objectiveText: {fileID: 1775869855}
 --- !u!1 &1345951627
 GameObject:
   m_ObjectHideFlags: 0
@@ -9686,7 +9686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -9726,7 +9726,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -10210,7 +10210,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1912402517}
         m_TargetAssemblyTypeName: UniversalPauseManager, Assembly-CSharp
         m_MethodName: BackToPause
         m_Mode: 1
@@ -10513,7 +10513,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1912402517}
         m_TargetAssemblyTypeName: UniversalPauseManager, Assembly-CSharp
         m_MethodName: BackToPause
         m_Mode: 1
