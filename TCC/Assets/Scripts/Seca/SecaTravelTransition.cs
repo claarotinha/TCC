@@ -50,6 +50,17 @@ public class SecaTravelTransition : MonoBehaviour
             return;
         }
 
+        GameProgress progress = GameProgress.Instance;
+        if (progress == null || !progress.Data.secaMealCompleted ||
+            progress.Data.secaFoodChoice < 1 || progress.Data.secaFoodChoice > 3)
+        {
+            Debug.LogError(
+                "SecaTravelTransition: falta registrar a refeição no GameProgress.",
+                this
+            );
+            return;
+        }
+
         loading = true;
         StartCoroutine(Travel());
     }
@@ -99,6 +110,19 @@ public class SecaTravelTransition : MonoBehaviour
 
         fadeImage.color = Color.black;
 
+        // BeginTravel só é liberado após terminar a despedida.
+        // O checkpoint da Estrada ainda verifica os cinco itens antes de salvar.
+        GameProgress progress = GameProgress.Instance;
+        if (progress == null)
+        {
+            Debug.LogError("SecaTravelTransition: GameProgress não encontrado.", this);
+            RestoreTransition();
+            yield break;
+        }
+
+        bool departureWasCompleted = progress.Data.secaDepartureCompleted;
+        progress.Data.secaDepartureCompleted = true;
+
         AsyncOperation operation = SceneManager.LoadSceneAsync(
             destinationScene,
             LoadSceneMode.Single
@@ -106,6 +130,7 @@ public class SecaTravelTransition : MonoBehaviour
 
         if (operation == null)
         {
+            progress.Data.secaDepartureCompleted = departureWasCompleted;
             Debug.LogError(
                 "SecaTravelTransition: não foi possível carregar a estrada.",
                 this

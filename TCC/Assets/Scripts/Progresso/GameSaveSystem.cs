@@ -139,7 +139,7 @@ public class GameSaveSystem : MonoBehaviour
 
         RememberProgress();
 
-        if (!data.tutorialCompleted)
+        if (!data.CanSave)
             return;
 
         if (nightJustCompleted)
@@ -262,10 +262,10 @@ public class GameSaveSystem : MonoBehaviour
             return false;
         }
 
-        if (!progress.Data.tutorialCompleted)
+        if (!progress.Data.CanSave)
         {
             Debug.Log(
-                "O salvamento começa após concluir o tutorial.",
+                "O salvamento começa após o tutorial ou a conclusão da Seca.",
                 this
             );
             return false;

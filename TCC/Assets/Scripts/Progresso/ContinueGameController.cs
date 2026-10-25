@@ -69,7 +69,7 @@ public class ContinueGameController : MonoBehaviour
         {
             save = JsonUtility.FromJson<GameSaveFile>(File.ReadAllText(SavePath));
             if (save == null || (save.version != 1 && save.version != 2) || save.progress == null ||
-                !save.progress.tutorialCompleted)
+                !save.progress.CanSave)
             {
                 error = "o arquivo não contém um checkpoint válido.";
                 return false;
@@ -153,5 +153,3 @@ public class ContinueGameController : MonoBehaviour
             continueButton.onClick.RemoveListener(ContinueGame);
     }
 }
-
-

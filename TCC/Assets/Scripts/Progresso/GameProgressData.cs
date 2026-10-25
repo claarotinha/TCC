@@ -23,6 +23,14 @@ public class GameProgressData
     // 3: dividiu com a irmã.
     public int secaFoodChoice;
 
+    // Registrado somente ao sair da Seca, depois da despedida.
+    // Permite testar este capítulo diretamente sem marcar o tutorial como concluído.
+    public bool secaDepartureCompleted;
+
+    public bool CanSave => tutorialCompleted ||
+        (secaDepartureCompleted && secaMealCompleted &&
+         secaFoodChoice >= 1 && secaFoodChoice <= 3);
+
     public List<string> collectedObjects = new List<string>();
     public List<string> usedTargets = new List<string>();
 

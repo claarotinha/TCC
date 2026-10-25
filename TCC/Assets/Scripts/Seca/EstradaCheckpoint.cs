@@ -20,11 +20,20 @@ public class EstradaCheckpoint : MonoBehaviour
 
         GameProgress progress = GameProgress.Instance;
 
-        if (progress == null || !progress.Data.tutorialCompleted)
+        if (progress == null)
+        {
+            Debug.LogError(
+                "EstradaCheckpoint: falta o GameProgress ativo na partida.",
+                this
+            );
+            yield break;
+        }
+
+        if (!progress.Data.CanSave)
         {
             Debug.LogWarning(
-                "EstradaCheckpoint: teste chegando pela Seca, " +
-                "com o tutorial concluído.",
+                "EstradaCheckpoint: chegue pela despedida da Seca " +
+                "ou carregue uma partida com o tutorial concluído.",
                 this
             );
             yield break;
