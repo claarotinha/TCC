@@ -27,6 +27,9 @@ public class GameProgressData
     // Permite testar este capítulo diretamente sem marcar o tutorial como concluído.
     public bool secaDepartureCompleted;
 
+    // Evita repetir a conversa inicial ao continuar a viagem.
+    public bool estradaOpeningCompleted;
+
     public bool CanSave => tutorialCompleted ||
         (secaDepartureCompleted && secaMealCompleted &&
          secaFoodChoice >= 1 && secaFoodChoice <= 3);

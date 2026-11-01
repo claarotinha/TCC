@@ -56,6 +56,14 @@ public class DialogoInicialEstrada : MonoBehaviour
             return;
         }
 
+        if (GameProgress.Instance != null &&
+            GameProgress.Instance.Data.estradaOpeningCompleted)
+        {
+            dialogueUI.SetActive(false);
+            Finished = true;
+            return;
+        }
+
         playerBody = playerMovement.GetComponent<Rigidbody2D>();
         movementWasEnabled = playerMovement.enabled;
         playerMovement.enabled = false;
@@ -140,6 +148,16 @@ public class DialogoInicialEstrada : MonoBehaviour
         Finished = true;
         dialogueUI.SetActive(false);
         RestoreMovement();
+
+        GameProgress progress = GameProgress.Instance;
+        if (progress != null)
+        {
+            progress.Data.estradaOpeningCompleted = true;
+
+            GameSaveSystem save = progress.GetComponent<GameSaveSystem>();
+            if (save != null && progress.Data.CanSave && !GameSaveSystem.IsRestoring)
+                save.TrySaveCheckpoint("Estrada");
+        }
     }
 
     private void StopPlayer()
