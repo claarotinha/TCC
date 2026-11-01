@@ -1207,7 +1207,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 4017393869555595384, guid: 20cd620554b817747a4d60a7645ac0b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3925,7 +3925,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 6458995221465509233, guid: 0b7a2c6214b28d04d9e775ef3eb45661, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -10013,10 +10013,10 @@ MonoBehaviour:
   characterNameText: {fileID: 3000000040}
   dialogueText: {fileID: 3000000098}
   portraitImage: {fileID: 3000000078}
-  paiPortrait: {fileID: 0}
-  maePortrait: {fileID: 0}
-  mariquinhaPortrait: {fileID: 0}
-  mariPortrait: {fileID: 0}
+  paiPortrait: {fileID: 6458995221465509233, guid: 0b7a2c6214b28d04d9e775ef3eb45661, type: 3}
+  maePortrait: {fileID: 4017393869555595384, guid: 20cd620554b817747a4d60a7645ac0b8, type: 3}
+  mariquinhaPortrait: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  mariPortrait: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
