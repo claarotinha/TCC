@@ -8,6 +8,7 @@ public class CacaPassarinho : MonoBehaviour
 {
     [SerializeField] private ItemData estilingue;
     [SerializeField] private ItemData pedra;
+    [SerializeField] private ItemData passaro;
     [SerializeField] private PlayerMovement mari;
     [SerializeField] private DialogoPrimeiraParada dialogoInicial;
     [SerializeField] private GameObject dialogueUI;
@@ -21,10 +22,10 @@ public class CacaPassarinho : MonoBehaviour
     private readonly string[] nomes = { "Mari", "Painho", "Mari", "Painho" };
     private readonly string[] falas =
     {
-        "Consegui acertar o passarinho com o estilingue!",
-        "Muito bem, minha filha. Agora temos o que comer.",
-        "Vou guardar o estilingue. A gente pode precisar dele de novo.",
-        "Vamo seguir viagem. Ainda temos muito chao pela frente."
+        "Pronto painho, consegui montar o estilingue!",
+        "Obrigado, minha filha.",
+        "A pedra acerta o pássaro, que cai no chão.",
+        "Num gosto de vê passarinho morto… Mas gosto menos de vê minhas filha com fome."
     };
 
     private bool acertou;
@@ -44,11 +45,6 @@ public class CacaPassarinho : MonoBehaviour
         if (!InventoryManager.Instance.Items.Contains(estilingue))
             return false;
 
-        if (!InventoryManager.Instance.Items.Contains(pedra))
-        {
-            Debug.Log("Para cazar, Mari precisa de uma pedra no inventario.", this);
-            return true;
-        }
 
         if (dialogueUI == null || dialoguePanel == null ||
             characterNameText == null || dialogueText == null)
@@ -57,7 +53,7 @@ public class CacaPassarinho : MonoBehaviour
             return true;
         }
 
-        InventoryManager.Instance.RemoveItem(pedra);
+        if (passaro != null) InventoryManager.Instance.AddItem(passaro);
         acertou = true;
         Collider2D colliderPassaro = GetComponent<Collider2D>();
         if (colliderPassaro != null) colliderPassaro.enabled = false;

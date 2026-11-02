@@ -10537,8 +10537,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa17c14a2df34f789bd319f7012a0020, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::CacaPassarinho
-  estilingue: {fileID: 11400000, guid: aa17c14a2df34f789bd319f7012a0011, type: 2}
+  estilingue: {fileID: 11400000, guid: aa17c14a2df34f789bd319f7012a0041, type: 2}
   pedra: {fileID: 11400000, guid: 1166bada09fb148478e04d7eaa8fefef, type: 2}
+  passaro: {fileID: 11400000, guid: aa17c14a2df34f789bd319f7012a0042, type: 2}
   mari: {fileID: 1304905420}
   dialogoInicial: {fileID: 2113098078}
   dialogueUI: {fileID: 3000000009}
