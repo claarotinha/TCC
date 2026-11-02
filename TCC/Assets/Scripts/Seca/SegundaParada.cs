@@ -31,6 +31,7 @@ public class SegundaParada : MonoBehaviour
 
     private void Start()
     {
+        JanelaQuebrada = PlayerPrefs.GetInt("EstradaMariquinhaFerida", 0) == 1;
         if (baleia != null) posicaoBaleia = baleia.position;
         CriarMarcador("Riacho", new Vector2(transform.position.x - 4f, -0.6f),
             new Color(0.25f, 0.52f, 0.68f), 3.2f, 0.55f, "riacho");
@@ -240,6 +241,8 @@ public class SegundaParada : MonoBehaviour
         dialogueUI.SetActive(false); mari.enabled = movimentoAnterior;
         // A escolha fica registrada no controlador da parada para a terceira parada.
         JanelaQuebrada = escolha == 1;
+        PlayerPrefs.SetInt("EstradaMariquinhaFerida", JanelaQuebrada ? 1 : 0);
+        PlayerPrefs.Save();
         Falar(new[] { "Cena", "Cena" },
             escolha == 0
                 ? new[] { "A família consegue abrir a porta.", "Ninguém se machuca." }
