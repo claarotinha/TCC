@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -33,7 +32,6 @@ public class InventorySlot : MonoBehaviour,
 
         InventoryManager.Instance.SelectItem(item);
         UpdateAllSlots();
-        StartCoroutine(SelectedAnimation());
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -157,13 +155,4 @@ public class InventorySlot : MonoBehaviour,
         }
     }
 
-    private IEnumerator SelectedAnimation()
-    {
-        Vector3 originalScale = transform.localScale;
-        transform.localScale = originalScale * 1.1f;
-
-        yield return new WaitForSeconds(0.1f);
-
-        transform.localScale = originalScale;
-    }
 }

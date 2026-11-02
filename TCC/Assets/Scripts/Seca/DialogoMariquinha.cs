@@ -65,7 +65,17 @@ public class DialogoMariquinha : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && PodeConversar())
+
+    }
+
+    private void OnMouseDown()
+    {
+        if (conversando || Time.timeScale == 0f || mari == null || movimentoMari == null)
+            return;
+        if (UnityEngine.EventSystems.EventSystem.current != null &&
+            UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            return;
+        if (PodeConversar())
             Iniciar();
     }
 
