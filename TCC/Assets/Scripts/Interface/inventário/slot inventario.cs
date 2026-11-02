@@ -120,6 +120,10 @@ public class InventorySlot : MonoBehaviour,
 
         foreach (Collider2D hit in Physics2D.OverlapPointAll(worldPoint))
         {
+            CacaPassarinho passarinho = hit.GetComponent<CacaPassarinho>();
+            if (passarinho != null && passarinho.TentarCacar(item))
+                return;
+
             ItemUseTarget target = hit.GetComponent<ItemUseTarget>();
 
             if (target != null && target.TryUse(item))
