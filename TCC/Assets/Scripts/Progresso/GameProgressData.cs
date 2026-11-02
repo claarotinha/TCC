@@ -29,6 +29,7 @@ public class GameProgressData
 
     // Evita repetir a conversa inicial ao continuar a viagem.
     public bool estradaOpeningCompleted;
+    public bool estradaElasticoEntregue;
 
     public bool CanSave => tutorialCompleted ||
         (secaDepartureCompleted && secaMealCompleted &&

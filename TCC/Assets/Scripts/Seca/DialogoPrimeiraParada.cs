@@ -45,8 +45,6 @@ public class DialogoPrimeiraParada : MonoBehaviour
         if (mari != null)
             corpoMari = mari.GetComponent<Rigidbody2D>();
 
-        if (dialogueUI != null)
-            dialogueUI.SetActive(false);
     }
 
     private void Update()

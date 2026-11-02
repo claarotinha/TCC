@@ -44,6 +44,7 @@ public class DialogoMariquinha : MonoBehaviour
     {
         if (movimentoMari != null)
             corpo = movimentoMari.GetComponent<Rigidbody2D>();
+        entregou = GameProgress.Instance != null && GameProgress.Instance.Data.estradaElasticoEntregue;
     }
 
     private void Update()
@@ -139,6 +140,8 @@ public class DialogoMariquinha : MonoBehaviour
             {
                 InventoryManager.Instance.AddItem(elastico);
                 entregou = true;
+                if (GameProgress.Instance != null)
+                    GameProgress.Instance.Data.estradaElasticoEntregue = true;
             }
             else
                 Debug.LogError("DialogoMariquinha: InventoryManager ausente.", this);
