@@ -204,6 +204,7 @@ public class SegundaParada : MonoBehaviour
         dialogueText.text = "Como entrar na casa?";
         if (portraitImage != null) portraitImage.enabled = false;
         choicesContainer.SetActive(true);
+        foreach (Transform child in choicesContainer.transform) child.gameObject.SetActive(false);
         CriarBotao("Arrombar a porta", 0);
         CriarBotao("Quebrar a janela", 1);
     }
@@ -213,6 +214,9 @@ public class SegundaParada : MonoBehaviour
         GameObject go = new GameObject(texto, typeof(RectTransform), typeof(Image), typeof(Button));
         go.transform.SetParent(choicesContainer.transform, false);
         RectTransform rt = go.GetComponent<RectTransform>();
+        rt.anchorMin = new Vector2(0.5f, 0.5f);
+        rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.anchoredPosition = new Vector2(0f, escolha == 0 ? 30f : -30f);
         rt.sizeDelta = new Vector2(440f, 55f);
         Image img = go.GetComponent<Image>(); img.color = new Color(0.22f, 0.17f, 0.12f, 0.95f);
         Button botao = go.GetComponent<Button>(); botoes.Add(botao);
