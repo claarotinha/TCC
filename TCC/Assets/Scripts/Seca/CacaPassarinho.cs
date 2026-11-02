@@ -8,6 +8,7 @@ public class CacaPassarinho : MonoBehaviour
 {
     [SerializeField] private ItemData estilingue;
     [SerializeField] private ItemData pedra;
+    [SerializeField] private ItemData estilingueSemPedra;
     [SerializeField] private ItemData passaro;
     [SerializeField] private PlayerMovement mari;
     [SerializeField] private DialogoPrimeiraParada dialogoInicial;
@@ -39,11 +40,12 @@ public class CacaPassarinho : MonoBehaviour
         ControleJornada jornada = ControleJornada.Instance;
         if (jornada == null || !jornada.ParadaAtiva || jornada.ParadaAtual != 1 ||
             (dialogoInicial != null && !dialogoInicial.Finished) || acertou ||
-            item != estilingue || mari == null || InventoryManager.Instance == null)
+            mari == null || InventoryManager.Instance == null)
             return false;
 
-        if (!InventoryManager.Instance.Items.Contains(estilingue))
-            return false;
+        bool pronto = item == estilingue && InventoryManager.Instance.Items.Contains(estilingue);
+        bool improvisado = item == estilingueSemPedra && InventoryManager.Instance.Items.Contains(estilingueSemPedra) && pedra != null && InventoryManager.Instance.Items.Contains(pedra);
+        if (!pronto && !improvisado) return false;
 
 
         if (dialogueUI == null || dialoguePanel == null ||
@@ -53,6 +55,7 @@ public class CacaPassarinho : MonoBehaviour
             return true;
         }
 
+        if (improvisado) InventoryManager.Instance.RemoveItem(pedra);
         if (passaro != null) InventoryManager.Instance.AddItem(passaro);
         acertou = true;
         Collider2D colliderPassaro = GetComponent<Collider2D>();
