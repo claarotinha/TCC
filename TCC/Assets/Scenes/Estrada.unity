@@ -3327,7 +3327,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -10339,7 +10339,7 @@ BoxCollider2D:
   m_ForceReceiveLayers: {serializedVersion: 2, m_Bits: 4294967295}
   m_ContactCaptureLayers: {serializedVersion: 2, m_Bits: 4294967295}
   m_CallbackLayers: {serializedVersion: 2, m_Bits: 4294967295}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -10369,7 +10369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CollectableExamine
   examinePanel: {fileID: 3000000053}
   examineText: {fileID: 3000000061}
-  itemData: {fileID: 11400000, guid: 1b749fc05bc5e0d44bf5e673aaee61e2, type: 2}
+  itemData: {fileID: 11400000, guid: 1166bada09fb148478e04d7eaa8fefef, type: 2}
   isTutorialBall: 0
   message: Uma pedra pequena. Pode servir de municao.
 --- !u!114 &3200000020

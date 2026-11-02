@@ -212,38 +212,25 @@ public class CollectableExamine : MonoBehaviour
             return;
         }
 
-        if (isTutorialBall)
+        // Todos os coletaveis precisam de confirmacao antes de entrar no inventario.
+        InventoryTabController inventory = InventoryTabController.Instance;
+        CollectPrompt prompt = inventory != null
+            ? inventory.GetComponent<CollectPrompt>()
+            : null;
+
+        if (prompt == null)
         {
-            InventoryTabController inventory = InventoryTabController.Instance;
-            CollectPrompt prompt = inventory != null
-                ? inventory.GetComponent<CollectPrompt>()
-                : null;
+            Debug.LogError("Painel de confirmacao de coleta nao encontrado no InventoryCanvas.", this);
+            return;
+        }
 
-            if (prompt == null)
-            {
-                Debug.LogError("Bola: painel de confirmação não encontrado no InventoryCanvas.", this);
-                return;
-            }
-
-            prompt.Show(itemData, () =>
-            {
-                GameProgress.Instance?.MarkObjectCollected(progressId);
+        prompt.Show(itemData, () =>
+        {
+            GameProgress.Instance?.MarkObjectCollected(progressId);
+            if (isTutorialBall)
                 TutorialManager.Instance?.ReportBallCollected();
-                Destroy(gameObject);
-            });
-            return;
-        }
-
-        if (InventoryManager.Instance == null)
-        {
-            Debug.LogError("InventoryManager não existe!", this);
-            return;
-        }
-
-        InventoryManager.Instance.AddItem(itemData);
-        Debug.Log(itemData.itemName + " coletado com sucesso!", this);
-        GameProgress.Instance?.MarkObjectCollected(progressId);
-        Destroy(gameObject);
+            Destroy(gameObject);
+        });
     }
 
     public static bool IsShowing()
