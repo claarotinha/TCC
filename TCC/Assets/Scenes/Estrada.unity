@@ -1078,7 +1078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GatilhoParada
   numeroDaParada: 2
-  concluirComTeclaT: 1
+  concluirComTeclaT: 0
 --- !u!61 &465652023
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10579,6 +10579,29 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3500000000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465652020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa17c14a2df34f789bd319f7012a0030, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::SegundaParada
+  mari: {fileID: 1304905420}
+  cabacaVazia: {fileID: 11400000, guid: f0c6e92250400ab42871c53f7ebf8161, type: 2}
+  cabacaCheia: {fileID: 11400000, guid: aa17c14a2df34f789bd319f7012a0031, type: 2}
+  prea: {fileID: 11400000, guid: aa17c14a2df34f789bd319f7012a0032, type: 2}
+  dialogueUI: {fileID: 3000000009}
+  dialoguePanel: {fileID: 3000000099}
+  choicesContainer: {fileID: 3000000093}
+  characterNameText: {fileID: 3000000040}
+  dialogueText: {fileID: 3000000098}
+  portraitImage: {fileID: 3000000078}
+  baleia: {fileID: 953090003}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

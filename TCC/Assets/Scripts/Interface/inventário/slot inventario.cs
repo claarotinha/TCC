@@ -118,6 +118,13 @@ public class InventorySlot : MonoBehaviour,
 
         foreach (Collider2D hit in Physics2D.OverlapPointAll(worldPoint))
         {
+            MarcadorSegundaParada marcador = hit.GetComponent<MarcadorSegundaParada>();
+            if (marcador != null && marcador.id == "riacho")
+            {
+                SegundaParada parada = marcador.GetComponentInParent<SegundaParada>();
+                if (parada != null && parada.UsarNoRiacho(item)) return;
+            }
+
             CacaPassarinho passarinho = hit.GetComponent<CacaPassarinho>();
             if (passarinho != null && passarinho.TentarCacar(item))
                 return;
