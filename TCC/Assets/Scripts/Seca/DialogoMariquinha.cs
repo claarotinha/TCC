@@ -24,13 +24,11 @@ public class DialogoMariquinha : MonoBehaviour
     [Header("Item")]
     [SerializeField] private ItemData elastico;
 
-    private static readonly string[] nomes = { "Mari", "Mariquinha", "Mari", "Mariquinha" };
+    private static readonly string[] nomes = { "Zefinha", "Mariquinha" };
     private static readonly string[] falas =
     {
-        "Mariquinha, tu tem algum elastico sobrando?",
-        "Tenho um no cabelo. Pra que tu quer?",
-        "Painho falou pra procurar comida. Acho que consigo fazer um estilingue.",
-        "Ta bom, pode ficar. Mas ve se consegue alguma coisa pra gente comer."
+        "Encontrei uma boa pedra e bom galho painho, mas não sei onde encontrar um elástico.",
+        "Eu tenho um zefinha, pegue, pode usar."
     };
 
     private bool conversando;

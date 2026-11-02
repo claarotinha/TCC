@@ -19,16 +19,12 @@ public class DialogoPrimeiraParada : MonoBehaviour
 
     private readonly string[] nomes =
     {
-        "Painho", "Mainha", "Mariquinha", "Painho", "Mari"
+        "Pai"
     };
 
     private readonly string[] falas =
     {
-        "Vamo parar um instante. Desse jeito, ninguem aguenta seguir sem comer.",
-        "A farinha que a gente trouxe nao vai durar pra sempre.",
-        "Painho, eu to com fome...",
-        "Eu sei, minha filha. Mari, ve se encontra alguma coisa que sirva pra gente cacar.",
-        "Vou procurar por aqui."
+        "Se a gente não parar agora para arrumar comida, não vamos longe, é melhor aproveitar que o sol já esfriou e ainda não anoiteceu. Zefinha, procure um galho mais flexível, uma pedra lisa e um elástico para a gente montar um estilingue e pegar aqueles pássaros."
     };
 
     public bool Finished => terminou;
