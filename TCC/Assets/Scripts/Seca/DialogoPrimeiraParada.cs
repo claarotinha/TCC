@@ -31,6 +31,8 @@ public class DialogoPrimeiraParada : MonoBehaviour
         "Vou procurar por aqui."
     };
 
+    public bool Finished => terminou;
+
     private int linhaAtual;
     private int quadroDaFala;
     private bool conversando;
