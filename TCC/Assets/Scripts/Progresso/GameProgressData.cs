@@ -37,6 +37,9 @@ public class GameProgressData
     public bool estradaMariquinhaFerida;
     public bool estradaAbrigoConcluido;
     public int estradaParadasConcluidas;
+    public bool estradaTerceiraAguaIniciada;
+    public bool estradaDialogoBarrigudaConcluido;
+    public bool estradaBarrigudaConcluida;
 
     public bool CanSave => tutorialCompleted ||
         (secaDepartureCompleted && secaMealCompleted &&

@@ -37,6 +37,16 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private Transform terceiraParada;
     [SerializeField, Min(0.1f)] private float duracaoTransicao = 0.7f;
 
+    [Header("Agua da terceira parada")]
+    [SerializeField] private ItemData facao;
+    [SerializeField] private Sprite barrigudaInteira;
+    [SerializeField] private Sprite barrigudaAberta;
+
+    private Transform barriguda;
+    private Vector3 posicaoBarriguda;
+    private bool aguaTerceiraIniciada, dialogoTerceiraConcluido, aguaTerceiraConcluida;
+    private bool recolhendoAgua, avisouProblemaAgua;
+
     private bool sequenciaAbrigo, deslocandoFamilia, grupoCapturado, fadePreparado;
     private Transform[] pessoasAbrigo;
     private SeguidorFamilia[] seguidoresAbrigo;
@@ -92,6 +102,7 @@ public class SegundaParada : MonoBehaviour
             escalaMariquinhaNormal = mariquinha.transform.localScale;
         }
         AplicarFerimento();
+        PrepararAguaTerceira();
         if (GameProgress.Instance != null && GameProgress.Instance.Data.estradaAbrigoConcluido)
         {
             iniciou = true;
@@ -127,6 +138,10 @@ public class SegundaParada : MonoBehaviour
     {
         if (PauseHelper.BlockInput() || Time.timeScale == 0f || sequenciaAbrigo) return;
         ControleJornada j = ControleJornada.Instance;
+        if (j != null && j.ParadaAtiva && j.ParadaAtual == 3 &&
+            !aguaTerceiraConcluida && !dialogoTerceiraConcluido &&
+            !conversando && dialogueUI != null && !dialogueUI.activeInHierarchy)
+            IniciarConversaAguaTerceira();
         if (!iniciou && j != null && j.ParadaAtiva && j.ParadaAtual == 2 && dialogueUI != null && !dialogueUI.activeInHierarchy)
         {
             iniciou = true;
@@ -510,10 +525,21 @@ public class SegundaParada : MonoBehaviour
 
     public void Clicar(string alvo)
     {
-        if (!iniciou || conversando || Time.frameCount <= quadro ||
+        if ((!iniciou && !aguaTerceiraIniciada) || conversando || Time.frameCount <= quadro ||
             PauseHelper.BlockInput() || Time.timeScale == 0f || sequenciaAbrigo) return;
         if (mari == null || Vector2.Distance(mari.transform.position, Posicao(alvo)) > 5f)
             return;
+        if (alvo == "barriguda")
+        {
+            ControleJornada jornada = ControleJornada.Instance;
+            if (jornada == null || !jornada.ParadaAtiva || jornada.ParadaAtual != 3 ||
+                !dialogoTerceiraConcluido || aguaTerceiraConcluida) return;
+            ItemData selecionado = InventoryManager.Instance != null ? InventoryManager.Instance.SelectedItem : null;
+            if (!UsarNaBarriguda(selecionado))
+                Falar(new[] { "Mãe" },
+                    new[] { "Apois usa ele naquela barriguda ali que tá gorda de tanta água." }, null);
+            return;
+        }
         if (alvo.StartsWith("pegada") && etapa == 2)
         {
             int n;
@@ -1050,9 +1076,174 @@ public class SegundaParada : MonoBehaviour
         marcadores.Add(go);
     }
 
+    private void PrepararAguaTerceira()
+    {
+        if (terceiraParada == null || barrigudaInteira == null || barrigudaAberta == null || facao == null)
+        {
+            Debug.LogError("SegundaParada: faltam as referencias da barriguda.", this);
+            return;
+        }
+        if (GameProgress.Instance != null)
+        {
+            GameProgressData dados = GameProgress.Instance.Data;
+            aguaTerceiraIniciada = dados.estradaTerceiraAguaIniciada;
+            dialogoTerceiraConcluido = dados.estradaDialogoBarrigudaConcluido;
+            aguaTerceiraConcluida = dados.estradaBarrigudaConcluida;
+        }
+        CriarMarcador("Barriguda", new Vector2(terceiraParada.position.x + 2.4f, -2.4f),
+            Color.white, 1f, 1f, "barriguda");
+        barriguda = marcadores[marcadores.Count - 1].transform;
+        posicaoBarriguda = barriguda.position;
+        MostrarBarriguda(aguaTerceiraConcluida ? barrigudaAberta : barrigudaInteira);
+    }
+
+    private void MostrarBarriguda(Sprite sprite)
+    {
+        if (barriguda == null || sprite == null) return;
+        SpriteRenderer desenho = barriguda.GetComponent<SpriteRenderer>();
+        desenho.sprite = sprite;
+        desenho.color = Color.white;
+        desenho.sortingOrder = 2;
+        float escala = 4.8f / Mathf.Max(0.01f, sprite.bounds.size.y);
+        barriguda.localScale = Vector3.one * escala;
+        BoxCollider2D area = barriguda.GetComponent<BoxCollider2D>();
+        area.size = sprite.bounds.size;
+        area.offset = sprite.bounds.center;
+    }
+
+    private bool TrocarCabaca(ItemData origem, ItemData destino)
+    {
+        InventoryManager inventario = InventoryManager.Instance;
+        if (inventario == null || origem == null || destino == null) return false;
+        var itens = new List<ItemData>(inventario.Items);
+        int indiceCabaca = itens.IndexOf(origem);
+        if (indiceCabaca < 0) return itens.Contains(destino);
+        itens[indiceCabaca] = destino;
+        // Uma unica atualizacao evita reconstruir os slots no meio da troca.
+        inventario.ReplaceItems(itens);
+        return true;
+    }
+
+    private void IniciarConversaAguaTerceira()
+    {
+        if (barriguda == null || mari == null || cabacaVazia == null || cabacaCheia == null ||
+            InventoryManager.Instance == null || (!Possui(cabacaVazia) && !Possui(cabacaCheia)))
+        {
+            if (!avisouProblemaAgua)
+                Debug.LogError("Terceira parada: confira a cabaca no inventario e as referencias.", this);
+            avisouProblemaAgua = true;
+            return;
+        }
+        if (!aguaTerceiraIniciada)
+        {
+            // A primeira fala informa que a agua acabou: a troca ocorre neste momento.
+            if (!TrocarCabaca(cabacaCheia, cabacaVazia)) return;
+            aguaTerceiraIniciada = true;
+            if (GameProgress.Instance != null)
+                GameProgress.Instance.Data.estradaTerceiraAguaIniciada = true;
+        }
+        Falar(new[] { "Mariquinha", "Mãe", "Pai", "Mãe", "Zefinha", "Mãe" },
+            new[] {
+                "Tô com sede mainha, a água da cabaça já acabou.",
+                "Mas eu num vejo nenhum rio por perto minha menina.",
+                "Num tem rio, mas tem barriguda, dentro tem água, nos quebra e toma.",
+                "Tais com o facão zefinha?",
+                "Tô…",
+                "Apois usa ele naquela barriguda ali que tá gorda de tanta água."
+            }, () => {
+                dialogoTerceiraConcluido = true;
+                if (GameProgress.Instance != null)
+                    GameProgress.Instance.Data.estradaDialogoBarrigudaConcluido = true;
+                SalvarAguaTerceira();
+            });
+    }
+
+    public bool SoltarNaBarriguda(ItemData item, Vector2 posicaoTela)
+    {
+        Camera camera = Camera.main;
+        if (barriguda == null || camera == null || item != facao) return false;
+        Ray raio = camera.ScreenPointToRay(posicaoTela);
+        Plane plano = new Plane(Vector3.forward, Vector3.zero);
+        float distancia;
+        if (!plano.Raycast(raio, out distancia)) return false;
+        BoxCollider2D area = barriguda.GetComponent<BoxCollider2D>();
+        Vector2 ponto = barriguda.InverseTransformPoint(raio.GetPoint(distancia));
+        Vector2 diferenca = ponto - area.offset;
+        if (Mathf.Abs(diferenca.x) > area.size.x * 0.5f ||
+            Mathf.Abs(diferenca.y) > area.size.y * 0.5f) return false;
+        return UsarNaBarriguda(item);
+    }
+
+    private bool UsarNaBarriguda(ItemData item)
+    {
+        ControleJornada jornada = ControleJornada.Instance;
+        if (jornada == null || !jornada.ParadaAtiva || jornada.ParadaAtual != 3 ||
+            !aguaTerceiraIniciada || !dialogoTerceiraConcluido || aguaTerceiraConcluida ||
+            recolhendoAgua || conversando || sequenciaAbrigo || PauseHelper.BlockInput() ||
+            Time.timeScale == 0f || item != facao || !Possui(facao) || !Possui(cabacaVazia) ||
+            barriguda == null || mari == null ||
+            Vector2.Distance(mari.transform.position, barriguda.position) > 5f)
+            return false;
+        recolhendoAgua = true;
+        sequenciaAbrigo = true;
+        BloquearMovimento();
+        inventarioAbrigo = InventoryTabController.Instance;
+        if (inventarioAbrigo != null)
+        {
+            inventarioEstavaAtivo = inventarioAbrigo.enabled;
+            inventarioAbrigo.Close();
+            inventarioAbrigo.enabled = false;
+        }
+        StartCoroutine(RecolherAguaBarriguda());
+        return true;
+    }
+
+    private IEnumerator RecolherAguaBarriguda()
+    {
+        float tempo = 0f;
+        while (tempo < 0.6f)
+        {
+            tempo += Time.deltaTime;
+            float deslocamento = Mathf.Sin(tempo * 45f) * 0.04f;
+            barriguda.position = posicaoBarriguda + Vector3.right * deslocamento;
+            yield return null;
+        }
+        barriguda.position = posicaoBarriguda;
+        MostrarBarriguda(barrigudaAberta);
+        if (TrocarCabaca(cabacaVazia, cabacaCheia))
+        {
+            aguaTerceiraConcluida = true;
+            if (GameProgress.Instance != null)
+                GameProgress.Instance.Data.estradaBarrigudaConcluida = true;
+            ControleJornada.Instance?.LiberarTrechoTerceiraParada();
+        }
+        else
+        {
+            MostrarBarriguda(barrigudaInteira);
+            Debug.LogError("Terceira parada: nao foi possivel encher a cabaca.", this);
+        }
+        yield return new WaitForSeconds(0.5f);
+        recolhendoAgua = false;
+        sequenciaAbrigo = false;
+        LiberarMovimento();
+        RestaurarInventarioAbrigo();
+        quadro = Time.frameCount;
+        if (aguaTerceiraConcluida) SalvarAguaTerceira();
+    }
+
+    private void SalvarAguaTerceira()
+    {
+        if (GameProgress.Instance == null || !GameProgress.Instance.Data.CanSave || GameSaveSystem.IsRestoring)
+            return;
+        GameSaveSystem salvar = GameProgress.Instance.GetComponent<GameSaveSystem>();
+        if (salvar != null) salvar.TrySaveCheckpoint("Estrada");
+    }
+
     private void OnDisable()
     {
         StopAllCoroutines();
+        recolhendoAgua = false;
+        if (barriguda != null) barriguda.position = posicaoBarriguda;
         RestaurarInventarioAbrigo();
         RestaurarFade();
         RestaurarExterior();

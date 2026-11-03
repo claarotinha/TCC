@@ -847,6 +847,8 @@ MonoBehaviour:
   - {fileID: 513277210}
   - {fileID: 1574179965}
   - {fileID: 845846474}
+  trechoAguaTerceira: 5
+  trechoAposAguaTerceira: 8
 --- !u!4 &406039565
 Transform:
   m_ObjectHideFlags: 0
@@ -1575,7 +1577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GatilhoParada
   numeroDaParada: 3
-  concluirComTeclaT: 1
+  concluirComTeclaT: 0
 --- !u!61 &513277212
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10627,6 +10629,9 @@ MonoBehaviour:
   mariquinhaFerida: {fileID: 21300000, guid: c4a40000000040008000000000000002, type: 3}
   terceiraParada: {fileID: 513277210}
   duracaoTransicao: 0.7
+  facao: {fileID: 11400000, guid: 479344094161c0740a7c1d933ed41f9b, type: 2}
+  barrigudaInteira: {fileID: 21300000, guid: c5a50000000040008000000000000001, type: 3}
+  barrigudaAberta: {fileID: 21300001, guid: c5a50000000040008000000000000001, type: 3}
 --- !u!1 &3500000010
 GameObject:
   m_ObjectHideFlags: 0

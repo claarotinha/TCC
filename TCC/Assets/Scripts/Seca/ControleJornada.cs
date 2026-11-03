@@ -13,6 +13,11 @@ public class ControleJornada : MonoBehaviour
     [SerializeField] private Transform mari;
     [SerializeField] private Transform[] limitesDasParadas = new Transform[5];
 
+    [Header("Trecho da terceira parada")]
+    [SerializeField, Min(0f)] private float trechoAguaTerceira = 5f;
+    [SerializeField, Min(0f)] private float trechoAposAguaTerceira = 8f;
+    private bool aguaTerceiraLiberada;
+
     private bool paradaAtiva;
     private int paradaAtual = -1;
 
@@ -42,6 +47,12 @@ public class ControleJornada : MonoBehaviour
         int salvo = Mathf.Clamp(dados.estradaParadasConcluidas, 0, 5);
         if (dados.estradaAbrigoConcluido) salvo = Mathf.Max(salvo, 2);
         paradasConcluidas = Mathf.Max(paradasConcluidas, salvo);
+        aguaTerceiraLiberada = dados.estradaBarrigudaConcluida;
+        if (paradasConcluidas == 2 && dados.estradaTerceiraAguaIniciada)
+        {
+            paradaAtiva = true;
+            paradaAtual = 3;
+        }
     }
 
     private void LateUpdate()
@@ -54,11 +65,14 @@ public class ControleJornada : MonoBehaviour
         if (limite == null)
             return;
 
+        float limiteX = limite.position.x;
+        if (paradasConcluidas == 2)
+            limiteX += aguaTerceiraLiberada ? trechoAposAguaTerceira : trechoAguaTerceira;
         // Bloqueia somente o avanço para a direita.
-        if (mari.position.x > limite.position.x)
+        if (mari.position.x > limiteX)
         {
             Vector3 posicao = mari.position;
-            posicao.x = limite.position.x;
+            posicao.x = limiteX;
             mari.position = posicao;
 
             Rigidbody2D corpo = mari.GetComponent<Rigidbody2D>();
@@ -71,6 +85,12 @@ public class ControleJornada : MonoBehaviour
                 );
             }
         }
+    }
+
+    public void LiberarTrechoTerceiraParada()
+    {
+        if (paradaAtiva && paradaAtual == 3) aguaTerceiraLiberada = true;
+        // A terceira parada so termina depois do ferimento/encontro da etapa seguinte.
     }
 
     public bool IniciarParada(int numero)

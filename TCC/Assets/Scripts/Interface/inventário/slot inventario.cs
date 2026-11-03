@@ -105,6 +105,8 @@ public class InventorySlot : MonoBehaviour,
         SegundaParada agua = FindFirstObjectByType<SegundaParada>();
         if (agua != null && agua.SoltarNoRiacho(item, eventData.position))
             return;
+        if (agua != null && agua.SoltarNaBarriguda(item, eventData.position))
+            return;
 
         // Primeiro tenta usar a cabaca no riacho, antes de rejeitar
         // o drop pela area visual do inventario.
