@@ -20,7 +20,9 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private Transform baleia;
 
     private int etapa; // 0 agua, 1 travessia, 2 busca, 3 abrigo, 4 concluida
-    private bool iniciou, conversando, movimentoAnterior, esperandoEscolha, dialogoCaminhada;
+    private bool iniciou, conversando, movimentoAnterior, esperandoEscolha, movimentoBloqueado;
+    private SeguidorFamilia seguidorBaleia;
+    private bool baleiaSeguia;
     private int indice, quadro, pegadas;
     private readonly List<GameObject> marcadores = new List<GameObject>();
     private readonly List<Button> botoes = new List<Button>();
@@ -32,7 +34,11 @@ public class SegundaParada : MonoBehaviour
     private void Start()
     {
         JanelaQuebrada = PlayerPrefs.GetInt("EstradaMariquinhaFerida", 0) == 1;
-        if (baleia != null) posicaoBaleia = baleia.position;
+        if (baleia != null)
+        {
+            posicaoBaleia = baleia.position;
+            seguidorBaleia = baleia.GetComponent<SeguidorFamilia>();
+        }
         CriarMarcador("Riacho", new Vector2(transform.position.x + 1.8f, -0.6f),
             new Color(0.25f, 0.52f, 0.68f), 3.2f, 0.55f, "riacho");
         CriarMarcador("Casa abandonada", new Vector2(transform.position.x + 5f, 0f),
@@ -45,9 +51,9 @@ public class SegundaParada : MonoBehaviour
 
     private void Update()
     {
-        if (Time.timeScale == 0f) return;
+        if (PauseHelper.BlockInput() || Time.timeScale == 0f) return;
         ControleJornada j = ControleJornada.Instance;
-        if (!iniciou && j != null && j.ParadaAtiva && j.ParadaAtual == 2 && !dialogueUI.activeInHierarchy)
+        if (!iniciou && j != null && j.ParadaAtiva && j.ParadaAtual == 2 && dialogueUI != null && !dialogueUI.activeInHierarchy)
         {
             iniciou = true;
             Falar(new[] { "Mãe" },
@@ -71,9 +77,8 @@ public class SegundaParada : MonoBehaviour
         }
         nomes = personagens; falas = textos; depois = fim; indice = 0;
         conversando = true; esperandoEscolha = false;
-        dialogoCaminhada = duranteCaminhada;
-        movimentoAnterior = mari.enabled;
-        if (!duranteCaminhada) mari.enabled = false;
+        if (duranteCaminhada) LiberarMovimento();
+        else BloquearMovimento();
         dialogueUI.SetActive(true); dialoguePanel.SetActive(true);
         Grupo(dialogueUI); Grupo(dialoguePanel);
         if (choicesContainer != null) choicesContainer.SetActive(false);
@@ -99,10 +104,44 @@ public class SegundaParada : MonoBehaviour
     {
         conversando = false;
         dialogueUI.SetActive(false);
-        if (!dialogoCaminhada) mari.enabled = movimentoAnterior;
-        dialogoCaminhada = false;
+        LiberarMovimento();
         Action acao = depois; depois = null;
         if (acao != null) acao();
+    }
+
+    private void BloquearMovimento()
+    {
+        if (mari == null || movimentoBloqueado) return;
+        movimentoAnterior = mari.enabled;
+        movimentoBloqueado = true;
+        mari.enabled = false;
+        PararMari();
+    }
+
+    private void LiberarMovimento()
+    {
+        if (!movimentoBloqueado) return;
+        if (mari != null) mari.enabled = movimentoAnterior;
+        movimentoBloqueado = false;
+    }
+
+    private void PararMari()
+    {
+        if (mari == null) return;
+        Rigidbody2D corpo = mari.GetComponent<Rigidbody2D>();
+        if (corpo != null)
+            corpo.linearVelocity = new Vector2(0f, corpo.linearVelocity.y);
+        Animator animacao = mari.GetComponent<Animator>();
+        if (animacao != null)
+        {
+            animacao.SetBool("IsWalking", false);
+            animacao.SetBool("IsRunning", false);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (movimentoBloqueado) PararMari();
     }
 
     public bool SoltarNoRiacho(ItemData item, Vector2 posicaoTela)
@@ -123,7 +162,8 @@ public class SegundaParada : MonoBehaviour
 
     public bool UsarNoRiacho(ItemData item)
     {
-        if (!iniciou || etapa != 0 || conversando || item != cabacaVazia ||
+        if (!iniciou || etapa != 0 || conversando || PauseHelper.BlockInput() ||
+            Time.timeScale == 0f || cabacaCheia == null || item != cabacaVazia ||
             InventoryManager.Instance == null ||
             !Possui(item)) return false;
         InventoryManager.Instance.RemoveItem(cabacaVazia);
@@ -178,19 +218,26 @@ public class SegundaParada : MonoBehaviour
     private void IniciarBusca()
     {
         etapa = 2;
-        if (baleia != null) baleia.position = new Vector3(mari.transform.position.x + 3.8f, posicaoBaleia.y, posicaoBaleia.z);
+        if (seguidorBaleia != null)
+        {
+            baleiaSeguia = seguidorBaleia.enabled;
+            seguidorBaleia.enabled = false;
+        }
+        if (baleia != null)
+            baleia.position = new Vector3(transform.position.x + 3.8f, posicaoBaleia.y, posicaoBaleia.z);
         for (int i = 0; i < 3; i++)
             CriarMarcador("Pegada " + (i + 1),
                 new Vector2(transform.position.x + 0.5f + i * 1.1f, -1.4f),
                 new Color(0.39f, 0.28f, 0.18f), 0.35f, 0.22f, "pegada" + i);
         CriarMarcador("Baleia encontrada",
-            new Vector2(transform.position.x + 3.8f, -1.3f),
+            new Vector2(transform.position.x + 3.8f, baleia != null ? baleia.position.y : -1.3f),
             new Color(0.55f, 0.4f, 0.28f), 0.8f, 0.6f, "baleia");
     }
 
     public void Clicar(string alvo)
     {
-        if (!iniciou || conversando || Time.timeScale == 0f) return;
+        if (!iniciou || conversando || Time.frameCount <= quadro ||
+            PauseHelper.BlockInput() || Time.timeScale == 0f) return;
         if (mari == null || Vector2.Distance(mari.transform.position, Posicao(alvo)) > 5f)
             return;
         if (alvo.StartsWith("pegada") && etapa == 2)
@@ -206,7 +253,7 @@ public class SegundaParada : MonoBehaviour
         {
             etapa = 3;
             if (InventoryManager.Instance != null) InventoryManager.Instance.AddItem(prea);
-            if (baleia != null) baleia.position = new Vector3(baleia.position.x, posicaoBaleia.y, posicaoBaleia.z);
+            if (seguidorBaleia != null) seguidorBaleia.enabled = baleiaSeguia;
             foreach (GameObject obj in marcadores)
                 if (obj.name.StartsWith("Pegada") || obj.name == "Baleia encontrada")
                     obj.SetActive(false);
@@ -231,49 +278,62 @@ public class SegundaParada : MonoBehaviour
 
     private void EscolherEntrada()
     {
-        if (choicesContainer == null) { Debug.LogError("ChoicesContainer ausente"); return; }
+        if (choicesContainer == null) { Debug.LogError("ChoicesContainer ausente", this); return; }
+        botoes.Clear();
+        foreach (Transform child in choicesContainer.transform)
+        {
+            Button botao = child.GetComponent<Button>();
+            if (botao != null) botoes.Add(botao);
+        }
+        if (botoes.Count < 2)
+        {
+            Debug.LogError("SegundaParada: faltam os botoes existentes da escolha.", this);
+            botoes.Clear();
+            return;
+        }
         conversando = true; esperandoEscolha = true;
-        movimentoAnterior = mari.enabled; mari.enabled = false;
+        BloquearMovimento();
         dialogueUI.SetActive(true); dialoguePanel.SetActive(true);
         Grupo(dialogueUI); Grupo(dialoguePanel);
         characterNameText.text = "Escolha";
         dialogueText.text = "Como entrar na casa?";
         if (portraitImage != null) portraitImage.enabled = false;
         choicesContainer.SetActive(true);
-        foreach (Transform child in choicesContainer.transform) child.gameObject.SetActive(false);
-        CriarBotao("Arrombar a porta", 0);
-        CriarBotao("Quebrar a janela", 1);
+        Grupo(choicesContainer);
+        string[] opcoes = { "Arrombar a porta", "Quebrar a janela" };
+        for (int i = 0; i < botoes.Count; i++)
+        {
+            Button botao = botoes[i];
+            botao.gameObject.SetActive(i < opcoes.Length);
+            if (i >= opcoes.Length) continue;
+            TMP_Text rotulo = botao.GetComponentInChildren<TMP_Text>(true);
+            if (rotulo != null) rotulo.text = opcoes[i];
+            int escolha = i;
+            botao.onClick.RemoveAllListeners();
+            botao.onClick.AddListener(() => EscolhaFeita(escolha));
+            botao.interactable = true;
+        }
     }
 
-    private void CriarBotao(string texto, int escolha)
+    private void LimparEscolhas()
     {
-        GameObject go = new GameObject(texto, typeof(RectTransform), typeof(Image), typeof(Button));
-        go.transform.SetParent(choicesContainer.transform, false);
-        RectTransform rt = go.GetComponent<RectTransform>();
-        rt.anchorMin = new Vector2(0.5f, 0.5f);
-        rt.anchorMax = new Vector2(0.5f, 0.5f);
-        rt.anchoredPosition = new Vector2(0f, escolha == 0 ? 30f : -30f);
-        rt.sizeDelta = new Vector2(440f, 55f);
-        Image img = go.GetComponent<Image>(); img.color = new Color(0.22f, 0.17f, 0.12f, 0.95f);
-        Button botao = go.GetComponent<Button>(); botoes.Add(botao);
-        GameObject label = new GameObject("Texto", typeof(RectTransform), typeof(TextMeshProUGUI));
-        label.transform.SetParent(go.transform, false);
-        RectTransform lr = label.GetComponent<RectTransform>();
-        lr.anchorMin = Vector2.zero; lr.anchorMax = Vector2.one;
-        lr.offsetMin = Vector2.zero; lr.offsetMax = Vector2.zero;
-        TextMeshProUGUI tmp = label.GetComponent<TextMeshProUGUI>();
-        tmp.text = texto; tmp.fontSize = 22; tmp.alignment = TextAlignmentOptions.Center;
-        tmp.color = Color.white; tmp.raycastTarget = false;
-        botao.onClick.AddListener(() => EscolhaFeita(escolha));
+        foreach (Button botao in botoes)
+        {
+            if (botao == null) continue;
+            botao.onClick.RemoveAllListeners();
+            botao.gameObject.SetActive(false);
+        }
+        botoes.Clear();
     }
 
     private void EscolhaFeita(int escolha)
     {
-        foreach (Button b in botoes) if (b != null) Destroy(b.gameObject);
-        botoes.Clear();
+        if (!esperandoEscolha || PauseHelper.BlockInput() || Time.timeScale == 0f ||
+            (escolha != 0 && escolha != 1)) return;
+        LimparEscolhas();
         choicesContainer.SetActive(false);
         esperandoEscolha = false; conversando = false;
-        dialogueUI.SetActive(false); mari.enabled = movimentoAnterior;
+        dialogueUI.SetActive(false); LiberarMovimento();
         // A escolha fica registrada no controlador da parada para a terceira parada.
         JanelaQuebrada = escolha == 1;
         PlayerPrefs.SetInt("EstradaMariquinhaFerida", JanelaQuebrada ? 1 : 0);
@@ -309,7 +369,9 @@ public class SegundaParada : MonoBehaviour
         tex.filterMode = FilterMode.Point; tex.SetPixel(0, 0, Color.white); tex.Apply();
         SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
         sr.sprite = Sprite.Create(tex, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f), 1);
-        sr.color = cor; sr.sortingOrder = 3; sr.enabled = false;
+        sr.color = cor; sr.sortingOrder = 3;
+        // Mantem visiveis os alvos ja usados pelo puzzle; Baleia usa seu proprio desenho.
+        sr.enabled = id != "baleia" || baleia == null;
         go.transform.localScale = new Vector3(largura, altura, 1);
         BoxCollider2D col = go.GetComponent<BoxCollider2D>(); col.isTrigger = true;
         MarcadorSegundaParada marcador = go.GetComponent<MarcadorSegundaParada>();
@@ -319,8 +381,13 @@ public class SegundaParada : MonoBehaviour
 
     private void OnDisable()
     {
-        if (conversando && mari != null && !dialogoCaminhada) mari.enabled = movimentoAnterior;
+        LiberarMovimento();
         if (conversando && dialogueUI != null) dialogueUI.SetActive(false);
+        LimparEscolhas();
+        if (etapa == 2 && seguidorBaleia != null) seguidorBaleia.enabled = baleiaSeguia;
+        conversando = false;
+        esperandoEscolha = false;
+        depois = null;
     }
 }
 

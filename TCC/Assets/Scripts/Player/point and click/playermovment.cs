@@ -134,6 +134,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        horizontalInput = 0f;
+        isRunning = false;
+        if (rb != null)
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+        if (animator != null)
+        {
+            animator.SetBool("IsWalking", false);
+            animator.SetBool("IsRunning", false);
+        }
+    }
+
     private void UpdateAnimations()
     {
         float speed = Mathf.Abs(rb.linearVelocity.x);
