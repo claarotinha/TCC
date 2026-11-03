@@ -90,6 +90,19 @@ public class SegundaParada : MonoBehaviour
     private float fracaoPainelNoite;
     private int focoNoite;
 
+    [Header("Fortaleza - fim do ato 1")]
+    [SerializeField] private Sprite cenarioFortaleza;
+    [SerializeField] private Sprite policialParado, policialPassoA, policialPassoB, policialBloqueio;
+    [SerializeField] private Sprite familiaSurpresa, familiaSurpresaCurativo;
+    private GameObject cidadeCenario, familiaFinal;
+    private readonly GameObject[] policiais = new GameObject[3];
+    private bool fortalezaIniciada, dialogoFortalezaConcluido, abordagemIniciada, atoConcluido;
+    private bool finalEmAndamento, encerramentoMostrado;
+    private SpriteRenderer[] desenhosFundoFim;
+    private bool[] fundoFimAtivo;
+    private CameraClearFlags fundoCameraOriginal;
+    private Color corCameraOriginal;
+
     private Transform barriguda;
     private Vector3 posicaoBarriguda;
     private bool aguaTerceiraIniciada, dialogoTerceiraConcluido, aguaTerceiraConcluida;
@@ -161,6 +174,7 @@ public class SegundaParada : MonoBehaviour
         PrepararAguaTerceira();
         PrepararEncontroTerceira();
         PrepararJuazeiro();
+        PrepararFortaleza();
         PrepararAcampamento();
         AplicarFerimento();
         if (GameProgress.Instance != null && GameProgress.Instance.Data.estradaAbrigoConcluido)
@@ -191,6 +205,8 @@ public class SegundaParada : MonoBehaviour
     {
         if (PauseHelper.BlockInput() || Time.timeScale == 0f || sequenciaAbrigo) return;
         ControleJornada j = ControleJornada.Instance;
+        AtualizarFortaleza();
+        if (sequenciaAbrigo || encerramentoMostrado) return;
         AtualizarAcampamento();
         if (sequenciaAbrigo) return;
         if (sequenciaJuazeiroIniciada && grupoCapturado)
@@ -2474,6 +2490,241 @@ public class SegundaParada : MonoBehaviour
         SalvarAguaTerceira();
     }
 
+    private void PrepararFortaleza()
+    {
+        if (GameProgress.Instance != null)
+        {
+            GameProgressData d = GameProgress.Instance.Data;
+            fortalezaIniciada = d.estradaFortalezaIniciada;
+            dialogoFortalezaConcluido = d.estradaDialogoFortalezaConcluido;
+            abordagemIniciada = d.estradaAbordagemIniciada;
+            atoConcluido = d.ato1Concluido;
+        }
+        if (quintaParada == null || cenarioFortaleza == null || placaFortaleza == null ||
+            policialParado == null || policialPassoA == null || policialPassoB == null ||
+            policialBloqueio == null || familiaSurpresa == null || familiaSurpresaCurativo == null ||
+            mari == null || mariquinha == null || mae == null || pai == null || baleia == null ||
+            Camera.main == null || dialogueUI == null || dialoguePanel == null ||
+            dialogueText == null || characterNameText == null || choicesContainer == null)
+        {
+            Debug.LogError("SegundaParada: faltam referencias da chegada a Fortaleza.", this);
+            return;
+        }
+        float x = quintaParada.position.x;
+        float largura = 12.8f * cenarioFortaleza.bounds.size.x / cenarioFortaleza.bounds.size.y;
+        cidadeCenario = CriarAlvoEncontro("Fortaleza", "cidade", cenarioFortaleza,
+            x + 7f + largura * 0.5f, 12.8f, -18);
+        cidadeCenario.transform.position += Vector3.down * 4f;
+        cidadeCenario.GetComponent<BoxCollider2D>().enabled = false;
+        cidadeCenario.SetActive(true);
+        GameObject placa = CriarAlvoEncontro("Entrada de Fortaleza", "entradaFortaleza", placaFortaleza,
+            x + 12f, 1.8f, 1);
+        placa.GetComponent<BoxCollider2D>().enabled = false;
+        placa.SetActive(true);
+        Bounds b = placa.GetComponent<SpriteRenderer>().bounds;
+        GameObject rotulo = new GameObject("Texto Fortaleza", typeof(TextMeshPro));
+        rotulo.transform.SetParent(transform, false);
+        rotulo.transform.position = new Vector3(b.center.x, b.min.y + b.size.y * 0.66f, -0.1f);
+        TextMeshPro texto = rotulo.GetComponent<TextMeshPro>();
+        texto.font = dialogueText.font;
+        texto.text = "FORTALEZA";
+        texto.alignment = TextAlignmentOptions.Center;
+        texto.color = new Color(0.24f, 0.12f, 0.07f);
+        texto.enableAutoSizing = true;
+        texto.fontSizeMin = 2f; texto.fontSizeMax = 3.2f; texto.fontSize = 3.2f;
+        texto.rectTransform.sizeDelta = new Vector2(b.size.x * 0.82f, b.size.y * 0.4f);
+        texto.GetComponent<MeshRenderer>().sortingOrder = 2;
+        for (int i = 0; i < policiais.Length; i++)
+        {
+            policiais[i] = CriarAlvoEncontro("Policial " + (i + 1), "policial", i == 0 ? policialBloqueio : policialParado,
+                x + 24f + i * 0.8f, 2.9f, 13);
+            policiais[i].GetComponent<BoxCollider2D>().enabled = false;
+            policiais[i].SetActive(true);
+        }
+        float altura = 6.8f * familiaSurpresa.bounds.size.y / familiaSurpresa.bounds.size.x;
+        familiaFinal = CriarAlvoEncontro("Familia na abordagem", "familiaFinal", familiaSurpresa,
+            x + 20f, altura, 11);
+        familiaFinal.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    private void AtualizarFortaleza()
+    {
+        if (cidadeCenario == null || restaurandoFamilia || finalEmAndamento || encerramentoMostrado ||
+            GameSaveSystem.IsRestoring || !acampamentoConcluido) return;
+        if (atoConcluido)
+        {
+            BloquearMovimento(); CapturarGrupoAbrigo();
+            if (seguirCamera != null) seguirCamera.enabled = false;
+            MostrarFimAto();
+            return;
+        }
+        if (conversando || (dialogueUI != null && dialogueUI.activeInHierarchy)) return;
+        if (abordagemIniciada || (dialogoFortalezaConcluido && mari.transform.position.x >= quintaParada.position.x + 21.8f))
+        {
+            IniciarAbordagem(); return;
+        }
+        if (!dialogoFortalezaConcluido && (fortalezaIniciada || mari.transform.position.x >= quintaParada.position.x + 12f))
+        {
+            fortalezaIniciada = true; SalvarFortaleza();
+            Falar(new[] { "Mariquinha", "Mãe", "Mariquinha", "Pai" }, new[] {
+                "Zefinha… Olha! Quanta casa! Mainha! Painho! Nos chegamu foi? Num vejo a hora de provar sorvete.",
+                "É cidade bonita…", "La ninguém passa fome?", "Num vai passar mais."
+            }, () => { dialogoFortalezaConcluido = true; SalvarFortaleza(); }, true);
+        }
+    }
+
+    private void IniciarAbordagem()
+    {
+        finalEmAndamento = true; abordagemIniciada = true;
+        BloquearMovimento(); CapturarGrupoAbrigo();
+        if (seguirCamera != null) seguirCamera.enabled = false;
+        SalvarFortaleza();
+        Falar(new[] { "Policial" }, new[] {
+            "Parados! Onde pensam que estão indo? Larguem essas trouxas."
+        }, () => { BloquearMovimento(); sequenciaAbrigo = true; StartCoroutine(EncerrarJornada()); });
+    }
+
+    private void PosePolicial(GameObject policial, Sprite pose, bool olharDireita)
+    {
+        SpriteRenderer desenho = policial.GetComponent<SpriteRenderer>();
+        float pe = desenho.bounds.min.y;
+        desenho.sprite = pose; desenho.flipX = olharDireita;
+        policial.transform.localScale = Vector3.one * (2.9f / Mathf.Max(0.01f, pose.bounds.size.y));
+        policial.transform.position += Vector3.up * (pe - desenho.bounds.min.y);
+    }
+
+    private void EnquadrarAbordagem(float zoom)
+    {
+        Bounds b = cidadeCenario.GetComponent<SpriteRenderer>().bounds;
+        cameraAbrigo.orthographicSize = Mathf.Min(zoom, b.size.x / (2f * cameraAbrigo.aspect), b.size.y * 0.5f - 0.2f);
+        float meiaLargura = cameraAbrigo.orthographicSize * cameraAbrigo.aspect;
+        Vector3 p = cameraOriginal;
+        p.x = Mathf.Clamp(familiaFinal.transform.position.x + 0.4f, b.min.x + meiaLargura, b.max.x - meiaLargura);
+        p.y = Mathf.Clamp(p.y, b.min.y + cameraAbrigo.orthographicSize, b.max.y - cameraAbrigo.orthographicSize);
+        cameraAbrigo.transform.position = p;
+    }
+
+    private IEnumerator EncerrarJornada()
+    {
+        PrepararFade(); yield return Escurecer(1f);
+        foreach (SpriteRenderer desenho in desenhosAbrigo) if (desenho != null) desenho.enabled = false;
+        Sprite pose = JanelaQuebrada && curativoAplicado ? familiaSurpresaCurativo : familiaSurpresa;
+        familiaFinal.GetComponent<SpriteRenderer>().sprite = pose;
+        familiaFinal.transform.localScale = Vector3.one * (6.8f / pose.bounds.size.x);
+        familiaFinal.transform.position = new Vector3(mari.transform.position.x - 1.4f, -2.4f, 0f);
+        familiaFinal.SetActive(true);
+        EnquadrarAbordagem(5f);
+        yield return Escurecer(0f); RestaurarFade();
+        Bounds familia = familiaFinal.GetComponent<SpriteRenderer>().bounds;
+        Vector3 centro = familiaFinal.transform.position;
+        Vector3[] origens = new Vector3[3];
+        Vector3[] destinos = {
+            new Vector3(familia.max.x + 0.8f, -2.4f, 0f),
+            new Vector3(familia.min.x - 1.2f, -2.4f, 0f),
+            new Vector3(familia.center.x, -1.7f, 0f)
+        };
+        for (int i = 0; i < policiais.Length; i++)
+        {
+            origens[i] = policiais[i].transform.position;
+            policiais[i].GetComponent<SpriteRenderer>().sortingOrder = i == 0 ? 13 : 10;
+        }
+        float tempo = 0f;
+        while (tempo < 4f)
+        {
+            tempo += Time.deltaTime;
+            float t = Mathf.Clamp01(tempo / 2.2f);
+            for (int i = 0; i < policiais.Length; i++)
+            {
+                Vector3 p = Vector3.Lerp(origens[i], destinos[i], t);
+                if (i > 0) p.y += Mathf.Sin(t * Mathf.PI) * 1.2f;
+                policiais[i].transform.position = p;
+                Sprite passo = ((int)(tempo / 0.18f) % 2 == 0) ? policialPassoA : policialPassoB;
+                PosePolicial(policiais[i], t < 1f ? passo : (i == 0 ? policialBloqueio : policialParado), i == 1);
+                if (i == 1 && t >= 1f) policiais[i].GetComponent<SpriteRenderer>().sortingOrder = 13;
+            }
+            familiaFinal.transform.position = centro + Vector3.right * (Mathf.Sin(tempo * 15f) * 0.035f);
+            EnquadrarAbordagem(Mathf.Lerp(5f, 6.1f, tempo / 4f));
+            yield return null;
+        }
+        familiaFinal.transform.position = centro;
+        PrepararFade(); yield return Escurecer(1f);
+        yield return new WaitForSeconds(1f);
+        atoConcluido = true; SalvarFortaleza();
+        MostrarFimAto();
+        sequenciaAbrigo = false;
+    }
+
+    private void MostrarFimAto()
+    {
+        // O painel existente apresenta o encerramento sobre a cena escurecida.
+        desenhosFundoFim = FindObjectsByType<SpriteRenderer>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        fundoFimAtivo = new bool[desenhosFundoFim.Length];
+        for (int i = 0; i < desenhosFundoFim.Length; i++)
+        {
+            fundoFimAtivo[i] = desenhosFundoFim[i].enabled;
+            desenhosFundoFim[i].enabled = false;
+        }
+        fundoCameraOriginal = cameraAbrigo.clearFlags; corCameraOriginal = cameraAbrigo.backgroundColor;
+        cameraAbrigo.clearFlags = CameraClearFlags.SolidColor; cameraAbrigo.backgroundColor = Color.black;
+        // Textos de placas usam MeshRenderer, fora do conjunto de sprites acima.
+        cidadeCenario.SetActive(false);
+        foreach (TextMeshPro placa in GetComponentsInChildren<TextMeshPro>(true)) placa.gameObject.SetActive(false);
+        RestaurarFade(); LimparEscolhas();
+        encerramentoMostrado = true; conversando = true; esperandoEscolha = true;
+        depois = null;
+        dialogueUI.SetActive(true); dialoguePanel.SetActive(true);
+        Grupo(dialogueUI); Grupo(dialoguePanel);
+        characterNameText.text = "Currais";
+        dialogueText.text = "FIM DO ATO 1 — A JORNADA DOS RETIRANTES";
+        if (portraitImage != null) portraitImage.enabled = false;
+        choicesContainer.SetActive(true); Grupo(choicesContainer);
+        Button[] opcoes = choicesContainer.GetComponentsInChildren<Button>(true);
+        for (int i = 0; i < opcoes.Length; i++)
+        {
+            Button botao = opcoes[i]; botoes.Add(botao);
+            botao.onClick.RemoveAllListeners(); botao.gameObject.SetActive(i == 0);
+            if (i != 0) continue;
+            TMP_Text texto = botao.GetComponentInChildren<TMP_Text>(true);
+            if (texto != null) texto.text = "Menu principal";
+            botao.interactable = true; botao.onClick.AddListener(VoltarMenuFim);
+        }
+    }
+
+    private void RestaurarFundoFim()
+    {
+        if (desenhosFundoFim == null) return;
+        for (int i = 0; i < desenhosFundoFim.Length; i++)
+            if (desenhosFundoFim[i] != null) desenhosFundoFim[i].enabled = fundoFimAtivo[i];
+        if (cameraAbrigo != null)
+        {
+            cameraAbrigo.clearFlags = fundoCameraOriginal; cameraAbrigo.backgroundColor = corCameraOriginal;
+        }
+        desenhosFundoFim = null; fundoFimAtivo = null;
+    }
+
+    private void VoltarMenuFim()
+    {
+        if (!encerramentoMostrado || PauseHelper.BlockInput() || !Application.CanStreamedLevelBeLoaded("MenuPrincipal")) return;
+        LimparEscolhas(); dialogueUI.SetActive(false);
+        RestaurarFundoFim(); RestaurarFade(); RestaurarCamera(); RestaurarGrupoAbrigo();
+        RestaurarInventarioAbrigo(); LiberarMovimento();
+        if (UniversalPauseManager.Instance != null) UniversalPauseManager.Instance.ResumeGame();
+        Time.timeScale = 1f;
+        if (GameManager.Instance != null) GameManager.Instance.LoadScene("MenuPrincipal");
+        else UnityEngine.SceneManagement.SceneManager.LoadScene("MenuPrincipal");
+    }
+
+    private void SalvarFortaleza()
+    {
+        if (GameProgress.Instance == null || GameSaveSystem.IsRestoring) return;
+        GameProgressData d = GameProgress.Instance.Data;
+        d.estradaFortalezaIniciada = fortalezaIniciada;
+        d.estradaDialogoFortalezaConcluido = dialogoFortalezaConcluido;
+        d.estradaAbordagemIniciada = abordagemIniciada;
+        d.ato1Concluido = atoConcluido;
+        SalvarAguaTerceira();
+    }
+
     private void SalvarAguaTerceira()
     {
         if (GameProgress.Instance == null || !GameProgress.Instance.Data.CanSave || GameSaveSystem.IsRestoring)
@@ -2485,6 +2736,9 @@ public class SegundaParada : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
+        RestaurarFundoFim();
+        if (familiaFinal != null) familiaFinal.SetActive(false);
+        finalEmAndamento = false; encerramentoMostrado = false;
         if (irmasCenario != null) irmasCenario.SetActive(false);
         if (paisCenario != null) paisCenario.SetActive(false);
         RestaurarCoresAcampamento();
@@ -2521,6 +2775,7 @@ public class MarcadorSegundaParada : MonoBehaviour
     public string id { get; private set; }
     public void configurar(SegundaParada c, string identificador) { id = identificador; }
 }
+
 
 
 

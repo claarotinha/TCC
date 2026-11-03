@@ -851,7 +851,7 @@ MonoBehaviour:
   trechoAposAguaTerceira: 8
   trechoJuazeiro: 4
   trechoAcampamento: 7.5
-  trechoAposAcampamento: 8
+  trechoAposAcampamento: 22.5
 --- !u!4 &406039565
 Transform:
   m_ObjectHideFlags: 0
@@ -6284,7 +6284,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.201737510, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -6294,7 +6294,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.403475021, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &1750010631
 SpriteRenderer:
@@ -10665,6 +10665,13 @@ MonoBehaviour:
   irmasSilencioCurativo: {fileID: 21300001, guid: c8a80000000040008000000000000003, type: 3}
   irmasDormindo: {fileID: 21300002, guid: c8a80000000040008000000000000003, type: 3}
   paisAcordados: {fileID: 21300003, guid: c8a80000000040008000000000000003, type: 3}
+  cenarioFortaleza: {fileID: 21300000, guid: c9a90000000040008000000000000001, type: 3}
+  policialParado: {fileID: 21300000, guid: c9a90000000040008000000000000002, type: 3}
+  policialPassoA: {fileID: 21300001, guid: c9a90000000040008000000000000002, type: 3}
+  policialPassoB: {fileID: 21300002, guid: c9a90000000040008000000000000002, type: 3}
+  policialBloqueio: {fileID: 21300003, guid: c9a90000000040008000000000000002, type: 3}
+  familiaSurpresa: {fileID: 21300000, guid: c9a90000000040008000000000000003, type: 3}
+  familiaSurpresaCurativo: {fileID: 21300001, guid: c9a90000000040008000000000000003, type: 3}
 --- !u!1 &3500000010
 GameObject:
   m_ObjectHideFlags: 0
@@ -10970,6 +10977,7 @@ SceneRoots:
   - {fileID: 789316125}
   - {fileID: 406039565}
   - {fileID: 3000000001}
+
 
 
 

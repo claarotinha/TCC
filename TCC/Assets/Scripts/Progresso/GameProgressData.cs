@@ -66,6 +66,10 @@ public class GameProgressData
     public bool estradaConversaIrmasConcluida;
     public bool estradaConversaPaisConcluida;
     public bool estradaAcampamentoConcluido;
+    public bool estradaFortalezaIniciada;
+    public bool estradaDialogoFortalezaConcluido;
+    public bool estradaAbordagemIniciada;
+    public bool ato1Concluido;
 
     public bool CanSave => tutorialCompleted ||
         (secaDepartureCompleted && secaMealCompleted &&
@@ -79,6 +83,7 @@ public class GameProgressData
 
     public List<string> unlockedDiaryPages = new List<string>();
 }
+
 
 
 

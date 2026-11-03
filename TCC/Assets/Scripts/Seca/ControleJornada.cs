@@ -24,7 +24,7 @@ public class ControleJornada : MonoBehaviour
 
     [Header("Acampamento e ultima caminhada")]
     [SerializeField, Min(0f)] private float trechoAcampamento = 7.5f;
-    [SerializeField, Min(0f)] private float trechoAposAcampamento = 8f;
+    [SerializeField, Min(0f)] private float trechoAposAcampamento = 22.5f;
 
     private bool paradaAtiva;
     private int paradaAtual = -1;
@@ -160,6 +160,7 @@ public class ControleJornada : MonoBehaviour
             Instance = null;
     }
 }
+
 
 
 
