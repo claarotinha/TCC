@@ -17,6 +17,7 @@ public class ControleJornada : MonoBehaviour
     [SerializeField, Min(0f)] private float trechoAguaTerceira = 5f;
     [SerializeField, Min(0f)] private float trechoAposAguaTerceira = 8f;
     private bool aguaTerceiraLiberada;
+    private bool encontroTerceiraLiberado;
 
     private bool paradaAtiva;
     private int paradaAtual = -1;
@@ -48,6 +49,7 @@ public class ControleJornada : MonoBehaviour
         if (dados.estradaAbrigoConcluido) salvo = Mathf.Max(salvo, 2);
         paradasConcluidas = Mathf.Max(paradasConcluidas, salvo);
         aguaTerceiraLiberada = dados.estradaBarrigudaConcluida;
+        encontroTerceiraLiberado = dados.estradaCurativoAplicado;
         if (paradasConcluidas == 2 && dados.estradaTerceiraAguaIniciada)
         {
             paradaAtiva = true;
@@ -67,7 +69,8 @@ public class ControleJornada : MonoBehaviour
 
         float limiteX = limite.position.x;
         if (paradasConcluidas == 2)
-            limiteX += aguaTerceiraLiberada ? trechoAposAguaTerceira : trechoAguaTerceira;
+            limiteX += aguaTerceiraLiberada && (encontroTerceiraLiberado || !SegundaParada.JanelaQuebrada)
+                ? trechoAposAguaTerceira : trechoAguaTerceira;
         // Bloqueia somente o avanço para a direita.
         if (mari.position.x > limiteX)
         {
@@ -91,6 +94,11 @@ public class ControleJornada : MonoBehaviour
     {
         if (paradaAtiva && paradaAtual == 3) aguaTerceiraLiberada = true;
         // A terceira parada so termina depois do ferimento/encontro da etapa seguinte.
+    }
+
+    public void LiberarEncontroTerceiraParada()
+    {
+        encontroTerceiraLiberado = true;
     }
 
     public bool IniciarParada(int numero)
@@ -130,3 +138,4 @@ public class ControleJornada : MonoBehaviour
             Instance = null;
     }
 }
+

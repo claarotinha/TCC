@@ -1401,6 +1401,7 @@ MonoBehaviour:
   yesButton: {fileID: 2437173132216038415}
   noButton: {fileID: 459745502855180605}
   recipes:
+  - {fileID: 11400000, guid: c6a60000000040008000000000000006, type: 2}
   - {fileID: 11400000, guid: b978c9c9b0851ad479f89963bc408037, type: 2}
   - {fileID: 11400000, guid: aa17c14a2df34f789bd319f7012a0012, type: 2}
   - {fileID: 11400000, guid: aa17c14a2df34f789bd319f7012a0043, type: 2}
@@ -2611,4 +2612,5 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+
 

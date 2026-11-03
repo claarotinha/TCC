@@ -42,6 +42,18 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private Sprite barrigudaInteira;
     [SerializeField] private Sprite barrigudaAberta;
 
+    [Header("Curativo e encontro da terceira parada")]
+    [SerializeField] private ItemData plantaMedicinal;
+    [SerializeField] private ItemData curativo;
+    [SerializeField] private Sprite mariquinhaComCurativo;
+    [SerializeField] private Sprite mulherRetirante;
+    [SerializeField] private Sprite meninoRetirante;
+    [SerializeField] private Sprite pessoaDeitada;
+    private GameObject plantaCenario, mulherCenario, meninoCenario, pessoaCenario;
+    private bool plantaColetada, curativoPreparado, curativoAplicado;
+    private bool encontroVisitado, encontroConcluido, perguntasAbertas;
+    private int perguntasAntonio;
+
     private Transform barriguda;
     private Vector3 posicaoBarriguda;
     private bool aguaTerceiraIniciada, dialogoTerceiraConcluido, aguaTerceiraConcluida;
@@ -101,8 +113,9 @@ public class SegundaParada : MonoBehaviour
             if (visualMariquinha != null) spriteMariquinhaNormal = visualMariquinha.sprite;
             escalaMariquinhaNormal = mariquinha.transform.localScale;
         }
-        AplicarFerimento();
         PrepararAguaTerceira();
+        PrepararEncontroTerceira();
+        AplicarFerimento();
         if (GameProgress.Instance != null && GameProgress.Instance.Data.estradaAbrigoConcluido)
         {
             iniciou = true;
@@ -138,6 +151,7 @@ public class SegundaParada : MonoBehaviour
     {
         if (PauseHelper.BlockInput() || Time.timeScale == 0f || sequenciaAbrigo) return;
         ControleJornada j = ControleJornada.Instance;
+        AtualizarEncontroTerceira();
         if (j != null && j.ParadaAtiva && j.ParadaAtual == 3 &&
             !aguaTerceiraConcluida && !dialogoTerceiraConcluido &&
             !conversando && dialogueUI != null && !dialogueUI.activeInHierarchy)
@@ -197,6 +211,9 @@ public class SegundaParada : MonoBehaviour
         float distancia;
         if (!plano.Raycast(raio, out distancia)) return;
         Vector3 ponto = raio.GetPoint(distancia);
+        InventoryManager inventarioSelecionado = InventoryManager.Instance;
+        if (inventarioSelecionado != null && inventarioSelecionado.SelectedItem == curativo &&
+            AcertouMariquinha(ponto) && UsarCurativo(curativo)) return;
         MarcadorSegundaParada escolhido = null;
         float menorDistancia = float.PositiveInfinity;
 
@@ -529,6 +546,11 @@ public class SegundaParada : MonoBehaviour
             PauseHelper.BlockInput() || Time.timeScale == 0f || sequenciaAbrigo) return;
         if (mari == null || Vector2.Distance(mari.transform.position, Posicao(alvo)) > 5f)
             return;
+        if (alvo == "plantaMedicinal" || alvo == "mulherRetirante" || alvo == "meninoRetirante")
+        {
+            InteragirEncontroTerceira(alvo);
+            return;
+        }
         if (alvo == "barriguda")
         {
             ControleJornada jornada = ControleJornada.Instance;
@@ -799,7 +821,10 @@ public class SegundaParada : MonoBehaviour
     {
         if (visualMariquinha == null || spriteMariquinhaNormal == null) return;
         float pe = visualMariquinha.bounds.min.y;
-        Sprite sprite = JanelaQuebrada && mariquinhaFerida != null ? mariquinhaFerida : spriteMariquinhaNormal;
+        Sprite sprite = spriteMariquinhaNormal;
+        if (JanelaQuebrada)
+            sprite = curativoAplicado && mariquinhaComCurativo != null ? mariquinhaComCurativo
+                : (mariquinhaFerida != null ? mariquinhaFerida : spriteMariquinhaNormal);
         visualMariquinha.sprite = sprite;
         float escala = spriteMariquinhaNormal.bounds.size.y / Mathf.Max(0.01f, sprite.bounds.size.y);
         mariquinha.transform.localScale = escalaMariquinhaNormal * escala;
@@ -1231,6 +1256,284 @@ public class SegundaParada : MonoBehaviour
         if (aguaTerceiraConcluida) SalvarAguaTerceira();
     }
 
+    private void PrepararEncontroTerceira()
+    {
+        if (GameProgress.Instance != null)
+        {
+            GameProgressData dados = GameProgress.Instance.Data;
+            plantaColetada = dados.estradaPlantaMedicinalColetada;
+            curativoPreparado = dados.estradaCurativoPreparado;
+            curativoAplicado = dados.estradaCurativoAplicado;
+            encontroVisitado = dados.estradaEncontroVisitado;
+            encontroConcluido = dados.estradaEncontroConcluido;
+            perguntasAntonio = dados.estradaPerguntasAntonio;
+        }
+        if (terceiraParada == null || plantaMedicinal == null || curativo == null ||
+            plantaMedicinal.icon == null || mariquinhaComCurativo == null ||
+            mulherRetirante == null || meninoRetirante == null || pessoaDeitada == null)
+        {
+            Debug.LogError("SegundaParada: faltam referencias do curativo/encontro.", this);
+            return;
+        }
+        float x = terceiraParada.position.x;
+        float alturaMeninas = spriteMariquinhaNormal != null
+            ? spriteMariquinhaNormal.bounds.size.y * Mathf.Abs(escalaMariquinhaNormal.y) : 2f;
+        plantaCenario = CriarAlvoEncontro("Planta medicinal", "plantaMedicinal",
+            plantaMedicinal.icon, x + 1.1f, 0.65f, 3);
+        pessoaCenario = CriarAlvoEncontro("Pessoa deitada", "pessoaDeitada",
+            pessoaDeitada, x + 4.8f, alturaMeninas * 0.3f, 2);
+        mulherCenario = CriarAlvoEncontro("Mulher retirante", "mulherRetirante",
+            mulherRetirante, x + 5.15f, alturaMeninas * 1.3f, 3);
+        meninoCenario = CriarAlvoEncontro("Menino retirante", "meninoRetirante",
+            meninoRetirante, x + 6.4f, alturaMeninas * 1.08f, 3);
+        pessoaCenario.GetComponent<BoxCollider2D>().enabled = false;
+        AtualizarVisuaisEncontro();
+    }
+
+    private GameObject CriarAlvoEncontro(string nome, string id, Sprite sprite, float x, float altura, int ordem)
+    {
+        CriarMarcador(nome, new Vector2(x, -2.4f), Color.white, 1f, 1f, id);
+        GameObject alvo = marcadores[marcadores.Count - 1];
+        SpriteRenderer desenho = alvo.GetComponent<SpriteRenderer>();
+        desenho.sprite = sprite;
+        desenho.sortingOrder = ordem;
+        float escala = altura / Mathf.Max(0.01f, sprite.bounds.size.y);
+        alvo.transform.localScale = Vector3.one * escala;
+        BoxCollider2D area = alvo.GetComponent<BoxCollider2D>();
+        area.size = sprite.bounds.size;
+        area.offset = sprite.bounds.center;
+        // Os icones usam pivô central; os personagens ja usam pivô nos pes.
+        Vector3 posicao = alvo.transform.position;
+        posicao.y += -2.4f - desenho.bounds.min.y;
+        alvo.transform.position = posicao;
+        alvo.SetActive(false);
+        return alvo;
+    }
+
+    private bool TerceiraEmAndamento()
+    {
+        ControleJornada jornada = ControleJornada.Instance;
+        return jornada != null && jornada.ParadaAtiva && jornada.ParadaAtual == 3 &&
+            aguaTerceiraConcluida && !encontroConcluido;
+    }
+
+    private void AtualizarVisuaisEncontro()
+    {
+        bool ativa = TerceiraEmAndamento();
+        bool precisaCurativo = JanelaQuebrada && !curativoAplicado;
+        if (plantaCenario != null) plantaCenario.SetActive(ativa && precisaCurativo && !plantaColetada);
+        // O grupo permanece no cenario depois da despedida, sem repetir a conversa.
+        bool mostrarGrupo = (ativa || encontroConcluido) && !precisaCurativo;
+        if (mulherCenario != null) mulherCenario.SetActive(mostrarGrupo);
+        if (meninoCenario != null) meninoCenario.SetActive(mostrarGrupo);
+        if (pessoaCenario != null) pessoaCenario.SetActive(mostrarGrupo);
+    }
+
+    private void AtualizarEncontroTerceira()
+    {
+        if (GameSaveSystem.IsRestoring) return;
+        AtualizarVisuaisEncontro();
+        if (!TerceiraEmAndamento()) return;
+        if (!curativoPreparado && Possui(curativo))
+        {
+            curativoPreparado = true;
+            if (GameProgress.Instance != null)
+                GameProgress.Instance.Data.estradaCurativoPreparado = true;
+            SalvarAguaTerceira();
+        }
+        if (JanelaQuebrada && !curativoAplicado) return;
+        ControleJornada.Instance.LiberarEncontroTerceiraParada();
+        if (mari == null || meninoCenario == null || dialogueUI == null ||
+            InvestigationGuard.Blocked) return;
+        // As interacoes sao opcionais. A aproximacao do grupo permite seguir adiante.
+        float x = mari.transform.position.x;
+        float referencia = terceiraParada.position.x;
+        if (!encontroVisitado && Mathf.Abs(x - (referencia + 5.7f)) <= 1.6f)
+        {
+            encontroVisitado = true;
+            if (GameProgress.Instance != null)
+                GameProgress.Instance.Data.estradaEncontroVisitado = true;
+        }
+        if (encontroVisitado && x >= referencia + 7.7f &&
+            (!conversando || perguntasAbertas) &&
+            (perguntasAbertas || !dialogueUI.activeInHierarchy))
+            EncerrarEncontroTerceira();
+    }
+
+    private void InteragirEncontroTerceira(string alvo)
+    {
+        if (!TerceiraEmAndamento() || InvestigationGuard.Blocked ||
+            dialogueUI == null || dialogueUI.activeInHierarchy) return;
+        if (alvo == "plantaMedicinal")
+        {
+            if (!JanelaQuebrada || curativoAplicado || plantaColetada || plantaCenario == null ||
+                !plantaCenario.activeInHierarchy || InventoryManager.Instance == null) return;
+            CollectPrompt coleta = FindFirstObjectByType<CollectPrompt>();
+            if (coleta != null) coleta.Show(plantaMedicinal, () =>
+            {
+                plantaColetada = true;
+                if (GameProgress.Instance != null)
+                    GameProgress.Instance.Data.estradaPlantaMedicinalColetada = true;
+                AtualizarVisuaisEncontro();
+                quadro = Time.frameCount;
+                SalvarAguaTerceira();
+            });
+            return;
+        }
+        if (JanelaQuebrada && !curativoAplicado) return;
+        encontroVisitado = true;
+        if (GameProgress.Instance != null)
+            GameProgress.Instance.Data.estradaEncontroVisitado = true;
+        if (alvo == "mulherRetirante")
+            Falar(new[] { "Mulher" }, new[] {
+                "Num acorda mais… Dormiu ontem. Hoje tá frio. Sempre dizia que ia morrê de velho. Mentiroso, morreu na paz, dormindo…"
+            }, SalvarAguaTerceira);
+        else if (alvo == "meninoRetirante")
+            Falar(new[] { "Menino" }, new[] {
+                "Ela ja vinha reclamando de uma dor forte no coração, dormiu ontem e não acordou mais."
+            }, MostrarPerguntasAntonio);
+    }
+
+    private bool AcertouMariquinha(Vector3 ponto)
+    {
+        if (visualMariquinha == null || !visualMariquinha.enabled ||
+            !visualMariquinha.gameObject.activeInHierarchy) return false;
+        Bounds area = visualMariquinha.bounds;
+        area.Expand(new Vector3(0.25f, 0.25f, 0f));
+        return ponto.x >= area.min.x && ponto.x <= area.max.x &&
+            ponto.y >= area.min.y && ponto.y <= area.max.y;
+    }
+
+    public bool SoltarCurativo(ItemData item, Vector2 posicaoTela)
+    {
+        Camera camera = Camera.main;
+        if (camera == null || item != curativo) return false;
+        Ray raio = camera.ScreenPointToRay(posicaoTela);
+        Plane plano = new Plane(Vector3.forward, Vector3.zero);
+        float distancia;
+        return plano.Raycast(raio, out distancia) && AcertouMariquinha(raio.GetPoint(distancia)) &&
+            UsarCurativo(item);
+    }
+
+    private bool UsarCurativo(ItemData item)
+    {
+        if (!TerceiraEmAndamento() || !JanelaQuebrada || curativoAplicado ||
+            item == null || item != curativo || !Possui(curativo) || mariquinha == null ||
+            mari == null || visualMariquinha == null || conversando || sequenciaAbrigo ||
+            PauseHelper.BlockInput() || Time.timeScale == 0f || GameSaveSystem.IsRestoring ||
+            (dialogueUI != null && dialogueUI.activeInHierarchy) ||
+            Vector2.Distance(mari.transform.position, mariquinha.transform.position) > 5f) return false;
+        curativoAplicado = true;
+        curativoPreparado = true;
+        if (GameProgress.Instance != null)
+        {
+            GameProgress.Instance.Data.estradaCurativoAplicado = true;
+            GameProgress.Instance.Data.estradaCurativoPreparado = true;
+        }
+        InventoryManager.Instance.RemoveItem(curativo);
+        // O tratamento muda o desenho, mas nunca apaga a escolha/ferimento da janela.
+        AplicarFerimento();
+        ControleJornada.Instance.LiberarEncontroTerceiraParada();
+        AtualizarVisuaisEncontro();
+        quadro = Time.frameCount;
+        InvestigationGuard.BlockCurrentClick();
+        SalvarAguaTerceira();
+        return true;
+    }
+
+    private void MostrarPerguntasAntonio()
+    {
+        if (choicesContainer == null) return;
+        LimparEscolhas();
+        foreach (Transform child in choicesContainer.transform)
+        {
+            Button botao = child.GetComponent<Button>();
+            if (botao != null) botoes.Add(botao);
+        }
+        if (botoes.Count < 3)
+        {
+            Debug.LogError("SegundaParada: faltam os tres botoes existentes para Antonio.", this);
+            LimparEscolhas();
+            return;
+        }
+        conversando = true;
+        esperandoEscolha = true;
+        perguntasAbertas = true;
+        depois = null;
+        // A/D permanece disponivel: afastar-se encerra o encontro sem impor perguntas.
+        LiberarMovimento();
+        dialogueUI.SetActive(true);
+        dialoguePanel.SetActive(true);
+        Grupo(dialogueUI); Grupo(dialoguePanel);
+        characterNameText.text = "Escolha";
+        dialogueText.text = "Escolha uma pergunta ou continue caminhando com A/D.";
+        if (portraitImage != null) portraitImage.enabled = false;
+        choicesContainer.SetActive(true);
+        Grupo(choicesContainer);
+        string[] opcoes = { "Perguntar o nome", "Perguntar de onde ele vem", "Desejar os pêsames" };
+        for (int i = 0; i < botoes.Count; i++)
+        {
+            Button botao = botoes[i];
+            botao.gameObject.SetActive(i < opcoes.Length);
+            if (i >= opcoes.Length) continue;
+            TMP_Text rotulo = botao.GetComponentInChildren<TMP_Text>(true);
+            if (rotulo != null) rotulo.text = opcoes[i];
+            int escolha = i;
+            botao.onClick.RemoveAllListeners();
+            botao.onClick.AddListener(() => ResponderAntonio(escolha));
+            botao.interactable = true;
+        }
+        quadro = Time.frameCount;
+        SalvarAguaTerceira();
+    }
+
+    private void ResponderAntonio(int escolha)
+    {
+        if (!perguntasAbertas || !esperandoEscolha || escolha < 0 || escolha > 2 ||
+            PauseHelper.BlockInput() || Time.timeScale == 0f) return;
+        perguntasAbertas = false;
+        esperandoEscolha = false;
+        LimparEscolhas();
+        choicesContainer.SetActive(false);
+        string[][] personagens = {
+            new[] { "Zefinha", "Menino", "Zefinha", "Menino", "Zefinha" },
+            new[] { "Zefinha", "Menino", "Zefinha", "Menino", "Zefinha" },
+            new[] { "Zefinha", "Menino", "Menino", "Zefinha", "Menino" }
+        };
+        string[][] textos = {
+            new[] { "Como é teu nome?", "Antônio.", "Eu sou Zefinha. Aquela ali é minha irmã, Mariquinha.", "Prazer…", "Prazer, Antônio." },
+            new[] { "Ocês vieram de onde?", "De uma fazenda lá pro interior. A seca acabou com tudo que nós tinha.", "E tão indo pra Fortaleza também?", "Tava indo… Agora num sei mais.", "Sinto muito…" },
+            new[] { "Sinto muito pelo que aconteceu.", "Obrigado…", "A gente saiu de casa achando que na cidade ia ser diferente.", "Talvez ainda seja…", "Tomara." }
+        };
+        Falar(personagens[escolha], textos[escolha], () =>
+        {
+            perguntasAntonio |= 1 << escolha;
+            if (GameProgress.Instance != null)
+                GameProgress.Instance.Data.estradaPerguntasAntonio = perguntasAntonio;
+            MostrarPerguntasAntonio();
+        });
+    }
+
+    private void EncerrarEncontroTerceira()
+    {
+        perguntasAbertas = false;
+        esperandoEscolha = false;
+        LimparEscolhas();
+        if (choicesContainer != null) choicesContainer.SetActive(false);
+        Falar(new[] { "Zefinha (em pensamentos)" }, new[] {
+            "Eu queria dizer alguma coisa que ajudasse… Mas num sei o que dizer."
+        }, () =>
+        {
+            encontroConcluido = true;
+            if (GameProgress.Instance != null)
+                GameProgress.Instance.Data.estradaEncontroConcluido = true;
+            ControleJornada.Instance.ConcluirParada(3);
+            AtualizarVisuaisEncontro();
+            quadro = Time.frameCount;
+            SalvarAguaTerceira();
+        });
+    }
+
     private void SalvarAguaTerceira()
     {
         if (GameProgress.Instance == null || !GameProgress.Instance.Data.CanSave || GameSaveSystem.IsRestoring)
@@ -1253,6 +1556,7 @@ public class SegundaParada : MonoBehaviour
         deslocandoFamilia = false;
         fugindo = false;
         preparandoBusca = false;
+        perguntasAbertas = false;
         LiberarMovimento();
         RetomarFamilia();
         MostrarBaleia(spriteBaleia);
@@ -1269,3 +1573,4 @@ public class MarcadorSegundaParada : MonoBehaviour
     public string id { get; private set; }
     public void configurar(SegundaParada c, string identificador) { id = identificador; }
 }
+

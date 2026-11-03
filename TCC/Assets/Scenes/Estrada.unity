@@ -10632,6 +10632,12 @@ MonoBehaviour:
   facao: {fileID: 11400000, guid: 479344094161c0740a7c1d933ed41f9b, type: 2}
   barrigudaInteira: {fileID: 21300000, guid: c5a50000000040008000000000000001, type: 3}
   barrigudaAberta: {fileID: 21300001, guid: c5a50000000040008000000000000001, type: 3}
+  plantaMedicinal: {fileID: 11400000, guid: c6a60000000040008000000000000004, type: 2}
+  curativo: {fileID: 11400000, guid: c6a60000000040008000000000000005, type: 2}
+  mariquinhaComCurativo: {fileID: 21300000, guid: c6a60000000040008000000000000002, type: 3}
+  mulherRetirante: {fileID: 21300001, guid: c6a60000000040008000000000000002, type: 3}
+  meninoRetirante: {fileID: 21300002, guid: c6a60000000040008000000000000002, type: 3}
+  pessoaDeitada: {fileID: 21300003, guid: c6a60000000040008000000000000002, type: 3}
 --- !u!1 &3500000010
 GameObject:
   m_ObjectHideFlags: 0
@@ -10679,3 +10685,4 @@ SceneRoots:
   - {fileID: 789316125}
   - {fileID: 406039565}
   - {fileID: 3000000001}
+
