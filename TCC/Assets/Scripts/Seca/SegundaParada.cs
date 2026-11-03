@@ -20,7 +20,7 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private Transform baleia;
 
     private int etapa; // 0 agua, 1 travessia, 2 busca, 3 abrigo, 4 concluida
-    private bool iniciou, conversando, movimentoAnterior, esperandoEscolha;
+    private bool iniciou, conversando, movimentoAnterior, esperandoEscolha, dialogoCaminhada;
     private int indice, quadro, pegadas;
     private readonly List<GameObject> marcadores = new List<GameObject>();
     private readonly List<Button> botoes = new List<Button>();
@@ -61,7 +61,7 @@ public class SegundaParada : MonoBehaviour
         Fechar();
     }
 
-    private void Falar(string[] personagens, string[] textos, Action fim)
+    private void Falar(string[] personagens, string[] textos, Action fim, bool duranteCaminhada = false)
     {
         if (dialogueUI == null || dialoguePanel == null ||
             characterNameText == null || dialogueText == null || mari == null)
@@ -71,7 +71,9 @@ public class SegundaParada : MonoBehaviour
         }
         nomes = personagens; falas = textos; depois = fim; indice = 0;
         conversando = true; esperandoEscolha = false;
-        movimentoAnterior = mari.enabled; mari.enabled = false;
+        dialogoCaminhada = duranteCaminhada;
+        movimentoAnterior = mari.enabled;
+        if (!duranteCaminhada) mari.enabled = false;
         dialogueUI.SetActive(true); dialoguePanel.SetActive(true);
         Grupo(dialogueUI); Grupo(dialoguePanel);
         if (choicesContainer != null) choicesContainer.SetActive(false);
@@ -97,7 +99,8 @@ public class SegundaParada : MonoBehaviour
     {
         conversando = false;
         dialogueUI.SetActive(false);
-        mari.enabled = movimentoAnterior;
+        if (!dialogoCaminhada) mari.enabled = movimentoAnterior;
+        dialogoCaminhada = false;
         Action acao = depois; depois = null;
         if (acao != null) acao();
     }
@@ -143,14 +146,30 @@ public class SegundaParada : MonoBehaviour
     private void DepoisDaTravessia()
     {
         if (riacho != null) riacho.gameObject.SetActive(false);
-        Falar(new[] { "Mariquinha", "Zefinha", "Mariquinha", "Zefinha (em pensamentos)", "Zefinha", "Mariquinha", "Zefinha", "Pai", "Mainha", "Mãe", "Pai" },
+        // Estas conversas usam o painel compartilhado, mas nao interrompem Mari.
+        Falar(
+            new[] { "Mariquinha", "Zefinha", "Mariquinha", "Zefinha (em pensamentos)", "Zefinha", "Mariquinha", "Zefinha" },
             new[] {
                 "Zefinha…", "hum?", "Tu acha que na cidade tem sorvete?",
                 "Claro que tem! Eu mesma vivo indo comer com mainha, ela nunca provou antes?",
                 "Eu acho que tem sim…", "Eu nunca vi. Nos pode comer quando chegar lá?",
-                "A gente pode pedir a painho e mainha sim.",
+                "A gente pode pedir a painho e mainha sim."
+            }, ConversaSertao, true);
+    }
+
+    private void ConversaSertao()
+    {
+        Falar(new[] { "Pai", "Mainha" },
+            new[] {
                 "Meu pai dizia que o sertão escuta. Quando o vento muda… É porque ele tá conversando. Quando num venta… É porque tá zangado. E quando chove… É porque perdoou nóis.",
-                "Que Deus nos conceda a graça da chuva.",
+                "Que Deus nos conceda a graça da chuva."
+            }, ConversaBaleia, true);
+    }
+
+    private void ConversaBaleia()
+    {
+        Falar(new[] { "Mãe", "Pai" },
+            new[] {
                 "Ave minha Nossa Senhora! Essa cachorra ficou doida, correndo desenfreada assim!",
                 "Severina, Jozefa, vão atrás de Baleia, ela deve ter visto alguma coisa ali na frente, eu e sua mãe vamo aproveitar pra ver se tem algum lugar por perto."
             }, IniciarBusca);
@@ -300,7 +319,7 @@ public class SegundaParada : MonoBehaviour
 
     private void OnDisable()
     {
-        if (conversando && mari != null) mari.enabled = movimentoAnterior;
+        if (conversando && mari != null && !dialogoCaminhada) mari.enabled = movimentoAnterior;
         if (conversando && dialogueUI != null) dialogueUI.SetActive(false);
     }
 }
