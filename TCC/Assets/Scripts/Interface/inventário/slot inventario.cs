@@ -100,6 +100,23 @@ public class InventorySlot : MonoBehaviour,
             return;
         }
 
+        // Primeiro tenta usar a cabaca no riacho, antes de rejeitar
+        // o drop pela area visual do inventario.
+        if (Camera.main != null)
+        {
+            Vector2 pontoAgua = Camera.main.ScreenToWorldPoint(eventData.position);
+            SegundaParada paradaAgua = FindFirstObjectByType<SegundaParada>();
+            if (paradaAgua != null)
+            {
+                foreach (Collider2D col in Physics2D.OverlapPointAll(pontoAgua))
+                {
+                    MarcadorSegundaParada marcadorAgua = col.GetComponent<MarcadorSegundaParada>();
+                    if (marcadorAgua != null && marcadorAgua.id == "riacho" &&
+                        paradaAgua.UsarNoRiacho(item)) return;
+                }
+            }
+        }
+
         // Soltar no restante do inventário não usa o item no cenário.
         InventoryUI inventoryUI = GetComponentInParent<InventoryUI>();
         RectTransform inventoryRect = inventoryUI != null
