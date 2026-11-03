@@ -2517,9 +2517,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   walkSpeed: 5
   runSpeed: 8
-  movementBounds: {fileID: 1931726781}
+  movementBounds: {fileID: 0}
   movementBackground:
-  - {fileID: 0}
+  - {fileID: 1931726780}
   - {fileID: 0}
   - {fileID: 0}
   groundCheck: {fileID: 0}
