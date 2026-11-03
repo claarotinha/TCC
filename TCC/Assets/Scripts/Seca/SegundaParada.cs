@@ -22,7 +22,6 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private SeguidorFamilia mariquinha;
     [SerializeField] private SeguidorFamilia mae;
     [SerializeField] private SeguidorFamilia pai;
-    [SerializeField] private Transform limiteBusca;
     [SerializeField] private Sprite[] corridaBaleia;
     [SerializeField] private Sprite baleiaComPrea;
     [SerializeField, Min(0.1f)] private float velocidadeFuga = 6.5f;
@@ -49,7 +48,7 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private Sprite mulherRetirante;
     [SerializeField] private Sprite meninoRetirante;
     [SerializeField] private Sprite pessoaDeitada;
-    private GameObject plantaCenario, mulherCenario, meninoCenario, pessoaCenario;
+    [SerializeField] private GameObject plantaCenario, mulherCenario, meninoCenario, pessoaCenario;
     private bool plantaColetada, curativoPreparado, curativoAplicado;
     private bool encontroVisitado, encontroConcluido, perguntasAbertas;
     private int perguntasAntonio;
@@ -60,7 +59,7 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private Sprite placaFortaleza;
     [SerializeField] private Sprite familiaJuazeiro;
     [SerializeField] private Sprite familiaJuazeiroCurativo;
-    private GameObject juazeiroCenario, familiaDescanso;
+    [SerializeField] private GameObject juazeiroCenario, familiaDescanso;
     private bool juazeiroIniciado, placaJuazeiroLida, letrasJuazeiroConcluidas, juazeiroConcluido;
     private bool sequenciaJuazeiroIniciada, restaurandoFamilia;
     private float fracaoPainelJuazeiro, zoomJuazeiro;
@@ -78,8 +77,8 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private Sprite irmasSilencio;
     [SerializeField] private Sprite irmasSilencioCurativo;
     [SerializeField] private Sprite paisAcordados;
-    private GameObject arvoreAcampamento, fogueiraCenario, irmasCenario, paisCenario;
-    private readonly GameObject[] materiaisCenario = new GameObject[3];
+    [SerializeField] private GameObject arvoreAcampamento, fogueiraCenario, irmasCenario, paisCenario;
+    [SerializeField] private GameObject[] materiaisCenario = new GameObject[3];
     private SpriteRenderer[] cenarioHorario;
     private Color[] coresHorario;
     private bool acampamentoIniciado, introAcampamentoConcluida, fogueiraPreparada, pedidoAlecrimConcluido;
@@ -94,8 +93,8 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private Sprite cenarioFortaleza;
     [SerializeField] private Sprite policialParado, policialPassoA, policialPassoB, policialBloqueio;
     [SerializeField] private Sprite familiaSurpresa, familiaSurpresaCurativo;
-    private GameObject cidadeCenario, familiaFinal;
-    private readonly GameObject[] policiais = new GameObject[3];
+    [SerializeField] private GameObject cidadeCenario, familiaFinal;
+    [SerializeField] private GameObject[] policiais = new GameObject[3];
     private bool fortalezaIniciada, dialogoFortalezaConcluido, abordagemIniciada, atoConcluido;
     private bool finalEmAndamento, encerramentoMostrado;
     private SpriteRenderer[] desenhosFundoFim;
@@ -103,7 +102,7 @@ public class SegundaParada : MonoBehaviour
     private CameraClearFlags fundoCameraOriginal;
     private Color corCameraOriginal;
 
-    private Transform barriguda;
+    [SerializeField] private Transform barriguda;
     private Vector3 posicaoBarriguda;
     private bool aguaTerceiraIniciada, dialogoTerceiraConcluido, aguaTerceiraConcluida;
     private bool recolhendoAgua, avisouProblemaAgua;
@@ -132,9 +131,6 @@ public class SegundaParada : MonoBehaviour
     private bool imagemFadeAtivaOriginal;
     private Vector2 ancoraMinOriginal, ancoraMaxOriginal, posicaoFadeOriginal, tamanhoFadeOriginal;
     private readonly List<bool> filhosFadeAtivos = new List<bool>();
-    private Vector3 posicaoCasaExterior, escalaCasaExterior;
-    private Sprite spriteCasaExterior;
-    private int ordemCasaExterior;
     private static bool ferimentoSemProgresso;
 
     private int etapa; // 0 agua, 1 travessia, 2 busca, 3 escolha, 4 concluida, 5 retorno, 6 casa, 7 cutscene
@@ -145,18 +141,32 @@ public class SegundaParada : MonoBehaviour
     private SpriteRenderer desenhoBaleia;
     private Sprite spriteBaleia;
     private Vector3 escalaBaleia, destinoBaleia;
-    private float inicioPegadas, retornoX;
+    private float retornoX;
     private int indice, quadro, pegadas;
     private readonly List<GameObject> marcadores = new List<GameObject>();
     private readonly List<Button> botoes = new List<Button>();
     private string[] nomes, falas;
     private Action depois;
-    private Vector3 posicaoBaleia;
-    private Transform riacho, casa;
+    [SerializeField] private Transform riacho, casa;
+
+    [Header("Posicionamento na Hierarchy")]
+    [SerializeField] private GameObject interiorAbrigo, familiaAcampamento;
+    [SerializeField] private GameObject placaJuazeiroCenario, placaEntradaFortaleza;
+    [SerializeField] private GameObject[] pistasBusca = new GameObject[3];
+    [SerializeField] private GameObject alvoBaleia;
+    [SerializeField] private Transform destinoBuscaBaleia, chegadaFortaleza, inicioAbordagem;
+    [SerializeField] private Transform inicioEncontro, saidaEncontro;
+    [SerializeField] private Transform[] destinosPoliciais = new Transform[3];
+    private readonly Dictionary<GameObject, string> idsCenario = new Dictionary<GameObject, string>();
+    private readonly Dictionary<GameObject, Vector3> escalasCenario = new Dictionary<GameObject, Vector3>();
+    private readonly Dictionary<GameObject, Vector3> tamanhosCenario = new Dictionary<GameObject, Vector3>();
+    private readonly Dictionary<GameObject, Vector2> areasCenario = new Dictionary<GameObject, Vector2>();
+    private readonly Dictionary<GameObject, Vector2> centrosCenario = new Dictionary<GameObject, Vector2>();
 
     private void Start()
     {
         ferimentoSemProgresso = false;
+        RegistrarCenario();
         if (mariquinha != null)
         {
             visualMariquinha = mariquinha.GetComponent<SpriteRenderer>();
@@ -165,7 +175,6 @@ public class SegundaParada : MonoBehaviour
         }
         if (baleia != null)
         {
-            posicaoBaleia = baleia.position;
             seguidorBaleia = baleia.GetComponent<SeguidorFamilia>();
             desenhoBaleia = baleia.GetComponent<SpriteRenderer>();
             escalaBaleia = baleia.localScale;
@@ -181,24 +190,12 @@ public class SegundaParada : MonoBehaviour
         {
             iniciou = true;
             etapa = 4;
+            if (riacho != null) riacho.gameObject.SetActive(false);
             restaurandoFamilia = true;
             StartCoroutine(RestaurarAbrigoCarregado());
             return;
         }
-        CriarMarcador("Riacho", new Vector2(transform.position.x + 1.8f, -0.6f),
-            new Color(0.25f, 0.52f, 0.68f), 3.2f, 0.55f, "riacho");
-        CriarMarcador("Casa abandonada", new Vector2(transform.position.x + 5f, 0f),
-            new Color(0.48f, 0.34f, 0.22f), 2f, 2.4f, "casa");
-        foreach (GameObject obj in marcadores)
-            if (obj.name == "Riacho") riacho = obj.transform;
-            else if (obj.name == "Casa abandonada") casa = obj.transform;
-        if (casa != null)
-        {
-            float x = limiteBusca != null ? limiteBusca.position.x - 2.8f : transform.position.x + 5f;
-            casa.position = new Vector3(x, -2.4f, 0f);
-            TrocarCasa(casaFechada);
-            casa.gameObject.SetActive(false);
-        }
+        if (casa != null) TrocarCasa(casaFechada);
     }
 
     private void Update()
@@ -282,7 +279,7 @@ public class SegundaParada : MonoBehaviour
         InventoryManager inventarioSelecionado = InventoryManager.Instance;
         if (inventarioSelecionado != null && inventarioSelecionado.SelectedItem == curativo &&
             AcertouMariquinha(ponto) && UsarCurativo(curativo)) return;
-        MarcadorSegundaParada escolhido = null;
+        string escolhido = null;
         float menorDistancia = float.PositiveInfinity;
 
         // Consulta os proprios alvos, sem deixar o collider da estrada cobri-los.
@@ -290,14 +287,14 @@ public class SegundaParada : MonoBehaviour
         {
             if (obj == null || !obj.activeInHierarchy) continue;
             BoxCollider2D area = obj.GetComponent<BoxCollider2D>();
-            MarcadorSegundaParada marcador = obj.GetComponent<MarcadorSegundaParada>();
-            if (area == null || !area.enabled || marcador == null) continue;
+            string identificador = IdentificadorCenario(obj);
+            if (area == null || !area.enabled || identificador == null) continue;
             Vector2 local = area.transform.InverseTransformPoint(ponto);
             Vector2 metade = area.size * 0.5f;
             Vector2 diferenca = local - area.offset;
             bool acertou = Mathf.Abs(diferenca.x) <= metade.x &&
                 Mathf.Abs(diferenca.y) <= metade.y;
-            if (marcador.id == "baleia" && desenhoBaleia != null &&
+            if (identificador == "baleia" && desenhoBaleia != null &&
                 desenhoBaleia.enabled && desenhoBaleia.gameObject.activeInHierarchy)
             {
                 // O clique acompanha o desenho real, inclusive o prea e mudancas de escala.
@@ -311,18 +308,18 @@ public class SegundaParada : MonoBehaviour
             if (proximidade < menorDistancia)
             {
                 menorDistancia = proximidade;
-                escolhido = marcador;
+                escolhido = identificador;
             }
         }
         if (escolhido == null) return;
-        if (escolhido.id == "riacho")
+        if (escolhido == "riacho")
         {
             InventoryManager inventario = InventoryManager.Instance;
             if (inventario != null && inventario.SelectedItem != null)
                 UsarNoRiacho(inventario.SelectedItem);
             return;
         }
-        Clicar(escolhido.id);
+        Clicar(escolhido);
     }
 
     private void Falar(string[] personagens, string[] textos, Action fim, bool duranteCaminhada = false)
@@ -494,12 +491,8 @@ public class SegundaParada : MonoBehaviour
         baleiaSeguia = seguidorBaleia != null && seguidorBaleia.enabled;
         if (seguidorBaleia != null) seguidorBaleia.enabled = false;
 
-        // A busca cabe no trecho atual mesmo se Mari caminhou durante as falas.
-        inicioPegadas = Mathf.Max(transform.position.x + 0.5f, mari.transform.position.x + 0.5f);
-        if (limiteBusca != null)
-            inicioPegadas = Mathf.Min(inicioPegadas, limiteBusca.position.x - 4.3f);
         retornoX = mae != null ? mae.transform.position.x + 1.2f : mari.transform.position.x;
-        destinoBaleia = new Vector3(inicioPegadas + 3.3f, posicaoBaleia.y, posicaoBaleia.z);
+        destinoBaleia = destinoBuscaBaleia.position;
     }
 
     private IEnumerator CorrerBaleia()
@@ -550,13 +543,8 @@ public class SegundaParada : MonoBehaviour
         BloquearMovimento();
         while (fugindo) yield return null;
         etapa = 2;
-        for (int i = 0; i < 3; i++)
-            CriarMarcador("Pegada " + (i + 1),
-                new Vector2(inicioPegadas + i * 1.1f, -1.4f),
-                new Color(0.39f, 0.28f, 0.18f), 0.35f, 0.22f, "pegada" + i);
-        CriarMarcador("Baleia encontrada",
-            new Vector2(destinoBaleia.x, baleia != null ? baleia.position.y + 0.35f : -1.3f),
-            new Color(0.55f, 0.4f, 0.28f), 1.2f, 0.9f, "baleia");
+        foreach (GameObject pista in pistasBusca) pista.SetActive(true);
+        alvoBaleia.SetActive(true);
         AtualizarPegadas();
         preparandoBusca = false;
         LiberarMovimento();
@@ -566,10 +554,10 @@ public class SegundaParada : MonoBehaviour
     {
         foreach (GameObject obj in marcadores)
         {
-            MarcadorSegundaParada pista = obj.GetComponent<MarcadorSegundaParada>();
-            if (pista == null || !pista.id.StartsWith("pegada")) continue;
+            string pista = IdentificadorCenario(obj);
+            if (pista == null || !pista.StartsWith("pegada")) continue;
             int numero;
-            if (!int.TryParse(pista.id.Substring(6), out numero)) continue;
+            if (!int.TryParse(pista.Substring(6), out numero)) continue;
             SpriteRenderer desenho = obj.GetComponent<SpriteRenderer>();
             if (desenho != null)
                 desenho.color = numero == pegadas
@@ -643,8 +631,7 @@ public class SegundaParada : MonoBehaviour
             int n;
             if (!int.TryParse(alvo.Substring(6), out n) || n != pegadas) return;
             pegadas++;
-            foreach (GameObject obj in marcadores)
-                if (obj.name == "Pegada " + pegadas) obj.SetActive(false);
+            pistasBusca[pegadas - 1].SetActive(false);
             AtualizarPegadas();
             return;
         }
@@ -655,9 +642,8 @@ public class SegundaParada : MonoBehaviour
             InventoryManager.Instance.AddItem(prea);
             MostrarBaleia(spriteBaleia);
             if (seguidorBaleia != null) seguidorBaleia.enabled = baleiaSeguia;
-            foreach (GameObject obj in marcadores)
-                if (obj.name.StartsWith("Pegada") || obj.name == "Baleia encontrada")
-                    obj.SetActive(false);
+            foreach (GameObject pista in pistasBusca) pista.SetActive(false);
+            alvoBaleia.SetActive(false);
         }
         else if (alvo == "casa" && etapa == 6) IniciarChegadaCasa();
     }
@@ -665,7 +651,7 @@ public class SegundaParada : MonoBehaviour
     private Vector2 Posicao(string alvo)
     {
         foreach (GameObject obj in marcadores)
-            if (obj.GetComponent<MarcadorSegundaParada>()?.id == alvo) return obj.transform.position;
+            if (IdentificadorCenario(obj) == alvo) return obj.transform.position;
         return transform.position;
     }
 
@@ -750,7 +736,7 @@ public class SegundaParada : MonoBehaviour
 
     private bool AbrigoConfigurado()
     {
-        bool valido = casa != null && casaFechada != null && casaPortaAberta != null &&
+        bool valido = casa != null && interiorAbrigo != null && casaFechada != null && casaPortaAberta != null &&
             casaJanelaQuebrada != null && descansoFamilia != null && mariquinhaFerida != null &&
             mari != null && mariquinha != null && mae != null && pai != null && baleia != null &&
             terceiraParada != null && dialoguePanel != null && dialoguePanel.GetComponent<Image>() != null &&
@@ -832,19 +818,7 @@ public class SegundaParada : MonoBehaviour
 
     private void TrocarCasa(Sprite sprite)
     {
-        if (casa == null || sprite == null) return;
-        SpriteRenderer visual = casa.GetComponent<SpriteRenderer>();
-        visual.sprite = sprite;
-        visual.color = Color.white;
-        visual.sortingOrder = 1;
-        float escala = 5.2f / Mathf.Max(0.01f, sprite.bounds.size.x);
-        casa.localScale = Vector3.one * escala;
-        BoxCollider2D area = casa.GetComponent<BoxCollider2D>();
-        if (area != null)
-        {
-            area.size = sprite.bounds.size;
-            area.offset = sprite.bounds.center;
-        }
+        if (casa != null) TrocarVisualCenario(casa.gameObject, sprite, true);
     }
 
     private IEnumerator MoverPessoa(Transform pessoa, float x, float duracao)
@@ -926,18 +900,11 @@ public class SegundaParada : MonoBehaviour
         yield return EntrarNoAbrigo();
         PrepararFade();
         yield return Escurecer(1f);
-        SpriteRenderer visualCasa = casa.GetComponent<SpriteRenderer>();
-        posicaoCasaExterior = casa.position;
-        escalaCasaExterior = casa.localScale;
-        spriteCasaExterior = visualCasa.sprite;
-        ordemCasaExterior = visualCasa.sortingOrder;
-        visualCasa.sprite = descansoFamilia;
-        visualCasa.sortingOrder = 30;
-        Vector3 centro = cameraAbrigo.transform.position;
-        casa.position = new Vector3(centro.x, centro.y, 0f);
-        float escala = Mathf.Max(2f * cameraAbrigo.orthographicSize / descansoFamilia.bounds.size.y,
-            2f * cameraAbrigo.orthographicSize * cameraAbrigo.aspect / descansoFamilia.bounds.size.x);
-        casa.localScale = Vector3.one * escala;
+        interiorAbrigo.SetActive(true);
+        Bounds interior = interiorAbrigo.GetComponent<SpriteRenderer>().bounds;
+        cameraAbrigo.transform.position = new Vector3(interior.center.x, interior.center.y, cameraOriginal.z);
+        cameraAbrigo.orthographicSize = Mathf.Min(zoomOriginal, interior.extents.y,
+            interior.extents.x / cameraAbrigo.aspect);
         if (seguirCamera != null) seguirCamera.enabled = false;
         for (int i = 0; i < desenhosAbrigo.Length; i++)
             if (desenhosAbrigo[i] != null) desenhosAbrigo[i].enabled = false;
@@ -1067,13 +1034,7 @@ public class SegundaParada : MonoBehaviour
 
     private void RestaurarExterior()
     {
-        if (spriteCasaExterior == null || casa == null) return;
-        SpriteRenderer visual = casa.GetComponent<SpriteRenderer>();
-        casa.position = posicaoCasaExterior; casa.localScale = escalaCasaExterior;
-        visual.sprite = spriteCasaExterior; visual.sortingOrder = ordemCasaExterior;
-        BoxCollider2D area = casa.GetComponent<BoxCollider2D>();
-        if (area != null) area.enabled = false;
-        spriteCasaExterior = null;
+        if (interiorAbrigo != null) interiorAbrigo.SetActive(false);
     }
 
     private void RestaurarCamera()
@@ -1161,29 +1122,61 @@ public class SegundaParada : MonoBehaviour
         restaurandoFamilia = false;
     }
 
-    private void CriarMarcador(string nome, Vector2 pos, Color cor, float largura, float altura, string id)
+    private void RegistrarAlvo(GameObject alvo, string id)
     {
-        GameObject go = new GameObject(nome, typeof(SpriteRenderer), typeof(BoxCollider2D), typeof(MarcadorSegundaParada));
-        go.transform.SetParent(transform, false);
-        go.transform.position = new Vector3(pos.x, pos.y, 0);
-        Texture2D tex = new Texture2D(1, 1);
-        tex.filterMode = FilterMode.Point; tex.SetPixel(0, 0, Color.white); tex.Apply();
-        SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
-        sr.sprite = Sprite.Create(tex, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f), 1);
-        sr.color = cor; sr.sortingOrder = 3;
-        // Mantem visiveis os alvos ja usados pelo puzzle; Baleia usa seu proprio desenho.
-        sr.enabled = id != "baleia" || baleia == null;
-        go.transform.localScale = new Vector3(largura, altura, 1);
-        BoxCollider2D col = go.GetComponent<BoxCollider2D>(); col.isTrigger = true;
-        if (id.StartsWith("pegada")) col.size = new Vector2(1.8f, 2f);
-        MarcadorSegundaParada marcador = go.GetComponent<MarcadorSegundaParada>();
-        marcador.configurar(this, id);
-        marcadores.Add(go);
+        if (alvo == null) { Debug.LogError("SegundaParada: objeto de cenario ausente: " + id, this); return; }
+        marcadores.Add(alvo); idsCenario[alvo] = id;
+        SpriteRenderer desenho = alvo.GetComponent<SpriteRenderer>();
+        if (desenho == null || desenho.sprite == null) return;
+        escalasCenario[alvo] = alvo.transform.localScale;
+        tamanhosCenario[alvo] = desenho.sprite.bounds.size;
+        BoxCollider2D area = alvo.GetComponent<BoxCollider2D>();
+        if (area != null) { areasCenario[alvo] = area.size; centrosCenario[alvo] = area.offset; }
+    }
+
+    private void RegistrarCenario()
+    {
+        RegistrarAlvo(riacho != null ? riacho.gameObject : null, "riacho");
+        RegistrarAlvo(casa != null ? casa.gameObject : null, "casa");
+        RegistrarAlvo(barriguda != null ? barriguda.gameObject : null, "barriguda");
+        RegistrarAlvo(plantaCenario, "plantaMedicinal"); RegistrarAlvo(mulherCenario, "mulherRetirante");
+        RegistrarAlvo(meninoCenario, "meninoRetirante"); RegistrarAlvo(pessoaCenario, "pessoaDeitada");
+        RegistrarAlvo(juazeiroCenario, "juazeiro"); RegistrarAlvo(familiaDescanso, "descansoJuazeiro");
+        RegistrarAlvo(arvoreAcampamento, "arvoreAcampamento"); RegistrarAlvo(fogueiraCenario, "fogueira");
+        RegistrarAlvo(irmasCenario, "irmasNoite"); RegistrarAlvo(paisCenario, "paisNoite");
+        RegistrarAlvo(familiaAcampamento, "familiaAcampamento"); RegistrarAlvo(interiorAbrigo, "interiorAbrigo");
+        RegistrarAlvo(cidadeCenario, "cidade"); RegistrarAlvo(familiaFinal, "familiaFinal");
+        RegistrarAlvo(alvoBaleia, "baleia");
+        for (int i = 0; i < pistasBusca.Length; i++) RegistrarAlvo(pistasBusca[i], "pegada" + i);
+        for (int i = 0; i < materiaisCenario.Length; i++) RegistrarAlvo(materiaisCenario[i], "materialAcampamento" + i);
+        for (int i = 0; i < policiais.Length; i++) RegistrarAlvo(policiais[i], "policial" + i);
+    }
+
+    private string IdentificadorCenario(GameObject alvo)
+    {
+        return alvo != null && idsCenario.TryGetValue(alvo, out string id) ? id : null;
+    }
+
+    private void TrocarVisualCenario(GameObject alvo, Sprite sprite, bool pelaLargura)
+    {
+        if (alvo == null || sprite == null || !tamanhosCenario.TryGetValue(alvo, out Vector3 original)) return;
+        SpriteRenderer desenho = alvo.GetComponent<SpriteRenderer>();
+        desenho.sprite = sprite;
+        float proporcao = pelaLargura ? original.x / sprite.bounds.size.x : original.y / sprite.bounds.size.y;
+        // As trocas de estado preservam a escala configurada no Inspector, inclusive eixos diferentes.
+        alvo.transform.localScale = escalasCenario[alvo] * proporcao;
+        BoxCollider2D area = alvo.GetComponent<BoxCollider2D>();
+        if (area != null && areasCenario.TryGetValue(alvo, out Vector2 tamanho))
+        {
+            Vector2 razao = new Vector2(sprite.bounds.size.x / original.x, sprite.bounds.size.y / original.y);
+            area.size = Vector2.Scale(tamanho, razao);
+            area.offset = Vector2.Scale(centrosCenario[alvo], razao);
+        }
     }
 
     private void PrepararAguaTerceira()
     {
-        if (terceiraParada == null || barrigudaInteira == null || barrigudaAberta == null || facao == null)
+        if (terceiraParada == null || barriguda == null || barrigudaInteira == null || barrigudaAberta == null || facao == null)
         {
             Debug.LogError("SegundaParada: faltam as referencias da barriguda.", this);
             return;
@@ -1195,25 +1188,13 @@ public class SegundaParada : MonoBehaviour
             dialogoTerceiraConcluido = dados.estradaDialogoBarrigudaConcluido;
             aguaTerceiraConcluida = dados.estradaBarrigudaConcluida;
         }
-        CriarMarcador("Barriguda", new Vector2(terceiraParada.position.x + 2.4f, -2.4f),
-            Color.white, 1f, 1f, "barriguda");
-        barriguda = marcadores[marcadores.Count - 1].transform;
         posicaoBarriguda = barriguda.position;
         MostrarBarriguda(aguaTerceiraConcluida ? barrigudaAberta : barrigudaInteira);
     }
 
     private void MostrarBarriguda(Sprite sprite)
     {
-        if (barriguda == null || sprite == null) return;
-        SpriteRenderer desenho = barriguda.GetComponent<SpriteRenderer>();
-        desenho.sprite = sprite;
-        desenho.color = Color.white;
-        desenho.sortingOrder = 2;
-        float escala = 4.8f / Mathf.Max(0.01f, sprite.bounds.size.y);
-        barriguda.localScale = Vector3.one * escala;
-        BoxCollider2D area = barriguda.GetComponent<BoxCollider2D>();
-        area.size = sprite.bounds.size;
-        area.offset = sprite.bounds.center;
+        if (barriguda != null) TrocarVisualCenario(barriguda.gameObject, sprite, false);
     }
 
     private bool TrocarCabaca(ItemData origem, ItemData destino)
@@ -1348,46 +1329,15 @@ public class SegundaParada : MonoBehaviour
             encontroConcluido = dados.estradaEncontroConcluido;
             perguntasAntonio = dados.estradaPerguntasAntonio;
         }
-        if (terceiraParada == null || plantaMedicinal == null || curativo == null ||
+        if (terceiraParada == null || plantaCenario == null || mulherCenario == null ||
+            meninoCenario == null || pessoaCenario == null || inicioEncontro == null || saidaEncontro == null || plantaMedicinal == null || curativo == null ||
             plantaMedicinal.icon == null || mariquinhaComCurativo == null ||
             mulherRetirante == null || meninoRetirante == null || pessoaDeitada == null)
         {
             Debug.LogError("SegundaParada: faltam referencias do curativo/encontro.", this);
             return;
         }
-        float x = terceiraParada.position.x;
-        float alturaMeninas = spriteMariquinhaNormal != null
-            ? spriteMariquinhaNormal.bounds.size.y * Mathf.Abs(escalaMariquinhaNormal.y) : 2f;
-        plantaCenario = CriarAlvoEncontro("Planta medicinal", "plantaMedicinal",
-            plantaMedicinal.icon, x + 1.1f, 0.65f, 3);
-        pessoaCenario = CriarAlvoEncontro("Pessoa deitada", "pessoaDeitada",
-            pessoaDeitada, x + 4.8f, alturaMeninas * 0.3f, 2);
-        mulherCenario = CriarAlvoEncontro("Mulher retirante", "mulherRetirante",
-            mulherRetirante, x + 5.15f, alturaMeninas * 1.3f, 3);
-        meninoCenario = CriarAlvoEncontro("Menino retirante", "meninoRetirante",
-            meninoRetirante, x + 6.4f, alturaMeninas * 1.08f, 3);
-        pessoaCenario.GetComponent<BoxCollider2D>().enabled = false;
         AtualizarVisuaisEncontro();
-    }
-
-    private GameObject CriarAlvoEncontro(string nome, string id, Sprite sprite, float x, float altura, int ordem)
-    {
-        CriarMarcador(nome, new Vector2(x, -2.4f), Color.white, 1f, 1f, id);
-        GameObject alvo = marcadores[marcadores.Count - 1];
-        SpriteRenderer desenho = alvo.GetComponent<SpriteRenderer>();
-        desenho.sprite = sprite;
-        desenho.sortingOrder = ordem;
-        float escala = altura / Mathf.Max(0.01f, sprite.bounds.size.y);
-        alvo.transform.localScale = Vector3.one * escala;
-        BoxCollider2D area = alvo.GetComponent<BoxCollider2D>();
-        area.size = sprite.bounds.size;
-        area.offset = sprite.bounds.center;
-        // Os icones usam pivô central; os personagens ja usam pivô nos pes.
-        Vector3 posicao = alvo.transform.position;
-        posicao.y += -2.4f - desenho.bounds.min.y;
-        alvo.transform.position = posicao;
-        alvo.SetActive(false);
-        return alvo;
     }
 
     private bool TerceiraEmAndamento()
@@ -1427,14 +1377,13 @@ public class SegundaParada : MonoBehaviour
             InvestigationGuard.Blocked) return;
         // As interacoes sao opcionais. A aproximacao do grupo permite seguir adiante.
         float x = mari.transform.position.x;
-        float referencia = terceiraParada.position.x;
-        if (!encontroVisitado && Mathf.Abs(x - (referencia + 5.7f)) <= 1.6f)
+        if (!encontroVisitado && Mathf.Abs(x - inicioEncontro.position.x) <= 1.6f)
         {
             encontroVisitado = true;
             if (GameProgress.Instance != null)
                 GameProgress.Instance.Data.estradaEncontroVisitado = true;
         }
-        if (encontroVisitado && x >= referencia + 7.7f &&
+        if (encontroVisitado && x >= saidaEncontro.position.x &&
             (!conversando || perguntasAbertas) &&
             (perguntasAbertas || !dialogueUI.activeInHierarchy))
             EncerrarEncontroTerceira();
@@ -1640,7 +1589,8 @@ public class SegundaParada : MonoBehaviour
             letrasJuazeiroConcluidas = dados.estradaLetrasJuazeiroConcluidas;
             juazeiroConcluido = dados.estradaJuazeiroConcluido;
         }
-        if (quartaParada == null || juazeiroSprite == null || placaFortaleza == null ||
+        if (quartaParada == null || juazeiroCenario == null || familiaDescanso == null ||
+            placaJuazeiroCenario == null || juazeiroSprite == null || placaFortaleza == null ||
             familiaJuazeiro == null || familiaJuazeiroCurativo == null ||
             mari == null || mariquinha == null || mae == null || pai == null || baleia == null ||
             dialogueText == null || dialoguePanel == null || dialoguePanel.GetComponent<Image>() == null)
@@ -1648,38 +1598,7 @@ public class SegundaParada : MonoBehaviour
             Debug.LogError("SegundaParada: faltam referencias do juazeiro e da familia descansando.", this);
             return;
         }
-        juazeiroCenario = CriarAlvoEncontro("Juazeiro", "juazeiro", juazeiroSprite,
-            quartaParada.position.x + 2f, 5.6f, -1);
-        juazeiroCenario.GetComponent<BoxCollider2D>().enabled = false;
-        juazeiroCenario.SetActive(true);
-        GameObject placa = CriarAlvoEncontro("Placa Fortaleza", "placaFortaleza", placaFortaleza,
-            quartaParada.position.x - 0.6f, 1.8f, 1);
-        placa.GetComponent<BoxCollider2D>().enabled = false;
-        placa.SetActive(true);
 
-        // O texto e composto pela fonte existente, para preservar acentos e a seta.
-        GameObject rotulo = new GameObject("Texto da placa", typeof(TextMeshPro));
-        rotulo.transform.SetParent(transform, false);
-        Bounds desenhoPlaca = placa.GetComponent<SpriteRenderer>().bounds;
-        rotulo.transform.position = new Vector3(desenhoPlaca.center.x,
-            desenhoPlaca.min.y + desenhoPlaca.size.y * 0.66f, -0.1f);
-        TextMeshPro texto = rotulo.GetComponent<TextMeshPro>();
-        texto.font = dialogueText.font;
-        texto.text = "FORTALEZA\n— 12 LÉGUAS →";
-        texto.alignment = TextAlignmentOptions.Center;
-        texto.color = new Color(0.24f, 0.12f, 0.07f);
-        texto.enableAutoSizing = true;
-        texto.fontSizeMin = 2f;
-        texto.fontSizeMax = 3.2f;
-        texto.fontSize = 3.2f;
-        texto.textWrappingMode = TextWrappingModes.Normal;
-        texto.rectTransform.sizeDelta = new Vector2(desenhoPlaca.size.x * 0.82f, desenhoPlaca.size.y * 0.4f);
-        texto.GetComponent<MeshRenderer>().sortingOrder = 2;
-
-        float altura = 7.2f * familiaJuazeiro.bounds.size.y / familiaJuazeiro.bounds.size.x;
-        familiaDescanso = CriarAlvoEncontro("Familia no juazeiro", "descansoJuazeiro", familiaJuazeiro,
-            juazeiroCenario.transform.position.x - 0.6f, altura, 11);
-        familiaDescanso.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     private void AtualizarJuazeiro()
@@ -1791,9 +1710,7 @@ public class SegundaParada : MonoBehaviour
         cameraAbrigo.transform.position = CentroCameraJuazeiro();
         cameraAbrigo.orthographicSize = zoomJuazeiro;
         Sprite sprite = JanelaQuebrada && curativoAplicado ? familiaJuazeiroCurativo : familiaJuazeiro;
-        SpriteRenderer descanso = familiaDescanso.GetComponent<SpriteRenderer>();
-        descanso.sprite = sprite;
-        familiaDescanso.transform.localScale = Vector3.one * (7.2f / sprite.bounds.size.x);
+        TrocarVisualCenario(familiaDescanso, sprite, true);
         familiaDescanso.SetActive(true);
         for (int i = 0; i < desenhosAbrigo.Length; i++)
             if (desenhosAbrigo[i] != null) desenhosAbrigo[i].enabled = false;
@@ -1888,7 +1805,8 @@ public class SegundaParada : MonoBehaviour
             conversaPaisConcluida = d.estradaConversaPaisConcluida;
             acampamentoConcluido = d.estradaAcampamentoConcluido;
         }
-        if (quintaParada == null || juazeiroSprite == null || familiaDescanso == null ||
+        if (quintaParada == null || arvoreAcampamento == null || fogueiraCenario == null ||
+            irmasCenario == null || paisCenario == null || familiaAcampamento == null || juazeiroSprite == null || familiaDescanso == null ||
             mari == null || mae == null || pai == null || mariquinha == null || baleia == null ||
             galhosSecos == null || folhasSecas == null || galhosAlecrim == null || passaro == null || prea == null ||
             galhosSecos.icon == null || folhasSecas.icon == null || galhosAlecrim.icon == null ||
@@ -1900,27 +1818,14 @@ public class SegundaParada : MonoBehaviour
             Debug.LogError("SegundaParada: faltam referencias dos materiais, fogueira ou poses da ultima noite.", this);
             return;
         }
-        float x = quintaParada.position.x;
-        arvoreAcampamento = CriarAlvoEncontro("Juazeiro do acampamento", "arvoreAcampamento", juazeiroSprite, x + 0.8f, 5.6f, -1);
-        arvoreAcampamento.GetComponent<BoxCollider2D>().enabled = false;
-        arvoreAcampamento.SetActive(true);
-        fogueiraCenario = CriarAlvoEncontro("Fogueira", "fogueira", fogueiraMontada, x + 1.9f, 1f, 12);
-        ItemData[] materiais = { galhosSecos, folhasSecas, galhosAlecrim };
-        float[] locais = { 3.5f, 5.5f, 7.3f };
-        for (int i = 0; i < materiais.Length; i++)
-            materiaisCenario[i] = CriarAlvoEncontro(materiais[i].itemName, "materialAcampamento" + i,
-                materiais[i].icon, x + locais[i], 0.7f, 3);
-        irmasCenario = CriarAlvoEncontro("Irmas na ultima noite", "irmasNoite", irmasAcordadas, x + 2f, 1f, 11);
-        paisCenario = CriarAlvoEncontro("Pais na ultima noite", "paisNoite", paisAcordados, x - 1.4f, 1f, 11);
-        irmasCenario.GetComponent<BoxCollider2D>().enabled = false;
-        paisCenario.GetComponent<BoxCollider2D>().enabled = false;
         var desenhos = new List<SpriteRenderer>();
         foreach (SpriteRenderer desenho in FindObjectsByType<SpriteRenderer>(FindObjectsInactive.Include, FindObjectsSortMode.None))
         {
             Transform pessoa = desenho.transform;
             if (pessoa == mari.transform || pessoa == mariquinha.transform || pessoa == mae.transform ||
                 pessoa == pai.transform || pessoa == baleia || desenho.gameObject == familiaDescanso ||
-                desenho.gameObject == irmasCenario || desenho.gameObject == paisCenario || desenho.gameObject == fogueiraCenario) continue;
+                desenho.gameObject == irmasCenario || desenho.gameObject == paisCenario || desenho.gameObject == fogueiraCenario ||
+                desenho.gameObject == familiaAcampamento || desenho.gameObject == interiorAbrigo) continue;
             desenhos.Add(desenho);
         }
         cenarioHorario = desenhos.ToArray();
@@ -1954,12 +1859,7 @@ public class SegundaParada : MonoBehaviour
 
     private void MostrarFogueira(Sprite sprite)
     {
-        if (fogueiraCenario == null || sprite == null) return;
-        SpriteRenderer desenho = fogueiraCenario.GetComponent<SpriteRenderer>();
-        desenho.sprite = sprite;
-        fogueiraCenario.transform.localScale = Vector3.one * (1.6f / sprite.bounds.size.x);
-        BoxCollider2D area = fogueiraCenario.GetComponent<BoxCollider2D>();
-        area.size = sprite.bounds.size; area.offset = sprite.bounds.center;
+        TrocarVisualCenario(fogueiraCenario, sprite, true);
     }
 
     private void AplicarHorarioAcampamento()
@@ -2146,7 +2046,7 @@ public class SegundaParada : MonoBehaviour
 
     private Bounds AreaFocoNoite()
     {
-        GameObject alvo = focoNoite == 1 ? irmasCenario : focoNoite == 2 ? paisCenario : familiaDescanso;
+        GameObject alvo = focoNoite == 1 ? irmasCenario : focoNoite == 2 ? paisCenario : familiaAcampamento;
         Bounds area = alvo.GetComponent<SpriteRenderer>().bounds;
         if (focoNoite == 0)
         {
@@ -2175,10 +2075,9 @@ public class SegundaParada : MonoBehaviour
         return minimo <= maximo ? Mathf.Clamp(x, minimo, maximo) : area.center.x;
     }
 
-    private void MostrarPoseNoite(GameObject alvo, Sprite sprite, float largura)
+    private void MostrarPoseNoite(GameObject alvo, Sprite sprite)
     {
-        alvo.GetComponent<SpriteRenderer>().sprite = sprite;
-        alvo.transform.localScale = Vector3.one * (largura / sprite.bounds.size.x);
+        TrocarVisualCenario(alvo, sprite, true);
         alvo.GetComponent<SpriteRenderer>().color = new Color(0.82f, 0.84f, 0.94f);
         alvo.SetActive(true);
     }
@@ -2200,16 +2099,15 @@ public class SegundaParada : MonoBehaviour
         Vector3 lugar = mari.transform.position; lugar.x = quintaParada.position.x + 2f; Posicionar(mari.transform, lugar);
         for (int i = 0; i < desenhosAbrigo.Length; i++)
             if (desenhosAbrigo[i] != null) desenhosAbrigo[i].enabled = false;
-        familiaDescanso.transform.position = new Vector3(quintaParada.position.x + 1f, -1.8f, 0f);
-        MostrarPoseNoite(familiaDescanso, JanelaQuebrada && curativoAplicado ? familiaJuazeiroCurativo : familiaJuazeiro, 7.2f);
+        MostrarPoseNoite(familiaAcampamento, JanelaQuebrada && curativoAplicado ? familiaJuazeiroCurativo : familiaJuazeiro);
         focoNoite = 0;
         if (conversaFogueiraConcluida)
         {
-            familiaDescanso.SetActive(false);
+            familiaAcampamento.SetActive(false);
             MostrarFogueira(fogueiraBrasas);
-            MostrarPoseNoite(paisCenario, paisAcordados, 4.8f);
+            MostrarPoseNoite(paisCenario, paisAcordados);
             MostrarPoseNoite(irmasCenario, conversaIrmasConcluida ? SpriteIrmasDormindo() :
-                JanelaQuebrada ? irmasAcordadasCurativo : irmasAcordadas, 4.8f);
+                JanelaQuebrada ? irmasAcordadasCurativo : irmasAcordadas);
             focoNoite = conversaIrmasConcluida || conversaPaisConcluida ? 2 : 1;
         }
         EnquadrarNoite();
@@ -2253,9 +2151,9 @@ public class SegundaParada : MonoBehaviour
     private IEnumerator MostrarCenaIrmas()
     {
         PrepararFade(); yield return Escurecer(1f);
-        familiaDescanso.SetActive(false); MostrarFogueira(fogueiraBrasas);
-        MostrarPoseNoite(irmasCenario, JanelaQuebrada ? irmasAcordadasCurativo : irmasAcordadas, 4.8f);
-        MostrarPoseNoite(paisCenario, paisAcordados, 4.8f);
+        familiaAcampamento.SetActive(false); MostrarFogueira(fogueiraBrasas);
+        MostrarPoseNoite(irmasCenario, JanelaQuebrada ? irmasAcordadasCurativo : irmasAcordadas);
+        MostrarPoseNoite(paisCenario, paisAcordados);
         focoNoite = 1; EnquadrarNoite();
         yield return Escurecer(0f); RestaurarFade(); sequenciaAbrigo = false;
         RetomarConversaIrmas();
@@ -2373,7 +2271,7 @@ public class SegundaParada : MonoBehaviour
 
     private void ConcluirSilencioNoturno()
     {
-        MostrarPoseNoite(irmasCenario, JanelaQuebrada ? irmasSilencioCurativo : irmasSilencio, 4.8f);
+        MostrarPoseNoite(irmasCenario, JanelaQuebrada ? irmasSilencioCurativo : irmasSilencio);
         Falar(new[] { "Zefinha (em pensamentos)" }, new[] {
             "Eu queria prometer… Mas nem sei o que vai acontecer amanhã."
         }, () => StartCoroutine(EncerrarConversaIrmas()));
@@ -2384,7 +2282,7 @@ public class SegundaParada : MonoBehaviour
         sequenciaAbrigo = true; BloquearMovimento();
         if (segundaEscolhaNoturna == 3) yield return new WaitForSeconds(1.8f);
         // Somente a promessa sem ferimento mostra as maos entrelacadas.
-        MostrarPoseNoite(irmasCenario, SpriteIrmasDormindo(), 4.8f);
+        MostrarPoseNoite(irmasCenario, SpriteIrmasDormindo());
         yield return new WaitForSeconds(2f);
         conversaIrmasConcluida = true; SalvarAcampamento();
         sequenciaAbrigo = false; IniciarCenaPais();
@@ -2405,9 +2303,9 @@ public class SegundaParada : MonoBehaviour
     private IEnumerator MostrarCenaPais()
     {
         PrepararFade(); yield return Escurecer(1f);
-        familiaDescanso.SetActive(false);
-        MostrarPoseNoite(paisCenario, paisAcordados, 4.8f);
-        MostrarPoseNoite(irmasCenario, SpriteIrmasDormindo(), 4.8f);
+        familiaAcampamento.SetActive(false);
+        MostrarPoseNoite(paisCenario, paisAcordados);
+        MostrarPoseNoite(irmasCenario, SpriteIrmasDormindo());
         focoNoite = 2; EnquadrarNoite();
         yield return Escurecer(0f); RestaurarFade(); sequenciaAbrigo = false;
         ConversarPaisNoite();
@@ -2431,8 +2329,8 @@ public class SegundaParada : MonoBehaviour
 
     private IEnumerator AmanhecerAcampamento()
     {
-        familiaDescanso.SetActive(false);
-        MostrarPoseNoite(paisCenario, paisAcordados, 4.8f);
+        familiaAcampamento.SetActive(false);
+        MostrarPoseNoite(paisCenario, paisAcordados);
         focoNoite = 2; EnquadrarNoite();
         float zoom = cameraAbrigo.orthographicSize;
         Bounds area = paisCenario.GetComponent<SpriteRenderer>().bounds;
@@ -2500,7 +2398,8 @@ public class SegundaParada : MonoBehaviour
             abordagemIniciada = d.estradaAbordagemIniciada;
             atoConcluido = d.ato1Concluido;
         }
-        if (quintaParada == null || cenarioFortaleza == null || placaFortaleza == null ||
+        if (quintaParada == null || cidadeCenario == null || familiaFinal == null ||
+            chegadaFortaleza == null || inicioAbordagem == null || placaEntradaFortaleza == null || cenarioFortaleza == null || placaFortaleza == null ||
             policialParado == null || policialPassoA == null || policialPassoB == null ||
             policialBloqueio == null || familiaSurpresa == null || familiaSurpresaCurativo == null ||
             mari == null || mariquinha == null || mae == null || pai == null || baleia == null ||
@@ -2510,41 +2409,7 @@ public class SegundaParada : MonoBehaviour
             Debug.LogError("SegundaParada: faltam referencias da chegada a Fortaleza.", this);
             return;
         }
-        float x = quintaParada.position.x;
-        float largura = 12.8f * cenarioFortaleza.bounds.size.x / cenarioFortaleza.bounds.size.y;
-        cidadeCenario = CriarAlvoEncontro("Fortaleza", "cidade", cenarioFortaleza,
-            x + 7f + largura * 0.5f, 12.8f, -18);
-        cidadeCenario.transform.position += Vector3.down * 4f;
-        cidadeCenario.GetComponent<BoxCollider2D>().enabled = false;
-        cidadeCenario.SetActive(true);
-        GameObject placa = CriarAlvoEncontro("Entrada de Fortaleza", "entradaFortaleza", placaFortaleza,
-            x + 12f, 1.8f, 1);
-        placa.GetComponent<BoxCollider2D>().enabled = false;
-        placa.SetActive(true);
-        Bounds b = placa.GetComponent<SpriteRenderer>().bounds;
-        GameObject rotulo = new GameObject("Texto Fortaleza", typeof(TextMeshPro));
-        rotulo.transform.SetParent(transform, false);
-        rotulo.transform.position = new Vector3(b.center.x, b.min.y + b.size.y * 0.66f, -0.1f);
-        TextMeshPro texto = rotulo.GetComponent<TextMeshPro>();
-        texto.font = dialogueText.font;
-        texto.text = "FORTALEZA";
-        texto.alignment = TextAlignmentOptions.Center;
-        texto.color = new Color(0.24f, 0.12f, 0.07f);
-        texto.enableAutoSizing = true;
-        texto.fontSizeMin = 2f; texto.fontSizeMax = 3.2f; texto.fontSize = 3.2f;
-        texto.rectTransform.sizeDelta = new Vector2(b.size.x * 0.82f, b.size.y * 0.4f);
-        texto.GetComponent<MeshRenderer>().sortingOrder = 2;
-        for (int i = 0; i < policiais.Length; i++)
-        {
-            policiais[i] = CriarAlvoEncontro("Policial " + (i + 1), "policial", i == 0 ? policialBloqueio : policialParado,
-                x + 24f + i * 0.8f, 2.9f, 13);
-            policiais[i].GetComponent<BoxCollider2D>().enabled = false;
-            policiais[i].SetActive(true);
-        }
-        float altura = 6.8f * familiaSurpresa.bounds.size.y / familiaSurpresa.bounds.size.x;
-        familiaFinal = CriarAlvoEncontro("Familia na abordagem", "familiaFinal", familiaSurpresa,
-            x + 20f, altura, 11);
-        familiaFinal.GetComponent<BoxCollider2D>().enabled = false;
+
     }
 
     private void AtualizarFortaleza()
@@ -2559,11 +2424,11 @@ public class SegundaParada : MonoBehaviour
             return;
         }
         if (conversando || (dialogueUI != null && dialogueUI.activeInHierarchy)) return;
-        if (abordagemIniciada || (dialogoFortalezaConcluido && mari.transform.position.x >= quintaParada.position.x + 21.8f))
+        if (abordagemIniciada || (dialogoFortalezaConcluido && mari.transform.position.x >= inicioAbordagem.position.x))
         {
             IniciarAbordagem(); return;
         }
-        if (!dialogoFortalezaConcluido && (fortalezaIniciada || mari.transform.position.x >= quintaParada.position.x + 12f))
+        if (!dialogoFortalezaConcluido && (fortalezaIniciada || mari.transform.position.x >= chegadaFortaleza.position.x))
         {
             fortalezaIniciada = true; SalvarFortaleza();
             Falar(new[] { "Mariquinha", "Mãe", "Mariquinha", "Pai" }, new[] {
@@ -2588,8 +2453,7 @@ public class SegundaParada : MonoBehaviour
     {
         SpriteRenderer desenho = policial.GetComponent<SpriteRenderer>();
         float pe = desenho.bounds.min.y;
-        desenho.sprite = pose; desenho.flipX = olharDireita;
-        policial.transform.localScale = Vector3.one * (2.9f / Mathf.Max(0.01f, pose.bounds.size.y));
+        TrocarVisualCenario(policial, pose, false); desenho.flipX = olharDireita;
         policial.transform.position += Vector3.up * (pe - desenho.bounds.min.y);
     }
 
@@ -2609,23 +2473,17 @@ public class SegundaParada : MonoBehaviour
         PrepararFade(); yield return Escurecer(1f);
         foreach (SpriteRenderer desenho in desenhosAbrigo) if (desenho != null) desenho.enabled = false;
         Sprite pose = JanelaQuebrada && curativoAplicado ? familiaSurpresaCurativo : familiaSurpresa;
-        familiaFinal.GetComponent<SpriteRenderer>().sprite = pose;
-        familiaFinal.transform.localScale = Vector3.one * (6.8f / pose.bounds.size.x);
-        familiaFinal.transform.position = new Vector3(mari.transform.position.x - 1.4f, -2.4f, 0f);
+        TrocarVisualCenario(familiaFinal, pose, true);
         familiaFinal.SetActive(true);
         EnquadrarAbordagem(5f);
         yield return Escurecer(0f); RestaurarFade();
-        Bounds familia = familiaFinal.GetComponent<SpriteRenderer>().bounds;
         Vector3 centro = familiaFinal.transform.position;
         Vector3[] origens = new Vector3[3];
-        Vector3[] destinos = {
-            new Vector3(familia.max.x + 0.8f, -2.4f, 0f),
-            new Vector3(familia.min.x - 1.2f, -2.4f, 0f),
-            new Vector3(familia.center.x, -1.7f, 0f)
-        };
+        Vector3[] destinos = new Vector3[policiais.Length];
         for (int i = 0; i < policiais.Length; i++)
         {
             origens[i] = policiais[i].transform.position;
+            destinos[i] = destinosPoliciais[i].position;
             policiais[i].GetComponent<SpriteRenderer>().sortingOrder = i == 0 ? 13 : 10;
         }
         float tempo = 0f;
@@ -2668,7 +2526,7 @@ public class SegundaParada : MonoBehaviour
         cameraAbrigo.clearFlags = CameraClearFlags.SolidColor; cameraAbrigo.backgroundColor = Color.black;
         // Textos de placas usam MeshRenderer, fora do conjunto de sprites acima.
         cidadeCenario.SetActive(false);
-        foreach (TextMeshPro placa in GetComponentsInChildren<TextMeshPro>(true)) placa.gameObject.SetActive(false);
+        placaJuazeiroCenario.SetActive(false); placaEntradaFortaleza.SetActive(false);
         RestaurarFade(); LimparEscolhas();
         encerramentoMostrado = true; conversando = true; esperandoEscolha = true;
         depois = null;
@@ -2738,6 +2596,7 @@ public class SegundaParada : MonoBehaviour
         StopAllCoroutines();
         RestaurarFundoFim();
         if (familiaFinal != null) familiaFinal.SetActive(false);
+        if (familiaAcampamento != null) familiaAcampamento.SetActive(false);
         finalEmAndamento = false; encerramentoMostrado = false;
         if (irmasCenario != null) irmasCenario.SetActive(false);
         if (paisCenario != null) paisCenario.SetActive(false);
@@ -2769,14 +2628,3 @@ public class SegundaParada : MonoBehaviour
         depois = null;
     }
 }
-
-public class MarcadorSegundaParada : MonoBehaviour
-{
-    public string id { get; private set; }
-    public void configurar(SegundaParada c, string identificador) { id = identificador; }
-}
-
-
-
-
-

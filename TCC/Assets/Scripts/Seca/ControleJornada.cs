@@ -26,6 +26,8 @@ public class ControleJornada : MonoBehaviour
     [SerializeField, Min(0f)] private float trechoAcampamento = 7.5f;
     [SerializeField, Min(0f)] private float trechoAposAcampamento = 22.5f;
 
+    [SerializeField] private Transform limiteFortaleza;
+
     private bool paradaAtiva;
     private int paradaAtual = -1;
 
@@ -92,7 +94,8 @@ public class ControleJornada : MonoBehaviour
                 ? trechoAposAguaTerceira : trechoAguaTerceira;
         if (paradasConcluidas == 3) limiteX += trechoJuazeiro;
         if (paradasConcluidas == 4) limiteX += trechoAcampamento;
-        if (paradasConcluidas >= 5) limiteX += trechoAposAcampamento;
+        if (paradasConcluidas >= 5) limiteX = limiteFortaleza != null
+            ? limiteFortaleza.position.x : limiteX + trechoAposAcampamento;
         // Bloqueia somente o avanço para a direita.
         if (mari.position.x > limiteX)
         {
