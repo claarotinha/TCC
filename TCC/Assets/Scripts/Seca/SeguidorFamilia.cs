@@ -19,6 +19,12 @@ public class SeguidorFamilia : MonoBehaviour
     [SerializeField] private string parametroAndando = "IsWalking";
     [SerializeField] private string parametroCorrendo = "IsRunning";
 
+    public float DistanciaAtras
+    {
+        get => distanciaAtras;
+        set => distanciaAtras = Mathf.Max(0.1f, value);
+    }
+
     private static readonly List<Vector3> caminho = new();
     private static Transform liderAtual;
     private static Vector3 ultimaPosicao;

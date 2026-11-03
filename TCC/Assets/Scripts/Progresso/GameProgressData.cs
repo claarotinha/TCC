@@ -32,6 +32,11 @@ public class GameProgressData
     public bool estradaElasticoEntregue;
     // 0: nenhuma; 1: Corpo-seco; 2: Comadre Fulozinha; 3: Mae-D'Agua.
     public int estradaHistoriaEscolhida;
+    // 0: nao escolheu; 1: porta; 2: janela.
+    public int estradaEntradaAbrigo;
+    public bool estradaMariquinhaFerida;
+    public bool estradaAbrigoConcluido;
+    public int estradaParadasConcluidas;
 
     public bool CanSave => tutorialCompleted ||
         (secaDepartureCompleted && secaMealCompleted &&

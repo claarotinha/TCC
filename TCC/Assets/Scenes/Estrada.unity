@@ -10620,6 +10620,13 @@ MonoBehaviour:
   baleiaComPrea: {fileID: 21300006, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
   velocidadeFuga: 6.5
   intervaloCorrida: 0.1
+  casaFechada: {fileID: 21300000, guid: c4a40000000040008000000000000001, type: 3}
+  casaPortaAberta: {fileID: 21300001, guid: c4a40000000040008000000000000001, type: 3}
+  casaJanelaQuebrada: {fileID: 21300002, guid: c4a40000000040008000000000000001, type: 3}
+  descansoFamilia: {fileID: 21300000, guid: c4a40000000040008000000000000003, type: 3}
+  mariquinhaFerida: {fileID: 21300000, guid: c4a40000000040008000000000000002, type: 3}
+  terceiraParada: {fileID: 513277210}
+  duracaoTransicao: 0.7
 --- !u!1 &3500000010
 GameObject:
   m_ObjectHideFlags: 0

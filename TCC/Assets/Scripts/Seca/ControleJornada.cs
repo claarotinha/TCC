@@ -35,6 +35,15 @@ public class ControleJornada : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        if (GameProgress.Instance == null) return;
+        GameProgressData dados = GameProgress.Instance.Data;
+        int salvo = Mathf.Clamp(dados.estradaParadasConcluidas, 0, 5);
+        if (dados.estradaAbrigoConcluido) salvo = Mathf.Max(salvo, 2);
+        paradasConcluidas = Mathf.Max(paradasConcluidas, salvo);
+    }
+
     private void LateUpdate()
     {
         if (mari == null || paradasConcluidas >= 5)
@@ -87,6 +96,8 @@ public class ControleJornada : MonoBehaviour
         }
 
         paradasConcluidas = numero;
+        if (GameProgress.Instance != null)
+            GameProgress.Instance.Data.estradaParadasConcluidas = numero;
         paradaAtiva = false;
         paradaAtual = -1;
 
