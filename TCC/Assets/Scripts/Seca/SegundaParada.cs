@@ -1450,9 +1450,9 @@ public class SegundaParada : MonoBehaviour
             Button botao = child.GetComponent<Button>();
             if (botao != null) botoes.Add(botao);
         }
-        if (botoes.Count < 3)
+        if (botoes.Count < 4)
         {
-            Debug.LogError("SegundaParada: faltam os tres botoes existentes para Antonio.", this);
+            Debug.LogError("SegundaParada: faltam as tres perguntas e o botao Sair de Antonio.", this);
             LimparEscolhas();
             return;
         }
@@ -1460,17 +1460,17 @@ public class SegundaParada : MonoBehaviour
         esperandoEscolha = true;
         perguntasAbertas = true;
         depois = null;
-        // A/D permanece disponivel: afastar-se encerra o encontro sem impor perguntas.
-        LiberarMovimento();
+        // O botao Sair fecha a conversa e devolve o controle da caminhada.
+        BloquearMovimento();
         dialogueUI.SetActive(true);
         dialoguePanel.SetActive(true);
         Grupo(dialogueUI); Grupo(dialoguePanel);
         characterNameText.text = "Escolha";
-        dialogueText.text = "Escolha uma pergunta ou continue caminhando com A/D.";
+        dialogueText.text = "Escolha uma pergunta ou selecione Sair.";
         if (portraitImage != null) portraitImage.enabled = false;
         choicesContainer.SetActive(true);
         Grupo(choicesContainer);
-        string[] opcoes = { "Perguntar o nome", "Perguntar de onde ele vem", "Desejar os pêsames" };
+        string[] opcoes = { "Perguntar o nome", "Perguntar de onde ele vem", "Desejar os pêsames", "Sair" };
         for (int i = 0; i < botoes.Count; i++)
         {
             Button botao = botoes[i];
@@ -1487,10 +1487,26 @@ public class SegundaParada : MonoBehaviour
         SalvarAguaTerceira();
     }
 
+    private void SairConversaAntonio()
+    {
+        perguntasAbertas = false;
+        esperandoEscolha = false;
+        LimparEscolhas();
+        choicesContainer.SetActive(false);
+        conversando = false;
+        depois = null;
+        dialogueUI.SetActive(false);
+        LiberarMovimento();
+        quadro = Time.frameCount;
+        InvestigationGuard.BlockCurrentClick();
+        SalvarAguaTerceira();
+    }
+
     private void ResponderAntonio(int escolha)
     {
-        if (!perguntasAbertas || !esperandoEscolha || escolha < 0 || escolha > 2 ||
+        if (!perguntasAbertas || !esperandoEscolha || escolha < 0 || escolha > 3 ||
             PauseHelper.BlockInput() || Time.timeScale == 0f) return;
+        if (escolha == 3) { SairConversaAntonio(); return; }
         perguntasAbertas = false;
         esperandoEscolha = false;
         LimparEscolhas();
@@ -1573,4 +1589,5 @@ public class MarcadorSegundaParada : MonoBehaviour
     public string id { get; private set; }
     public void configurar(SegundaParada c, string identificador) { id = identificador; }
 }
+
 
