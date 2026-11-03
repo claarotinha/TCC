@@ -47,7 +47,7 @@ public class SegundaParada : MonoBehaviour
     {
         if (Time.timeScale == 0f) return;
         ControleJornada j = ControleJornada.Instance;
-        if (!iniciou && j != null && j.ParadaAtiva && j.ParadaAtual == 2)
+        if (!iniciou && j != null && j.ParadaAtiva && j.ParadaAtual == 2 && !dialogueUI.activeInHierarchy)
         {
             iniciou = true;
             Falar(new[] { "Mãe" },
@@ -178,7 +178,7 @@ public class SegundaParada : MonoBehaviour
     private void IniciarBusca()
     {
         etapa = 2;
-        if (baleia != null) baleia.position = transform.position + new Vector3(3.8f, -1f, 0f);
+        if (baleia != null) baleia.position = new Vector3(mari.transform.position.x + 3.8f, posicaoBaleia.y, posicaoBaleia.z);
         for (int i = 0; i < 3; i++)
             CriarMarcador("Pegada " + (i + 1),
                 new Vector2(transform.position.x + 0.5f + i * 1.1f, -1.4f),
@@ -206,7 +206,7 @@ public class SegundaParada : MonoBehaviour
         {
             etapa = 3;
             if (InventoryManager.Instance != null) InventoryManager.Instance.AddItem(prea);
-            if (baleia != null) baleia.position = posicaoBaleia;
+            if (baleia != null) baleia.position = new Vector3(baleia.position.x, posicaoBaleia.y, posicaoBaleia.z);
             foreach (GameObject obj in marcadores)
                 if (obj.name.StartsWith("Pegada") || obj.name == "Baleia encontrada")
                     obj.SetActive(false);
@@ -309,7 +309,7 @@ public class SegundaParada : MonoBehaviour
         tex.filterMode = FilterMode.Point; tex.SetPixel(0, 0, Color.white); tex.Apply();
         SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
         sr.sprite = Sprite.Create(tex, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f), 1);
-        sr.color = cor; sr.sortingOrder = 3;
+        sr.color = cor; sr.sortingOrder = 3; sr.enabled = false;
         go.transform.localScale = new Vector3(largura, altura, 1);
         BoxCollider2D col = go.GetComponent<BoxCollider2D>(); col.isTrigger = true;
         MarcadorSegundaParada marcador = go.GetComponent<MarcadorSegundaParada>();
