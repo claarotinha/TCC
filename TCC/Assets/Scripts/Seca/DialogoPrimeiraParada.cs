@@ -141,7 +141,7 @@ public class DialogoPrimeiraParada : MonoBehaviour
 
         if (portraitImage != null)
         {
-            bool falaPainho = nomes[linhaAtual] == "Painho";
+            bool falaPainho = nomes[linhaAtual] == "Pai";
 
             portraitImage.sprite =
                 falaPainho ? retratoPainho : null;

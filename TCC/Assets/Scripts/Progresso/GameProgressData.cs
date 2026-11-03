@@ -30,6 +30,8 @@ public class GameProgressData
     // Evita repetir a conversa inicial ao continuar a viagem.
     public bool estradaOpeningCompleted;
     public bool estradaElasticoEntregue;
+    // 0: nenhuma; 1: Corpo-seco; 2: Comadre Fulozinha; 3: Mae-D'Agua.
+    public int estradaHistoriaEscolhida;
 
     public bool CanSave => tutorialCompleted ||
         (secaDepartureCompleted && secaMealCompleted &&
