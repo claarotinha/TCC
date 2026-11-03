@@ -113,7 +113,8 @@ public class CacaPassarinho : MonoBehaviour
         mari.enabled = movimentoAnterior;
         ControleJornada.Instance?.ConcluirParada(1);
         HistoriaPaiCaminhada historia = gameObject.AddComponent<HistoriaPaiCaminhada>();
-        historia.Iniciar();
+        historia.Iniciar(dialogueUI, dialoguePanel, choicesContainer,
+            characterNameText, dialogueText, portraitImage, retratoPainho);
         Debug.Log("Primeira parada concluida. Caminho liberado.", this);
     }
 

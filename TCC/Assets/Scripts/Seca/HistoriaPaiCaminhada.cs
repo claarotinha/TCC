@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System.Collections.Generic;
 
 // Conversa opcional da primeira parada: acontece durante a caminhada.
 // A/D continuam funcionando enquanto o jogador escolhe e le as falas.
@@ -64,83 +67,136 @@ public class HistoriaPaiCaminhada : MonoBehaviour
 
     private Fala[] falas = Introducao;
     private int indice;
+    private int quadro;
     private bool escolhendo;
     private bool ativo;
-    private GUIStyle textoEstilo;
-    private GUIStyle nomeEstilo;
-    private GUIStyle botaoEstilo;
-    private Texture2D fundo;
+    private GameObject dialogueUI, dialoguePanel, choicesContainer;
+    private TMP_Text characterNameText, dialogueText;
+    private Image portraitImage;
+    private Sprite retratoPainho;
+    private readonly List<Button> botoes = new List<Button>();
 
-    public void Iniciar()
+    public void Iniciar(GameObject ui, GameObject panel, GameObject choices,
+        TMP_Text nome, TMP_Text texto, Image retrato, Sprite painho)
     {
-        if (ativo) return;
+        dialogueUI = ui; dialoguePanel = panel; choicesContainer = choices;
+        characterNameText = nome; dialogueText = texto;
+        portraitImage = retrato; retratoPainho = painho;
+        if (dialogueUI == null || dialoguePanel == null || characterNameText == null ||
+            dialogueText == null || choicesContainer == null)
+        {
+            Debug.LogError("HistoriaPaiCaminhada: referencias do dialogo ausentes.", this);
+            Destroy(this);
+            return;
+        }
         ativo = true;
-        escolhendo = false;
         indice = 0;
         falas = Introducao;
+        dialogueUI.SetActive(true);
+        dialoguePanel.SetActive(true);
+        AtivarGrupo(dialogueUI);
+        AtivarGrupo(dialoguePanel);
+        choicesContainer.SetActive(false);
+        Mostrar();
+    }
+
+    private static void AtivarGrupo(GameObject go)
+    {
+        CanvasGroup grupo = go.GetComponent<CanvasGroup>();
+        if (grupo == null) return;
+        grupo.alpha = 1f;
+        grupo.interactable = true;
+        grupo.blocksRaycasts = true;
+    }
+
+    private void Mostrar()
+    {
+        characterNameText.text = falas[indice].Nome;
+        dialogueText.text = falas[indice].Texto;
+        if (portraitImage != null)
+        {
+            bool pai = falas[indice].Nome == "Pai";
+            portraitImage.sprite = pai ? retratoPainho : null;
+            portraitImage.enabled = pai && retratoPainho != null;
+        }
+        quadro = Time.frameCount;
+    }
+
+    private void Update()
+    {
+        if (!ativo || escolhendo || Time.timeScale == 0f ||
+            Time.frameCount <= quadro || !Input.GetMouseButtonDown(0)) return;
+        indice++;
+        if (indice < falas.Length) { Mostrar(); return; }
+        if (falas == Introducao) MostrarEscolhas();
+        else Encerrar();
+    }
+
+    private void MostrarEscolhas()
+    {
+        escolhendo = true;
+        characterNameText.text = "Escolha";
+        dialogueText.text = "Qual história painho deve contar?";
+        if (portraitImage != null) portraitImage.enabled = false;
+        choicesContainer.SetActive(true);
+        foreach (Transform filho in choicesContainer.transform)
+            filho.gameObject.SetActive(false);
+        CriarBotao("Corpo-seco", 1);
+        CriarBotao("Comadre Fulozinha", 2);
+        CriarBotao("Mãe-D’Água", 3);
+    }
+
+    private void CriarBotao(string titulo, int escolha)
+    {
+        GameObject go = new GameObject(titulo, typeof(RectTransform), typeof(Image), typeof(Button));
+        go.transform.SetParent(choicesContainer.transform, false);
+        RectTransform rt = go.GetComponent<RectTransform>();
+        rt.anchorMin = new Vector2(0.5f, 0.5f);
+        rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.anchoredPosition = new Vector2(0f, 70f - (escolha - 1) * 65f);
+        rt.sizeDelta = new Vector2(440f, 55f);
+        go.GetComponent<Image>().color = new Color(0.22f, 0.17f, 0.12f, 0.95f);
+        Button botao = go.GetComponent<Button>();
+        botoes.Add(botao);
+        GameObject label = new GameObject("Texto", typeof(RectTransform), typeof(TextMeshProUGUI));
+        label.transform.SetParent(go.transform, false);
+        RectTransform lr = label.GetComponent<RectTransform>();
+        lr.anchorMin = Vector2.zero; lr.anchorMax = Vector2.one;
+        lr.offsetMin = Vector2.zero; lr.offsetMax = Vector2.zero;
+        TextMeshProUGUI tmp = label.GetComponent<TextMeshProUGUI>();
+        tmp.text = titulo; tmp.fontSize = 22; tmp.alignment = TextAlignmentOptions.Center;
+        tmp.color = Color.white; tmp.raycastTarget = false;
+        botao.onClick.AddListener(() => Escolher(escolha));
     }
 
     private void Escolher(int escolha)
     {
+        foreach (Button botao in botoes)
+            if (botao != null) Destroy(botao.gameObject);
+        botoes.Clear();
+        foreach (Transform filho in choicesContainer.transform)
+            filho.gameObject.SetActive(true);
+        choicesContainer.SetActive(false);
         falas = escolha == 1 ? CorpoSeco : escolha == 2 ? ComadreFulozinha : MaeDAgua;
-        indice = 0;
-        escolhendo = false;
         if (GameProgress.Instance != null)
             GameProgress.Instance.Data.estradaHistoriaEscolhida = escolha;
+        indice = 0;
+        escolhendo = false;
+        Mostrar();
     }
 
-    private void Avancar()
+    private void Encerrar()
     {
-        indice++;
-        if (indice < falas.Length) return;
-        if (falas == Introducao)
-            escolhendo = true;
-        else
-        {
-            ativo = false;
-            Destroy(this);
-        }
+        ativo = false;
+        dialogueUI.SetActive(false);
+        Destroy(this);
     }
 
-    private void PrepararEstilos()
+    private void OnDisable()
     {
-        if (textoEstilo != null) return;
-        textoEstilo = new GUIStyle(GUI.skin.label) { wordWrap = true, fontSize = 16 };
-        textoEstilo.normal.textColor = Color.white;
-        nomeEstilo = new GUIStyle(textoEstilo) { fontStyle = FontStyle.Bold, fontSize = 18 };
-        botaoEstilo = new GUIStyle(GUI.skin.button) { fontSize = 15, wordWrap = true };
-        fundo = new Texture2D(1, 1);
-        fundo.SetPixel(0, 0, new Color(0.10f, 0.09f, 0.08f, 0.93f));
-        fundo.Apply();
-    }
-
-    private void OnGUI()
-    {
-        if (!ativo || Time.timeScale == 0f) return;
-        PrepararEstilos();
-        float largura = Mathf.Min(660f, Screen.width - 24f);
-        float altura = escolhendo ? 245f : 190f;
-        Rect painel = new Rect((Screen.width - largura) / 2f, Screen.height - altura - 16f, largura, altura);
-        GUI.DrawTexture(painel, fundo);
-        GUILayout.BeginArea(new Rect(painel.x + 16, painel.y + 12, painel.width - 32, painel.height - 24));
-        if (escolhendo)
-        {
-            GUILayout.Label("Escolha a história que painho vai contar:", nomeEstilo);
-            if (GUILayout.Button("Corpo-seco", botaoEstilo, GUILayout.Height(42))) Escolher(1);
-            if (GUILayout.Button("Comadre Fulozinha", botaoEstilo, GUILayout.Height(42))) Escolher(2);
-            if (GUILayout.Button("Mãe-D’Água", botaoEstilo, GUILayout.Height(42))) Escolher(3);
-        }
-        else
-        {
-            GUILayout.Label(falas[indice].Nome, nomeEstilo);
-            GUILayout.Label(falas[indice].Texto, textoEstilo, GUILayout.ExpandHeight(true));
-            if (GUILayout.Button("Continuar", botaoEstilo, GUILayout.Height(36))) Avancar();
-        }
-        GUILayout.EndArea();
-    }
-
-    private void OnDestroy()
-    {
-        if (fundo != null) Destroy(fundo);
+        if (ativo && dialogueUI != null) dialogueUI.SetActive(false);
+        foreach (Button botao in botoes)
+            if (botao != null) Destroy(botao.gameObject);
+        botoes.Clear();
     }
 }
