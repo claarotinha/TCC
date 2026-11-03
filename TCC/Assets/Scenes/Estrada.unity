@@ -850,6 +850,8 @@ MonoBehaviour:
   trechoAguaTerceira: 5
   trechoAposAguaTerceira: 8
   trechoJuazeiro: 4
+  trechoAcampamento: 7.5
+  trechoAposAcampamento: 8
 --- !u!4 &406039565
 Transform:
   m_ObjectHideFlags: 0
@@ -2652,7 +2654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GatilhoParada
   numeroDaParada: 5
-  concluirComTeclaT: 1
+  concluirComTeclaT: 0
 --- !u!61 &845846476
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10645,6 +10647,24 @@ MonoBehaviour:
   placaFortaleza: {fileID: 21300001, guid: c7a70000000040008000000000000001, type: 3}
   familiaJuazeiro: {fileID: 21300000, guid: c7a70000000040008000000000000002, type: 3}
   familiaJuazeiroCurativo: {fileID: 21300001, guid: c7a70000000040008000000000000002, type: 3}
+  quintaParada: {fileID: 845846474}
+  limitesEstrada: {fileID: 1750010630}
+  galhosSecos: {fileID: 11400000, guid: c8a80000000040008000000000000010, type: 2}
+  folhasSecas: {fileID: 11400000, guid: c8a80000000040008000000000000011, type: 2}
+  galhosAlecrim: {fileID: 11400000, guid: c8a80000000040008000000000000012, type: 2}
+  passaro: {fileID: 11400000, guid: aa17c14a2df34f789bd319f7012a0042, type: 2}
+  fogueiraMontada: {fileID: 21300000, guid: c8a80000000040008000000000000001, type: 3}
+  fogueiraAcesa: {fileID: 21300001, guid: c8a80000000040008000000000000001, type: 3}
+  fogueiraAssando: {fileID: 21300002, guid: c8a80000000040008000000000000001, type: 3}
+  fogueiraBrasas: {fileID: 21300003, guid: c8a80000000040008000000000000001, type: 3}
+  irmasAcordadas: {fileID: 21300000, guid: c8a80000000040008000000000000002, type: 3}
+  irmasAcordadasCurativo: {fileID: 21300001, guid: c8a80000000040008000000000000002, type: 3}
+  irmasPromessa: {fileID: 21300002, guid: c8a80000000040008000000000000002, type: 3}
+  irmasDormindoCurativo: {fileID: 21300003, guid: c8a80000000040008000000000000002, type: 3}
+  irmasSilencio: {fileID: 21300000, guid: c8a80000000040008000000000000003, type: 3}
+  irmasSilencioCurativo: {fileID: 21300001, guid: c8a80000000040008000000000000003, type: 3}
+  irmasDormindo: {fileID: 21300002, guid: c8a80000000040008000000000000003, type: 3}
+  paisAcordados: {fileID: 21300003, guid: c8a80000000040008000000000000003, type: 3}
 --- !u!1 &3500000010
 GameObject:
   m_ObjectHideFlags: 0
@@ -10950,6 +10970,7 @@ SceneRoots:
   - {fileID: 789316125}
   - {fileID: 406039565}
   - {fileID: 3000000001}
+
 
 
 

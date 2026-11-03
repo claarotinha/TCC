@@ -51,6 +51,21 @@ public class GameProgressData
     public bool estradaPlacaJuazeiroLida;
     public bool estradaLetrasJuazeiroConcluidas;
     public bool estradaJuazeiroConcluido;
+    public bool estradaAcampamentoIniciado;
+    public bool estradaIntroAcampamentoConcluida;
+    // Bits 0, 1 e 2: galhos secos, folhas secas e alecrim coletados.
+    public int estradaMateriaisAcampamento;
+    public bool estradaFogueiraPreparada;
+    public bool estradaPedidoAlecrimConcluido;
+    public bool estradaRefeicaoPreparada;
+    public bool estradaConversaFogueiraConcluida;
+    // Primeira: 0 nenhuma, 1 silencio, 2 responder.
+    public int estradaPrimeiraEscolhaNoturna;
+    // Segunda: 0 nenhuma, 1 promessa, 2 tranquilizar, 3 silencio.
+    public int estradaSegundaEscolhaNoturna;
+    public bool estradaConversaIrmasConcluida;
+    public bool estradaConversaPaisConcluida;
+    public bool estradaAcampamentoConcluido;
 
     public bool CanSave => tutorialCompleted ||
         (secaDepartureCompleted && secaMealCompleted &&
@@ -64,5 +79,6 @@ public class GameProgressData
 
     public List<string> unlockedDiaryPages = new List<string>();
 }
+
 
 

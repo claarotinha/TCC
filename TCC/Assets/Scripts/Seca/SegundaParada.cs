@@ -66,6 +66,30 @@ public class SegundaParada : MonoBehaviour
     private float fracaoPainelJuazeiro, zoomJuazeiro;
     private readonly Vector3[] cantosPainelJuazeiro = new Vector3[4];
 
+    [Header("Quinta parada - ultima noite")]
+    [SerializeField] private Transform quintaParada;
+    [SerializeField] private Collider2D limitesEstrada;
+    [SerializeField] private ItemData galhosSecos, folhasSecas, galhosAlecrim, passaro;
+    [SerializeField] private Sprite fogueiraMontada, fogueiraAcesa, fogueiraAssando, fogueiraBrasas;
+    [SerializeField] private Sprite irmasAcordadas, irmasAcordadasCurativo;
+    [SerializeField] private Sprite irmasDormindo;
+    [SerializeField] private Sprite irmasDormindoCurativo;
+    [SerializeField] private Sprite irmasPromessa;
+    [SerializeField] private Sprite irmasSilencio;
+    [SerializeField] private Sprite irmasSilencioCurativo;
+    [SerializeField] private Sprite paisAcordados;
+    private GameObject arvoreAcampamento, fogueiraCenario, irmasCenario, paisCenario;
+    private readonly GameObject[] materiaisCenario = new GameObject[3];
+    private SpriteRenderer[] cenarioHorario;
+    private Color[] coresHorario;
+    private bool acampamentoIniciado, introAcampamentoConcluida, fogueiraPreparada, pedidoAlecrimConcluido;
+    private bool refeicaoPreparada, conversaFogueiraConcluida, conversaIrmasConcluida, conversaPaisConcluida;
+    private bool acampamentoConcluido, noiteEmAndamento, retomouAcampamento, escolhaNoturnaAberta;
+    private bool segundaEscolhaNoturnaAberta;
+    private int materiaisAcampamento, primeiraEscolhaNoturna, segundaEscolhaNoturna;
+    private float fracaoPainelNoite;
+    private int focoNoite;
+
     private Transform barriguda;
     private Vector3 posicaoBarriguda;
     private bool aguaTerceiraIniciada, dialogoTerceiraConcluido, aguaTerceiraConcluida;
@@ -137,6 +161,7 @@ public class SegundaParada : MonoBehaviour
         PrepararAguaTerceira();
         PrepararEncontroTerceira();
         PrepararJuazeiro();
+        PrepararAcampamento();
         AplicarFerimento();
         if (GameProgress.Instance != null && GameProgress.Instance.Data.estradaAbrigoConcluido)
         {
@@ -166,6 +191,8 @@ public class SegundaParada : MonoBehaviour
     {
         if (PauseHelper.BlockInput() || Time.timeScale == 0f || sequenciaAbrigo) return;
         ControleJornada j = ControleJornada.Instance;
+        AtualizarAcampamento();
+        if (sequenciaAbrigo) return;
         if (sequenciaJuazeiroIniciada && grupoCapturado)
         {
             PrepararCameraJuazeiro();
@@ -234,6 +261,8 @@ public class SegundaParada : MonoBehaviour
         float distancia;
         if (!plano.Raycast(raio, out distancia)) return;
         Vector3 ponto = raio.GetPoint(distancia);
+        if (AcampamentoEmAndamento() && !noiteEmAndamento &&
+            AcertouMaeAcampamento(ponto)) { InteragirAcampamento(); return; }
         InventoryManager inventarioSelecionado = InventoryManager.Instance;
         if (inventarioSelecionado != null && inventarioSelecionado.SelectedItem == curativo &&
             AcertouMariquinha(ponto) && UsarCurativo(curativo)) return;
@@ -569,6 +598,14 @@ public class SegundaParada : MonoBehaviour
             PauseHelper.BlockInput() || Time.timeScale == 0f || sequenciaAbrigo) return;
         if (mari == null || Vector2.Distance(mari.transform.position, Posicao(alvo)) > 5f)
             return;
+        if (alvo == "fogueira") { InteragirAcampamento(); return; }
+        if (alvo.StartsWith("materialAcampamento"))
+        {
+            int material;
+            if (int.TryParse(alvo.Substring("materialAcampamento".Length), out material))
+                ColetarMaterialAcampamento(material);
+            return;
+        }
         if (alvo == "plantaMedicinal" || alvo == "mulherRetirante" || alvo == "meninoRetirante")
         {
             InteragirEncontroTerceira(alvo);
@@ -1817,6 +1854,626 @@ public class SegundaParada : MonoBehaviour
         SalvarAguaTerceira();
     }
 
+    private void PrepararAcampamento()
+    {
+        if (GameProgress.Instance != null)
+        {
+            GameProgressData d = GameProgress.Instance.Data;
+            acampamentoIniciado = d.estradaAcampamentoIniciado;
+            introAcampamentoConcluida = d.estradaIntroAcampamentoConcluida;
+            materiaisAcampamento = d.estradaMateriaisAcampamento;
+            fogueiraPreparada = d.estradaFogueiraPreparada;
+            pedidoAlecrimConcluido = d.estradaPedidoAlecrimConcluido;
+            refeicaoPreparada = d.estradaRefeicaoPreparada;
+            conversaFogueiraConcluida = d.estradaConversaFogueiraConcluida;
+            primeiraEscolhaNoturna = d.estradaPrimeiraEscolhaNoturna;
+            segundaEscolhaNoturna = d.estradaSegundaEscolhaNoturna;
+            conversaIrmasConcluida = d.estradaConversaIrmasConcluida;
+            conversaPaisConcluida = d.estradaConversaPaisConcluida;
+            acampamentoConcluido = d.estradaAcampamentoConcluido;
+        }
+        if (quintaParada == null || juazeiroSprite == null || familiaDescanso == null ||
+            mari == null || mae == null || pai == null || mariquinha == null || baleia == null ||
+            galhosSecos == null || folhasSecas == null || galhosAlecrim == null || passaro == null || prea == null ||
+            galhosSecos.icon == null || folhasSecas.icon == null || galhosAlecrim.icon == null ||
+            fogueiraMontada == null || fogueiraAcesa == null || fogueiraAssando == null || fogueiraBrasas == null ||
+            irmasAcordadas == null || irmasAcordadasCurativo == null || irmasDormindo == null ||
+            irmasDormindoCurativo == null || irmasPromessa == null || irmasSilencio == null ||
+            irmasSilencioCurativo == null || paisAcordados == null)
+        {
+            Debug.LogError("SegundaParada: faltam referencias dos materiais, fogueira ou poses da ultima noite.", this);
+            return;
+        }
+        float x = quintaParada.position.x;
+        arvoreAcampamento = CriarAlvoEncontro("Juazeiro do acampamento", "arvoreAcampamento", juazeiroSprite, x + 0.8f, 5.6f, -1);
+        arvoreAcampamento.GetComponent<BoxCollider2D>().enabled = false;
+        arvoreAcampamento.SetActive(true);
+        fogueiraCenario = CriarAlvoEncontro("Fogueira", "fogueira", fogueiraMontada, x + 1.9f, 1f, 12);
+        ItemData[] materiais = { galhosSecos, folhasSecas, galhosAlecrim };
+        float[] locais = { 3.5f, 5.5f, 7.3f };
+        for (int i = 0; i < materiais.Length; i++)
+            materiaisCenario[i] = CriarAlvoEncontro(materiais[i].itemName, "materialAcampamento" + i,
+                materiais[i].icon, x + locais[i], 0.7f, 3);
+        irmasCenario = CriarAlvoEncontro("Irmas na ultima noite", "irmasNoite", irmasAcordadas, x + 2f, 1f, 11);
+        paisCenario = CriarAlvoEncontro("Pais na ultima noite", "paisNoite", paisAcordados, x - 1.4f, 1f, 11);
+        irmasCenario.GetComponent<BoxCollider2D>().enabled = false;
+        paisCenario.GetComponent<BoxCollider2D>().enabled = false;
+        var desenhos = new List<SpriteRenderer>();
+        foreach (SpriteRenderer desenho in FindObjectsByType<SpriteRenderer>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            Transform pessoa = desenho.transform;
+            if (pessoa == mari.transform || pessoa == mariquinha.transform || pessoa == mae.transform ||
+                pessoa == pai.transform || pessoa == baleia || desenho.gameObject == familiaDescanso ||
+                desenho.gameObject == irmasCenario || desenho.gameObject == paisCenario || desenho.gameObject == fogueiraCenario) continue;
+            desenhos.Add(desenho);
+        }
+        cenarioHorario = desenhos.ToArray();
+        coresHorario = new Color[cenarioHorario.Length];
+        for (int i = 0; i < cenarioHorario.Length; i++) coresHorario[i] = cenarioHorario[i].color;
+        AtualizarMateriaisAcampamento();
+        AplicarHorarioAcampamento();
+    }
+
+    private bool AcampamentoEmAndamento()
+    {
+        ControleJornada j = ControleJornada.Instance;
+        return j != null && j.ParadaAtiva && j.ParadaAtual == 5 && !acampamentoConcluido;
+    }
+
+    private void AtualizarMateriaisAcampamento()
+    {
+        for (int i = 0; i < materiaisCenario.Length; i++)
+            if (materiaisCenario[i] != null)
+                materiaisCenario[i].SetActive(introAcampamentoConcluida && !acampamentoConcluido &&
+                    (materiaisAcampamento & (1 << i)) == 0);
+        if (fogueiraCenario != null)
+        {
+            fogueiraCenario.SetActive(acampamentoIniciado);
+            Sprite sprite = acampamentoConcluido || conversaFogueiraConcluida ? fogueiraBrasas :
+                refeicaoPreparada && !conversaFogueiraConcluida ? fogueiraAssando :
+                fogueiraPreparada ? fogueiraAcesa : fogueiraMontada;
+            MostrarFogueira(sprite);
+        }
+    }
+
+    private void MostrarFogueira(Sprite sprite)
+    {
+        if (fogueiraCenario == null || sprite == null) return;
+        SpriteRenderer desenho = fogueiraCenario.GetComponent<SpriteRenderer>();
+        desenho.sprite = sprite;
+        fogueiraCenario.transform.localScale = Vector3.one * (1.6f / sprite.bounds.size.x);
+        BoxCollider2D area = fogueiraCenario.GetComponent<BoxCollider2D>();
+        area.size = sprite.bounds.size; area.offset = sprite.bounds.center;
+    }
+
+    private void AplicarHorarioAcampamento()
+    {
+        if (cenarioHorario == null) return;
+        Color luz = !acampamentoIniciado || acampamentoConcluido ? Color.white :
+            refeicaoPreparada ? new Color(0.23f, 0.28f, 0.45f) : new Color(0.86f, 0.68f, 0.63f);
+        for (int i = 0; i < cenarioHorario.Length; i++)
+            if (cenarioHorario[i] != null) cenarioHorario[i].color = coresHorario[i] * luz;
+    }
+
+    private void RestaurarCoresAcampamento()
+    {
+        if (cenarioHorario == null) return;
+        for (int i = 0; i < cenarioHorario.Length; i++)
+            if (cenarioHorario[i] != null) cenarioHorario[i].color = coresHorario[i];
+    }
+
+    private void AguardarFamiliaAcampamento()
+    {
+        if (familiaEsperando) return;
+        maeSeguia = mae.enabled; paiSeguia = pai.enabled;
+        baleiaSeguia = seguidorBaleia != null && seguidorBaleia.enabled;
+        mae.enabled = false; pai.enabled = false;
+        if (seguidorBaleia != null) seguidorBaleia.enabled = false;
+        familiaEsperando = true;
+    }
+
+    private void PosicionarPaisAcampamento()
+    {
+        float x = quintaParada.position.x;
+        Vector3 posicao = mae.transform.position; posicao.x = x; Posicionar(mae.transform, posicao);
+        posicao = pai.transform.position; posicao.x = x - 1.4f; Posicionar(pai.transform, posicao);
+        posicao = baleia.position; posicao.x = x - 2.7f; Posicionar(baleia, posicao);
+    }
+
+    private void AtualizarAcampamento()
+    {
+        if (restaurandoFamilia || !AcampamentoEmAndamento() || fogueiraCenario == null) return;
+        if (noiteEmAndamento)
+        {
+            if (grupoCapturado)
+            {
+                LerPainelNoite();
+                EnquadrarNoite();
+            }
+            return;
+        }
+        if (conversando || dialogueUI == null || dialogueUI.activeInHierarchy || InvestigationGuard.Blocked) return;
+        if (!retomouAcampamento)
+        {
+            retomouAcampamento = true;
+            AguardarFamiliaAcampamento();
+            if (introAcampamentoConcluida) PosicionarPaisAcampamento();
+        }
+        if (!acampamentoIniciado)
+        {
+            acampamentoIniciado = true;
+            AtualizarMateriaisAcampamento(); AplicarHorarioAcampamento(); SalvarAcampamento();
+        }
+        if (!introAcampamentoConcluida)
+            Falar(new[] { "Pai", "Mãe" }, new[] {
+                "Já tamo quase na entrada em Fortaleza, vamo fazer uma pausa, descansar uma última noite.",
+                "Zefinha, vá junto de tua irmã procurar uns galhos secos e folhas secas, vamo montar uma fogueira debaixo daquele juazeiro."
+            }, () => StartCoroutine(MontarAcampamento()));
+        else if (refeicaoPreparada) IniciarNoiteAcampamento();
+    }
+
+    private IEnumerator MontarAcampamento()
+    {
+        sequenciaAbrigo = true; BloquearMovimento(); CapturarGrupoAbrigo();
+        PrepararFade(); yield return Escurecer(1f);
+        Vector3 lugar = mari.transform.position; lugar.x = quintaParada.position.x + 3f; Posicionar(mari.transform, lugar);
+        lugar = mariquinha.transform.position; lugar.x = mari.transform.position.x - mariquinha.DistanciaAtras; Posicionar(mariquinha.transform, lugar);
+        PosicionarPaisAcampamento();
+        introAcampamentoConcluida = true; AtualizarMateriaisAcampamento();
+        RestaurarCamera();
+        yield return Escurecer(0f); RestaurarFade();
+        RestaurarGrupoAbrigo(); RestaurarInventarioAbrigo(); LiberarMovimento();
+        sequenciaAbrigo = false; quadro = Time.frameCount;
+        SalvarAcampamento();
+    }
+
+    private void ColetarMaterialAcampamento(int indiceMaterial)
+    {
+        if (indiceMaterial < 0 || indiceMaterial > 2 || !AcampamentoEmAndamento() ||
+            !introAcampamentoConcluida || noiteEmAndamento || InvestigationGuard.Blocked ||
+            (materiaisAcampamento & (1 << indiceMaterial)) != 0 || InventoryManager.Instance == null) return;
+        ItemData[] itens = { galhosSecos, folhasSecas, galhosAlecrim };
+        CollectPrompt coleta = FindFirstObjectByType<CollectPrompt>();
+        if (coleta != null) coleta.Show(itens[indiceMaterial], () =>
+        {
+            materiaisAcampamento |= 1 << indiceMaterial;
+            AtualizarMateriaisAcampamento(); quadro = Time.frameCount; SalvarAcampamento();
+        });
+    }
+
+    private bool AcertouMaeAcampamento(Vector3 ponto)
+    {
+        if (mae == null) return false;
+        SpriteRenderer desenho = mae.GetComponent<SpriteRenderer>();
+        if (desenho == null || !desenho.enabled || !desenho.gameObject.activeInHierarchy) return false;
+        Bounds area = desenho.bounds; area.Expand(new Vector3(0.25f, 0.25f, 0f));
+        return ponto.x >= area.min.x && ponto.x <= area.max.x && ponto.y >= area.min.y && ponto.y <= area.max.y;
+    }
+
+    public bool SoltarNoAcampamento(ItemData item, Vector2 posicaoTela)
+    {
+        if (item == null || !AcampamentoEmAndamento() || noiteEmAndamento || Camera.main == null ||
+            (item != galhosSecos && item != folhasSecas && item != galhosAlecrim && item != passaro && item != prea)) return false;
+        Ray raio = Camera.main.ScreenPointToRay(posicaoTela); float distancia;
+        Plane plano = new Plane(Vector3.forward, Vector3.zero);
+        if (!plano.Raycast(raio, out distancia)) return false;
+        Vector3 ponto = raio.GetPoint(distancia);
+        Collider2D area = fogueiraCenario != null ? fogueiraCenario.GetComponent<Collider2D>() : null;
+        if (!AcertouMaeAcampamento(ponto) && (area == null || !area.OverlapPoint(ponto))) return false;
+        return InteragirAcampamento(true);
+    }
+
+    private bool ConsumirItensAcampamento(params ItemData[] usados)
+    {
+        InventoryManager inventario = InventoryManager.Instance;
+        if (inventario == null) return false;
+        var itens = new List<ItemData>(inventario.Items);
+        foreach (ItemData item in usados)
+            if (item == null || !itens.Remove(item)) return false;
+        inventario.ReplaceItems(itens);
+        return true;
+    }
+
+    private bool InteragirAcampamento(bool peloInventario = false)
+    {
+        if (!AcampamentoEmAndamento() || !introAcampamentoConcluida || noiteEmAndamento ||
+            conversando || sequenciaAbrigo || PauseHelper.BlockInput() || Time.timeScale == 0f ||
+            Time.frameCount <= quadro || (!peloInventario && InvestigationGuard.Blocked) ||
+            mari == null || mae == null || Vector2.Distance(mari.transform.position, mae.transform.position) > 5f) return false;
+        InventoryTabController.Instance?.Close();
+        if (!fogueiraPreparada)
+        {
+            if (!Possui(galhosSecos) || !Possui(folhasSecas))
+            {
+                Falar(new[] { "Mãe" }, new[] {
+                    "Zefinha, vá junto de tua irmã procurar uns galhos secos e folhas secas, vamo montar uma fogueira debaixo daquele juazeiro."
+                }, null);
+                return true;
+            }
+            if (!ConsumirItensAcampamento(galhosSecos, folhasSecas)) return false;
+            fogueiraPreparada = true; AtualizarMateriaisAcampamento(); SalvarAcampamento();
+        }
+        if (!pedidoAlecrimConcluido || !Possui(galhosAlecrim))
+        {
+            Falar(new[] { "Mãe" }, new[] {
+                "Agora vá atrás de alguns galhos de alecrim, pra gente conseguir colocar os bicho no espeto, vamo assar na fogueira."
+            }, () =>
+            {
+                pedidoAlecrimConcluido = true; SalvarAcampamento();
+                if (Possui(galhosAlecrim)) PrepararRefeicaoAcampamento();
+            });
+        }
+        else PrepararRefeicaoAcampamento();
+        return true;
+    }
+
+    private void PrepararRefeicaoAcampamento()
+    {
+        if (refeicaoPreparada || !fogueiraPreparada || !pedidoAlecrimConcluido) return;
+        if (!ConsumirItensAcampamento(galhosAlecrim, passaro, prea))
+        {
+            Falar(new[] { "Objetivo" }, new[] { "Para preparar a refeição, reúna os galhos de alecrim, o pássaro e o preá no inventário." }, null);
+            return;
+        }
+        refeicaoPreparada = true; AtualizarMateriaisAcampamento(); SalvarAcampamento();
+        IniciarNoiteAcampamento();
+    }
+
+    private void LerPainelNoite()
+    {
+        dialoguePanel.GetComponent<RectTransform>().GetWorldCorners(cantosPainelJuazeiro);
+        Canvas canvas = dialoguePanel.GetComponentInParent<Canvas>();
+        Camera cameraUI = canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay ? canvas.worldCamera : null;
+        float topo = RectTransformUtility.WorldToScreenPoint(cameraUI, cantosPainelJuazeiro[1]).y;
+        fracaoPainelNoite = Mathf.Clamp(topo / Mathf.Max(1f, Screen.height), 0f, 0.85f);
+    }
+
+    private Bounds AreaFocoNoite()
+    {
+        GameObject alvo = focoNoite == 1 ? irmasCenario : focoNoite == 2 ? paisCenario : familiaDescanso;
+        Bounds area = alvo.GetComponent<SpriteRenderer>().bounds;
+        if (focoNoite == 0)
+        {
+            area.Encapsulate(arvoreAcampamento.GetComponent<SpriteRenderer>().bounds);
+            area.Encapsulate(fogueiraCenario.GetComponent<SpriteRenderer>().bounds);
+        }
+        return area;
+    }
+
+    private void EnquadrarNoite()
+    {
+        Bounds area = AreaFocoNoite();
+        float zoom = Mathf.Max(2.5f, (area.size.y + 0.9f) / (2f * (1f - fracaoPainelNoite)),
+            (area.size.x + 1f) / (2f * cameraAbrigo.aspect));
+        cameraAbrigo.orthographicSize = zoom;
+        cameraAbrigo.transform.position = new Vector3(LimitarCameraNoiteX(area.center.x, zoom),
+            area.min.y - 0.25f + zoom * (1f - 2f * fracaoPainelNoite), cameraOriginal.z);
+    }
+
+    private float LimitarCameraNoiteX(float x, float zoom)
+    {
+        if (limitesEstrada == null) return x;
+        Bounds area = limitesEstrada.bounds;
+        float metade = zoom * cameraAbrigo.aspect;
+        float minimo = area.min.x + metade, maximo = area.max.x - metade;
+        return minimo <= maximo ? Mathf.Clamp(x, minimo, maximo) : area.center.x;
+    }
+
+    private void MostrarPoseNoite(GameObject alvo, Sprite sprite, float largura)
+    {
+        alvo.GetComponent<SpriteRenderer>().sprite = sprite;
+        alvo.transform.localScale = Vector3.one * (largura / sprite.bounds.size.x);
+        alvo.GetComponent<SpriteRenderer>().color = new Color(0.82f, 0.84f, 0.94f);
+        alvo.SetActive(true);
+    }
+
+    private void IniciarNoiteAcampamento()
+    {
+        if (noiteEmAndamento || !refeicaoPreparada || acampamentoConcluido) return;
+        noiteEmAndamento = true; sequenciaAbrigo = true;
+        BloquearMovimento(); CapturarGrupoAbrigo();
+        if (seguirCamera != null) seguirCamera.enabled = false;
+        LerPainelNoite();
+        StartCoroutine(MostrarNoiteAcampamento());
+    }
+
+    private IEnumerator MostrarNoiteAcampamento()
+    {
+        PrepararFade(); yield return Escurecer(1f);
+        AplicarHorarioAcampamento();
+        Vector3 lugar = mari.transform.position; lugar.x = quintaParada.position.x + 2f; Posicionar(mari.transform, lugar);
+        for (int i = 0; i < desenhosAbrigo.Length; i++)
+            if (desenhosAbrigo[i] != null) desenhosAbrigo[i].enabled = false;
+        familiaDescanso.transform.position = new Vector3(quintaParada.position.x + 1f, -1.8f, 0f);
+        MostrarPoseNoite(familiaDescanso, JanelaQuebrada && curativoAplicado ? familiaJuazeiroCurativo : familiaJuazeiro, 7.2f);
+        focoNoite = 0;
+        if (conversaFogueiraConcluida)
+        {
+            familiaDescanso.SetActive(false);
+            MostrarFogueira(fogueiraBrasas);
+            MostrarPoseNoite(paisCenario, paisAcordados, 4.8f);
+            MostrarPoseNoite(irmasCenario, conversaIrmasConcluida ? SpriteIrmasDormindo() :
+                JanelaQuebrada ? irmasAcordadasCurativo : irmasAcordadas, 4.8f);
+            focoNoite = conversaIrmasConcluida || conversaPaisConcluida ? 2 : 1;
+        }
+        EnquadrarNoite();
+        yield return Escurecer(0f); RestaurarFade();
+        if (!conversaFogueiraConcluida)
+        {
+            yield return new WaitForSeconds(2.5f);
+            sequenciaAbrigo = false;
+            Falar(new[] { "Mariquinha", "Mãe", "Mariquinha", "Mãe", "Mariquinha", "Mãe", "Zefinha", "Mãe", "Mariquinha", "Pai" }, new[] {
+                "Será que dueu ou foi num sopro? igual voinho?",
+                "Tá falando de que Severina?",
+                "Do homem na estrada mainha.",
+                "Num sei minha filha, esqueça isso, guardar tanta desgraça faz mal para o coração.",
+                "Num guarda é pio, num quero esquecer as coisa que a gente passou, vou escrever um livro mainha, tu vai vê, Zefinha vai me ensinar a ler e escrever.",
+                "E desde quando tu sabe ler e escrever Maria Jozefa?",
+                "A sinhazinha da fazenda que painho trabalhava me ensinou às escondidas mainha, sei um pouco.",
+                "Hora essa! Livro num enche bucho não Severina, tu devia é aprender a bordar, isso sim pode te ajudar no futuro…",
+                "Num quero, quero mesmo ser inteligente igual gente que escreve coisa, num é painho? isso num da dinheiro?",
+                "Sabe… Tem hora que eu acho… Que Deus fez o sertanejo diferente. Gente quebra. Gente desiste. Mas nóis… Nóis é bicho. Bicho apanha. Bicho passa fome. Bicho sangra. Mas continua andando. Enquanto eu respirá… Ocês num morre. Bicho trabaia Mariquinha, trabaia para não passar fome, num tem tempo pra escrever não."
+            }, () =>
+            {
+                conversaFogueiraConcluida = true; MostrarFogueira(fogueiraBrasas); SalvarAcampamento();
+                IniciarCenaIrmas();
+            });
+        }
+        else
+        {
+            sequenciaAbrigo = false;
+            if (conversaPaisConcluida) IniciarFimNoite();
+            else if (conversaIrmasConcluida) ConversarPaisNoite();
+            else RetomarConversaIrmas();
+        }
+    }
+
+    private void IniciarCenaIrmas()
+    {
+        sequenciaAbrigo = true; BloquearMovimento();
+        LerPainelNoite(); StartCoroutine(MostrarCenaIrmas());
+    }
+
+    private IEnumerator MostrarCenaIrmas()
+    {
+        PrepararFade(); yield return Escurecer(1f);
+        familiaDescanso.SetActive(false); MostrarFogueira(fogueiraBrasas);
+        MostrarPoseNoite(irmasCenario, JanelaQuebrada ? irmasAcordadasCurativo : irmasAcordadas, 4.8f);
+        MostrarPoseNoite(paisCenario, paisAcordados, 4.8f);
+        focoNoite = 1; EnquadrarNoite();
+        yield return Escurecer(0f); RestaurarFade(); sequenciaAbrigo = false;
+        RetomarConversaIrmas();
+    }
+
+    private void RetomarConversaIrmas()
+    {
+        if (primeiraEscolhaNoturna == 0)
+            Falar(new[] { "Mariquinha" }, new[] { "Zefinha… Tu tá acordada?" }, () => MostrarEscolhaNoturna(false));
+        else ContinuarPrimeiraEscolhaNoturna();
+    }
+
+    private void MostrarEscolhaNoturna(bool segunda)
+    {
+        LimparEscolhas();
+        foreach (Transform filho in choicesContainer.transform)
+        {
+            Button botao = filho.GetComponent<Button>();
+            if (botao != null) botoes.Add(botao);
+        }
+        string[] opcoes = segunda ? new[] { "Eu prometo.", "Vai dar tudo certo.", "Ficar em silêncio." }
+            : new[] { "Ficar em silêncio.", "Responder." };
+        if (botoes.Count < opcoes.Length)
+        {
+            Debug.LogError("SegundaParada: faltam os botoes existentes para as escolhas noturnas.", this);
+            LimparEscolhas(); LiberarMovimento(); return;
+        }
+        escolhaNoturnaAberta = true; segundaEscolhaNoturnaAberta = segunda;
+        conversando = true; esperandoEscolha = true; depois = null; BloquearMovimento();
+        dialogueUI.SetActive(true); dialoguePanel.SetActive(true); choicesContainer.SetActive(true);
+        Grupo(dialogueUI); Grupo(dialoguePanel); Grupo(choicesContainer);
+        characterNameText.text = "Escolha";
+        dialogueText.text = segunda ? "Promete que nós nunca vai se largá?" : "Zefinha… Tu tá acordada?";
+        if (portraitImage != null) portraitImage.enabled = false;
+        for (int i = 0; i < botoes.Count; i++)
+        {
+            Button botao = botoes[i]; botao.gameObject.SetActive(i < opcoes.Length);
+            if (i >= opcoes.Length) continue;
+            TMP_Text texto = botao.GetComponentInChildren<TMP_Text>(true);
+            if (texto != null) texto.text = opcoes[i];
+            int opcao = i + 1;
+            botao.onClick.RemoveAllListeners(); botao.onClick.AddListener(() => EscolherNoite(opcao));
+            botao.interactable = true;
+        }
+        quadro = Time.frameCount;
+    }
+
+    private void EscolherNoite(int opcao)
+    {
+        if (!escolhaNoturnaAberta || !esperandoEscolha || PauseHelper.BlockInput() || Time.timeScale == 0f ||
+            opcao < 1 || opcao > (segundaEscolhaNoturnaAberta ? 3 : 2)) return;
+        bool segunda = segundaEscolhaNoturnaAberta;
+        escolhaNoturnaAberta = false; esperandoEscolha = false; conversando = false;
+        LimparEscolhas(); choicesContainer.SetActive(false); dialogueUI.SetActive(false);
+        InvestigationGuard.BlockCurrentClick();
+        if (segunda) segundaEscolhaNoturna = opcao;
+        else primeiraEscolhaNoturna = opcao;
+        SalvarAcampamento();
+        if (segunda) ContinuarSegundaEscolhaNoturna();
+        else ContinuarPrimeiraEscolhaNoturna();
+    }
+
+    private void ContinuarPrimeiraEscolhaNoturna()
+    {
+        if (primeiraEscolhaNoturna == 1)
+        {
+            Falar(new[] { "Mariquinha" }, new[] { "Acho que tu já dormiu…" }, () =>
+                StartCoroutine(PausarConversaNoite(0.8f, () => Falar(new[] { "Mariquinha", "Mariquinha" }, new[] {
+                    "Eu queria tanto que a gente já tivesse chegado…", "Boa noite, irmã."
+                }, () => StartCoroutine(EncerrarConversaIrmas())))));
+            return;
+        }
+        if (segundaEscolhaNoturna != 0) { ContinuarSegundaEscolhaNoturna(); return; }
+        Falar(new[] { "Zefinha", "Mariquinha", "Zefinha", "Mariquinha" }, new[] {
+            "Tô.", "Posso conta um segredo?", "Pode.",
+            "Eu num quero sê bicho não… Quero sê gente. Quero brincá. Quero estudá. Quero comê até encher a barriga. Quero vê mainha rindo de novo. Quero ser inteligente igual tu. Os porco pode sê bicho. As galinha. Os boi. Mas nós não. Promete que nós nunca vai se largá?"
+        }, () => MostrarEscolhaNoturna(true));
+    }
+
+    private IEnumerator PausarConversaNoite(float duracao, Action continuacao)
+    {
+        sequenciaAbrigo = true; BloquearMovimento();
+        yield return new WaitForSeconds(duracao);
+        sequenciaAbrigo = false;
+        continuacao?.Invoke();
+    }
+
+    private void ContinuarSegundaEscolhaNoturna()
+    {
+        if (segundaEscolhaNoturna == 1)
+            Falar(new[] { "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha" }, new[] {
+                "Eu prometo.",
+                "E tu promete vai me ensina? Pra eu fica famosa com meu livro, igual as moça de vestido bunito que anda na cidade.",
+                "Prometo.", "Até eu aprender igualzinho a tu.", "Igualzinho a mim não… Melhor.",
+                "Melhor que tu?", "Muito melhor.", "Promessa?", "Promessa.",
+                "Você é a melhor Zefinha, uma irma boa, sabe que te amo num sabe?", "Eu sei."
+            }, () => StartCoroutine(EncerrarConversaIrmas()));
+        else if (segundaEscolhaNoturna == 2)
+            Falar(new[] { "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Mariquinha", "Zefinha" }, new[] {
+                "Vai dar tudo certo, Mariquinha.", "Tu acha mesmo?",
+                "Acho. A gente vai chegar na cidade, painho vai arrumar trabalho… As coisa vão melhorar.",
+                "Eu queria acreditar assim também…", "Então acredita comigo.", "Tá bom… Vou tentar.",
+                "Boa noite, Zefinha.", "Boa noite, irmã."
+            }, () => StartCoroutine(EncerrarConversaIrmas()));
+        else if (segundaEscolhaNoturna == 3)
+        {
+            Falar(new[] { "Mariquinha" }, new[] { "Tu num precisa prometer se num quiser…" }, () =>
+                StartCoroutine(PausarConversaNoite(0.8f, () => Falar(new[] {
+                    "Mariquinha", "Zefinha", "Mariquinha", "Mariquinha"
+                }, new[] {
+                    "Eu só tenho medo de perder vocês.", "…", "Desculpa… Num queria te aperrear.", "Boa noite, Zefinha."
+                }, ConcluirSilencioNoturno))));
+        }
+    }
+
+    private void ConcluirSilencioNoturno()
+    {
+        MostrarPoseNoite(irmasCenario, JanelaQuebrada ? irmasSilencioCurativo : irmasSilencio, 4.8f);
+        Falar(new[] { "Zefinha (em pensamentos)" }, new[] {
+            "Eu queria prometer… Mas nem sei o que vai acontecer amanhã."
+        }, () => StartCoroutine(EncerrarConversaIrmas()));
+    }
+
+    private IEnumerator EncerrarConversaIrmas()
+    {
+        sequenciaAbrigo = true; BloquearMovimento();
+        if (segundaEscolhaNoturna == 3) yield return new WaitForSeconds(1.8f);
+        // Somente a promessa sem ferimento mostra as maos entrelacadas.
+        MostrarPoseNoite(irmasCenario, SpriteIrmasDormindo(), 4.8f);
+        yield return new WaitForSeconds(2f);
+        conversaIrmasConcluida = true; SalvarAcampamento();
+        sequenciaAbrigo = false; IniciarCenaPais();
+    }
+
+    private Sprite SpriteIrmasDormindo()
+    {
+        return JanelaQuebrada ? irmasDormindoCurativo :
+            primeiraEscolhaNoturna == 2 && segundaEscolhaNoturna == 1 ? irmasPromessa : irmasDormindo;
+    }
+
+    private void IniciarCenaPais()
+    {
+        sequenciaAbrigo = true; BloquearMovimento(); LerPainelNoite();
+        StartCoroutine(MostrarCenaPais());
+    }
+
+    private IEnumerator MostrarCenaPais()
+    {
+        PrepararFade(); yield return Escurecer(1f);
+        familiaDescanso.SetActive(false);
+        MostrarPoseNoite(paisCenario, paisAcordados, 4.8f);
+        MostrarPoseNoite(irmasCenario, SpriteIrmasDormindo(), 4.8f);
+        focoNoite = 2; EnquadrarNoite();
+        yield return Escurecer(0f); RestaurarFade(); sequenciaAbrigo = false;
+        ConversarPaisNoite();
+    }
+
+    private void ConversarPaisNoite()
+    {
+        Falar(new[] { "Pai", "Mãe", "Pai", "Mãe" }, new[] {
+            "Elas num merece isso.", "Eu sei.", "Queria te deixado alguma coisa.", "Mas tu deixou. Tu ficou."
+        }, () =>
+        {
+            conversaPaisConcluida = true; SalvarAcampamento(); IniciarFimNoite();
+        });
+    }
+
+    private void IniciarFimNoite()
+    {
+        sequenciaAbrigo = true; BloquearMovimento();
+        StartCoroutine(AmanhecerAcampamento());
+    }
+
+    private IEnumerator AmanhecerAcampamento()
+    {
+        familiaDescanso.SetActive(false);
+        MostrarPoseNoite(paisCenario, paisAcordados, 4.8f);
+        focoNoite = 2; EnquadrarNoite();
+        float zoom = cameraAbrigo.orthographicSize;
+        Bounds area = paisCenario.GetComponent<SpriteRenderer>().bounds;
+        float tempo = 0f;
+        while (tempo < 2.5f)
+        {
+            tempo += Time.deltaTime;
+            float tamanho = Mathf.Lerp(zoom, zoom + 1.2f, Mathf.Clamp01(tempo / 2.5f));
+            cameraAbrigo.orthographicSize = tamanho;
+            cameraAbrigo.transform.position = new Vector3(LimitarCameraNoiteX(area.center.x, tamanho),
+                area.min.y - 0.25f + tamanho * (1f - 2f * fracaoPainelNoite), cameraOriginal.z);
+            yield return null;
+        }
+        PrepararFade(); yield return Escurecer(1f);
+        yield return new WaitForSeconds(1.4f);
+        irmasCenario.SetActive(false); paisCenario.SetActive(false);
+        RestaurarCoresAcampamento(); MostrarFogueira(fogueiraBrasas);
+        Vector3 lugar = mari.transform.position; lugar.x = quintaParada.position.x + 2.8f; Posicionar(mari.transform, lugar);
+        foreach (SeguidorFamilia familiar in seguidoresAbrigo)
+        {
+            if (familiar == null) continue;
+            lugar = familiar.transform.position; lugar.x = mari.transform.position.x - familiar.DistanciaAtras;
+            Posicionar(familiar.transform, lugar);
+        }
+        foreach (SpriteRenderer desenho in desenhosAbrigo) if (desenho != null) desenho.flipX = false;
+        RestaurarGrupoAbrigo(); RetomarFamilia(); AplicarFerimento();
+        Physics2D.SyncTransforms(); RestaurarCamera();
+        yield return Escurecer(0f); RestaurarFade();
+        ControleJornada jornada = ControleJornada.Instance;
+        if (jornada != null && jornada.ParadaAtiva && jornada.ParadaAtual == 5)
+        {
+            acampamentoConcluido = true; jornada.ConcluirParada(5);
+        }
+        noiteEmAndamento = false; sequenciaAbrigo = false;
+        RestaurarInventarioAbrigo(); LiberarMovimento();
+        quadro = Time.frameCount; SalvarAcampamento();
+    }
+
+    private void SalvarAcampamento()
+    {
+        if (GameProgress.Instance == null || GameSaveSystem.IsRestoring) return;
+        GameProgressData d = GameProgress.Instance.Data;
+        d.estradaAcampamentoIniciado = acampamentoIniciado;
+        d.estradaIntroAcampamentoConcluida = introAcampamentoConcluida;
+        d.estradaMateriaisAcampamento = materiaisAcampamento;
+        d.estradaFogueiraPreparada = fogueiraPreparada;
+        d.estradaPedidoAlecrimConcluido = pedidoAlecrimConcluido;
+        d.estradaRefeicaoPreparada = refeicaoPreparada;
+        d.estradaConversaFogueiraConcluida = conversaFogueiraConcluida;
+        d.estradaPrimeiraEscolhaNoturna = primeiraEscolhaNoturna;
+        d.estradaSegundaEscolhaNoturna = segundaEscolhaNoturna;
+        d.estradaConversaIrmasConcluida = conversaIrmasConcluida;
+        d.estradaConversaPaisConcluida = conversaPaisConcluida;
+        d.estradaAcampamentoConcluido = acampamentoConcluido;
+        SalvarAguaTerceira();
+    }
+
     private void SalvarAguaTerceira()
     {
         if (GameProgress.Instance == null || !GameProgress.Instance.Data.CanSave || GameSaveSystem.IsRestoring)
@@ -1828,6 +2485,11 @@ public class SegundaParada : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
+        if (irmasCenario != null) irmasCenario.SetActive(false);
+        if (paisCenario != null) paisCenario.SetActive(false);
+        RestaurarCoresAcampamento();
+        noiteEmAndamento = false; retomouAcampamento = false;
+        escolhaNoturnaAberta = false;
         if (familiaDescanso != null) familiaDescanso.SetActive(false);
         sequenciaJuazeiroIniciada = false;
         restaurandoFamilia = false;
@@ -1859,6 +2521,7 @@ public class MarcadorSegundaParada : MonoBehaviour
     public string id { get; private set; }
     public void configurar(SegundaParada c, string identificador) { id = identificador; }
 }
+
 
 
 

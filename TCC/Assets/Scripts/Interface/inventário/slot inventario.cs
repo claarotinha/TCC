@@ -109,6 +109,8 @@ public class InventorySlot : MonoBehaviour,
             return;
         if (agua != null && agua.SoltarCurativo(item, eventData.position))
             return;
+        if (agua != null && agua.SoltarNoAcampamento(item, eventData.position))
+            return;
 
         // Primeiro tenta usar a cabaca no riacho, antes de rejeitar
         // o drop pela area visual do inventario.
@@ -190,4 +192,5 @@ public class InventorySlot : MonoBehaviour,
     }
 
 }
+
 

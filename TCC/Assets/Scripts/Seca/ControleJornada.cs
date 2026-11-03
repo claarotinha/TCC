@@ -22,6 +22,10 @@ public class ControleJornada : MonoBehaviour
     [Header("Trecho do juazeiro")]
     [SerializeField, Min(0f)] private float trechoJuazeiro = 4f;
 
+    [Header("Acampamento e ultima caminhada")]
+    [SerializeField, Min(0f)] private float trechoAcampamento = 7.5f;
+    [SerializeField, Min(0f)] private float trechoAposAcampamento = 8f;
+
     private bool paradaAtiva;
     private int paradaAtual = -1;
 
@@ -51,6 +55,7 @@ public class ControleJornada : MonoBehaviour
         int salvo = Mathf.Clamp(dados.estradaParadasConcluidas, 0, 5);
         if (dados.estradaAbrigoConcluido) salvo = Mathf.Max(salvo, 2);
         if (dados.estradaJuazeiroConcluido) salvo = Mathf.Max(salvo, 4);
+        if (dados.estradaAcampamentoConcluido) salvo = 5;
         paradasConcluidas = Mathf.Max(paradasConcluidas, salvo);
         aguaTerceiraLiberada = dados.estradaBarrigudaConcluida;
         encontroTerceiraLiberado = dados.estradaCurativoAplicado;
@@ -64,14 +69,19 @@ public class ControleJornada : MonoBehaviour
             paradaAtiva = true;
             paradaAtual = 4;
         }
+        else if (paradasConcluidas == 4 && dados.estradaAcampamentoIniciado)
+        {
+            paradaAtiva = true;
+            paradaAtual = 5;
+        }
     }
 
     private void LateUpdate()
     {
-        if (mari == null || paradasConcluidas >= 5)
+        if (mari == null)
             return;
 
-        Transform limite = limitesDasParadas[paradasConcluidas];
+        Transform limite = limitesDasParadas[Mathf.Min(paradasConcluidas, 4)];
 
         if (limite == null)
             return;
@@ -81,6 +91,8 @@ public class ControleJornada : MonoBehaviour
             limiteX += aguaTerceiraLiberada && (encontroTerceiraLiberado || !SegundaParada.JanelaQuebrada)
                 ? trechoAposAguaTerceira : trechoAguaTerceira;
         if (paradasConcluidas == 3) limiteX += trechoJuazeiro;
+        if (paradasConcluidas == 4) limiteX += trechoAcampamento;
+        if (paradasConcluidas >= 5) limiteX += trechoAposAcampamento;
         // Bloqueia somente o avanço para a direita.
         if (mari.position.x > limiteX)
         {
@@ -148,5 +160,6 @@ public class ControleJornada : MonoBehaviour
             Instance = null;
     }
 }
+
 
 
