@@ -135,8 +135,18 @@ public class SegundaParada : MonoBehaviour
             Vector2 local = area.transform.InverseTransformPoint(ponto);
             Vector2 metade = area.size * 0.5f;
             Vector2 diferenca = local - area.offset;
-            if (Mathf.Abs(diferenca.x) > metade.x ||
-                Mathf.Abs(diferenca.y) > metade.y) continue;
+            bool acertou = Mathf.Abs(diferenca.x) <= metade.x &&
+                Mathf.Abs(diferenca.y) <= metade.y;
+            if (marcador.id == "baleia" && desenhoBaleia != null &&
+                desenhoBaleia.enabled && desenhoBaleia.gameObject.activeInHierarchy)
+            {
+                // O clique acompanha o desenho real, inclusive o prea e mudancas de escala.
+                Bounds desenho = desenhoBaleia.bounds;
+                desenho.Expand(new Vector3(0.2f, 0.2f, 0f));
+                acertou |= ponto.x >= desenho.min.x && ponto.x <= desenho.max.x &&
+                    ponto.y >= desenho.min.y && ponto.y <= desenho.max.y;
+            }
+            if (!acertou) continue;
             float proximidade = ((Vector2)(ponto - obj.transform.position)).sqrMagnitude;
             if (proximidade < menorDistancia)
             {
@@ -446,8 +456,7 @@ public class SegundaParada : MonoBehaviour
             AtualizarPegadas();
             return;
         }
-        if (alvo == "baleia" && etapa == 2 && pegadas == 3 &&
-            Vector2.Distance(mari.transform.position, Posicao(alvo)) <= 1.5f)
+        if (alvo == "baleia" && etapa == 2 && pegadas == 3)
         {
             if (prea == null || InventoryManager.Instance == null) return;
             etapa = 5;
