@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -18,11 +19,24 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private Image portraitImage;
     [SerializeField] private Transform baleia;
+    [SerializeField] private SeguidorFamilia mariquinha;
+    [SerializeField] private SeguidorFamilia mae;
+    [SerializeField] private SeguidorFamilia pai;
+    [SerializeField] private Transform limiteBusca;
+    [SerializeField] private Sprite[] corridaBaleia;
+    [SerializeField] private Sprite baleiaComPrea;
+    [SerializeField, Min(0.1f)] private float velocidadeFuga = 6.5f;
+    [SerializeField, Min(0.02f)] private float intervaloCorrida = 0.1f;
 
-    private int etapa; // 0 agua, 1 travessia, 2 busca, 3 abrigo, 4 concluida
+    private int etapa; // 0 agua, 1 travessia, 2 busca, 3 abrigo, 4 concluida, 5 retorno
     private bool iniciou, conversando, movimentoAnterior, esperandoEscolha, movimentoBloqueado;
     private SeguidorFamilia seguidorBaleia;
     private bool baleiaSeguia;
+    private bool maeSeguia, paiSeguia, familiaEsperando, fugindo, preparandoBusca;
+    private SpriteRenderer desenhoBaleia;
+    private Sprite spriteBaleia;
+    private Vector3 escalaBaleia, destinoBaleia;
+    private float inicioPegadas, retornoX;
     private int indice, quadro, pegadas;
     private readonly List<GameObject> marcadores = new List<GameObject>();
     private readonly List<Button> botoes = new List<Button>();
@@ -38,6 +52,9 @@ public class SegundaParada : MonoBehaviour
         {
             posicaoBaleia = baleia.position;
             seguidorBaleia = baleia.GetComponent<SeguidorFamilia>();
+            desenhoBaleia = baleia.GetComponent<SpriteRenderer>();
+            escalaBaleia = baleia.localScale;
+            if (desenhoBaleia != null) spriteBaleia = desenhoBaleia.sprite;
         }
         CriarMarcador("Riacho", new Vector2(transform.position.x + 1.8f, -0.6f),
             new Color(0.25f, 0.52f, 0.68f), 3.2f, 0.55f, "riacho");
@@ -59,6 +76,11 @@ public class SegundaParada : MonoBehaviour
             Falar(new[] { "Mãe" },
                 new[] { "Estou com muita sede, Zefinha, use a sua cabaça para coletar um pouco de água." },
                 null);
+        }
+        if (etapa == 5 && !conversando && mari != null &&
+            Mathf.Abs(mari.transform.position.x - retornoX) <= 1f)
+        {
+            VoltarParaFamilia();
         }
         if (!conversando || esperandoEscolha || Time.frameCount <= quadro ||
             !Input.GetMouseButtonDown(0)) return;
@@ -208,6 +230,8 @@ public class SegundaParada : MonoBehaviour
 
     private void ConversaBaleia()
     {
+        PrepararFuga();
+        StartCoroutine(CorrerBaleia());
         Falar(new[] { "Mãe", "Pai" },
             new[] {
                 "Ave minha Nossa Senhora! Essa cachorra ficou doida, correndo desenfreada assim!",
@@ -215,23 +239,129 @@ public class SegundaParada : MonoBehaviour
             }, IniciarBusca);
     }
 
+    private void PrepararFuga()
+    {
+        familiaEsperando = true;
+        maeSeguia = mae != null && mae.enabled;
+        paiSeguia = pai != null && pai.enabled;
+        if (mae != null) mae.enabled = false;
+        if (pai != null) pai.enabled = false;
+        if (mariquinha != null) mariquinha.enabled = true;
+        baleiaSeguia = seguidorBaleia != null && seguidorBaleia.enabled;
+        if (seguidorBaleia != null) seguidorBaleia.enabled = false;
+
+        // A busca cabe no trecho atual mesmo se Mari caminhou durante as falas.
+        inicioPegadas = Mathf.Max(transform.position.x + 0.5f, mari.transform.position.x + 0.5f);
+        if (limiteBusca != null)
+            inicioPegadas = Mathf.Min(inicioPegadas, limiteBusca.position.x - 4.3f);
+        retornoX = mae != null ? mae.transform.position.x + 1.2f : mari.transform.position.x;
+        destinoBaleia = new Vector3(inicioPegadas + 3.3f, posicaoBaleia.y, posicaoBaleia.z);
+    }
+
+    private IEnumerator CorrerBaleia()
+    {
+        fugindo = true;
+        float tempo = 0f;
+        while (baleia != null && Mathf.Abs(baleia.position.x - destinoBaleia.x) > 0.01f)
+        {
+            if (!PauseHelper.BlockInput() && Time.timeScale > 0f)
+            {
+                float direcao = Mathf.Sign(destinoBaleia.x - baleia.position.x);
+                Vector3 posicao = baleia.position;
+                posicao.x = Mathf.MoveTowards(posicao.x, destinoBaleia.x, velocidadeFuga * Time.deltaTime);
+                baleia.position = posicao;
+                tempo += Time.deltaTime;
+                if (corridaBaleia != null && corridaBaleia.Length > 0)
+                {
+                    int frame = Mathf.FloorToInt(tempo / Mathf.Max(0.02f, intervaloCorrida)) % corridaBaleia.Length;
+                    MostrarBaleia(corridaBaleia[frame]);
+                }
+                if (desenhoBaleia != null) desenhoBaleia.flipX = direcao < 0f;
+            }
+            yield return null;
+        }
+        MostrarBaleia(baleiaComPrea);
+        fugindo = false;
+    }
+
+    private void MostrarBaleia(Sprite sprite)
+    {
+        if (desenhoBaleia == null || sprite == null) return;
+        desenhoBaleia.sprite = sprite;
+        // Os quadros mantem os pes na mesma altura, sem saltos de escala.
+        float proporcao = spriteBaleia != null && sprite.bounds.size.y > 0f
+            ? spriteBaleia.bounds.size.y / sprite.bounds.size.y : 1f;
+        baleia.localScale = escalaBaleia * proporcao;
+    }
+
     private void IniciarBusca()
     {
+        if (preparandoBusca || etapa != 1) return;
+        preparandoBusca = true;
+        StartCoroutine(PrepararBusca());
+    }
+
+    private IEnumerator PrepararBusca()
+    {
+        BloquearMovimento();
+        while (fugindo) yield return null;
         etapa = 2;
-        if (seguidorBaleia != null)
-        {
-            baleiaSeguia = seguidorBaleia.enabled;
-            seguidorBaleia.enabled = false;
-        }
-        if (baleia != null)
-            baleia.position = new Vector3(transform.position.x + 3.8f, posicaoBaleia.y, posicaoBaleia.z);
         for (int i = 0; i < 3; i++)
             CriarMarcador("Pegada " + (i + 1),
-                new Vector2(transform.position.x + 0.5f + i * 1.1f, -1.4f),
+                new Vector2(inicioPegadas + i * 1.1f, -1.4f),
                 new Color(0.39f, 0.28f, 0.18f), 0.35f, 0.22f, "pegada" + i);
         CriarMarcador("Baleia encontrada",
-            new Vector2(transform.position.x + 3.8f, baleia != null ? baleia.position.y : -1.3f),
-            new Color(0.55f, 0.4f, 0.28f), 0.8f, 0.6f, "baleia");
+            new Vector2(destinoBaleia.x, baleia != null ? baleia.position.y + 0.35f : -1.3f),
+            new Color(0.55f, 0.4f, 0.28f), 1.2f, 0.9f, "baleia");
+        AtualizarPegadas();
+        preparandoBusca = false;
+        LiberarMovimento();
+    }
+
+    private void AtualizarPegadas()
+    {
+        foreach (GameObject obj in marcadores)
+        {
+            MarcadorSegundaParada pista = obj.GetComponent<MarcadorSegundaParada>();
+            if (pista == null || !pista.id.StartsWith("pegada")) continue;
+            int numero;
+            if (!int.TryParse(pista.id.Substring(6), out numero)) continue;
+            SpriteRenderer desenho = obj.GetComponent<SpriteRenderer>();
+            if (desenho != null)
+                desenho.color = numero == pegadas
+                    ? new Color(0.55f, 0.4f, 0.25f)
+                    : new Color(0.39f, 0.28f, 0.18f, 0.6f);
+        }
+    }
+
+    private void RetomarFamilia()
+    {
+        if (!familiaEsperando) return;
+        if (mae != null) mae.enabled = maeSeguia;
+        if (pai != null) pai.enabled = paiSeguia;
+        if (seguidorBaleia != null) seguidorBaleia.enabled = baleiaSeguia;
+        familiaEsperando = false;
+    }
+
+    private void VoltarParaFamilia()
+    {
+        etapa = 3;
+        RetomarFamilia();
+        Falar(new[] { "Zefinha", "Pai" },
+            new[] {
+                "achamos ela painho.",
+                "Já tá escurecendo, tem uma casinha ali mais a frente, vamo ve se da pra entrar e esticar as pernas, amanhã a gente continua."
+            }, ConversarNaCasa);
+    }
+
+    private void ConversarNaCasa()
+    {
+        Falar(new[] { "Mãe", "Mariquinha", "Pai" },
+            new[] {
+                "A casa ta trancafiada, mas pela janelinha da pra ve que num tem ninguém. A gente pode arrombar a porta com um empurrão.",
+                "Acho que dá para encontrar uma pedra e tacar na janela.",
+                "O que tu acha Zefinha? A gente empurra a porta ou quebramos a janela?"
+            }, () => { if (casa != null) casa.gameObject.SetActive(true); });
     }
 
     public void Clicar(string alvo)
@@ -247,24 +377,20 @@ public class SegundaParada : MonoBehaviour
             pegadas++;
             foreach (GameObject obj in marcadores)
                 if (obj.name == "Pegada " + pegadas) obj.SetActive(false);
+            AtualizarPegadas();
             return;
         }
-        if (alvo == "baleia" && etapa == 2 && pegadas == 3)
+        if (alvo == "baleia" && etapa == 2 && pegadas == 3 &&
+            Vector2.Distance(mari.transform.position, Posicao(alvo)) <= 1.5f)
         {
-            etapa = 3;
-            if (InventoryManager.Instance != null) InventoryManager.Instance.AddItem(prea);
+            if (prea == null || InventoryManager.Instance == null) return;
+            etapa = 5;
+            InventoryManager.Instance.AddItem(prea);
+            MostrarBaleia(spriteBaleia);
             if (seguidorBaleia != null) seguidorBaleia.enabled = baleiaSeguia;
             foreach (GameObject obj in marcadores)
                 if (obj.name.StartsWith("Pegada") || obj.name == "Baleia encontrada")
                     obj.SetActive(false);
-            Falar(new[] { "Zefinha", "Pai", "Mãe", "Mariquinha", "Pai" },
-                new[] {
-                    "achamos ela painho.",
-                    "Já tá escurecendo, tem uma casinha ali mais a frente, vamo ve se da pra entrar e esticar as pernas, amanhã a gente continua.",
-                    "A casa ta trancafiada, mas pela janelinha da pra ve que num tem ninguém. A gente pode arrombar a porta com um empurrão.",
-                    "Acho que dá para encontrar uma pedra e tacar na janela.",
-                    "O que tu acha Zefinha? A gente empurra a porta ou quebramos a janela?"
-                }, () => { if (casa != null) casa.gameObject.SetActive(true); });
         }
         else if (alvo == "casa" && etapa == 3) EscolherEntrada();
     }
@@ -381,10 +507,14 @@ public class SegundaParada : MonoBehaviour
 
     private void OnDisable()
     {
+        StopAllCoroutines();
+        fugindo = false;
+        preparandoBusca = false;
         LiberarMovimento();
+        RetomarFamilia();
+        MostrarBaleia(spriteBaleia);
         if (conversando && dialogueUI != null) dialogueUI.SetActive(false);
         LimparEscolhas();
-        if (etapa == 2 && seguidorBaleia != null) seguidorBaleia.enabled = baleiaSeguia;
         conversando = false;
         esperandoEscolha = false;
         depois = null;
@@ -399,6 +529,8 @@ public class MarcadorSegundaParada : MonoBehaviour
     private void OnMouseDown()
     {
         if (controle == null) return;
+        if (UnityEngine.EventSystems.EventSystem.current != null &&
+            UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
         if (id == "riacho")
         {
             InventoryManager inventario = InventoryManager.Instance;

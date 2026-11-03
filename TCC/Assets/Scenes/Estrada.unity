@@ -3094,9 +3094,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -10606,6 +10606,20 @@ MonoBehaviour:
   dialogueText: {fileID: 3000000098}
   portraitImage: {fileID: 3000000078}
   baleia: {fileID: 953090003}
+  mariquinha: {fileID: 700555848}
+  mae: {fileID: 467838416}
+  pai: {fileID: 1156249498}
+  limiteBusca: {fileID: 3500000011}
+  corridaBaleia:
+  - {fileID: 21300000, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
+  - {fileID: 21300001, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
+  - {fileID: 21300002, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
+  - {fileID: 21300003, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
+  - {fileID: 21300004, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
+  - {fileID: 21300005, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
+  baleiaComPrea: {fileID: 21300006, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
+  velocidadeFuga: 6.5
+  intervaloCorrida: 0.1
 --- !u!1 &3500000010
 GameObject:
   m_ObjectHideFlags: 0
