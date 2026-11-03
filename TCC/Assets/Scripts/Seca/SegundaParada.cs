@@ -33,7 +33,7 @@ public class SegundaParada : MonoBehaviour
     {
         JanelaQuebrada = PlayerPrefs.GetInt("EstradaMariquinhaFerida", 0) == 1;
         if (baleia != null) posicaoBaleia = baleia.position;
-        CriarMarcador("Riacho", new Vector2(transform.position.x - 4f, -0.6f),
+        CriarMarcador("Riacho", new Vector2(transform.position.x + 1.8f, -0.6f),
             new Color(0.25f, 0.52f, 0.68f), 3.2f, 0.55f, "riacho");
         CriarMarcador("Casa abandonada", new Vector2(transform.position.x + 5f, 0f),
             new Color(0.48f, 0.34f, 0.22f), 2f, 2.4f, "casa");
@@ -294,5 +294,16 @@ public class MarcadorSegundaParada : MonoBehaviour
     private SegundaParada controle;
     public string id { get; private set; }
     public void configurar(SegundaParada c, string identificador) { controle = c; id = identificador; }
-    private void OnMouseDown() { if (controle != null) controle.Clicar(id); }
+    private void OnMouseDown()
+    {
+        if (controle == null) return;
+        if (id == "riacho")
+        {
+            InventoryManager inventario = InventoryManager.Instance;
+            if (inventario != null && inventario.SelectedItem != null &&
+                controle.UsarNoRiacho(inventario.SelectedItem))
+                return;
+        }
+        controle.Clicar(id);
+    }
 }
