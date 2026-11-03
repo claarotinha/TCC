@@ -102,6 +102,22 @@ public class SegundaParada : MonoBehaviour
         if (acao != null) acao();
     }
 
+    public bool SoltarNoRiacho(ItemData item, Vector2 posicaoTela)
+    {
+        if (riacho == null || item != cabacaVazia || Camera.main == null)
+            return false;
+        Vector3 ponto = Camera.main.ScreenToWorldPoint(
+            new Vector3(posicaoTela.x, posicaoTela.y,
+                Mathf.Abs(Camera.main.transform.position.z - riacho.position.z)));
+        Collider2D area = riacho.GetComponent<Collider2D>();
+        if (area == null) return false;
+        Vector2 posicao = new Vector2(ponto.x, ponto.y);
+        if (area.OverlapPoint(posicao) ||
+            Vector2.Distance(posicao, riacho.position) < 1.6f)
+            return UsarNoRiacho(item);
+        return false;
+    }
+
     public bool UsarNoRiacho(ItemData item)
     {
         if (!iniciou || etapa != 0 || conversando || item != cabacaVazia ||

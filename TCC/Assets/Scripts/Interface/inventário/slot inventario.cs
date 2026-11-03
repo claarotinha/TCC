@@ -19,6 +19,8 @@ public class InventorySlot : MonoBehaviour,
         {
             icon.sprite = item.icon;
             icon.enabled = item.icon != null;
+            icon.color = item.itemName == "Cabaça cheia"
+                ? new Color(0.65f, 0.85f, 1f, 1f) : Color.white;
         }
 
         if (highlight != null)
@@ -99,6 +101,10 @@ public class InventorySlot : MonoBehaviour,
 
             return;
         }
+
+        SegundaParada agua = FindFirstObjectByType<SegundaParada>();
+        if (agua != null && agua.SoltarNoRiacho(item, eventData.position))
+            return;
 
         // Primeiro tenta usar a cabaca no riacho, antes de rejeitar
         // o drop pela area visual do inventario.
