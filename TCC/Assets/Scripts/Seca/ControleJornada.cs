@@ -19,6 +19,9 @@ public class ControleJornada : MonoBehaviour
     private bool aguaTerceiraLiberada;
     private bool encontroTerceiraLiberado;
 
+    [Header("Trecho do juazeiro")]
+    [SerializeField, Min(0f)] private float trechoJuazeiro = 4f;
+
     private bool paradaAtiva;
     private int paradaAtual = -1;
 
@@ -47,6 +50,7 @@ public class ControleJornada : MonoBehaviour
         GameProgressData dados = GameProgress.Instance.Data;
         int salvo = Mathf.Clamp(dados.estradaParadasConcluidas, 0, 5);
         if (dados.estradaAbrigoConcluido) salvo = Mathf.Max(salvo, 2);
+        if (dados.estradaJuazeiroConcluido) salvo = Mathf.Max(salvo, 4);
         paradasConcluidas = Mathf.Max(paradasConcluidas, salvo);
         aguaTerceiraLiberada = dados.estradaBarrigudaConcluida;
         encontroTerceiraLiberado = dados.estradaCurativoAplicado;
@@ -54,6 +58,11 @@ public class ControleJornada : MonoBehaviour
         {
             paradaAtiva = true;
             paradaAtual = 3;
+        }
+        else if (paradasConcluidas == 3 && dados.estradaJuazeiroIniciado)
+        {
+            paradaAtiva = true;
+            paradaAtual = 4;
         }
     }
 
@@ -71,6 +80,7 @@ public class ControleJornada : MonoBehaviour
         if (paradasConcluidas == 2)
             limiteX += aguaTerceiraLiberada && (encontroTerceiraLiberado || !SegundaParada.JanelaQuebrada)
                 ? trechoAposAguaTerceira : trechoAguaTerceira;
+        if (paradasConcluidas == 3) limiteX += trechoJuazeiro;
         // Bloqueia somente o avanço para a direita.
         if (mari.position.x > limiteX)
         {
@@ -138,4 +148,5 @@ public class ControleJornada : MonoBehaviour
             Instance = null;
     }
 }
+
 

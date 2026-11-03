@@ -849,6 +849,7 @@ MonoBehaviour:
   - {fileID: 845846474}
   trechoAguaTerceira: 5
   trechoAposAguaTerceira: 8
+  trechoJuazeiro: 4
 --- !u!4 &406039565
 Transform:
   m_ObjectHideFlags: 0
@@ -5502,7 +5503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GatilhoParada
   numeroDaParada: 4
-  concluirComTeclaT: 1
+  concluirComTeclaT: 0
 --- !u!61 &1574179967
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10639,6 +10640,11 @@ MonoBehaviour:
   mulherRetirante: {fileID: 21300001, guid: c6a60000000040008000000000000002, type: 3}
   meninoRetirante: {fileID: 21300002, guid: c6a60000000040008000000000000002, type: 3}
   pessoaDeitada: {fileID: 21300003, guid: c6a60000000040008000000000000002, type: 3}
+  quartaParada: {fileID: 1574179965}
+  juazeiroSprite: {fileID: 21300000, guid: c7a70000000040008000000000000001, type: 3}
+  placaFortaleza: {fileID: 21300001, guid: c7a70000000040008000000000000001, type: 3}
+  familiaJuazeiro: {fileID: 21300000, guid: c7a70000000040008000000000000002, type: 3}
+  familiaJuazeiroCurativo: {fileID: 21300001, guid: c7a70000000040008000000000000002, type: 3}
 --- !u!1 &3500000010
 GameObject:
   m_ObjectHideFlags: 0
@@ -10944,5 +10950,6 @@ SceneRoots:
   - {fileID: 789316125}
   - {fileID: 406039565}
   - {fileID: 3000000001}
+
 
 

@@ -54,6 +54,18 @@ public class SegundaParada : MonoBehaviour
     private bool encontroVisitado, encontroConcluido, perguntasAbertas;
     private int perguntasAntonio;
 
+    [Header("Quarta parada - juazeiro")]
+    [SerializeField] private Transform quartaParada;
+    [SerializeField] private Sprite juazeiroSprite;
+    [SerializeField] private Sprite placaFortaleza;
+    [SerializeField] private Sprite familiaJuazeiro;
+    [SerializeField] private Sprite familiaJuazeiroCurativo;
+    private GameObject juazeiroCenario, familiaDescanso;
+    private bool juazeiroIniciado, placaJuazeiroLida, letrasJuazeiroConcluidas, juazeiroConcluido;
+    private bool sequenciaJuazeiroIniciada, restaurandoFamilia;
+    private float fracaoPainelJuazeiro, zoomJuazeiro;
+    private readonly Vector3[] cantosPainelJuazeiro = new Vector3[4];
+
     private Transform barriguda;
     private Vector3 posicaoBarriguda;
     private bool aguaTerceiraIniciada, dialogoTerceiraConcluido, aguaTerceiraConcluida;
@@ -80,6 +92,7 @@ public class SegundaParada : MonoBehaviour
     private Image.Type tipoFadeOriginal;
     private Color corFadeOriginal;
     private bool raycastFadeOriginal;
+    private bool imagemFadeAtivaOriginal;
     private Vector2 ancoraMinOriginal, ancoraMaxOriginal, posicaoFadeOriginal, tamanhoFadeOriginal;
     private readonly List<bool> filhosFadeAtivos = new List<bool>();
     private Vector3 posicaoCasaExterior, escalaCasaExterior;
@@ -113,16 +126,6 @@ public class SegundaParada : MonoBehaviour
             if (visualMariquinha != null) spriteMariquinhaNormal = visualMariquinha.sprite;
             escalaMariquinhaNormal = mariquinha.transform.localScale;
         }
-        PrepararAguaTerceira();
-        PrepararEncontroTerceira();
-        AplicarFerimento();
-        if (GameProgress.Instance != null && GameProgress.Instance.Data.estradaAbrigoConcluido)
-        {
-            iniciou = true;
-            etapa = 4;
-            StartCoroutine(RestaurarAbrigoCarregado());
-            return;
-        }
         if (baleia != null)
         {
             posicaoBaleia = baleia.position;
@@ -130,6 +133,18 @@ public class SegundaParada : MonoBehaviour
             desenhoBaleia = baleia.GetComponent<SpriteRenderer>();
             escalaBaleia = baleia.localScale;
             if (desenhoBaleia != null) spriteBaleia = desenhoBaleia.sprite;
+        }
+        PrepararAguaTerceira();
+        PrepararEncontroTerceira();
+        PrepararJuazeiro();
+        AplicarFerimento();
+        if (GameProgress.Instance != null && GameProgress.Instance.Data.estradaAbrigoConcluido)
+        {
+            iniciou = true;
+            etapa = 4;
+            restaurandoFamilia = true;
+            StartCoroutine(RestaurarAbrigoCarregado());
+            return;
         }
         CriarMarcador("Riacho", new Vector2(transform.position.x + 1.8f, -0.6f),
             new Color(0.25f, 0.52f, 0.68f), 3.2f, 0.55f, "riacho");
@@ -151,6 +166,14 @@ public class SegundaParada : MonoBehaviour
     {
         if (PauseHelper.BlockInput() || Time.timeScale == 0f || sequenciaAbrigo) return;
         ControleJornada j = ControleJornada.Instance;
+        if (sequenciaJuazeiroIniciada && grupoCapturado)
+        {
+            PrepararCameraJuazeiro();
+            cameraAbrigo.orthographicSize = zoomJuazeiro;
+            cameraAbrigo.transform.position = CentroCameraJuazeiro();
+        }
+        AtualizarJuazeiro();
+        if (sequenciaAbrigo) return;
         AtualizarEncontroTerceira();
         if (j != null && j.ParadaAtiva && j.ParadaAtual == 3 &&
             !aguaTerceiraConcluida && !dialogoTerceiraConcluido &&
@@ -934,6 +957,7 @@ public class SegundaParada : MonoBehaviour
         tipoFadeOriginal = imagemFade.type;
         corFadeOriginal = imagemFade.color;
         raycastFadeOriginal = imagemFade.raycastTarget;
+        imagemFadeAtivaOriginal = imagemFade.enabled;
         ancoraMinOriginal = retanguloFade.anchorMin; ancoraMaxOriginal = retanguloFade.anchorMax;
         posicaoFadeOriginal = retanguloFade.anchoredPosition; tamanhoFadeOriginal = retanguloFade.sizeDelta;
         filhosFadeAtivos.Clear();
@@ -945,6 +969,7 @@ public class SegundaParada : MonoBehaviour
         retanguloFade.anchorMin = Vector2.zero; retanguloFade.anchorMax = Vector2.one;
         retanguloFade.anchoredPosition = Vector2.zero; retanguloFade.sizeDelta = Vector2.zero;
         imagemFade.sprite = null; imagemFade.type = Image.Type.Simple;
+        imagemFade.enabled = true;
         imagemFade.color = new Color(0f, 0f, 0f, 0f); imagemFade.raycastTarget = true;
         dialogueUI.SetActive(true); dialoguePanel.SetActive(true);
         Grupo(dialogueUI); Grupo(dialoguePanel);
@@ -972,6 +997,7 @@ public class SegundaParada : MonoBehaviour
         {
             imagemFade.sprite = spriteFadeOriginal; imagemFade.type = tipoFadeOriginal;
             imagemFade.color = corFadeOriginal; imagemFade.raycastTarget = raycastFadeOriginal;
+            imagemFade.enabled = imagemFadeAtivaOriginal;
             retanguloFade.anchorMin = ancoraMinOriginal; retanguloFade.anchorMax = ancoraMaxOriginal;
             retanguloFade.anchoredPosition = posicaoFadeOriginal; retanguloFade.sizeDelta = tamanhoFadeOriginal;
             int i = 0;
@@ -1079,6 +1105,7 @@ public class SegundaParada : MonoBehaviour
             }
         }
         AplicarFerimento();
+        restaurandoFamilia = false;
     }
 
     private void CriarMarcador(string nome, Vector2 pos, Color cor, float largura, float altura, string id)
@@ -1550,6 +1577,246 @@ public class SegundaParada : MonoBehaviour
         });
     }
 
+    private void PrepararJuazeiro()
+    {
+        if (GameProgress.Instance != null)
+        {
+            GameProgressData dados = GameProgress.Instance.Data;
+            juazeiroIniciado = dados.estradaJuazeiroIniciado;
+            placaJuazeiroLida = dados.estradaPlacaJuazeiroLida;
+            letrasJuazeiroConcluidas = dados.estradaLetrasJuazeiroConcluidas;
+            juazeiroConcluido = dados.estradaJuazeiroConcluido;
+        }
+        if (quartaParada == null || juazeiroSprite == null || placaFortaleza == null ||
+            familiaJuazeiro == null || familiaJuazeiroCurativo == null ||
+            mari == null || mariquinha == null || mae == null || pai == null || baleia == null ||
+            dialogueText == null || dialoguePanel == null || dialoguePanel.GetComponent<Image>() == null)
+        {
+            Debug.LogError("SegundaParada: faltam referencias do juazeiro e da familia descansando.", this);
+            return;
+        }
+        juazeiroCenario = CriarAlvoEncontro("Juazeiro", "juazeiro", juazeiroSprite,
+            quartaParada.position.x + 2f, 5.6f, -1);
+        juazeiroCenario.GetComponent<BoxCollider2D>().enabled = false;
+        juazeiroCenario.SetActive(true);
+        GameObject placa = CriarAlvoEncontro("Placa Fortaleza", "placaFortaleza", placaFortaleza,
+            quartaParada.position.x - 0.6f, 1.8f, 1);
+        placa.GetComponent<BoxCollider2D>().enabled = false;
+        placa.SetActive(true);
+
+        // O texto e composto pela fonte existente, para preservar acentos e a seta.
+        GameObject rotulo = new GameObject("Texto da placa", typeof(TextMeshPro));
+        rotulo.transform.SetParent(transform, false);
+        Bounds desenhoPlaca = placa.GetComponent<SpriteRenderer>().bounds;
+        rotulo.transform.position = new Vector3(desenhoPlaca.center.x,
+            desenhoPlaca.min.y + desenhoPlaca.size.y * 0.66f, -0.1f);
+        TextMeshPro texto = rotulo.GetComponent<TextMeshPro>();
+        texto.font = dialogueText.font;
+        texto.text = "FORTALEZA\n— 12 LÉGUAS →";
+        texto.alignment = TextAlignmentOptions.Center;
+        texto.color = new Color(0.24f, 0.12f, 0.07f);
+        texto.enableAutoSizing = true;
+        texto.fontSizeMin = 2f;
+        texto.fontSizeMax = 3.2f;
+        texto.fontSize = 3.2f;
+        texto.textWrappingMode = TextWrappingModes.Normal;
+        texto.rectTransform.sizeDelta = new Vector2(desenhoPlaca.size.x * 0.82f, desenhoPlaca.size.y * 0.4f);
+        texto.GetComponent<MeshRenderer>().sortingOrder = 2;
+
+        float altura = 7.2f * familiaJuazeiro.bounds.size.y / familiaJuazeiro.bounds.size.x;
+        familiaDescanso = CriarAlvoEncontro("Familia no juazeiro", "descansoJuazeiro", familiaJuazeiro,
+            juazeiroCenario.transform.position.x - 0.6f, altura, 11);
+        familiaDescanso.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    private void AtualizarJuazeiro()
+    {
+        ControleJornada jornada = ControleJornada.Instance;
+        if (restaurandoFamilia || juazeiroConcluido || sequenciaJuazeiroIniciada ||
+            conversando || juazeiroCenario == null || familiaDescanso == null || Camera.main == null ||
+            jornada == null || !jornada.ParadaAtiva || jornada.ParadaAtual != 4 ||
+            dialogueUI == null || dialogueUI.activeInHierarchy || InvestigationGuard.Blocked) return;
+        sequenciaJuazeiroIniciada = true;
+        if (!juazeiroIniciado)
+        {
+            juazeiroIniciado = true;
+            if (GameProgress.Instance != null)
+                GameProgress.Instance.Data.estradaJuazeiroIniciado = true;
+            SalvarAguaTerceira();
+        }
+        if (placaJuazeiroLida) IniciarDescansoJuazeiro();
+        else Falar(new[] { "Mariquinha" }, new[] {
+            "To cansada painho, será que a gente num pode senta um pouco?"
+        }, () => StartCoroutine(AproximarJuazeiro()));
+    }
+
+    private Vector3 CentroCameraJuazeiro()
+    {
+        float chao = juazeiroCenario.transform.position.y;
+        float limiteY = chao - 0.25f + zoomJuazeiro * (1f - 2f * fracaoPainelJuazeiro);
+        return new Vector3(juazeiroCenario.transform.position.x - 0.5f,
+            Mathf.Min(chao + 1.2f, limiteY), cameraOriginal.z);
+    }
+
+    private void PrepararCameraJuazeiro()
+    {
+        RectTransform painel = dialoguePanel.GetComponent<RectTransform>();
+        painel.GetWorldCorners(cantosPainelJuazeiro);
+        Canvas canvas = dialoguePanel.GetComponentInParent<Canvas>();
+        Camera cameraUI = canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay
+            ? canvas.worldCamera : null;
+        float topo = RectTransformUtility.WorldToScreenPoint(cameraUI, cantosPainelJuazeiro[1]).y;
+        fracaoPainelJuazeiro = Mathf.Clamp(topo / Mathf.Max(1f, Screen.height), 0f, 0.85f);
+        float altura = juazeiroCenario.GetComponent<SpriteRenderer>().bounds.size.y + 0.85f;
+        zoomJuazeiro = Mathf.Max(5f, zoomOriginal, altura / (2f * (1f - fracaoPainelJuazeiro)));
+    }
+
+    private IEnumerator AproximarJuazeiro()
+    {
+        sequenciaAbrigo = true;
+        BloquearMovimento();
+        CapturarGrupoAbrigo();
+        if (seguirCamera != null) seguirCamera.enabled = false;
+        PrepararCameraJuazeiro();
+        Vector3[] origens = new Vector3[pessoasAbrigo.Length];
+        Vector3[] destinos = new Vector3[pessoasAbrigo.Length];
+        float destinoMari = juazeiroCenario.transform.position.x - 0.2f;
+        for (int i = 0; i < pessoasAbrigo.Length; i++)
+        {
+            origens[i] = pessoasAbrigo[i].position;
+            destinos[i] = origens[i];
+            float distancia = i > 0 && seguidoresAbrigo[i - 1] != null
+                ? seguidoresAbrigo[i - 1].DistanciaAtras : i * 0.9f;
+            destinos[i].x = destinoMari - distancia;
+        }
+        float tempo = 0f;
+        deslocandoFamilia = true;
+        while (tempo < 1.2f)
+        {
+            tempo += Time.deltaTime;
+            float andamento = Mathf.Clamp01(tempo / 1.2f);
+            for (int i = 0; i < pessoasAbrigo.Length; i++)
+                Posicionar(pessoasAbrigo[i], Vector3.Lerp(origens[i], destinos[i], andamento));
+            cameraAbrigo.transform.position = Vector3.Lerp(cameraOriginal, CentroCameraJuazeiro(), andamento);
+            cameraAbrigo.orthographicSize = Mathf.Lerp(zoomOriginal, zoomJuazeiro, andamento);
+            Animator animacao = mari.GetComponent<Animator>();
+            if (animacao != null) animacao.SetBool("IsWalking", true);
+            yield return null;
+        }
+        deslocandoFamilia = false;
+        PararMari();
+        sequenciaAbrigo = false;
+        Falar(new[] { "Zefinha", "Pai", "Mariquinha", "Pai" }, new[] {
+            "A placa ta dizendo que ainda falta umas doze léguas pra Fortaleza.",
+            "Vamos sentar um pouco debaixo daquele Juazeiro, mas pouquinho mesmo, ainda tem muita estrada pela frente.",
+            "Doze légua ainda? Ave Maria…",
+            "Uma légua de cada vez, minha filha. Uma de cada vez."
+        }, () =>
+        {
+            placaJuazeiroLida = true;
+            if (GameProgress.Instance != null)
+                GameProgress.Instance.Data.estradaPlacaJuazeiroLida = true;
+            SalvarAguaTerceira();
+            IniciarDescansoJuazeiro();
+        });
+    }
+
+    private void IniciarDescansoJuazeiro()
+    {
+        sequenciaAbrigo = true;
+        BloquearMovimento();
+        CapturarGrupoAbrigo();
+        if (seguirCamera != null) seguirCamera.enabled = false;
+        PrepararCameraJuazeiro();
+        StartCoroutine(SentarNoJuazeiro());
+    }
+
+    private IEnumerator SentarNoJuazeiro()
+    {
+        PrepararFade();
+        yield return Escurecer(1f);
+        cameraAbrigo.transform.position = CentroCameraJuazeiro();
+        cameraAbrigo.orthographicSize = zoomJuazeiro;
+        Sprite sprite = JanelaQuebrada && curativoAplicado ? familiaJuazeiroCurativo : familiaJuazeiro;
+        SpriteRenderer descanso = familiaDescanso.GetComponent<SpriteRenderer>();
+        descanso.sprite = sprite;
+        familiaDescanso.transform.localScale = Vector3.one * (7.2f / sprite.bounds.size.x);
+        familiaDescanso.SetActive(true);
+        for (int i = 0; i < desenhosAbrigo.Length; i++)
+            if (desenhosAbrigo[i] != null) desenhosAbrigo[i].enabled = false;
+        yield return Escurecer(0f);
+        RestaurarFade();
+        sequenciaAbrigo = false;
+        if (letrasJuazeiroConcluidas) IniciarCochiloJuazeiro();
+        else Falar(new[] {
+            "Mariquinha", "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha",
+            "Mariquinha", "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha"
+        }, new[] {
+            "Como tu fez isso?",
+            "Isso o quê?",
+            "Tu olhou e já sabia o que estava escrito.",
+            "Ah… Foi a Sinhazinha da fazenda, a filha do patrão, ela me ensinou escondida.",
+            "As letra é bonita. Parece desenho.",
+            "Parece mesmo.",
+            "Tu me ensina?",
+            "Ensino.",
+            "Quem fez as letras?",
+            "Eu não sei.",
+            "Deve ser alguém muito inteligente, porque mesmo depois de morto, num deixa de falar.",
+            "É… Acho que sim. Vamos tirar um cochilo também, antes que painho e mainha acorde."
+        }, IniciarCochiloJuazeiro);
+    }
+
+    private void IniciarCochiloJuazeiro()
+    {
+        letrasJuazeiroConcluidas = true;
+        if (GameProgress.Instance != null)
+            GameProgress.Instance.Data.estradaLetrasJuazeiroConcluidas = true;
+        SalvarAguaTerceira();
+        sequenciaAbrigo = true;
+        BloquearMovimento();
+        StartCoroutine(CochilarNoJuazeiro());
+    }
+
+    private IEnumerator CochilarNoJuazeiro()
+    {
+        PrepararFade();
+        yield return Escurecer(1f);
+        yield return new WaitForSeconds(1.4f);
+        familiaDescanso.SetActive(false);
+        // Reconstroi a formacao anterior sem apagar o curativo nem aproximar as irmas feridas.
+        for (int i = 0; i < seguidoresAbrigo.Length; i++)
+        {
+            SeguidorFamilia familiar = seguidoresAbrigo[i];
+            if (familiar == null) continue;
+            Vector3 lugar = familiar.transform.position;
+            lugar.x = mari.transform.position.x - familiar.DistanciaAtras;
+            Posicionar(familiar.transform, lugar);
+        }
+        foreach (SpriteRenderer desenho in desenhosAbrigo)
+            if (desenho != null) desenho.flipX = false;
+        RestaurarGrupoAbrigo();
+        AplicarFerimento();
+        Physics2D.SyncTransforms();
+        RestaurarCamera();
+        yield return Escurecer(0f);
+        RestaurarFade();
+        ControleJornada jornada = ControleJornada.Instance;
+        if (jornada != null && jornada.ParadaAtiva && jornada.ParadaAtual == 4)
+        {
+            juazeiroConcluido = true;
+            if (GameProgress.Instance != null)
+                GameProgress.Instance.Data.estradaJuazeiroConcluido = true;
+            jornada.ConcluirParada(4);
+        }
+        sequenciaJuazeiroIniciada = false;
+        sequenciaAbrigo = false;
+        LiberarMovimento();
+        RestaurarInventarioAbrigo();
+        quadro = Time.frameCount;
+        SalvarAguaTerceira();
+    }
+
     private void SalvarAguaTerceira()
     {
         if (GameProgress.Instance == null || !GameProgress.Instance.Data.CanSave || GameSaveSystem.IsRestoring)
@@ -1561,6 +1828,9 @@ public class SegundaParada : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
+        if (familiaDescanso != null) familiaDescanso.SetActive(false);
+        sequenciaJuazeiroIniciada = false;
+        restaurandoFamilia = false;
         recolhendoAgua = false;
         if (barriguda != null) barriguda.position = posicaoBarriguda;
         RestaurarInventarioAbrigo();
@@ -1589,5 +1859,6 @@ public class MarcadorSegundaParada : MonoBehaviour
     public string id { get; private set; }
     public void configurar(SegundaParada c, string identificador) { id = identificador; }
 }
+
 
 
