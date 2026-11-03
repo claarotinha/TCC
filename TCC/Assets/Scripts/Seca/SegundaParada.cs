@@ -82,11 +82,77 @@ public class SegundaParada : MonoBehaviour
         {
             VoltarParaFamilia();
         }
+        if (!conversando && !preparandoBusca && Time.frameCount > quadro &&
+            Input.GetMouseButtonDown(0))
+            VerificarCliqueCenario();
+
         if (!conversando || esperandoEscolha || Time.frameCount <= quadro ||
             !Input.GetMouseButtonDown(0)) return;
         indice++;
         if (indice < falas.Length) { Mostrar(); return; }
         Fechar();
+    }
+
+    private bool PonteiroEmControleUI()
+    {
+        UnityEngine.EventSystems.EventSystem eventos =
+            UnityEngine.EventSystems.EventSystem.current;
+        if (eventos == null) return false;
+        var ponteiro = new UnityEngine.EventSystems.PointerEventData(eventos);
+        ponteiro.position = Input.mousePosition;
+        var resultados = new List<UnityEngine.EventSystems.RaycastResult>();
+        eventos.RaycastAll(ponteiro, resultados);
+        foreach (var resultado in resultados)
+        {
+            // Colliders de cenario e fundos vazios de Canvas nao sao controles.
+            if (!(resultado.module is GraphicRaycaster) || resultado.gameObject == null) continue;
+            if (resultado.gameObject.GetComponentInParent<Selectable>() != null ||
+                resultado.gameObject.GetComponentInParent<InventorySlot>() != null)
+                return true;
+        }
+        return false;
+    }
+
+    private void VerificarCliqueCenario()
+    {
+        Camera camera = Camera.main;
+        if (camera == null || PonteiroEmControleUI()) return;
+        Ray raio = camera.ScreenPointToRay(Input.mousePosition);
+        Plane plano = new Plane(Vector3.forward, Vector3.zero);
+        float distancia;
+        if (!plano.Raycast(raio, out distancia)) return;
+        Vector3 ponto = raio.GetPoint(distancia);
+        MarcadorSegundaParada escolhido = null;
+        float menorDistancia = float.PositiveInfinity;
+
+        // Consulta os proprios alvos, sem deixar o collider da estrada cobri-los.
+        foreach (GameObject obj in marcadores)
+        {
+            if (obj == null || !obj.activeInHierarchy) continue;
+            BoxCollider2D area = obj.GetComponent<BoxCollider2D>();
+            MarcadorSegundaParada marcador = obj.GetComponent<MarcadorSegundaParada>();
+            if (area == null || !area.enabled || marcador == null) continue;
+            Vector2 local = area.transform.InverseTransformPoint(ponto);
+            Vector2 metade = area.size * 0.5f;
+            Vector2 diferenca = local - area.offset;
+            if (Mathf.Abs(diferenca.x) > metade.x ||
+                Mathf.Abs(diferenca.y) > metade.y) continue;
+            float proximidade = ((Vector2)(ponto - obj.transform.position)).sqrMagnitude;
+            if (proximidade < menorDistancia)
+            {
+                menorDistancia = proximidade;
+                escolhido = marcador;
+            }
+        }
+        if (escolhido == null) return;
+        if (escolhido.id == "riacho")
+        {
+            InventoryManager inventario = InventoryManager.Instance;
+            if (inventario != null && inventario.SelectedItem != null)
+                UsarNoRiacho(inventario.SelectedItem);
+            return;
+        }
+        Clicar(escolhido.id);
     }
 
     private void Falar(string[] personagens, string[] textos, Action fim, bool duranteCaminhada = false)
@@ -500,6 +566,7 @@ public class SegundaParada : MonoBehaviour
         sr.enabled = id != "baleia" || baleia == null;
         go.transform.localScale = new Vector3(largura, altura, 1);
         BoxCollider2D col = go.GetComponent<BoxCollider2D>(); col.isTrigger = true;
+        if (id.StartsWith("pegada")) col.size = new Vector2(1.8f, 2f);
         MarcadorSegundaParada marcador = go.GetComponent<MarcadorSegundaParada>();
         marcador.configurar(this, id);
         marcadores.Add(go);
@@ -523,21 +590,6 @@ public class SegundaParada : MonoBehaviour
 
 public class MarcadorSegundaParada : MonoBehaviour
 {
-    private SegundaParada controle;
     public string id { get; private set; }
-    public void configurar(SegundaParada c, string identificador) { controle = c; id = identificador; }
-    private void OnMouseDown()
-    {
-        if (controle == null) return;
-        if (UnityEngine.EventSystems.EventSystem.current != null &&
-            UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
-        if (id == "riacho")
-        {
-            InventoryManager inventario = InventoryManager.Instance;
-            if (inventario != null && inventario.SelectedItem != null &&
-                controle.UsarNoRiacho(inventario.SelectedItem))
-                return;
-        }
-        controle.Clicar(id);
-    }
+    public void configurar(SegundaParada c, string identificador) { id = identificador; }
 }
