@@ -139,43 +139,48 @@ public class HistoriaPaiCaminhada : MonoBehaviour
         dialogueText.text = "Qual história painho deve contar?";
         if (portraitImage != null) portraitImage.enabled = false;
         choicesContainer.SetActive(true);
-        foreach (Transform filho in choicesContainer.transform)
-            filho.gameObject.SetActive(false);
-        CriarBotao("Corpo-seco", 1);
-        CriarBotao("Comadre Fulozinha", 2);
-        CriarBotao("Mãe-D’Água", 3);
-    }
+        AtivarGrupo(choicesContainer);
 
-    private void CriarBotao(string titulo, int escolha)
-    {
-        GameObject go = new GameObject(titulo, typeof(RectTransform), typeof(Image), typeof(Button));
-        go.transform.SetParent(choicesContainer.transform, false);
-        RectTransform rt = go.GetComponent<RectTransform>();
-        rt.anchorMin = new Vector2(0.5f, 0.5f);
-        rt.anchorMax = new Vector2(0.5f, 0.5f);
-        rt.anchoredPosition = new Vector2(0f, 70f - (escolha - 1) * 65f);
-        rt.sizeDelta = new Vector2(440f, 55f);
-        go.GetComponent<Image>().color = new Color(0.22f, 0.17f, 0.12f, 0.95f);
-        Button botao = go.GetComponent<Button>();
-        botoes.Add(botao);
-        GameObject label = new GameObject("Texto", typeof(RectTransform), typeof(TextMeshProUGUI));
-        label.transform.SetParent(go.transform, false);
-        RectTransform lr = label.GetComponent<RectTransform>();
-        lr.anchorMin = Vector2.zero; lr.anchorMax = Vector2.one;
-        lr.offsetMin = Vector2.zero; lr.offsetMax = Vector2.zero;
-        TextMeshProUGUI tmp = label.GetComponent<TextMeshProUGUI>();
-        tmp.text = titulo; tmp.fontSize = 22; tmp.alignment = TextAlignmentOptions.Center;
-        tmp.color = Color.white; tmp.raycastTarget = false;
-        botao.onClick.AddListener(() => Escolher(escolha));
+        // Reutiliza os tres botoes ja existentes na cena, como MotherDialogue.
+        botoes.Clear();
+        foreach (Transform filho in choicesContainer.transform)
+        {
+            Button botao = filho.GetComponent<Button>();
+            if (botao != null) botoes.Add(botao);
+        }
+        if (botoes.Count < 3)
+        {
+            Debug.LogError("HistoriaPaiCaminhada: ChoicesContainer precisa dos tres botoes existentes.", this);
+            Encerrar();
+            return;
+        }
+        string[] titulos = { "Corpo-seco", "Comadre Fulozinha", "Mãe-D’Água" };
+        for (int i = 0; i < botoes.Count; i++)
+        {
+            Button botao = botoes[i];
+            bool usar = i < 3;
+            botao.gameObject.SetActive(usar);
+            if (!usar) continue;
+            TMP_Text rotulo = botao.GetComponentInChildren<TMP_Text>(true);
+            if (rotulo != null) rotulo.text = titulos[i];
+            int escolha = i + 1;
+            botao.onClick.RemoveAllListeners();
+            botao.onClick.AddListener(() => Escolher(escolha));
+            botao.interactable = true;
+        }
     }
 
     private void Escolher(int escolha)
     {
         foreach (Button botao in botoes)
-            if (botao != null) Destroy(botao.gameObject);
+        {
+            if (botao != null)
+            {
+                botao.onClick.RemoveAllListeners();
+                botao.gameObject.SetActive(false);
+            }
+        }
         botoes.Clear();
-        foreach (Transform filho in choicesContainer.transform)
-            filho.gameObject.SetActive(true);
         choicesContainer.SetActive(false);
         falas = escolha == 1 ? CorpoSeco : escolha == 2 ? ComadreFulozinha : MaeDAgua;
         if (GameProgress.Instance != null)
@@ -196,7 +201,7 @@ public class HistoriaPaiCaminhada : MonoBehaviour
     {
         if (ativo && dialogueUI != null) dialogueUI.SetActive(false);
         foreach (Button botao in botoes)
-            if (botao != null) Destroy(botao.gameObject);
+            if (botao != null) botao.onClick.RemoveAllListeners();
         botoes.Clear();
     }
 }
