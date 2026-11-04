@@ -17,10 +17,12 @@ public class InventorySlot : MonoBehaviour,
 
         if (icon != null)
         {
-            icon.sprite = item.icon;
-            icon.enabled = item.icon != null;
-            icon.color = item.itemName == "Cabaça cheia"
-                ? new Color(0.65f, 0.85f, 1f, 1f) : Color.white;
+            icon.sprite = item != null ? item.icon : null;
+            icon.enabled = item != null && item.icon != null;
+
+            icon.color = item != null && item.itemName == "Cabaça cheia"
+                ? new Color(0.65f, 0.85f, 1f, 1f)
+                : Color.white;
         }
 
         if (highlight != null)
@@ -42,6 +44,7 @@ public class InventorySlot : MonoBehaviour,
             return;
 
         Canvas canvas = GetComponentInParent<Canvas>();
+
         if (canvas == null)
             return;
 
@@ -84,8 +87,9 @@ public class InventorySlot : MonoBehaviour,
         if (!wasDragging || item == null)
             return;
 
-        // Primeiro, verifica se o item foi solto sobre outro slot.
+        // Verifica a combinação com outro item do inventário.
         GameObject dropObject = eventData.pointerCurrentRaycast.gameObject;
+
         InventorySlot otherSlot = dropObject != null
             ? dropObject.GetComponentInParent<InventorySlot>()
             : null;
@@ -94,7 +98,9 @@ public class InventorySlot : MonoBehaviour,
         {
             if (otherSlot != this && otherSlot.item != null)
             {
-                CombinationPrompt prompt = GetComponentInParent<CombinationPrompt>();
+                CombinationPrompt prompt =
+                    GetComponentInParent<CombinationPrompt>();
+
                 if (prompt != null)
                     prompt.Show(item, otherSlot.item);
             }
@@ -102,59 +108,53 @@ public class InventorySlot : MonoBehaviour,
             return;
         }
 
-        SegundaParada agua = FindFirstObjectByType<SegundaParada>();
-        if (agua != null && agua.SoltarNoRiacho(item, eventData.position))
-            return;
-        if (agua != null && agua.SoltarNaBarriguda(item, eventData.position))
-            return;
-        if (agua != null && agua.SoltarCurativo(item, eventData.position))
-            return;
-        if (agua != null && agua.SoltarNoAcampamento(item, eventData.position))
-            return;
+        // Usa os métodos existentes da jornada.
+        SegundaParada parada = FindAnyObjectByType<SegundaParada>();
 
-        // Primeiro tenta usar a cabaca no riacho, antes de rejeitar
-        // o drop pela area visual do inventario.
-        if (Camera.main != null)
+        if (parada != null)
         {
-            Vector2 pontoAgua = Camera.main.ScreenToWorldPoint(eventData.position);
-            SegundaParada paradaAgua = FindFirstObjectByType<SegundaParada>();
-            if (paradaAgua != null)
-            {
-                foreach (Collider2D col in Physics2D.OverlapPointAll(pontoAgua))
-                {
-                    MarcadorSegundaParada marcadorAgua = col.GetComponent<MarcadorSegundaParada>();
-                    if (marcadorAgua != null && marcadorAgua.id == "riacho" &&
-                        paradaAgua.UsarNoRiacho(item)) return;
-                }
-            }
+            if (parada.SoltarNoRiacho(item, eventData.position))
+                return;
+
+            if (parada.SoltarNaBarriguda(item, eventData.position))
+                return;
+
+            if (parada.SoltarCurativo(item, eventData.position))
+                return;
+
+            if (parada.SoltarNoAcampamento(item, eventData.position))
+                return;
         }
 
         // Soltar no restante do inventário não usa o item no cenário.
         InventoryUI inventoryUI = GetComponentInParent<InventoryUI>();
+
         RectTransform inventoryRect = inventoryUI != null
             ? inventoryUI.GetComponentInParent<RectTransform>()
             : null;
 
         if (inventoryRect != null &&
             RectTransformUtility.RectangleContainsScreenPoint(
-                inventoryRect, eventData.position, null))
+                inventoryRect,
+                eventData.position,
+                eventData.pressEventCamera))
+        {
+            return;
+        }
+
+        Camera cameraPrincipal = Camera.main;
+
+        if (cameraPrincipal == null)
             return;
 
-        if (Camera.main == null)
-            return;
-
-        Vector2 worldPoint = Camera.main.ScreenToWorldPoint(eventData.position);
+        Vector2 worldPoint =
+            cameraPrincipal.ScreenToWorldPoint(eventData.position);
 
         foreach (Collider2D hit in Physics2D.OverlapPointAll(worldPoint))
         {
-            MarcadorSegundaParada marcador = hit.GetComponent<MarcadorSegundaParada>();
-            if (marcador != null && marcador.id == "riacho")
-            {
-                SegundaParada parada = marcador.GetComponentInParent<SegundaParada>();
-                if (parada != null && parada.UsarNoRiacho(item)) return;
-            }
+            CacaPassarinho passarinho =
+                hit.GetComponent<CacaPassarinho>();
 
-            CacaPassarinho passarinho = hit.GetComponent<CacaPassarinho>();
             if (passarinho != null && passarinho.TentarCacar(item))
                 return;
 
@@ -175,22 +175,22 @@ public class InventorySlot : MonoBehaviour,
 
     private void UpdateAllSlots()
     {
-        InventorySlot[] slots = FindObjectsByType<InventorySlot>(
-            FindObjectsInactive.Include,
-            FindObjectsSortMode.None
-        );
+        InventoryManager manager = InventoryManager.Instance;
+
+        if (manager == null)
+            return;
+
+        InventorySlot[] slots =
+            FindObjectsByType<InventorySlot>(FindObjectsInactive.Include);
 
         foreach (InventorySlot slot in slots)
         {
             if (slot.highlight != null)
             {
                 slot.highlight.SetActive(
-                    InventoryManager.Instance.SelectedItem == slot.item
+                    manager.SelectedItem == slot.item
                 );
             }
         }
     }
-
 }
-
-
