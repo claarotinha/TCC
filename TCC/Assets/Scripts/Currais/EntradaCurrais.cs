@@ -231,7 +231,7 @@ public partial class EntradaCurrais : MonoBehaviour
         if (!referenciasPresentes) return false;
         return FalasValidas(antesSeparacao) && FalasValidas(barreira) &&
             FalasValidas(depoisSeparacao) && FalasValidas(entrada) &&
-            FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() && ReferenciasCampoValidas() && ReferenciasPostoValidas() &&
+            FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() && ReferenciasCampoValidas() && ReferenciasPostoValidas() && ReferenciasConsultaValidas() &&
             FalaValida(promessa) && FalaValida(semPromessa) && FalaValida(respostaZefinha);
     }
 
@@ -896,7 +896,8 @@ public partial class EntradaCurrais : MonoBehaviour
             luzia.transform.position = luziaRepouso.position;
             luzia.transform.localRotation = Quaternion.Euler(0f, 0f, -8f);
         }
-        else if (Dados.curraisEscolhaAgua == 2)
+        else if (Dados.curraisEscolhaAgua == 2 &&
+            (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))
         {
             Posicionar(mae, maeAbrigo);
         }
@@ -906,6 +907,8 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void RestaurarAcompanhante()
     {
+        if (ConsultaDisponivel && Dados.curraisEtapaConsulta >= 1)
+        { RestaurarFamiliaConsulta(); return; }
         if (PostoDisponivel && Dados.curraisEtapaPosto >= 2)
         { Posicionar(luzia.transform, Dados.curraisEtapaPosto == 4 ? luziaNoite : luziaRepouso); return; }
         if (Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 1)
@@ -929,6 +932,7 @@ public partial class EntradaCurrais : MonoBehaviour
             return;
         }
         bool livre = !ocupado && !menuAberto && !dialogando && !PauseHelper.BlockInput();
+        if (ConsultaDisponivel) { AtualizarAcompanhamentoConsulta(livre); return; }
         bool buscaComLuzia = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 1 &&
             (!PostoDisponivel || Dados.curraisEtapaPosto < 2);
         bool luziaAcompanha = buscaComLuzia || (!PostoDisponivel && Dados.curraisDistribuicaoIniciada && Dados.curraisEscolhaAgua != 1);
@@ -1014,6 +1018,7 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         encerrando = true;
         StopAllCoroutines();
+        RestaurarDesenhoSaida();
         FecharDialogo();
         if (mari != null) mari.enabled = true;
         if (seguirCamera != null) seguirCamera.enabled = true;
@@ -1022,5 +1027,6 @@ public partial class EntradaCurrais : MonoBehaviour
                 if (botao != null) botao.onClick.RemoveAllListeners();
         if (seguidoraLuzia != null) seguidoraLuzia.enabled = false;
         if (seguidoraMae != null) seguidoraMae.enabled = false;
+        if (seguidorPaiConsulta != null) seguidorPaiConsulta.enabled = false;
     }
 }

@@ -108,6 +108,13 @@ public class GameProgressData
     // 0 sem decisão, 1 contar a última fala, 2 pedir companhia.
     public int curraisEscolhaNoite;
 
+    // Etapa 5: 0 amanhecer, 1 consulta, 2 pedido de saída, 3 retorno, 4 concluída.
+    public int curraisEtapaConsulta;
+    // 0 sem decisão, 1 confirmar destino, 2 confirmar acompanhante.
+    public int curraisEscolhaConsulta;
+    public bool curraisConsultaApresentada;
+    public bool curraisLacoRemendado;
+
     public bool CanSave => tutorialCompleted ||
         (secaDepartureCompleted && secaMealCompleted &&
          secaFoodChoice >= 1 && secaFoodChoice <= 3);

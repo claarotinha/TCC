@@ -48,9 +48,9 @@ public partial class EntradaCurrais
         return valido;
     }
 
-    private string ObjetivoPosto() => objetivosPosto[Mathf.Clamp(Dados.curraisEtapaPosto, 0, 4)];
+    private string ObjetivoPosto() => ConsultaDisponivel ? ObjetivoConsulta() : objetivosPosto[Mathf.Clamp(Dados.curraisEtapaPosto, 0, 4)];
 
-    private Collider2D[] AlvosPosto() => new[] { areaPostoEscolha, areaPortaQuarto, areaFamiliaAbrigo, areaEsteiraNoite };
+    private Collider2D[] AlvosPosto() => ConsultaDisponivel ? AlvosConsulta() : new[] { areaPostoEscolha, areaPortaQuarto, areaFamiliaAbrigo, areaEsteiraNoite };
 
     private void AplicarNoite(bool ativa)
     {
@@ -74,7 +74,7 @@ public partial class EntradaCurrais
         maoNaRoupa.SetActive(ativo && (noiteEmCurso || Dados.curraisEtapaPosto == 4) && !Dados.curraisLacoGuardado);
         cabacaNoite.SetActive(ativo && Dados.curraisEtapaPosto == 4);
         AplicarNoite(ativo && (noiteEmCurso || Dados.curraisEtapaPosto == 4));
-        if (!ativo) return;
+        if (!ativo) { AtualizarConsulta(); return; }
         int etapa = Dados.curraisEtapaPosto;
         objetivoTexto.text = ObjetivoPosto();
         areaPostoEscolha.enabled = etapa == 0;
@@ -89,18 +89,20 @@ public partial class EntradaCurrais
         Posicionar(areaRaimundo.transform, etapa == 0 ? raimundoNoPosto :
             Dados.curraisEscolhaPosto == 1 ? raimundoSentado : raimundoOutroSetor);
         areaRaimundo.transform.localRotation = Quaternion.Euler(0f, 0f, Dados.curraisEscolhaPosto == 1 ? -12f : 0f);
-        if (etapa >= 2)
+        if (etapa >= 2 && (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))
         {
             bool duranteNoite = noiteEmCurso || etapa == 4;
             Posicionar(luzia.transform, duranteNoite ? luziaNoite : luziaRepouso);
             Posicionar(pai, duranteNoite ? paiNoite : paiAbrigo);
             Posicionar(mae, (noiteEmCurso || etapa == 4) ? maeNoite : maeAbrigo);
         }
+        AtualizarConsulta();
         Physics2D.SyncTransforms();
     }
 
     private bool InteragirPosto(Vector2 ponto)
     {
+        if (ConsultaDisponivel) return InteragirConsulta(ponto);
         foreach (Collider2D area in AlvosPosto())
         {
             if (!area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;

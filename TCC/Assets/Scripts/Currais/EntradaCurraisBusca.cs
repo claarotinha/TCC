@@ -88,7 +88,7 @@ public partial class EntradaCurrais
         bento.gameObject.SetActive(etapa < 6);
         Posicionar(bento, etapa >= 5 ? bentoCaido : bentoEmPe);
         bento.rotation = (etapa >= 5 ? bentoCaido : bentoEmPe).rotation;
-        if (etapa >= 1)
+        if (etapa >= 1 && (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))
         {
             if (seguidoraMae != null) seguidoraMae.enabled = false;
             Posicionar(mae, maeAbrigo);

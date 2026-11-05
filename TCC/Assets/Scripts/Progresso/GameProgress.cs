@@ -41,6 +41,7 @@ public class GameProgress : MonoBehaviour
         if (data == null) data = new GameProgressData();
         data.curraisEtapaBusca = Mathf.Clamp(data.curraisEtapaBusca, 0, 6);
         data.curraisEtapaPosto = Mathf.Clamp(data.curraisEtapaPosto, 0, 4);
+        data.curraisEtapaConsulta = Mathf.Clamp(data.curraisEtapaConsulta, 0, 4);
         if (data.curraisItensRetidos == null) data.curraisItensRetidos = new System.Collections.Generic.List<string>();
         if (data.foundPhotos == null) data.foundPhotos = new System.Collections.Generic.List<int>();
         if (data.readPhotos == null) data.readPhotos = new System.Collections.Generic.List<int>();
