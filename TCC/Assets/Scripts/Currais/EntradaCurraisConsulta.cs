@@ -72,13 +72,13 @@ public partial class EntradaCurrais
         return valido;
     }
 
-    private string ObjetivoConsulta() => objetivosConsulta[Mathf.Clamp(Dados.curraisEtapaConsulta, 0, 4)];
+    private string ObjetivoConsulta() => MemoriaDisponivel ? ObjetivoMemoria() : objetivosConsulta[Mathf.Clamp(Dados.curraisEtapaConsulta, 0, 4)];
 
     private string InformacoesConsulta() => rotuloLugar + ": " +
         (Dados.curraisDestinoConfirmado ? lugarConsulta : naoConfirmado) + "\n" + rotuloNome + ": " +
         (Dados.curraisIdentidadeConfirmada ? nomeConsulta : naoConfirmado);
 
-    private Collider2D[] AlvosConsulta() => new[] { areaAmanhecer, areaUltimaConsulta, areaSaidaConsulta, areaRetornoConsulta };
+    private Collider2D[] AlvosConsulta() => MemoriaDisponivel ? AlvosMemoria() : new[] { areaAmanhecer, areaUltimaConsulta, areaSaidaConsulta, areaRetornoConsulta };
 
     private void AtualizarConsulta()
     {
@@ -86,13 +86,13 @@ public partial class EntradaCurrais
         int etapa = Dados.curraisEtapaConsulta;
         setorConsulta.SetActive(ativa && etapa >= 1);
         bloqueioSaida.enabled = ativa && etapa >= 1;
-        if (!ativa) return;
+        if (!ativa) { AtualizarMemoria(); return; }
         objetivoTexto.text = ObjetivoConsulta();
         areaAmanhecer.enabled = etapa == 0;
         areaUltimaConsulta.enabled = etapa == 1;
         areaSaidaConsulta.enabled = etapa == 2;
         areaRetornoConsulta.enabled = etapa >= 3;
-        if (etapa == 0) return; // A noite permanece até a interação da manhã.
+        if (etapa == 0) { AtualizarMemoria(); return; } // A noite permanece até a interação da manhã.
         AplicarNoite(false);
         lacoNaMao.SetActive(false); maoNaRoupa.SetActive(false); cabacaNoite.SetActive(false);
         papelConsulta.SetActive(Dados.curraisEscolhaConsulta == 0);
@@ -108,6 +108,7 @@ public partial class EntradaCurrais
         }
         else if (etapa == 1 && mari.transform.position.x >= maeLimiteConsulta.position.x)
             Posicionar(mae, maeLimiteConsulta);
+        AtualizarMemoria();
         Physics2D.SyncTransforms();
     }
 
@@ -143,6 +144,7 @@ public partial class EntradaCurrais
 
     private bool InteragirConsulta(Vector2 ponto)
     {
+        if (MemoriaDisponivel) return InteragirMemoria(ponto);
         foreach (Collider2D area in AlvosConsulta())
         {
             if (!area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;

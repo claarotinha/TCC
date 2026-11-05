@@ -178,6 +178,7 @@ public partial class EntradaCurrais : MonoBehaviour
             AtualizarEstadoBusca();
             if (restaurandoPartida) RestaurarAcompanhante();
             LiberarMari();
+            if (MemoriaDisponivel && Dados.curraisMemoriaIniciada) Iniciar(RetomarMemoria());
         }
     }
 
@@ -231,7 +232,7 @@ public partial class EntradaCurrais : MonoBehaviour
         if (!referenciasPresentes) return false;
         return FalasValidas(antesSeparacao) && FalasValidas(barreira) &&
             FalasValidas(depoisSeparacao) && FalasValidas(entrada) &&
-            FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() && ReferenciasCampoValidas() && ReferenciasPostoValidas() && ReferenciasConsultaValidas() &&
+            FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() && ReferenciasCampoValidas() && ReferenciasPostoValidas() && ReferenciasConsultaValidas() && ReferenciasMemoriaValidas() &&
             FalaValida(promessa) && FalaValida(semPromessa) && FalaValida(respostaZefinha);
     }
 
@@ -301,7 +302,8 @@ public partial class EntradaCurrais : MonoBehaviour
         if (!pronto || PauseHelper.BlockInput() || Time.timeScale == 0f) return;
         if (dialogando)
         {
-            if (Time.frameCount > quadroBloqueado && Input.GetMouseButtonDown(0) && !SobreControle())
+            if (Time.frameCount > quadroBloqueado && Input.GetMouseButtonDown(0) && !SobreControle() &&
+                (!leituraPaginaMemoria || (paginaMemoriaPodeAvancar && !InventarioAbertoMemoria())))
             {
                 aguardandoClique = false;
                 quadroBloqueado = Time.frameCount;
@@ -932,6 +934,12 @@ public partial class EntradaCurrais : MonoBehaviour
             return;
         }
         bool livre = !ocupado && !menuAberto && !dialogando && !PauseHelper.BlockInput();
+        if (planoMemoriaAtivo)
+        {
+            cameraCena.transform.position = cameraPlanoMemoria.position;
+            seguidorPaiConsulta.enabled = false; seguidoraMae.enabled = false; seguidoraLuzia.enabled = false;
+            return;
+        }
         if (ConsultaDisponivel) { AtualizarAcompanhamentoConsulta(livre); return; }
         bool buscaComLuzia = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 1 &&
             (!PostoDisponivel || Dados.curraisEtapaPosto < 2);
@@ -1019,6 +1027,7 @@ public partial class EntradaCurrais : MonoBehaviour
         encerrando = true;
         StopAllCoroutines();
         RestaurarDesenhoSaida();
+        RestaurarApresentacaoMemoria();
         FecharDialogo();
         if (mari != null) mari.enabled = true;
         if (seguirCamera != null) seguirCamera.enabled = true;

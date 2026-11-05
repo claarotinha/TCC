@@ -115,6 +115,11 @@ public class GameProgressData
     public bool curraisConsultaApresentada;
     public bool curraisLacoRemendado;
 
+    // Etapa 6: número de passagens de tempo já lidas (0..3), sem alterar pistas ou final.
+    public bool curraisMemoriaIniciada;
+    public int curraisPaginaMemoria;
+    public bool ato2Concluido;
+
     public bool CanSave => tutorialCompleted ||
         (secaDepartureCompleted && secaMealCompleted &&
          secaFoodChoice >= 1 && secaFoodChoice <= 3);
