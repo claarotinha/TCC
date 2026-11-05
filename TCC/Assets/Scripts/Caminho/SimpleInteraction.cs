@@ -6,6 +6,8 @@ public class SimpleInteraction : MonoBehaviour
     public GameObject interactionText;
     public string interactionMessage = "EITAA ENCONTREI UMA ARVORE RSRS";
 
+    public bool CanInteract => isActiveAndEnabled && playerNearby && !hasInteracted;
+
     private bool playerNearby = false;
     private bool hasInteracted = false;
 

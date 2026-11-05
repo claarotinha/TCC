@@ -13,6 +13,8 @@ public class SecaBedInteraction : MonoBehaviour
     private bool sleepRequested;
     private bool showingCursor;
 
+    public bool PodeInteragir => isActiveAndEnabled && CanInteract();
+
     private bool CanInteract()
     {
         if (sleepRequested ||

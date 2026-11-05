@@ -77,6 +77,9 @@ public class DialogoMariquinha : MonoBehaviour
             Iniciar();
     }
 
+    public bool CanInteract => isActiveAndEnabled && !conversando && Time.timeScale > 0f &&
+        mari != null && movimentoMari != null && PodeConversar();
+
     private bool PodeConversar()
     {
         ControleJornada jornada = ControleJornada.Instance;

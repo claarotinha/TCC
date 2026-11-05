@@ -8,6 +8,19 @@ public class ItemUseTarget : MonoBehaviour
     [SerializeField] private bool consumeOnUse = true;
     [SerializeField] private UnityEvent onUsed;
 
+    public bool CanInteract
+    {
+        get
+        {
+            if (!isActiveAndEnabled || requiredItem == null ||
+                (consumeOnUse && GameProgress.Instance != null && GameProgress.Instance.WasTargetUsed(progressId))) return false;
+            QuartoBaguncaDoor porta = GetComponent<QuartoBaguncaDoor>();
+            if (porta != null && QuartoBaguncaDoor.Unlocked) return false;
+            TutorialBoysDialogue garotos = GetComponent<TutorialBoysDialogue>();
+            return garotos == null || garotos.CanReceiveBall;
+        }
+    }
+
     private string progressId;
     private void Awake() => progressId = GameProgress.ObjectId(gameObject);
 

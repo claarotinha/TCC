@@ -35,6 +35,10 @@ public class CacaPassarinho : MonoBehaviour
     private int indice;
     private int quadro;
 
+    public bool CanInteract => isActiveAndEnabled && !acertou && !conversando && mari != null &&
+        ControleJornada.Instance != null && ControleJornada.Instance.ParadaAtiva &&
+        ControleJornada.Instance.ParadaAtual == 1 && (dialogoInicial == null || dialogoInicial.Finished);
+
     public bool TentarCacar(ItemData item)
     {
         ControleJornada jornada = ControleJornada.Instance;

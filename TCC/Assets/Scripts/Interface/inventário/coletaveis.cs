@@ -4,6 +4,8 @@ public class CollectableItem : MonoBehaviour
 {
     [SerializeField] private ItemData itemData;
 
+    public bool CanInteract => isActiveAndEnabled && itemData != null;
+
     private string progressId;
 
     private void Awake() => progressId = GameProgress.ObjectId(gameObject);

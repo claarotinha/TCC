@@ -347,6 +347,21 @@ public partial class EntradaCurrais : MonoBehaviour
         }
     }
 
+    public bool BloqueiaCursor => !pronto || ocupado || menuAberto || dialogando || encerrando;
+
+    public bool PonteiroSobreInteracao(Vector2 ponto)
+    {
+        if (!isActiveAndEnabled || BloqueiaCursor) return false;
+        if (Dados.curraisEtapaEntrada == 1)
+            return areaLaco != null && areaLaco.enabled && areaLaco.gameObject.activeInHierarchy && areaLaco.OverlapPoint(ponto);
+        if (Dados.curraisEtapaEntrada != 4) return false;
+        foreach (Collider2D alvo in AlvosAtuais())
+            if (alvo != null && alvo.enabled && alvo.gameObject.activeInHierarchy && alvo.OverlapPoint(ponto)) return true;
+        foreach (Exame exame in exames)
+            if (exame.area != null && exame.area.enabled && exame.area.gameObject.activeInHierarchy && exame.area.OverlapPoint(ponto)) return true;
+        return false;
+    }
+
     private static bool SobreControle()
     {
         EventSystem sistema = EventSystem.current;

@@ -267,6 +267,54 @@ public class SegundaParada : MonoBehaviour
         return false;
     }
 
+    public bool BloqueiaCursor => carregandoCurrais || conversando || preparandoBusca ||
+        sequenciaAbrigo || encerramentoMostrado || (dialogueUI != null && dialogueUI.activeInHierarchy);
+
+    public bool PonteiroSobreInteracao(Vector3 ponto)
+    {
+        if (!isActiveAndEnabled || BloqueiaCursor || PauseHelper.BlockInput() || Time.timeScale == 0f) return false;
+        if (AcampamentoEmAndamento() && introAcampamentoConcluida && !noiteEmAndamento && AcertouMaeAcampamento(ponto)) return true;
+        if (TerceiraEmAndamento() && JanelaQuebrada && !curativoAplicado && AcertouMariquinha(ponto)) return true;
+        foreach (GameObject alvo in marcadores)
+        {
+            if (alvo == null || !alvo.activeInHierarchy) continue;
+            string id = IdentificadorCenario(alvo);
+            if (!AlvoDisponivelParaCursor(id)) continue;
+            BoxCollider2D area = alvo.GetComponent<BoxCollider2D>();
+            if (area == null || !area.enabled) continue;
+            if (area.OverlapPoint(ponto)) return true;
+            if (id == "baleia" && desenhoBaleia != null && desenhoBaleia.enabled)
+            {
+                Bounds bounds = desenhoBaleia.bounds;
+                bounds.Expand(new Vector3(.2f, .2f, 0f));
+                if (ponto.x >= bounds.min.x && ponto.x <= bounds.max.x && ponto.y >= bounds.min.y && ponto.y <= bounds.max.y) return true;
+            }
+        }
+        return false;
+    }
+
+    private bool AlvoDisponivelParaCursor(string id)
+    {
+        if (id == null) return false;
+        ControleJornada jornada = ControleJornada.Instance;
+        if (id == "riacho") return iniciou && !encheu && jornada != null && jornada.ParadaAtual == 2;
+        if (id == "casa") return etapa == 6;
+        if (id == "baleia") return etapa == 2 && pegadas == 3;
+        if (id.StartsWith("pegada")) return etapa == 2 && id == "pegada" + pegadas;
+        if (id == "barriguda") return jornada != null && jornada.ParadaAtiva && jornada.ParadaAtual == 3 &&
+            dialogoTerceiraConcluido && !aguaTerceiraConcluida;
+        if (id == "plantaMedicinal") return TerceiraEmAndamento() && JanelaQuebrada && !curativoAplicado && !plantaColetada;
+        if (id == "mulherRetirante" || id == "meninoRetirante") return TerceiraEmAndamento() && (!JanelaQuebrada || curativoAplicado);
+        if (id == "fogueira") return AcampamentoEmAndamento() && introAcampamentoConcluida && !noiteEmAndamento;
+        if (id.StartsWith("materialAcampamento"))
+        {
+            return AcampamentoEmAndamento() && introAcampamentoConcluida && !noiteEmAndamento &&
+                int.TryParse(id.Substring("materialAcampamento".Length), out int indice) &&
+                indice >= 0 && indice < 3 && (materiaisAcampamento & (1 << indice)) == 0;
+        }
+        return false;
+    }
+
     private void VerificarCliqueCenario()
     {
         Camera camera = Camera.main;
