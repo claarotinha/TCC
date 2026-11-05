@@ -30,7 +30,6 @@ public class MotherDialogue : MonoBehaviour
                                     activeDialogue.canvasGroup.gameObject.activeInHierarchy &&
                                     activeDialogue.canvasGroup.alpha > 0f;
 
-    private bool reclamouNome = false;
 
     private static bool talkedThisSession;
     public static bool FalouSobreTrabalho => GameProgress.Instance != null
@@ -236,7 +235,6 @@ public class MotherDialogue : MonoBehaviour
 
     private void ReclamarNome()
     {
-        reclamouNome = true;
 
         EsconderOpcoes();
 

@@ -89,24 +89,21 @@ public static class InvestigationGuard
             }
 
             foreach (PhotoCollect photo in
-                Object.FindObjectsByType<PhotoCollect>(
-                    FindObjectsSortMode.None))
+                Object.FindObjectsByType<PhotoCollect>())
             {
                 if (photo.IsDialogOpen)
                     return "fotografia";
             }
 
             foreach (OldPhoto photo in
-                Object.FindObjectsByType<OldPhoto>(
-                    FindObjectsSortMode.None))
+                Object.FindObjectsByType<OldPhoto>())
             {
                 if (photo.IsDialogOpen)
                     return "fotografia antiga";
             }
 
             foreach (DiaryWithCutscene diary in
-                Object.FindObjectsByType<DiaryWithCutscene>(
-                    FindObjectsSortMode.None))
+                Object.FindObjectsByType<DiaryWithCutscene>())
             {
                 if (diary.IsDialogOpen)
                     return "diário";

@@ -86,7 +86,7 @@ public class CursorManager : MonoBehaviour
 
         // Inclui triggers explicitamente e não deixa o chão interceptar a lupa.
         hoverHits.Clear();
-        Physics2D.OverlapPoint(mousePosition, new ContactFilter2D().NoFilter(), hoverHits);
+        Physics2D.OverlapPoint(mousePosition, ContactFilter2D.noFilter, hoverHits);
         var hits = hoverHits;
 
         foreach (Collider2D hit in hits)

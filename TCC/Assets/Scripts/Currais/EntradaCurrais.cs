@@ -245,8 +245,8 @@ public class EntradaCurrais : MonoBehaviour
             foreach (Collider2D alvo in alvos)
             {
                 if (alvo == null || !alvo.enabled || !alvo.gameObject.activeInHierarchy) continue;
-                float distancia = Mathf.Abs(mari.transform.position.x - alvo.bounds.center.x);
-                if (distancia < menor) { menor = distancia; maisPerto = alvo; }
+                float distanciaAoAlvo = Mathf.Abs(mari.transform.position.x - alvo.bounds.center.x);
+                if (distanciaAoAlvo < menor) { menor = distanciaAoAlvo; maisPerto = alvo; }
             }
             if (maisPerto != null) InteragirBusca(maisPerto.bounds.center);
             return;
@@ -255,8 +255,8 @@ public class EntradaCurrais : MonoBehaviour
             !Input.GetMouseButtonDown(0) || SobreControle()) return;
         Ray raio = cameraCena.ScreenPointToRay(Input.mousePosition);
         Plane plano = new Plane(Vector3.forward, mari.transform.position);
-        if (!plano.Raycast(raio, out float distancia)) return;
-        Vector2 ponto = raio.GetPoint(distancia);
+        if (!plano.Raycast(raio, out float distanciaDoRaio)) return;
+        Vector2 ponto = raio.GetPoint(distanciaDoRaio);
         if (Dados.curraisEtapaEntrada == 1 && areaLaco.OverlapPoint(ponto))
         {
             Iniciar(RecolherLaco());
@@ -749,6 +749,7 @@ public class EntradaCurrais : MonoBehaviour
 
     private string ObjetivoAtual()
     {
+        if (objetivosBusca == null || objetivosBusca.Length < 6) return objetivoBusca;
         if (!Dados.curraisDistribuicaoIniciada) return objetivosBusca[0];
         if (!Dados.curraisAguaRecebida) return objetivosBusca[1];
         if (Dados.curraisEscolhaAgua == 0) return objetivosBusca[2];

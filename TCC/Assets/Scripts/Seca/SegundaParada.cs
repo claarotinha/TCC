@@ -1459,7 +1459,7 @@ public class SegundaParada : MonoBehaviour
         {
             if (!JanelaQuebrada || curativoAplicado || plantaColetada || plantaCenario == null ||
                 !plantaCenario.activeInHierarchy || InventoryManager.Instance == null) return;
-            CollectPrompt coleta = FindFirstObjectByType<CollectPrompt>();
+            CollectPrompt coleta = FindAnyObjectByType<CollectPrompt>();
             if (coleta != null) coleta.Show(plantaMedicinal, () =>
             {
                 plantaColetada = true;
@@ -1881,7 +1881,7 @@ public class SegundaParada : MonoBehaviour
             return;
         }
         var desenhos = new List<SpriteRenderer>();
-        foreach (SpriteRenderer desenho in FindObjectsByType<SpriteRenderer>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        foreach (SpriteRenderer desenho in FindObjectsByType<SpriteRenderer>(FindObjectsInactive.Include))
         {
             Transform pessoa = desenho.transform;
             if (pessoa == mari.transform || pessoa == mariquinha.transform || pessoa == mae.transform ||
@@ -2011,7 +2011,7 @@ public class SegundaParada : MonoBehaviour
             !introAcampamentoConcluida || noiteEmAndamento || InvestigationGuard.Blocked ||
             (materiaisAcampamento & (1 << indiceMaterial)) != 0 || InventoryManager.Instance == null) return;
         ItemData[] itens = { galhosSecos, folhasSecas, galhosAlecrim };
-        CollectPrompt coleta = FindFirstObjectByType<CollectPrompt>();
+        CollectPrompt coleta = FindAnyObjectByType<CollectPrompt>();
         if (coleta != null) coleta.Show(itens[indiceMaterial], () =>
         {
             materiaisAcampamento |= 1 << indiceMaterial;
@@ -2593,7 +2593,7 @@ public class SegundaParada : MonoBehaviour
         }
 
         // O painel existente apresenta o encerramento sobre a cena escurecida.
-        desenhosFundoFim = FindObjectsByType<SpriteRenderer>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        desenhosFundoFim = FindObjectsByType<SpriteRenderer>(FindObjectsInactive.Include);
         fundoFimAtivo = new bool[desenhosFundoFim.Length];
         for (int i = 0; i < desenhosFundoFim.Length; i++)
         {
