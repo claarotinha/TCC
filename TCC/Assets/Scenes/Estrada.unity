@@ -10739,6 +10739,72 @@ MonoBehaviour:
   policialBloqueio: {fileID: 21300003, guid: c9a90000000040008000000000000002, type: 3}
   familiaSurpresa: {fileID: 21300000, guid: c9a90000000040008000000000000003, type: 3}
   familiaSurpresaCurativo: {fileID: 21300001, guid: c9a90000000040008000000000000003, type: 3}
+  riacho:
+    fileID: 3900000004
+  casa:
+    fileID: 3900000008
+  interiorAbrigo:
+    fileID: 3900000011
+  pistasBusca:
+  - fileID: 3900000017
+  - fileID: 3900000021
+  - fileID: 3900000025
+  destinoBuscaBaleia:
+    fileID: 3900000030
+  alvoBaleia:
+    fileID: 3900000031
+  barriguda:
+    fileID: 3900000036
+  plantaCenario:
+    fileID: 3900000039
+  pessoaCenario:
+    fileID: 3900000045
+  mulherCenario:
+    fileID: 3900000049
+  meninoCenario:
+    fileID: 3900000053
+  inicioEncontro:
+    fileID: 3900000058
+  saidaEncontro:
+    fileID: 3900000060
+  juazeiroCenario:
+    fileID: 3900000061
+  placaJuazeiroCenario:
+    fileID: 3900000065
+  familiaDescanso:
+    fileID: 3900000069
+  arvoreAcampamento:
+    fileID: 3900000073
+  fogueiraCenario:
+    fileID: 3900000077
+  materiaisCenario:
+  - fileID: 3900000081
+  - fileID: 3900000085
+  - fileID: 3900000089
+  familiaAcampamento:
+    fileID: 3900000093
+  irmasCenario:
+    fileID: 3900000097
+  paisCenario:
+    fileID: 3900000101
+  cidadeCenario:
+    fileID: 3900000105
+  placaEntradaFortaleza:
+    fileID: 3900000109
+  policiais:
+  - fileID: 3900000113
+  - fileID: 3900000117
+  - fileID: 3900000121
+  familiaFinal:
+    fileID: 3900000125
+  chegadaFortaleza:
+    fileID: 3900000130
+  inicioAbordagem:
+    fileID: 3900000132
+  destinosPoliciais:
+  - fileID: 3900000136
+  - fileID: 3900000138
+  - fileID: 3900000140
 --- !u!1 &3500000010
 GameObject:
   m_ObjectHideFlags: 0
