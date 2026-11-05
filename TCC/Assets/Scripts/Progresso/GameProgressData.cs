@@ -79,6 +79,22 @@ public class GameProgressData
     public bool curraisPertencesRetidos;
     public List<string> curraisItensRetidos = new List<string>();
 
+    // Ato 2, etapa 2: escolhas independentes, preservadas para as etapas seguintes.
+    public bool curraisDistribuicaoIniciada;
+    public bool curraisCabacaDevolvida;
+    public bool curraisAguaRecebida;
+    // 0 sem escolha, 1 mãe, 2 Luzia. Não determina um final.
+    public int curraisEscolhaAgua;
+    public bool curraisMeninoVisitado;
+    public int curraisPerguntasMenino;
+    public bool curraisRegistroConcluido;
+    public bool curraisPanelaConcluida;
+    // 0 sem escolha, 1 laço, 2 canhoto.
+    public int curraisEscolhaPertence;
+    public bool curraisLacoGuardado;
+    public bool curraisDestinoConfirmado;
+    public bool curraisIdentidadeConfirmada;
+
     public bool CanSave => tutorialCompleted ||
         (secaDepartureCompleted && secaMealCompleted &&
          secaFoodChoice >= 1 && secaFoodChoice <= 3);

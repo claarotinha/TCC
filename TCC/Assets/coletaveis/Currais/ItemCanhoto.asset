@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: 332dfd45824a30c478c96aca1ae71b3d
+    type: 3
+  m_Name: ItemCanhoto
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemName: Canhoto de encaminhamento
+  icon:
+    fileID: 21300000
+    guid: 3eb6ac21c8f75970917b48c387253a0e
+    type: 3
+  description: O papel tem a marca do carro e o nome Lagoa do Meio. Não identifica quem acompanhou Mariquinha.

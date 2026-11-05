@@ -68,6 +68,26 @@ public class EntradaCurrais : MonoBehaviour
     [SerializeField] private string objetivoBusca = "Descobrir para onde levaram Mariquinha.";
     [SerializeField] private string objetivoLaco = "Clique no pedaço do laço que caiu no chão.";
 
+    [Header("Etapa 2 - exploração e escolhas")]
+    [SerializeField] private Button[] botoesEtapa2;
+    [SerializeField] private Collider2D areaAgua, areaMae, areaMenino, areaRegistro, areaPanela;
+    [SerializeField] private Transform meninoBusca, meninoFimPasso, panelaBusca, panelaNoChao, panelaRecolhida, lacoNoChao;
+    [SerializeField] private Transform luziaRepouso;
+    [SerializeField] private SeguidorFamilia seguidoraLuzia, seguidoraMae;
+    [SerializeField] private GameObject canhotoCenario, cabacaMesa;
+    [SerializeField] private SpriteRenderer guardaRegistro;
+    [SerializeField] private Sprite guardaRegistroParado, guardaRegistroBloqueio;
+    [SerializeField] private ItemData cabacaVaziaBusca, cabacaCheiaBusca, itemLaco, itemCanhoto;
+    [SerializeField, Min(0.5f)] private float alcanceInteracao = 3f;
+    [SerializeField] private Fala[] aguaFuncionario, aguaAntesEscolha, aguaMae, aguaLuzia;
+    [SerializeField] private Fala[] meninoApresentacao, meninoEspera, meninoNome, meninoSaida;
+    [SerializeField] private Fala[] registroInicio, registroMae, registroLuzia;
+    [SerializeField] private Fala[] panelaInicio, panelaLaco, panelaCanhoto;
+    [SerializeField] private string[] opcoesLuziaInicio, opcoesAgua, opcoesMenino, opcoesRegistro, opcoesPanela, objetivosBusca;
+    [SerializeField, TextArea(2, 4)] private string perguntaAgua, perguntaPanela;
+    private Action[] acoesMenu;
+    private int escolhaRecebida = -1;
+
     private GameProgressData Dados => GameProgress.Instance.Data;
     private bool pronto, ocupado, dialogando, aguardandoClique, menuAberto, encerrando;
     private int quadroBloqueado;
@@ -123,8 +143,7 @@ public class EntradaCurrais : MonoBehaviour
             }
         }
         FecharDialogo();
-        conversarBotao.onClick.AddListener(RelembrarLuzia);
-        sairBotao.onClick.AddListener(FecharMenu);
+        PrepararOpcoes();
         pronto = true;
         int etapa = Mathf.Clamp(Dados.curraisEtapaEntrada, 0, 4);
         if (etapa == 0) Iniciar(Separar());
@@ -149,7 +168,8 @@ public class EntradaCurrais : MonoBehaviour
                 Physics2D.SyncTransforms();
             }
             CorFade(0f);
-            objetivoTexto.text = objetivoBusca;
+            AtualizarEstadoBusca();
+            if (restaurandoPartida) RestaurarAcompanhante();
             LiberarMari();
         }
     }
@@ -171,8 +191,28 @@ public class EntradaCurrais : MonoBehaviour
             return false;
         return FalasValidas(antesSeparacao) && FalasValidas(barreira) &&
             FalasValidas(depoisSeparacao) && FalasValidas(entrada) &&
-            FalasValidas(revista) && FalasValidas(abrigo) &&
+            FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() &&
             FalaValida(promessa) && FalaValida(semPromessa) && FalaValida(respostaZefinha);
+    }
+
+    private bool ReferenciasBuscaValidas()
+    {
+        if (botoesEtapa2 == null || botoesEtapa2.Length != 4 || areaAgua == null || areaMae == null ||
+            areaMenino == null || areaRegistro == null || areaPanela == null || meninoBusca == null ||
+            meninoFimPasso == null || panelaBusca == null || panelaNoChao == null || panelaRecolhida == null ||
+            lacoNoChao == null || luziaRepouso == null || seguidoraLuzia == null || seguidoraMae == null ||
+            canhotoCenario == null || cabacaMesa == null || guardaRegistro == null ||
+            guardaRegistroParado == null || guardaRegistroBloqueio == null || cabacaVaziaBusca == null || cabacaCheiaBusca == null ||
+            itemLaco == null || itemCanhoto == null || objetivosBusca == null || objetivosBusca.Length != 6)
+            return false;
+        foreach (Button botao in botoesEtapa2) if (botao == null) return false;
+        Fala[][] sequencias = { aguaFuncionario, aguaAntesEscolha, aguaMae, aguaLuzia,
+            meninoApresentacao, meninoEspera, meninoNome, meninoSaida,
+            registroInicio, registroMae, registroLuzia, panelaInicio, panelaLaco, panelaCanhoto };
+        foreach (Fala[] sequencia in sequencias) if (!FalasValidas(sequencia)) return false;
+        return opcoesLuziaInicio != null && opcoesLuziaInicio.Length == 3 &&
+            opcoesAgua != null && opcoesAgua.Length == 2 && opcoesMenino != null && opcoesMenino.Length == 3 &&
+            opcoesRegistro != null && opcoesRegistro.Length == 2 && opcoesPanela != null && opcoesPanela.Length == 2;
     }
 
     private static bool FalaValida(Fala fala) => fala != null &&
@@ -197,6 +237,20 @@ public class EntradaCurrais : MonoBehaviour
             }
             return;
         }
+        if (!ocupado && !menuAberto && Dados.curraisEtapaEntrada == 4 && Input.GetKeyDown(KeyCode.E))
+        {
+            Collider2D[] alvos = { areaLuzia, areaAgua, areaMae, areaMenino, areaRegistro, areaPanela };
+            Collider2D maisPerto = null;
+            float menor = alcanceInteracao;
+            foreach (Collider2D alvo in alvos)
+            {
+                if (alvo == null || !alvo.enabled || !alvo.gameObject.activeInHierarchy) continue;
+                float distancia = Mathf.Abs(mari.transform.position.x - alvo.bounds.center.x);
+                if (distancia < menor) { menor = distancia; maisPerto = alvo; }
+            }
+            if (maisPerto != null) InteragirBusca(maisPerto.bounds.center);
+            return;
+        }
         if (ocupado || menuAberto || Time.frameCount <= quadroBloqueado ||
             !Input.GetMouseButtonDown(0) || SobreControle()) return;
         Ray raio = cameraCena.ScreenPointToRay(Input.mousePosition);
@@ -209,11 +263,7 @@ public class EntradaCurrais : MonoBehaviour
             return;
         }
         if (Dados.curraisEtapaEntrada != 4) return;
-        if (areaLuzia.OverlapPoint(ponto))
-        {
-            AbrirMenuLuzia();
-            return;
-        }
+        if (InteragirBusca(ponto)) return;
         foreach (Exame exame in exames)
         {
             if (exame.area != null && exame.area.enabled && exame.area.OverlapPoint(ponto))
@@ -255,8 +305,11 @@ public class EntradaCurrais : MonoBehaviour
             ocupado = false;
             if (!encerrando)
             {
-                FecharDialogo();
-                if (Dados.curraisEtapaEntrada == 4) LiberarMari();
+                if (!menuAberto)
+                {
+                    FecharDialogo();
+                    if (Dados.curraisEtapaEntrada == 4) LiberarMari();
+                }
             }
         }
     }
@@ -381,7 +434,7 @@ public class EntradaCurrais : MonoBehaviour
         yield return Escurecer(0f);
         yield return Dizer(abrigo);
         Dados.curraisEtapaEntrada = 4;
-        objetivoTexto.text = objetivoBusca;
+        AtualizarEstadoBusca();
         LiberarMari();
         Salvar();
     }
@@ -434,21 +487,324 @@ public class EntradaCurrais : MonoBehaviour
         quadroBloqueado = Time.frameCount;
     }
 
-    private void AbrirMenuLuzia()
+    private void PrepararOpcoes()
     {
-        menuAberto = true; mari.enabled = false;
-        dialogoUI.SetActive(true); painelDialogo.SetActive(true);
-        nomeTexto.text = "Luzia"; falaTexto.text = objetivoBusca;
-        if (retrato != null) retrato.enabled = false;
-        escolhas.SetActive(true);
-        conversarBotao.gameObject.SetActive(true); sairBotao.gameObject.SetActive(true);
+        for (int i = 0; i < botoesEtapa2.Length; i++)
+        {
+            int indice = i;
+            botoesEtapa2[i].onClick.RemoveAllListeners();
+            botoesEtapa2[i].onClick.AddListener(() => SelecionarOpcao(indice));
+        }
     }
 
-    private void RelembrarLuzia()
+    private void SelecionarOpcao(int indice)
     {
-        if (!menuAberto || PauseHelper.BlockInput()) return;
-        FecharMenu();
-        Iniciar(Dizer(abrigo));
+        if (!menuAberto || PauseHelper.BlockInput() || Time.timeScale == 0f ||
+            acoesMenu == null || indice < 0 || indice >= acoesMenu.Length) return;
+        Action acao = acoesMenu[indice];
+        acoesMenu = null;
+        menuAberto = false;
+        FecharDialogo();
+        acao?.Invoke();
+        if (!ocupado && Dados.curraisEtapaEntrada == 4) LiberarMari();
+    }
+
+    private void MostrarOpcoes(string personagem, string texto, string[] rotulos, Action[] acoes)
+    {
+        if (InventoryTabController.Instance != null) InventoryTabController.Instance.Close();
+        mari.enabled = false;
+        dialogando = false;
+        menuAberto = true;
+        acoesMenu = acoes;
+        dialogoUI.SetActive(true); painelDialogo.SetActive(true); escolhas.SetActive(true);
+        nomeTexto.text = personagem; falaTexto.text = texto;
+        if (retrato != null) retrato.enabled = false;
+        for (int i = 0; i < botoesEtapa2.Length; i++)
+        {
+            Button botao = botoesEtapa2[i];
+            bool mostrar = i < rotulos.Length;
+            botao.gameObject.SetActive(mostrar);
+            botao.interactable = mostrar;
+            TMP_Text textoBotao = botao.GetComponentInChildren<TMP_Text>(true);
+            if (mostrar && textoBotao != null) textoBotao.text = rotulos[i];
+        }
+        quadroBloqueado = Time.frameCount;
+    }
+
+    private IEnumerator Escolher(string personagem, string texto, string[] rotulos)
+    {
+        escolhaRecebida = -1;
+        Action[] acoes = new Action[rotulos.Length];
+        for (int i = 0; i < acoes.Length; i++)
+        {
+            int opcao = i;
+            acoes[i] = () => escolhaRecebida = opcao;
+        }
+        MostrarOpcoes(personagem, texto, rotulos, acoes);
+        while (escolhaRecebida < 0) yield return null;
+    }
+
+    private bool InteragirBusca(Vector2 ponto)
+    {
+        Collider2D[] areas = { areaLuzia, areaAgua, areaMae, areaMenino, areaRegistro, areaPanela };
+        foreach (Collider2D area in areas)
+        {
+            if (area == null || !area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
+            if (Mathf.Abs(mari.transform.position.x - area.bounds.center.x) > alcanceInteracao)
+            {
+                objetivoTexto.text = "Aproxime-se para interagir. " + ObjetivoAtual();
+                return true;
+            }
+            if (area == areaLuzia)
+            {
+                if (Dados.curraisAguaRecebida && Dados.curraisEscolhaAgua == 0) Iniciar(DestinarAgua());
+                else AbrirMenuLuzia();
+            }
+            else if (area == areaAgua)
+            {
+                if (!Dados.curraisDistribuicaoIniciada) objetivoTexto.text = objetivosBusca[0];
+                else if (!Dados.curraisAguaRecebida) Iniciar(ReceberAgua());
+                else objetivoTexto.text = ObjetivoAtual();
+            }
+            else if (area == areaMae)
+            {
+                if (Dados.curraisAguaRecebida && Dados.curraisEscolhaAgua == 0) Iniciar(DestinarAgua());
+                else objetivoTexto.text = ObjetivoAtual();
+            }
+            else if (area == areaMenino)
+            {
+                if (Dados.curraisEscolhaAgua == 0) objetivoTexto.text = ObjetivoAtual();
+                else if (!Dados.curraisMeninoVisitado) Iniciar(ConhecerMenino());
+                else AbrirMenuMenino();
+            }
+            else if (area == areaRegistro)
+            {
+                if (Dados.curraisEscolhaAgua == 0) objetivoTexto.text = ObjetivoAtual();
+                else if (!Dados.curraisRegistroConcluido) Iniciar(ConsultarRegistro());
+                else MostrarOpcoes("Escrivão", objetivosBusca[4], opcoesRegistro,
+                    new Action[] { () => Iniciar(RelembrarRegistro()), FecharMenu });
+            }
+            else if (area == areaPanela)
+            {
+                if (Dados.curraisRegistroConcluido && !Dados.curraisPanelaConcluida) Iniciar(EscolherPertence());
+                else objetivoTexto.text = ObjetivoAtual();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private void AbrirMenuLuzia()
+    {
+        if (!Dados.curraisDistribuicaoIniciada)
+        {
+            MostrarOpcoes("Luzia", objetivosBusca[0], opcoesLuziaInicio, new Action[] {
+                () => { Dados.curraisDistribuicaoIniciada = true; AtualizarEstadoBusca(); Salvar(); },
+                () => Iniciar(Dizer(abrigo)), FecharMenu });
+        }
+        else
+            MostrarOpcoes("Luzia", ObjetivoAtual(), opcoesRegistro,
+                new Action[] { () => Iniciar(Dizer(abrigo)), FecharMenu });
+    }
+
+    private bool DevolverCabaca()
+    {
+        if (Dados.curraisCabacaDevolvida) return true;
+        InventorySaveCatalog catalogo = Resources.Load<InventorySaveCatalog>("InventorySaveCatalog");
+        if (catalogo == null || !catalogo.TryGetId(cabacaVaziaBusca, out string idVazia) ||
+            !catalogo.TryGetId(cabacaCheiaBusca, out string idCheia)) return false;
+        int indice = Dados.curraisItensRetidos.FindIndex(id => id == idVazia || id == idCheia);
+        if (indice >= 0) Dados.curraisItensRetidos.RemoveAt(indice);
+        else if (Dados.CanSave && !TemItem(cabacaVaziaBusca) && !TemItem(cabacaCheiaBusca))
+        {
+            Debug.LogError("Currais: a cabaça não está entre os pertences retidos. Os outros itens foram preservados.", this);
+            return false;
+        }
+        // Em teste isolado, o recipiente existente permite verificar a cena sem alterar saves anteriores.
+        if (!TemItem(cabacaVaziaBusca) && !TemItem(cabacaCheiaBusca))
+            InventoryManager.Instance.AddItem(cabacaVaziaBusca);
+        Dados.curraisCabacaDevolvida = true;
+        return true;
+    }
+
+    private bool TemItem(ItemData itemBusca)
+    {
+        foreach (ItemData atual in InventoryManager.Instance.Items) if (atual == itemBusca) return true;
+        return false;
+    }
+
+    private IEnumerator ReceberAgua()
+    {
+        if (!DevolverCabaca())
+        {
+            objetivoTexto.text = objetivosBusca[1];
+            yield break;
+        }
+        if (TemItem(cabacaVaziaBusca))
+        {
+            InventoryManager.Instance.RemoveItem(cabacaVaziaBusca);
+            InventoryManager.Instance.AddItem(cabacaCheiaBusca);
+        }
+        Dados.curraisAguaRecebida = true;
+        AtualizarEstadoBusca(); Salvar();
+        yield return Dizer(aguaFuncionario);
+    }
+
+    private IEnumerator DestinarAgua()
+    {
+        if (Dados.curraisEscolhaAgua != 0) yield break;
+        if (Mathf.Abs(mari.transform.position.x - mariAbrigo.position.x) > alcanceInteracao + 1f)
+        {
+            objetivoTexto.text = objetivosBusca[2];
+            yield break;
+        }
+        if (!TemItem(cabacaCheiaBusca))
+        {
+            objetivoTexto.text = "Leve a cabaça com a porção de água até o abrigo.";
+            yield break;
+        }
+        yield return Dizer(aguaAntesEscolha);
+        yield return Escolher("Zefinha", perguntaAgua, opcoesAgua);
+        int opcao = escolhaRecebida;
+        InventoryManager.Instance.RemoveItem(cabacaCheiaBusca);
+        InventoryManager.Instance.AddItem(cabacaVaziaBusca);
+        Dados.curraisEscolhaAgua = opcao + 1;
+        GameProgress.Instance.UnlockDiaryPage(opcao == 0 ? "currais-agua-mae" : "currais-agua-luzia");
+        AtualizarEstadoBusca(); Salvar();
+        yield return Dizer(opcao == 0 ? aguaMae : aguaLuzia);
+    }
+
+    private IEnumerator ConhecerMenino()
+    {
+        yield return Mover(meninoBusca, meninoFimPasso.position, tempoPlano);
+        yield return Dizer(meninoApresentacao);
+        Dados.curraisMeninoVisitado = true;
+        Salvar();
+        AbrirMenuMenino();
+    }
+
+    private void AbrirMenuMenino()
+    {
+        MostrarOpcoes("Criança", meninoApresentacao[meninoApresentacao.Length - 1].texto,
+            opcoesMenino, new Action[] {
+                () => Iniciar(ResponderMenino(1, meninoEspera)),
+                () => Iniciar(ResponderMenino(2, meninoNome)),
+                () => Iniciar(Dizer(meninoSaida)) });
+    }
+
+    private IEnumerator ResponderMenino(int bit, Fala[] falas)
+    {
+        yield return Dizer(falas);
+        Dados.curraisPerguntasMenino |= bit;
+        GameProgress.Instance.UnlockDiaryPage(bit == 1 ? "currais-menino-espera" : "currais-menino-nome");
+        Salvar();
+        AbrirMenuMenino();
+    }
+
+    private Fala[] ComAcompanhante(Fala[] falas)
+    {
+        Fala[] resultado = new Fala[falas.Length];
+        for (int i = 0; i < falas.Length; i++)
+            resultado[i] = new Fala {
+                personagem = falas[i].personagem == "ACOMPANHANTE"
+                    ? (Dados.curraisEscolhaAgua == 1 ? "Mãe" : "Luzia") : falas[i].personagem,
+                texto = falas[i].texto };
+        return resultado;
+    }
+
+    private IEnumerator ConsultarRegistro()
+    {
+        yield return RelembrarRegistro();
+        Dados.curraisRegistroConcluido = true;
+        GameProgress.Instance.UnlockDiaryPage("currais-registro");
+        AtualizarEstadoBusca(); Salvar();
+    }
+
+    private IEnumerator RelembrarRegistro()
+    {
+        yield return Dizer(ComAcompanhante(registroInicio));
+        yield return Dizer(Dados.curraisEscolhaAgua == 1 ? registroMae : registroLuzia);
+        guardaRegistro.sprite = guardaRegistroBloqueio;
+        yield return Esperar(tempoPlano);
+        guardaRegistro.sprite = guardaRegistroParado;
+    }
+
+    private IEnumerator EscolherPertence()
+    {
+        if (Dados.curraisPanelaConcluida) yield break;
+        yield return Dizer(panelaInicio);
+        yield return Escolher("Zefinha", perguntaPanela, opcoesPanela);
+        int opcao = escolhaRecebida;
+        ItemData escolhido = opcao == 0 ? itemLaco : itemCanhoto;
+        if (!TemItem(escolhido)) InventoryManager.Instance.AddItem(escolhido);
+        Dados.curraisEscolhaPertence = opcao + 1;
+        Dados.curraisLacoGuardado = opcao == 0;
+        if (opcao == 1) Dados.curraisDestinoConfirmado = true;
+        Dados.curraisLacoNaPanela = false;
+        Dados.curraisPanelaConcluida = true;
+        GameProgress.Instance.UnlockDiaryPage(opcao == 0 ? "currais-laco" : "currais-canhoto");
+        AtualizarEstadoBusca(); Salvar();
+        yield return Dizer(opcao == 0 ? panelaLaco : panelaCanhoto);
+    }
+
+    private string ObjetivoAtual()
+    {
+        if (!Dados.curraisDistribuicaoIniciada) return objetivosBusca[0];
+        if (!Dados.curraisAguaRecebida) return objetivosBusca[1];
+        if (Dados.curraisEscolhaAgua == 0) return objetivosBusca[2];
+        if (!Dados.curraisRegistroConcluido) return objetivosBusca[3];
+        if (!Dados.curraisPanelaConcluida) return objetivosBusca[4];
+        return objetivosBusca[5];
+    }
+
+    private void AtualizarEstadoBusca()
+    {
+        if (Dados.curraisEtapaEntrada != 4) return;
+        objetivoTexto.text = ObjetivoAtual();
+        bool panelaAcessivel = Dados.curraisRegistroConcluido && !Dados.curraisPanelaConcluida;
+        if (panelaAcessivel)
+        {
+            panelaBusca.position = panelaNoChao.position;
+            lacoPanela.transform.position = lacoNoChao.position;
+        }
+        else if (Dados.curraisPanelaConcluida) panelaBusca.position = panelaRecolhida.position;
+        canhotoCenario.SetActive(panelaAcessivel);
+        cabacaMesa.SetActive(!Dados.curraisAguaRecebida);
+        lacoPanela.SetActive(Dados.curraisLacoNaPanela && !Dados.curraisPanelaConcluida);
+        areaPanela.enabled = panelaAcessivel;
+        meninoBusca.gameObject.SetActive(Dados.curraisEscolhaAgua != 0);
+        if (Dados.curraisMeninoVisitado) meninoBusca.position = meninoFimPasso.position;
+        if (Dados.curraisEscolhaAgua == 1)
+        {
+            luzia.transform.position = luziaRepouso.position;
+            luzia.transform.localRotation = Quaternion.Euler(0f, 0f, -8f);
+        }
+        else if (Dados.curraisEscolhaAgua == 2)
+        {
+            Posicionar(mae, maeAbrigo);
+        }
+        Physics2D.SyncTransforms();
+    }
+
+    private void RestaurarAcompanhante()
+    {
+        if (!Dados.curraisDistribuicaoIniciada) return;
+        SeguidorFamilia seguidor = Dados.curraisEscolhaAgua == 1 ? seguidoraMae : seguidoraLuzia;
+        Vector3 posicao = seguidor.transform.position;
+        posicao.x = Mathf.Clamp(mari.transform.position.x - seguidor.DistanciaAtras,
+            limiteSetor.bounds.min.x + 1f, limiteSetor.bounds.max.x - 1f);
+        seguidor.transform.position = posicao;
+        Physics2D.SyncTransforms();
+    }
+
+    private void LateUpdate()
+    {
+        if (!pronto || Dados.curraisEtapaEntrada != 4) return;
+        bool livre = !ocupado && !menuAberto && !dialogando && !PauseHelper.BlockInput();
+        bool luziaAcompanha = Dados.curraisDistribuicaoIniciada && Dados.curraisEscolhaAgua != 1;
+        if (seguidoraLuzia.enabled != (livre && luziaAcompanha)) seguidoraLuzia.enabled = livre && luziaAcompanha;
+        bool maeAcompanha = livre && Dados.curraisEscolhaAgua == 1;
+        if (seguidoraMae.enabled != maeAcompanha) seguidoraMae.enabled = maeAcompanha;
     }
 
     private void FecharMenu()
@@ -531,7 +887,10 @@ public class EntradaCurrais : MonoBehaviour
         FecharDialogo();
         if (mari != null) mari.enabled = true;
         if (seguirCamera != null) seguirCamera.enabled = true;
-        if (conversarBotao != null) conversarBotao.onClick.RemoveListener(RelembrarLuzia);
-        if (sairBotao != null) sairBotao.onClick.RemoveListener(FecharMenu);
+        if (botoesEtapa2 != null)
+            foreach (Button botao in botoesEtapa2)
+                if (botao != null) botao.onClick.RemoveAllListeners();
+        if (seguidoraLuzia != null) seguidoraLuzia.enabled = false;
+        if (seguidoraMae != null) seguidoraMae.enabled = false;
     }
 }
