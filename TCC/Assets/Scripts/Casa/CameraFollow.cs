@@ -46,6 +46,14 @@ public class CameraFollow : MonoBehaviour
             transform.position = new Vector3(ClampX(target.position.x), fixedY, fixedZ);
     }
 
+    // Chamado pelo setor quando uma passagem é liberada; outras cenas mantêm seus limites.
+    public void AtualizarLimites()
+    {
+        if (levelBounds == null) return;
+        cameraBounds = levelBounds.bounds;
+        hasBounds = true;
+    }
+
     private float ClampX(float x)
     {
         if (!hasBounds || sceneCamera == null || !sceneCamera.orthographic)

@@ -39,6 +39,7 @@ public class GameProgress : MonoBehaviour
     public void NormalizeData()
     {
         if (data == null) data = new GameProgressData();
+        data.curraisEtapaBusca = Mathf.Clamp(data.curraisEtapaBusca, 0, 6);
         if (data.curraisItensRetidos == null) data.curraisItensRetidos = new System.Collections.Generic.List<string>();
         if (data.foundPhotos == null) data.foundPhotos = new System.Collections.Generic.List<int>();
         if (data.readPhotos == null) data.readPhotos = new System.Collections.Generic.List<int>();

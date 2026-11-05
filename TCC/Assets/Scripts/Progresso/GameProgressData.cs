@@ -95,6 +95,11 @@ public class GameProgressData
     public bool curraisDestinoConfirmado;
     public bool curraisIdentidadeConfirmada;
 
+    // Etapa 3: 0 Raimundo, 1 lavagem, 2 apoiar pano, 3 corredor, 4 pátio, 5 atendimento, 6 concluída.
+    public int curraisEtapaBusca;
+    public bool curraisRaimundoConhecido;
+    public int curraisPerguntasRaimundo;
+
     public bool CanSave => tutorialCompleted ||
         (secaDepartureCompleted && secaMealCompleted &&
          secaFoodChoice >= 1 && secaFoodChoice <= 3);

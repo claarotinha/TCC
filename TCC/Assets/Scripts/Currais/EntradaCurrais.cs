@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 // Ato 2, etapa 1. As artes, falas e posições são referências editáveis da cena.
-public class EntradaCurrais : MonoBehaviour
+public partial class EntradaCurrais : MonoBehaviour
 {
     [Serializable]
     public class Fala
@@ -164,6 +164,7 @@ public class EntradaCurrais : MonoBehaviour
         else
         {
             MostrarAbrigo();
+            AplicarLimitesBusca();
             if (restaurandoPartida)
             {
                 Bounds limites = limiteSetor.bounds;
@@ -230,7 +231,7 @@ public class EntradaCurrais : MonoBehaviour
         if (!referenciasPresentes) return false;
         return FalasValidas(antesSeparacao) && FalasValidas(barreira) &&
             FalasValidas(depoisSeparacao) && FalasValidas(entrada) &&
-            FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() &&
+            FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() && ReferenciasCampoValidas() &&
             FalaValida(promessa) && FalaValida(semPromessa) && FalaValida(respostaZefinha);
     }
 
@@ -309,7 +310,7 @@ public class EntradaCurrais : MonoBehaviour
         }
         if (!ocupado && !menuAberto && Dados.curraisEtapaEntrada == 4 && Input.GetKeyDown(KeyCode.E))
         {
-            Collider2D[] alvos = { areaLuzia, areaAgua, areaMae, areaMenino, areaRegistro, areaPanela };
+            Collider2D[] alvos = AlvosAtuais();
             Collider2D maisPerto = null;
             float menor = alcanceInteracao;
             foreach (Collider2D alvo in alvos)
@@ -658,6 +659,7 @@ public class EntradaCurrais : MonoBehaviour
 
     private bool InteragirBusca(Vector2 ponto)
     {
+        if (Dados.curraisPanelaConcluida) return InteragirCampo(ponto);
         Collider2D[] areas = { areaLuzia, areaAgua, areaMae, areaMenino, areaRegistro, areaPanela };
         foreach (Collider2D area in areas)
         {
@@ -861,6 +863,7 @@ public class EntradaCurrais : MonoBehaviour
 
     private string ObjetivoAtual()
     {
+        if (Dados.curraisPanelaConcluida) return ObjetivoCampo();
         if (objetivosBusca == null || objetivosBusca.Length < 6) return objetivoBusca;
         if (!Dados.curraisDistribuicaoIniciada) return objetivosBusca[0];
         if (!Dados.curraisAguaRecebida) return objetivosBusca[1];
@@ -887,7 +890,8 @@ public class EntradaCurrais : MonoBehaviour
         areaPanela.enabled = panelaAcessivel;
         meninoBusca.gameObject.SetActive(Dados.curraisEscolhaAgua != 0);
         if (Dados.curraisMeninoVisitado) meninoBusca.position = meninoFimPasso.position;
-        if (Dados.curraisEscolhaAgua == 1)
+        if (Dados.curraisEscolhaAgua == 1 &&
+            (!Dados.curraisPanelaConcluida || Dados.curraisEtapaBusca == 0))
         {
             luzia.transform.position = luziaRepouso.position;
             luzia.transform.localRotation = Quaternion.Euler(0f, 0f, -8f);
@@ -896,11 +900,14 @@ public class EntradaCurrais : MonoBehaviour
         {
             Posicionar(mae, maeAbrigo);
         }
+        AtualizarCampo();
         Physics2D.SyncTransforms();
     }
 
     private void RestaurarAcompanhante()
     {
+        if (Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 1)
+        { RestaurarLuziaNaBusca(); return; }
         if (!Dados.curraisDistribuicaoIniciada) return;
         SeguidorFamilia seguidor = Dados.curraisEscolhaAgua == 1 ? seguidoraMae : seguidoraLuzia;
         Vector3 posicao = seguidor.transform.position;
@@ -920,9 +927,10 @@ public class EntradaCurrais : MonoBehaviour
             return;
         }
         bool livre = !ocupado && !menuAberto && !dialogando && !PauseHelper.BlockInput();
-        bool luziaAcompanha = Dados.curraisDistribuicaoIniciada && Dados.curraisEscolhaAgua != 1;
+        bool buscaComLuzia = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 1;
+        bool luziaAcompanha = buscaComLuzia || (Dados.curraisDistribuicaoIniciada && Dados.curraisEscolhaAgua != 1);
         if (seguidoraLuzia.enabled != (livre && luziaAcompanha)) seguidoraLuzia.enabled = livre && luziaAcompanha;
-        bool maeAcompanha = livre && Dados.curraisEscolhaAgua == 1;
+        bool maeAcompanha = livre && !buscaComLuzia && Dados.curraisEscolhaAgua == 1;
         if (seguidoraMae.enabled != maeAcompanha) seguidoraMae.enabled = maeAcompanha;
     }
 
