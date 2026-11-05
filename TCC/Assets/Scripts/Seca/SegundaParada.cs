@@ -297,7 +297,7 @@ public class SegundaParada : MonoBehaviour
     {
         if (id == null) return false;
         ControleJornada jornada = ControleJornada.Instance;
-        if (id == "riacho") return iniciou && !encheu && jornada != null && jornada.ParadaAtual == 2;
+        if (id == "riacho") return iniciou && etapa == 0 && jornada != null && jornada.ParadaAtual == 2;
         if (id == "casa") return etapa == 6;
         if (id == "baleia") return etapa == 2 && pegadas == 3;
         if (id.StartsWith("pegada")) return etapa == 2 && id == "pegada" + pegadas;
