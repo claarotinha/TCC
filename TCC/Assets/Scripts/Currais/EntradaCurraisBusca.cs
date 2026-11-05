@@ -43,12 +43,13 @@ public partial class EntradaCurrais
 
     private Collider2D[] AlvosAtuais()
     {
+        if (PostoDisponivel) return AlvosPosto();
         if (Dados.curraisPanelaConcluida)
             return new[] { areaRaimundo, areaLavadeira, areaPanoLavagem, areaLembranca, areaPatio, areaPanoAtendimento };
         return new[] { areaLuzia, areaAgua, areaMae, areaMenino, areaRegistro, areaPanela };
     }
 
-    private string ObjetivoCampo() => objetivosCampo[Mathf.Clamp(Dados.curraisEtapaBusca, 0, 6)];
+    private string ObjetivoCampo() => PostoDisponivel ? ObjetivoPosto() : objetivosCampo[Mathf.Clamp(Dados.curraisEtapaBusca, 0, 6)];
 
     private void AplicarLimitesBusca()
     {
@@ -71,7 +72,7 @@ public partial class EntradaCurrais
         bool ativo = Dados.curraisPanelaConcluida;
         setorBusca.SetActive(ativo);
         AplicarLimitesBusca();
-        if (!ativo) return;
+        if (!ativo) { AtualizarPosto(); return; }
         int etapa = Dados.curraisEtapaBusca;
         objetivoTexto.text = ObjetivoCampo();
         areaRaimundo.enabled = etapa == 0;
@@ -96,6 +97,7 @@ public partial class EntradaCurrais
             if (etapa >= 6) Posicionar(pai, paiAbrigo);
         }
         OcultarPercepcao();
+        AtualizarPosto();
         Physics2D.SyncTransforms();
     }
 
@@ -107,6 +109,7 @@ public partial class EntradaCurrais
 
     private bool InteragirCampo(Vector2 ponto)
     {
+        if (PostoDisponivel) return InteragirPosto(ponto);
         foreach (Collider2D area in AlvosAtuais())
         {
             if (area == null || !area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;

@@ -231,7 +231,7 @@ public partial class EntradaCurrais : MonoBehaviour
         if (!referenciasPresentes) return false;
         return FalasValidas(antesSeparacao) && FalasValidas(barreira) &&
             FalasValidas(depoisSeparacao) && FalasValidas(entrada) &&
-            FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() && ReferenciasCampoValidas() &&
+            FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() && ReferenciasCampoValidas() && ReferenciasPostoValidas() &&
             FalaValida(promessa) && FalaValida(semPromessa) && FalaValida(respostaZefinha);
     }
 
@@ -906,6 +906,8 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void RestaurarAcompanhante()
     {
+        if (PostoDisponivel && Dados.curraisEtapaPosto >= 2)
+        { Posicionar(luzia.transform, Dados.curraisEtapaPosto == 4 ? luziaNoite : luziaRepouso); return; }
         if (Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 1)
         { RestaurarLuziaNaBusca(); return; }
         if (!Dados.curraisDistribuicaoIniciada) return;
@@ -927,10 +929,11 @@ public partial class EntradaCurrais : MonoBehaviour
             return;
         }
         bool livre = !ocupado && !menuAberto && !dialogando && !PauseHelper.BlockInput();
-        bool buscaComLuzia = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 1;
-        bool luziaAcompanha = buscaComLuzia || (Dados.curraisDistribuicaoIniciada && Dados.curraisEscolhaAgua != 1);
+        bool buscaComLuzia = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 1 &&
+            (!PostoDisponivel || Dados.curraisEtapaPosto < 2);
+        bool luziaAcompanha = buscaComLuzia || (!PostoDisponivel && Dados.curraisDistribuicaoIniciada && Dados.curraisEscolhaAgua != 1);
         if (seguidoraLuzia.enabled != (livre && luziaAcompanha)) seguidoraLuzia.enabled = livre && luziaAcompanha;
-        bool maeAcompanha = livre && !buscaComLuzia && Dados.curraisEscolhaAgua == 1;
+        bool maeAcompanha = livre && !PostoDisponivel && !buscaComLuzia && Dados.curraisEscolhaAgua == 1;
         if (seguidoraMae.enabled != maeAcompanha) seguidoraMae.enabled = maeAcompanha;
     }
 

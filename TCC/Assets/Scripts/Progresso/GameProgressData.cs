@@ -100,6 +100,14 @@ public class GameProgressData
     public bool curraisRaimundoConhecido;
     public int curraisPerguntasRaimundo;
 
+    // Etapa 4: 0 posto, 1 quarto, 2 notícias aos pais, 3 preparar noite, 4 noite concluída.
+    public int curraisEtapaPosto;
+    // 0 sem decisão, 1 ajudar Raimundo, 2 copiar o registro.
+    public int curraisEscolhaPosto;
+    public bool curraisRefeicaoRelembrada;
+    // 0 sem decisão, 1 contar a última fala, 2 pedir companhia.
+    public int curraisEscolhaNoite;
+
     public bool CanSave => tutorialCompleted ||
         (secaDepartureCompleted && secaMealCompleted &&
          secaFoodChoice >= 1 && secaFoodChoice <= 3);
