@@ -93,9 +93,14 @@ public class EntradaCurrais : MonoBehaviour
     private int quadroBloqueado;
     private Quaternion rotacaoPai;
     private float ajustePivoIrma;
+    private float zoomInicial;
+    private Vector3 inicioMariNaRua;
 
     private void Awake()
     {
+        if (mari != null) inicioMariNaRua = mari.transform.position;
+        if (cameraCena != null) zoomInicial = cameraCena.orthographicSize;
+        FixarCameraDaSequencia();
         if (seguirCamera != null) seguirCamera.enabled = false;
         if (mari != null) mari.enabled = false;
         if (seguidores != null)
@@ -142,6 +147,7 @@ public class EntradaCurrais : MonoBehaviour
                 ajustePivoIrma = irma.position.y - yAnterior;
             }
         }
+        FixarCameraDaSequencia();
         FecharDialogo();
         PrepararOpcoes();
         pronto = true;
@@ -316,6 +322,16 @@ public class EntradaCurrais : MonoBehaviour
 
     private IEnumerator Separar()
     {
+        // Um checkpoint de chegada repete a separação a partir da posição da própria cena.
+        // Não reaproveita uma posição da Estrada ou de uma inicialização interrompida.
+        mari.transform.position = inicioMariNaRua;
+        Rigidbody2D corpoInicial = mari.GetComponent<Rigidbody2D>();
+        if (corpoInicial != null)
+        {
+            corpoInicial.position = inicioMariNaRua;
+            corpoInicial.linearVelocity = Vector2.zero;
+        }
+        Physics2D.SyncTransforms();
         rua.SetActive(true); campo.SetActive(false);
         luzia.SetActive(false); lacoChao.SetActive(false); lacoPanela.SetActive(false);
         cameraCena.transform.position = cameraRua.position;
@@ -459,7 +475,19 @@ public class EntradaCurrais : MonoBehaviour
     private void LiberarMari()
     {
         if (mari != null) mari.enabled = true;
-        if (seguirCamera != null) seguirCamera.enabled = true;
+        bool explorarSetor = pronto && GameProgress.Instance != null &&
+            Dados.curraisEtapaEntrada == 4 && campo != null && campo.activeInHierarchy;
+        if (seguirCamera != null) seguirCamera.enabled = explorarSetor;
+        if (!explorarSetor) FixarCameraDaSequencia();
+    }
+
+    private void FixarCameraDaSequencia()
+    {
+        if (cameraCena == null || cameraCena.gameObject.scene != gameObject.scene) return;
+        if (seguirCamera != null) seguirCamera.enabled = false;
+        Transform marca = campo != null && campo.activeInHierarchy ? cameraCampo : cameraRua;
+        if (marca != null) cameraCena.transform.position = marca.position;
+        if (zoomInicial > 0f) cameraCena.orthographicSize = zoomInicial;
     }
 
     private IEnumerator Dizer(Fala[] falas)
@@ -819,7 +847,13 @@ public class EntradaCurrais : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!pronto || Dados.curraisEtapaEntrada != 4) return;
+        if (!pronto) return;
+        if (Dados.curraisEtapaEntrada != 4)
+        {
+            // Os limites do setor interno não devem deslocar a câmera da separação na rua.
+            FixarCameraDaSequencia();
+            return;
+        }
         bool livre = !ocupado && !menuAberto && !dialogando && !PauseHelper.BlockInput();
         bool luziaAcompanha = Dados.curraisDistribuicaoIniciada && Dados.curraisEscolhaAgua != 1;
         if (seguidoraLuzia.enabled != (livre && luziaAcompanha)) seguidoraLuzia.enabled = livre && luziaAcompanha;

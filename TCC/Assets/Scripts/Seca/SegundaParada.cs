@@ -98,7 +98,7 @@ public class SegundaParada : MonoBehaviour
     private bool fortalezaIniciada, dialogoFortalezaConcluido, abordagemIniciada, atoConcluido;
     private bool finalEmAndamento, encerramentoMostrado;
     [SerializeField] private string cenaCurrais = "Currais";
-    private bool carregandoCurrais;
+    private bool carregandoCurrais, transicaoCurraisPreparada;
     private SpriteRenderer[] desenhosFundoFim;
     private bool[] fundoFimAtivo;
     private CameraClearFlags fundoCameraOriginal;
@@ -202,7 +202,7 @@ public class SegundaParada : MonoBehaviour
 
     private void Update()
     {
-        if (PauseHelper.BlockInput() || Time.timeScale == 0f || sequenciaAbrigo) return;
+        if (carregandoCurrais || PauseHelper.BlockInput() || Time.timeScale == 0f || sequenciaAbrigo) return;
         ControleJornada j = ControleJornada.Instance;
         AtualizarFortaleza();
         if (sequenciaAbrigo || encerramentoMostrado) return;
@@ -1101,7 +1101,7 @@ public class SegundaParada : MonoBehaviour
 
     private void RestaurarCamera()
     {
-        if (cameraAbrigo == null || mari == null) return;
+        if (cameraAbrigo == null || mari == null || cameraAbrigo.gameObject.scene != gameObject.scene) return;
         cameraAbrigo.orthographicSize = zoomOriginal;
         cameraAbrigo.transform.position = new Vector3(mari.transform.position.x, cameraOriginal.y, cameraOriginal.z);
         if (seguirCamera != null) seguirCamera.enabled = cameraSeguia;
@@ -1881,7 +1881,7 @@ public class SegundaParada : MonoBehaviour
             return;
         }
         var desenhos = new List<SpriteRenderer>();
-        foreach (SpriteRenderer desenho in FindObjectsByType<SpriteRenderer>(FindObjectsInactive.Include))
+        foreach (SpriteRenderer desenho in DesenhosDestaCena())
         {
             Transform pessoa = desenho.transform;
             if (pessoa == mari.transform || pessoa == mariquinha.transform || pessoa == mae.transform ||
@@ -2574,26 +2574,61 @@ public class SegundaParada : MonoBehaviour
         sequenciaAbrigo = false;
     }
 
+    private SpriteRenderer[] DesenhosDestaCena()
+    {
+        List<SpriteRenderer> desenhos = new List<SpriteRenderer>();
+        foreach (GameObject raiz in gameObject.scene.GetRootGameObjects())
+            desenhos.AddRange(raiz.GetComponentsInChildren<SpriteRenderer>(true));
+        return desenhos.ToArray();
+    }
+
+    private IEnumerator CarregarCurrais()
+    {
+        // Aguarda o encerramento da rotina da abordagem antes de limpar a cena antiga.
+        yield return null;
+        RestaurarFundoFim();
+        RestaurarFade();
+        RestaurarExterior();
+        RestaurarCamera();
+        RestaurarGrupoAbrigo();
+        RestaurarInventarioAbrigo();
+        LiberarMovimento();
+        if (InventoryTabController.Instance != null) InventoryTabController.Instance.Close();
+        if (UniversalPauseManager.Instance != null) UniversalPauseManager.Instance.ResumeGame();
+        Time.timeScale = 1f;
+
+        if (GameProgress.Instance != null)
+        {
+            GameSaveSystem salvar = GameProgress.Instance.GetComponent<GameSaveSystem>();
+            if (salvar != null && GameProgress.Instance.Data.CanSave)
+                salvar.TrySaveCheckpoint(cenaCurrais);
+        }
+        if (GameManager.Instance != null) GameManager.Instance.ChangeState(GameState.Gameplay);
+        transicaoCurraisPreparada = true;
+        AsyncOperation carga = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(
+            cenaCurrais, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        if (carga == null)
+        {
+            transicaoCurraisPreparada = false;
+            carregandoCurrais = false;
+            Debug.LogError("Não foi possível carregar a cena Currais.", this);
+            yield break;
+        }
+        while (!carga.isDone) yield return null;
+    }
+
     private void MostrarFimAto()
     {
         if (Application.CanStreamedLevelBeLoaded(cenaCurrais))
         {
             if (carregandoCurrais) return;
             carregandoCurrais = true;
-            if (GameProgress.Instance != null)
-            {
-                GameSaveSystem salvar = GameProgress.Instance.GetComponent<GameSaveSystem>();
-                if (salvar != null && GameProgress.Instance.Data.CanSave)
-                    salvar.TrySaveCheckpoint(cenaCurrais);
-            }
-            if (InventoryTabController.Instance != null) InventoryTabController.Instance.Close();
-            if (GameManager.Instance != null) GameManager.Instance.ChangeState(GameState.Gameplay);
-            UnityEngine.SceneManagement.SceneManager.LoadScene(cenaCurrais);
+            StartCoroutine(CarregarCurrais());
             return;
         }
 
         // O painel existente apresenta o encerramento sobre a cena escurecida.
-        desenhosFundoFim = FindObjectsByType<SpriteRenderer>(FindObjectsInactive.Include);
+        desenhosFundoFim = DesenhosDestaCena();
         fundoFimAtivo = new bool[desenhosFundoFim.Length];
         for (int i = 0; i < desenhosFundoFim.Length; i++)
         {
@@ -2672,6 +2707,8 @@ public class SegundaParada : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
+        // A limpeza já ocorreu antes da carga; não altera sistemas persistentes na cena nova.
+        if (transicaoCurraisPreparada) return;
         RestaurarFundoFim();
         if (familiaFinal != null) familiaFinal.SetActive(false);
         if (familiaAcampamento != null) familiaAcampamento.SetActive(false);
