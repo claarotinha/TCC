@@ -18,6 +18,8 @@ public class PauseSoundSettings : MonoBehaviour
         // Aplica o volume mesmo com o painel de som fechado.
         AudioListener.volume = savedVolume;
 
+        RecuperarControlesDoPainel();
+
         if (masterVolumeSlider == null || volumeValueText == null)
         {
             Debug.LogError(
@@ -37,6 +39,27 @@ public class PauseSoundSettings : MonoBehaviour
         UpdateLabel(savedVolume);
 
         masterVolumeSlider.onValueChanged.AddListener(SetVolume);
+    }
+
+    private void RecuperarControlesDoPainel()
+    {
+        // Procura somente no sistema de pausa deste objeto, inclusive painéis fechados.
+        // Não reutiliza controles de outra cena e não cria elementos de interface.
+        Transform sistema = transform.parent != null ? transform.parent : transform;
+        if (masterVolumeSlider == null)
+            foreach (Slider slider in sistema.GetComponentsInChildren<Slider>(true))
+                if (slider.name == "MasterVolumeSlider")
+                {
+                    masterVolumeSlider = slider;
+                    break;
+                }
+        if (volumeValueText == null)
+            foreach (TMP_Text texto in sistema.GetComponentsInChildren<TMP_Text>(true))
+                if (texto.name == "VolumeValueText")
+                {
+                    volumeValueText = texto;
+                    break;
+                }
     }
 
     public void SetVolume(float value)

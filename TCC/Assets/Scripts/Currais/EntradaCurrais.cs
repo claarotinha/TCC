@@ -112,7 +112,7 @@ public class EntradaCurrais : MonoBehaviour
     {
         if (!ReferenciasValidas())
         {
-            Debug.LogError("EntradaCurrais: há referências obrigatórias vazias no Inspector.", this);
+            Debug.LogError("EntradaCurrais: inicialização interrompida. Confira os campos identificados acima no objeto " + name + ".", this);
             LiberarMari();
             yield break;
         }
@@ -182,19 +182,52 @@ public class EntradaCurrais : MonoBehaviour
 
     private bool ReferenciasValidas()
     {
-        if (progressoPrefab == null || inventarioPrefab == null || mari == null ||
-            cameraCena == null || seguirCamera == null || limiteSetor == null ||
-            dialogoUI == null || painelDialogo == null || escolhas == null ||
-            nomeTexto == null || falaTexto == null || objetivoTexto == null || fade == null ||
-            conversarBotao == null || sairBotao == null || rua == null || campo == null ||
-            lacoChao == null || lacoPanela == null || outraFila == null || areaLaco == null ||
-            areaLuzia == null || pai == null || mae == null || baleia == null || irma == null ||
-            cabo == null || carroca == null || luzia == null || cameraRua == null ||
-            cameraCampo == null || irmaSeparada == null || irmaSaida == null ||
-            caboBarreira == null || carrocaSaida == null || pontoColeta == null ||
-            mariEntrada == null || paiEntrada == null || maeEntrada == null || baleiaEntrada == null ||
-            mariAbrigo == null || paiAbrigo == null || maeAbrigo == null || baleiaAbrigo == null)
-            return false;
+        bool referenciasPresentes = true;
+        referenciasPresentes &= ConferirReferencia(progressoPrefab, nameof(progressoPrefab));
+        referenciasPresentes &= ConferirReferencia(inventarioPrefab, nameof(inventarioPrefab));
+        referenciasPresentes &= ConferirReferencia(mari, nameof(mari));
+        referenciasPresentes &= ConferirReferencia(cameraCena, nameof(cameraCena));
+        referenciasPresentes &= ConferirReferencia(seguirCamera, nameof(seguirCamera));
+        referenciasPresentes &= ConferirReferencia(limiteSetor, nameof(limiteSetor));
+        referenciasPresentes &= ConferirReferencia(dialogoUI, nameof(dialogoUI));
+        referenciasPresentes &= ConferirReferencia(painelDialogo, nameof(painelDialogo));
+        referenciasPresentes &= ConferirReferencia(escolhas, nameof(escolhas));
+        referenciasPresentes &= ConferirReferencia(nomeTexto, nameof(nomeTexto));
+        referenciasPresentes &= ConferirReferencia(falaTexto, nameof(falaTexto));
+        referenciasPresentes &= ConferirReferencia(objetivoTexto, nameof(objetivoTexto));
+        referenciasPresentes &= ConferirReferencia(fade, nameof(fade));
+        referenciasPresentes &= ConferirReferencia(conversarBotao, nameof(conversarBotao));
+        referenciasPresentes &= ConferirReferencia(sairBotao, nameof(sairBotao));
+        referenciasPresentes &= ConferirReferencia(rua, nameof(rua));
+        referenciasPresentes &= ConferirReferencia(campo, nameof(campo));
+        referenciasPresentes &= ConferirReferencia(lacoChao, nameof(lacoChao));
+        referenciasPresentes &= ConferirReferencia(lacoPanela, nameof(lacoPanela));
+        referenciasPresentes &= ConferirReferencia(outraFila, nameof(outraFila));
+        referenciasPresentes &= ConferirReferencia(areaLaco, nameof(areaLaco));
+        referenciasPresentes &= ConferirReferencia(areaLuzia, nameof(areaLuzia));
+        referenciasPresentes &= ConferirReferencia(pai, nameof(pai));
+        referenciasPresentes &= ConferirReferencia(mae, nameof(mae));
+        referenciasPresentes &= ConferirReferencia(baleia, nameof(baleia));
+        referenciasPresentes &= ConferirReferencia(irma, nameof(irma));
+        referenciasPresentes &= ConferirReferencia(cabo, nameof(cabo));
+        referenciasPresentes &= ConferirReferencia(carroca, nameof(carroca));
+        referenciasPresentes &= ConferirReferencia(luzia, nameof(luzia));
+        referenciasPresentes &= ConferirReferencia(cameraRua, nameof(cameraRua));
+        referenciasPresentes &= ConferirReferencia(cameraCampo, nameof(cameraCampo));
+        referenciasPresentes &= ConferirReferencia(irmaSeparada, nameof(irmaSeparada));
+        referenciasPresentes &= ConferirReferencia(irmaSaida, nameof(irmaSaida));
+        referenciasPresentes &= ConferirReferencia(caboBarreira, nameof(caboBarreira));
+        referenciasPresentes &= ConferirReferencia(carrocaSaida, nameof(carrocaSaida));
+        referenciasPresentes &= ConferirReferencia(pontoColeta, nameof(pontoColeta));
+        referenciasPresentes &= ConferirReferencia(mariEntrada, nameof(mariEntrada));
+        referenciasPresentes &= ConferirReferencia(paiEntrada, nameof(paiEntrada));
+        referenciasPresentes &= ConferirReferencia(maeEntrada, nameof(maeEntrada));
+        referenciasPresentes &= ConferirReferencia(baleiaEntrada, nameof(baleiaEntrada));
+        referenciasPresentes &= ConferirReferencia(mariAbrigo, nameof(mariAbrigo));
+        referenciasPresentes &= ConferirReferencia(paiAbrigo, nameof(paiAbrigo));
+        referenciasPresentes &= ConferirReferencia(maeAbrigo, nameof(maeAbrigo));
+        referenciasPresentes &= ConferirReferencia(baleiaAbrigo, nameof(baleiaAbrigo));
+        if (!referenciasPresentes) return false;
         return FalasValidas(antesSeparacao) && FalasValidas(barreira) &&
             FalasValidas(depoisSeparacao) && FalasValidas(entrada) &&
             FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() &&
@@ -203,14 +236,37 @@ public class EntradaCurrais : MonoBehaviour
 
     private bool ReferenciasBuscaValidas()
     {
-        if (botoesEtapa2 == null || botoesEtapa2.Length != 4 || areaAgua == null || areaMae == null ||
-            areaMenino == null || areaRegistro == null || areaPanela == null || meninoBusca == null ||
-            meninoFimPasso == null || panelaBusca == null || panelaNoChao == null || panelaRecolhida == null ||
-            lacoNoChao == null || luziaRepouso == null || seguidoraLuzia == null || seguidoraMae == null ||
-            canhotoCenario == null || cabacaMesa == null || guardaRegistro == null ||
-            guardaRegistroParado == null || guardaRegistroBloqueio == null || cabacaVaziaBusca == null || cabacaCheiaBusca == null ||
-            itemLaco == null || itemCanhoto == null || objetivosBusca == null || objetivosBusca.Length != 6)
+        bool referenciasPresentes = true;
+        referenciasPresentes &= ConferirReferencia(areaAgua, nameof(areaAgua));
+        referenciasPresentes &= ConferirReferencia(areaMae, nameof(areaMae));
+        referenciasPresentes &= ConferirReferencia(areaMenino, nameof(areaMenino));
+        referenciasPresentes &= ConferirReferencia(areaRegistro, nameof(areaRegistro));
+        referenciasPresentes &= ConferirReferencia(areaPanela, nameof(areaPanela));
+        referenciasPresentes &= ConferirReferencia(meninoBusca, nameof(meninoBusca));
+        referenciasPresentes &= ConferirReferencia(meninoFimPasso, nameof(meninoFimPasso));
+        referenciasPresentes &= ConferirReferencia(panelaBusca, nameof(panelaBusca));
+        referenciasPresentes &= ConferirReferencia(panelaNoChao, nameof(panelaNoChao));
+        referenciasPresentes &= ConferirReferencia(panelaRecolhida, nameof(panelaRecolhida));
+        referenciasPresentes &= ConferirReferencia(lacoNoChao, nameof(lacoNoChao));
+        referenciasPresentes &= ConferirReferencia(luziaRepouso, nameof(luziaRepouso));
+        referenciasPresentes &= ConferirReferencia(seguidoraLuzia, nameof(seguidoraLuzia));
+        referenciasPresentes &= ConferirReferencia(seguidoraMae, nameof(seguidoraMae));
+        referenciasPresentes &= ConferirReferencia(canhotoCenario, nameof(canhotoCenario));
+        referenciasPresentes &= ConferirReferencia(cabacaMesa, nameof(cabacaMesa));
+        referenciasPresentes &= ConferirReferencia(guardaRegistro, nameof(guardaRegistro));
+        referenciasPresentes &= ConferirReferencia(guardaRegistroParado, nameof(guardaRegistroParado));
+        referenciasPresentes &= ConferirReferencia(guardaRegistroBloqueio, nameof(guardaRegistroBloqueio));
+        referenciasPresentes &= ConferirReferencia(cabacaVaziaBusca, nameof(cabacaVaziaBusca));
+        referenciasPresentes &= ConferirReferencia(cabacaCheiaBusca, nameof(cabacaCheiaBusca));
+        referenciasPresentes &= ConferirReferencia(itemLaco, nameof(itemLaco));
+        referenciasPresentes &= ConferirReferencia(itemCanhoto, nameof(itemCanhoto));
+        if (!referenciasPresentes) return false;
+        if (botoesEtapa2 == null || botoesEtapa2.Length != 4 ||
+            objetivosBusca == null || objetivosBusca.Length != 6)
+        {
+            Debug.LogError("EntradaCurrais: confira os quatro botoesEtapa2 e os seis objetivosBusca.", this);
             return false;
+        }
         foreach (Button botao in botoesEtapa2) if (botao == null) return false;
         Fala[][] sequencias = { aguaFuncionario, aguaAntesEscolha, aguaMae, aguaLuzia,
             meninoApresentacao, meninoEspera, meninoNome, meninoSaida,
@@ -219,6 +275,14 @@ public class EntradaCurrais : MonoBehaviour
         return opcoesLuziaInicio != null && opcoesLuziaInicio.Length == 3 &&
             opcoesAgua != null && opcoesAgua.Length == 2 && opcoesMenino != null && opcoesMenino.Length == 3 &&
             opcoesRegistro != null && opcoesRegistro.Length == 2 && opcoesPanela != null && opcoesPanela.Length == 2;
+    }
+
+    private bool ConferirReferencia(UnityEngine.Object referencia, string campo)
+    {
+        if (referencia != null) return true;
+        Debug.LogError("EntradaCurrais: referência ausente: " + campo +
+            ". Objeto: " + name + "; cena: " + gameObject.scene.name + ".", this);
+        return false;
     }
 
     private static bool FalaValida(Fala fala) => fala != null &&
@@ -474,7 +538,8 @@ public class EntradaCurrais : MonoBehaviour
 
     private void LiberarMari()
     {
-        if (mari != null) mari.enabled = true;
+        // Não aplica os limites do campo enquanto a inicialização estiver incompleta.
+        if (mari != null) mari.enabled = pronto;
         bool explorarSetor = pronto && GameProgress.Instance != null &&
             Dados.curraisEtapaEntrada == 4 && campo != null && campo.activeInHierarchy;
         if (seguirCamera != null) seguirCamera.enabled = explorarSetor;
