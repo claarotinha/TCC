@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: a43e63f55e9289546b7bfdf81906300d
+guid: 7a539f408aa88e849ad3aae669049090
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7150782778903756330
-    second: "Moldura_Pixel_Art_Bege_com_Bordas_Bord\xF4-removebg-preview (1)_0"
+      213: -4287014586234117345
+    second: x icone_0
+  - first:
+      213: -8601039753502258958
+    second: x icone_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Moldura_Pixel_Art_Bege_com_Bordas_Bord\xF4-removebg-preview (1)_0"
+      name: x icone_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 26
-        width: 688
-        height: 303
+        x: 75
+        y: 138
+        width: 31
+        height: 957
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a2ef98a0d0fac3360800000000000000
-      internalID: 7150782778903756330
+      spriteID: f13e89882f67184c0800000000000000
+      internalID: -4287014586234117345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: x icone_1
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 78
+        width: 1111
+        height: 1078
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f80c791ae7f2a880800000000000000
+      internalID: -8601039753502258958
       vertices: []
       indices: 
       edges: []
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "Moldura_Pixel_Art_Bege_com_Bordas_Bord\xF4-removebg-preview (1)_0": 7150782778903756330
+      x icone_0: -4287014586234117345
+      x icone_1: -8601039753502258958
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
