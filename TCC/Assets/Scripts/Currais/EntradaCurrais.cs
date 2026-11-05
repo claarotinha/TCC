@@ -466,7 +466,7 @@ public class EntradaCurrais : MonoBehaviour
     {
         dialogando = true;
         escolhas.SetActive(false);
-        dialogoUI.SetActive(true); painelDialogo.SetActive(true);
+        AbrirPainelDialogo();
         if (retrato != null) retrato.enabled = false;
         foreach (Fala fala in falas)
         {
@@ -477,6 +477,25 @@ public class EntradaCurrais : MonoBehaviour
             while (aguardandoClique) yield return null;
         }
         FecharDialogo();
+    }
+
+    private void AbrirPainelDialogo()
+    {
+        dialogoUI.SetActive(true);
+        painelDialogo.SetActive(true);
+        // SetActive não restaura um CanvasGroup ocultado pelo modelo de diálogo.
+        RestaurarGrupo(dialogoUI);
+        RestaurarGrupo(painelDialogo);
+        RestaurarGrupo(escolhas);
+    }
+
+    private static void RestaurarGrupo(GameObject painel)
+    {
+        CanvasGroup grupo = painel.GetComponent<CanvasGroup>();
+        if (grupo == null) return;
+        grupo.alpha = 1f;
+        grupo.interactable = true;
+        grupo.blocksRaycasts = true;
     }
 
     private void FecharDialogo()
@@ -516,7 +535,7 @@ public class EntradaCurrais : MonoBehaviour
         dialogando = false;
         menuAberto = true;
         acoesMenu = acoes;
-        dialogoUI.SetActive(true); painelDialogo.SetActive(true); escolhas.SetActive(true);
+        AbrirPainelDialogo(); escolhas.SetActive(true);
         nomeTexto.text = personagem; falaTexto.text = texto;
         if (retrato != null) retrato.enabled = false;
         for (int i = 0; i < botoesEtapa2.Length; i++)
