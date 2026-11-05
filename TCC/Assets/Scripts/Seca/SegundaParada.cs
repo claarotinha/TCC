@@ -409,17 +409,77 @@ public class SegundaParada : MonoBehaviour
 
     public bool SoltarNoRiacho(ItemData item, Vector2 posicaoTela)
     {
-        if (riacho == null || item != cabacaVazia || Camera.main == null)
+        if (item == null || item != cabacaVazia)
             return false;
-        Vector3 ponto = Camera.main.ScreenToWorldPoint(
-            new Vector3(posicaoTela.x, posicaoTela.y,
-                Mathf.Abs(Camera.main.transform.position.z - riacho.position.z)));
-        Collider2D area = riacho.GetComponent<Collider2D>();
-        if (area == null) return false;
-        Vector2 posicao = new Vector2(ponto.x, ponto.y);
-        if (area.OverlapPoint(posicao) ||
-            Vector2.Distance(posicao, riacho.position) < 1.6f)
-            return UsarNoRiacho(item);
+
+        if (riacho == null)
+        {
+            Debug.LogWarning("Coleta de água: a referência do riacho está vazia.", this);
+            return false;
+        }
+
+        Camera cameraPrincipal = Camera.main;
+        if (cameraPrincipal == null)
+        {
+            Debug.LogWarning("Coleta de água: nenhuma câmera com a tag MainCamera.", this);
+            return false;
+        }
+
+        Ray raio = cameraPrincipal.ScreenPointToRay(posicaoTela);
+        Plane plano = new Plane(Vector3.forward, riacho.position);
+        if (!plano.Raycast(raio, out float distancia))
+            return false;
+
+        Vector3 ponto = raio.GetPoint(distancia);
+        Vector2 ponto2D = new Vector2(ponto.x, ponto.y);
+        bool acertou = false;
+
+        Collider2D[] areas = riacho.GetComponentsInChildren<Collider2D>();
+        foreach (Collider2D area in areas)
+        {
+            if (area.enabled && area.OverlapPoint(ponto2D))
+            {
+                acertou = true;
+                break;
+            }
+        }
+
+        if (!acertou)
+        {
+            SpriteRenderer[] imagens = riacho.GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer imagem in imagens)
+            {
+                if (!imagem.enabled || imagem.sprite == null)
+                    continue;
+
+                Bounds limites = imagem.bounds;
+                limites.Expand(new Vector3(0.2f, 0.2f, 0.2f));
+                Vector3 pontoVisual = new Vector3(ponto.x, ponto.y, limites.center.z);
+                if (limites.Contains(pontoVisual))
+                {
+                    acertou = true;
+                    break;
+                }
+            }
+        }
+
+        if (!acertou)
+        {
+            Debug.LogWarning(
+                "Coleta de água: a cabaça foi solta fora da área detectada do riacho. " +
+                "Confira a referência do riacho.", this);
+            return false;
+        }
+
+        if (UsarNoRiacho(item))
+            return true;
+
+        Debug.LogWarning(
+            "Coleta de água: o arrasto acertou o riacho, mas o uso foi bloqueado. " +
+            $"iniciou={iniciou}; etapa={etapa}; conversando={conversando}; " +
+            $"inputBloqueado={PauseHelper.BlockInput()}; timeScale={Time.timeScale}; " +
+            $"cabacaCheiaConfigurada={cabacaCheia != null}; " +
+            $"inventarioExiste={InventoryManager.Instance != null}", this);
         return false;
     }
 
