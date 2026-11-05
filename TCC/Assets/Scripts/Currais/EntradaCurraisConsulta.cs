@@ -44,6 +44,12 @@ public partial class EntradaCurrais
 
     private bool ReferenciasConsultaValidas()
     {
+        // São as mesmas áreas reutilizadas da etapa 4, não novos objetos.
+        // Recupera a ligação caso uma cópia antiga da cena tenha importado o campo vazio.
+        if (areaAmanhecer == null) areaAmanhecer = areaEsteiraNoite;
+        if (areaUltimaConsulta == null) areaUltimaConsulta = areaPostoEscolha;
+        if (areaRetornoConsulta == null) areaRetornoConsulta = areaFamiliaAbrigo;
+
         UnityEngine.Object[] referencias = { setorConsulta, papelConsulta, testemunhaConsulta, lacoRemendadoCenario,
             areaAmanhecer, areaUltimaConsulta, areaSaidaConsulta, areaRetornoConsulta, bloqueioSaida, seguidorPaiConsulta,
             maeLimiteConsulta, raimundoConsultaPerto, raimundoConsultaLonge, paiUltimaConsulta, mariUltimaConsulta, portaoConsulta, portaoConsultaAberto,

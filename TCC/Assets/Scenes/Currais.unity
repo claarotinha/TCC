@@ -18473,7 +18473,7 @@ MonoBehaviour:
   - Ainda preciso descobrir para onde levaram Mariquinha.
   setorPosto: {fileID: 4400000000}
   papelPosto: {fileID: 4400000012}
-  areaPostoEscolha: &id002 {fileID: 4400000026}
+  areaPostoEscolha: {fileID: 4400000026}
   quartoInterior: {fileID: 4400000027}
   portaQuartoFechada: {fileID: 4400000061}
   areaPortaQuarto: {fileID: 4400000071}
@@ -18483,8 +18483,8 @@ MonoBehaviour:
   lacoNaMao: {fileID: 4400000084}
   maoNaRoupa: {fileID: 4400000088}
   cabacaNoite: {fileID: 4400000092}
-  areaFamiliaAbrigo: &id003 {fileID: 4400000102}
-  areaEsteiraNoite: &id001 {fileID: 4400000105}
+  areaFamiliaAbrigo: {fileID: 4400000102}
+  areaEsteiraNoite: {fileID: 4400000105}
   raimundoNoPosto: {fileID: 4400000107}
   raimundoSentado: {fileID: 4400000109}
   raimundoOutroSetor: {fileID: 4400000111}
@@ -18657,10 +18657,10 @@ MonoBehaviour:
   testemunhaConsulta: {fileID: 4500000014}
   bloqueioSaida: {fileID: 4500000018}
   portaoConsulta: {fileID: 4100000061}
-  areaAmanhecer: *id001
-  areaUltimaConsulta: *id002
+  areaAmanhecer: {fileID: 4400000105}
+  areaUltimaConsulta: {fileID: 4400000026}
   areaSaidaConsulta: {fileID: 4100000143}
-  areaRetornoConsulta: *id003
+  areaRetornoConsulta: {fileID: 4400000102}
   seguidorPaiConsulta: {fileID: 1156249498}
   lacoRemendadoCenario: {fileID: 4500000019}
   maeLimiteConsulta: {fileID: 4500000028}
