@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: 21300000
     second: Fortaleza
+  - first:
+      213: 21300001
+    second: ChaoCurrais
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -50,9 +53,15 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  spritePivot:
+    x: 0.5
+    y: 0.5
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -186,9 +195,15 @@ TextureImporter:
         width: 2172
         height: 724
       alignment: 9
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
+      pivot:
+        x: 0.5
+        y: 0
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -196,17 +211,45 @@ TextureImporter:
       spriteID: dde330fd024a5551856f0cee3fb70da1
       internalID: 21300000
       vertices: []
-      indices:
+      indices: null
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChaoCurrais
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 2172
+        height: 100
+      alignment: 9
+      pivot:
+        x: 0.5
+        y: 0
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2863fdf6d5d5af1bb18c6be02d6035d
+      internalID: 21300001
+      vertices: []
+      indices: null
       edges: []
       weights: []
     outline: []
-    customData:
+    customData: null
     physicsShape: []
     bones: []
-    spriteID:
+    spriteID: null
     internalID: 0
     vertices: []
-    indices:
+    indices: null
     edges: []
     weights: []
     secondaryTextures: []
@@ -214,8 +257,9 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       Fortaleza: 21300000
-  mipmapLimitGroupName:
+      ChaoCurrais: 21300001
+  mipmapLimitGroupName: null
   pSDRemoveMatte: 0
-  userData:
-  assetBundleName:
-  assetBundleVariant:
+  userData: null
+  assetBundleName: null
+  assetBundleVariant: null

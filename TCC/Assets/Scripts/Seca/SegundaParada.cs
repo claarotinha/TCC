@@ -97,6 +97,8 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private GameObject[] policiais = new GameObject[3];
     private bool fortalezaIniciada, dialogoFortalezaConcluido, abordagemIniciada, atoConcluido;
     private bool finalEmAndamento, encerramentoMostrado;
+    [SerializeField] private string cenaCurrais = "Currais";
+    private bool carregandoCurrais;
     private SpriteRenderer[] desenhosFundoFim;
     private bool[] fundoFimAtivo;
     private CameraClearFlags fundoCameraOriginal;
@@ -2574,6 +2576,22 @@ public class SegundaParada : MonoBehaviour
 
     private void MostrarFimAto()
     {
+        if (Application.CanStreamedLevelBeLoaded(cenaCurrais))
+        {
+            if (carregandoCurrais) return;
+            carregandoCurrais = true;
+            if (GameProgress.Instance != null)
+            {
+                GameSaveSystem salvar = GameProgress.Instance.GetComponent<GameSaveSystem>();
+                if (salvar != null && GameProgress.Instance.Data.CanSave)
+                    salvar.TrySaveCheckpoint(cenaCurrais);
+            }
+            if (InventoryTabController.Instance != null) InventoryTabController.Instance.Close();
+            if (GameManager.Instance != null) GameManager.Instance.ChangeState(GameState.Gameplay);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(cenaCurrais);
+            return;
+        }
+
         // O painel existente apresenta o encerramento sobre a cena escurecida.
         desenhosFundoFim = FindObjectsByType<SpriteRenderer>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         fundoFimAtivo = new bool[desenhosFundoFim.Length];

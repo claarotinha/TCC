@@ -39,6 +39,7 @@ public class GameProgress : MonoBehaviour
     public void NormalizeData()
     {
         if (data == null) data = new GameProgressData();
+        if (data.curraisItensRetidos == null) data.curraisItensRetidos = new System.Collections.Generic.List<string>();
         if (data.foundPhotos == null) data.foundPhotos = new System.Collections.Generic.List<int>();
         if (data.readPhotos == null) data.readPhotos = new System.Collections.Generic.List<int>();
         if (data.unlockedDiaryPages == null) data.unlockedDiaryPages = new System.Collections.Generic.List<string>();

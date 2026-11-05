@@ -8,6 +8,9 @@ TextureImporter:
   - first:
       213: 21300001
     second: FamiliaSurpresaCurativo
+  - first:
+      213: 21300002
+    second: PaiSeparado
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -53,9 +56,15 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  spritePivot:
+    x: 0.5
+    y: 0.5
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -189,9 +198,15 @@ TextureImporter:
         width: 858
         height: 342
       alignment: 9
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
+      pivot:
+        x: 0.5
+        y: 0
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -199,7 +214,7 @@ TextureImporter:
       spriteID: d586dc477d4e5688a6c76070e5c82c6c
       internalID: 21300000
       vertices: []
-      indices:
+      indices: null
       edges: []
       weights: []
     - serializedVersion: 2
@@ -211,9 +226,15 @@ TextureImporter:
         width: 858
         height: 342
       alignment: 9
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData:
+      pivot:
+        x: 0.5
+        y: 0
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -221,17 +242,45 @@ TextureImporter:
       spriteID: 5760753f3f5f55f28d741a57305b4e90
       internalID: 21300001
       vertices: []
-      indices:
+      indices: null
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PaiSeparado
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 443
+        width: 163
+        height: 337
+      alignment: 9
+      pivot:
+        x: 0.5
+        y: 0
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f33eb290b1d5c26983e463c98f015ba
+      internalID: 21300002
+      vertices: []
+      indices: null
       edges: []
       weights: []
     outline: []
-    customData:
+    customData: null
     physicsShape: []
     bones: []
-    spriteID:
+    spriteID: null
     internalID: 0
     vertices: []
-    indices:
+    indices: null
     edges: []
     weights: []
     secondaryTextures: []
@@ -240,8 +289,9 @@ TextureImporter:
     nameFileIdTable:
       FamiliaSurpresa: 21300000
       FamiliaSurpresaCurativo: 21300001
-  mipmapLimitGroupName:
+      PaiSeparado: 21300002
+  mipmapLimitGroupName: null
   pSDRemoveMatte: 0
-  userData:
-  assetBundleName:
-  assetBundleVariant:
+  userData: null
+  assetBundleName: null
+  assetBundleVariant: null

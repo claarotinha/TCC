@@ -1,0 +1,458 @@
+fileFormatVersion: 2
+guid: 19ccb5d69c5d524091c0931dd5dd5013
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Portao
+  - first:
+      213: 21300001
+    second: Cerca
+  - first:
+      213: 21300002
+    second: Mesa
+  - first:
+      213: 21300003
+    second: Carroca
+  - first:
+      213: 21300004
+    second: Esteira
+  - first:
+      213: 21300005
+    second: Abrigo
+  - first:
+      213: 21300006
+    second: Panela
+  - first:
+      213: 21300007
+    second: Laco
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 4096
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot:
+    x: 0.5
+    y: 0.5
+  spritePixelsToUnits: 100
+  spriteBorder:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: VisionOS
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Portao
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 510
+        width: 300
+        height: 274
+      alignment: 9
+      pivot:
+        x: 0.5
+        y: 0
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7938d4e342985cb39f31934f2b9a7316
+      internalID: 21300000
+      vertices: []
+      indices: null
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cerca
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 517
+        width: 367
+        height: 170
+      alignment: 9
+      pivot:
+        x: 0.5
+        y: 0
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7ef071a352250bab240ac0891941fc9
+      internalID: 21300001
+      vertices: []
+      indices: null
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mesa
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 510
+        width: 359
+        height: 192
+      alignment: 9
+      pivot:
+        x: 0.5
+        y: 0
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9425f352b6365bf9b77d9210d3e0a0e9
+      internalID: 21300002
+      vertices: []
+      indices: null
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Carroca
+      rect:
+        serializedVersion: 2
+        x: 1354
+        y: 510
+        width: 400
+        height: 199
+      alignment: 9
+      pivot:
+        x: 0.5
+        y: 0
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ecbb11482eb50268b64b2b1a4ff1fb4
+      internalID: 21300003
+      vertices: []
+      indices: null
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Esteira
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 113
+        width: 395
+        height: 126
+      alignment: 9
+      pivot:
+        x: 0.5
+        y: 0
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2edff86cea9e5b3886038fd7deb858af
+      internalID: 21300004
+      vertices: []
+      indices: null
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Abrigo
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 81
+        width: 410
+        height: 252
+      alignment: 9
+      pivot:
+        x: 0.5
+        y: 0
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d107ef932ec57ab9563ac25f4343cb0
+      internalID: 21300005
+      vertices: []
+      indices: null
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panela
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 78
+        width: 324
+        height: 224
+      alignment: 9
+      pivot:
+        x: 0.5
+        y: 0
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fa2e2a4d0405372bef64f287acc02c2
+      internalID: 21300006
+      vertices: []
+      indices: null
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Laco
+      rect:
+        serializedVersion: 2
+        x: 1448
+        y: 116
+        width: 198
+        height: 150
+      alignment: 9
+      pivot:
+        x: 0.5
+        y: 0
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4deaaa26b3053f89dc8bfd56bc1fa8a
+      internalID: 21300007
+      vertices: []
+      indices: null
+      edges: []
+      weights: []
+    outline: []
+    customData: null
+    physicsShape: []
+    bones: []
+    spriteID: null
+    internalID: 0
+    vertices: []
+    indices: null
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Portao: 21300000
+      Cerca: 21300001
+      Mesa: 21300002
+      Carroca: 21300003
+      Esteira: 21300004
+      Abrigo: 21300005
+      Panela: 21300006
+      Laco: 21300007
+  mipmapLimitGroupName: null
+  pSDRemoveMatte: 0
+  userData: null
+  assetBundleName: null
+  assetBundleVariant: null
+  textureCompression: 0

@@ -71,6 +71,14 @@ public class GameProgressData
     public bool estradaAbordagemIniciada;
     public bool ato1Concluido;
 
+    // Ato 2, entrada: 0 separação, 1 laço, 2 revista, 3 abrigo, 4 setor livre.
+    public int curraisEtapaEntrada;
+    public bool curraisPaiFerido;
+    public bool curraisLacoRecolhido;
+    public bool curraisLacoNaPanela;
+    public bool curraisPertencesRetidos;
+    public List<string> curraisItensRetidos = new List<string>();
+
     public bool CanSave => tutorialCompleted ||
         (secaDepartureCompleted && secaMealCompleted &&
          secaFoodChoice >= 1 && secaFoodChoice <= 3);
