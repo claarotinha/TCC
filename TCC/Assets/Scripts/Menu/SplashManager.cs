@@ -6,7 +6,7 @@ using UnityEngine.Video;
 
 public class SplashManager : MonoBehaviour
 {
-    private const string IntroWatchedKey = "Currais.IntroWatched";
+    private const string IntroWatchedKey = "Currais.CurraisOpeningWatched";
 
     public VideoPlayer videoPlayer;
     [SerializeField] private GameObject skipIndicator;

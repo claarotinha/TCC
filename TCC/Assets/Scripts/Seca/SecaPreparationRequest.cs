@@ -107,8 +107,7 @@ public class SecaPreparationRequest : MonoBehaviour
         characterNameText.text = "Mãe";
         dialogueText.text =
             "Josefa, já que terminou de comer, vá pegar algumas coisas " +
-            "antes de sairmos. Pegue o cantil, o facão, um pano, " +
-            "o chapéu e o resto de farinha.";
+            "antes de sairmos. Pegue a cabaça, o facão e um pano.";
 
         if (portraitImage != null)
         {

@@ -998,6 +998,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 430481790}
   - {fileID: 404199434}
   - {fileID: 1642418713}
   - {fileID: 535726266}
@@ -2533,6 +2534,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7888760854718667742, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
       insertIndex: -1
       addedObject: {fileID: 311003298}
+    - targetCorrespondingSourceObject: {fileID: 7888760854718667742, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 930000011}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
 --- !u!224 &191222198 stripped
@@ -3233,7 +3237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   walkSpeed: 5
   runSpeed: 8
-  movementBounds: {fileID: 0}
+  movementBounds: {fileID: 930000003}
   movementBackground:
   - {fileID: 1931726780}
   - {fileID: 0}
@@ -3918,11 +3922,11 @@ Transform:
   m_GameObject: {fileID: 430481788}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.36, y: 2.89, z: 0}
+  m_LocalPosition: {x: -570.5115, y: -227.56615, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 179926296}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &444654522
 GameObject:
@@ -4254,11 +4258,11 @@ Transform:
   m_GameObject: {fileID: 499741853}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.79, y: 3.07, z: 0}
+  m_LocalPosition: {x: -269.8615, y: -110.38615, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1383027015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &535726265
 GameObject:
@@ -5890,7 +5894,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1161645294}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &821186046
 GameObject:
@@ -6983,7 +6987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &920001031
 Transform:
   m_ObjectHideFlags: 0
@@ -7182,7 +7186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &920001041
 Transform:
   m_ObjectHideFlags: 0
@@ -7821,18 +7825,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SecaRoomExit
   sleepSequence: {fileID: 1658920426}
-  requiredObjects:
-  - {fileID: 404199438}
-  - {fileID: 1642418716}
-  - {fileID: 535726269}
-  - {fileID: 807877040}
-  - {fileID: 1340118800}
-  - {fileID: 1863462132}
-  mirrorDiscovery: {fileID: 1340118802}
   quarto: {fileID: 179926295}
   salaCozinha: {fileID: 1383027014}
   entradaSala: {fileID: 302387105}
   playerMovement: {fileID: 331809455}
+  confirmPanel: {fileID: 311003297}
+  questionText: {fileID: 724138556}
+  yesButton: {fileID: 1132290551}
+  noButton: {fileID: 1919512082}
   onEnteredRoom:
     m_PersistentCalls:
       m_Calls: []
@@ -8576,6 +8576,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 817652643}
   - {fileID: 484919992}
   - {fileID: 1671660834}
   - {fileID: 2030220651}
@@ -9205,6 +9206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb1661025d0b22146b016d6b7c5025c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SecaMirrorDiscovery
+  reflectionImage: {fileID: 930000013}
   discoveryMessage: "Essa\u2026 Essa n\xE3o sou eu. \xC9 a bisa\u2026 \xC9 o rosto
     da minha bisav\xF3, Zefinha! Meu Deus, o que est\xE1 acontecendo?"
   repeatMessage: "O reflexo continua sendo o de Zefinha. N\xE3o sei como isso \xE9
@@ -9283,9 +9285,7 @@ MonoBehaviour:
   preparationRequest: {fileID: 1340838776}
   requiredItems:
   - {fileID: 11400000, guid: f0c6e92250400ab42871c53f7ebf8161, type: 2}
-  - {fileID: 11400000, guid: 33dc36a016c339549bdac63244f539cf, type: 2}
   - {fileID: 11400000, guid: 479344094161c0740a7c1d933ed41f9b, type: 2}
-  - {fileID: 11400000, guid: 2dad17489245bec4eb0392999801e8bd, type: 2}
   - {fileID: 11400000, guid: 290faf3e464dc4c4f97c0f50675e5395, type: 2}
   objectiveText: {fileID: 1775869855}
 --- !u!1 &1345951627
@@ -9707,6 +9707,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 499741855}
   - {fileID: 302387105}
   - {fileID: 2125664710}
   - {fileID: 691660995}
@@ -10611,7 +10612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   target: {fileID: 331809460}
   smoothSpeed: 5
-  levelBounds: {fileID: 1931726781}
+  levelBounds: {fileID: 930000003}
   backgroundPieces: []
 --- !u!114 &1644134077
 MonoBehaviour:
@@ -11306,7 +11307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1775869854
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13800,7 +13801,167 @@ SceneRoots:
   - {fileID: 1161645294}
   - {fileID: 404776039}
   - {fileID: 217013456}
-  - {fileID: 430481790}
-  - {fileID: 499741855}
-  - {fileID: 817652643}
 
+  - {fileID: 930000001}
+--- !u!1 &930000000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 930000001}
+  - component: {fileID: 930000002}
+  - component: {fileID: 930000003}
+  m_Layer: 2
+  m_Name: Limites dos ambientes
+  m_TagString: Untagged
+  m_IsActive: 1
+--- !u!4 &930000001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930000000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &930000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930000000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc2b1156f13244fb909d49a8e435091a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::SecaEnvironmentLimits
+  environments:
+  - {fileID: 179926295}
+  - {fileID: 1383027014}
+  - {fileID: 1161645293}
+  backgrounds:
+  - {fileID: 430481789}
+  - {fileID: 499741854}
+  - {fileID: 817652642}
+  movementArea: {fileID: 930000003}
+  cameraFollow: {fileID: 1644134076}
+--- !u!61 &930000003
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930000000}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -2.36, y: 2.89}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 20.21, y: 16.41}
+  m_EdgeRadius: 0
+--- !u!1 &930000010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 930000011}
+  - component: {fileID: 930000012}
+  - component: {fileID: 930000013}
+  m_Layer: 5
+  m_Name: Reflexo de Zefinha
+  m_TagString: Untagged
+  m_IsActive: 0
+--- !u!224 &930000011
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930000010}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 191222198}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 40}
+  m_SizeDelta: {x: 240, y: 320}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &930000012
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930000010}
+  m_CullTransparentMesh: 1
+--- !u!114 &930000013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930000010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 8297607517880692621, guid: 7711d4513fd808c40adef11b269310e2, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_PixelsPerUnitMultiplier: 1

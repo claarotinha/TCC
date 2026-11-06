@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class EstradaCheckpoint : MonoBehaviour
 {
-    [Header("Os cinco itens levados da casa")]
-    [SerializeField] private ItemData[] requiredItems = new ItemData[5];
+    [Header("Itens levados da casa")]
+    [SerializeField] private ItemData[] requiredItems = new ItemData[3];
 
     private IEnumerator Start()
     {
@@ -83,11 +83,11 @@ public class EstradaCheckpoint : MonoBehaviour
 
     private bool ValidateItems()
     {
-        if (requiredItems == null || requiredItems.Length != 5 ||
+        if (requiredItems == null || requiredItems.Length == 0 ||
             InventoryManager.Instance == null)
         {
             Debug.LogError(
-                "EstradaCheckpoint: configure os cinco itens " +
+                "EstradaCheckpoint: configure os itens " +
                 "e confira se existe um InventoryManager.",
                 this
             );
@@ -112,7 +112,7 @@ public class EstradaCheckpoint : MonoBehaviour
                 if (requiredItems[j] == required)
                 {
                     Debug.LogError(
-                        "EstradaCheckpoint: os cinco itens " +
+                        "EstradaCheckpoint: os itens " +
                         "precisam ser diferentes.",
                         this
                     );

@@ -63,6 +63,9 @@ public static class InvestigationGuard
             if (QuartoBaguncaDoor.IsPanelOpen)
                 return "porta do quartinho";
 
+            if (SecaRoomExit.IsPanelOpen)
+                return "saída do quarto da Seca";
+
             if (QuartinhoExit.IsPanelOpen)
                 return "saída do quartinho";
 

@@ -49,7 +49,7 @@ public class SecaMotherReturn : MonoBehaviour
 
         examineObject.message =
             "Ainda preciso pegar tudo que mainha pediu: " +
-            "o cantil, o facão, o pano, o chapéu e a farinha.";
+            "a cabaça, o facão e o pano.";
     }
 
     private void Start()
