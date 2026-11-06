@@ -5,6 +5,7 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [Serializable]
 public class GameSaveFile
@@ -23,6 +24,8 @@ public class GameSaveSystem : MonoBehaviour
     [Header("Aviso de salvamento")]
     [SerializeField] private GameObject saveNotice;
     [SerializeField] private TMP_Text saveText;
+    [SerializeField] private Image saveIcon;
+    [SerializeField, Min(0f)] private float saveIconDegreesPerSecond = 150f;
 
     private GameProgress progress;
     private Coroutine noticeRoutine;
@@ -97,6 +100,10 @@ public class GameSaveSystem : MonoBehaviour
     {
         if (!IsOwner)
             return;
+
+        // Continua girando mesmo quando o checkpoint ocorre durante uma pausa.
+        if (saveIcon != null && saveIcon.gameObject.activeInHierarchy)
+            saveIcon.rectTransform.Rotate(0f, 0f, -saveIconDegreesPerSecond * Time.unscaledDeltaTime);
 
         TutorialManager tutorial = TutorialManager.Instance;
 
@@ -368,9 +375,14 @@ public class GameSaveSystem : MonoBehaviour
     {
         if (saveText != null)
         {
-            saveText.text = success
-                ? "Progresso salvo"
-                : "Não foi possível salvar";
+            saveText.enabled = !success;
+            saveText.text = success ? string.Empty : "Não foi possível salvar";
+        }
+
+        if (saveIcon != null)
+        {
+            saveIcon.rectTransform.localRotation = Quaternion.identity;
+            saveIcon.gameObject.SetActive(success);
         }
 
         if (saveNotice != null)
@@ -420,3 +432,4 @@ public class GameSaveSystem : MonoBehaviour
             progress.ProgressChanged -= OnProgressChanged;
     }
 }
+

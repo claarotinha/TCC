@@ -11,7 +11,10 @@ public class CursorManager : MonoBehaviour
     public Texture2D normalCursor;
     public Texture2D lupaCursor;
     [SerializeField] private Sprite lupaSprite;
+    [SerializeField] private Texture2D texturaLupaPronta;
     private Texture2D preparedLupa;
+    private bool cursorConfigurado, lupaAtiva;
+    private Texture2D texturaEmUso;
     private readonly List<Collider2D> hoverHits = new List<Collider2D>();
     private readonly List<RaycastResult> uiHits = new List<RaycastResult>();
     [SerializeField] private GameObject painelDialogoDaCena;
@@ -38,9 +41,10 @@ public class CursorManager : MonoBehaviour
 
     private void PrepareLupa()
     {
-        if (lupaSprite == null) return;
-
-        Texture2D source = lupaSprite.texture;
+        // Textura importada como Cursor: não depende de recortes/atlas em execução.
+        if (texturaLupaPronta != null) return;
+        Texture2D source = lupaSprite != null ? lupaSprite.texture : lupaCursor;
+        if (source == null) return;
         if (!source.isReadable)
         {
             Debug.LogError("CursorManager: habilite Read/Write na imagem lupa.", this);
@@ -48,7 +52,8 @@ public class CursorManager : MonoBehaviour
         }
 
         // Usa só a região da lupa, sem as margens transparentes da imagem.
-        Rect rect = lupaSprite.rect;
+        Rect rect = lupaSprite != null ? lupaSprite.rect :
+            new Rect(0, 0, source.width, source.height);
         int sourceWidth = Mathf.RoundToInt(rect.width);
         int sourceHeight = Mathf.RoundToInt(rect.height);
         Color[] sourcePixels = source.GetPixels(
@@ -68,6 +73,8 @@ public class CursorManager : MonoBehaviour
         }
 
         preparedLupa = new Texture2D(size, size, TextureFormat.RGBA32, false);
+        preparedLupa.filterMode = FilterMode.Point;
+        preparedLupa.wrapMode = TextureWrapMode.Clamp;
         preparedLupa.SetPixels(pixels);
         preparedLupa.Apply(false, false);
     }
@@ -229,10 +236,19 @@ public class CursorManager : MonoBehaviour
     public void SetLupa()
     {
         if (Instance != this || !isActiveAndEnabled) return;
-        Cursor.visible = true;
+        // Alguns ambientes configuram os recursos depois do Awake.
+        if (texturaLupaPronta == null && preparedLupa == null) PrepareLupa();
+        Texture2D textura = texturaLupaPronta != null ? texturaLupaPronta :
+            (preparedLupa != null ? preparedLupa : lupaCursor);
+        if (textura == null) { SetNormal(); return; }
         Cursor.lockState = CursorLockMode.None;
-        Cursor.SetCursor(preparedLupa != null ? preparedLupa : lupaCursor,
-            Vector2.zero, CursorMode.ForceSoftware);
+        // Não reinstala o cursor em cada quadro: evita cintilação/desaparecimento no Editor.
+        if (!cursorConfigurado || !lupaAtiva || texturaEmUso != textura)
+            Cursor.SetCursor(textura, Vector2.zero, CursorMode.Auto);
+        cursorConfigurado = true;
+        lupaAtiva = true;
+        texturaEmUso = textura;
+        Cursor.visible = true;
     }
 
     public void SetNormal()
@@ -241,7 +257,16 @@ public class CursorManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         // O cursor normal é o ponteiro do sistema, nunca o PNG inteiro da lupa.
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        if (!cursorConfigurado || lupaAtiva)
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        cursorConfigurado = true;
+        lupaAtiva = false;
+        texturaEmUso = null;
+    }
+
+    private void OnApplicationFocus(bool foco)
+    {
+        if (foco) cursorConfigurado = false;
     }
 
     private void OnDestroy()
@@ -255,3 +280,4 @@ public class CursorManager : MonoBehaviour
             Destroy(preparedLupa);
     }
 }
+
