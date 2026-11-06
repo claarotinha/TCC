@@ -25,7 +25,8 @@ public class GameSaveSystem : MonoBehaviour
     [SerializeField] private GameObject saveNotice;
     [SerializeField] private TMP_Text saveText;
     [SerializeField] private Image saveIcon;
-    [SerializeField, Min(0f)] private float saveIconDegreesPerSecond = 150f;
+    [SerializeField, Min(0f)] private float saveIconDegreesPerSecond = 90f;
+    [SerializeField, Min(0.5f)] private float saveNoticeDuration = 3f;
 
     private GameProgress progress;
     private Coroutine noticeRoutine;
@@ -84,7 +85,7 @@ public class GameSaveSystem : MonoBehaviour
 
     private void Start()
     {
-        if (saveNotice != null)
+        if (saveNotice != null && noticeRoutine == null)
             saveNotice.SetActive(false);
 
         progress = GetComponent<GameProgress>();
@@ -382,14 +383,27 @@ public class GameSaveSystem : MonoBehaviour
         if (saveIcon != null)
         {
             saveIcon.rectTransform.localRotation = Quaternion.identity;
+            saveIcon.color = Color.white;
             saveIcon.gameObject.SetActive(success);
         }
 
         if (saveNotice != null)
+        {
+            Canvas canvas = saveNotice.GetComponentInParent<Canvas>(true);
+            if (canvas != null)
+            {
+                // Corrige overrides antigos que deixavam o Canvas com escala zero.
+                canvas.transform.localScale = Vector3.one;
+                canvas.gameObject.SetActive(true);
+                canvas.enabled = true;
+            }
+            saveNotice.transform.SetAsLastSibling();
             saveNotice.SetActive(true);
+            Canvas.ForceUpdateCanvases();
+        }
 
         yield return new WaitForSecondsRealtime(
-            success ? 2f : 4f
+            success ? Mathf.Max(0.5f, saveNoticeDuration) : 4f
         );
 
         if (saveNotice != null)

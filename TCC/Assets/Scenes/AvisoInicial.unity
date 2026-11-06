@@ -822,7 +822,7 @@ MonoBehaviour:
     fileID: 5200000301
   tempoOrientacoes: 10
   tempoFade: 0.6
-  velocidadeSol: 150
+  velocidadeSol: 90
 --- !u!4 &1501835886
 Transform:
   m_ObjectHideFlags: 0
@@ -1674,8 +1674,8 @@ RectTransform:
     x: -630
     y: -90
   m_SizeDelta:
-    x: 220
-    y: 220
+    x: 120
+    y: 120
   m_Pivot:
     x: 0.5
     y: 0.5
@@ -1711,9 +1711,7 @@ MonoBehaviour:
   m_Name: null
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material:
-    fileID: 2100000
-    guid: a8d070f3aad04609b78534c5fedc346f
-    type: 2
+    fileID: 0
   m_Color:
     r: 1
     g: 1
@@ -1731,7 +1729,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite:
     fileID: 21300000
-    guid: b71041e06dcf4f099cb481cf7360b421
+    guid: 677b46b72df445ae978f7734a3f865f7
     type: 3
   m_Type: 0
   m_PreserveAspect: 1

@@ -34,6 +34,9 @@ public class HiddenPhoto : MonoBehaviour
     private void Awake()
     {
         interactionCollider = GetComponent<Collider2D>();
+        // O alvo da fotografia tem seu próprio painel; não abre também o exame genérico.
+        ExamineObject exame = GetComponent<ExamineObject>();
+        if (exame != null) exame.enabled = false;
         if (interactionCollider == null)
         {
             Debug.LogError(
@@ -125,7 +128,11 @@ public class HiddenPhoto : MonoBehaviour
 
         current = this;
 
+        ExamineObject.HideCurrentPanel();
         panelImage.sprite = photoSprite;
+        panelImage.color = Color.white;
+        panelImage.raycastTarget = false;
+        panelText.raycastTarget = false;
         panelImage.preserveAspect = true;
         panelText.text = GameProgress.Instance != null &&
             GameProgress.Instance.HasReadPhoto(photoId) ? inscription : "";

@@ -18,6 +18,8 @@ public class MotherDiaryDialogue : MonoBehaviour
     private bool open;
     private bool ready;
     private bool discussedDiary;
+    private bool tellingDiary;
+    private int diaryLine, speechStartedFrame;
 
     private void Start()
     {
@@ -49,6 +51,8 @@ public class MotherDiaryDialogue : MonoBehaviour
         if (group == null)
             group = original.dialoguePanel.AddComponent<CanvasGroup>();
 
+        original.portraitImage.preserveAspect = true;
+        original.portraitImage.raycastTarget = false;
         ready = true;
 
         if (progress != null)
@@ -73,10 +77,30 @@ public class MotherDiaryDialogue : MonoBehaviour
 
     private void Update()
     {
-        if (!ready)
+        if (!ready || PauseHelper.BlockInput())
             return;
 
         RefreshMode();
+        if (open)
+        {
+            if (tellingDiary && Input.GetMouseButtonDown(0) && Time.frameCount > speechStartedFrame)
+            {
+                speechStartedFrame = Time.frameCount;
+                if (diaryLine == 0)
+                {
+                    diaryLine = 1;
+                    ShowMother("Pode ser, minha filha. Guarde com cuidado. " +
+                        "Essas coisas fazem parte da nossa história.");
+                }
+                else
+                {
+                    tellingDiary = false;
+                    ShowChoices();
+                }
+                InvestigationGuard.BlockCurrentClick();
+            }
+            return;
+        }
 
         if (GameProgress.Instance == null ||
             !GameProgress.Instance.Data.diaryCollected ||
@@ -126,14 +150,14 @@ public class MotherDiaryDialogue : MonoBehaviour
     private void ShowChoices()
     {
         SetChoice(
-            original.choice1,
+            original.choice2,
             "Diário",
             TellAboutDiary
         );
 
         SetChoice(
-            original.choice2,
-            "ler",
+            original.choice1,
+            "Ler",
             AskToRead
         );
 
@@ -151,14 +175,18 @@ public class MotherDiaryDialogue : MonoBehaviour
 
         discussedDiary = true;
 
-        ShowMother(
-            "Mari: Encontrei um diário dentro daquele baú. " +
-            "Talvez ele ajude no meu trabalho.\n" +
-            "Mãe: Pode ser, minha filha. Guarde com cuidado. " +
-            "Essas coisas fazem parte da nossa história."
-        );
-
-        ShowChoices();
+        tellingDiary = true;
+        diaryLine = 0;
+        speechStartedFrame = Time.frameCount;
+        original.choice1.gameObject.SetActive(false);
+        original.choice2.gameObject.SetActive(false);
+        original.choice3.gameObject.SetActive(false);
+        original.ConfigureDialogueText();
+        original.portraitImage.sprite = original.mariPortrait;
+        original.portraitImage.enabled = original.mariPortrait != null;
+        original.characterNameText.text = "Mari";
+        original.dialogueText.text = "Encontrei um diário dentro daquele baú. " +
+            "Talvez ele ajude no meu trabalho.";
         InvestigationGuard.BlockCurrentClick();
     }
 
@@ -182,6 +210,7 @@ public class MotherDiaryDialogue : MonoBehaviour
     {
         original.ConfigureDialogueText();
         original.portraitImage.sprite = original.motherPortrait;
+        original.portraitImage.enabled = original.motherPortrait != null;
         original.characterNameText.text = "Mãe";
         original.dialogueText.text = text;
     }
@@ -230,6 +259,7 @@ public class MotherDiaryDialogue : MonoBehaviour
         original.choice3.gameObject.SetActive(false);
 
         open = false;
+        tellingDiary = false;
         discussedDiary = false;
 
         if (current == this)

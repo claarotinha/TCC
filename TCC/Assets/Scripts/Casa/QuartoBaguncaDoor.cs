@@ -16,6 +16,9 @@ public class QuartoBaguncaDoor : MonoBehaviour
     public static void ResetSession() => ResetState();
     public static bool IsPanelOpen => openedPanel != null && openedPanel.activeInHierarchy;
 
+    [Header("Visual após destravar") ]
+    [SerializeField] private GameObject openedVisual;
+
     [Header("Painel de confirmação")]
     public GameObject confirmPanel;
     public TMP_Text confirmText;
@@ -34,6 +37,15 @@ public class QuartoBaguncaDoor : MonoBehaviour
     {
         if (confirmPanel != null)
             confirmPanel.SetActive(false);
+        AtualizarVisual();
+    }
+
+    private void Update() => AtualizarVisual();
+
+    private void AtualizarVisual()
+    {
+        if (openedVisual != null && openedVisual.activeSelf != Unlocked)
+            openedVisual.SetActive(Unlocked);
     }
 
     private void OnMouseEnter()
@@ -96,6 +108,7 @@ public class QuartoBaguncaDoor : MonoBehaviour
     {
         unlocked = true;
         GameProgress.Instance?.UnlockQuartinho();
+        AtualizarVisual();
         FecharConfirmacao();
     }
 

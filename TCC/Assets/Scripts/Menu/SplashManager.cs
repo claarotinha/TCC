@@ -43,12 +43,17 @@ public class SplashManager : MonoBehaviour
 
         OcultarCreditos();
         videoPlayer.isLooping = false;
+        // Usa diretamente a textura decodificada. Evita cópia/formato da RenderTexture.
+        videoPlayer.renderMode = VideoRenderMode.APIOnly;
+        videoPlayer.targetTexture = null;
+        videoPlayer.sendFrameReadyEvents = true;
         videoPlayer.aspectRatio = VideoAspectRatio.FitInside;
         if (imagemVideo != null)
         {
-            imagemVideo.texture = videoPlayer.targetTexture;
+            imagemVideo.texture = null;
             imagemVideo.enabled = false;
         }
+        videoPlayer.frameReady += QuadroDisponivel;
         videoPlayer.prepareCompleted += VideoPreparado;
         videoPlayer.errorReceived += ErroVideo;
         videoPlayer.loopPointReached += FimDoVideo;
@@ -64,8 +69,20 @@ public class SplashManager : MonoBehaviour
     private void VideoPreparado(VideoPlayer player)
     {
         if (leaving || player != videoPlayer) return;
-        if (imagemVideo != null) imagemVideo.enabled = true;
         player.Play();
+    }
+
+    private void QuadroDisponivel(VideoPlayer player, long quadro)
+    {
+        if (leaving || player != videoPlayer || imagemVideo == null || player.texture == null) return;
+        if (imagemVideo.texture != player.texture) imagemVideo.texture = player.texture;
+        imagemVideo.enabled = true;
+    }
+
+    private void LateUpdate()
+    {
+        if (videoPlayer != null && videoPlayer.isPlaying)
+            QuadroDisponivel(videoPlayer, videoPlayer.frame);
     }
 
     private void ErroVideo(VideoPlayer player, string mensagem)
@@ -149,6 +166,7 @@ public class SplashManager : MonoBehaviour
     {
         if (videoPlayer != null)
         {
+            videoPlayer.frameReady -= QuadroDisponivel;
             videoPlayer.loopPointReached -= FimDoVideo;
             videoPlayer.prepareCompleted -= VideoPreparado;
             videoPlayer.errorReceived -= ErroVideo;

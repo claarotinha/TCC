@@ -12,6 +12,12 @@ public class LockedChest : MonoBehaviour
     [SerializeField]
     private ExamineObject unlockedExamine;
 
+    [Header("Visuais fechados e abertos da cena")]
+    [SerializeField] private GameObject closedVisual;
+    [SerializeField] private GameObject openedVisual;
+    private bool visualReady;
+    private bool visualOpen;
+
     private Collider2D interactionCollider;
 
     public bool CanInteract =>
@@ -51,10 +57,12 @@ public class LockedChest : MonoBehaviour
         }
 
         codeController.ChestUnlocked += HandleUnlocked;
+        RefreshVisual();
     }
 
     private void Update()
     {
+        RefreshVisual();
         if (!Input.GetMouseButtonDown(0) ||
             !CanInteract ||
             InvestigationGuard.Blocked ||
@@ -75,9 +83,21 @@ public class LockedChest : MonoBehaviour
             codeController.Open();
     }
 
+    private void RefreshVisual()
+    {
+        bool unlocked = (codeController != null && codeController.Unlocked) ||
+            (GameProgress.Instance != null && GameProgress.Instance.Data.chestOpened);
+        if (visualReady && visualOpen == unlocked) return;
+        visualReady = true;
+        visualOpen = unlocked;
+        if (closedVisual != null) closedVisual.SetActive(!unlocked);
+        if (openedVisual != null) openedVisual.SetActive(unlocked);
+    }
+
     private void HandleUnlocked()
     {
         GameProgress.Instance?.MarkChestOpened();
+        RefreshVisual();
         contentsController.Open();
     }
 
