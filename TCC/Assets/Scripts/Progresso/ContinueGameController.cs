@@ -12,19 +12,22 @@ public class ContinueGameController : MonoBehaviour
     [SerializeField] private GameObject gameProgressPrefab;
 
     private bool loading;
+    private bool canContinue;
     private string SavePath => Path.Combine(Application.persistentDataPath, "currais-save.json");
 
     private void Awake()
     {
         if (continueButton != null)
-            continueButton.gameObject.SetActive(false);
+            continueButton.gameObject.SetActive(true);
     }
 
     private void SetContinueAvailable(bool available)
     {
         if (continueButton == null) return;
-        continueButton.interactable = available;
-        continueButton.gameObject.SetActive(available);
+        canContinue = available;
+        // Mantém a mesma aparência e posição mesmo antes do primeiro checkpoint.
+        continueButton.gameObject.SetActive(true);
+        continueButton.interactable = !loading;
     }
 
     private void Start()
@@ -44,7 +47,7 @@ public class ContinueGameController : MonoBehaviour
 
     public void ContinueGame()
     {
-        if (loading) return;
+        if (loading || !canContinue) return;
         if (!TryReadSave(out GameSaveFile save, out string error))
         {
             Debug.LogError("Não foi possível continuar: " + error, this);
