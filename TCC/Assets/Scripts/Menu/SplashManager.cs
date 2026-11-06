@@ -43,17 +43,19 @@ public class SplashManager : MonoBehaviour
 
         OcultarCreditos();
         videoPlayer.isLooping = false;
-        // Usa diretamente a textura decodificada. Evita cópia/formato da RenderTexture.
-        videoPlayer.renderMode = VideoRenderMode.APIOnly;
+        // Reproduz diretamente na câmera; o Canvas fica apenas com os créditos.
+        videoPlayer.renderMode = VideoRenderMode.CameraNearPlane;
+        videoPlayer.targetCamera = Camera.main;
+        videoPlayer.targetCameraAlpha = 1f;
+        videoPlayer.waitForFirstFrame = true;
         videoPlayer.targetTexture = null;
-        videoPlayer.sendFrameReadyEvents = true;
+        videoPlayer.sendFrameReadyEvents = false;
         videoPlayer.aspectRatio = VideoAspectRatio.FitInside;
         if (imagemVideo != null)
         {
             imagemVideo.texture = null;
             imagemVideo.enabled = false;
         }
-        videoPlayer.frameReady += QuadroDisponivel;
         videoPlayer.prepareCompleted += VideoPreparado;
         videoPlayer.errorReceived += ErroVideo;
         videoPlayer.loopPointReached += FimDoVideo;
@@ -70,19 +72,6 @@ public class SplashManager : MonoBehaviour
     {
         if (leaving || player != videoPlayer) return;
         player.Play();
-    }
-
-    private void QuadroDisponivel(VideoPlayer player, long quadro)
-    {
-        if (leaving || player != videoPlayer || imagemVideo == null || player.texture == null) return;
-        if (imagemVideo.texture != player.texture) imagemVideo.texture = player.texture;
-        imagemVideo.enabled = true;
-    }
-
-    private void LateUpdate()
-    {
-        if (videoPlayer != null && videoPlayer.isPlaying)
-            QuadroDisponivel(videoPlayer, videoPlayer.frame);
     }
 
     private void ErroVideo(VideoPlayer player, string mensagem)
@@ -166,7 +155,6 @@ public class SplashManager : MonoBehaviour
     {
         if (videoPlayer != null)
         {
-            videoPlayer.frameReady -= QuadroDisponivel;
             videoPlayer.loopPointReached -= FimDoVideo;
             videoPlayer.prepareCompleted -= VideoPreparado;
             videoPlayer.errorReceived -= ErroVideo;

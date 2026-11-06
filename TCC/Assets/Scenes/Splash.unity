@@ -222,14 +222,14 @@ VideoPlayer:
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera:
-    fileID: 0
+    fileID: 1748505407
   m_TargetTexture:
     fileID: 0
   m_TimeReference: 0
   m_TargetMaterialRenderer:
     fileID: 0
   m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 4
+  m_RenderMode: 1
   m_AspectRatio: 3
   m_DataSource: 0
   m_TimeUpdateMode: 2
@@ -247,7 +247,7 @@ VideoPlayer:
   m_SkipOnDrop: 1
   m_Looping: 0
   m_WaitForFirstFrame: 1
-  m_FrameReadyEventEnabled: 1
+  m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
 --- !u!4 &240700030
 Transform:
@@ -2074,7 +2074,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Orienta\xE7\xE3o: Andre Freitas e Arthur\nIFRN/Programa\xE7ao de Jogod
+  m_text: "Orienta\xE7\xE3o: Andr\xE9 Freitas e Arthur\nIFRN/Programa\xE7\xE3o de Jogos
     Digitais \u2014 2026"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}

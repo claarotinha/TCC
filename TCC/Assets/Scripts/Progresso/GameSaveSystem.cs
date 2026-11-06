@@ -106,6 +106,9 @@ public class GameSaveSystem : MonoBehaviour
         if (saveIcon != null && saveIcon.gameObject.activeInHierarchy)
             saveIcon.rectTransform.Rotate(0f, 0f, -saveIconDegreesPerSecond * Time.unscaledDeltaTime);
 
+        if (saveNotice != null && saveNotice.activeInHierarchy)
+            PosicionarAviso();
+
         TutorialManager tutorial = TutorialManager.Instance;
 
         if (!progress.Data.tutorialCompleted &&
@@ -400,6 +403,7 @@ public class GameSaveSystem : MonoBehaviour
             saveNotice.transform.SetAsLastSibling();
             saveNotice.SetActive(true);
             Canvas.ForceUpdateCanvases();
+            PosicionarAviso();
         }
 
         yield return new WaitForSecondsRealtime(
@@ -410,6 +414,23 @@ public class GameSaveSystem : MonoBehaviour
             saveNotice.SetActive(false);
 
         noticeRoutine = null;
+    }
+
+    private void PosicionarAviso()
+    {
+        RectTransform aviso = saveNotice.transform as RectTransform;
+        RectTransform area = aviso != null ? aviso.parent as RectTransform : null;
+        if (area == null) return;
+        Canvas canvas = saveNotice.GetComponentInParent<Canvas>();
+        Camera cameraUI = canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay
+            ? canvas.worldCamera : null;
+        Rect segura = Screen.safeArea;
+        if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(area,
+            segura.max, cameraUI, out Vector2 canto)) return;
+        aviso.anchorMin = aviso.anchorMax = Vector2.one;
+        aviso.pivot = Vector2.one;
+        aviso.localScale = Vector3.one;
+        aviso.anchoredPosition = canto - area.rect.max - new Vector2(48f, 40f);
     }
 
     [ContextMenu("Testar salvamento da cena atual")]
