@@ -12,9 +12,54 @@ public class CombinationPrompt : MonoBehaviour
     [SerializeField] private Button noButton;
     [SerializeField] private ItemCombination[] recipes;
 
+    [Header("Ajuda da primeira combinação")]
+    [SerializeField] private TMP_Text combinationHint;
+    [SerializeField] private GameObject combinationHintPanel;
+    private bool combinationLearned;
+    private GameProgress teachingProgress;
+
     private ItemData first;
     private ItemData second;
     private ItemCombination selectedRecipe;
+
+    private void Update()
+    {
+        if (combinationHint == null) return;
+        if (teachingProgress != GameProgress.Instance)
+        {
+            teachingProgress = GameProgress.Instance;
+            combinationLearned = false;
+        }
+        bool visible = !combinationLearned && !IsOpen && !PauseHelper.BlockInput() &&
+            InventoryTabController.Instance != null && InventoryTabController.Instance.IsOpen &&
+            HasAvailableRecipe();
+        SetCombinationHint(visible);
+    }
+
+    private void SetCombinationHint(bool visible)
+    {
+        GameObject panel = combinationHintPanel != null ? combinationHintPanel :
+            (combinationHint != null ? combinationHint.gameObject : null);
+        if (panel != null && panel.activeSelf != visible) panel.SetActive(visible);
+    }
+
+    private bool HasAvailableRecipe()
+    {
+        if (InventoryManager.Instance == null || recipes == null) return false;
+        foreach (ItemCombination recipe in recipes ?? System.Array.Empty<ItemCombination>())
+        {
+            if (recipe == null || recipe.itemA == null || recipe.itemB == null) continue;
+            int countA = 0, countB = 0;
+            foreach (ItemData item in InventoryManager.Instance.Items)
+            {
+                if (item == recipe.itemA) countA++;
+                if (item == recipe.itemB) countB++;
+            }
+            if (recipe.itemA == recipe.itemB ? countA >= 2 : countA > 0 && countB > 0)
+                return true;
+        }
+        return false;
+    }
 
     public void Show(ItemData firstItem, ItemData secondItem)
     {
@@ -28,7 +73,7 @@ public class CombinationPrompt : MonoBehaviour
         second = secondItem;
         selectedRecipe = null;
 
-        foreach (ItemCombination recipe in recipes)
+        foreach (ItemCombination recipe in recipes ?? System.Array.Empty<ItemCombination>())
         {
             if (recipe == null) continue;
 
@@ -71,6 +116,8 @@ public class CombinationPrompt : MonoBehaviour
             return;
         }
 
+        combinationLearned = true;
+        SetCombinationHint(false);
         Close();
     }
 

@@ -10,6 +10,7 @@ public class TutorialManager : MonoBehaviour
     {
         Move,
         Run,
+        Pause,
         Investigate,
         CryingBoy,
         Boys,
@@ -27,6 +28,7 @@ public class TutorialManager : MonoBehaviour
     public TutorialStep CurrentStep { get; private set; }
     public bool IsCompleted => CurrentStep == TutorialStep.Completed;
 
+    private bool pauseObserved;
     private float lastPlayerX;
     private float distanceInStep;
     private readonly HashSet<GameObject> investigated = new HashSet<GameObject>();
@@ -63,6 +65,20 @@ public class TutorialManager : MonoBehaviour
         float distanceMoved = Mathf.Abs(currentX - lastPlayerX);
         lastPlayerX = currentX;
 
+        // Observa abrir e fechar a pausa antes de bloquear Update por IsPaused.
+        if (CurrentStep == TutorialStep.Pause)
+        {
+            if (UniversalPauseManager.IsPaused)
+            {
+                pauseObserved = true;
+                if (tutorialText != null)
+                    tutorialText.text = "Pressione ESC novamente para voltar ao jogo.";
+            }
+            else if (pauseObserved)
+                SetStep(TutorialStep.Investigate);
+            return;
+        }
+
         if (UniversalPauseManager.IsPaused || NPCDialogue.IsShowing())
             return;
 
@@ -92,7 +108,7 @@ public class TutorialManager : MonoBehaviour
             distanceInStep += distanceMoved;
 
             if (distanceInStep >= requiredDistance)
-                SetStep(TutorialStep.Investigate);
+                SetStep(TutorialStep.Pause);
         }
         else if (CurrentStep == TutorialStep.OpenInventory &&
                  InventoryTabController.Instance != null &&
@@ -181,6 +197,10 @@ public class TutorialManager : MonoBehaviour
                 break;
             case TutorialStep.Run:
                 tutorialText.text = "Segure Shift enquanto anda para correr.";
+                break;
+            case TutorialStep.Pause:
+                pauseObserved = false;
+                tutorialText.text = "Pressione ESC para abrir o menu de pausa.";
                 break;
             case TutorialStep.Investigate:
                 ShowInvestigationProgress();

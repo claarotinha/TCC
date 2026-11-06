@@ -5,7 +5,7 @@ public class CollectableExamine : MonoBehaviour
 {
     public GameObject examinePanel;
     public TMP_Text examineText;
-    
+
     [SerializeField] private ItemData itemData;
     [SerializeField] private bool isTutorialBall;
     [TextArea]
@@ -57,7 +57,7 @@ public class CollectableExamine : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (tutorial != null && tutorial.CurrentStep <= TutorialManager.TutorialStep.Run)
+            if (tutorial != null && tutorial.CurrentStep <= TutorialManager.TutorialStep.Pause)
             {
 #if UNITY_EDITOR
                 if (Camera.main != null && myCollider != null &&
@@ -103,7 +103,7 @@ public class CollectableExamine : MonoBehaviour
                         {
                             currentObject.HidePanel();
                         }
-                        
+
                         ShowPanel();
                         currentObject = this;
                         if (tutorial != null)
@@ -273,4 +273,3 @@ public class CollectableExamine : MonoBehaviour
         }
     }
 }
-

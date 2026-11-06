@@ -99,7 +99,7 @@ public class CursorManager : MonoBehaviour
             (jornada != null && jornada.BloqueiaCursor) ||
             Camera.main == null ||
             (tutorial != null &&
-             tutorial.CurrentStep <= TutorialManager.TutorialStep.Run))
+             tutorial.CurrentStep <= TutorialManager.TutorialStep.Pause))
         {
             SetNormal();
             return;
@@ -280,4 +280,3 @@ public class CursorManager : MonoBehaviour
             Destroy(preparedLupa);
     }
 }
-
