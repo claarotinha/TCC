@@ -17,6 +17,7 @@ public class AvisoInicial : MonoBehaviour
     public float tempoEntreLetras = 0.08f;
     public float tempoDepoisDoTexto = 2f;
     [SerializeField, Min(0f)] private float tempoOrientacoes = 10f;
+    [SerializeField, Min(0f)] private float tempoAvisoFones = 4f;
     [SerializeField, Min(0f)] private float tempoFade = 0.6f;
     [SerializeField] private float velocidadeSol = 150f;
 
@@ -45,6 +46,14 @@ public class AvisoInicial : MonoBehaviour
 
     private IEnumerator Apresentar()
     {
+        // Aviso anterior ao cartão sobre consequências, usando o texto já existente.
+        float tamanhoOriginal = textoAviso.fontSize;
+        textoAviso.fontSize = Mathf.Min(tamanhoOriginal, 32f);
+        textoAviso.text = "Para uma melhor experiência, recomendamos o uso de fones de ouvido.";
+        yield return new WaitForSecondsRealtime(tempoAvisoFones);
+        textoAviso.text = string.Empty;
+        textoAviso.fontSize = tamanhoOriginal;
+
         if (orientacoes != null)
         {
             orientacoes.gameObject.SetActive(true);
