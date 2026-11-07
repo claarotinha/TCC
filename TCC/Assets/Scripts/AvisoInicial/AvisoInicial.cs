@@ -17,7 +17,7 @@ public class AvisoInicial : MonoBehaviour
     public float tempoEntreLetras = 0.08f;
     public float tempoDepoisDoTexto = 2f;
     [SerializeField, Min(0f)] private float tempoOrientacoes = 10f;
-    [SerializeField, Min(0f)] private float tempoAvisoFones = 4f;
+    [SerializeField, Min(0f)] private float tempoAvisoFones = 7f;
     [SerializeField, Min(0f)] private float tempoFade = 0.6f;
     [SerializeField] private float velocidadeSol = 150f;
 

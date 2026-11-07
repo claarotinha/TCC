@@ -33,12 +33,16 @@ public class SecaMirrorDiscovery : MonoBehaviour
     private void Start()
     {
         examineObject.message = discoveryMessage;
-        if (reflectionImage != null) reflectionImage.gameObject.SetActive(false);
+        if (reflectionImage != null) reflectionImage.transform.parent.gameObject.SetActive(false);
     }
 
     private void OnMirrorOpened()
     {
-        if (reflectionImage != null) reflectionImage.gameObject.SetActive(true);
+        if (reflectionImage != null)
+        {
+            reflectionImage.transform.parent.gameObject.SetActive(true);
+            reflectionImage.gameObject.SetActive(true);
+        }
         if (Discovered)
             return;
 
@@ -56,12 +60,12 @@ public class SecaMirrorDiscovery : MonoBehaviour
             examineObject.examinePanel.activeInHierarchy && examineObject.examineText != null &&
             (examineObject.examineText.text == discoveryMessage ||
              examineObject.examineText.text == repeatMessage);
-        if (!mirrorOpen) reflectionImage.gameObject.SetActive(false);
+        if (!mirrorOpen) reflectionImage.transform.parent.gameObject.SetActive(false);
     }
 
     private void OnDisable()
     {
-        if (reflectionImage != null) reflectionImage.gameObject.SetActive(false);
+        if (reflectionImage != null) reflectionImage.transform.parent.gameObject.SetActive(false);
     }
 
     private void OnDestroy()

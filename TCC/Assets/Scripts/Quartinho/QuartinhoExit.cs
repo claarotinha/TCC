@@ -83,6 +83,7 @@ public class QuartinhoExit : MonoBehaviour
 
     private void OpenRadioConfirmation()
     {
+        radioExamined = false;
         radioConfirmation = true;
         if (exitText != null)
             exitText.text = "Deseja tocar a música?";
