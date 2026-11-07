@@ -61,6 +61,8 @@ public class SecaRoomExit : MonoBehaviour
         if (!configured || EnteredRoom || !sleepSequence.Finished) return;
         examineObject.HidePanel();
         questionText.text = "Você quer sair do quarto?";
+        // O Canvas compartilhado continua ativo mesmo após a sequência
+        // de dormir; traz a confirmação acima dos demais elementos.
         confirmPanel.transform.SetAsLastSibling();
         confirmPanel.SetActive(true);
         openedPanel = confirmPanel;

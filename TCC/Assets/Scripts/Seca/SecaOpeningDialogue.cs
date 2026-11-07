@@ -156,7 +156,10 @@ public class SecaOpeningDialogue : MonoBehaviour
         dialogueRunning = false;
         Finished = true;
 
-        dialogueUI.SetActive(false);
+        // Mantém o Canvas ativo para que o ExamineObject e a porta
+        // possam abrir seus painéis após o diálogo inicial.
+        dialoguePanel.SetActive(false);
+        if (choicesContainer != null) choicesContainer.SetActive(false);
         RestoreMovement();
     }
 
@@ -195,8 +198,8 @@ public class SecaOpeningDialogue : MonoBehaviour
 
     private void OnDisable()
     {
-        if (dialogueRunning && dialogueUI != null)
-            dialogueUI.SetActive(false);
+        if (dialogueRunning && dialoguePanel != null)
+            dialoguePanel.SetActive(false);
 
         dialogueRunning = false;
         RestoreMovement();
