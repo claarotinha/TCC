@@ -3,8 +3,23 @@ guid: 8eaa4f7d8b76df84385622eb32fc0a1d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7156540819860650860
-    second: "\xCDcones Pixelados_ Aves, Galho, Pedra e El\xE1stico_0"
+      213: 21300101
+    second: AveVooA
+  - first:
+      213: 21300102
+    second: AveVooB
+  - first:
+      213: 21300103
+    second: Galho
+  - first:
+      213: 21300104
+    second: Pedra
+  - first:
+      213: 21300105
+    second: Elastico
+  - first:
+      213: 21300106
+    second: AveAbatida
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -34,10 +49,10 @@ TextureImporter:
   cubemapConvolution: 0
   seamlessCubemap: 0
   textureFormat: 1
-  maxTextureSize: 2048
+  maxTextureSize: 4096
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -50,9 +65,15 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePivot:
+    x: 0.5
+    y: 0.5
+  spritePixelsToUnits: 320
+  spriteBorder:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -72,10 +93,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -85,10 +106,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,44 +121,195 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\xCDcones Pixelados_ Aves, Galho, Pedra e El\xE1stico_0"
+      name: AveVooA
       rect:
         serializedVersion: 2
+        x: 55
+        y: 359
+        width: 193
+        height: 149
+      alignment: 0
+      pivot:
+        x: 0.5
+        y: 0.5
+      border:
         x: 0
         y: 0
-        width: 2172
-        height: 724
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
+        z: 0
+        w: 0
+      customData: null
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c6b706c65f3215360800000000000000
-      internalID: 7156540819860650860
+      spriteID: 79f7c03378d254bdb8985f295f5c7510
+      internalID: 21300101
       vertices: []
-      indices: 
+      indices: null
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AveVooB
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 229
+        width: 211
+        height: 169
+      alignment: 0
+      pivot:
+        x: 0.5
+        y: 0.5
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56b516e47c795627bc29e4ad4b43cb3a
+      internalID: 21300102
+      vertices: []
+      indices: null
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Galho
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 218
+        width: 289
+        height: 290
+      alignment: 0
+      pivot:
+        x: 0.5
+        y: 0.5
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21a9e52c3f3b5fcf95bd42377bc7fa72
+      internalID: 21300103
+      vertices: []
+      indices: null
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pedra
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 253
+        width: 281
+        height: 172
+      alignment: 0
+      pivot:
+        x: 0.5
+        y: 0.5
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26a3427907b355b99099f7a1431a77ad
+      internalID: 21300104
+      vertices: []
+      indices: null
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elastico
+      rect:
+        serializedVersion: 2
+        x: 1367
+        y: 267
+        width: 292
+        height: 172
+      alignment: 0
+      pivot:
+        x: 0.5
+        y: 0.5
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2760b7416e805235ba1df88e304727e0
+      internalID: 21300105
+      vertices: []
+      indices: null
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AveAbatida
+      rect:
+        serializedVersion: 2
+        x: 1783
+        y: 270
+        width: 335
+        height: 185
+      alignment: 0
+      pivot:
+        x: 0.5
+        y: 0.5
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cae89c10a9f5273a0349c14f3451d03
+      internalID: 21300106
+      vertices: []
+      indices: null
       edges: []
       weights: []
     outline: []
-    customData: 
+    customData: null
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: null
     internalID: 0
     vertices: []
-    indices: 
+    indices: null
     edges: []
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\xCDcones Pixelados_ Aves, Galho, Pedra e El\xE1stico_0": 7156540819860650860
-  mipmapLimitGroupName: 
+      AveVooA: 21300101
+      AveVooB: 21300102
+      Galho: 21300103
+      Pedra: 21300104
+      Elastico: 21300105
+      AveAbatida: 21300106
+  mipmapLimitGroupName: null
   pSDRemoveMatte: 0
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  userData: null
+  assetBundleName: null
+  assetBundleVariant: null
