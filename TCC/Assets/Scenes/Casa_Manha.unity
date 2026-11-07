@@ -8211,7 +8211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 120361311}
   examineText: {fileID: 1103893478}
-  message: "A vov\xF3 est\xE1 dormindo, n\xE3o vou incomoda-l\xE1"
+  message: "A vovó está descansando no quartinho dela. Melhor fazer silêncio e deixá-la dormir. Depois volto para conversar com ela."
 --- !u!61 &1608361052
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11216,7 +11216,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.2498343, y: -0.7071191, z: 0}
-  m_LocalScale: {x: 0.2825266, y: 0.19799434, z: 1}
+  m_LocalScale: {x: 0.244, y: 0.1823, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1185381340}

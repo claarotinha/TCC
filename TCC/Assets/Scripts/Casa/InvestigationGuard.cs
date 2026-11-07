@@ -66,6 +66,9 @@ public static class InvestigationGuard
             if (SecaRoomExit.IsPanelOpen)
                 return "saída do quarto da Seca";
 
+            if (RadioInteraction.IsPanelOpen)
+                return "rádio";
+
             if (QuartinhoExit.IsPanelOpen)
                 return "saída do quartinho";
 
