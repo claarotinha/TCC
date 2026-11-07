@@ -19,6 +19,7 @@ public class SecaMirrorDiscovery : MonoBehaviour
 
     [Header("Imagem do reflexo") ]
     [SerializeField] private Image reflectionImage;
+    [SerializeField] private GameObject reflectionBackdrop;
 
     public bool Discovered { get; private set; }
 
@@ -33,15 +34,14 @@ public class SecaMirrorDiscovery : MonoBehaviour
     private void Start()
     {
         examineObject.message = discoveryMessage;
-        if (reflectionImage != null) reflectionImage.transform.parent.gameObject.SetActive(false);
+        if (reflectionImage != null) SetReflectionVisible(false);
     }
 
     private void OnMirrorOpened()
     {
         if (reflectionImage != null)
         {
-            reflectionImage.transform.parent.gameObject.SetActive(true);
-            reflectionImage.gameObject.SetActive(true);
+            SetReflectionVisible(true);
         }
         if (Discovered)
             return;
@@ -60,12 +60,20 @@ public class SecaMirrorDiscovery : MonoBehaviour
             examineObject.examinePanel.activeInHierarchy && examineObject.examineText != null &&
             (examineObject.examineText.text == discoveryMessage ||
              examineObject.examineText.text == repeatMessage);
-        if (!mirrorOpen) reflectionImage.transform.parent.gameObject.SetActive(false);
+        if (!mirrorOpen) SetReflectionVisible(false);
     }
 
     private void OnDisable()
     {
-        if (reflectionImage != null) reflectionImage.transform.parent.gameObject.SetActive(false);
+        if (reflectionImage != null) SetReflectionVisible(false);
+    }
+
+    private void SetReflectionVisible(bool visible)
+    {
+        // Nunca desativa o pai inferido da imagem: ele pode ser o Canvas
+        // compartilhado se a referência/hierarquia for editada no Inspector.
+        if (reflectionBackdrop != null) reflectionBackdrop.SetActive(visible);
+        if (reflectionImage != null) reflectionImage.gameObject.SetActive(visible);
     }
 
     private void OnDestroy()

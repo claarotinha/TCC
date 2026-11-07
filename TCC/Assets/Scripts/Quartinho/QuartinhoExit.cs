@@ -115,8 +115,8 @@ public class QuartinhoExit : MonoBehaviour
 
         if (radioAudio != null && radioAudio.clip != null)
         {
-            radioAudio.Stop();
-            radioAudio.Play();
+            // Confirmar novamente mantém a música atual sem reiniciá-la.
+            if (!radioAudio.isPlaying) radioAudio.Play();
         }
         else
         {

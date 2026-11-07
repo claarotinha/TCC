@@ -646,7 +646,7 @@ PrefabInstance:
     - target: {fileID: 5871127168250078241, guid: b237002287116cc4c9d42eea24e122b0, type: 3}
       propertyPath: painelDialogoDaCena
       value:
-      objectReference: {fileID: 191222203}
+      objectReference: {fileID: 191222202}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2535,9 +2535,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7888760854718667742, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
       insertIndex: -1
       addedObject: {fileID: 311003298}
-    - targetCorrespondingSourceObject: {fileID: 7888760854718667742, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 930000011}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
 --- !u!224 &191222198 stripped
@@ -9208,6 +9205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SecaMirrorDiscovery
   reflectionImage: {fileID: 930000013}
+  reflectionBackdrop: {fileID: 9400200010}
   discoveryMessage: "Essa\u2026 Essa n\xE3o sou eu. \xC9 a bisa\u2026 \xC9 o rosto
     da minha bisav\xF3, Zefinha! Meu Deus, o que est\xE1 acontecendo?"
   repeatMessage: "O reflexo continua sendo o de Zefinha. N\xE3o sei como isso \xE9
@@ -13962,7 +13960,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8297607517880692621, guid: 7711d4513fd808c40adef11b269310e2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e57809634923414ab18dc700826f4768, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

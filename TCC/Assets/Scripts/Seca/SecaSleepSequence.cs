@@ -112,8 +112,8 @@ public class SecaSleepSequence : MonoBehaviour
 
         yield return WaitForAdvance();
 
-        // Não desative o Canvas: o painel de Examine e a confirmação
-        // da porta são filhos da mesma interface.
+        // Fecha apenas a conversa, mantendo o Canvas e o ExaminePanel disponíveis.
+        dialogueUI.SetActive(false);
         dialoguePanel.SetActive(false);
         if (choicesContainer != null) choicesContainer.SetActive(false);
 
