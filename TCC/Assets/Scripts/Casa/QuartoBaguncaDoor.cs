@@ -114,8 +114,19 @@ public class QuartoBaguncaDoor : MonoBehaviour
 
     private void EntrarNoQuartinho()
     {
-        if (Unlocked)
-            SceneManager.LoadScene("Quartinho");
+        if (!Unlocked) return;
+        // A confirmação da porta não pode continuar bloqueando a nova cena.
+        FecharConfirmacao();
+        ExamineObject.HideCurrentPanel();
+        InventoryTabController.Instance?.Close();
+        SceneManager.LoadScene("Quartinho");
+    }
+
+    private void OnDisable()
+    {
+        if (openedPanel != confirmPanel) return;
+        if (confirmPanel != null) confirmPanel.SetActive(false);
+        openedPanel = null;
     }
 
     private void FecharConfirmacao()

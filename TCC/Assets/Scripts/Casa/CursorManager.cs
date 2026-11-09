@@ -92,6 +92,7 @@ public class CursorManager : MonoBehaviour
         }
 
         TutorialManager tutorial = TutorialManager.Instance;
+        if (tutorial != null && tutorial.gameObject.scene != gameObject.scene) tutorial = null;
 
         if (InvestigationGuard.Blocked || SobreControleUI() ||
             (painelDialogoDaCena != null && painelDialogoDaCena.activeInHierarchy) ||

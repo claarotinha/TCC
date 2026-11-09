@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,12 +27,14 @@ public class UniversalPauseManager : MonoBehaviour
     [Header("Cena do menu principal")]
     [SerializeField] private string mainMenuScene = "MenuPrincipal";
 
+    private readonly List<Button> backButtons = new List<Button>();
     private GameObject currentSubpanel;
     private float previousTimeScale = 1f;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (Instance != null && Instance != this &&
+            Instance.gameObject.scene == gameObject.scene)
         {
             Debug.LogError(
                 "Existe mais de um UniversalPauseManager ativo.",
@@ -42,7 +45,11 @@ public class UniversalPauseManager : MonoBehaviour
             return;
         }
 
+        // Uma cena nova assume a pausa; o controlador da cena anterior não
+        // pode desabilitar este nem deixar Time.timeScale em zero.
+        if (Instance != null && Instance != this) Instance.ResumeGame();
         Instance = this;
+        IsPaused = false;
     }
 
     private void Start()
@@ -79,7 +86,21 @@ public class UniversalPauseManager : MonoBehaviour
         if (mainMenuButton != null)
             mainMenuButton.onClick.AddListener(GoToMainMenu);
 
+        BindBackButtons();
         RefreshButtons();
+    }
+
+    private void BindBackButtons()
+    {
+        Canvas canvas = pausePanel.GetComponentInParent<Canvas>(true);
+        if (canvas == null) return;
+        foreach (Button button in canvas.GetComponentsInChildren<Button>(true))
+        {
+            if (button.name != "BackDiaryButton" && button.name != "BackSoundButton" &&
+                button.name != "BackControlsButton") continue;
+            button.onClick.AddListener(BackToPause);
+            backButtons.Add(button);
+        }
     }
 
     private void Update()
@@ -254,6 +275,9 @@ public class UniversalPauseManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        foreach (Button button in backButtons)
+            if (button != null) button.onClick.RemoveListener(BackToPause);
+        backButtons.Clear();
         if (resumeButton != null)
             resumeButton.onClick.RemoveListener(ResumeGame);
 

@@ -79,7 +79,7 @@ public class ExamineObject : MonoBehaviour
 
         TutorialManager tutorialManager = TutorialManager.Instance;
 
-        if (tutorialManager != null &&
+        if (tutorialManager != null && tutorialManager.gameObject.scene == gameObject.scene &&
             tutorialManager.CurrentStep <= TutorialManager.TutorialStep.Pause)
         {
 #if UNITY_EDITOR

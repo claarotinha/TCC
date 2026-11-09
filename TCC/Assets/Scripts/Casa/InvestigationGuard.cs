@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class InvestigationGuard
 {
@@ -8,6 +9,15 @@ public static class InvestigationGuard
     {
         position = default;
         Camera camera = Camera.main;
+        Scene activeScene = SceneManager.GetActiveScene();
+        if (camera == null || camera.gameObject.scene != activeScene)
+        {
+            camera = null;
+            foreach (GameObject root in activeScene.GetRootGameObjects())
+                foreach (Camera candidate in root.GetComponentsInChildren<Camera>())
+                    if (candidate.isActiveAndEnabled && candidate.CompareTag("MainCamera"))
+                    { camera = candidate; break; }
+        }
         if (camera == null) return false;
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
         Plane plane = new Plane(Vector3.forward, Vector3.zero);
