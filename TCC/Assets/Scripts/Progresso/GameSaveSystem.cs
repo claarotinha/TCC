@@ -300,6 +300,7 @@ public class GameSaveSystem : MonoBehaviour
             return false;
         }
 
+        progress.SyncDiaryPages();
         GameSaveFile save = new GameSaveFile
         {
             checkpointScene = checkpointScene,

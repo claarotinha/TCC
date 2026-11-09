@@ -129,6 +129,7 @@ public partial class EntradaCurrais : MonoBehaviour
         }
         Vector3 posicaoRestaurada = mari.transform.position;
         GameProgress.Instance.NormalizeData();
+        GameProgress.Instance.UnlockDiaryPage("josefa-06");
         rotacaoPai = pai.localRotation;
         if (Dados.estradaMariquinhaFerida && visualIrma != null)
         {

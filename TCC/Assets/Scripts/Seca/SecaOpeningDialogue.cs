@@ -155,6 +155,7 @@ public class SecaOpeningDialogue : MonoBehaviour
     {
         dialogueRunning = false;
         Finished = true;
+        GameProgress.Instance?.UnlockDiaryPage("josefa-02");
 
         // DialogueUI contém só a conversa; ExaminePanel é seu irmão no Canvas.
         dialogueUI.SetActive(false);

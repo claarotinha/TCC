@@ -54,6 +54,7 @@ public class GameProgress : MonoBehaviour
         if (data.unlockedDiaryPages == null) data.unlockedDiaryPages = new System.Collections.Generic.List<string>();
         if (data.collectedObjects == null) data.collectedObjects = new System.Collections.Generic.List<string>();
         if (data.usedTargets == null) data.usedTargets = new System.Collections.Generic.List<string>();
+        SyncDiaryPages();
     }
 
     public void ResetProgress()
@@ -212,6 +213,35 @@ public class GameProgress : MonoBehaviour
         NotifyChange();
     }
 
+    // Reconstitui desbloqueios de saves anteriores sem mudar escolhas ou textos.
+    // Cada ID representa uma abertura completa (dois lados do livro).
+    public void SyncDiaryPages()
+    {
+        if (data == null || !data.diaryCollected) return;
+        if (data.unlockedDiaryPages == null)
+            data.unlockedDiaryPages = new System.Collections.Generic.List<string>();
+        int ultima = 1;
+        for (int i = 2; i <= 14; i++)
+            if (data.unlockedDiaryPages.Contains("josefa-" + i.ToString("00"))) ultima = i;
+        if (data.secaMealCompleted || data.secaDepartureCompleted) ultima = Mathf.Max(ultima, 2);
+        if (data.estradaHistoriaEscolhida != 0) ultima = Mathf.Max(ultima, 3);
+        if (data.estradaParadasConcluidas >= 2) ultima = Mathf.Max(ultima, 4);
+        if (data.estradaAbrigoConcluido) ultima = Mathf.Max(ultima, 5);
+        if (data.ato1Concluido) ultima = Mathf.Max(ultima, 6);
+        if (data.curraisEtapaEntrada >= 1) ultima = Mathf.Max(ultima, 7);
+        if (data.curraisRaimundoConhecido || data.curraisEtapaBusca >= 1) ultima = Mathf.Max(ultima, 8);
+        if (data.curraisEtapaBusca >= 6 || data.unlockedDiaryPages.Contains("currais-bento")) ultima = Mathf.Max(ultima, 9);
+        if (data.curraisEtapaPosto >= 1) ultima = Mathf.Max(ultima, 10);
+        if (data.curraisEtapaPosto >= 4) ultima = Mathf.Max(ultima, 11);
+        if (data.ato2Concluido) ultima = Mathf.Max(ultima, 13);
+        if (data.epilogoEtapa >= 1 || data.epilogoConcluido) ultima = 14;
+        for (int i = 1; i <= ultima; i++)
+        {
+            string id = "josefa-" + i.ToString("00");
+            if (!data.unlockedDiaryPages.Contains(id)) data.unlockedDiaryPages.Add(id);
+        }
+    }
+
     public bool HasDiaryPage(string pageId)
     {
         return data.unlockedDiaryPages.Contains(pageId);
@@ -259,6 +289,7 @@ public class GameProgress : MonoBehaviour
 
     private void NotifyChange()
     {
+        SyncDiaryPages();
         ProgressChanged?.Invoke();
     }
 

@@ -652,6 +652,7 @@ public class SegundaParada : MonoBehaviour
     {
         BloquearMovimento();
         while (fugindo) yield return null;
+        GameProgress.Instance?.UnlockDiaryPage("josefa-04");
         etapa = 2;
         foreach (GameObject pista in pistasBusca) pista.SetActive(true);
         alvoBaleia.SetActive(true);

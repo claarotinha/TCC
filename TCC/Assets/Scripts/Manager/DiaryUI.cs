@@ -24,6 +24,15 @@ public class DiaryUI : MonoBehaviour
         public string rightText;
     }
 
+    [Serializable]
+    private class DiaryCatalog
+    {
+        public DiaryEntry[] entries;
+    }
+
+    [Header("Texto oficial compartilhado pelas cenas")]
+    [SerializeField] private TextAsset catalogo;
+
     [Header("Textos")]
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text leftPageText;
@@ -63,8 +72,41 @@ public class DiaryUI : MonoBehaviour
             return;
         }
 
+        if (catalogo == null) catalogo = Resources.Load<TextAsset>("DiarioJosefa");
+        if (catalogo == null)
+        {
+            configured = false;
+            Debug.LogError("DiaryUI: catálogo DiarioJosefa não encontrado.", this);
+            return;
+        }
+        DiaryCatalog livro = JsonUtility.FromJson<DiaryCatalog>(catalogo.text);
+        entries = livro != null ? livro.entries : null;
+        if (entries == null || entries.Length != 14)
+        {
+            configured = false;
+            Debug.LogError("DiaryUI: o diário deve conter as 14 aberturas oficiais.", this);
+            return;
+        }
+        PrepararTexto(leftPageText, 32f, 22f);
+        PrepararTexto(rightPageText, 32f, 22f);
+        PrepararTexto(titleText, 30f, 22f);
+        PrepararTexto(pageNumberText, 24f, 18f);
         previousButton.onClick.AddListener(Previous);
         nextButton.onClick.AddListener(Next);
+    }
+
+    private static void PrepararTexto(TMP_Text texto, float tamanho, float minimo)
+    {
+        texto.color = new Color(0.22f, 0.13f, 0.08f, 1f);
+        texto.enableAutoSizing = true;
+        texto.fontSize = tamanho;
+        texto.fontSizeMin = minimo;
+        texto.fontSizeMax = tamanho;
+        texto.richText = false;
+        texto.overflowMode = TextOverflowModes.Overflow;
+        texto.margin = new Vector4(8f, 6f, 8f, 6f);
+        // As folhas seguem com o mesmo fundo, posição e fonte do jogo.
+        texto.alignment = TextAlignmentOptions.TopLeft;
     }
 
     private void OnEnable()
@@ -77,7 +119,6 @@ public class DiaryUI : MonoBehaviour
         if (subscribedProgress != null)
             subscribedProgress.ProgressChanged += Refresh;
 
-        currentIndex = 0;
         Refresh();
     }
 
@@ -100,6 +141,7 @@ public class DiaryUI : MonoBehaviour
         availableEntries.Clear();
 
         GameProgress progress = GameProgress.Instance;
+        progress?.SyncDiaryPages();
 
         if (progress != null &&
             progress.Data.diaryCollected &&
@@ -139,8 +181,8 @@ public class DiaryUI : MonoBehaviour
     {
         if (availableEntries.Count == 0)
         {
-            titleText.text = "Diário";
-            leftPageText.text = "Ainda não há páginas disponíveis.";
+            titleText.text = "Diário de Maria Josefa";
+            leftPageText.text = "Encontre o diário para ler suas páginas.";
             rightPageText.text = "";
             pageNumberText.text = "";
 
@@ -156,7 +198,7 @@ public class DiaryUI : MonoBehaviour
         rightPageText.text = entry.rightText;
 
         pageNumberText.text =
-            (currentIndex + 1) + " / " + availableEntries.Count;
+            (currentIndex + 1) + " / " + entries.Length;
 
         previousButton.interactable = currentIndex > 0;
         nextButton.interactable =

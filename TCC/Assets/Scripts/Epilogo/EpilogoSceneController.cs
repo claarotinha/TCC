@@ -113,6 +113,7 @@ public class EpilogoSceneController : MonoBehaviour
         transitionRunning = true;
         DefinirFade(1f);
         while (GameSaveSystem.IsRestoring) yield return null;
+        GameProgress.Instance?.UnlockDiaryPage("josefa-14");
         GameProgressData dados = GameProgress.Instance != null ? GameProgress.Instance.Data : null;
         if (dados != null && dados.epilogoConcluido && dados.epilogoFinalVisto != 0)
         {
