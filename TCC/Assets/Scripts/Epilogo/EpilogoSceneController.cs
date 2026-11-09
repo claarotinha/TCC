@@ -57,9 +57,9 @@ public class EpilogoSceneController : MonoBehaviour
 
     private IEnumerator Start()
     {
+        RecuperarReferenciasDaCena();
         if (!ReferenciasValidas())
         {
-            Debug.LogError("Epilogo: confira ambientes, cameras, dialogo e pesquisa no Inspector.", this);
             enabled = false;
             yield break;
         }
@@ -105,20 +105,76 @@ public class EpilogoSceneController : MonoBehaviour
         EncaminharFinal();
     }
 
+    private T BuscarComponente<T>(string nome) where T : Component
+    {
+        foreach (GameObject raiz in gameObject.scene.GetRootGameObjects())
+            foreach (Transform candidato in raiz.GetComponentsInChildren<Transform>(true))
+                if (candidato.name == nome) return candidato.GetComponent<T>();
+        return null;
+    }
+
+    private GameObject BuscarObjeto(string nome)
+    {
+        Transform encontrado = BuscarComponente<Transform>(nome);
+        return encontrado != null ? encontrado.gameObject : null;
+    }
+
+    private void RecuperarReferenciasDaCena()
+    {
+        // Recupera apenas os objetos existentes nesta cena, inclusive os inativos.
+        // Não instancia Canvas, personagens ou cenários durante o jogo.
+        if (cameraCena == null) cameraCena = BuscarComponente<Camera>("Main Camera");
+        if (dialogueUI == null) dialogueUI = BuscarObjeto("DialogueUI");
+        if (dialoguePanel == null) dialoguePanel = BuscarObjeto("DialoguePanel");
+        if (choicesContainer == null) choicesContainer = BuscarObjeto("ChoicesContainer");
+        if (characterNameText == null) characterNameText = BuscarComponente<TMP_Text>("CharacterName");
+        if (dialogueText == null) dialogueText = BuscarComponente<TMP_Text>("DialogueText");
+        if (portraitImage == null) portraitImage = BuscarComponente<Image>("Portrait");
+        if (fadeImage == null) fadeImage = BuscarComponente<Image>("Escurecimento do epilogo");
+        if (imagemPesquisa == null) imagemPesquisa = BuscarComponente<Image>("Pesquisa - fotografias e papeis");
+        string[] nomes = { "01 Quarto de Mari", "02 Cozinha - pesquisa", "03 Quarto de Zefinha - base reutilizada" };
+        if (ambientes == null || ambientes.Length != nomes.Length) ambientes = new GameObject[nomes.Length];
+        if (pontosCamera == null || pontosCamera.Length != nomes.Length) pontosCamera = new Transform[nomes.Length];
+        for (int i = 0; i < nomes.Length; i++)
+        {
+            if (ambientes[i] == null) ambientes[i] = BuscarObjeto(nomes[i]);
+            if (pontosCamera[i] == null && ambientes[i] != null)
+                pontosCamera[i] = ambientes[i].transform.Find("Enquadramento - camera da Casa Manha");
+        }
+    }
+
+    private bool Conferir(bool valido, string campo)
+    {
+        if (!valido) Debug.LogError("Epilogo: referência ausente ou inválida em " + campo + ".", this);
+        return valido;
+    }
+
     private bool ReferenciasValidas()
     {
-        if (ambientes == null || fundos == null || pontosCamera == null ||
-            ambientes.Length != 3 || fundos.Length != 3 || pontosCamera.Length != 3 ||
-            cameraCena == null || fadeImage == null || dialogueUI == null || dialoguePanel == null ||
-            choicesContainer == null || characterNameText == null || dialogueText == null || portraitImage == null ||
-            imagemPesquisa == null || imagensPesquisa == null || cartelasPesquisa == null ||
-            imagensPesquisa.Length != cartelasPesquisa.Length || cartelasPesquisa.Length == 0 ||
-            falasDespertar == null || falasDespertar.Length == 0 || falasCozinha == null || falasCozinha.Length == 0)
-            return false;
+        bool valido = true;
+        valido &= Conferir(cameraCena != null, nameof(cameraCena));
+        valido &= Conferir(fadeImage != null, nameof(fadeImage));
+        valido &= Conferir(dialogueUI != null, nameof(dialogueUI));
+        valido &= Conferir(dialoguePanel != null, nameof(dialoguePanel));
+        valido &= Conferir(choicesContainer != null, nameof(choicesContainer));
+        valido &= Conferir(characterNameText != null, nameof(characterNameText));
+        valido &= Conferir(dialogueText != null, nameof(dialogueText));
+        valido &= Conferir(portraitImage != null, nameof(portraitImage));
+        valido &= Conferir(imagemPesquisa != null, nameof(imagemPesquisa));
         for (int i = 0; i < 3; i++)
-            if (ambientes[i] == null || fundos[i] == null || fundos[i].sprite == null || pontosCamera[i] == null) return false;
-        for (int i = 0; i < imagensPesquisa.Length; i++) if (imagensPesquisa[i] == null) return false;
-        return true;
+        {
+            valido &= Conferir(ambientes[i] != null, $"ambientes[{i}]");
+            valido &= Conferir(pontosCamera[i] != null, $"pontosCamera[{i}]");
+        }
+        valido &= Conferir(falasDespertar != null && falasDespertar.Length > 0, nameof(falasDespertar));
+        valido &= Conferir(falasCozinha != null && falasCozinha.Length > 0, nameof(falasCozinha));
+        bool pesquisaValida = imagensPesquisa != null && cartelasPesquisa != null &&
+            cartelasPesquisa.Length > 0 && imagensPesquisa.Length == cartelasPesquisa.Length;
+        valido &= Conferir(pesquisaValida, "imagensPesquisa / cartelasPesquisa");
+        if (pesquisaValida)
+            for (int i = 0; i < imagensPesquisa.Length; i++)
+                valido &= Conferir(imagensPesquisa[i] != null, $"imagensPesquisa[{i}]");
+        return valido;
     }
 
     private IEnumerator Dizer(Fala fala)
