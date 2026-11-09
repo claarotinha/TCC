@@ -59,6 +59,7 @@ public class ExamineObject : MonoBehaviour
 
     private void Update()
     {
+        InvestigationGuard.TraceQuartinhoClick();
         // Se a etapa terminou enquanto o mouse estava sobre o objeto,
         // retira imediatamente a lupa.
         if (showingTutorialLupa && TutorialInvestigationBlocked())

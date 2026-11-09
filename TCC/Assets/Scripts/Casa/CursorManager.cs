@@ -82,6 +82,7 @@ public class CursorManager : MonoBehaviour
     // A câmera e os scripts dos objetos terminam antes da decisão do cursor.
     private void LateUpdate()
     {
+        InvestigationGuard.TraceQuartinhoClick();
         if (PauseHelper.BlockInput() || Time.timeScale == 0f)
         { SetNormal(); return; }
         if (ChestContentsController.Instance != null &&

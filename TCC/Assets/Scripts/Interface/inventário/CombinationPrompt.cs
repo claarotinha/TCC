@@ -25,6 +25,27 @@ public class CombinationPrompt : MonoBehaviour
     private ItemData second;
     private ItemCombination selectedRecipe;
 
+    private void Awake()
+    {
+        Close();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        Close();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (mode == LoadSceneMode.Single) Close();
+    }
+
     private void Update()
     {
         if (combinationHint == null && estradaCombinationHint == null) return;
@@ -141,8 +162,8 @@ public class CombinationPrompt : MonoBehaviour
 
     private void Close()
     {
-        InvestigationGuard.BlockCurrentClick();
-        combinePanel.SetActive(false);
+        if (IsOpen) InvestigationGuard.BlockCurrentClick();
+        if (combinePanel != null) combinePanel.SetActive(false);
         first = null;
         second = null;
         selectedRecipe = null;

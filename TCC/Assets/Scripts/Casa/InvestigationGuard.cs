@@ -26,6 +26,39 @@ public static class InvestigationGuard
         return true;
     }
 
+    private static int lastDiagnosticFrame = -1;
+
+    [System.Diagnostics.Conditional("UNITY_EDITOR")]
+    public static void TraceQuartinhoClick()
+    {
+        if (SceneManager.GetActiveScene().name != "Quartinho" ||
+            !Input.GetMouseButtonDown(0) || lastDiagnosticFrame == Time.frameCount) return;
+        lastDiagnosticFrame = Time.frameCount;
+        bool projetou = TryGetPointerPosition(out Vector2 point);
+        var hits = new System.Collections.Generic.List<Collider2D>();
+        var names = new System.Collections.Generic.List<string>();
+        if (projetou) Physics2D.OverlapPoint(point, ContactFilter2D.noFilter, hits);
+        foreach (Collider2D hit in hits) names.Add(hit.name);
+        var uiNames = new System.Collections.Generic.List<string>();
+        var events = UnityEngine.EventSystems.EventSystem.current;
+        if (events != null)
+        {
+            var uiHits = new System.Collections.Generic.List<UnityEngine.EventSystems.RaycastResult>();
+            events.RaycastAll(new UnityEngine.EventSystems.PointerEventData(events)
+                { position = Input.mousePosition }, uiHits);
+            foreach (var hit in uiHits)
+                if (hit.gameObject != null && hit.gameObject.GetComponentInParent<UnityEngine.UI.Selectable>() != null)
+                    uiNames.Add(hit.gameObject.name);
+        }
+        Debug.Log("QUARTINHO_DIAG | bloqueio=" + (OpenPanelReason ?? "nenhum") +
+            " | pausa=" + UniversalPauseManager.IsPaused + " | restaurando=" + GameSaveSystem.IsRestoring +
+            " | bloqueioDoClique=" + (lastPanelClickFrame == Time.frameCount) + " | tempo=" + Time.timeScale +
+            " | camera=" + (Camera.main != null ? Camera.main.name + " / " + Camera.main.gameObject.scene.name : "nenhuma") +
+            " | projecao=" + projetou + " | ponto=" + point + " | colliders=" + string.Join(", ", names) +
+            " | controlesUI=" + string.Join(", ", uiNames) +
+            " | cursorAtivo=" + (CursorManager.Instance != null && CursorManager.Instance.isActiveAndEnabled));
+    }
+
     public static void BlockCurrentClick()
     {
         lastPanelClickFrame = Time.frameCount;
