@@ -169,7 +169,7 @@ public class EpilogoSceneController : MonoBehaviour
         if (imagemPesquisa == null) imagemPesquisa = BuscarComponente<Image>("Pesquisa - fotografias e papeis");
         if (painelCarta == null) painelCarta = BuscarObjeto("Carta de Maria Severina");
         if (textoCarta == null) textoCarta = BuscarComponente<TMP_Text>("Texto da carta");
-        string[] nomes = { "01 Quarto de Mari", "02 Cozinha - pesquisa", "03 Quarto de Zefinha - base reutilizada" };
+        string[] nomes = { "01 Quarto de Mari", "02 Cozinha - pesquisa", "03 Quarto de Zefinha" };
         if (ambientes == null || ambientes.Length != nomes.Length) ambientes = new GameObject[nomes.Length];
         if (pontosCamera == null || pontosCamera.Length != nomes.Length) pontosCamera = new Transform[nomes.Length];
         for (int i = 0; i < nomes.Length; i++)
@@ -220,11 +220,23 @@ public class EpilogoSceneController : MonoBehaviour
         return valido;
     }
 
+    private static void MostrarPainelDialogo(GameObject painel)
+    {
+        painel.SetActive(true);
+        // O modelo de diálogo da casa vem com CanvasGroup oculto.
+        // Ativar o GameObject sozinho mantém todas as falas invisíveis.
+        CanvasGroup grupo = painel.GetComponent<CanvasGroup>();
+        if (grupo == null) return;
+        grupo.alpha = 1f;
+        grupo.interactable = true;
+        grupo.blocksRaycasts = true;
+    }
+
     private IEnumerator Dizer(Fala fala)
     {
         // Canvas e painéis são os mesmos usados nas outras cenas da casa.
-        dialogueUI.SetActive(true);
-        dialoguePanel.SetActive(true);
+        MostrarPainelDialogo(dialogueUI);
+        MostrarPainelDialogo(dialoguePanel);
         choicesContainer.SetActive(false);
         portraitImage.enabled = false;
         characterNameText.text = fala.personagem;
@@ -281,8 +293,8 @@ public class EpilogoSceneController : MonoBehaviour
         imagemPesquisa.sprite = imagensPesquisa[0];
         Vector2 posicaoFoto = imagemPesquisa.rectTransform.anchoredPosition;
         Vector2 tamanhoFoto = imagemPesquisa.rectTransform.sizeDelta;
-        imagemPesquisa.rectTransform.anchoredPosition = new Vector2(-260f, 100f);
-        imagemPesquisa.rectTransform.sizeDelta = new Vector2(450f, 500f);
+        imagemPesquisa.rectTransform.anchoredPosition = new Vector2(-225f, 100f);
+        imagemPesquisa.rectTransform.sizeDelta = new Vector2(382f, 425f);
         imagemPesquisa.gameObject.SetActive(true);
         if (retratoSeverina != null) retratoSeverina.gameObject.SetActive(true);
         foreach (Fala fala in descobertaCarta) yield return Dizer(fala);
