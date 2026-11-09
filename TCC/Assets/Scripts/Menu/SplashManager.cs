@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -24,6 +26,8 @@ public class SplashManager : MonoBehaviour
     [SerializeField] private CreditoAbertura[] creditos;
     [SerializeField, Min(0f)] private float tempoFadeCreditos = 0.6f;
 
+    private TMP_Text textoPular;
+    private bool mostrouAviso;
     private bool canSkip;
     private bool leaving;
 
@@ -32,7 +36,10 @@ public class SplashManager : MonoBehaviour
         // Assistir à introdução é uma preferência; não depende dos checkpoints.
         canSkip = PlayerPrefs.GetInt(IntroWatchedKey, 0) == 1;
         if (skipIndicator != null)
-            skipIndicator.SetActive(canSkip);
+        {
+            textoPular = skipIndicator.GetComponentInChildren<TMP_Text>(true);
+            skipIndicator.SetActive(false);
+        }
 
         if (videoPlayer == null)
         {
@@ -43,27 +50,30 @@ public class SplashManager : MonoBehaviour
 
         OcultarCreditos();
         videoPlayer.isLooping = false;
-        // Reproduz diretamente na câmera; o Canvas fica apenas com os créditos.
-        videoPlayer.renderMode = VideoRenderMode.CameraNearPlane;
-        videoPlayer.targetCamera = Camera.main;
-        videoPlayer.targetCameraAlpha = 1f;
-        videoPlayer.waitForFirstFrame = true;
+        // A textura pertence ao player desta cena; não depende de Camera.main
+        // durante a troca síncrona Boot -> Intro -> Splash.
+        videoPlayer.Stop();
+        videoPlayer.playOnAwake = false;
+        videoPlayer.renderMode = VideoRenderMode.APIOnly;
         videoPlayer.targetTexture = null;
-        videoPlayer.sendFrameReadyEvents = false;
-        videoPlayer.aspectRatio = VideoAspectRatio.FitInside;
+        videoPlayer.waitForFirstFrame = true;
+        videoPlayer.sendFrameReadyEvents = true;
         if (imagemVideo != null)
         {
             imagemVideo.texture = null;
+            imagemVideo.uvRect = new Rect(0f, 0f, 1f, 1f);
             imagemVideo.enabled = false;
         }
+        videoPlayer.frameReady += PrimeiroQuadro;
         videoPlayer.prepareCompleted += VideoPreparado;
         videoPlayer.errorReceived += ErroVideo;
         videoPlayer.loopPointReached += FimDoVideo;
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
-        if (videoPlayer == null) return;
+        yield return null;
+        if (videoPlayer == null) yield break;
         if (videoPlayer.isPrepared) VideoPreparado(videoPlayer);
         else videoPlayer.Prepare();
     }
@@ -72,6 +82,43 @@ public class SplashManager : MonoBehaviour
     {
         if (leaving || player != videoPlayer) return;
         player.Play();
+    }
+
+    private void PrimeiroQuadro(VideoPlayer player, long quadro)
+    {
+        if (leaving || player != videoPlayer || imagemVideo == null || player.texture == null) return;
+        imagemVideo.texture = player.texture;
+        imagemVideo.enabled = true;
+        RectTransform area = imagemVideo.rectTransform.parent as RectTransform;
+        if (area != null && player.height > 0)
+        {
+            float aspecto = (float)player.width / player.height;
+            float largura = Mathf.Min(area.rect.width, area.rect.height * aspecto);
+            imagemVideo.rectTransform.anchorMin = imagemVideo.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+            imagemVideo.rectTransform.anchoredPosition = Vector2.zero;
+            imagemVideo.rectTransform.sizeDelta = new Vector2(largura, largura / aspecto);
+        }
+        if (canSkip && !mostrouAviso)
+        {
+            mostrouAviso = true;
+            StartCoroutine(PulsarAviso());
+        }
+    }
+
+    private IEnumerator PulsarAviso()
+    {
+        if (skipIndicator == null || textoPular == null) yield break;
+        skipIndicator.SetActive(true);
+        float tempo = 0f;
+        while (tempo < 2f && !leaving)
+        {
+            tempo += Time.unscaledDeltaTime;
+            // Dois pulsos suaves, começando e terminando transparentes.
+            textoPular.alpha = Mathf.Pow(Mathf.Sin(Mathf.Clamp01(tempo / 2f) * Mathf.PI * 2f), 2f);
+            yield return null;
+        }
+        textoPular.alpha = 0f;
+        skipIndicator.SetActive(false);
     }
 
     private void ErroVideo(VideoPlayer player, string mensagem)
@@ -155,6 +202,7 @@ public class SplashManager : MonoBehaviour
     {
         if (videoPlayer != null)
         {
+            videoPlayer.frameReady -= PrimeiroQuadro;
             videoPlayer.loopPointReached -= FimDoVideo;
             videoPlayer.prepareCompleted -= VideoPreparado;
             videoPlayer.errorReceived -= ErroVideo;
