@@ -16801,6 +16801,18 @@ PrefabInstance:
       propertyPath: painelDialogoDaCena
       value: 
       objectReference: {fileID: 3000000009}
+    - target: {fileID: 5871127168250078241, guid: b237002287116cc4c9d42eea24e122b0, type: 3}
+      propertyPath: lupaCursor
+      value:
+      objectReference: {fileID: 2800000, guid: d3df5f669130ced458c014e0d5f676eb, type: 3}
+    - target: {fileID: 5871127168250078241, guid: b237002287116cc4c9d42eea24e122b0, type: 3}
+      propertyPath: lupaSprite
+      value:
+      objectReference: {fileID: 4421436994050687871, guid: d3df5f669130ced458c014e0d5f676eb, type: 3}
+    - target: {fileID: 5871127168250078241, guid: b237002287116cc4c9d42eea24e122b0, type: 3}
+      propertyPath: texturaLupaPronta
+      value:
+      objectReference: {fileID: 2800000, guid: 610ad42201da45b3b441138220e5d54f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

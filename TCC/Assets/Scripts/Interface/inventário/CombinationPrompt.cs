@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CombinationPrompt : MonoBehaviour
 {
@@ -15,8 +16,10 @@ public class CombinationPrompt : MonoBehaviour
     [Header("Ajuda da primeira combinação")]
     [SerializeField] private TMP_Text combinationHint;
     [SerializeField] private GameObject combinationHintPanel;
+    [SerializeField] private TMP_Text estradaCombinationHint;
     private bool combinationLearned;
     private GameProgress teachingProgress;
+    private string teachingScene;
 
     private ItemData first;
     private ItemData second;
@@ -24,11 +27,17 @@ public class CombinationPrompt : MonoBehaviour
 
     private void Update()
     {
-        if (combinationHint == null) return;
+        if (combinationHint == null && estradaCombinationHint == null) return;
         if (teachingProgress != GameProgress.Instance)
         {
             teachingProgress = GameProgress.Instance;
             combinationLearned = false;
+        }
+        string activeScene = SceneManager.GetActiveScene().name;
+        if (teachingScene != activeScene)
+        {
+            teachingScene = activeScene;
+            if (activeScene == "Estrada") combinationLearned = false;
         }
         bool visible = !combinationLearned && !IsOpen && !PauseHelper.BlockInput() &&
             InventoryTabController.Instance != null && InventoryTabController.Instance.IsOpen &&
@@ -40,7 +49,16 @@ public class CombinationPrompt : MonoBehaviour
     {
         GameObject panel = combinationHintPanel != null ? combinationHintPanel :
             (combinationHint != null ? combinationHint.gameObject : null);
-        if (panel != null && panel.activeSelf != visible) panel.SetActive(visible);
+        bool estrada = SceneManager.GetActiveScene().name == "Estrada" &&
+            estradaCombinationHint != null;
+        bool showPanel = visible && !estrada;
+        if (panel != null && panel.activeSelf != showPanel) panel.SetActive(showPanel);
+        if (estradaCombinationHint != null)
+        {
+            bool showText = visible && estrada;
+            if (estradaCombinationHint.gameObject.activeSelf != showText)
+                estradaCombinationHint.gameObject.SetActive(showText);
+        }
     }
 
     private bool HasAvailableRecipe()
