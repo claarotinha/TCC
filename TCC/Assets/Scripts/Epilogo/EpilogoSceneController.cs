@@ -39,6 +39,22 @@ public class EpilogoSceneController : MonoBehaviour
     [SerializeField] private UnityEvent aoEncontrarCarta = new UnityEvent();
     [SerializeField] private UnityEvent aoFicarSemNoticias = new UnityEvent();
 
+    [Header("Etapa 3 - a carta que chegou tarde")]
+    [SerializeField] private Fala[] descobertaCarta;
+    [SerializeField] private Fala perguntaNaCozinha;
+    [SerializeField] private Fala pedidoLeitura;
+    [SerializeField] private Fala confirmacaoMae;
+    [SerializeField] private Fala gestoZefinha;
+    [SerializeField] private Fala gestoFinal;
+    [SerializeField] private Fala[] depoisDaCarta;
+    [SerializeField] private Fala[] encerramentoCarta;
+    [SerializeField, TextArea(4, 12)] private string[] paginasCarta;
+    [SerializeField] private GameObject painelCarta;
+    [SerializeField] private TMP_Text textoCarta;
+    [SerializeField, Min(0f)] private float silencioFinal = 3f;
+    [SerializeField] private UnityEvent aoConcluirFinalCarta = new UnityEvent();
+    public bool FinalCartaConcluido { get; private set; }
+
     [Header("Transição")]
     [SerializeField] private Image fadeImage;
     [SerializeField, Min(0.1f)] private float fadeDuration = 0.7f;
@@ -65,6 +81,7 @@ public class EpilogoSceneController : MonoBehaviour
         }
         FecharDialogo();
         imagemPesquisa.gameObject.SetActive(false);
+        if (painelCarta != null) painelCarta.SetActive(false);
         InventoryTabController.Instance?.Close();
         narrativaEmCurso = true;
         transitionRunning = true;
@@ -103,6 +120,7 @@ public class EpilogoSceneController : MonoBehaviour
         narrativaEmCurso = false;
         PesquisaConcluida = true;
         EncaminharFinal();
+        if (FinalComCarta) yield return ApresentarFinalCarta();
     }
 
     private T BuscarComponente<T>(string nome) where T : Component
@@ -132,6 +150,8 @@ public class EpilogoSceneController : MonoBehaviour
         if (portraitImage == null) portraitImage = BuscarComponente<Image>("Portrait");
         if (fadeImage == null) fadeImage = BuscarComponente<Image>("Escurecimento do epilogo");
         if (imagemPesquisa == null) imagemPesquisa = BuscarComponente<Image>("Pesquisa - fotografias e papeis");
+        if (painelCarta == null) painelCarta = BuscarObjeto("Carta de Maria Severina");
+        if (textoCarta == null) textoCarta = BuscarComponente<TMP_Text>("Texto da carta");
         string[] nomes = { "01 Quarto de Mari", "02 Cozinha - pesquisa", "03 Quarto de Zefinha - base reutilizada" };
         if (ambientes == null || ambientes.Length != nomes.Length) ambientes = new GameObject[nomes.Length];
         if (pontosCamera == null || pontosCamera.Length != nomes.Length) pontosCamera = new Transform[nomes.Length];
@@ -186,6 +206,11 @@ public class EpilogoSceneController : MonoBehaviour
         portraitImage.enabled = false;
         characterNameText.text = fala.personagem;
         dialogueText.text = fala.texto;
+        yield return AguardarAvanco();
+    }
+
+    private IEnumerator AguardarAvanco()
+    {
         int quadro = Time.frameCount;
         while (true)
         {
@@ -211,9 +236,59 @@ public class EpilogoSceneController : MonoBehaviour
         if (finalEncaminhado) return;
         finalEncaminhado = true;
         // Apenas identidade E destino confirmados permitem localizar a carta.
-        // As próximas etapas apresentam o conteúdo de cada final.
+        // O caminho sem notícias será apresentado na etapa 4.
         if (FinalComCarta) aoEncontrarCarta.Invoke();
         else aoFicarSemNoticias.Invoke();
+    }
+
+    private IEnumerator ApresentarFinalCarta()
+    {
+        // Nunca entra neste final com apenas uma das pistas confirmadas.
+        if (!FinalComCarta) yield break;
+        bool valido = Conferir(painelCarta != null, nameof(painelCarta));
+        valido &= Conferir(textoCarta != null, nameof(textoCarta));
+        valido &= Conferir(paginasCarta != null && paginasCarta.Length > 0, nameof(paginasCarta));
+        valido &= Conferir(descobertaCarta != null && descobertaCarta.Length > 0, nameof(descobertaCarta));
+        valido &= Conferir(depoisDaCarta != null && depoisDaCarta.Length > 0, nameof(depoisDaCarta));
+        valido &= Conferir(encerramentoCarta != null && encerramentoCarta.Length > 0, nameof(encerramentoCarta));
+        if (!valido) yield break;
+
+        narrativaEmCurso = true;
+        InventoryTabController.Instance?.Close();
+        imagemPesquisa.sprite = imagensPesquisa[0];
+        imagemPesquisa.gameObject.SetActive(true);
+        foreach (Fala fala in descobertaCarta) yield return Dizer(fala);
+        imagemPesquisa.gameObject.SetActive(false);
+        yield return Dizer(perguntaNaCozinha);
+        yield return Dizer(confirmacaoMae);
+        yield return TrocarAmbiente(2);
+        yield return Dizer(pedidoLeitura);
+        FecharDialogo();
+        painelCarta.SetActive(true);
+        foreach (string pagina in paginasCarta)
+        {
+            textoCarta.text = pagina;
+            yield return AguardarAvanco();
+        }
+        painelCarta.SetActive(false);
+        yield return Dizer(gestoZefinha);
+        foreach (Fala fala in depoisDaCarta) yield return Dizer(fala);
+        yield return Dizer(gestoFinal);
+        FecharDialogo();
+        float tempo = 0f;
+        while (tempo < silencioFinal)
+        {
+            if (!PauseHelper.BlockInput() && Time.timeScale > 0f) tempo += Time.deltaTime;
+            yield return null;
+        }
+        yield return FadePara(1f);
+        fadeImage.transform.SetAsFirstSibling();
+        foreach (Fala fala in encerramentoCarta) yield return Dizer(fala);
+        FecharDialogo();
+        fadeImage.transform.SetAsLastSibling();
+        FinalCartaConcluido = true;
+        narrativaEmCurso = false;
+        aoConcluirFinalCarta.Invoke();
     }
 
     public void MostrarAmbiente(int indice)
@@ -291,6 +366,7 @@ public class EpilogoSceneController : MonoBehaviour
         transitionRunning = false;
         FecharDialogo();
         if (imagemPesquisa != null) imagemPesquisa.gameObject.SetActive(false);
+        if (painelCarta != null) painelCarta.SetActive(false);
         if (fadeImage != null) DefinirFade(0f);
     }
 }
