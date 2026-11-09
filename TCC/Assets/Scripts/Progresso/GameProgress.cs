@@ -44,6 +44,10 @@ public class GameProgress : MonoBehaviour
         data.curraisEtapaConsulta = Mathf.Clamp(data.curraisEtapaConsulta, 0, 4);
         data.curraisPaginaMemoria = Mathf.Clamp(data.curraisPaginaMemoria, 0, 3);
         data.epilogoEtapa = Mathf.Clamp(data.epilogoEtapa, 0, 2);
+        data.epilogoFinalVisto = Mathf.Clamp(data.epilogoFinalVisto, 0, 2);
+        // Arquivos antigos continuam a partir da pesquisa normalmente.
+        if (data.epilogoFinalVisto == 0) data.epilogoConcluido = false;
+        if (data.epilogoConcluido) data.epilogoEtapa = 2;
         if (data.curraisItensRetidos == null) data.curraisItensRetidos = new System.Collections.Generic.List<string>();
         if (data.foundPhotos == null) data.foundPhotos = new System.Collections.Generic.List<int>();
         if (data.readPhotos == null) data.readPhotos = new System.Collections.Generic.List<int>();

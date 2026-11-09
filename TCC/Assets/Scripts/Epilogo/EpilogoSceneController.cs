@@ -70,6 +70,14 @@ public class EpilogoSceneController : MonoBehaviour
     [SerializeField] private UnityEvent aoConcluirFinalSemNoticias = new UnityEvent();
     public bool FinalSemNoticiasConcluido { get; private set; }
 
+    [Header("Etapa 5 - encerramento comum")]
+    [SerializeField] private GameObject painelEncerramento;
+    [SerializeField] private TMP_Text textoEncerramento;
+    [SerializeField] private Button botaoMenuFinal;
+    [SerializeField, TextArea(3, 10)] private string[] textosHistoricos;
+    [SerializeField, TextArea(3, 12)] private string[] paginasCreditos;
+    private bool voltandoAoMenu;
+
     [Header("Transição")]
     [SerializeField] private Image fadeImage;
     [SerializeField, Min(0.1f)] private float fadeDuration = 0.7f;
@@ -95,6 +103,8 @@ public class EpilogoSceneController : MonoBehaviour
             yield break;
         }
         FecharDialogo();
+        painelEncerramento.SetActive(false);
+        botaoMenuFinal.onClick.AddListener(VoltarAoMenuFinal);
         imagemPesquisa.gameObject.SetActive(false);
         if (painelCarta != null) painelCarta.SetActive(false);
         if (retratoSeverina != null) retratoSeverina.gameObject.SetActive(false);
@@ -103,7 +113,17 @@ public class EpilogoSceneController : MonoBehaviour
         transitionRunning = true;
         DefinirFade(1f);
         while (GameSaveSystem.IsRestoring) yield return null;
-        int etapa = GameProgress.Instance != null ? GameProgress.Instance.Data.epilogoEtapa : 0;
+        GameProgressData dados = GameProgress.Instance != null ? GameProgress.Instance.Data : null;
+        if (dados != null && dados.epilogoConcluido && dados.epilogoFinalVisto != 0)
+        {
+            AtivarAmbiente(2);
+            PesquisaConcluida = true;
+            FinalCartaConcluido = dados.epilogoFinalVisto == 1;
+            FinalSemNoticiasConcluido = dados.epilogoFinalVisto == 2;
+            yield return EncerramentoComum(false);
+            yield break;
+        }
+        int etapa = dados != null ? dados.epilogoEtapa : 0;
         AtivarAmbiente(etapa == 0 ? 0 : 1);
         yield return FadePara(0f);
         transitionRunning = false;
@@ -138,6 +158,8 @@ public class EpilogoSceneController : MonoBehaviour
         EncaminharFinal();
         if (FinalComCarta) yield return ApresentarFinalCarta();
         else yield return ApresentarFinalSemNoticias();
+        if (FinalCartaConcluido || FinalSemNoticiasConcluido)
+            yield return EncerramentoComum(true);
     }
 
     private T BuscarComponente<T>(string nome) where T : Component
@@ -169,6 +191,9 @@ public class EpilogoSceneController : MonoBehaviour
         if (imagemPesquisa == null) imagemPesquisa = BuscarComponente<Image>("Pesquisa - fotografias e papeis");
         if (painelCarta == null) painelCarta = BuscarObjeto("Carta de Maria Severina");
         if (textoCarta == null) textoCarta = BuscarComponente<TMP_Text>("Texto da carta");
+        if (painelEncerramento == null) painelEncerramento = BuscarObjeto("Encerramento e créditos");
+        if (textoEncerramento == null) textoEncerramento = BuscarComponente<TMP_Text>("Texto do encerramento");
+        if (botaoMenuFinal == null) botaoMenuFinal = BuscarComponente<Button>("Voltar ao menu - final");
         string[] nomes = { "01 Quarto de Mari", "02 Cozinha - pesquisa", "03 Quarto de Zefinha" };
         if (ambientes == null || ambientes.Length != nomes.Length) ambientes = new GameObject[nomes.Length];
         if (pontosCamera == null || pontosCamera.Length != nomes.Length) pontosCamera = new Transform[nomes.Length];
@@ -217,6 +242,11 @@ public class EpilogoSceneController : MonoBehaviour
         valido &= Conferir(passosMari != null && passosMari.Length > 0, nameof(passosMari));
         valido &= Conferir(retratoSeverina != null && retratoSeverina.sprite != null, nameof(retratoSeverina));
         valido &= Conferir(grupoCarta != null, nameof(grupoCarta));
+        valido &= Conferir(painelEncerramento != null, nameof(painelEncerramento));
+        valido &= Conferir(textoEncerramento != null, nameof(textoEncerramento));
+        valido &= Conferir(botaoMenuFinal != null, nameof(botaoMenuFinal));
+        valido &= Conferir(textosHistoricos != null && textosHistoricos.Length > 0, nameof(textosHistoricos));
+        valido &= Conferir(paginasCreditos != null && paginasCreditos.Length > 0, nameof(paginasCreditos));
         return valido;
     }
 
@@ -461,6 +491,60 @@ public class EpilogoSceneController : MonoBehaviour
         imagemPesquisa.color = cor;
     }
 
+    private IEnumerator EncerramentoComum(bool registrarFinal)
+    {
+        narrativaEmCurso = true;
+        transitionRunning = false;
+        FecharDialogo();
+        painelCarta.SetActive(false);
+        imagemPesquisa.gameObject.SetActive(false);
+        retratoSeverina.gameObject.SetActive(false);
+        InventoryTabController.Instance?.Close();
+        if (registrarFinal && GameProgress.Instance != null)
+        {
+            GameProgress progress = GameProgress.Instance;
+            progress.Data.epilogoFinalVisto = FinalCartaConcluido ? 1 : 2;
+            progress.Data.epilogoConcluido = true;
+            progress.Data.epilogoEtapa = 2;
+            // Reutiliza o checkpoint e o inventário existentes. Não desbloqueia
+            // salvamento nem sobrescreve a partida ao testar uma cena isolada.
+            if (progress.Data.CanSave && !GameSaveSystem.IsRestoring)
+                progress.GetComponent<GameSaveSystem>()?.TrySaveCheckpoint(gameObject.scene.name);
+        }
+        DefinirFade(1f);
+        fadeImage.transform.SetAsFirstSibling();
+        painelEncerramento.SetActive(true);
+        botaoMenuFinal.gameObject.SetActive(false);
+        foreach (string texto in textosHistoricos)
+        {
+            textoEncerramento.text = texto + "\n\nClique para continuar.";
+            yield return AguardarAvanco();
+        }
+        foreach (string pagina in paginasCreditos)
+        {
+            textoEncerramento.text = pagina + "\n\nClique para continuar.";
+            yield return AguardarAvanco();
+        }
+        int final = GameProgress.Instance != null ? GameProgress.Instance.Data.epilogoFinalVisto :
+            (FinalCartaConcluido ? 1 : 2);
+        textoEncerramento.text = final == 1 ? "CURRAIS\n\nA carta que chegou tarde" : "CURRAIS\n\nSem notícias";
+        botaoMenuFinal.gameObject.SetActive(true);
+    }
+
+    public void VoltarAoMenuFinal()
+    {
+        if (voltandoAoMenu || !painelEncerramento.activeInHierarchy ||
+            !botaoMenuFinal.gameObject.activeSelf || PauseHelper.BlockInput()) return;
+        UniversalPauseManager pause = UniversalPauseManager.Instance;
+        if (pause == null)
+        {
+            Debug.LogError("Epilogo: gerenciador de pausa/menu não encontrado.", this);
+            return;
+        }
+        voltandoAoMenu = true;
+        pause.GoToMainMenu();
+    }
+
     public void MostrarAmbiente(int indice)
     {
         if (!isActiveAndEnabled || transitionRunning || narrativaEmCurso ||
@@ -532,6 +616,8 @@ public class EpilogoSceneController : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
+        if (botaoMenuFinal != null) botaoMenuFinal.onClick.RemoveListener(VoltarAoMenuFinal);
+        if (painelEncerramento != null) painelEncerramento.SetActive(false);
         narrativaEmCurso = false;
         transitionRunning = false;
         FecharDialogo();

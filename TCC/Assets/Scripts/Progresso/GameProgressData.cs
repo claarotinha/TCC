@@ -122,6 +122,9 @@ public class GameProgressData
 
     // Epilogo: 0 despertar, 1 pesquisa na cozinha, 2 pesquisa concluida.
     public int epilogoEtapa;
+    public bool epilogoConcluido;
+    // 0 não concluído, 1 a carta que chegou tarde, 2 sem notícias.
+    public int epilogoFinalVisto;
 
     public bool CanSave => tutorialCompleted ||
         (secaDepartureCompleted && secaMealCompleted &&
