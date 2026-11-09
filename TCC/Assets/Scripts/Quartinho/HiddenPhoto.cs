@@ -147,13 +147,17 @@ public class HiddenPhoto : MonoBehaviour
 
         photoPanel.transform.SetAsLastSibling();
         photoPanel.SetActive(true);
-        CanvasGroup grupo = photoPanel.GetComponent<CanvasGroup>();
-        if (grupo != null)
-        {
-            grupo.alpha = 1f;
-            grupo.interactable = true;
-            grupo.blocksRaycasts = true;
-        }
+        // PhotoWindow é um filho independente do painel externo. Ativar só
+        // PhotoPanel deixava a janela e seus botões invisíveis, mas bloqueava
+        // todas as outras interações pela flag IsPanelOpen.
+        MostrarRamoDoPainel(panelImage.transform);
+        MostrarRamoDoPainel(panelText.transform);
+        MostrarRamoDoPainel(readButton.transform);
+        MostrarRamoDoPainel(closeButton.transform);
+        panelImage.enabled = true;
+        panelText.enabled = true;
+        readButton.interactable = true;
+        closeButton.interactable = true;
 
         GameProgress.Instance?.MarkPhotoFound(photoId);
 
@@ -161,6 +165,24 @@ public class HiddenPhoto : MonoBehaviour
 
         if (CursorManager.Instance != null)
             CursorManager.Instance.SetNormal();
+    }
+
+    private void MostrarRamoDoPainel(Transform elemento)
+    {
+        Transform raiz = photoPanel.transform;
+        if (!elemento.IsChildOf(raiz)) return;
+        for (Transform atual = elemento; atual != null; atual = atual.parent)
+        {
+            atual.gameObject.SetActive(true);
+            CanvasGroup grupo = atual.GetComponent<CanvasGroup>();
+            if (grupo != null)
+            {
+                grupo.alpha = 1f;
+                grupo.interactable = true;
+                grupo.blocksRaycasts = true;
+            }
+            if (atual == raiz) break;
+        }
     }
 
     private void ReadPhoto()
