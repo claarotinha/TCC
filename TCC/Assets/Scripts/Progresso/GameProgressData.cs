@@ -120,6 +120,9 @@ public class GameProgressData
     public int curraisPaginaMemoria;
     public bool ato2Concluido;
 
+    // Epilogo: 0 despertar, 1 pesquisa na cozinha, 2 pesquisa concluida.
+    public int epilogoEtapa;
+
     public bool CanSave => tutorialCompleted ||
         (secaDepartureCompleted && secaMealCompleted &&
          secaFoodChoice >= 1 && secaFoodChoice <= 3);

@@ -43,6 +43,7 @@ public class GameProgress : MonoBehaviour
         data.curraisEtapaPosto = Mathf.Clamp(data.curraisEtapaPosto, 0, 4);
         data.curraisEtapaConsulta = Mathf.Clamp(data.curraisEtapaConsulta, 0, 4);
         data.curraisPaginaMemoria = Mathf.Clamp(data.curraisPaginaMemoria, 0, 3);
+        data.epilogoEtapa = Mathf.Clamp(data.epilogoEtapa, 0, 2);
         if (data.curraisItensRetidos == null) data.curraisItensRetidos = new System.Collections.Generic.List<string>();
         if (data.foundPhotos == null) data.foundPhotos = new System.Collections.Generic.List<int>();
         if (data.readPhotos == null) data.readPhotos = new System.Collections.Generic.List<int>();

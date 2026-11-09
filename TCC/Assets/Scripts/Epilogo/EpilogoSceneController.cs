@@ -1,15 +1,25 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
-// Base do epílogo. As pistas do ato 2 permanecem no GameProgress existente.
 public class EpilogoSceneController : MonoBehaviour
 {
-    [Header("Ambientes editáveis na Hierarchy")]
+    [Serializable]
+    private struct Fala
+    {
+        public string personagem;
+        [TextArea(2, 6)] public string texto;
+    }
+
+    [Header("Ambientes e enquadramento da Casa Manha")]
     [SerializeField] private GameObject[] ambientes;
     [SerializeField] private SpriteRenderer[] fundos;
+    [SerializeField] private Transform[] pontosCamera;
     [SerializeField] private Camera cameraCena;
+    [SerializeField, Min(1f)] private float tamanhoCamera = 5f;
 
     [Header("Interface de diálogo existente")]
     [SerializeField] private GameObject dialogueUI;
@@ -19,48 +29,141 @@ public class EpilogoSceneController : MonoBehaviour
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private Image portraitImage;
 
+    [Header("Etapa 2 - volta e pesquisa")]
+    [SerializeField] private Fala[] falasDespertar;
+    [SerializeField] private Fala[] falasCozinha;
+    [SerializeField] private Fala[] cartelasPesquisa;
+    [SerializeField] private Fala passagemSemanas;
+    [SerializeField] private Image imagemPesquisa;
+    [SerializeField] private Sprite[] imagensPesquisa;
+    [SerializeField] private UnityEvent aoEncontrarCarta = new UnityEvent();
+    [SerializeField] private UnityEvent aoFicarSemNoticias = new UnityEvent();
+
     [Header("Transição")]
     [SerializeField] private Image fadeImage;
     [SerializeField, Min(0.1f)] private float fadeDuration = 0.7f;
     private bool transitionRunning;
+    private bool narrativaEmCurso;
+    private bool finalEncaminhado;
     private int ambienteAtual;
     private float ultimoAspecto;
 
     public int AmbienteAtual => ambienteAtual;
     public bool EmTransicao => transitionRunning;
+    public bool PesquisaConcluida { get; private set; }
+    public bool FinalComCarta => GameProgress.Instance != null &&
+        GameProgress.Instance.Data.curraisDestinoConfirmado &&
+        GameProgress.Instance.Data.curraisIdentidadeConfirmada;
 
     private IEnumerator Start()
     {
-        if (ambientes == null || fundos == null || ambientes.Length != 3 || fundos.Length != 3 ||
-            cameraCena == null || fadeImage == null || dialogueUI == null || dialoguePanel == null ||
-            choicesContainer == null || characterNameText == null || dialogueText == null || portraitImage == null)
+        if (!ReferenciasValidas())
         {
-            Debug.LogError("Epilogo: confira os três ambientes, a câmera e a interface.", this);
+            Debug.LogError("Epilogo: confira ambientes, cameras, dialogo e pesquisa no Inspector.", this);
             enabled = false;
             yield break;
         }
-        for (int i = 0; i < ambientes.Length; i++)
-            if (ambientes[i] == null || fundos[i] == null || fundos[i].sprite == null)
-            {
-                Debug.LogError("Epilogo: um ambiente está sem fundo.", this);
-                enabled = false;
-                yield break;
-            }
-
         FecharDialogo();
+        imagemPesquisa.gameObject.SetActive(false);
         InventoryTabController.Instance?.Close();
+        narrativaEmCurso = true;
         transitionRunning = true;
         DefinirFade(1f);
-        AtivarAmbiente(0);
-        // Aguarda o sistema existente terminar de restaurar o checkpoint.
         while (GameSaveSystem.IsRestoring) yield return null;
+        int etapa = GameProgress.Instance != null ? GameProgress.Instance.Data.epilogoEtapa : 0;
+        AtivarAmbiente(etapa == 0 ? 0 : 1);
         yield return FadePara(0f);
         transitionRunning = false;
+
+        if (etapa == 0)
+        {
+            foreach (Fala fala in falasDespertar) yield return Dizer(fala);
+            yield return TrocarAmbiente(1);
+            SalvarEtapa(1);
+        }
+        if (etapa < 2)
+        {
+            foreach (Fala fala in falasCozinha) yield return Dizer(fala);
+            for (int i = 0; i < cartelasPesquisa.Length; i++)
+            {
+                imagemPesquisa.sprite = imagensPesquisa[i];
+                imagemPesquisa.gameObject.SetActive(true);
+                yield return Dizer(cartelasPesquisa[i]);
+            }
+            imagemPesquisa.gameObject.SetActive(false);
+            yield return FadePara(1f);
+            fadeImage.transform.SetAsFirstSibling();
+            yield return Dizer(passagemSemanas);
+            FecharDialogo();
+            fadeImage.transform.SetAsLastSibling();
+            yield return FadePara(0f);
+            SalvarEtapa(2);
+        }
+        FecharDialogo();
+        narrativaEmCurso = false;
+        PesquisaConcluida = true;
+        EncaminharFinal();
+    }
+
+    private bool ReferenciasValidas()
+    {
+        if (ambientes == null || fundos == null || pontosCamera == null ||
+            ambientes.Length != 3 || fundos.Length != 3 || pontosCamera.Length != 3 ||
+            cameraCena == null || fadeImage == null || dialogueUI == null || dialoguePanel == null ||
+            choicesContainer == null || characterNameText == null || dialogueText == null || portraitImage == null ||
+            imagemPesquisa == null || imagensPesquisa == null || cartelasPesquisa == null ||
+            imagensPesquisa.Length != cartelasPesquisa.Length || cartelasPesquisa.Length == 0 ||
+            falasDespertar == null || falasDespertar.Length == 0 || falasCozinha == null || falasCozinha.Length == 0)
+            return false;
+        for (int i = 0; i < 3; i++)
+            if (ambientes[i] == null || fundos[i] == null || fundos[i].sprite == null || pontosCamera[i] == null) return false;
+        for (int i = 0; i < imagensPesquisa.Length; i++) if (imagensPesquisa[i] == null) return false;
+        return true;
+    }
+
+    private IEnumerator Dizer(Fala fala)
+    {
+        // Canvas e painéis são os mesmos usados nas outras cenas da casa.
+        dialogueUI.SetActive(true);
+        dialoguePanel.SetActive(true);
+        choicesContainer.SetActive(false);
+        portraitImage.enabled = false;
+        characterNameText.text = fala.personagem;
+        dialogueText.text = fala.texto;
+        int quadro = Time.frameCount;
+        while (true)
+        {
+            yield return null;
+            if (Time.frameCount > quadro && !PauseHelper.BlockInput() && Time.timeScale > 0f &&
+                (InventoryTabController.Instance == null || !InventoryTabController.Instance.IsOpen) &&
+                Input.GetMouseButtonDown(0)) break;
+        }
+        InvestigationGuard.BlockCurrentClick();
+    }
+
+    private void SalvarEtapa(int etapa)
+    {
+        GameProgress progress = GameProgress.Instance;
+        if (progress == null) return;
+        progress.Data.epilogoEtapa = etapa;
+        if (!GameSaveSystem.IsRestoring && progress.Data.CanSave)
+            progress.GetComponent<GameSaveSystem>()?.TrySaveCheckpoint(gameObject.scene.name);
+    }
+
+    private void EncaminharFinal()
+    {
+        if (finalEncaminhado) return;
+        finalEncaminhado = true;
+        // Apenas identidade E destino confirmados permitem localizar a carta.
+        // As próximas etapas apresentam o conteúdo de cada final.
+        if (FinalComCarta) aoEncontrarCarta.Invoke();
+        else aoFicarSemNoticias.Invoke();
     }
 
     public void MostrarAmbiente(int indice)
     {
-        if (!isActiveAndEnabled || transitionRunning || indice < 0 || indice >= ambientes.Length) return;
+        if (!isActiveAndEnabled || transitionRunning || narrativaEmCurso ||
+            indice < 0 || indice >= ambientes.Length) return;
         StartCoroutine(TrocarAmbiente(indice));
     }
 
@@ -84,17 +187,17 @@ public class EpilogoSceneController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (cameraCena != null && !Mathf.Approximately(ultimoAspecto, cameraCena.aspect))
-            EnquadrarAmbiente();
+        if (narrativaEmCurso) InventoryTabController.Instance?.Close();
+        if (cameraCena != null && !Mathf.Approximately(ultimoAspecto, cameraCena.aspect)) EnquadrarAmbiente();
     }
 
     private void EnquadrarAmbiente()
     {
-        if (fundos == null || ambienteAtual >= fundos.Length || fundos[ambienteAtual] == null) return;
-        Bounds bounds = fundos[ambienteAtual].bounds;
-        ultimoAspecto = Mathf.Max(.01f, cameraCena.aspect);
-        cameraCena.orthographicSize = Mathf.Max(bounds.extents.y, bounds.extents.x / ultimoAspecto);
-        cameraCena.transform.position = new Vector3(bounds.center.x, bounds.center.y, -10f);
+        if (pontosCamera == null || ambienteAtual >= pontosCamera.Length || pontosCamera[ambienteAtual] == null) return;
+        ultimoAspecto = cameraCena.aspect;
+        cameraCena.orthographicSize = tamanhoCamera;
+        Vector3 ponto = pontosCamera[ambienteAtual].position;
+        cameraCena.transform.position = new Vector3(ponto.x, ponto.y, -10f);
     }
 
     private IEnumerator FadePara(float destino)
@@ -128,7 +231,10 @@ public class EpilogoSceneController : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
+        narrativaEmCurso = false;
         transitionRunning = false;
+        FecharDialogo();
+        if (imagemPesquisa != null) imagemPesquisa.gameObject.SetActive(false);
         if (fadeImage != null) DefinirFade(0f);
     }
 }
