@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-// Cena 21: encerramento do passado, sem carregar o epílogo ou escolher um final.
+// Cena 21: encerra o passado e preserva as pistas ao entrar no epílogo.
 public partial class EntradaCurrais
 {
     [Header("Etapa 6 - as páginas seguintes")]
@@ -18,6 +19,7 @@ public partial class EntradaCurrais
     [SerializeField, Min(1f)] private float duracaoPaginaMemoria = 8f;
     [SerializeField, Min(.1f)] private float leituraMinimaMemoria = 2.5f;
     [SerializeField, Min(.1f)] private float duracaoCorteMemoria = 1.5f;
+    [SerializeField] private string cenaEpilogo = "epilogo";
     private bool planoMemoriaAtivo, leituraPaginaMemoria, paginaMemoriaPodeAvancar;
     private readonly Dictionary<Animator, bool> animadoresMemoria = new Dictionary<Animator, bool>();
 
@@ -159,9 +161,10 @@ public partial class EntradaCurrais
         {
             Dados.ato2Concluido = true;
             GameProgress.Instance.UnlockDiaryPage("currais-memoria-encerrada");
-            Salvar(); // O checkpoint continua em Currais, sem entrar no epílogo.
+            Salvar(); // Mantém um checkpoint recuperável se a transição falhar.
         }
-        AbrirMenuFimMemoria();
+        if (!rever) yield return IrParaEpilogo();
+        else AbrirMenuFimMemoria();
     }
 
     private IEnumerator CorteParaPresente()
@@ -194,7 +197,7 @@ public partial class EntradaCurrais
         {
             PrepararPlanoMemoria();
             quartoMemoria.gameObject.SetActive(true); DefinirAlphaQuarto(1f);
-            AbrirMenuFimMemoria();
+            yield return IrParaEpilogo();
             yield break;
         }
         yield return ExibirPaginasMemoria(false);
@@ -202,10 +205,12 @@ public partial class EntradaCurrais
 
     private void AbrirMenuFimMemoria()
     {
-        MostrarOpcoes(tituloFimMemoria, InformacoesConsulta(), opcoesFimMemoria, new Action[] {
+        string[] opcoes = (string[])opcoesFimMemoria.Clone();
+        opcoes[2] = "Voltar ao presente";
+        MostrarOpcoes(tituloFimMemoria, InformacoesConsulta(), opcoes, new Action[] {
             () => Iniciar(ExibirPaginasMemoria(true)),
             () => Iniciar(RevisarPistasMemoria()),
-            VoltarAoAbrigoMemoria,
+            () => Iniciar(IrParaEpilogo()),
             VoltarAoMenuMemoria });
     }
 
@@ -213,6 +218,22 @@ public partial class EntradaCurrais
     {
         yield return Dizer(new[] { new Fala { personagem = "Memória", texto = InformacoesConsulta() } });
         AbrirMenuFimMemoria();
+    }
+
+    private IEnumerator IrParaEpilogo()
+    {
+        if (string.IsNullOrWhiteSpace(cenaEpilogo) || !Application.CanStreamedLevelBeLoaded(cenaEpilogo))
+        {
+            Debug.LogError("Currais: a cena do epílogo não está habilitada na build.", this);
+            AbrirMenuFimMemoria();
+            yield break;
+        }
+        yield return Escurecer(1f);
+        // Não altera destino, identidade, inventário ou escolhas anteriores.
+        GameSaveSystem sistema = GameProgress.Instance.GetComponent<GameSaveSystem>();
+        if (sistema != null && Dados.CanSave && !GameSaveSystem.IsRestoring)
+            sistema.TrySaveCheckpoint(cenaEpilogo);
+        SceneManager.LoadScene(cenaEpilogo);
     }
 
     private void VoltarAoAbrigoMemoria()
