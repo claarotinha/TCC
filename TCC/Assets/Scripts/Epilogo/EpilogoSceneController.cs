@@ -55,6 +55,21 @@ public class EpilogoSceneController : MonoBehaviour
     [SerializeField] private UnityEvent aoConcluirFinalCarta = new UnityEvent();
     public bool FinalCartaConcluido { get; private set; }
 
+    [Header("Gestos e imagens do epílogo")]
+    [SerializeField] private Transform maeCozinha;
+    [SerializeField] private Transform zefinhaIdosa;
+    [SerializeField] private SpriteRenderer mariLeitura;
+    [SerializeField] private Sprite[] passosMari;
+    [SerializeField] private Image retratoSeverina;
+    [SerializeField] private CanvasGroup grupoCarta;
+
+    [Header("Etapa 4 - sem notícias")]
+    [SerializeField] private Fala[] conversaSemNoticias;
+    [SerializeField] private Fala[] quartoSemNoticias;
+    [SerializeField] private Fala[] encerramentoSemNoticias;
+    [SerializeField] private UnityEvent aoConcluirFinalSemNoticias = new UnityEvent();
+    public bool FinalSemNoticiasConcluido { get; private set; }
+
     [Header("Transição")]
     [SerializeField] private Image fadeImage;
     [SerializeField, Min(0.1f)] private float fadeDuration = 0.7f;
@@ -82,6 +97,7 @@ public class EpilogoSceneController : MonoBehaviour
         FecharDialogo();
         imagemPesquisa.gameObject.SetActive(false);
         if (painelCarta != null) painelCarta.SetActive(false);
+        if (retratoSeverina != null) retratoSeverina.gameObject.SetActive(false);
         InventoryTabController.Instance?.Close();
         narrativaEmCurso = true;
         transitionRunning = true;
@@ -121,6 +137,7 @@ public class EpilogoSceneController : MonoBehaviour
         PesquisaConcluida = true;
         EncaminharFinal();
         if (FinalComCarta) yield return ApresentarFinalCarta();
+        else yield return ApresentarFinalSemNoticias();
     }
 
     private T BuscarComponente<T>(string nome) where T : Component
@@ -194,6 +211,12 @@ public class EpilogoSceneController : MonoBehaviour
         if (pesquisaValida)
             for (int i = 0; i < imagensPesquisa.Length; i++)
                 valido &= Conferir(imagensPesquisa[i] != null, $"imagensPesquisa[{i}]");
+        valido &= Conferir(maeCozinha != null, nameof(maeCozinha));
+        valido &= Conferir(zefinhaIdosa != null, nameof(zefinhaIdosa));
+        valido &= Conferir(mariLeitura != null, nameof(mariLeitura));
+        valido &= Conferir(passosMari != null && passosMari.Length > 0, nameof(passosMari));
+        valido &= Conferir(retratoSeverina != null && retratoSeverina.sprite != null, nameof(retratoSeverina));
+        valido &= Conferir(grupoCarta != null, nameof(grupoCarta));
         return valido;
     }
 
@@ -236,7 +259,7 @@ public class EpilogoSceneController : MonoBehaviour
         if (finalEncaminhado) return;
         finalEncaminhado = true;
         // Apenas identidade E destino confirmados permitem localizar a carta.
-        // O caminho sem notícias será apresentado na etapa 4.
+        // Cada caminho mantém os mesmos fatos e pistas do salvamento.
         if (FinalComCarta) aoEncontrarCarta.Invoke();
         else aoFicarSemNoticias.Invoke();
     }
@@ -256,23 +279,36 @@ public class EpilogoSceneController : MonoBehaviour
         narrativaEmCurso = true;
         InventoryTabController.Instance?.Close();
         imagemPesquisa.sprite = imagensPesquisa[0];
+        Vector2 posicaoFoto = imagemPesquisa.rectTransform.anchoredPosition;
+        Vector2 tamanhoFoto = imagemPesquisa.rectTransform.sizeDelta;
+        imagemPesquisa.rectTransform.anchoredPosition = new Vector2(-260f, 100f);
+        imagemPesquisa.rectTransform.sizeDelta = new Vector2(450f, 500f);
         imagemPesquisa.gameObject.SetActive(true);
+        if (retratoSeverina != null) retratoSeverina.gameObject.SetActive(true);
         foreach (Fala fala in descobertaCarta) yield return Dizer(fala);
         imagemPesquisa.gameObject.SetActive(false);
+        imagemPesquisa.rectTransform.anchoredPosition = posicaoFoto;
+        imagemPesquisa.rectTransform.sizeDelta = tamanhoFoto;
+        if (retratoSeverina != null) retratoSeverina.gameObject.SetActive(false);
         yield return Dizer(perguntaNaCozinha);
+        yield return AnimarGesto(maeCozinha, 0.7f, 2f);
         yield return Dizer(confirmacaoMae);
         yield return TrocarAmbiente(2);
         yield return Dizer(pedidoLeitura);
         FecharDialogo();
         painelCarta.SetActive(true);
+        yield return AnimarCarta(true);
         foreach (string pagina in paginasCarta)
         {
             textoCarta.text = pagina;
             yield return AguardarAvanco();
         }
+        yield return AnimarCarta(false);
         painelCarta.SetActive(false);
+        yield return AnimarGesto(zefinhaIdosa, 1.2f, 0.6f);
         yield return Dizer(gestoZefinha);
         foreach (Fala fala in depoisDaCarta) yield return Dizer(fala);
+        yield return AproximarMari();
         yield return Dizer(gestoFinal);
         FecharDialogo();
         float tempo = 0f;
@@ -289,6 +325,128 @@ public class EpilogoSceneController : MonoBehaviour
         FinalCartaConcluido = true;
         narrativaEmCurso = false;
         aoConcluirFinalCarta.Invoke();
+    }
+
+    private IEnumerator ApresentarFinalSemNoticias()
+    {
+        if (FinalComCarta) yield break;
+        bool valido = Conferir(conversaSemNoticias != null && conversaSemNoticias.Length > 0, nameof(conversaSemNoticias));
+        valido &= Conferir(quartoSemNoticias != null && quartoSemNoticias.Length > 0, nameof(quartoSemNoticias));
+        valido &= Conferir(encerramentoSemNoticias != null && encerramentoSemNoticias.Length > 0, nameof(encerramentoSemNoticias));
+        if (!valido) yield break;
+        narrativaEmCurso = true;
+        InventoryTabController.Instance?.Close();
+        // Só a fotografia das meninas: a pesquisa não revela destino nem carta.
+        imagemPesquisa.sprite = imagensPesquisa[0];
+        imagemPesquisa.gameObject.SetActive(true);
+        for (int i = 0; i < conversaSemNoticias.Length; i++)
+        {
+            if (i == 2) yield return AguardarTempo(1.5f);
+            yield return Dizer(conversaSemNoticias[i]);
+        }
+        imagemPesquisa.gameObject.SetActive(false);
+        yield return TrocarAmbiente(2);
+        yield return AnimarGesto(zefinhaIdosa, 1f, 0.6f);
+        foreach (Fala fala in quartoSemNoticias) yield return Dizer(fala);
+        yield return AproximarMari();
+        FecharDialogo();
+        imagemPesquisa.gameObject.SetActive(true);
+        yield return AguardarTempo(silencioFinal);
+        // O fundo escurece primeiro; a fotografia continua acima do preto.
+        fadeImage.transform.SetAsFirstSibling();
+        yield return FadePara(1f);
+        yield return AguardarTempo(3f);
+        yield return DesaparecerFotografia();
+        imagemPesquisa.gameObject.SetActive(false);
+        foreach (Fala fala in encerramentoSemNoticias) yield return Dizer(fala);
+        FecharDialogo();
+        fadeImage.transform.SetAsLastSibling();
+        FinalSemNoticiasConcluido = true;
+        narrativaEmCurso = false;
+        aoConcluirFinalSemNoticias.Invoke();
+    }
+
+    private IEnumerator AguardarTempo(float duracao)
+    {
+        float tempo = 0f;
+        while (tempo < duracao)
+        {
+            if (!PauseHelper.BlockInput() && Time.timeScale > 0f) tempo += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private IEnumerator AnimarGesto(Transform alvo, float duracao, float angulo)
+    {
+        if (alvo == null) yield break;
+        Quaternion origem = alvo.localRotation;
+        float tempo = 0f;
+        while (tempo < duracao)
+        {
+            if (!PauseHelper.BlockInput() && Time.timeScale > 0f)
+            {
+                tempo += Time.deltaTime;
+                alvo.localRotation = origem * Quaternion.Euler(0f, 0f,
+                    Mathf.Sin(tempo / duracao * Mathf.PI * 4f) * angulo);
+            }
+            yield return null;
+        }
+        alvo.localRotation = origem;
+    }
+
+    private IEnumerator AproximarMari()
+    {
+        if (mariLeitura == null) yield break;
+        Vector3 inicio = mariLeitura.transform.localPosition;
+        Vector3 destino = inicio + Vector3.right * 1.2f;
+        Sprite repouso = mariLeitura.sprite;
+        float tempo = 0f;
+        while (tempo < 1.2f)
+        {
+            if (!PauseHelper.BlockInput() && Time.timeScale > 0f)
+            {
+                tempo += Time.deltaTime;
+                mariLeitura.transform.localPosition = Vector3.Lerp(inicio, destino, Mathf.SmoothStep(0f, 1f, tempo / 1.2f));
+                if (passosMari != null && passosMari.Length > 0)
+                    mariLeitura.sprite = passosMari[Mathf.FloorToInt(tempo * 8f) % passosMari.Length];
+            }
+            yield return null;
+        }
+        mariLeitura.sprite = repouso;
+    }
+
+    private IEnumerator AnimarCarta(bool mostrar)
+    {
+        if (grupoCarta == null) yield break;
+        float tempo = 0f;
+        grupoCarta.alpha = mostrar ? 0f : 1f;
+        while (tempo < 0.5f)
+        {
+            if (!PauseHelper.BlockInput() && Time.timeScale > 0f)
+            {
+                tempo += Time.deltaTime;
+                float fracao = Mathf.Clamp01(tempo / 0.5f);
+                grupoCarta.alpha = mostrar ? fracao : 1f - fracao;
+            }
+            yield return null;
+        }
+        grupoCarta.alpha = mostrar ? 1f : 0f;
+    }
+
+    private IEnumerator DesaparecerFotografia()
+    {
+        Color cor = imagemPesquisa.color;
+        float tempo = 0f;
+        while (tempo < 1.5f)
+        {
+            if (!PauseHelper.BlockInput() && Time.timeScale > 0f)
+            {
+                tempo += Time.deltaTime;
+                imagemPesquisa.color = new Color(cor.r, cor.g, cor.b, Mathf.Lerp(cor.a, 0f, tempo / 1.5f));
+            }
+            yield return null;
+        }
+        imagemPesquisa.color = cor;
     }
 
     public void MostrarAmbiente(int indice)
@@ -366,6 +524,7 @@ public class EpilogoSceneController : MonoBehaviour
         transitionRunning = false;
         FecharDialogo();
         if (imagemPesquisa != null) imagemPesquisa.gameObject.SetActive(false);
+        if (retratoSeverina != null) retratoSeverina.gameObject.SetActive(false);
         if (painelCarta != null) painelCarta.SetActive(false);
         if (fadeImage != null) DefinirFade(0f);
     }
