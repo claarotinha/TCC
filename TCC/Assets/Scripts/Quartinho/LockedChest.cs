@@ -71,8 +71,8 @@ public class LockedChest : MonoBehaviour
             !interactionCollider.enabled)
             return;
 
-        Vector2 mousePosition =
-            Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (!InvestigationGuard.TryGetPointerPosition(out Vector2 mousePosition))
+            return;
 
         if (!interactionCollider.OverlapPoint(mousePosition))
             return;

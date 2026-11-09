@@ -61,8 +61,8 @@ public class QuartinhoExit : MonoBehaviour
             InvestigationGuard.Blocked)
             return;
 
-        Vector2 mousePosition =
-            Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (!InvestigationGuard.TryGetPointerPosition(out Vector2 mousePosition))
+            return;
 
         if (!doorCollider.OverlapPoint(mousePosition))
             return;

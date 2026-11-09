@@ -120,8 +120,8 @@ public class ExamineObject : MonoBehaviour
         if (Camera.main == null || myCollider == null)
             return;
 
-        Vector2 mousePosition =
-            Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (!InvestigationGuard.TryGetPointerPosition(out Vector2 mousePosition))
+            return;
 
         if (!myCollider.OverlapPoint(mousePosition))
             return;
@@ -192,7 +192,16 @@ public class ExamineObject : MonoBehaviour
             currentObject.HidePanel();
 
         if (examinePanel != null)
+        {
             examinePanel.SetActive(true);
+            CanvasGroup grupo = examinePanel.GetComponent<CanvasGroup>();
+            if (grupo != null)
+            {
+                grupo.alpha = 1f;
+                grupo.interactable = true;
+                grupo.blocksRaycasts = true;
+            }
+        }
 
         if (examineText != null)
             examineText.text = text;

@@ -4,6 +4,18 @@ public static class InvestigationGuard
 {
     private static int lastPanelClickFrame = -1;
 
+    public static bool TryGetPointerPosition(out Vector2 position)
+    {
+        position = default;
+        Camera camera = Camera.main;
+        if (camera == null) return false;
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        Plane plane = new Plane(Vector3.forward, Vector3.zero);
+        if (!plane.Raycast(ray, out float distance)) return false;
+        position = ray.GetPoint(distance);
+        return true;
+    }
+
     public static void BlockCurrentClick()
     {
         lastPanelClickFrame = Time.frameCount;

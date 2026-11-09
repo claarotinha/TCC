@@ -106,10 +106,8 @@ public class CursorManager : MonoBehaviour
         }
 
         // A mesma projeção usada pelos controladores de clique, inclusive com câmera inclinada.
-        Ray raio = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane plano = new Plane(Vector3.forward, Vector3.zero);
-        if (!plano.Raycast(raio, out float distancia)) { SetNormal(); return; }
-        Vector2 mousePosition = raio.GetPoint(distancia);
+        if (!InvestigationGuard.TryGetPointerPosition(out Vector2 mousePosition))
+        { SetNormal(); return; }
         if ((currais != null && currais.PonteiroSobreInteracao(mousePosition)) ||
             (jornada != null && jornada.PonteiroSobreInteracao(mousePosition)))
         { SetLupa(); return; }

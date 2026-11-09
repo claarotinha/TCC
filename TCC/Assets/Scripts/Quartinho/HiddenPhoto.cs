@@ -34,6 +34,8 @@ public class HiddenPhoto : MonoBehaviour
     private void Awake()
     {
         interactionCollider = GetComponent<Collider2D>();
+        // O painel compartilhado só fica ativo depois de clicar numa foto.
+        if (current == null && photoPanel != null) photoPanel.SetActive(false);
         // O alvo da fotografia tem seu próprio painel; não abre também o exame genérico.
         ExamineObject exame = GetComponent<ExamineObject>();
         if (exame != null) exame.enabled = false;
@@ -70,8 +72,8 @@ public class HiddenPhoto : MonoBehaviour
 
         // Testa o collider do objeto diretamente. O collider do chão ou
         // da personagem não pode interceptar o clique como em OnMouseDown.
-        Vector2 mousePosition =
-            Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (!InvestigationGuard.TryGetPointerPosition(out Vector2 mousePosition))
+            return;
 
         if (!interactionCollider.OverlapPoint(mousePosition))
             return;
@@ -145,6 +147,13 @@ public class HiddenPhoto : MonoBehaviour
 
         photoPanel.transform.SetAsLastSibling();
         photoPanel.SetActive(true);
+        CanvasGroup grupo = photoPanel.GetComponent<CanvasGroup>();
+        if (grupo != null)
+        {
+            grupo.alpha = 1f;
+            grupo.interactable = true;
+            grupo.blocksRaycasts = true;
+        }
 
         GameProgress.Instance?.MarkPhotoFound(photoId);
 
