@@ -941,15 +941,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component:
-      fileID: 467838414
-  - component:
-      fileID: 467838415
-  - component:
-      fileID: 467838416
-  - component:
-      fileID: 4200000047
+  m_Component: [{component: {fileID: 467838414}}, {component: {fileID: 467838415}}, {component: {fileID: 467838416}}, {component: {fileID: 4200000047}}, {component: {fileID: 8800000011}}, {component: {fileID: 8800001001}}]
   m_Layer: 0
   m_Name: Mainha
   m_TagString: Untagged
@@ -1022,12 +1014,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 20
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4017393869555595384, guid: 20cd620554b817747a4d60a7645ac0b8, type: 3}
-  m_Color:
-    r: 1
-    g: 1
-    b: 1
-    a: 1
+  m_Sprite: {fileID: 21300000, guid: c7b11d73cf3554cca3848043952741ee, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1052,7 +1040,7 @@ MonoBehaviour:
   m_Name: null
   m_EditorClassIdentifier: Assembly-CSharp::SeguidorFamilia
   mari: {fileID: 1304905425}
-  animator: {fileID: 0}
+  animator: {fileID: 8800000011}
   spriteRenderer: {fileID: 0}
   distanciaAtras: 1.8
   velocidade: 5
@@ -1781,15 +1769,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component:
-      fileID: 700555846
-  - component:
-      fileID: 700555847
-  - component:
-      fileID: 700555848
-  - component:
-      fileID: 3400000000
+  m_Component: [{component: {fileID: 700555846}}, {component: {fileID: 700555847}}, {component: {fileID: 700555848}}, {component: {fileID: 3400000000}}, {component: {fileID: 8800000010}}, {component: {fileID: 8800001000}}]
   m_Layer: 0
   m_Name: Mariquinha
   m_TagString: Untagged
@@ -1874,12 +1854,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 22
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8665033404165353698, guid: 435d48fc323a46a40899d354d3aabc28, type: 3}
-  m_Color:
-    r: 1
-    g: 1
-    b: 1
-    a: 1
+  m_Sprite: {fileID: 21300000, guid: e0ecc5fda5255e10b61a0d785bd31b46, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1904,7 +1880,7 @@ MonoBehaviour:
   m_Name: null
   m_EditorClassIdentifier: Assembly-CSharp::SeguidorFamilia
   mari: {fileID: 1304905425}
-  animator: {fileID: 0}
+  animator: {fileID: 8800000010}
   spriteRenderer: {fileID: 0}
   distanciaAtras: 1.2
   velocidade: 5
@@ -3371,13 +3347,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component:
-      fileID: 1156249496
-  - component:
-      fileID: 1156249497
-  - component:
-      fileID: 1156249498
+  m_Component: [{component: {fileID: 1156249496}}, {component: {fileID: 1156249497}}, {component: {fileID: 1156249498}}, {component: {fileID: 8800000012}}, {component: {fileID: 8800001002}}]
   m_Layer: 0
   m_Name: Painho
   m_TagString: Untagged
@@ -3450,12 +3420,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 21
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300002, guid: c9a90000000040008000000000000003, type: 3}
-  m_Color:
-    r: 1
-    g: 1
-    b: 1
-    a: 1
+  m_Sprite: {fileID: 21300000, guid: fc7ce8e52d6652eea7806cba6d15bc15, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3480,7 +3446,7 @@ MonoBehaviour:
   m_Name: null
   m_EditorClassIdentifier: Assembly-CSharp::SeguidorFamilia
   mari: {fileID: 1304905425}
-  animator: {fileID: 0}
+  animator: {fileID: 8800000012}
   spriteRenderer: {fileID: 0}
   distanciaAtras: 3.6
   velocidade: 5
@@ -3830,7 +3796,7 @@ Animator:
   m_GameObject: {fileID: 1304905419}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: f38afdc39dba517c910a3f42f2c9cdbb, type: 2}
+  m_Controller: {fileID: 22100000, guid: b3fe80fd0b1952b8b480a4b0794865a4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3978,12 +3944,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 30
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8297607517880692621, guid: 7711d4513fd808c40adef11b269310e2, type: 3}
-  m_Color:
-    r: 1
-    g: 1
-    b: 1
-    a: 1
+  m_Sprite: {fileID: 21300000, guid: 85479e3103f15df781ff1e87c6892992, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -13629,15 +13591,9 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component:
-      fileID: 4100000083
-  - component:
-      fileID: 4100000084
-  - component:
-      fileID: 4100000085
+  m_Component: [{component: {fileID: 4100000083}}, {component: {fileID: 4100000084}}, {component: {fileID: 4100000085}}, {component: {fileID: 8800000013}}, {component: {fileID: 8800001003}}]
   m_Layer: 0
-  m_Name: Cabo - policial provisório
+  m_Name: Cabo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13720,12 +13676,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 28
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300003, guid: c9a90000000040008000000000000002, type: 3}
-  m_Color:
-    r: 1
-    g: 1
-    b: 1
-    a: 1
+  m_Sprite: {fileID: 21300000, guid: 236602abc3425227b90e85f32c86e5d1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -13804,15 +13756,9 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component:
-      fileID: 4100000087
-  - component:
-      fileID: 4100000088
-  - component:
-      fileID: 4100000089
+  m_Component: [{component: {fileID: 4100000087}}, {component: {fileID: 4100000088}}, {component: {fileID: 4100000089}}, {component: {fileID: 8800000014}}, {component: {fileID: 8800001004}}]
   m_Layer: 0
-  m_Name: Fiscal - policial provisório
+  m_Name: Fiscal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13895,12 +13841,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 24
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: c9a90000000040008000000000000002, type: 3}
-  m_Color:
-    r: 1
-    g: 1
-    b: 1
-    a: 1
+  m_Sprite: {fileID: 21300000, guid: 34ef38e60f0e505f948cd84fa73d42d1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -13979,13 +13921,9 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4100000091}
-  - component: {fileID: 4100000092}
-  - component: {fileID: 4100000093}
-  - component: {fileID: 4500000018}
+  m_Component: [{component: {fileID: 4100000091}}, {component: {fileID: 4100000092}}, {component: {fileID: 4100000093}}, {component: {fileID: 4500000018}}, {component: {fileID: 8800000015}}, {component: {fileID: 8800001005}}]
   m_Layer: 0
-  m_Name: Guarda do portao - provisório
+  m_Name: Guarda do portao
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14068,12 +14006,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 28
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: c9a90000000040008000000000000002, type: 3}
-  m_Color:
-    r: 1
-    g: 1
-    b: 1
-    a: 1
+  m_Sprite: {fileID: 21300000, guid: 34ef38e60f0e505f948cd84fa73d42d1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -14152,17 +14086,9 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component:
-      fileID: 4100000095
-  - component:
-      fileID: 4100000096
-  - component:
-      fileID: 4100000097
-  - component:
-      fileID: 4200000049
+  m_Component: [{component: {fileID: 4100000095}}, {component: {fileID: 4100000096}}, {component: {fileID: 4100000097}}, {component: {fileID: 4200000049}}, {component: {fileID: 8800000016}}, {component: {fileID: 8800001006}}]
   m_Layer: 0
-  m_Name: Luzia - mulher reutilizada
+  m_Name: Luzia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14245,12 +14171,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 24
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300001, guid: c6a60000000040008000000000000002, type: 3}
-  m_Color:
-    r: 1
-    g: 1
-    b: 1
-    a: 1
+  m_Sprite: {fileID: 21300000, guid: e2027014ff175e58a9d1c34d8623058a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -14551,13 +14473,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component:
-      fileID: 4100000105
-  - component:
-      fileID: 4100000106
-  - component:
-      fileID: 4100000107
+  m_Component: [{component: {fileID: 4100000105}}, {component: {fileID: 4100000106}}, {component: {fileID: 4100000107}}, {component: {fileID: 8800000017}}, {component: {fileID: 8800001007}}]
   m_Layer: 0
   m_Name: Crianca da outra fila
   m_TagString: Untagged
@@ -14642,12 +14558,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 18
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300002, guid: c6a60000000040008000000000000002, type: 3}
-  m_Color:
-    r: 1
-    g: 1
-    b: 1
-    a: 1
+  m_Sprite: {fileID: 21300000, guid: 46dd88b275cb59968d6ae630cb0e03f7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -15886,8 +15798,8 @@ MonoBehaviour:
   seguidoraMae: {fileID: 467838416}
   alcanceInteracao: 3
   guardaRegistro: {fileID: 4200000034}
-  guardaRegistroParado: {fileID: 21300000, guid: c9a90000000040008000000000000002, type: 3}
-  guardaRegistroBloqueio: {fileID: 21300003, guid: c9a90000000040008000000000000002, type: 3}
+  guardaRegistroParado: {fileID: 21300000, guid: 34ef38e60f0e505f948cd84fa73d42d1, type: 3}
+  guardaRegistroBloqueio: {fileID: 21300000, guid: 34ef38e60f0e505f948cd84fa73d42d1, type: 3}
   cabacaVaziaBusca: {fileID: 11400000, guid: f0c6e92250400ab42871c53f7ebf8161, type: 2}
   cabacaCheiaBusca: {fileID: 11400000, guid: aa17c14a2df34f789bd319f7012a0031, type: 2}
   itemLaco: {fileID: 11400000, guid: 1083a2fec9775e2c9829a6a959228da0, type: 2}
@@ -17748,15 +17660,9 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component:
-      fileID: 4200000029
-  - component:
-      fileID: 4200000030
-  - component:
-      fileID: 4200000031
+  m_Component: [{component: {fileID: 4200000029}}, {component: {fileID: 4200000030}}, {component: {fileID: 4200000031}}, {component: {fileID: 8800000018}}, {component: {fileID: 8800001008}}]
   m_Layer: 0
-  m_Name: Escrivao - personagem reutilizado
+  m_Name: Escrivao
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17839,12 +17745,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 24
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300002, guid: c9a90000000040008000000000000003, type: 3}
-  m_Color:
-    r: 1
-    g: 1
-    b: 1
-    a: 1
+  m_Sprite: {fileID: 21300000, guid: 9d3c2f7eb5bf58e6ac1821224a4010f7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -17923,15 +17825,9 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component:
-      fileID: 4200000033
-  - component:
-      fileID: 4200000034
-  - component:
-      fileID: 4200000035
+  m_Component: [{component: {fileID: 4200000033}}, {component: {fileID: 4200000034}}, {component: {fileID: 4200000035}}, {component: {fileID: 8800000019}}, {component: {fileID: 8800001009}}]
   m_Layer: 0
-  m_Name: Guarda da mesa - provisório
+  m_Name: Guarda da mesa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18014,12 +17910,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 28
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: c9a90000000040008000000000000002, type: 3}
-  m_Color:
-    r: 1
-    g: 1
-    b: 1
-    a: 1
+  m_Sprite: {fileID: 21300000, guid: 34ef38e60f0e505f948cd84fa73d42d1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -18688,7 +18580,7 @@ MonoBehaviour:
   m_Name: null
   m_EditorClassIdentifier: Assembly-CSharp::SeguidorFamilia
   mari: {fileID: 1304905425}
-  animator: {fileID: 0}
+  animator: {fileID: 8800000016}
   spriteRenderer: {fileID: 4100000096}
   distanciaAtras: 1.8
   velocidade: 5
@@ -20344,10 +20236,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4300000045}
-  - component: {fileID: 4300000046}
-  - component: {fileID: 4300000047}
+  m_Component: [{component: {fileID: 4300000045}}, {component: {fileID: 4300000046}}, {component: {fileID: 4300000047}}, {component: {fileID: 8800000020}}, {component: {fileID: 8800001010}}]
   m_Layer: 0
   m_Name: Reflexo de Mariquinha
   m_TagString: Untagged
@@ -20419,8 +20308,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 19
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: c6a60000000040008000000000000002, type: 3}
-  m_Color: {r: 0.65, g: 0.8, b: 0.85, a: 0.75}
+  m_Sprite: {fileID: 21300000, guid: 1277467a5ad15965872a53d0018d4601, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.75}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -20622,12 +20511,9 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4300000053}
-  - component: {fileID: 4300000054}
-  - component: {fileID: 4300000055}
+  m_Component: [{component: {fileID: 4300000053}}, {component: {fileID: 4300000054}}, {component: {fileID: 4300000055}}, {component: {fileID: 8800000021}}, {component: {fileID: 8800001011}}]
   m_Layer: 0
-  m_Name: Cabo sinaliza a passagem - policial atual
+  m_Name: Cabo sinaliza a passagem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20697,7 +20583,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 25
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300003, guid: c9a90000000040008000000000000002, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 236602abc3425227b90e85f32c86e5d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -21751,12 +21637,9 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4300000087}
-  - component: {fileID: 4300000088}
-  - component: {fileID: 4300000089}
+  m_Component: [{component: {fileID: 4300000087}}, {component: {fileID: 4300000088}}, {component: {fileID: 4300000089}}, {component: {fileID: 8800000022}}, {component: {fileID: 8800001012}}]
   m_Layer: 0
-  m_Name: Fiscal do trabalho - policial atual
+  m_Name: Fiscal do trabalho
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21826,7 +21709,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 27
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: c9a90000000040008000000000000002, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 34ef38e60f0e505f948cd84fa73d42d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -26301,12 +26184,9 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4400000066}
-  - component: {fileID: 4400000067}
-  - component: {fileID: 4400000068}
+  m_Component: [{component: {fileID: 4400000066}}, {component: {fileID: 4400000067}}, {component: {fileID: 4400000068}}, {component: {fileID: 8800000023}}, {component: {fileID: 8800001013}}]
   m_Layer: 0
-  m_Name: Cabo diante da passagem - policial atual
+  m_Name: Cabo diante da passagem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26376,7 +26256,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 31
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300003, guid: c9a90000000040008000000000000002, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 236602abc3425227b90e85f32c86e5d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -28132,12 +28012,9 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4500000011}
-  - component: {fileID: 4500000012}
-  - component: {fileID: 4500000013}
+  m_Component: [{component: {fileID: 4500000011}}, {component: {fileID: 4500000012}}, {component: {fileID: 4500000013}}, {component: {fileID: 8800000024}}, {component: {fileID: 8800001014}}]
   m_Layer: 0
-  m_Name: Escrivao da ultima consulta - adulto atual
+  m_Name: Escrivao da ultima consulta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28207,7 +28084,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 24
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300002, guid: c9a90000000040008000000000000003, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d3c2f7eb5bf58e6ac1821224a4010f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -30058,3 +29935,513 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6757574737847219616, guid: b237002287116cc4c9d42eea24e122b0, type: 3}
   m_PrefabInstance: {fileID: 4700000000}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &8800000010
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700555845}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 6c84f8206bef5652becc1dc1afe97b27, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000011
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467838413}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 488be0f6328a5f7bbc8320e157470b3f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000012
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156249495}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 9f271cd4da585e7992fc6abfc15cd6fc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000013
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100000082}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 5d29c47636c35e3b8a0fa2047be65771, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000014
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100000086}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: ffdbbfd8aff0531f88535a2fbef80475, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000015
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100000090}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: ffdbbfd8aff0531f88535a2fbef80475, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000016
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100000094}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 717be220fb5b53ccb6f8bc864993717a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000017
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100000104}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 3e44d39fae3957e587c9f314ed86156f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000018
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4200000028}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: bc6e0c36be995a88ba9348b78faaf4b2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000019
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4200000032}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: ffdbbfd8aff0531f88535a2fbef80475, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000020
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000044}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 97a5ea21b295557d9c246e60ddeb8d6f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000021
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000052}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 5d29c47636c35e3b8a0fa2047be65771, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000022
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000086}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: ffdbbfd8aff0531f88535a2fbef80475, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000023
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400000065}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 5d29c47636c35e3b8a0fa2047be65771, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000024
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4500000010}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: bc6e0c36be995a88ba9348b78faaf4b2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8800001000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700555845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467838413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156249495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100000082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100000086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100000090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100000094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100000104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4200000028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4200000032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400000065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4500000010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem

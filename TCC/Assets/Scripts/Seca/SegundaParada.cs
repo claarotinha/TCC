@@ -986,6 +986,9 @@ public class SegundaParada : MonoBehaviour
         if (JanelaQuebrada)
             sprite = curativoAplicado && mariquinhaComCurativo != null ? mariquinhaComCurativo
                 : (mariquinhaFerida != null ? mariquinhaFerida : spriteMariquinhaNormal);
+        // As poses de ferimento são estáticas: o Animator não pode substituí-las.
+        Animator animacaoIrma = visualMariquinha.GetComponent<Animator>();
+        if (animacaoIrma != null) animacaoIrma.enabled = !JanelaQuebrada;
         visualMariquinha.sprite = sprite;
         float escala = spriteMariquinhaNormal.bounds.size.y / Mathf.Max(0.01f, sprite.bounds.size.y);
         mariquinha.transform.localScale = escalaMariquinhaNormal * escala;

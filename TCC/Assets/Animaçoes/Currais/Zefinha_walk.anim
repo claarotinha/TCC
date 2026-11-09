@@ -9,7 +9,7 @@ AnimationClip:
     fileID: 0
   m_PrefabAsset:
     fileID: 0
-  m_Name: Zefinha_walk
+  m_Name: Zefinha_272_0_0_walk
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -24,57 +24,37 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0.0
-      value: &id001
-        fileID: -8690112158737777300
-        guid: 57d3a31ffd5246d488934eacc4f2953c
+      value:
+        fileID: 21300004
+        guid: 85479e3103f15df781ff1e87c6892992
         type: 3
-    - time: 0.16666666666666666
-      value: &id002
-        fileID: -1648798902729682955
-        guid: 3c3cb751128413a409bb1bbb970efeba
+    - time: 0.1
+      value:
+        fileID: 21300005
+        guid: 85479e3103f15df781ff1e87c6892992
         type: 3
-    - time: 0.3333333333333333
-      value: &id003
-        fileID: 7307932280384751138
-        guid: cd43597b1725010418cd44a2e42695f9
+    - time: 0.2
+      value:
+        fileID: 21300006
+        guid: 85479e3103f15df781ff1e87c6892992
+        type: 3
+    - time: 0.3
+      value:
+        fileID: 21300007
+        guid: 85479e3103f15df781ff1e87c6892992
+        type: 3
+    - time: 0.4
+      value:
+        fileID: 21300008
+        guid: 85479e3103f15df781ff1e87c6892992
         type: 3
     - time: 0.5
-      value: &id004
-        fileID: -4096919155409417703
-        guid: d1f4eaa017bfead42a773f21a1d748c5
-        type: 3
-    - time: 0.6666666666666666
-      value: &id005
-        fileID: 2703574496470658156
-        guid: 7900c2c2667d3d54c8e2990d7d4904c1
-        type: 3
-    - time: 0.8333333333333334
-      value: &id006
-        fileID: 4091909827422720676
-        guid: d5eab005d7aa6b24cbd358b7e3aba359
-        type: 3
-    - time: 1.0
-      value: &id007
-        fileID: -8872099485782424370
-        guid: 99b038c7b8c979e449cdcc2fb2137e09
-        type: 3
-    - time: 1.1666666666666667
-      value: &id008
-        fileID: -138184148236402595
-        guid: 78b28715f5791614da99c6169f1294ee
-        type: 3
-    - time: 1.3333333333333333
-      value: &id009
-        fileID: -3275141391550427061
-        guid: 59d1fab987f4c1e4bb51a6eaf3530f63
-        type: 3
-    - time: 1.5
-      value: &id010
-        fileID: -3076209693166123249
-        guid: ab3507b4673ec984e97d1529c491b1a6
+      value:
+        fileID: 21300008
+        guid: 85479e3103f15df781ff1e87c6892992
         type: 3
     attribute: m_Sprite
-    path: null
+    path: ''
     classID: 212
     script:
       fileID: 0
@@ -103,23 +83,31 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - *id001
-    - *id002
-    - *id003
-    - *id004
-    - *id005
-    - *id006
-    - *id007
-    - *id008
-    - *id009
-    - *id010
+    - fileID: 21300004
+      guid: 85479e3103f15df781ff1e87c6892992
+      type: 3
+    - fileID: 21300005
+      guid: 85479e3103f15df781ff1e87c6892992
+      type: 3
+    - fileID: 21300006
+      guid: 85479e3103f15df781ff1e87c6892992
+      type: 3
+    - fileID: 21300007
+      guid: 85479e3103f15df781ff1e87c6892992
+      type: 3
+    - fileID: 21300008
+      guid: 85479e3103f15df781ff1e87c6892992
+      type: 3
+    - fileID: 21300008
+      guid: 85479e3103f15df781ff1e87c6892992
+      type: 3
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip:
       fileID: 0
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.6666666666666667
+    m_StopTime: 0.5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

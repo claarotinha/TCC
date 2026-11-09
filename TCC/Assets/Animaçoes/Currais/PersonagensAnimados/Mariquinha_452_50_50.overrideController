@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_Name: Mariquinha_452_50_50
+  m_Controller:
+    fileID: 9100000
+    guid: 3e622fe267c772a46bcb030e2622b132
+    type: 2
+  m_Clips:
+  - m_OriginalClip:
+      fileID: 7400000
+      guid: 866ab532250b7294ab5b4a8a734d9ae1
+      type: 2
+    m_OverrideClip:
+      fileID: 7400000
+      guid: c51ce62a0e7d5183b40250a4205a08fb
+      type: 2
+  - m_OriginalClip:
+      fileID: 7400000
+      guid: 1148ea6ac8451944fbbfd73705a4f804
+      type: 2
+    m_OverrideClip:
+      fileID: 7400000
+      guid: e1d8df97355a570e94d17f1458a4cfd9
+      type: 2
+  - m_OriginalClip:
+      fileID: 7400000
+      guid: d24ab181fe809994aaf5836255488a10
+      type: 2
+    m_OverrideClip:
+      fileID: 7400000
+      guid: e1d8df97355a570e94d17f1458a4cfd9
+      type: 2

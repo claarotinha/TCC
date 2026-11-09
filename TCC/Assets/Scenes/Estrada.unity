@@ -1312,10 +1312,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 467838414}
-  - component: {fileID: 467838415}
-  - component: {fileID: 467838416}
+  m_Component: [{component: {fileID: 467838414}}, {component: {fileID: 467838415}}, {component: {fileID: 467838416}}, {component: {fileID: 8800000008}}, {component: {fileID: 8800001001}}]
   m_Layer: 0
   m_Name: Mainha
   m_TagString: Untagged
@@ -1387,7 +1384,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0bafdf1e44e0594d92df1c68e7980173, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1411,7 +1408,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::SeguidorFamilia
   mari: {fileID: 1304905425}
-  animator: {fileID: 0}
+  animator: {fileID: 8800000008}
   spriteRenderer: {fileID: 0}
   distanciaAtras: 2.4
   velocidade: 5
@@ -2219,12 +2216,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 700555846}
-  - component: {fileID: 700555847}
-  - component: {fileID: 700555848}
-  - component: {fileID: 3200000020}
-  - component: {fileID: 3400000000}
+  m_Component: [{component: {fileID: 700555846}}, {component: {fileID: 700555847}}, {component: {fileID: 700555848}}, {component: {fileID: 3200000020}}, {component: {fileID: 3400000000}}, {component: {fileID: 8800000007}}, {component: {fileID: 8800001000}}]
   m_Layer: 0
   m_Name: Mariquinha
   m_TagString: Untagged
@@ -2296,7 +2288,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ef662e1f224a56aab97ca8a3dd15fff4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2320,7 +2312,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::SeguidorFamilia
   mari: {fileID: 1304905425}
-  animator: {fileID: 0}
+  animator: {fileID: 8800000007}
   spriteRenderer: {fileID: 0}
   distanciaAtras: 1.2
   velocidade: 5
@@ -4471,10 +4463,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1156249496}
-  - component: {fileID: 1156249497}
-  - component: {fileID: 1156249498}
+  m_Component: [{component: {fileID: 1156249496}}, {component: {fileID: 1156249497}}, {component: {fileID: 1156249498}}, {component: {fileID: 8800000009}}, {component: {fileID: 8800001002}}]
   m_Layer: 0
   m_Name: Painho
   m_TagString: Untagged
@@ -4546,7 +4535,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 18588a245bad547aa45a63ee0010d4c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4570,7 +4559,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::SeguidorFamilia
   mari: {fileID: 1304905425}
-  animator: {fileID: 0}
+  animator: {fileID: 8800000009}
   spriteRenderer: {fileID: 0}
   distanciaAtras: 3.6
   velocidade: 5
@@ -4984,7 +4973,7 @@ Animator:
   m_GameObject: {fileID: 1304905419}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3e622fe267c772a46bcb030e2622b132, type: 2}
+  m_Controller: {fileID: 22100000, guid: 17f3cec105d454e7ae180750534a883a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5118,7 +5107,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -3846487595514147800, guid: 865bb02cce4f81b4eac528c7b57430de, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc3f96c7932950fba742b71d9da157aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -16800,3 +16789,105 @@ SceneRoots:
   - {fileID: 995426769}
   - {fileID: 1099322744}
   - {fileID: 892663972}
+--- !u!95 &8800000007
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700555845}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: cb517720de7554d28b821b74ad320d12, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000008
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467838413}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: f06704e8cac0578f86c6896eb586ec90, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &8800000009
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156249495}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: cbc69c5a1903537b92c21995a290736b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8800001000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700555845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467838413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+--- !u!114 &8800001002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156249495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem

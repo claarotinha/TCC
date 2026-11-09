@@ -9,7 +9,7 @@ AnimationClip:
     fileID: 0
   m_PrefabAsset:
     fileID: 0
-  m_Name: Zefinha_idle
+  m_Name: Zefinha_272_0_0_idle
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -24,27 +24,32 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0.0
-      value: &id001
-        fileID: 8297607517880692621
-        guid: 7711d4513fd808c40adef11b269310e2
+      value:
+        fileID: 21300000
+        guid: 85479e3103f15df781ff1e87c6892992
         type: 3
     - time: 0.1
-      value: &id002
-        fileID: -5408605687392006496
-        guid: 1a22f139a712b6c4eb5c14971ddd2715
+      value:
+        fileID: 21300001
+        guid: 85479e3103f15df781ff1e87c6892992
         type: 3
     - time: 0.2
-      value: &id003
-        fileID: -6274875953202769161
-        guid: c44b9dde172b4e64ebda29ecc048771b
+      value:
+        fileID: 21300002
+        guid: 85479e3103f15df781ff1e87c6892992
         type: 3
     - time: 0.3
-      value: &id004
-        fileID: 8662220823374870173
-        guid: 81925708e4b38424182d7dea325a3b34
+      value:
+        fileID: 21300003
+        guid: 85479e3103f15df781ff1e87c6892992
+        type: 3
+    - time: 0.4
+      value:
+        fileID: 21300003
+        guid: 85479e3103f15df781ff1e87c6892992
         type: 3
     attribute: m_Sprite
-    path: null
+    path: ''
     classID: 212
     script:
       fileID: 0
@@ -73,10 +78,21 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - *id001
-    - *id002
-    - *id003
-    - *id004
+    - fileID: 21300000
+      guid: 85479e3103f15df781ff1e87c6892992
+      type: 3
+    - fileID: 21300001
+      guid: 85479e3103f15df781ff1e87c6892992
+      type: 3
+    - fileID: 21300002
+      guid: 85479e3103f15df781ff1e87c6892992
+      type: 3
+    - fileID: 21300003
+      guid: 85479e3103f15df781ff1e87c6892992
+      type: 3
+    - fileID: 21300003
+      guid: 85479e3103f15df781ff1e87c6892992
+      type: 3
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip:
