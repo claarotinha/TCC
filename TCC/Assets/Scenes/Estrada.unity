@@ -5070,7 +5070,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -11347,11 +11347,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3300000001}
-  - component: {fileID: 3300000002}
-  - component: {fileID: 3300000003}
-  - component: {fileID: 3300000004}
+  m_Component: [{component: {fileID: 3300000001}}, {component: {fileID: 3300000002}}, {component: {fileID: 3300000003}}, {component: {fileID: 3300000004}}, {component: {fileID: 9702000000}}]
   m_Layer: 0
   m_Name: Passarinho
   m_TagString: Untagged
@@ -11423,7 +11419,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300101, guid: 8eaa4f7d8b76df84385622eb32fc0a1d, type: 3}
+  m_Sprite: {fileID: -8964344110206770156, guid: 597f2a5874b19a04caa2a52214282c1c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -16972,3 +16968,36 @@ MonoBehaviour:
   - {fileID: 21300005, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
   intervaloCaminhada: 0.24
   intervaloCorrida: 0.13
+--- !u!114 &9702000000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 3300000000
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: 91a4ee187bcf5767a86704e9419497b4
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::PassaroVoo
+  quadros:
+  - fileID: -8964344110206770156
+    guid: 597f2a5874b19a04caa2a52214282c1c
+    type: 3
+  - fileID: -1790820590554897686
+    guid: 835d048792c9c4d47ab9239d6017dc7e
+    type: 3
+  - fileID: -7602605710276695520
+    guid: f64a84cbbd7b3074c8e05e184098669a
+    type: 3
+  - fileID: -6762929211733123448
+    guid: 3b8aa893b013b8442985c8718639ce35
+    type: 3
+  intervalo: 0.2

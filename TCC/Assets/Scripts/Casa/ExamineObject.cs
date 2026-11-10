@@ -127,6 +127,12 @@ public class ExamineObject : MonoBehaviour
         if (!myCollider.OverlapPoint(mousePosition))
             return;
 
+        // Na Seca, o item sobre a mesa/rede tem prioridade sobre o cenário
+        // atrás dele. Os outros objetos e cenas mantêm sua interação.
+        if (gameObject.scene.name == "Seca" &&
+            (SecaPreparationItem.HasCollectableAt(mousePosition) ||
+             SecaTableVisual.CoversBackgroundExamine(this, mousePosition))) return;
+
         QuartoBaguncaDoor door = GetComponent<QuartoBaguncaDoor>();
 
         if (door != null && !door.TryHandleClick())

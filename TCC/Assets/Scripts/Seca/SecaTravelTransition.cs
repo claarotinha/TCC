@@ -111,7 +111,7 @@ public class SecaTravelTransition : MonoBehaviour
         fadeImage.color = Color.black;
 
         // BeginTravel só é liberado após terminar a despedida.
-        // O checkpoint da Estrada ainda verifica os cinco itens antes de salvar.
+        // O checkpoint da Estrada verifica os itens necessários antes de salvar.
         GameProgress progress = GameProgress.Instance;
         if (progress == null)
         {

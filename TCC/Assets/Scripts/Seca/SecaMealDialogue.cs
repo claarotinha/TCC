@@ -22,8 +22,6 @@ public class SecaMealDialogue : MonoBehaviour
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private Image portraitImage;
 
-    [Header("Imagem da família durante a refeição")]
-    [SerializeField] private GameObject imagemRefeicao;
 
     [Header("Retratos opcionais")]
     [SerializeField] private Sprite paiPortrait;
@@ -36,6 +34,8 @@ public class SecaMealDialogue : MonoBehaviour
 
     [Header("Após terminar a refeição")]
     [SerializeField] private UnityEvent onMealCompleted = new UnityEvent();
+
+    public bool MealInProgress => running;
 
     public bool IntroCompleted { get; private set; }
     public bool MealCompleted { get; private set; }
@@ -120,7 +120,6 @@ public class SecaMealDialogue : MonoBehaviour
     private void Start()
     {
         configured =
-            imagemRefeicao != null &&
             roomExit != null &&
             playerMovement != null &&
             lugarMari != null &&
@@ -221,9 +220,6 @@ public class SecaMealDialogue : MonoBehaviour
             return;
 
         started = true;
-        imagemRefeicao.SetActive(true);
-        // A conversa e as escolhas continuam na frente da imagem.
-        // O Canvas da imagem tem ordem inferior à interface compartilhada.
 
         tableInteraction.HidePanel();
         tableInteraction.enabled = false;
@@ -350,7 +346,6 @@ public class SecaMealDialogue : MonoBehaviour
         running = false;
         showingResponse = false;
         MealCompleted = true;
-        if (imagemRefeicao != null) imagemRefeicao.SetActive(false);
 
         choicesContainer.SetActive(false);
         dialogueUI.SetActive(false);
@@ -423,7 +418,6 @@ public class SecaMealDialogue : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
-        if (imagemRefeicao != null) imagemRefeicao.SetActive(false);
 
         if (running)
         {

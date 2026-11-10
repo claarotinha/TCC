@@ -3,15 +3,25 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 0
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 332dfd45824a30c478c96aca1ae71b3d, type: 3}
+  m_Script:
+    fileID: 11500000
+    guid: 332dfd45824a30c478c96aca1ae71b3d
+    type: 3
   m_Name: ItemCabacaVazia
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Cabaça vazia
-  icon: {fileID: 7821557915200161833, guid: 543e2c03235c7f544a8c453b68a4320b, type: 3}
-  description: "Recipiente para transportar \xE1gua durante a viagem."
+  icon:
+    fileID: 8305898602170235152
+    guid: 65d8fe3c48ed89e4f96db6c6b69898e6
+    type: 3
+  description: Recipiente para transportar água durante a viagem.

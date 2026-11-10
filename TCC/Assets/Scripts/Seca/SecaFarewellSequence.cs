@@ -9,10 +9,8 @@ public class SecaFarewellSequence : MonoBehaviour
     [Header("Liberação")]
     [SerializeField] private SecaMotherReturn motherReturn;
 
-    [Header("Ambientes")]
-    [SerializeField] private GameObject salaCozinha;
-    [SerializeField] private GameObject despedidaCasa;
-    [SerializeField] private Transform lugarMariDespedida;
+    [Header("Imagem da despedida")]
+    [SerializeField] private GameObject imagemDespedida;
 
     [Header("Personagem")]
     [SerializeField] private PlayerMovement playerMovement;
@@ -45,8 +43,7 @@ public class SecaFarewellSequence : MonoBehaviour
 
     private void Start()
     {
-        if (despedidaCasa != null)
-            despedidaCasa.SetActive(false);
+        if (imagemDespedida != null) imagemDespedida.SetActive(false);
     }
 
     public void BeginFarewell()
@@ -57,9 +54,7 @@ public class SecaFarewellSequence : MonoBehaviour
         if (motherReturn == null || !motherReturn.DepartureReady)
             return;
 
-        if (salaCozinha == null || despedidaCasa == null ||
-            salaCozinha == despedidaCasa ||
-            lugarMariDespedida == null || playerMovement == null ||
+        if (imagemDespedida == null || playerMovement == null ||
             fadeImage == null || dialogueUI == null ||
             dialoguePanel == null || characterNameText == null ||
             dialogueText == null)
@@ -104,30 +99,8 @@ public class SecaFarewellSequence : MonoBehaviour
 
         yield return FadeTo(1f);
 
-        despedidaCasa.SetActive(true);
-        salaCozinha.SetActive(false);
-
-        Vector3 destination = lugarMariDespedida.position;
-
-        if (playerBody != null)
-        {
-            playerBody.linearVelocity = Vector2.zero;
-            playerBody.position =
-                new Vector2(destination.x, destination.y);
-        }
-
-        playerMovement.transform.position = destination;
-
-        SpriteRenderer visual =
-            playerMovement.GetComponent<SpriteRenderer>();
-
-        if (visual != null)
-            visual.flipX = false;
-
-        Physics2D.SyncTransforms();
-
-        // Aguarda a câmera existente acompanhar a nova posição.
-        yield return new WaitForSeconds(0.8f);
+        imagemDespedida.SetActive(true);
+        yield return null;
 
         yield return FadeTo(0f);
 
