@@ -1336,7 +1336,7 @@ Transform:
   m_GameObject: {fileID: 467838413}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.219265, y: 0.1126, z: 0}
+  m_LocalPosition: {x: -14.891885, y: 0.1126, z: 0}
   m_LocalScale: {x: 3.6301162, y: 3.6301162, z: 3.6301162}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2247,7 +2247,7 @@ Transform:
   m_GameObject: {fileID: 700555845}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.821013, y: -0.3058, z: 0}
+  m_LocalPosition: {x: -12.493633, y: -0.3058, z: 0}
   m_LocalScale: {x: 2.8485, y: 2.8485, z: 2.8485}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3313,7 +3313,7 @@ Transform:
   m_GameObject: {fileID: 953090002}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.854965, y: -1.6711, z: 0}
+  m_LocalPosition: {x: -19.527585000000002, y: -1.6711, z: 0}
   m_LocalScale: {x: 1.8253053, y: 1.8253053, z: 1.8253053}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4496,7 +4496,7 @@ Transform:
   m_GameObject: {fileID: 1156249495}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.434006, y: 0.23, z: 0}
+  m_LocalPosition: {x: -17.106626, y: 0.23, z: 0}
   m_LocalScale: {x: 3.6026, y: 3.6026, z: 3.6026}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4972,6 +4972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   walkSpeed: 5
   runSpeed: 8
+  journeyBounds: {fileID: 406039564}
   movementBounds: {fileID: 1750010630}
   movementBackground: []
   groundCheck: {fileID: 0}
@@ -17001,3 +17002,6 @@ MonoBehaviour:
     guid: 3b8aa893b013b8442985c8718639ce35
     type: 3
   intervalo: 0.2
+  alcanceHorizontal: 2.5
+  alturaVoo: 0.35
+  velocidadeVoo: 0.8

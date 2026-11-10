@@ -28,22 +28,22 @@ AnimationClip:
         fileID: 21300000
         guid: c7b11d73cf3554cca3848043952741ee
         type: 3
-    - time: 0.3
+    - time: 0.16
       value:
         fileID: 21300001
         guid: c7b11d73cf3554cca3848043952741ee
         type: 3
-    - time: 0.6
+    - time: 0.32
       value:
         fileID: 21300002
         guid: c7b11d73cf3554cca3848043952741ee
         type: 3
-    - time: 0.9
+    - time: 0.48
       value:
         fileID: 21300003
         guid: c7b11d73cf3554cca3848043952741ee
         type: 3
-    - time: 1.2
+    - time: 0.64
       value:
         fileID: 21300000
         guid: c7b11d73cf3554cca3848043952741ee
@@ -99,7 +99,7 @@ AnimationClip:
       fileID: 0
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.2
+    m_StopTime: 0.64
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

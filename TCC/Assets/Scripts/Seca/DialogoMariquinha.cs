@@ -63,18 +63,17 @@ public class DialogoMariquinha : MonoBehaviour
             return;
         }
 
-
-    }
-
-    private void OnMouseDown()
-    {
-        if (conversando || Time.timeScale == 0f || mari == null || movimentoMari == null)
-            return;
-        if (UnityEngine.EventSystems.EventSystem.current != null &&
-            UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-            return;
-        if (PodeConversar())
-            Iniciar();
+        if (!Input.GetMouseButtonDown(0) || InvestigationGuard.Blocked || !PodeConversar()) return;
+        if (!InvestigationGuard.TryGetPointerPosition(out Vector2 point)) return;
+        Collider2D area = GetComponent<Collider2D>();
+        SpriteRenderer visual = GetComponent<SpriteRenderer>();
+        bool hit = area != null && area.enabled && area.OverlapPoint(point);
+        if (!hit && visual != null)
+        {
+            Bounds bounds = visual.bounds;
+            hit = bounds.Contains(new Vector3(point.x, point.y, bounds.center.z));
+        }
+        if (hit) Iniciar();
     }
 
     public bool CanInteract => isActiveAndEnabled && !conversando && Time.timeScale > 0f &&
@@ -89,6 +88,16 @@ public class DialogoMariquinha : MonoBehaviour
             return false;
         if (primeiraParada != null && !primeiraParada.Finished)
             return false;
+        // Mede a distância entre os corpos, não entre pivôs de sprites distintos.
+        SpriteRenderer irma = GetComponent<SpriteRenderer>();
+        SpriteRenderer protagonista = mari.GetComponent<SpriteRenderer>();
+        if (irma != null && protagonista != null)
+        {
+            Bounds a = protagonista.bounds, b = irma.bounds;
+            float dx = Mathf.Max(0f, Mathf.Max(a.min.x - b.max.x, b.min.x - a.max.x));
+            float dy = Mathf.Max(0f, Mathf.Max(a.min.y - b.max.y, b.min.y - a.max.y));
+            return new Vector2(dx, dy).sqrMagnitude <= distanciaInteracao * distanciaInteracao;
+        }
         return Vector2.Distance(mari.position, transform.position) <= distanciaInteracao;
     }
 

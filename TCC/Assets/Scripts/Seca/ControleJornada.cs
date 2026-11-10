@@ -78,24 +78,32 @@ public class ControleJornada : MonoBehaviour
         }
     }
 
+    public float LimiteAvancoX
+    {
+        get
+        {
+            if (limitesDasParadas == null || limitesDasParadas.Length == 0) return float.PositiveInfinity;
+            Transform limite = limitesDasParadas[Mathf.Min(paradasConcluidas, Mathf.Min(4, limitesDasParadas.Length - 1))];
+
+            if (limite == null)
+                return float.PositiveInfinity;
+
+            float limiteX = limite.position.x;
+            if (paradasConcluidas == 2)
+                limiteX += aguaTerceiraLiberada && (encontroTerceiraLiberado || !SegundaParada.JanelaQuebrada)
+                    ? trechoAposAguaTerceira : trechoAguaTerceira;
+            if (paradasConcluidas == 3) limiteX += trechoJuazeiro;
+            if (paradasConcluidas == 4) limiteX += trechoAcampamento;
+            if (paradasConcluidas >= 5) limiteX = limiteFortaleza != null
+                ? limiteFortaleza.position.x : limiteX + trechoAposAcampamento;
+            return limiteX;
+        }
+    }
+
     private void LateUpdate()
     {
-        if (mari == null)
-            return;
-
-        Transform limite = limitesDasParadas[Mathf.Min(paradasConcluidas, 4)];
-
-        if (limite == null)
-            return;
-
-        float limiteX = limite.position.x;
-        if (paradasConcluidas == 2)
-            limiteX += aguaTerceiraLiberada && (encontroTerceiraLiberado || !SegundaParada.JanelaQuebrada)
-                ? trechoAposAguaTerceira : trechoAguaTerceira;
-        if (paradasConcluidas == 3) limiteX += trechoJuazeiro;
-        if (paradasConcluidas == 4) limiteX += trechoAcampamento;
-        if (paradasConcluidas >= 5) limiteX = limiteFortaleza != null
-            ? limiteFortaleza.position.x : limiteX + trechoAposAcampamento;
+        if (mari == null) return;
+        float limiteX = LimiteAvancoX;
         // Bloqueia somente o avanço para a direita.
         if (mari.position.x > limiteX)
         {

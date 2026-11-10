@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float runSpeed = 8f;
     [SerializeField] private Collider2D movementBounds;
+    [SerializeField] private ControleJornada journeyBounds;
     [SerializeField] private SpriteRenderer[] movementBackground;
 
     [Header("Ground Check")]
@@ -76,10 +77,18 @@ public class PlayerMovement : MonoBehaviour
     {
         float speed = isRunning ? runSpeed : walkSpeed;
 
-        rb.linearVelocity = new Vector2(
-            horizontalInput * speed,
-            rb.linearVelocity.y
-        );
+        float velocity = horizontalInput * speed;
+        if (TryGetHorizontalLimits(out float min, out float max))
+        {
+            if ((velocity < 0f && rb.position.x <= min + 0.001f) ||
+                (velocity > 0f && rb.position.x >= max - 0.001f)) velocity = 0f;
+            else
+            {
+                float next = Mathf.Clamp(rb.position.x + velocity * Time.fixedDeltaTime, min, max);
+                velocity = (next - rb.position.x) / Time.fixedDeltaTime;
+            }
+        }
+        rb.linearVelocity = new Vector2(velocity, rb.linearVelocity.y);
     }
 
     private void CheckGround()
@@ -94,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
         );
     }
 
-    private void KeepInsideBounds()
+    private bool TryGetHorizontalLimits(out float minX, out float maxX)
     {
         Bounds bounds = default;
         bool hasBounds = movementBounds != null;
@@ -118,14 +127,26 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (!hasBounds)
-            return;
+        {
+            minX = float.NegativeInfinity;
+            maxX = journeyBounds != null ? journeyBounds.LimiteAvancoX : float.PositiveInfinity;
+            return journeyBounds != null;
+        }
 
         float halfWidth = bodyCollider != null ? bodyCollider.bounds.extents.x : 0f;
-        float minX = bounds.min.x + halfWidth;
-        float maxX = bounds.max.x - halfWidth;
+        minX = bounds.min.x + halfWidth;
+        maxX = bounds.max.x - halfWidth;
+        if (journeyBounds != null) maxX = Mathf.Min(maxX, journeyBounds.LimiteAvancoX);
+        if (minX > maxX) minX = maxX = bounds.center.x;
+        return true;
+    }
+
+    private void KeepInsideBounds()
+    {
+        if (!TryGetHorizontalLimits(out float minX, out float maxX)) return;
         float clampedX = minX <= maxX
             ? Mathf.Clamp(rb.position.x, minX, maxX)
-            : bounds.center.x;
+            : minX;
 
         if (!Mathf.Approximately(clampedX, rb.position.x))
         {
@@ -151,7 +172,10 @@ public class PlayerMovement : MonoBehaviour
     {
         float speed = Mathf.Abs(rb.linearVelocity.x);
 
-        bool isMoving = speed > 0.1f;
+        bool blocked = TryGetHorizontalLimits(out float min, out float max) &&
+            ((horizontalInput < 0f && rb.position.x <= min + 0.001f) ||
+             (horizontalInput > 0f && rb.position.x >= max - 0.001f));
+        bool isMoving = speed > 0.1f && !blocked;
         bool running = isRunning && isMoving;
 
         animator.SetBool("IsWalking", isMoving);
