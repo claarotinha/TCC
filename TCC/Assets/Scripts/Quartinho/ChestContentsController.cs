@@ -14,6 +14,11 @@ public class ChestContentsController : MonoBehaviour
     [SerializeField] private GameObject contentsPanel;
     [SerializeField] private Button closeContentsButton;
 
+    [Header("Imagem integrada") ]
+    [SerializeField] private Image chestImage;
+    [SerializeField] private Sprite withDiary;
+    [SerializeField] private Sprite withoutDiary;
+
     [Header("Objetos: 0 = diário, 1 e 2 = outros objetos")]
     [SerializeField] private Button[] itemButtons = new Button[3];
     [SerializeField] private Sprite[] itemSprites = new Sprite[3];
@@ -62,7 +67,7 @@ public class ChestContentsController : MonoBehaviour
             examineActions[i] = () => ExamineItem(index);
             itemButtons[i].onClick.AddListener(examineActions[i]);
             Image image = itemButtons[i].GetComponent<Image>();
-            if (image != null && itemSprites[i] != null)
+            if (image != null && chestImage == null && itemSprites[i] != null)
             {
                 image.sprite = itemSprites[i];
                 image.color = Color.white;
@@ -180,8 +185,15 @@ public class ChestContentsController : MonoBehaviour
         BlockClick();
     }
 
-    private void RefreshDiary() =>
+    private void RefreshDiary()
+    {
         itemButtons[0].gameObject.SetActive(!DiaryCollected);
+        if (chestImage != null)
+        {
+            chestImage.sprite = DiaryCollected ? withoutDiary : withDiary;
+            chestImage.preserveAspect = true;
+        }
+    }
 
     public void Close()
     {

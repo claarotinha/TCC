@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,6 +38,8 @@ public class ChestCodePanelController : MonoBehaviour
     public event System.Action ChestUnlocked;
 
     private bool configured;
+    private Coroutine feedbackRoutine;
+    private const string Prompt = "O baú está trancado, qual será a combinação?";
 
     private void Awake()
     {
@@ -144,7 +147,7 @@ public class ChestCodePanelController : MonoBehaviour
             digitTexts[i].text = "0";
         }
 
-        feedbackText.text = "";
+        feedbackText.text = Prompt;
     }
 
     private void ChangeDigit(int index, int amount)
@@ -156,7 +159,7 @@ public class ChestCodePanelController : MonoBehaviour
         digits[index] = (digits[index] + amount + 10) % 10;
         digitTexts[index].text = digits[index].ToString();
 
-        feedbackText.text = "";
+        // Mantém o aviso de erro até os dois segundos terminarem.
     }
 
     private void TryCode()
@@ -171,8 +174,8 @@ public class ChestCodePanelController : MonoBehaviour
 
         if (enteredCode != CorrectCode)
         {
-            feedbackText.text =
-                "Essa combinação não abriu o baú. Vou tentar outra.";
+            if (feedbackRoutine != null) StopCoroutine(feedbackRoutine);
+            feedbackRoutine = StartCoroutine(ShowWrongCode());
             return;
         }
 
@@ -184,8 +187,19 @@ public class ChestCodePanelController : MonoBehaviour
         ChestUnlocked?.Invoke();
     }
 
+    private IEnumerator ShowWrongCode()
+    {
+        feedbackText.text = "Combinação incorreta. Tente novamente.";
+        yield return new WaitForSecondsRealtime(2f);
+        feedbackText.text = Prompt;
+        feedbackRoutine = null;
+    }
+
     public void Close()
     {
+        if (feedbackRoutine != null) StopCoroutine(feedbackRoutine);
+        feedbackRoutine = null;
+        if (feedbackText != null) feedbackText.text = Prompt;
         if (codePanel != null)
             codePanel.SetActive(false);
 

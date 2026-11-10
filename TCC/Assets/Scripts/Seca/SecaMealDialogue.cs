@@ -23,6 +23,9 @@ public class SecaMealDialogue : MonoBehaviour
     [SerializeField] private Image portraitImage;
 
 
+    [Header("Imagem da família sentada")]
+    [SerializeField] private GameObject familyImagePanel;
+
     [Header("Retratos opcionais")]
     [SerializeField] private Sprite paiPortrait;
     [SerializeField] private Sprite maePortrait;
@@ -112,6 +115,7 @@ public class SecaMealDialogue : MonoBehaviour
 
     private void Awake()
     {
+        if (familyImagePanel != null) familyImagePanel.SetActive(false);
         tableInteraction = GetComponent<ExamineObject>();
         tableInteraction.enabled = false;
         tableInteraction.Opened += BeginMeal;
@@ -256,6 +260,7 @@ public class SecaMealDialogue : MonoBehaviour
 
         choicesContainer.SetActive(false);
 
+        if (familyImagePanel != null) familyImagePanel.SetActive(true);
         running = true;
         StartCoroutine(InitialSilence());
     }
@@ -343,6 +348,7 @@ public class SecaMealDialogue : MonoBehaviour
 
     private void FinishMeal()
     {
+        if (familyImagePanel != null) familyImagePanel.SetActive(false);
         running = false;
         showingResponse = false;
         MealCompleted = true;
@@ -428,6 +434,7 @@ public class SecaMealDialogue : MonoBehaviour
                 dialogueUI.SetActive(false);
         }
 
+        if (familyImagePanel != null) familyImagePanel.SetActive(false);
         running = false;
         showingChoices = false;
         RestoreMovement();
