@@ -521,8 +521,8 @@ public class SegundaParada : MonoBehaviour
     private IEnumerator CorrerBaleia()
     {
         fugindo = true;
-        Animator animacaoBaleia = baleia != null ? baleia.GetComponent<Animator>() : null;
-        if (animacaoBaleia != null) animacaoBaleia.enabled = false;
+        BaleiaAnimacao animacaoBaleia = baleia != null ? baleia.GetComponent<BaleiaAnimacao>() : null;
+        if (animacaoBaleia != null) animacaoBaleia.DefinirPoseExterna(true);
         float tempo = 0f;
         while (baleia != null && Mathf.Abs(baleia.position.x - destinoBaleia.x) > 0.01f)
         {
@@ -549,8 +549,8 @@ public class SegundaParada : MonoBehaviour
     private void MostrarBaleia(Sprite sprite)
     {
         if (desenhoBaleia == null || sprite == null) return;
-        Animator animacaoBaleia = desenhoBaleia.GetComponent<Animator>();
-        if (animacaoBaleia != null) animacaoBaleia.enabled = sprite == spriteBaleia && !fugindo;
+        BaleiaAnimacao animacaoBaleia = desenhoBaleia.GetComponent<BaleiaAnimacao>();
+        if (animacaoBaleia != null) animacaoBaleia.DefinirPoseExterna(sprite != spriteBaleia || fugindo);
         desenhoBaleia.sprite = sprite;
         // Os quadros mantem os pes na mesma altura, sem saltos de escala.
         float proporcao = spriteBaleia != null && sprite.bounds.size.y > 0f

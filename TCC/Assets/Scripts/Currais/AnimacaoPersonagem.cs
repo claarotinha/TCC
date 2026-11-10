@@ -8,12 +8,14 @@ public class AnimacaoPersonagem : MonoBehaviour
 {
     private static readonly int Andando = Animator.StringToHash("IsWalking");
     private static readonly int Correndo = Animator.StringToHash("IsRunning");
+    private SeguidorFamilia seguidor;
     private Animator animador;
     private SpriteRenderer desenho;
     private Vector3 posicaoAnterior;
 
     private void Awake()
     {
+        seguidor = GetComponent<SeguidorFamilia>();
         animador = GetComponent<Animator>();
         desenho = GetComponent<SpriteRenderer>();
     }
@@ -24,6 +26,8 @@ public class AnimacaoPersonagem : MonoBehaviour
     {
         float deslocamento = transform.position.x - posicaoAnterior.x;
         posicaoAnterior = transform.position;
+        // O seguidor conhece a direção de Mari e ignora a reposição da fila.
+        if (seguidor != null && seguidor.isActiveAndEnabled) return;
         // Ferimentos e sequências de memória desativam o Animator de propósito.
         if (animador == null || !animador.enabled) return;
 

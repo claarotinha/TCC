@@ -23,17 +23,23 @@ public class SeguidorFamilia : MonoBehaviour
         set => distanciaAtras = Mathf.Max(0.1f, value);
     }
 
+    public bool EstaAndando { get; private set; }
+    public bool EstaCorrendo { get; private set; }
+    public float Direcao { get; private set; } = 1f;
+
+    private SpriteRenderer visualMari;
     private Rigidbody2D corpoMari;
-    private Vector3 posicaoAnterior;
 
     private void Awake()
     {
         if (animator == null) animator = GetComponent<Animator>();
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
-        if (mari != null) corpoMari = mari.GetComponent<Rigidbody2D>();
+        if (mari != null)
+        {
+            corpoMari = mari.GetComponent<Rigidbody2D>();
+            visualMari = mari.GetComponent<SpriteRenderer>();
+        }
     }
-
-    private void OnEnable() => posicaoAnterior = transform.position;
 
     private void Start()
     {
@@ -47,29 +53,35 @@ public class SeguidorFamilia : MonoBehaviour
         if (mari == null) return;
         if (PauseHelper.BlockInput() || Time.timeScale == 0f)
         {
+            EstaAndando = false;
+            EstaCorrendo = false;
             AtualizarAnimacoes(false, false);
-            posicaoAnterior = transform.position;
             return;
         }
 
         float velocidadeMari = corpoMari != null ? corpoMari.linearVelocity.x : 0f;
         bool mariMovendo = Mathf.Abs(velocidadeMari) > 0.05f;
-        bool correndo = Mathf.Abs(velocidadeMari) > (velocidade + velocidadeCorrida) * 0.5f;
-        if (mariMovendo)
+        float direcao = visualMari != null
+            ? (visualMari.flipX ? -1f : 1f) * Mathf.Sign(mari.lossyScale.x)
+            : Direcao;
+        if (visualMari == null && mariMovendo) direcao = Mathf.Sign(velocidadeMari);
+        bool virou = direcao != Direcao;
+        Direcao = direcao;
+        if (mariMovendo || virou)
         {
-            // A formação tem ordem fixa no mundo. Virar não espelha os destinos
-            // nem faz os familiares cruzarem uns pelos outros para trocar de lado.
+            // Reorganiza a fila inteira no mesmo frame, sem atravessar os
+            // outros familiares durante uma interpolação entre os dois lados.
             Vector3 posicao = transform.position;
-            posicao.x = mari.position.x - distanciaAtras;
+            posicao.x = mari.position.x - Direcao * distanciaAtras;
             transform.position = posicao;
         }
 
-        float movimento = transform.position.x - posicaoAnterior.x;
-        bool andando = Mathf.Abs(movimento) > 0.001f;
-        if (spriteRenderer != null && mariMovendo)
-            spriteRenderer.flipX = velocidadeMari * transform.lossyScale.x < 0f;
-        AtualizarAnimacoes(andando, andando && correndo);
-        posicaoAnterior = transform.position;
+        // A reposição ao virar não é corrida nem movimento na direção oposta.
+        EstaAndando = mariMovendo;
+        EstaCorrendo = mariMovendo && Mathf.Abs(velocidadeMari) > (velocidade + velocidadeCorrida) * 0.5f;
+        if (spriteRenderer != null)
+            spriteRenderer.flipX = Direcao * transform.lossyScale.x < 0f;
+        AtualizarAnimacoes(EstaAndando, EstaCorrendo);
     }
 
     private void AtualizarAnimacoes(bool andando, bool correndo)
