@@ -41,13 +41,12 @@ public class CasaKeychain : MonoBehaviour
 
         if (collected || keyItem == null ||
             !Input.GetMouseButtonDown(0) ||
-            Camera.main == null ||
             InventoryTabController.Instance == null ||
             InvestigationGuard.Blocked)
             return;
 
-        Vector2 mousePosition =
-            Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (!InvestigationGuard.TryGetPointerPosition(out Vector2 mousePosition))
+            return;
 
         if (!keychainCollider.OverlapPoint(mousePosition))
             return;

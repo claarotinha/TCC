@@ -50,15 +50,9 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot:
-    x: 0.5
-    y: 0.5
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 160
-  spriteBorder:
-    x: 0
-    y: 0
-    z: 0
-    w: 0
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -192,15 +186,9 @@ TextureImporter:
         width: 182
         height: 392
       alignment: 9
-      pivot:
-        x: 0.5
-        y: 0.5
-      border:
-        x: 0
-        y: 0
-        z: 0
-        w: 0
-      customData: null
+      pivot: {x: 0.500000000, y: 0.500000000}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData:
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -208,17 +196,17 @@ TextureImporter:
       spriteID: 82cce6459e78e9ac0800000000000000
       internalID: -3846487595514147800
       vertices: []
-      indices: null
+      indices:
       edges: []
       weights: []
     outline: []
-    customData: null
+    customData:
     physicsShape: []
     bones: []
-    spriteID: null
+    spriteID:
     internalID: 0
     vertices: []
-    indices: null
+    indices:
     edges: []
     weights: []
     secondaryTextures: []
@@ -226,8 +214,8 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       prota idle (1)1_0: -3846487595514147800
-  mipmapLimitGroupName: null
+  mipmapLimitGroupName:
   pSDRemoveMatte: 0
-  userData: null
-  assetBundleName: null
-  assetBundleVariant: null
+  userData:
+  assetBundleName:
+  assetBundleVariant:
