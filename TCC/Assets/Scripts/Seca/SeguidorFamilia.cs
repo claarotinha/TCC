@@ -1,5 +1,3 @@
-
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SeguidorFamilia : MonoBehaviour
@@ -25,123 +23,59 @@ public class SeguidorFamilia : MonoBehaviour
         set => distanciaAtras = Mathf.Max(0.1f, value);
     }
 
-    private static readonly List<Vector3> caminho = new();
-    private static Transform liderAtual;
-    private static Vector3 ultimaPosicao;
-    private static float distanciaTotal;
-
-    private readonly List<Vector3> pontos = new();
-    private readonly List<float> distancias = new();
-
+    private Rigidbody2D corpoMari;
     private Vector3 posicaoAnterior;
-    private float distanciaPercorrida;
-    private bool inicializado;
+
+    private void Awake()
+    {
+        if (animator == null) animator = GetComponent<Animator>();
+        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+        if (mari != null) corpoMari = mari.GetComponent<Rigidbody2D>();
+    }
+
+    private void OnEnable() => posicaoAnterior = transform.position;
 
     private void Start()
     {
-        if (mari == null)
-        {
-            Debug.LogError(
-                "SeguidorFamilia: atribua Mari no Inspector.",
-                this
-            );
-            enabled = false;
-            return;
-        }
-
-        if (animator == null)
-            animator = GetComponent<Animator>();
-
-        if (spriteRenderer == null)
-            spriteRenderer = GetComponent<SpriteRenderer>();
-
-        posicaoAnterior = transform.position;
-
-        // Cada familiar mantém seu próprio histórico de posições.
-        pontos.Add(transform.position);
-        distancias.Add(0f);
-
-        inicializado = true;
+        if (mari != null) return;
+        Debug.LogError("SeguidorFamilia: atribua Mari no Inspector.", this);
+        enabled = false;
     }
 
     private void LateUpdate()
     {
-        if (!inicializado || mari == null)
-            return;
-
-        if (PauseHelper.BlockInput())
+        if (mari == null) return;
+        if (PauseHelper.BlockInput() || Time.timeScale == 0f)
         {
             AtualizarAnimacoes(false, false);
+            posicaoAnterior = transform.position;
             return;
         }
 
-        // O destino fica atrás de Mari na direção da caminhada.
-        float direcao = mari.localScale.x >= 0f ? 1f : -1f;
-
-        Rigidbody2D corpoMari = mari.GetComponent<Rigidbody2D>();
-
-        if (corpoMari != null &&
-            Mathf.Abs(corpoMari.linearVelocity.x) > 0.05f)
+        float velocidadeMari = corpoMari != null ? corpoMari.linearVelocity.x : 0f;
+        bool mariMovendo = Mathf.Abs(velocidadeMari) > 0.05f;
+        bool correndo = Mathf.Abs(velocidadeMari) > (velocidade + velocidadeCorrida) * 0.5f;
+        if (mariMovendo)
         {
-            direcao = Mathf.Sign(corpoMari.linearVelocity.x);
+            // A formação tem ordem fixa no mundo. Virar não espelha os destinos
+            // nem faz os familiares cruzarem uns pelos outros para trocar de lado.
+            Vector3 posicao = transform.position;
+            posicao.x = mari.position.x - distanciaAtras;
+            transform.position = posicao;
         }
 
-        Vector3 destino = mari.position -
-            new Vector3(direcao * distanciaAtras, 0f, 0f);
-
-        destino.y = transform.position.y;
-        destino.z = transform.position.z;
-
-        float distancia = Vector3.Distance(
-            transform.position,
-            destino
-        );
-
-        bool mariMovendo = corpoMari != null &&
-            Mathf.Abs(corpoMari.linearVelocity.x) > 0.05f;
-
-        bool mariCorrendo = corpoMari != null &&
-            Mathf.Abs(corpoMari.linearVelocity.x) >
-            (velocidade + velocidadeCorrida) * 0.5f;
-
-        if (mariMovendo && distancia > distanciaParada)
-        {
-            float velocidadeAtual = mariCorrendo
-                ? velocidadeCorrida
-                : velocidade;
-
-            transform.position = Vector3.MoveTowards(
-                transform.position,
-                destino,
-                velocidadeAtual * Time.deltaTime
-            );
-        }
-
-        float movimentoReal =
-            transform.position.x - posicaoAnterior.x;
-
-        bool andando = Mathf.Abs(movimentoReal) > 0.001f;
-
-        if (andando && spriteRenderer != null)
-            spriteRenderer.flipX = movimentoReal < 0f;
-
-        AtualizarAnimacoes(
-            andando,
-            andando && mariCorrendo
-        );
-
+        float movimento = transform.position.x - posicaoAnterior.x;
+        bool andando = Mathf.Abs(movimento) > 0.001f;
+        if (spriteRenderer != null && mariMovendo)
+            spriteRenderer.flipX = velocidadeMari * transform.lossyScale.x < 0f;
+        AtualizarAnimacoes(andando, andando && correndo);
         posicaoAnterior = transform.position;
     }
 
     private void AtualizarAnimacoes(bool andando, bool correndo)
     {
-        if (animator == null)
-            return;
-
-        if (!string.IsNullOrEmpty(parametroAndando))
-            animator.SetBool(parametroAndando, andando);
-
-        if (!string.IsNullOrEmpty(parametroCorrendo))
-            animator.SetBool(parametroCorrendo, correndo);
+        if (animator == null || !animator.enabled) return;
+        if (!string.IsNullOrEmpty(parametroAndando)) animator.SetBool(parametroAndando, andando);
+        if (!string.IsNullOrEmpty(parametroCorrendo)) animator.SetBool(parametroCorrendo, correndo);
     }
 }

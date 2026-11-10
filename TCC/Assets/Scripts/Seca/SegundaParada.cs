@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Segunda parada: riacho, busca por Baleia e escolha do abrigo.
+// Segunda parada: conversa na estrada, busca por Baleia e escolha do abrigo.
 public class SegundaParada : MonoBehaviour
 {
     [SerializeField] private PlayerMovement mari;
@@ -135,7 +135,7 @@ public class SegundaParada : MonoBehaviour
     private readonly List<bool> filhosFadeAtivos = new List<bool>();
     private static bool ferimentoSemProgresso;
 
-    private int etapa; // 0 agua, 1 travessia, 2 busca, 3 escolha, 4 concluida, 5 retorno, 6 casa, 7 cutscene
+    private int etapa; // 1 caminhada, 2 busca, 3 escolha, 4 concluida, 5 retorno, 6 casa, 7 cutscene
     private bool iniciou, conversando, movimentoAnterior, esperandoEscolha, movimentoBloqueado;
     private SeguidorFamilia seguidorBaleia;
     private bool baleiaSeguia;
@@ -169,6 +169,7 @@ public class SegundaParada : MonoBehaviour
     {
         ferimentoSemProgresso = false;
         RegistrarCenario();
+        if (riacho != null) riacho.gameObject.SetActive(false);
         if (mariquinha != null)
         {
             visualMariquinha = mariquinha.GetComponent<SpriteRenderer>();
@@ -224,9 +225,8 @@ public class SegundaParada : MonoBehaviour
         if (!iniciou && j != null && j.ParadaAtiva && j.ParadaAtual == 2 && dialogueUI != null && !dialogueUI.activeInHierarchy)
         {
             iniciou = true;
-            Falar(new[] { "Mãe" },
-                new[] { "Estou com muita sede, Zefinha, use a sua cabaça para coletar um pouco de água." },
-                null);
+            etapa = 1;
+            ContinuarCaminhada();
         }
         if (etapa == 5 && !conversando && mari != null &&
             Mathf.Abs(mari.transform.position.x - retornoX) <= 1f)
@@ -297,7 +297,7 @@ public class SegundaParada : MonoBehaviour
     {
         if (id == null) return false;
         ControleJornada jornada = ControleJornada.Instance;
-        if (id == "riacho") return iniciou && etapa == 0 && jornada != null && jornada.ParadaAtual == 2;
+        if (id == "riacho") return false;
         if (id == "casa") return etapa == 6;
         if (id == "baleia") return etapa == 2 && pegadas == 3;
         if (id.StartsWith("pegada")) return etapa == 2 && id == "pegada" + pegadas;
@@ -457,96 +457,9 @@ public class SegundaParada : MonoBehaviour
         }
     }
 
-    public bool SoltarNoRiacho(ItemData item, Vector2 posicaoTela)
-    {
-        if (item == null || item != cabacaVazia)
-            return false;
-
-        if (riacho == null)
-        {
-            Debug.LogWarning("Coleta de água: a referência do riacho está vazia.", this);
-            return false;
-        }
-
-        Camera cameraPrincipal = Camera.main;
-        if (cameraPrincipal == null)
-        {
-            Debug.LogWarning("Coleta de água: nenhuma câmera com a tag MainCamera.", this);
-            return false;
-        }
-
-        Ray raio = cameraPrincipal.ScreenPointToRay(posicaoTela);
-        Plane plano = new Plane(Vector3.forward, riacho.position);
-        if (!plano.Raycast(raio, out float distancia))
-            return false;
-
-        Vector3 ponto = raio.GetPoint(distancia);
-        Vector2 ponto2D = new Vector2(ponto.x, ponto.y);
-        bool acertou = false;
-
-        Collider2D[] areas = riacho.GetComponentsInChildren<Collider2D>();
-        foreach (Collider2D area in areas)
-        {
-            if (area.enabled && area.OverlapPoint(ponto2D))
-            {
-                acertou = true;
-                break;
-            }
-        }
-
-        if (!acertou)
-        {
-            SpriteRenderer[] imagens = riacho.GetComponentsInChildren<SpriteRenderer>();
-            foreach (SpriteRenderer imagem in imagens)
-            {
-                if (!imagem.enabled || imagem.sprite == null)
-                    continue;
-
-                Bounds limites = imagem.bounds;
-                limites.Expand(new Vector3(0.2f, 0.2f, 0.2f));
-                Vector3 pontoVisual = new Vector3(ponto.x, ponto.y, limites.center.z);
-                if (limites.Contains(pontoVisual))
-                {
-                    acertou = true;
-                    break;
-                }
-            }
-        }
-
-        if (!acertou)
-        {
-            Debug.LogWarning(
-                "Coleta de água: a cabaça foi solta fora da área detectada do riacho. " +
-                "Confira a referência do riacho.", this);
-            return false;
-        }
-
-        if (UsarNoRiacho(item))
-            return true;
-
-        Debug.LogWarning(
-            "Coleta de água: o arrasto acertou o riacho, mas o uso foi bloqueado. " +
-            $"iniciou={iniciou}; etapa={etapa}; conversando={conversando}; " +
-            $"inputBloqueado={PauseHelper.BlockInput()}; timeScale={Time.timeScale}; " +
-            $"cabacaCheiaConfigurada={cabacaCheia != null}; " +
-            $"inventarioExiste={InventoryManager.Instance != null}", this);
-        return false;
-    }
-
-    public bool UsarNoRiacho(ItemData item)
-    {
-        if (!iniciou || etapa != 0 || conversando || PauseHelper.BlockInput() ||
-            Time.timeScale == 0f || cabacaCheia == null || item != cabacaVazia ||
-            InventoryManager.Instance == null ||
-            !Possui(item)) return false;
-        InventoryManager.Instance.RemoveItem(cabacaVazia);
-        InventoryManager.Instance.AddItem(cabacaCheia);
-        etapa = 1;
-        Falar(new[] { "Cena" },
-            new[] { "O grupo atravessa por uma parte rasa do riacho." },
-            DepoisDaTravessia);
-        return true;
-    }
+    // Mantém a API dos slots de inventário e saves antigos, sem a coleta removida.
+    public bool SoltarNoRiacho(ItemData item, Vector2 posicaoTela) => false;
+    public bool UsarNoRiacho(ItemData item) => false;
 
     private bool Possui(ItemData item)
     {
@@ -556,7 +469,7 @@ public class SegundaParada : MonoBehaviour
         return false;
     }
 
-    private void DepoisDaTravessia()
+    private void ContinuarCaminhada()
     {
         if (riacho != null) riacho.gameObject.SetActive(false);
         // Estas conversas usam o painel compartilhado, mas nao interrompem Mari.
@@ -608,6 +521,8 @@ public class SegundaParada : MonoBehaviour
     private IEnumerator CorrerBaleia()
     {
         fugindo = true;
+        Animator animacaoBaleia = baleia != null ? baleia.GetComponent<Animator>() : null;
+        if (animacaoBaleia != null) animacaoBaleia.enabled = false;
         float tempo = 0f;
         while (baleia != null && Mathf.Abs(baleia.position.x - destinoBaleia.x) > 0.01f)
         {
@@ -634,6 +549,8 @@ public class SegundaParada : MonoBehaviour
     private void MostrarBaleia(Sprite sprite)
     {
         if (desenhoBaleia == null || sprite == null) return;
+        Animator animacaoBaleia = desenhoBaleia.GetComponent<Animator>();
+        if (animacaoBaleia != null) animacaoBaleia.enabled = sprite == spriteBaleia && !fugindo;
         desenhoBaleia.sprite = sprite;
         // Os quadros mantem os pes na mesma altura, sem saltos de escala.
         float proporcao = spriteBaleia != null && sprite.bounds.size.y > 0f
@@ -995,7 +912,7 @@ public class SegundaParada : MonoBehaviour
         Vector3 posicao = mariquinha.transform.position;
         posicao.y += pe - visualMariquinha.bounds.min.y;
         mariquinha.transform.position = posicao;
-        if (JanelaQuebrada) mariquinha.DistanciaAtras = 1.8f;
+        if (JanelaQuebrada) mariquinha.DistanciaAtras = Mathf.Max(mariquinha.DistanciaAtras, 1.8f);
     }
 
     private void Descansar()
