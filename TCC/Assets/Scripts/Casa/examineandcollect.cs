@@ -86,6 +86,15 @@ public class CollectableExamine : MonoBehaviour
                 // Se clicou neste objeto
                 if (clickedThis)
                 {
+                    // Depois da conversa com o grupo, vai direto à confirmação.
+                    if (isTutorialBall && tutorial != null &&
+                        tutorial.CurrentStep == TutorialManager.TutorialStep.FindBall)
+                    {
+                        if (isShowing) HidePanel();
+                        CollectItem();
+                        return;
+                    }
+
                     // Antes da pista dos garotos, a bola pode ser investigada,
                     // mas não pode entrar no inventário.
                     if (isShowing && currentObject == this)
@@ -174,10 +183,7 @@ public class CollectableExamine : MonoBehaviour
 
         if (examineText != null)
         {
-            examineText.text = isTutorialBall && TutorialManager.Instance != null &&
-                    TutorialManager.Instance.CurrentStep == TutorialManager.TutorialStep.FindBall
-                    ? "Encontrei a bola dos garotos. Quero pegá-la?"
-                    : message;
+            examineText.text = message;
         }
 
         isShowing = true;

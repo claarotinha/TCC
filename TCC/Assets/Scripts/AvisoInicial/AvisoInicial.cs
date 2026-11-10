@@ -7,6 +7,7 @@ public class AvisoInicial : MonoBehaviour
 {
     [Header("UI")]
     public TMP_Text textoAviso;
+    [SerializeField] private TMP_Text textoFones;
     [SerializeField] private CanvasGroup orientacoes;
     [SerializeField] private RectTransform solAviso;
 
@@ -25,15 +26,16 @@ public class AvisoInicial : MonoBehaviour
 
     private void Start()
     {
-        if (textoAviso == null)
+        if (textoAviso == null || textoFones == null)
         {
-            Debug.LogError("AvisoInicial: configure o texto da data.", this);
+            Debug.LogError("AvisoInicial: configure os textos da data e do aviso de fones na Hierarchy.", this);
             enabled = false;
             return;
         }
         // A data e os avisos são escritos nos próprios textos da Hierarchy.
         mensagem = textoAviso.text;
         textoAviso.text = string.Empty;
+        textoFones.gameObject.SetActive(false);
         StartCoroutine(Apresentar());
     }
 
@@ -46,13 +48,10 @@ public class AvisoInicial : MonoBehaviour
 
     private IEnumerator Apresentar()
     {
-        // Aviso anterior ao cartão sobre consequências, usando o texto já existente.
-        float tamanhoOriginal = textoAviso.fontSize;
-        textoAviso.fontSize = Mathf.Min(tamanhoOriginal, 32f);
-        textoAviso.text = "Para uma melhor experiência, recomendamos o uso de fones de ouvido.";
+        // O conteúdo é editado no TMP da Hierarchy, não neste código.
+        textoFones.gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(tempoAvisoFones);
-        textoAviso.text = string.Empty;
-        textoAviso.fontSize = tamanhoOriginal;
+        textoFones.gameObject.SetActive(false);
 
         if (orientacoes != null)
         {
