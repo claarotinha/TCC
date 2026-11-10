@@ -8,8 +8,8 @@ public class BaleiaAnimacao : MonoBehaviour
     [SerializeField] private Sprite parada;
     [SerializeField] private Sprite[] caminhada;
     [SerializeField] private Sprite[] corrida;
-    [SerializeField, Min(0.02f)] private float intervaloCaminhada = 0.18f;
-    [SerializeField, Min(0.02f)] private float intervaloCorrida = 0.1f;
+    [SerializeField, Min(0.02f)] private float intervaloCaminhada = 0.24f;
+    [SerializeField, Min(0.02f)] private float intervaloCorrida = 0.13f;
     private SpriteRenderer desenho;
     private SeguidorFamilia seguidor;
     private Vector3 ultimaPosicao;

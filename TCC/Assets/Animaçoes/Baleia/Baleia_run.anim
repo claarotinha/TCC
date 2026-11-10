@@ -28,34 +28,34 @@ AnimationClip:
         fileID: 21300000
         guid: bda1e1a300034c9c9f97b4e300000001
         type: 3
-    - time: 0.1
+    - time: 0.13
       value:
         fileID: 21300001
         guid: bda1e1a300034c9c9f97b4e300000001
         type: 3
-    - time: 0.2
+    - time: 0.26
       value:
         fileID: 21300002
         guid: bda1e1a300034c9c9f97b4e300000001
         type: 3
-    - time: 0.3
+    - time: 0.39
       value:
         fileID: 21300003
         guid: bda1e1a300034c9c9f97b4e300000001
         type: 3
-    - time: 0.4
+    - time: 0.52
       value:
         fileID: 21300004
         guid: bda1e1a300034c9c9f97b4e300000001
         type: 3
-    - time: 0.5
+    - time: 0.65
       value:
         fileID: 21300005
         guid: bda1e1a300034c9c9f97b4e300000001
         type: 3
-    - time: 0.6
+    - time: 0.78
       value:
-        fileID: 21300005
+        fileID: 21300000
         guid: bda1e1a300034c9c9f97b4e300000001
         type: 3
     attribute: m_Sprite
@@ -64,7 +64,7 @@ AnimationClip:
     script:
       fileID: 0
     flags: 2
-  m_SampleRate: 10
+  m_SampleRate: 100
   m_WrapMode: 0
   m_Bounds:
     m_Center:
@@ -106,7 +106,7 @@ AnimationClip:
     - fileID: 21300005
       guid: bda1e1a300034c9c9f97b4e300000001
       type: 3
-    - fileID: 21300005
+    - fileID: 21300000
       guid: bda1e1a300034c9c9f97b4e300000001
       type: 3
   m_AnimationClipSettings:
@@ -115,7 +115,7 @@ AnimationClip:
       fileID: 0
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.6
+    m_StopTime: 0.78
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

@@ -25,7 +25,7 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private Sprite[] corridaBaleia;
     [SerializeField] private Sprite baleiaComPrea;
     [SerializeField, Min(0.1f)] private float velocidadeFuga = 6.5f;
-    [SerializeField, Min(0.02f)] private float intervaloCorrida = 0.1f;
+    [SerializeField, Min(0.02f)] private float intervaloCorrida = 0.13f;
 
     [Header("Casa abandonada")]
     [SerializeField] private Sprite casaFechada;
