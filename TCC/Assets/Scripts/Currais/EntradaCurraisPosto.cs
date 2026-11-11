@@ -164,6 +164,7 @@ public partial class EntradaCurrais
         yield return Escurecer(0f);
         yield return Esperar(tempoPlano);
         yield return Dizer(quartoFalas);
+        yield return AjudarNoQuarto();
         Dados.curraisEtapaPosto = 2;
         GameProgress.Instance.UnlockDiaryPage("currais-quarto");
         AtualizarEstadoBusca(); Salvar();

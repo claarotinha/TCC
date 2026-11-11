@@ -45,11 +45,13 @@ public partial class EntradaCurrais
     {
         if (PostoDisponivel) return AlvosPosto();
         if (Dados.curraisPanelaConcluida)
-            return new[] { areaPanosUso, areaPanosAtendimento, areaRaimundo, areaLavadeira, areaPanoLavagem, areaLembranca, areaPatio, areaPanoAtendimento };
+            return new[] { areaAguaPatio, areaPanosPatio, areaSocorroBento, areaCabacaSocorro, areaPanosUso, areaPanosAtendimento, areaRaimundo, areaLavadeira, areaPanoLavagem, areaLembranca, areaPatio, areaPanoAtendimento };
         return new[] { areaLotePanos, areaLuzia, areaAgua, areaMae, areaMenino, areaRegistro, areaPanela };
     }
 
-    private string ObjetivoCampo() => PostoDisponivel ? ObjetivoPosto() : objetivosCampo[Mathf.Clamp(Dados.curraisEtapaBusca, 0, 6)];
+    private string ObjetivoCampo() => PostoDisponivel ? ObjetivoPosto() :
+        Dados.curraisEtapaBusca >= 4 && Dados.curraisEtapaBusca <= 5 ? ObjetivoSocorro() :
+        objetivosCampo[Mathf.Clamp(Dados.curraisEtapaBusca, 0, 6)];
 
     private void AplicarLimitesBusca()
     {
@@ -81,12 +83,12 @@ public partial class EntradaCurrais
         AtualizarVisuaisLavagem();
         areaLembranca.enabled = etapa == 3;
         areaPatio.enabled = etapa == 4;
-        areaPanoAtendimento.enabled = etapa == 5;
+        areaPanoAtendimento.enabled = etapa == 5 && PrecisaRecolherPanoSocorro;
         panoCarregado.SetActive(etapa >= 3 && etapa <= 4 && Dados.curraisEscolhaAgua == 1);
         manchaRoda.SetActive(etapa >= 5);
-        corpoCoberto.SetActive(etapa >= 6);
+        corpoCoberto.SetActive((etapa >= 6 || Dados.curraisBentoMorto) && !Dados.curraisSepultamentoConcluido);
         trabalhadorRetorno.SetActive(etapa >= 6);
-        bento.gameObject.SetActive(etapa < 6);
+        bento.gameObject.SetActive(etapa < 6 && !Dados.curraisBentoMorto);
         Posicionar(bento, etapa >= 5 ? bentoCaido : bentoEmPe);
         bento.rotation = (etapa >= 5 ? bentoCaido : bentoEmPe).rotation;
         if (etapa >= 1 && (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))
@@ -97,6 +99,7 @@ public partial class EntradaCurrais
             if (etapa >= 4) Posicionar(pai, paiTrabalhoMarca);
             if (etapa >= 6) Posicionar(pai, paiAbrigo);
         }
+        AtualizarSocorro();
         OcultarPercepcao();
         AtualizarPosto();
         Physics2D.SyncTransforms();
@@ -117,7 +120,11 @@ public partial class EntradaCurrais
             if (Mathf.Abs(mari.transform.position.x - area.bounds.center.x) > alcanceInteracao)
             { objetivoTexto.text = "Aproxime-se para interagir. " + ObjetivoCampo(); return true; }
             int etapa = Dados.curraisEtapaBusca;
-            if (area == areaPanosUso && etapa == 2) Iniciar(SepararPanoLavagem(false));
+            if (area == areaAguaPatio && etapa == 4) Iniciar(PrepararAguaPatio());
+            else if (area == areaPanosPatio && etapa == 4) Iniciar(EntregarPanosPatio());
+            else if (area == areaSocorroBento && etapa == 5) Iniciar(UsarNoSocorro());
+            else if (area == areaCabacaSocorro && etapa == 5) Iniciar(RecolherCabacaSocorro());
+            else if (area == areaPanosUso && etapa == 2) Iniciar(SepararPanoLavagem(false));
             else if (area == areaPanosAtendimento && etapa == 2) Iniciar(SepararPanoLavagem(true));
             else if (area == areaRaimundo && etapa == 0)
             {
@@ -243,7 +250,22 @@ public partial class EntradaCurrais
 
     private IEnumerator TestemunharTrabalho()
     {
-        yield return Dizer(patioInicio);
+        if (!Dados.curraisTrabalhoPatioIniciado)
+        {
+            Dados.curraisTrabalhoPatioIniciado = true;
+            if (!TemItem(panoAuxilio)) InventoryManager.Instance.AddItem(panoAuxilio);
+            AtualizarEstadoBusca(); Salvar();
+            yield return Dizer(patioInicio);
+            yield return Dizer(tarefaPatioFalas);
+            yield break;
+        }
+        if (!Dados.curraisAguaPatioPreparada || !Dados.curraisPanosPatioEntregues)
+        { yield return Dizer(tarefaPatioFalas); yield break; }
+        yield return AgressaoNoPatio();
+    }
+
+    private IEnumerator AgressaoNoPatio()
+    {
         yield return Mover(bento, bentoCaido.position, tempoPlano);
         bento.rotation = bentoCaido.rotation;
         Quaternion fiscalOriginal = fiscalTrabalho.localRotation;
@@ -263,10 +285,11 @@ public partial class EntradaCurrais
 
     private IEnumerator AjudarBento()
     {
-        yield return Dizer(atendimentoFalas);
-        yield return Esperar(tempoPlano);
-        yield return Dizer(noticiaBento);
-        GameProgress.Instance.UnlockDiaryPage("currais-bento");
-        AvancarCampo(6);
+        if (!PrecisaRecolherPanoSocorro) yield break;
+        if (!TemItem(panoAuxilio)) InventoryManager.Instance.AddItem(panoAuxilio);
+        AtualizarEstadoBusca(); Salvar();
+        yield return Dizer(new[] { new Fala { personagem = "Luzia", texto = Dados.curraisBentoMorto
+            ? "Leve esse pano limpo para cobrir os pertences dele. Os homens vão preparar a saída."
+            : "Pegue esse pano. Selecione no inventário e traga até Bento. A água também vai ser necessária." } });
     }
 }

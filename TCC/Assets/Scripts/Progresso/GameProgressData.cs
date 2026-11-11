@@ -113,6 +113,15 @@ public class GameProgressData
     public int curraisPanosSeparados;
     public bool curraisTiraPanoRecolhida;
     public bool curraisPassagemVigiadaConcluida;
+    public bool curraisTrabalhoPatioIniciado;
+    public bool curraisAguaPatioPreparada;
+    public bool curraisPanosPatioEntregues;
+    public int curraisItensAtendimentoBento;
+    public bool curraisBentoMorto;
+    public bool curraisPanoSepultamentoEntregue;
+    public bool curraisCabacaSocorroRecolhida;
+    public bool curraisSepultamentoConcluido;
+    public bool curraisAjudouAtendimentoQuarto;
     public bool curraisRaimundoConhecido;
     public int curraisPerguntasRaimundo;
 

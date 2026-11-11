@@ -154,6 +154,7 @@ public partial class EntradaCurrais : MonoBehaviour
         PrepararChegadaAlternativa();
         PrepararTarefaPanos();
         PrepararEtapaLavagem();
+        PrepararSocorro();
         pronto = true;
         int etapa = Mathf.Clamp(Dados.curraisEtapaEntrada, 0, 4);
         if (etapa == 0) Iniciar(Separar());
@@ -227,7 +228,7 @@ public partial class EntradaCurrais : MonoBehaviour
         referenciasPresentes &= ConferirReferencia(paiAbrigo, nameof(paiAbrigo));
         referenciasPresentes &= ConferirReferencia(maeAbrigo, nameof(maeAbrigo));
         referenciasPresentes &= ConferirReferencia(baleiaAbrigo, nameof(baleiaAbrigo));
-        if (!referenciasPresentes || !ReferenciasChegadaValidas() || !ReferenciasTarefaValidas() || !ReferenciasLavagemValidas()) return false;
+        if (!referenciasPresentes || !ReferenciasChegadaValidas() || !ReferenciasTarefaValidas() || !ReferenciasLavagemValidas() || !ReferenciasSocorroValidas()) return false;
         return FalasValidas(antesSeparacao) && FalasValidas(barreira) &&
             FalasValidas(depoisSeparacao) && FalasValidas(entrada) &&
             FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() && ReferenciasCampoValidas() && ReferenciasPostoValidas() && ReferenciasConsultaValidas() && ReferenciasMemoriaValidas() &&
@@ -1074,6 +1075,7 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         encerrando = true;
         StopAllCoroutines();
+        RestaurarPlanoSepultamento();
         RestaurarDesenhoSaida();
         RestaurarApresentacaoMemoria();
         FecharDialogo();
