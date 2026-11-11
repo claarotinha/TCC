@@ -152,6 +152,7 @@ public partial class EntradaCurrais : MonoBehaviour
         FecharDialogo();
         PrepararOpcoes();
         PrepararChegadaAlternativa();
+        PrepararTarefaPanos();
         pronto = true;
         int etapa = Mathf.Clamp(Dados.curraisEtapaEntrada, 0, 4);
         if (etapa == 0) Iniciar(Separar());
@@ -225,7 +226,7 @@ public partial class EntradaCurrais : MonoBehaviour
         referenciasPresentes &= ConferirReferencia(paiAbrigo, nameof(paiAbrigo));
         referenciasPresentes &= ConferirReferencia(maeAbrigo, nameof(maeAbrigo));
         referenciasPresentes &= ConferirReferencia(baleiaAbrigo, nameof(baleiaAbrigo));
-        if (!referenciasPresentes || !ReferenciasChegadaValidas()) return false;
+        if (!referenciasPresentes || !ReferenciasChegadaValidas() || !ReferenciasTarefaValidas()) return false;
         return FalasValidas(antesSeparacao) && FalasValidas(barreira) &&
             FalasValidas(depoisSeparacao) && FalasValidas(entrada) &&
             FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() && ReferenciasCampoValidas() && ReferenciasPostoValidas() && ReferenciasConsultaValidas() && ReferenciasMemoriaValidas() &&
@@ -677,7 +678,7 @@ public partial class EntradaCurrais : MonoBehaviour
     private bool InteragirBusca(Vector2 ponto)
     {
         if (Dados.curraisPanelaConcluida) return InteragirCampo(ponto);
-        Collider2D[] areas = { areaLuzia, areaAgua, areaMae, areaMenino, areaRegistro, areaPanela };
+        Collider2D[] areas = { areaLotePanos, areaLuzia, areaAgua, areaMae, areaMenino, areaRegistro, areaPanela };
         foreach (Collider2D area in areas)
         {
             if (area == null || !area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
@@ -686,7 +687,8 @@ public partial class EntradaCurrais : MonoBehaviour
                 objetivoTexto.text = "Aproxime-se para interagir. " + ObjetivoAtual();
                 return true;
             }
-            if (area == areaLuzia)
+            if (area == areaLotePanos) Iniciar(RecolherLotePanos());
+            else if (area == areaLuzia)
             {
                 if (Dados.curraisAguaRecebida && Dados.curraisEscolhaAgua == 0) Iniciar(DestinarAgua());
                 else AbrirMenuLuzia();
@@ -712,8 +714,7 @@ public partial class EntradaCurrais : MonoBehaviour
             {
                 if (Dados.curraisEscolhaAgua == 0) objetivoTexto.text = ObjetivoAtual();
                 else if (!Dados.curraisRegistroConcluido) Iniciar(ConsultarRegistro());
-                else MostrarOpcoes("Escrivão", objetivosBusca[4], opcoesRegistro,
-                    new Action[] { () => Iniciar(RelembrarRegistro()), FecharMenu });
+                else MenuTarefaPanos();
             }
             else if (area == areaPanela)
             {
@@ -768,14 +769,24 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (!DevolverCabaca())
         {
-            objetivoTexto.text = objetivosBusca[1];
+            objetivoTexto.text = "A cabaça precisa ser devolvida na distribuição antes de receber água.";
             yield break;
         }
-        if (TemItem(cabacaVaziaBusca))
+        if (!Dados.curraisAguaOrientada)
         {
-            InventoryManager.Instance.RemoveItem(cabacaVaziaBusca);
-            InventoryManager.Instance.AddItem(cabacaCheiaBusca);
+            yield return Dizer(orientacaoAgua);
+            Dados.curraisAguaOrientada = true;
+            AtualizarEstadoBusca(); Salvar();
+            yield break;
         }
+        if (!TemItem(cabacaVaziaBusca) || InventoryManager.Instance.SelectedItem != cabacaVaziaBusca)
+        {
+            yield return Dizer(new[] { new Fala { personagem = "Funcionária", texto =
+                "Selecione sua cabaça vazia no inventário, feche com TAB e apresente aqui. Espere sua vez; não mexa no reservatório." } });
+            yield break;
+        }
+        InventoryManager.Instance.RemoveItem(cabacaVaziaBusca);
+        InventoryManager.Instance.AddItem(cabacaCheiaBusca);
         Dados.curraisAguaRecebida = true;
         AtualizarEstadoBusca(); Salvar();
         yield return Dizer(aguaFuncionario);
@@ -789,9 +800,9 @@ public partial class EntradaCurrais : MonoBehaviour
             objetivoTexto.text = objetivosBusca[2];
             yield break;
         }
-        if (!TemItem(cabacaCheiaBusca))
+        if (!TemItem(cabacaCheiaBusca) || InventoryManager.Instance.SelectedItem != cabacaCheiaBusca)
         {
-            objetivoTexto.text = "Leve a cabaça com a porção de água até o abrigo.";
+            objetivoTexto.text = "Selecione a cabaça cheia no inventário, feche com TAB e fale com sua mãe ou Luzia no abrigo.";
             yield break;
         }
         yield return Dizer(aguaAntesEscolha);
@@ -845,10 +856,12 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private IEnumerator ConsultarRegistro()
     {
-        yield return RelembrarRegistro();
+        yield return Dizer(ComAcompanhante(pedidoPanos));
+        Dados.curraisTarefaPanosIniciada = true;
         Dados.curraisRegistroConcluido = true;
         GameProgress.Instance.UnlockDiaryPage("currais-registro");
         AtualizarEstadoBusca(); Salvar();
+        MenuTarefaPanos();
     }
 
     private IEnumerator RelembrarRegistro()
@@ -862,20 +875,23 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private IEnumerator EscolherPertence()
     {
-        if (Dados.curraisPanelaConcluida) yield break;
+        if (Dados.curraisPanelaConcluida || !Dados.curraisLotePanosRecolhido) yield break;
         yield return Dizer(panelaInicio);
         yield return Escolher("Zefinha", perguntaPanela, opcoesPanela);
-        int opcao = escolhaRecebida;
-        ItemData escolhido = opcao == 0 ? itemLaco : itemCanhoto;
-        if (!TemItem(escolhido)) InventoryManager.Instance.AddItem(escolhido);
-        Dados.curraisEscolhaPertence = opcao + 1;
-        Dados.curraisLacoGuardado = opcao == 0;
-        if (opcao == 1) Dados.curraisDestinoConfirmado = true;
+        bool perguntar = escolhaRecebida == 0;
+        if (perguntar)
+        {
+            if (!TemItem(itemCanhoto)) InventoryManager.Instance.AddItem(itemCanhoto);
+            Dados.curraisDestinoConfirmado = true;
+        }
+        // O laço foi retirado da chegada. Mantém-se apenas o estado de compatibilidade.
+        Dados.curraisEscolhaPertence = perguntar ? 2 : 0;
+        Dados.curraisLacoGuardado = false;
         Dados.curraisLacoNaPanela = false;
         Dados.curraisPanelaConcluida = true;
-        GameProgress.Instance.UnlockDiaryPage(opcao == 0 ? "currais-laco" : "currais-canhoto");
+        if (perguntar) GameProgress.Instance.UnlockDiaryPage("currais-canhoto");
         AtualizarEstadoBusca(); Salvar();
-        yield return Dizer(opcao == 0 ? panelaLaco : panelaCanhoto);
+        yield return Dizer(perguntar ? panelaCanhoto : seguirPanos);
     }
 
     private string ObjetivoAtual()
@@ -883,9 +899,12 @@ public partial class EntradaCurrais : MonoBehaviour
         if (Dados.curraisPanelaConcluida) return ObjetivoCampo();
         if (objetivosBusca == null || objetivosBusca.Length < 6) return objetivoBusca;
         if (!Dados.curraisDistribuicaoIniciada) return objetivosBusca[0];
-        if (!Dados.curraisAguaRecebida) return objetivosBusca[1];
+        if (!Dados.curraisAguaRecebida) return Dados.curraisAguaOrientada
+            ? "Selecione a cabaça vazia no inventário e apresente na distribuição." : objetivosBusca[1];
         if (Dados.curraisEscolhaAgua == 0) return objetivosBusca[2];
         if (!Dados.curraisRegistroConcluido) return objetivosBusca[3];
+        if (!Dados.curraisLotePanosRecolhido)
+            return (Dados.curraisPerguntasTarefaPanos & 3) == 3 ? objetivoLotePanos : "Pergunte ao escrivão qual lote levar e a quem entregar.";
         if (!Dados.curraisPanelaConcluida) return objetivosBusca[4];
         return objetivosBusca[5];
     }
@@ -894,8 +913,9 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (Dados.curraisEtapaEntrada != 4) return;
         AtualizarVisuaisChegada();
+        AtualizarTarefaPanos();
         objetivoTexto.text = ObjetivoAtual();
-        bool panelaAcessivel = Dados.curraisRegistroConcluido && !Dados.curraisPanelaConcluida;
+        bool panelaAcessivel = Dados.curraisLotePanosRecolhido && !Dados.curraisPanelaConcluida;
         if (panelaAcessivel)
         {
             panelaBusca.position = panelaNoChao.position;
@@ -903,7 +923,7 @@ public partial class EntradaCurrais : MonoBehaviour
         }
         else if (Dados.curraisPanelaConcluida) panelaBusca.position = panelaRecolhida.position;
         canhotoCenario.SetActive(panelaAcessivel);
-        cabacaMesa.SetActive(!Dados.curraisAguaRecebida);
+        cabacaMesa.SetActive(!Dados.curraisCabacaDevolvida);
         lacoPanela.SetActive(false);
         areaPanela.enabled = panelaAcessivel;
         meninoBusca.gameObject.SetActive(Dados.curraisEscolhaAgua != 0);

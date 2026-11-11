@@ -46,7 +46,7 @@ public partial class EntradaCurrais
         if (PostoDisponivel) return AlvosPosto();
         if (Dados.curraisPanelaConcluida)
             return new[] { areaRaimundo, areaLavadeira, areaPanoLavagem, areaLembranca, areaPatio, areaPanoAtendimento };
-        return new[] { areaLuzia, areaAgua, areaMae, areaMenino, areaRegistro, areaPanela };
+        return new[] { areaLotePanos, areaLuzia, areaAgua, areaMae, areaMenino, areaRegistro, areaPanela };
     }
 
     private string ObjetivoCampo() => PostoDisponivel ? ObjetivoPosto() : objetivosCampo[Mathf.Clamp(Dados.curraisEtapaBusca, 0, 6)];
@@ -182,6 +182,19 @@ public partial class EntradaCurrais
 
     private IEnumerator ConversarLavadeira()
     {
+        if (Dados.curraisTarefaPanosIniciada && !Dados.curraisLotePanosEntregue)
+        {
+            if (!TemItem(itemLotePanos) || InventoryManager.Instance.SelectedItem != itemLotePanos)
+            {
+                yield return Dizer(new[] { new Fala { personagem = "Lavadeira", texto =
+                    "Você trouxe o lote da mesa dos nomes? Selecione os panos no inventário, feche com TAB e entregue aqui." } });
+                yield break;
+            }
+            InventoryManager.Instance.RemoveItem(itemLotePanos);
+            Dados.curraisLotePanosEntregue = true;
+            AtualizarTarefaPanos();
+            Salvar();
+        }
         yield return Dizer(lavagemFalas);
         AvancarCampo(Dados.curraisEscolhaAgua == 1 ? 2 : 3);
         GameProgress.Instance.UnlockDiaryPage("currais-lavagem");

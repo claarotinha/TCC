@@ -88,6 +88,11 @@ public class GameProgressData
 
     // Ato 2, etapa 2: escolhas independentes, preservadas para as etapas seguintes.
     public bool curraisDistribuicaoIniciada;
+    public bool curraisAguaOrientada;
+    public bool curraisTarefaPanosIniciada;
+    public int curraisPerguntasTarefaPanos;
+    public bool curraisLotePanosRecolhido;
+    public bool curraisLotePanosEntregue;
     public bool curraisCabacaDevolvida;
     public bool curraisAguaRecebida;
     // 0 sem escolha, 1 mãe, 2 Luzia. Não determina um final.

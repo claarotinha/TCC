@@ -9102,7 +9102,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: [{fileID: 4100000031}, {fileID: 4100000037}, {fileID: 4100000040}, {fileID: 4100000043}, {fileID: 4100000046}, {fileID: 4100000049}, {fileID: 4100000052}, {fileID: 4100000055}, {fileID: 4100000058}, {fileID: 4100000061}, {fileID: 4100000064}, {fileID: 4100000067}, {fileID: 4100000070}, {fileID: 4100000073}, {fileID: 4100000076}, {fileID: 4100000080}, {fileID: 4100000087}, {fileID: 4100000091}, {fileID: 4100000095}, {fileID: 4100000139}, {fileID: 4100000142}, {fileID: 4100000145}, {fileID: 4200000001}, {fileID: 4200000005}, {fileID: 4200000009}, {fileID: 4200000013}, {fileID: 4200000017}, {fileID: 4200000021}, {fileID: 4200000025}, {fileID: 4200000029}, {fileID: 4200000033}, {fileID: 4200000037}, {fileID: 4200000044}, {fileID: 4300000001}, {fileID: 4400000001}, {fileID: 4500000001}, {fileID: 4600000001}, {fileID: 9805000201}, {fileID: 9805000301}]
+  m_Children: [{fileID: 4100000031}, {fileID: 4100000037}, {fileID: 4100000040}, {fileID: 4100000043}, {fileID: 4100000046}, {fileID: 4100000049}, {fileID: 4100000052}, {fileID: 4100000055}, {fileID: 4100000058}, {fileID: 4100000061}, {fileID: 4100000064}, {fileID: 4100000067}, {fileID: 4100000070}, {fileID: 4100000073}, {fileID: 4100000076}, {fileID: 4100000080}, {fileID: 4100000087}, {fileID: 4100000091}, {fileID: 4100000095}, {fileID: 4100000139}, {fileID: 4100000142}, {fileID: 4100000145}, {fileID: 4200000001}, {fileID: 4200000005}, {fileID: 4200000009}, {fileID: 4200000013}, {fileID: 4200000017}, {fileID: 4200000021}, {fileID: 4200000025}, {fileID: 4200000029}, {fileID: 4200000033}, {fileID: 4200000037}, {fileID: 4200000044}, {fileID: 4300000001}, {fileID: 4400000001}, {fileID: 4500000001}, {fileID: 4600000001}, {fileID: 9805000201}, {fileID: 9805000301}, {fileID: 9806000201}]
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4100000004
@@ -13168,9 +13168,7 @@ MonoBehaviour:
   itemLaco: {fileID: 11400000, guid: 1083a2fec9775e2c9829a6a959228da0, type: 2}
   itemCanhoto: {fileID: 11400000, guid: 8c45070f39885b448afa8363afcb0774, type: 2}
   alcanceInteracao: 3
-  aguaFuncionario:
-  - personagem: "Funcion\xE1rio"
-    texto: "\xC9 o que tem nessa rodada. Volta quando chamar."
+  aguaFuncionario: [{personagem: "Funcion\xE1ria", texto: "Ponha a caba\xE7a aqui. \xC9 o que tem nessa rodada. Volte quando chamar."}, {personagem: Zefinha, texto: "\xC9 t\xE3o pouco\u2026 Vou levar pro abrigo."}]
   aguaAntesEscolha:
   - personagem: "M\xE3e"
     texto: "D\xEA a ele primeiro."
@@ -13192,22 +13190,8 @@ MonoBehaviour:
     texto: "Tua m\xE3e t\xE1 esperando, menina."
   - personagem: Zefinha
     texto: Eu digo a ela. Tome.
-  meninoApresentacao:
-  - personagem: Zefinha
-    texto: Desculpa. Eu pensei...
-  - personagem: "Crian\xE7a"
-    texto: "T\xE1 procurando algu\xE9m?"
-  - personagem: Zefinha
-    texto: "Minha irm\xE3."
-  - personagem: "Crian\xE7a"
-    texto: "Eu t\xF4 esperando meu tio."
-  meninoEspera:
-  - personagem: "Crian\xE7a"
-    texto: "Desde que trouxeram n\xF3s. Minha m\xE3e disse que ele vinha com as ferramenta."
-  - personagem: Zefinha
-    texto: "E tua m\xE3e?"
-  - personagem: "Crian\xE7a"
-    texto: "T\xE1 ali. Eu num posso me afastar muito."
+  meninoApresentacao: [{personagem: Zefinha, texto: "Desculpa. De longe, pensei que fosse minha irm\xE3."}, {personagem: "Crian\xE7a", texto: "T\xE1 procurando algu\xE9m?"}, {personagem: Zefinha, texto: "Minha irm\xE3. E tu?"}, {personagem: "Crian\xE7a", texto: Meu tio. Mainha disse que ele vinha com as ferramentas.}]
+  meninoEspera: [{personagem: Zefinha, texto: 'Tu fica esperando aqui o dia todo?'}, {personagem: "Crian\xE7a", texto: A gente espera muita coisa aqui.}, {personagem: Zefinha, texto: 'E essa lata?'}, {personagem: "Crian\xE7a", texto: "\xC9 da comida. Mainha disse pra num perder. Se chamarem, eu preciso t\xE1 com ela."}]
   meninoNome:
   - personagem: Zefinha
     texto: "Maria Severina. Se tu escutar algu\xE9m chamar, me avisa."
@@ -13216,58 +13200,16 @@ MonoBehaviour:
   meninoSaida:
   - personagem: Zefinha
     texto: Eu preciso ir. Tomara que teu tio chegue.
-  registroInicio:
-  - personagem: Zefinha
-    texto: "Minha irm\xE3 foi com o outro grupo antes de n\xF3s entrar. O nome dela
-      \xE9 Maria Severina."
-  - personagem: "Escriv\xE3o"
-    texto: Sobrenome?
-  - personagem: ACOMPANHANTE
-    texto: "N\xF3s pode dizer o nome do pai e da m\xE3e. Ela foi separada da fam\xEDlia
-      no bloqueio."
-  - personagem: "Escriv\xE3o"
-    texto: "Essa rela\xE7\xE3o aqui \xE9 de quem entrou por este port\xE3o. N\xE3o
-      achei."
-  - personagem: Zefinha
-    texto: "Ent\xE3o olhe a outra."
-  - personagem: "Escriv\xE3o"
-    texto: "A outra n\xE3o veio pra minha m\xE3o."
-  - personagem: Zefinha
-    texto: "Mas o senhor sabe quem t\xE1 com ela?"
-  - personagem: "Escriv\xE3o"
-    texto: "Pergunte no posto de sa\xEDda. Quando o movimento acabar."
-  registroMae:
-  - personagem: "M\xE3e"
-    texto: "Minha filha num \xE9 movimento. Eu vi levarem ela."
-  - personagem: "Escriv\xE3o"
-    texto: Eu estou dizendo onde perguntar.
-  - personagem: "M\xE3e"
-    texto: "E l\xE1 v\xE3o mandar perguntar aqui de novo?"
-  registroLuzia:
-  - personagem: Luzia
-    texto: "Pelo menos escreva que tem uma m\xE3e procurando."
-  - personagem: "Escriv\xE3o"
-    texto: "N\xE3o tenho como atestar o que n\xE3o vi."
-  - personagem: Luzia
-    texto: "Eu num pedi que inventasse. Escreva o que a menina t\xE1 dizendo."
-  panelaInicio:
-  - personagem: Fiscal
-    texto: "Veio buscar o pano? Pegue e v\xE1. Num vou parar o servi\xE7o pra tu
-      remexer tudo."
-  - personagem: Zefinha (em pensamentos)
-    texto: "O la\xE7o dela... E esse papel veio do carro. Tem um lugar escrito."
+  registroInicio: [{personagem: Zefinha, texto: "E a minha irm\xE3? Maria Severina. Foi separada de n\xF3s antes do port\xE3o."}, {personagem: "Escriv\xE3o", texto: "Agora eu t\xF4 atendendo esta fila. Leve os panos. Depois procure no posto de sa\xEDda."}, {personagem: ACOMPANHANTE, texto: "Foi l\xE1 que mandaram perguntar aqui."}, {personagem: "Escriv\xE3o", texto: "J\xE1 disse onde deve ir."}]
+  registroMae: [{personagem: "M\xE3e", texto: "Prometeram procurar. Agora tem mais servi\xE7o no meio."}, {personagem: "Escriv\xE3o", texto: 'Desocupe a mesa, senhora.'}]
+  registroLuzia: [{personagem: Luzia, texto: Ao menos guarde o nome da menina. Maria Severina.}, {personagem: "Escriv\xE3o", texto: Eu ouvi. Agora desocupe.}]
+  panelaInicio: [{personagem: Zefinha, texto: 'Esse canhoto veio com o carro que levou o outro grupo?'}, {personagem: Fiscal, texto: "Num mexa nas coisas. J\xE1 pegou os panos, siga pro servi\xE7o."}, {personagem: Zefinha (em pensamentos), texto: A marca parece a do carro. Posso perguntar pelo lugar escrito no papel antes de ir.}]
   panelaLaco:
   - personagem: Zefinha
     texto: "\xC9 dela. Eu quero isso aqui."
   - personagem: Fiscal
     texto: Pois leve.
-  panelaCanhoto:
-  - personagem: Zefinha
-    texto: "Esse papel tamb\xE9m veio com n\xF3s."
-  - personagem: Fiscal
-    texto: "Ent\xE3o \xE9 isso. V\xE1."
-  - personagem: Zefinha (em pensamentos)
-    texto: Lagoa do Meio. Eu preciso guardar esse nome.
+  panelaCanhoto: [{personagem: Zefinha, texto: 'Foi pra onde mandaram aquele grupo?'}, {personagem: Fiscal, texto: "Lagoa do Meio. Est\xE1 escrito a\xED. Leve esse canhoto e v\xE1."}, {personagem: Zefinha (em pensamentos), texto: "Lagoa do Meio. Vou guardar esse nome. O papel num diz se chegaram l\xE1."}]
   opcoesLuziaInicio:
   - "Buscar \xE1gua"
   - Relembrar a chegada
@@ -13282,18 +13224,10 @@ MonoBehaviour:
   opcoesRegistro:
   - Relembrar a conversa
   - Sair
-  opcoesPanela:
-  - "Recuperar o peda\xE7o do la\xE7o"
-  - Guardar o canhoto do encaminhamento
-  objetivosBusca:
-  - "Fale com Luzia para buscar \xE1gua."
-  - "V\xE1 \xE0 distribui\xE7\xE3o de \xE1gua e fale com o funcion\xE1rio."
-  - "Volte ao abrigo e entregue a por\xE7\xE3o de \xE1gua \xE0 m\xE3e ou a Luzia."
-  - "Procure a mesa dos nomes. Voc\xEA tamb\xE9m pode conversar com o menino."
-  - "Retorne \xE0 panela dos pertences, junto da mesa da revista."
-  - "Procurar quem viu o grupo que passou antes da entrada da fam\xEDlia."
+  opcoesPanela: [Perguntar pelo encaminhamento, Seguir com os panos]
+  objetivosBusca: ["Fale com Luzia para buscar \xE1gua.", "V\xE1 \xE0 distribui\xE7\xE3o e pergunte como receber \xE1gua.", "Selecione a caba\xE7a cheia e volte ao abrigo para decidir com quem dividir.", "Procure a mesa dos nomes. Voc\xEA tamb\xE9m pode conversar com o menino.", "Veja o canhoto junto \xE0 mesa dos nomes antes de seguir com os panos.", "Leve o lote \xE0 lavadeira. Fale com Raimundo para seguir pela passagem."]
   perguntaAgua: "A caba\xE7a tem \xE1gua para uma por\xE7\xE3o. A quem entregar?"
-  perguntaPanela: O fiscal permite levar uma coisa. O que guardar?
+  perguntaPanela: Perguntar pelo encaminhamento ou seguir com os panos?
   setorBusca: {fileID: 4300000000}
   areaRaimundo: {fileID: 4300000011}
   areaLavadeira: {fileID: 4300000023}
@@ -13839,6 +13773,16 @@ MonoBehaviour:
   luziaIrma: [{"personagem": "Zefinha", "texto": "A senhora viu minha irmã? É parecida comigo."}, {"personagem": "Luzia", "texto": "Hoje eu num vi. Qual é o nome dela?"}, {"personagem": "Zefinha", "texto": "Maria Severina. Nós chama Mariquinha."}, {"personagem": "Luzia", "texto": "Vou perguntar na lavagem. Tem muita gente chegando por caminhos diferentes."}]
   objetivoRevista: "Entregue as ferramentas ao fiscal: TAB para abrir, clique no item, TAB para fechar e clique no fiscal. Depois confira a revista com ele."
   objetivoPano: "Explore o abrigo e converse com Luzia. Pegue o pano que ela cedeu e entregue à sua mãe pelo inventário."
+  lotePanosCenario: {"fileID": 9806000200}
+  areaLotePanos: {"fileID": 9806000203}
+  lotePanosRecebido: {"fileID": 9806000300}
+  itemLotePanos: {"fileID": 11400000, "guid": "ee0589088b4a4149ae2fd3fa4a4dc399", "type": 2}
+  orientacaoAgua: [{"personagem": "Funcionária", "texto": "É a cabaça de vocês? Pode levar de volta. Espere na fila pra encher."}, {"personagem": "Zefinha", "texto": "Preciso levar água pro meu pai."}, {"personagem": "Funcionária", "texto": "Apresente o recipiente aqui. Num encoste dentro do reservatório."}, {"personagem": "Retirante", "texto": "Ontem a água veio com gosto ruim."}, {"personagem": "Funcionária", "texto": "É a que mandaram. Nós também tá esperando a próxima entrega."}]
+  pedidoPanos: [{"personagem": "Zefinha", "texto": "Minha irmã foi com o outro grupo. Maria Severina. O senhor pode procurar?"}, {"personagem": "Escrivão", "texto": "Leve os panos da mesa pra mulher da lavagem. Depois eu vejo a relação."}, {"personagem": "ACOMPANHANTE", "texto": "Ela veio perguntar pela irmã."}, {"personagem": "Escrivão", "texto": "Eu ouvi. O serviço também num pode esperar."}, {"personagem": "Zefinha", "texto": "Se eu levar, o senhor procura?"}, {"personagem": "Escrivão", "texto": "Eu disse que depois vejo."}]
+  qualLotePanos: [{"personagem": "Zefinha", "texto": "Qual lote eu devo levar?"}, {"personagem": "Escrivão", "texto": "O lote dobrado ao lado desta mesa. Deixe os papéis e os outros pertences onde estão."}]
+  destinatariaPanos: [{"personagem": "Zefinha", "texto": "A quem eu entrego?"}, {"personagem": "Escrivão", "texto": "À lavadeira junto do tanque. Fale com Raimundo no caminho; ele mostra a passagem."}]
+  seguirPanos: [{"personagem": "Zefinha", "texto": "Vou levar o lote à lavadeira. Ainda posso perguntar pelo encaminhamento no posto."}]
+  objetivoLotePanos: "Recolha o lote dobrado ao lado da mesa dos nomes. Você já sabe a quem entregar."
 --- !u!1 &4200000000
 GameObject:
   m_ObjectHideFlags: 0
@@ -15353,7 +15297,7 @@ Transform:
   m_GameObject: {fileID: 4200000043}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.5, y: 0.4, z: 0}
+  m_LocalPosition: {x: 60.8, y: 0.4, z: 0}
   m_LocalScale: {x: 0.077793494, y: 0.077793494, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15634,7 +15578,7 @@ Transform:
   m_GameObject: {fileID: 4200000052}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.5, y: 0, z: 0}
+  m_LocalPosition: {x: 60.8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15808,12 +15752,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4300000009}
-  - {fileID: 4300000013}
-  - {fileID: 4300000017}
-  - {fileID: 4300000021}
-  - {fileID: 4300000025}
+  m_Children: [{fileID: 4300000009}, {fileID: 4300000013}, {fileID: 4300000017}, {fileID: 4300000021}, {fileID: 4300000025}, {fileID: 9806000301}]
   m_Father: {fileID: 4300000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4300000004
@@ -27387,18 +27326,7 @@ MonoBehaviour:
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
-  m_Roots:
-  - {fileID: 282311972}
-  - {fileID: 1148415098}
-  - {fileID: 1304905425}
-  - {fileID: 1673554085}
-  - {fileID: 2093131751}
-  - {fileID: 3000000001}
-  - {fileID: 4100000001}
-  - {fileID: 4100000003}
-  - {fileID: 4100000005}
-  - {fileID: 4100000007}
-  - {fileID: 4700000000}
+  m_Roots: [{fileID: 282311972}, {fileID: 1148415098}, {fileID: 1304905425}, {fileID: 1673554085}, {fileID: 2093131751}, {fileID: 3000000001}, {fileID: 4100000001}, {fileID: 4100000003}, {fileID: 4100000005}, {fileID: 4100000007}, {fileID: 4700000000}, {fileID: 9806000001}, {fileID: 9806000011}]
 --- !u!95 &8800010000
 Animator:
   serializedVersion: 7
@@ -28202,3 +28130,281 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &9806000200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component: [{component: {fileID: 9806000201}}, {component: {fileID: 9806000202}}, {component: {fileID: 9806000203}}]
+  m_Layer: 0
+  m_Name: Lote de panos - tarefa da mesa dos nomes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &9806000201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9806000200}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 54.8, y: 1.15, z: 0}
+  m_LocalScale: {x: 0.38, y: 0.38, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4100000003}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &9806000202
+SpriteRenderer:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9806000200}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 26
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 9028552476046108007, guid: f0d2f06dc137f7a4d88f6192c962c7df, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
+--- !u!61 &9806000203
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9806000200}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 3.72, y: 2.52}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 4, y: 3}
+  m_EdgeRadius: 0
+--- !u!1 &9806000300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component: [{component: {fileID: 9806000301}}, {component: {fileID: 9806000302}}]
+  m_Layer: 0
+  m_Name: Lote entregue - junto da lavadeira
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &9806000301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9806000300}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 72.3, y: 0.6, z: 0}
+  m_LocalScale: {x: 0.38, y: 0.38, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4300000003}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &9806000302
+SpriteRenderer:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9806000300}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 26
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 9028552476046108007, guid: f0d2f06dc137f7a4d88f6192c962c7df, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
+--- !u!1001 &9806000000
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3105571907722419084, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_Name
+      value: InventoryCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105571907722419084, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+--- !u!224 &9806000001 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 784946119250149849, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+  m_PrefabInstance: {fileID: 9806000000}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &9806000010
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1997213353830323318, guid: 9467ae3681ed7a44f9278721b339ebee, type: 3}
+      propertyPath: m_Name
+      value: Inventário persistente
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997213353830323318, guid: 9467ae3681ed7a44f9278721b339ebee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9467ae3681ed7a44f9278721b339ebee, type: 3}
+--- !u!4 &9806000011 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3403429408227789021, guid: 9467ae3681ed7a44f9278721b339ebee, type: 3}
+  m_PrefabInstance: {fileID: 9806000010}
+  m_PrefabAsset: {fileID: 0}
