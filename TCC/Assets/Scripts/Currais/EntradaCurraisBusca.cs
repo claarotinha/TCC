@@ -32,7 +32,7 @@ public partial class EntradaCurrais
         bool valido = true;
         for (int i = 0; i < referencias.Length; i++) valido &= ConferirReferencia(referencias[i], nomes[i]);
         if (limitesBusca == null || limitesBusca.Length != 4 || opcoesRaimundo == null ||
-            opcoesRaimundo.Length != 3 || objetivosCampo == null || objetivosCampo.Length != 7) valido = false;
+            opcoesRaimundo.Length != 4 || objetivosCampo == null || objetivosCampo.Length != 7) valido = false;
         else foreach (Transform marca in limitesBusca) valido &= ConferirReferencia(marca, nameof(limitesBusca));
         Fala[][] sequencias = { raimundoInicio, raimundoBando, raimundoMulher, raimundoSaida, lavagemFalas,
             lembrancaCorpo, lembrancaComadre, lembrancaAgua, lembrancaRetorno, patioInicio, patioAgressao,
@@ -45,7 +45,7 @@ public partial class EntradaCurrais
     {
         if (PostoDisponivel) return AlvosPosto();
         if (Dados.curraisPanelaConcluida)
-            return new[] { areaRaimundo, areaLavadeira, areaPanoLavagem, areaLembranca, areaPatio, areaPanoAtendimento };
+            return new[] { areaPanosUso, areaPanosAtendimento, areaRaimundo, areaLavadeira, areaPanoLavagem, areaLembranca, areaPatio, areaPanoAtendimento };
         return new[] { areaLotePanos, areaLuzia, areaAgua, areaMae, areaMenino, areaRegistro, areaPanela };
     }
 
@@ -77,7 +77,8 @@ public partial class EntradaCurrais
         objetivoTexto.text = ObjetivoCampo();
         areaRaimundo.enabled = etapa == 0;
         areaLavadeira.enabled = etapa == 1;
-        areaPanoLavagem.enabled = etapa == 2;
+        areaPanoLavagem.enabled = etapa == 2 && Dados.curraisPanosSeparados == 3;
+        AtualizarVisuaisLavagem();
         areaLembranca.enabled = etapa == 3;
         areaPatio.enabled = etapa == 4;
         areaPanoAtendimento.enabled = etapa == 5;
@@ -116,14 +117,20 @@ public partial class EntradaCurrais
             if (Mathf.Abs(mari.transform.position.x - area.bounds.center.x) > alcanceInteracao)
             { objetivoTexto.text = "Aproxime-se para interagir. " + ObjetivoCampo(); return true; }
             int etapa = Dados.curraisEtapaBusca;
-            if (area == areaRaimundo && etapa == 0)
+            if (area == areaPanosUso && etapa == 2) Iniciar(SepararPanoLavagem(false));
+            else if (area == areaPanosAtendimento && etapa == 2) Iniciar(SepararPanoLavagem(true));
+            else if (area == areaRaimundo && etapa == 0)
             {
                 if (!Dados.curraisRaimundoConhecido) Iniciar(ConhecerRaimundo());
                 else MenuRaimundo();
             }
             else if (area == areaLavadeira && etapa == 1) Iniciar(ConversarLavadeira());
-            else if (area == areaPanoLavagem && etapa == 2) AvancarCampo(3);
-            else if (area == areaLembranca && etapa == 3) Iniciar(LembrarLenda());
+            else if (area == areaPanoLavagem && etapa == 2) Iniciar(RecolherTiraLavagem());
+            else if (area == areaLembranca && etapa == 3)
+            {
+                if (Dados.curraisPassagemVigiadaConcluida) Iniciar(LembrarLenda());
+                else objetivoTexto.text = "Observe a ronda. Espere junto dos sacos e atravesse atrás do guarda quando ele se afastar.";
+            }
             else if (area == areaPatio && etapa == 4) Iniciar(TestemunharTrabalho());
             else if (area == areaPanoAtendimento && etapa == 5) Iniciar(AjudarBento());
             else objetivoTexto.text = ObjetivoCampo();
@@ -153,6 +160,7 @@ public partial class EntradaCurrais
         MostrarOpcoes("Raimundo", raimundoInicio[raimundoInicio.Length - 1].texto, opcoesRaimundo, new Action[] {
             () => Iniciar(PerguntarRaimundo(1, raimundoBando)),
             () => Iniciar(PerguntarRaimundo(2, raimundoMulher)),
+            () => Iniciar(PerguntarRaimundo(4, raimundoTrabalho)),
             () => Iniciar(DeixarRaimundo()) });
     }
 
@@ -196,7 +204,10 @@ public partial class EntradaCurrais
             Salvar();
         }
         yield return Dizer(lavagemFalas);
-        AvancarCampo(Dados.curraisEscolhaAgua == 1 ? 2 : 3);
+        yield return Dizer(instrucoesLavagem);
+        Dados.curraisEtapaBusca = 2;
+        GarantirPanosLavagem();
+        AvancarCampo(2);
         GameProgress.Instance.UnlockDiaryPage("currais-lavagem");
         Salvar();
     }

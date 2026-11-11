@@ -109,6 +109,10 @@ public class GameProgressData
 
     // Etapa 3: 0 Raimundo, 1 lavagem, 2 apoiar pano, 3 corredor, 4 pátio, 5 atendimento, 6 concluída.
     public int curraisEtapaBusca;
+    // Lavagem: bit 1 = panos de uso; bit 2 = peças do atendimento.
+    public int curraisPanosSeparados;
+    public bool curraisTiraPanoRecolhida;
+    public bool curraisPassagemVigiadaConcluida;
     public bool curraisRaimundoConhecido;
     public int curraisPerguntasRaimundo;
 

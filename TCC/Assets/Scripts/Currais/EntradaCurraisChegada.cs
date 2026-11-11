@@ -97,7 +97,7 @@ public partial class EntradaCurrais
 
     private Collider2D[] AlvosChegada() => Dados.curraisEtapaEntrada == 2
         ? new[] { areaFiscalEntrada, areaDiarioEntrada }
-        : new[] { areaLuzia, areaPanoAbrigo, areaMae };
+        : new[] { areaPanoAbrigo, areaLuzia, areaMae };
 
     private bool PonteiroSobreChegada(Vector2 ponto)
     {
@@ -211,12 +211,12 @@ public partial class EntradaCurrais
     private IEnumerator RecolherPanoAbrigo()
     {
         if (Dados.curraisPanoAbrigoRecolhido || Dados.curraisPaiAcomodado) yield break;
-        yield return Dizer(panoDisponivel);
         if (!TemItem(itemPanoAbrigo)) InventoryManager.Instance.AddItem(itemPanoAbrigo);
         Dados.curraisPanoAbrigoRecolhido = true;
         AtualizarVisuaisChegada();
-        objetivoTexto.text = "Selecione o pano no inventário, feche com TAB e entregue à sua mãe.";
         Salvar();
+        yield return Dizer(panoDisponivel);
+        objetivoTexto.text = "O pano está no inventário. Selecione com TAB, feche e entregue à sua mãe.";
     }
 
     private IEnumerator AcomodarPai()

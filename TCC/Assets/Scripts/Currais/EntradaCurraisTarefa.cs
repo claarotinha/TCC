@@ -50,7 +50,7 @@ public partial class EntradaCurrais
             !Dados.curraisLotePanosRecolhido && !Dados.curraisPanelaConcluida;
         lotePanosCenario.SetActive(disponivel);
         areaLotePanos.enabled = disponivel;
-        lotePanosRecebido.SetActive(Dados.curraisLotePanosEntregue && Dados.curraisEtapaBusca <= 2);
+        lotePanosRecebido.SetActive(Dados.curraisLotePanosEntregue && Dados.curraisEtapaBusca < 2);
     }
 
     private void MenuTarefaPanos()

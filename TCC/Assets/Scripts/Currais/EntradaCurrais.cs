@@ -153,6 +153,7 @@ public partial class EntradaCurrais : MonoBehaviour
         PrepararOpcoes();
         PrepararChegadaAlternativa();
         PrepararTarefaPanos();
+        PrepararEtapaLavagem();
         pronto = true;
         int etapa = Mathf.Clamp(Dados.curraisEtapaEntrada, 0, 4);
         if (etapa == 0) Iniciar(Separar());
@@ -226,7 +227,7 @@ public partial class EntradaCurrais : MonoBehaviour
         referenciasPresentes &= ConferirReferencia(paiAbrigo, nameof(paiAbrigo));
         referenciasPresentes &= ConferirReferencia(maeAbrigo, nameof(maeAbrigo));
         referenciasPresentes &= ConferirReferencia(baleiaAbrigo, nameof(baleiaAbrigo));
-        if (!referenciasPresentes || !ReferenciasChegadaValidas() || !ReferenciasTarefaValidas()) return false;
+        if (!referenciasPresentes || !ReferenciasChegadaValidas() || !ReferenciasTarefaValidas() || !ReferenciasLavagemValidas()) return false;
         return FalasValidas(antesSeparacao) && FalasValidas(barreira) &&
             FalasValidas(depoisSeparacao) && FalasValidas(entrada) &&
             FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() && ReferenciasCampoValidas() && ReferenciasPostoValidas() && ReferenciasConsultaValidas() && ReferenciasMemoriaValidas() &&
@@ -297,6 +298,7 @@ public partial class EntradaCurrais : MonoBehaviour
     private void Update()
     {
         if (!pronto || PauseHelper.BlockInput() || Time.timeScale == 0f) return;
+        AtualizarPatrulha();
         if (dialogando)
         {
             if (Time.frameCount > quadroBloqueado && Input.GetMouseButtonDown(0) && !SobreControle() &&
@@ -795,7 +797,8 @@ public partial class EntradaCurrais : MonoBehaviour
     private IEnumerator DestinarAgua()
     {
         if (Dados.curraisEscolhaAgua != 0) yield break;
-        if (Mathf.Abs(mari.transform.position.x - mariAbrigo.position.x) > alcanceInteracao + 1f)
+        if (mari.transform.position.x < limiteAbrigoEsquerda.position.x ||
+            mari.transform.position.x > limiteAbrigoDireita.position.x)
         {
             objetivoTexto.text = objetivosBusca[2];
             yield break;
