@@ -78,7 +78,7 @@ public partial class EntradaCurrais
         (Dados.curraisDestinoConfirmado ? lugarConsulta : naoConfirmado) + "\n" + rotuloNome + ": " +
         (Dados.curraisIdentidadeConfirmada ? nomeConsulta : naoConfirmado);
 
-    private Collider2D[] AlvosConsulta() => MemoriaDisponivel ? AlvosMemoria() : new[] { areaAmanhecer, areaUltimaConsulta, areaSaidaConsulta, areaRetornoConsulta };
+    private Collider2D[] AlvosConsulta() => MemoriaDisponivel ? AlvosMemoria() : new[] { areaBaldeRaimundo, areaRaimundo, areaAmanhecer, areaUltimaConsulta, areaSaidaConsulta, areaRetornoConsulta };
 
     private void AtualizarConsulta()
     {
@@ -86,6 +86,7 @@ public partial class EntradaCurrais
         int etapa = Dados.curraisEtapaConsulta;
         setorConsulta.SetActive(ativa && etapa >= 1);
         bloqueioSaida.enabled = ativa && etapa >= 1;
+        AtualizarFamiliaAlternativa();
         if (!ativa) { AtualizarMemoria(); return; }
         objetivoTexto.text = ObjetivoConsulta();
         areaAmanhecer.enabled = etapa == 0;
@@ -150,7 +151,9 @@ public partial class EntradaCurrais
             if (!area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
             if (Mathf.Abs(mari.transform.position.x - area.bounds.center.x) > alcanceInteracao)
             { objetivoTexto.text = "Aproxime-se para interagir. " + ObjetivoConsulta(); return true; }
-            if (area == areaAmanhecer) Iniciar(AmanhecerNoCampo());
+            if (area == areaBaldeRaimundo) Iniciar(PegarBaldeRaimundo());
+            else if (area == areaRaimundo) MenuRaimundoManha();
+            else if (area == areaAmanhecer) Iniciar(AmanhecerNoCampo());
             else if (area == areaUltimaConsulta) Iniciar(FazerUltimaConsulta());
             else if (area == areaSaidaConsulta) Iniciar(PedirSaida());
             else if (Dados.curraisEtapaConsulta == 3) Iniciar(ConcluirRetorno());
@@ -185,7 +188,12 @@ public partial class EntradaCurrais
             Dados.curraisConsultaApresentada = true;
             Salvar();
         }
-        yield return Escolher("Escrivão", InformacoesConsulta() + "\n" + perguntaConsulta, opcoesConsulta);
+        if (TemItem(itemCanhoto) && InventoryManager.Instance.SelectedItem == itemCanhoto)
+            yield return Dizer(papelApresentado);
+        string[] rotulos = (string[])opcoesConsulta.Clone();
+        if (Dados.curraisDestinoConfirmado) rotulos[0] += " (já confirmado)";
+        if (Dados.curraisIdentidadeConfirmada) rotulos[1] += " (já confirmado)";
+        yield return Escolher("Escrivão", InformacoesConsulta() + "\n" + perguntaConsulta, rotulos);
         int opcao = escolhaRecebida;
         if (opcao == 2) yield break;
         bool repetida = opcao == 0 ? Dados.curraisDestinoConfirmado : Dados.curraisIdentidadeConfirmada;

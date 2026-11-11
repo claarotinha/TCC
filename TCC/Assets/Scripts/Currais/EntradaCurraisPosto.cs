@@ -84,7 +84,8 @@ public partial class EntradaCurrais
         papelPosto.SetActive(Dados.curraisEscolhaPosto == 0);
         quartoInterior.SetActive(etapa >= 2);
         portaQuartoFechada.SetActive(etapa < 2);
-        panoAlca.SetActive(Dados.curraisEscolhaPosto == 1);
+        panoAlca.SetActive(Dados.curraisBaldeApoiado);
+        AtualizarFamiliaAlternativa();
         curativoRaimundo.SetActive(Dados.curraisEscolhaPosto != 0);
         Posicionar(areaRaimundo.transform, etapa == 0 ? raimundoNoPosto :
             Dados.curraisEscolhaPosto == 1 ? raimundoSentado : raimundoOutroSetor);
@@ -138,7 +139,6 @@ public partial class EntradaCurrais
         bool destinoAnterior = Dados.curraisDestinoConfirmado;
         if (opcao == 0)
         {
-            panoAlca.SetActive(true);
             yield return Dizer(postoAjuda);
         }
         else
@@ -148,10 +148,9 @@ public partial class EntradaCurrais
         }
         // A decisão e a etapa são registradas juntas após o encerramento da conversa.
         Dados.curraisEscolhaPosto = opcao + 1;
-        if (opcao == 0) Dados.curraisIdentidadeConfirmada = true;
-        else Dados.curraisDestinoConfirmado = true;
+        if (opcao == 1) Dados.curraisDestinoConfirmado = true;
         Dados.curraisEtapaPosto = 1;
-        GameProgress.Instance.UnlockDiaryPage(opcao == 0 ? "currais-nair" : "currais-copia");
+        if (opcao == 1) GameProgress.Instance.UnlockDiaryPage("currais-copia");
         AtualizarEstadoBusca(); Salvar();
     }
 
@@ -190,13 +189,10 @@ public partial class EntradaCurrais
 
     private void MenuAbrigo()
     {
-        bool conheceRefeicao = Dados.secaFoodChoice >= 1 && Dados.secaFoodChoice <= 3;
-        if (conheceRefeicao)
-            MostrarOpcoes("Família", ObjetivoPosto(), opcoesAbrigo, new Action[] {
-                () => Iniciar(RelembrarRefeicao()), () => Iniciar(NoticiasDaBusca()), FecharMenu });
-        else
-            MostrarOpcoes("Família", ObjetivoPosto(), new[] { opcoesAbrigo[1], opcoesAbrigo[2] }, new Action[] {
-                () => Iniciar(NoticiasDaBusca()), FecharMenu });
+        MostrarOpcoes("Família", "Podemos conversar um pouco antes de tentar descansar.",
+            new[] { "O que prometeram?", "O trabalho e Bento", "Nossa família e o caderno", "Sair" },
+            new Action[] { () => Iniciar(ConversarFamilia(1, familiaPromessas)),
+                () => Iniciar(ConversarFamilia(2, familiaTrabalho)), MenuLembrancasFamilia, FecharMenu });
     }
 
     private IEnumerator RelembrarRefeicao()
@@ -218,6 +214,7 @@ public partial class EntradaCurrais
         int promessa = Dados.estradaSegundaEscolhaNoturna;
         if (promessa >= 1 && promessa <= 3)
             yield return Dizer(promessa == 1 ? noitePromessa : promessa == 2 ? noiteTranquilizou : noiteSilencio);
+        yield return Dizer(noiteCaderno);
         yield return Dizer(noiteInicio);
         yield return Escolher("Zefinha", perguntaNoite, opcoesNoite);
         int opcao = escolhaRecebida;

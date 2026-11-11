@@ -100,6 +100,16 @@ public class CombinationPrompt : MonoBehaviour
         return false;
     }
 
+    public void RegisterRecipe(ItemCombination recipe)
+    {
+        if (recipe == null) return;
+        if (recipes == null) recipes = new ItemCombination[0];
+        if (System.Array.IndexOf(recipes, recipe) >= 0) return;
+        int index = recipes.Length;
+        System.Array.Resize(ref recipes, index + 1);
+        recipes[index] = recipe;
+    }
+
     public void Show(ItemData firstItem, ItemData secondItem)
     {
         if (combinePanel == null || combineText == null ||
