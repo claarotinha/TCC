@@ -37,9 +37,12 @@ public partial class EntradaCurrais
         valido &= FalasValidas(paginasMemoria) && paginasMemoria.Length == 3 &&
             FalaValida(pensamentoMemoria) && FalaValida(chamadoPresente);
         valido &= idsPaginasMemoria != null && idsPaginasMemoria.Length == 3 &&
-            opcoesFimMemoria != null && opcoesFimMemoria.Length == 4;
+            opcoesFimMemoria != null && opcoesFimMemoria.Length == 4 &&
+            imagensPassagem != null && imagensPassagem.Length == 3;
         valido &= !string.IsNullOrWhiteSpace(objetivoPaginasMemoria) &&
             !string.IsNullOrWhiteSpace(objetivoFimMemoria) && !string.IsNullOrWhiteSpace(tituloFimMemoria);
+        if (imagensPassagem != null)
+            foreach (GameObject imagem in imagensPassagem) valido &= ConferirReferencia(imagem, nameof(imagensPassagem));
         return valido;
     }
 
@@ -53,8 +56,8 @@ public partial class EntradaCurrais
         if (!MemoriaDisponivel) return;
         objetivoTexto.text = ObjetivoMemoria();
         areaPaginasMemoria.enabled = true;
-        lacoMemoria.SetActive(planoMemoriaAtivo && Dados.curraisLacoGuardado);
-        documentoMemoria.SetActive(planoMemoriaAtivo && !Dados.curraisLacoGuardado);
+        lacoMemoria.SetActive(false);
+        documentoMemoria.SetActive(planoMemoriaAtivo && (TemItem(itemCanhoto) || Dados.curraisEscolhaPosto == 2));
     }
 
     private bool InteragirMemoria(Vector2 ponto)
@@ -146,6 +149,7 @@ public partial class EntradaCurrais
         int inicio = rever ? 0 : Mathf.Clamp(Dados.curraisPaginaMemoria, 0, 3);
         for (int i = inicio; i < paginasMemoria.Length; i++)
         {
+            MostrarPassagemMemoria(i);
             yield return LerPaginaMemoria(paginasMemoria[i]);
             if (!rever)
             {
@@ -154,6 +158,7 @@ public partial class EntradaCurrais
                 Salvar();
             }
         }
+        MostrarPassagemMemoria(-1);
         maoMemoria.SetActive(true);
         yield return LerPaginaMemoria(pensamentoMemoria);
         yield return CorteParaPresente();
@@ -222,6 +227,11 @@ public partial class EntradaCurrais
 
     private IEnumerator IrParaEpilogo()
     {
+        if (!Dados.ato2Concluido)
+        {
+            objetivoTexto.text = objetivoPaginasMemoria;
+            yield break;
+        }
         if (string.IsNullOrWhiteSpace(cenaEpilogo) || !Application.CanStreamedLevelBeLoaded(cenaEpilogo))
         {
             Debug.LogError("Currais: a cena do epílogo não está habilitada na build.", this);
@@ -260,6 +270,7 @@ public partial class EntradaCurrais
     {
         leituraPaginaMemoria = false; paginaMemoriaPodeAvancar = false;
         planoMemoriaAtivo = false;
+        MostrarPassagemMemoria(-1);
         foreach (KeyValuePair<Animator, bool> animador in animadoresMemoria)
             if (animador.Key != null) animador.Key.enabled = animador.Value;
         animadoresMemoria.Clear();

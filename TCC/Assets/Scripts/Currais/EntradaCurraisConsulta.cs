@@ -99,7 +99,7 @@ public partial class EntradaCurrais
         papelConsulta.SetActive(Dados.curraisEscolhaConsulta == 0);
         testemunhaConsulta.SetActive(false);
         trabalhadorRetorno.SetActive(etapa != 1);
-        lacoRemendadoCenario.SetActive(Dados.curraisLacoRemendado && Dados.curraisLacoGuardado);
+        lacoRemendadoCenario.SetActive(false);
         Posicionar(areaRaimundo.transform, Dados.curraisEscolhaPosto == 1 ? raimundoConsultaPerto : raimundoConsultaLonge);
         Posicionar(portaoConsulta, etapa >= 3 ? portaoConsultaFechado : portaoConsultaAberto);
         Posicionar(luzia.transform, luziaRepouso);
@@ -237,15 +237,7 @@ public partial class EntradaCurrais
     private IEnumerator ConcluirRetorno()
     {
         Posicionar(pai, paiAbrigo); Posicionar(mae, maeAbrigo);
-        yield return RelatarInformacoes();
-        if (Dados.curraisLacoGuardado)
-        {
-            lacoRemendadoCenario.SetActive(true);
-            yield return Esperar(tempoPlano);
-            Dados.curraisLacoRemendado = true;
-        }
-        Dados.curraisEtapaConsulta = 4;
-        GameProgress.Instance.UnlockDiaryPage("currais-pistas-finais");
-        AtualizarEstadoBusca(); Salvar();
+        yield return Dizer(aberturaEncerramento);
+        MenuNomesFinais();
     }
 }

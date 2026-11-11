@@ -126,6 +126,7 @@ public class GameProgressData
     public bool curraisBaldeSolicitado;
     public bool curraisBaldeRecolhido;
     public bool curraisBaldeApoiado;
+    public int curraisAssuntosEncerramento;
     public bool curraisRaimundoConhecido;
     public int curraisPerguntasRaimundo;
 
