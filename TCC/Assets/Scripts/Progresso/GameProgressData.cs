@@ -37,6 +37,8 @@ public class GameProgressData
     public bool estradaMariquinhaFerida;
     public bool estradaAbrigoConcluido;
     public int estradaParadasConcluidas;
+    // 1: estrada ampliada; saves anteriores usam as coordenadas do percurso curto.
+    public int estradaVersaoPercurso;
     public bool estradaTerceiraAguaIniciada;
     public bool estradaDialogoBarrigudaConcluido;
     public bool estradaBarrigudaConcluida;

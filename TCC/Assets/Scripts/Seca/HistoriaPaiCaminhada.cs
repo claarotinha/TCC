@@ -124,7 +124,7 @@ public class HistoriaPaiCaminhada : MonoBehaviour
 
     private void Update()
     {
-        if (!ativo || escolhendo || Time.timeScale == 0f ||
+        if (!ativo || escolhendo || PauseHelper.BlockInput() || Time.timeScale == 0f ||
             Time.frameCount <= quadro || !Input.GetMouseButtonDown(0)) return;
         indice++;
         if (indice < falas.Length) { Mostrar(); return; }

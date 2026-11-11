@@ -299,12 +299,12 @@ public class SegundaParada : MonoBehaviour
         ControleJornada jornada = ControleJornada.Instance;
         if (id == "riacho") return false;
         if (id == "casa") return etapa == 6;
-        if (id == "baleia") return etapa == 2 && pegadas == 3;
+        if (id == "baleia") return etapa == 2 && pegadas == pistasBusca.Length;
         if (id.StartsWith("pegada")) return etapa == 2 && id == "pegada" + pegadas;
         if (id == "barriguda") return jornada != null && jornada.ParadaAtiva && jornada.ParadaAtual == 3 &&
             dialogoTerceiraConcluido && !aguaTerceiraConcluida;
         if (id == "plantaMedicinal") return TerceiraEmAndamento() && JanelaQuebrada && !curativoAplicado && !plantaColetada;
-        if (id == "mulherRetirante" || id == "meninoRetirante") return TerceiraEmAndamento() && (!JanelaQuebrada || curativoAplicado);
+        if (id == "mulherRetirante" || id == "meninoRetirante" || id == "pessoaDeitada") return TerceiraEmAndamento();
         if (id == "fogueira") return AcampamentoEmAndamento() && introAcampamentoConcluida && !noiteEmAndamento;
         if (id.StartsWith("materialAcampamento"))
         {
@@ -338,7 +338,7 @@ public class SegundaParada : MonoBehaviour
             if (obj == null || !obj.activeInHierarchy) continue;
             BoxCollider2D area = obj.GetComponent<BoxCollider2D>();
             string identificador = IdentificadorCenario(obj);
-            if (area == null || !area.enabled || identificador == null) continue;
+            if (area == null || !area.enabled || !AlvoDisponivelParaCursor(identificador)) continue;
             Vector2 local = area.transform.InverseTransformPoint(ponto);
             Vector2 metade = area.size * 0.5f;
             Vector2 diferenca = local - area.offset;
@@ -469,7 +469,31 @@ public class SegundaParada : MonoBehaviour
         return false;
     }
 
+    public float InicioCaminhadaDaManhaX => casa != null ? casa.position.x + 4f : terceiraParada.position.x - 1.8f;
+
+    private float limiteConversa;
+    // Reserva chão livre para caminhar entre falas, mesmo se o jogador ler andando até o limite.
+    public float LimiteCaminhadaAntesDaBusca => familiaEsperando || etapa >= 2
+        ? float.PositiveInfinity : !iniciou ? transform.position.x + 5f : limiteConversa;
+
     private void ContinuarCaminhada()
+    {
+        limiteConversa = transform.position.x + 270f;
+        StartCoroutine(ConversaDepoisDeCaminhar(30f, ConversaSorvete));
+    }
+
+    private IEnumerator ConversaDepoisDeCaminhar(float segundos, Action conversa)
+    {
+        ControleJornada jornada = ControleJornada.Instance;
+        if (jornada == null) yield break;
+        yield return jornada.EsperarCaminhada(segundos);
+        // Nunca disputa o Canvas com a lenda, examine ou outro diálogo.
+        while (PauseHelper.BlockInput() || InvestigationGuard.Blocked ||
+            (dialogueUI != null && dialogueUI.activeInHierarchy)) yield return null;
+        conversa?.Invoke();
+    }
+
+    private void ConversaSorvete()
     {
         if (riacho != null) riacho.gameObject.SetActive(false);
         // Estas conversas usam o painel compartilhado, mas nao interrompem Mari.
@@ -480,7 +504,10 @@ public class SegundaParada : MonoBehaviour
                 "Claro que tem! Eu mesma vivo indo comer com mainha, ela nunca provou antes?",
                 "Eu acho que tem sim…", "Eu nunca vi. Nos pode comer quando chegar lá?",
                 "A gente pode pedir a painho e mainha sim."
-            }, ConversaSertao, true);
+            }, () => {
+                limiteConversa = transform.position.x + 410f;
+                StartCoroutine(ConversaDepoisDeCaminhar(15f, ConversaSertao));
+            }, true);
     }
 
     private void ConversaSertao()
@@ -489,7 +516,10 @@ public class SegundaParada : MonoBehaviour
             new[] {
                 "Meu pai dizia que o sertão escuta. Quando o vento muda… É porque ele tá conversando. Quando num venta… É porque tá zangado. E quando chove… É porque perdoou nóis.",
                 "Que Deus nos conceda a graça da chuva."
-            }, ConversaBaleia, true);
+            }, () => {
+                limiteConversa = transform.position.x + 530f;
+                StartCoroutine(ConversaDepoisDeCaminhar(12f, ConversaBaleia));
+            }, true);
     }
 
     private void ConversaBaleia()
@@ -638,7 +668,7 @@ public class SegundaParada : MonoBehaviour
                 ColetarMaterialAcampamento(material);
             return;
         }
-        if (alvo == "plantaMedicinal" || alvo == "mulherRetirante" || alvo == "meninoRetirante")
+        if (alvo == "plantaMedicinal" || alvo == "mulherRetirante" || alvo == "meninoRetirante" || alvo == "pessoaDeitada")
         {
             InteragirEncontroTerceira(alvo);
             return;
@@ -663,7 +693,7 @@ public class SegundaParada : MonoBehaviour
             AtualizarPegadas();
             return;
         }
-        if (alvo == "baleia" && etapa == 2 && pegadas == 3)
+        if (alvo == "baleia" && etapa == 2 && pegadas == pistasBusca.Length)
         {
             if (prea == null || InventoryManager.Instance == null) return;
             etapa = 5;
@@ -1111,7 +1141,7 @@ public class SegundaParada : MonoBehaviour
     private void PosicionarGrupoManha()
     {
         if (mari == null || terceiraParada == null) return;
-        float x = terceiraParada.position.x - 1.8f;
+        float x = InicioCaminhadaDaManhaX;
         Vector3 posicao = mari.transform.position; posicao.x = x;
         Posicionar(mari.transform, posicao);
         SeguidorFamilia[] familiares = { mariquinha, mae, pai, seguidorBaleia };
@@ -1384,7 +1414,7 @@ public class SegundaParada : MonoBehaviour
         bool precisaCurativo = JanelaQuebrada && !curativoAplicado;
         if (plantaCenario != null) plantaCenario.SetActive(ativa && precisaCurativo && !plantaColetada);
         // O grupo permanece no cenario depois da despedida, sem repetir a conversa.
-        bool mostrarGrupo = (ativa || encontroConcluido) && !precisaCurativo;
+        bool mostrarGrupo = ativa || encontroConcluido;
         if (mulherCenario != null) mulherCenario.SetActive(mostrarGrupo);
         if (meninoCenario != null) meninoCenario.SetActive(mostrarGrupo);
         if (pessoaCenario != null) pessoaCenario.SetActive(mostrarGrupo);
@@ -1402,13 +1432,12 @@ public class SegundaParada : MonoBehaviour
                 GameProgress.Instance.Data.estradaCurativoPreparado = true;
             SalvarAguaTerceira();
         }
-        if (JanelaQuebrada && !curativoAplicado) return;
         ControleJornada.Instance.LiberarEncontroTerceiraParada();
         if (mari == null || meninoCenario == null || dialogueUI == null ||
             InvestigationGuard.Blocked) return;
         // As interacoes sao opcionais. A aproximacao do grupo permite seguir adiante.
         float x = mari.transform.position.x;
-        if (!encontroVisitado && Mathf.Abs(x - inicioEncontro.position.x) <= 1.6f)
+        if (!encontroVisitado && x >= inicioEncontro.position.x)
         {
             encontroVisitado = true;
             if (GameProgress.Instance != null)
@@ -1440,11 +1469,14 @@ public class SegundaParada : MonoBehaviour
             });
             return;
         }
-        if (JanelaQuebrada && !curativoAplicado) return;
         encontroVisitado = true;
         if (GameProgress.Instance != null)
             GameProgress.Instance.Data.estradaEncontroVisitado = true;
-        if (alvo == "mulherRetirante")
+        if (alvo == "pessoaDeitada")
+            Falar(new[] { "Zefinha (em pensamentos)" }, new[] {
+                "Pensei que estivesse descansando... Mas ninguém ali esperava que acordasse."
+            }, SalvarAguaTerceira);
+        else if (alvo == "mulherRetirante")
             Falar(new[] { "Mulher" }, new[] {
                 "Num acorda mais… Dormiu ontem. Hoje tá frio. Sempre dizia que ia morrê de velho. Mentiroso, morreu na paz, dormindo…"
             }, SalvarAguaTerceira);

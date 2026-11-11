@@ -234,6 +234,13 @@ public class GameSaveSystem : MonoBehaviour
         InventoryManager.Instance.ReplaceItems(pendingInventory);
         pendingInventory = null;
 
+        if (scene.name == "Estrada" && save.progress != null && save.progress.estradaVersaoPercurso < 1)
+        {
+            if (save.hasPlayerPosition && ControleJornada.Instance != null)
+                save.playerPosition = ControleJornada.Instance.MigrarPosicaoSalva(save.playerPosition, save.progress);
+            save.progress.estradaVersaoPercurso = 1;
+        }
+
         if (save.hasPlayerPosition)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -300,6 +307,7 @@ public class GameSaveSystem : MonoBehaviour
             return false;
         }
 
+        if (SceneManager.GetActiveScene().name == "Estrada") progress.Data.estradaVersaoPercurso = 1;
         progress.SyncDiaryPages();
         GameSaveFile save = new GameSaveFile
         {

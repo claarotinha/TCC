@@ -11,6 +11,7 @@ public class ControleJornada : MonoBehaviour
 
     [Header("Referências")]
     [SerializeField] private Transform mari;
+    [SerializeField] private SegundaParada caminhada;
     [SerializeField] private Transform[] limitesDasParadas = new Transform[5];
 
     [Header("Trecho da terceira parada")]
@@ -90,13 +91,63 @@ public class ControleJornada : MonoBehaviour
 
             float limiteX = limite.position.x;
             if (paradasConcluidas == 2)
-                limiteX += aguaTerceiraLiberada && (encontroTerceiraLiberado || !SegundaParada.JanelaQuebrada)
+                limiteX += (aguaTerceiraLiberada || encontroTerceiraLiberado)
                     ? trechoAposAguaTerceira : trechoAguaTerceira;
             if (paradasConcluidas == 3) limiteX += trechoJuazeiro;
             if (paradasConcluidas == 4) limiteX += trechoAcampamento;
             if (paradasConcluidas >= 5) limiteX = limiteFortaleza != null
                 ? limiteFortaleza.position.x : limiteX + trechoAposAcampamento;
+            if (paradasConcluidas == 1 && caminhada != null)
+                limiteX = Mathf.Min(limiteX, caminhada.LimiteCaminhadaAntesDaBusca);
             return limiteX;
+        }
+    }
+
+    public Vector3 MigrarPosicaoSalva(Vector3 posicao, GameProgressData dados)
+    {
+        // Os marcos e seus objetos foram transladados juntos, preservando a posição
+        // relativa dentro de cada parada dos checkpoints anteriores à ampliação.
+        if (dados.estradaAcampamentoConcluido || dados.estradaParadasConcluidas >= 5)
+            posicao.x += posicao.x >= 162f ? 2120f : 1800f;
+        else if (dados.estradaAcampamentoIniciado || dados.estradaParadasConcluidas >= 4)
+            posicao.x += posicao.x >= 135f ? 1800f : 1500f;
+        else if (dados.estradaJuazeiroIniciado || dados.estradaParadasConcluidas >= 3)
+            posicao.x += posicao.x >= 105f ? 1500f : 1200f;
+        else if (dados.estradaAbrigoConcluido || dados.estradaParadasConcluidas >= 2)
+        {
+            if (!dados.estradaTerceiraAguaIniciada && posicao.x < 79f && caminhada != null)
+                posicao.x = caminhada.InicioCaminhadaDaManhaX;
+            else posicao.x += 1200f;
+        }
+        else if (dados.estradaParadasConcluidas >= 1)
+            // A busca ainda não possui checkpoint próprio: retoma a caminhada inicial.
+            posicao.x = Mathf.Min(posicao.x + 260f, caminhada != null ? caminhada.transform.position.x : posicao.x + 260f);
+        return posicao;
+    }
+
+    // Conta deslocamento real, sem contar pausa, inventário, restauração ou leitura.
+    public System.Collections.IEnumerator EsperarCaminhada(float segundos)
+    {
+        float tempo = 0f;
+        float anterior = mari != null ? mari.position.x : 0f;
+        while (tempo < segundos)
+        {
+            yield return null;
+            if (mari == null) continue;
+            float atual = mari.position.x;
+            float deslocamento = Mathf.Abs(atual - anterior);
+            anterior = atual;
+            PlayerMovement movimento = mari.GetComponent<PlayerMovement>();
+            if (Time.timeScale <= 0f || PauseHelper.BlockInput() || GameSaveSystem.IsRestoring ||
+                InvestigationGuard.Blocked || movimento == null || !movimento.enabled) continue;
+            // Teletransportes/cutscenes não contam como caminhada.
+            if (deslocamento > 0.001f && deslocamento <= 12f * Mathf.Max(Time.deltaTime, Time.fixedDeltaTime))
+            {
+                Rigidbody2D corpo = mari.GetComponent<Rigidbody2D>();
+                float velocidade = corpo != null ? Mathf.Abs(corpo.linearVelocity.x) : 0f;
+                if (velocidade > 0.01f)
+                    tempo += Mathf.Min(deslocamento / velocidade, Mathf.Max(Time.deltaTime, Time.fixedDeltaTime) * 2f);
+            }
         }
     }
 

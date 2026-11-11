@@ -116,6 +116,18 @@ public class CacaPassarinho : MonoBehaviour
         dialogueUI.SetActive(false);
         mari.enabled = movimentoAnterior;
         ControleJornada.Instance?.ConcluirParada(1);
+        StartCoroutine(ContarHistoriaDepoisDaCaminhada());
+        Debug.Log("Primeira parada concluida. Caminho liberado.", this);
+    }
+
+    private System.Collections.IEnumerator ContarHistoriaDepoisDaCaminhada()
+    {
+        ControleJornada jornada = ControleJornada.Instance;
+        if (jornada == null) yield break;
+        yield return jornada.EsperarCaminhada(30f);
+        if (GameProgress.Instance != null && GameProgress.Instance.Data.estradaHistoriaEscolhida > 0) yield break;
+        while (PauseHelper.BlockInput() || InvestigationGuard.Blocked ||
+            (dialogueUI != null && dialogueUI.activeInHierarchy)) yield return null;
         HistoriaPaiCaminhada historia = gameObject.AddComponent<HistoriaPaiCaminhada>();
         historia.Iniciar(dialogueUI, dialoguePanel, choicesContainer,
             characterNameText, dialogueText, portraitImage, retratoPainho);
