@@ -151,16 +151,11 @@ public partial class EntradaCurrais : MonoBehaviour
         FixarCameraDaSequencia();
         FecharDialogo();
         PrepararOpcoes();
+        PrepararChegadaAlternativa();
         pronto = true;
         int etapa = Mathf.Clamp(Dados.curraisEtapaEntrada, 0, 4);
         if (etapa == 0) Iniciar(Separar());
-        else if (etapa == 1)
-        {
-            MostrarRuaDepoisDaSeparacao();
-            CorFade(0f);
-            objetivoTexto.text = objetivoLaco;
-        }
-        else if (etapa == 2) Iniciar(Entrar());
+        else if (etapa == 1 || etapa == 2) Iniciar(Entrar());
         else if (etapa == 3) Iniciar(ChegarAbrigo());
         else
         {
@@ -230,7 +225,7 @@ public partial class EntradaCurrais : MonoBehaviour
         referenciasPresentes &= ConferirReferencia(paiAbrigo, nameof(paiAbrigo));
         referenciasPresentes &= ConferirReferencia(maeAbrigo, nameof(maeAbrigo));
         referenciasPresentes &= ConferirReferencia(baleiaAbrigo, nameof(baleiaAbrigo));
-        if (!referenciasPresentes) return false;
+        if (!referenciasPresentes || !ReferenciasChegadaValidas()) return false;
         return FalasValidas(antesSeparacao) && FalasValidas(barreira) &&
             FalasValidas(depoisSeparacao) && FalasValidas(entrada) &&
             FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() && ReferenciasCampoValidas() && ReferenciasPostoValidas() && ReferenciasConsultaValidas() && ReferenciasMemoriaValidas() &&
@@ -311,6 +306,11 @@ public partial class EntradaCurrais : MonoBehaviour
             }
             return;
         }
+        if (Dados.curraisEtapaEntrada == 2 || Dados.curraisEtapaEntrada == 3)
+        {
+            AtualizarInteracaoChegada();
+            return;
+        }
         if (!ocupado && !menuAberto && Dados.curraisEtapaEntrada == 4 && Input.GetKeyDown(KeyCode.E))
         {
             Collider2D[] alvos = AlvosAtuais();
@@ -331,11 +331,6 @@ public partial class EntradaCurrais : MonoBehaviour
         Plane plano = new Plane(Vector3.forward, mari.transform.position);
         if (!plano.Raycast(raio, out float distanciaDoRaio)) return;
         Vector2 ponto = raio.GetPoint(distanciaDoRaio);
-        if (Dados.curraisEtapaEntrada == 1 && areaLaco.OverlapPoint(ponto))
-        {
-            Iniciar(RecolherLaco());
-            return;
-        }
         if (Dados.curraisEtapaEntrada != 4) return;
         if (InteragirBusca(ponto)) return;
         foreach (Exame exame in exames)
@@ -353,8 +348,8 @@ public partial class EntradaCurrais : MonoBehaviour
     public bool PonteiroSobreInteracao(Vector2 ponto)
     {
         if (!isActiveAndEnabled || BloqueiaCursor) return false;
-        if (Dados.curraisEtapaEntrada == 1)
-            return areaLaco != null && areaLaco.enabled && areaLaco.gameObject.activeInHierarchy && areaLaco.OverlapPoint(ponto);
+        if (Dados.curraisEtapaEntrada == 2 || Dados.curraisEtapaEntrada == 3)
+            return PonteiroSobreChegada(ponto);
         if (Dados.curraisEtapaEntrada != 4) return false;
         foreach (Collider2D alvo in AlvosAtuais())
             if (alvo != null && alvo.enabled && alvo.gameObject.activeInHierarchy && alvo.OverlapPoint(ponto)) return true;
@@ -397,7 +392,7 @@ public partial class EntradaCurrais : MonoBehaviour
                 if (!menuAberto)
                 {
                     FecharDialogo();
-                    if (Dados.curraisEtapaEntrada == 4) LiberarMari();
+                    if (Dados.curraisEtapaEntrada >= 3) LiberarMari();
                 }
             }
         }
@@ -422,25 +417,35 @@ public partial class EntradaCurrais : MonoBehaviour
         yield return Esperar(tempoPlano);
         yield return Escurecer(0f);
         yield return Dizer(antesSeparacao);
+        yield return MarcharEscolta();
+        yield return Dizer(ordemSeparar);
+        yield return Mover(guardaRetaguarda, guardaSeparacao.position, tempoPlano);
         yield return Mover(irma, irmaSeparada.position + Vector3.up * ajustePivoIrma, tempoSeparacao);
         yield return Mover(cabo, caboBarreira.position, tempoPlano);
         yield return Dizer(barreira);
+        yield return Mover(pai, paiReacao.position, tempoPlano);
+        yield return Dizer(protestoPai);
+        // O avanço da guarda, o corte e a pose curvada mostram a origem da lesão.
+        yield return Mover(guardaRetaguarda, guardaGolpe.position, tempoPlano * .5f);
+        CorFade(1f);
         pai.localRotation = rotacaoPai * Quaternion.Euler(0f, 0f, -18f);
-        yield return Esperar(tempoPlano);
+        yield return Esperar(.15f);
+        CorFade(0f);
+        Dados.curraisPaiFerido = true;
+        yield return Dizer(reacaoGolpe);
         yield return Dizer(new[] { Dados.estradaSegundaEscolhaNoturna == 1 ? promessa : semPromessa, respostaZefinha });
         yield return PartirOutraFila();
-        lacoChao.SetActive(true);
         yield return Dizer(depoisSeparacao);
-        Dados.curraisPaiFerido = true;
-        Dados.curraisEtapaEntrada = 1;
-        objetivoTexto.text = objetivoLaco;
+        Dados.curraisEtapaEntrada = 2;
         Salvar();
+        yield return Entrar();
     }
 
     private IEnumerator PartirOutraFila()
     {
         Vector3 origemIrma = irma.position, origemCarroca = carroca.position;
         Vector3 origemFila = outraFila.transform.position;
+        Vector3 origemGuarda = guardaRetaguarda.position;
         Vector3 destinoIrma = irmaSaida.position + Vector3.up * ajustePivoIrma;
         Vector3 deslocamento = destinoIrma - origemIrma;
         float tempo = 0f;
@@ -453,31 +458,13 @@ public partial class EntradaCurrais : MonoBehaviour
                 irma.position = Vector3.Lerp(origemIrma, destinoIrma, t);
                 carroca.position = Vector3.Lerp(origemCarroca, carrocaSaida.position, t);
                 outraFila.transform.position = origemFila + deslocamento * t;
+                guardaRetaguarda.position = origemGuarda + deslocamento * t;
             }
             yield return null;
         }
         irma.gameObject.SetActive(false);
         outraFila.SetActive(false);
-    }
-
-    private void MostrarRuaDepoisDaSeparacao()
-    {
-        rua.SetActive(true); campo.SetActive(false); luzia.SetActive(false);
-        irma.gameObject.SetActive(false); outraFila.SetActive(false);
-        carroca.position = carrocaSaida.position; cabo.position = caboBarreira.position;
-        lacoChao.SetActive(true); lacoPanela.SetActive(false);
-        pai.localRotation = rotacaoPai * Quaternion.Euler(0f, 0f, -18f);
-        cameraCena.transform.position = cameraRua.position;
-    }
-
-    private IEnumerator RecolherLaco()
-    {
-        yield return Mover(mari.transform, pontoColeta.position, tempoPlano);
-        lacoChao.SetActive(false);
-        Dados.curraisLacoRecolhido = true;
-        Dados.curraisEtapaEntrada = 2;
-        Salvar();
-        yield return Entrar();
+        guardaRetaguarda.gameObject.SetActive(false);
     }
 
     private IEnumerator Entrar()
@@ -485,20 +472,16 @@ public partial class EntradaCurrais : MonoBehaviour
         yield return Escurecer(1f);
         MostrarEntrada();
         yield return Escurecer(0f);
-        yield return Dizer(entrada);
-        if (!ReterPertences())
+        if (!Dados.curraisRevistaApresentada)
         {
-            // Permite tentar novamente sem apagar os itens que não puderam ser registrados.
-            yield return Dizer(new[] { new Fala { personagem = "Cena", texto =
-                "Não foi possível registrar os pertences. Saia e continue a partida para tentar novamente." } });
-            yield break;
+            yield return Dizer(entrada);
+            Dados.curraisRevistaApresentada = true;
         }
-        lacoPanela.SetActive(true);
-        yield return Dizer(revista);
-        Dados.curraisLacoNaPanela = true;
-        Dados.curraisEtapaEntrada = 3;
+        Dados.curraisEtapaEntrada = 2;
+        AtualizarVisuaisChegada();
+        objetivoTexto.text = Dados.curraisPertencesRetidos
+            ? "Recolha seu caderno na mesa do fiscal." : objetivoRevista;
         Salvar();
-        yield return ChegarAbrigo();
     }
 
     private void MostrarEntrada()
@@ -506,7 +489,7 @@ public partial class EntradaCurrais : MonoBehaviour
         rua.SetActive(false); campo.SetActive(true);
         irma.gameObject.SetActive(false); outraFila.SetActive(false);
         luzia.SetActive(true); lacoChao.SetActive(false);
-        lacoPanela.SetActive(Dados.curraisLacoNaPanela);
+        lacoPanela.SetActive(false);
         Posicionar(mari.transform, mariEntrada); Posicionar(pai, paiEntrada);
         Posicionar(mae, maeEntrada); Posicionar(baleia, baleiaEntrada);
         cameraCena.transform.position = cameraCampo.position;
@@ -520,7 +503,7 @@ public partial class EntradaCurrais : MonoBehaviour
             Debug.LogError("EntradaCurrais: pertences preservados no inventário. " + erro, this);
             return false;
         }
-        Dados.curraisItensRetidos = new List<string>(ids);
+        Dados.curraisItensRetidos.AddRange(ids);
         Dados.curraisPertencesRetidos = true;
         InventoryManager.Instance.ReplaceItems(new ItemData[0]);
         return true;
@@ -531,10 +514,24 @@ public partial class EntradaCurrais : MonoBehaviour
         yield return Escurecer(1f);
         MostrarAbrigo();
         yield return Escurecer(0f);
-        yield return Dizer(abrigo);
-        Dados.curraisEtapaEntrada = 4;
-        AtualizarEstadoBusca();
-        LiberarMari();
+        if (!Dados.curraisAbrigoApresentado)
+        {
+            yield return Dizer(abrigo);
+            Dados.curraisAbrigoApresentado = true;
+        }
+        if (Dados.curraisPaiAcomodado)
+        {
+            Dados.curraisEtapaEntrada = 4;
+            AtualizarEstadoBusca();
+            Salvar();
+            yield break;
+        }
+        if (Dados.curraisPanoAbrigoRecolhido && !TemItem(itemPanoAbrigo))
+            InventoryManager.Instance.AddItem(itemPanoAbrigo);
+        Dados.curraisEtapaEntrada = 3;
+        LimitarPrimeiroAbrigo();
+        AtualizarVisuaisChegada();
+        objetivoTexto.text = objetivoPano;
         Salvar();
     }
 
@@ -543,7 +540,7 @@ public partial class EntradaCurrais : MonoBehaviour
         MostrarEntrada();
         Posicionar(mari.transform, mariAbrigo); Posicionar(pai, paiAbrigo);
         Posicionar(mae, maeAbrigo); Posicionar(baleia, baleiaAbrigo);
-        lacoPanela.SetActive(Dados.curraisLacoNaPanela);
+        lacoPanela.SetActive(false);
         pai.localRotation = rotacaoPai * Quaternion.Euler(0f, 0f, -18f);
     }
 
@@ -558,7 +555,7 @@ public partial class EntradaCurrais : MonoBehaviour
     private void LiberarMari()
     {
         // Não aplica os limites do campo enquanto a inicialização estiver incompleta.
-        if (mari != null) mari.enabled = pronto;
+        if (mari != null) mari.enabled = pronto && GameProgress.Instance != null && Dados.curraisEtapaEntrada >= 3;
         bool explorarSetor = pronto && GameProgress.Instance != null &&
             Dados.curraisEtapaEntrada == 4 && campo != null && campo.activeInHierarchy;
         if (seguirCamera != null) seguirCamera.enabled = explorarSetor;
@@ -569,7 +566,9 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (cameraCena == null || cameraCena.gameObject.scene != gameObject.scene) return;
         if (seguirCamera != null) seguirCamera.enabled = false;
-        Transform marca = campo != null && campo.activeInHierarchy ? cameraCampo : cameraRua;
+        Transform marca = campo != null && campo.activeInHierarchy
+            ? (GameProgress.Instance != null && Dados.curraisEtapaEntrada == 2 && cameraRevista != null ? cameraRevista : cameraCampo)
+            : cameraRua;
         if (marca != null) cameraCena.transform.position = marca.position;
         if (zoomInicial > 0f) cameraCena.orthographicSize = zoomInicial;
     }
@@ -637,7 +636,7 @@ public partial class EntradaCurrais : MonoBehaviour
         menuAberto = false;
         FecharDialogo();
         acao?.Invoke();
-        if (!ocupado && Dados.curraisEtapaEntrada == 4) LiberarMari();
+        if (!ocupado && Dados.curraisEtapaEntrada >= 3) LiberarMari();
     }
 
     private void MostrarOpcoes(string personagem, string texto, string[] rotulos, Action[] acoes)
@@ -894,6 +893,7 @@ public partial class EntradaCurrais : MonoBehaviour
     private void AtualizarEstadoBusca()
     {
         if (Dados.curraisEtapaEntrada != 4) return;
+        AtualizarVisuaisChegada();
         objetivoTexto.text = ObjetivoAtual();
         bool panelaAcessivel = Dados.curraisRegistroConcluido && !Dados.curraisPanelaConcluida;
         if (panelaAcessivel)
@@ -904,7 +904,7 @@ public partial class EntradaCurrais : MonoBehaviour
         else if (Dados.curraisPanelaConcluida) panelaBusca.position = panelaRecolhida.position;
         canhotoCenario.SetActive(panelaAcessivel);
         cabacaMesa.SetActive(!Dados.curraisAguaRecebida);
-        lacoPanela.SetActive(Dados.curraisLacoNaPanela && !Dados.curraisPanelaConcluida);
+        lacoPanela.SetActive(false);
         areaPanela.enabled = panelaAcessivel;
         meninoBusca.gameObject.SetActive(Dados.curraisEscolhaAgua != 0);
         if (Dados.curraisMeninoVisitado) meninoBusca.position = meninoFimPasso.position;
@@ -943,6 +943,7 @@ public partial class EntradaCurrais : MonoBehaviour
     private void LateUpdate()
     {
         if (!pronto) return;
+        if (Dados.curraisEtapaEntrada == 2 || Dados.curraisEtapaEntrada == 3) AtualizarVisuaisChegada();
         if (Dados.curraisEtapaEntrada != 4)
         {
             // Os limites do setor interno não devem deslocar a câmera da separação na rua.
@@ -988,7 +989,15 @@ public partial class EntradaCurrais : MonoBehaviour
             {
                 tempo += Time.deltaTime;
                 alvo.position = Vector3.Lerp(origem, destino, Mathf.Clamp01(tempo / duracao));
+                Rigidbody2D corpoEmMovimento = alvo.GetComponent<Rigidbody2D>();
+                if (corpoEmMovimento != null)
+                { corpoEmMovimento.position = alvo.position; corpoEmMovimento.linearVelocity = Vector2.zero; }
+                if (animador != null && animador.enabled) animador.SetBool("IsWalking", true);
+                SpriteRenderer visual = alvo.GetComponent<SpriteRenderer>();
+                if (visual != null && Mathf.Abs(destino.x - origem.x) > .01f)
+                    visual.flipX = (destino.x - origem.x) * alvo.lossyScale.x < 0f;
             }
+            else if (animador != null && animador.enabled) animador.SetBool("IsWalking", false);
             yield return null;
         }
         if (animador != null && animador.enabled) animador.SetBool("IsWalking", false);

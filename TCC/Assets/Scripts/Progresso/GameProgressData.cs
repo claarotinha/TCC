@@ -74,6 +74,13 @@ public class GameProgressData
     // Ato 2, entrada: 0 separação, 1 laço, 2 revista, 3 abrigo, 4 setor livre.
     public int curraisEtapaEntrada;
     public bool curraisPaiFerido;
+    // Chegada alternativa: independentes dos estados do roteiro anterior.
+    public bool curraisRevistaApresentada;
+    public bool curraisDiarioRecuperado;
+    public bool curraisAbrigoApresentado;
+    public bool curraisPanoAbrigoRecolhido;
+    public bool curraisPaiAcomodado;
+    public int curraisPerguntasAbrigo;
     public bool curraisLacoRecolhido;
     public bool curraisLacoNaPanela;
     public bool curraisPertencesRetidos;
