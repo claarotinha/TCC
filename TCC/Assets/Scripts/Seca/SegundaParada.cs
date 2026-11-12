@@ -606,6 +606,10 @@ public class SegundaParada : MonoBehaviour
         AtualizarPegadas();
         preparandoBusca = false;
         LiberarMovimento();
+        Falar(new[] { "Mariquinha", "Mariquinha" }, new[] {
+            "Olha as pegadinhas de Baleia, Zefinha! Vão pra aquele lado.",
+            "Vamo seguindo. Clica nas pegadas pra gente conferir por onde ela passou."
+        }, null, true);
     }
 
     private void AtualizarPegadas()
@@ -696,12 +700,16 @@ public class SegundaParada : MonoBehaviour
         if (alvo == "baleia" && etapa == 2 && !fugindo && pegadas == pistasBusca.Length)
         {
             if (prea == null || InventoryManager.Instance == null) return;
-            etapa = 5;
             InventoryManager.Instance.AddItem(prea);
             MostrarBaleia(spriteBaleia);
             if (seguidorBaleia != null) seguidorBaleia.enabled = baleiaSeguia;
             foreach (GameObject pista in pistasBusca) pista.SetActive(false);
             alvoBaleia.SetActive(false);
+            Falar(new[] { "Mariquinha", "Zefinha", "Mariquinha" }, new[] {
+                "Baleia! Tu deu foi um susto na gente... Olha, Zefinha, ela pegou um preá!",
+                "Foi atrás de comida... Vamo levar pra painho e mainha.",
+                "Vem, Baleia. Agora fica pertinho, viu?"
+            }, () => { etapa = 5; });
         }
         else if (alvo == "casa" && etapa == 6) IniciarChegadaCasa();
     }
@@ -1443,10 +1451,10 @@ public class SegundaParada : MonoBehaviour
             if (GameProgress.Instance != null)
                 GameProgress.Instance.Data.estradaEncontroVisitado = true;
         }
+        // A saída nunca encerra a conversa nem descarta as perguntas de Antônio.
         if (encontroVisitado && x >= saidaEncontro.position.x &&
-            (!conversando || perguntasAbertas) &&
-            (perguntasAbertas || !dialogueUI.activeInHierarchy))
-            EncerrarEncontroTerceira();
+            !conversando && !perguntasAbertas && !dialogueUI.activeInHierarchy)
+            ConfirmarSaidaEncontro();
     }
 
     private void InteragirEncontroTerceira(string alvo)
@@ -1620,6 +1628,52 @@ public class SegundaParada : MonoBehaviour
                 GameProgress.Instance.Data.estradaPerguntasAntonio = perguntasAntonio;
             MostrarPerguntasAntonio();
         });
+    }
+
+    private void ConfirmarSaidaEncontro()
+    {
+        LimparEscolhas();
+        Button[] opcoes = choicesContainer.GetComponentsInChildren<Button>(true);
+        if (opcoes.Length < 2)
+        {
+            Debug.LogError("Estrada: a saída do encontro precisa de dois botões de escolha.", this);
+            return;
+        }
+        conversando = true;
+        esperandoEscolha = true;
+        BloquearMovimento();
+        dialogueUI.SetActive(true);
+        dialoguePanel.SetActive(true);
+        choicesContainer.SetActive(true);
+        Grupo(dialogueUI); Grupo(dialoguePanel); Grupo(choicesContainer);
+        characterNameText.text = "Zefinha";
+        dialogueText.text = "Ainda posso conversar com aquele menino. Já vamos seguir viagem?";
+        if (portraitImage != null) portraitImage.enabled = false;
+        for (int i = 0; i < opcoes.Length; i++)
+        {
+            Button botao = opcoes[i];
+            botoes.Add(botao);
+            botao.onClick.RemoveAllListeners();
+            botao.gameObject.SetActive(i < 2);
+            if (i >= 2) continue;
+            TMP_Text rotulo = botao.GetComponentInChildren<TMP_Text>(true);
+            if (rotulo != null) rotulo.text = i == 0 ? "Ficar e conversar" : "Seguir viagem";
+            botao.interactable = true;
+            bool conversar = i == 0;
+            botao.onClick.AddListener(() =>
+            {
+                if (!esperandoEscolha || PauseHelper.BlockInput() || Time.timeScale <= 0f) return;
+                esperandoEscolha = false;
+                LimparEscolhas();
+                choicesContainer.SetActive(false);
+                if (!conversar) { EncerrarEncontroTerceira(); return; }
+                conversando = false;
+                dialogueUI.SetActive(false);
+                LiberarMovimento();
+                InteragirEncontroTerceira("meninoRetirante");
+            });
+        }
+        quadro = Time.frameCount;
     }
 
     private void EncerrarEncontroTerceira()
