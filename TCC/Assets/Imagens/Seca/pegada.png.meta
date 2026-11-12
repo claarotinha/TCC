@@ -1,0 +1,1079 @@
+fileFormatVersion: 2
+guid: 8512e17e95a250541b4ef2aad052c4b7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3999985423075485116
+    second: pegada_0
+  - first:
+      213: -5075577240788596591
+    second: pegada_1
+  - first:
+      213: -7892527624090317327
+    second: pegada_2
+  - first:
+      213: -8409647230888001594
+    second: pegada_3
+  - first:
+      213: -7894318580370474728
+    second: pegada_4
+  - first:
+      213: 4762263355760500285
+    second: pegada_5
+  - first:
+      213: 6801893046392589546
+    second: pegada_6
+  - first:
+      213: 3467474046180255175
+    second: pegada_7
+  - first:
+      213: -2062961687882271209
+    second: pegada_8
+  - first:
+      213: 8182075863188874934
+    second: pegada_9
+  - first:
+      213: -2529918864025431467
+    second: pegada_10
+  - first:
+      213: -1200165909552400138
+    second: pegada_11
+  - first:
+      213: -8858929287530559522
+    second: pegada_12
+  - first:
+      213: -1433335088993617932
+    second: pegada_13
+  - first:
+      213: -385400655119402529
+    second: pegada_14
+  - first:
+      213: -8423202252721671938
+    second: pegada_15
+  - first:
+      213: -1225312744326145512
+    second: pegada_16
+  - first:
+      213: 4591592203970515442
+    second: pegada_17
+  - first:
+      213: -5836736006482808186
+    second: pegada_18
+  - first:
+      213: 5658163216633560003
+    second: pegada_19
+  - first:
+      213: 7779758759772169973
+    second: pegada_20
+  - first:
+      213: 1997230342044765675
+    second: pegada_21
+  - first:
+      213: 6337327649007674828
+    second: pegada_22
+  - first:
+      213: 2835026558233842100
+    second: pegada_23
+  - first:
+      213: 7478853196898731
+    second: pegada_24
+  - first:
+      213: -8648704998756803751
+    second: pegada_25
+  - first:
+      213: 3994977500607798992
+    second: pegada_26
+  - first:
+      213: -1859389785148212485
+    second: pegada_27
+  - first:
+      213: 1129021053180486521
+    second: pegada_28
+  - first:
+      213: 1891844050332971257
+    second: pegada_29
+  - first:
+      213: 4729848508481793562
+    second: pegada_30
+  - first:
+      213: -2633238356848166675
+    second: pegada_31
+  - first:
+      213: -6242521203570276133
+    second: pegada_32
+  - first:
+      213: 9220828805841705975
+    second: pegada_33
+  - first:
+      213: 1093922439762227941
+    second: pegada_34
+  - first:
+      213: -8966752976599671872
+    second: pegada_35
+  - first:
+      213: 2741220645558905974
+    second: pegada_36
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pegada_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 25
+        width: 1348
+        height: 1072
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb5a729ac8dc28730800000000000000
+      internalID: 3999985423075485116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_1
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 1048
+        width: 35
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1980dbc146def89b0800000000000000
+      internalID: -5075577240788596591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_2
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 1065
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fd832a31fb187290800000000000000
+      internalID: -7892527624090317327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_3
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 1065
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cfb294566eea4b80800000000000000
+      internalID: -8409647230888001594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_4
+      rect:
+        serializedVersion: 2
+        x: 1217
+        y: 1045
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8197049b31fb17290800000000000000
+      internalID: -7894318580370474728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_5
+      rect:
+        serializedVersion: 2
+        x: 493
+        y: 1031
+        width: 7
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3ed6fe5a45f61240800000000000000
+      internalID: 4762263355760500285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_6
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 1031
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aec0e6e00bd256e50800000000000000
+      internalID: 6801893046392589546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_7
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 1023
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c5e5760641fe1030800000000000000
+      internalID: 3467474046180255175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_8
+      rect:
+        serializedVersion: 2
+        x: 898
+        y: 1011
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71679806643ee53e0800000000000000
+      internalID: -2062961687882271209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_9
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 979
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b6aba6a5a29c8170800000000000000
+      internalID: 8182075863188874934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_10
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 978
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 552543f723ce3ecd0800000000000000
+      internalID: -2529918864025431467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_11
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 974
+        width: 32
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f87899c677285fe0800000000000000
+      internalID: -1200165909552400138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_12
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 983
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed7cf66efb2ce0580800000000000000
+      internalID: -8858929287530559522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_13
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 975
+        width: 17
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f7be68a455cb1ce0800000000000000
+      internalID: -1433335088993617932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_14
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 976
+        width: 19
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd9b7676528c6aaf0800000000000000
+      internalID: -385400655119402529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_15
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 977
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef0314fdd26ca1b80800000000000000
+      internalID: -8423202252721671938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_16
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 536
+        width: 98
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81a5eaf0d80defee0800000000000000
+      internalID: -1225312744326145512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_17
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 621
+        width: 84
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f19d1f38cc98bf30800000000000000
+      internalID: 4591592203970515442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_18
+      rect:
+        serializedVersion: 2
+        x: 1207
+        y: 552
+        width: 32
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6823cd5c68fbffea0800000000000000
+      internalID: -5836736006482808186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_19
+      rect:
+        serializedVersion: 2
+        x: 1249
+        y: 568
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cbff90a775d58e40800000000000000
+      internalID: 5658163216633560003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_20
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 434
+        width: 102
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f624728f5147fb60800000000000000
+      internalID: 7779758759772169973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_21
+      rect:
+        serializedVersion: 2
+        x: 1185
+        y: 488
+        width: 59
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bedc5301a6697bb10800000000000000
+      internalID: 1997230342044765675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_22
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 544
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc52d509be5b2f750800000000000000
+      internalID: 6337327649007674828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_23
+      rect:
+        serializedVersion: 2
+        x: 1231
+        y: 515
+        width: 27
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b1935452a9085720800000000000000
+      internalID: 2835026558233842100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_24
+      rect:
+        serializedVersion: 2
+        x: 1267
+        y: 512
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba1e0243af19a1000800000000000000
+      internalID: 7478853196898731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_25
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 452
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95b94fd50a0a9f780800000000000000
+      internalID: -8648704998756803751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_26
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 455
+        width: 20
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ded769ded2017730800000000000000
+      internalID: 3994977500607798992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_27
+      rect:
+        serializedVersion: 2
+        x: 1241
+        y: 456
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfa304587de1236e0800000000000000
+      internalID: -1859389785148212485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_28
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 418
+        width: 7
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 973a2c28aa61baf00800000000000000
+      internalID: 1129021053180486521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_29
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 426
+        width: 14
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f0788ee32e214a10800000000000000
+      internalID: 1891844050332971257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_30
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 388
+        width: 9
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1ee77d982cc3a140800000000000000
+      internalID: 4729848508481793562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_31
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 376
+        width: 40
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de8b12b7aabd47bd0800000000000000
+      internalID: -2633238356848166675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_32
+      rect:
+        serializedVersion: 2
+        x: 1201
+        y: 390
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd889562a0c1e59a0800000000000000
+      internalID: -6242521203570276133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_33
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 368
+        width: 7
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fb52e2e1f6f6ff70800000000000000
+      internalID: 9220828805841705975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_34
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 357
+        width: 6
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e23bd1c9a46e2f00800000000000000
+      internalID: 1093922439762227941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_35
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 368
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cb9919fca1bf8380800000000000000
+      internalID: -8966752976599671872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pegada_36
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 23
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67c618d47a5ca0620800000000000000
+      internalID: 2741220645558905974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      pegada_0: 3999985423075485116
+      pegada_1: -5075577240788596591
+      pegada_10: -2529918864025431467
+      pegada_11: -1200165909552400138
+      pegada_12: -8858929287530559522
+      pegada_13: -1433335088993617932
+      pegada_14: -385400655119402529
+      pegada_15: -8423202252721671938
+      pegada_16: -1225312744326145512
+      pegada_17: 4591592203970515442
+      pegada_18: -5836736006482808186
+      pegada_19: 5658163216633560003
+      pegada_2: -7892527624090317327
+      pegada_20: 7779758759772169973
+      pegada_21: 1997230342044765675
+      pegada_22: 6337327649007674828
+      pegada_23: 2835026558233842100
+      pegada_24: 7478853196898731
+      pegada_25: -8648704998756803751
+      pegada_26: 3994977500607798992
+      pegada_27: -1859389785148212485
+      pegada_28: 1129021053180486521
+      pegada_29: 1891844050332971257
+      pegada_3: -8409647230888001594
+      pegada_30: 4729848508481793562
+      pegada_31: -2633238356848166675
+      pegada_32: -6242521203570276133
+      pegada_33: 9220828805841705975
+      pegada_34: 1093922439762227941
+      pegada_35: -8966752976599671872
+      pegada_36: 2741220645558905974
+      pegada_4: -7894318580370474728
+      pegada_5: 4762263355760500285
+      pegada_6: 6801893046392589546
+      pegada_7: 3467474046180255175
+      pegada_8: -2062961687882271209
+      pegada_9: 8182075863188874934
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
