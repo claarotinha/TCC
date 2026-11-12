@@ -249,7 +249,10 @@ public class GameSaveSystem : MonoBehaviour
         }
 
         if (scene.name == "Currais" && save.progress != null && save.progress.curraisEtapaEntrada == 2)
-            save.playerPosition.x = 33.45f;
+        {
+            EntradaCurrais entrada = FindFirstObjectByType<EntradaCurrais>();
+            if (entrada != null) save.playerPosition = entrada.PosicaoDaRevista;
+        }
 
         if (save.hasPlayerPosition)
         {

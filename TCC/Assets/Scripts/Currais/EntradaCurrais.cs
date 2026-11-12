@@ -455,6 +455,7 @@ public partial class EntradaCurrais : MonoBehaviour
         Vector3 origemFila = outraFila.transform.position;
         Vector3 origemGuarda = guardaRetaguarda.position;
         Vector3 destinoIrma = irmaSaida.position + Vector3.up * ajustePivoIrma;
+        destinoIrma.y = origemIrma.y;
         Vector3 deslocamento = destinoIrma - origemIrma;
         float tempo = 0f;
         while (tempo < tempoCarroca)
@@ -1008,6 +1009,9 @@ public partial class EntradaCurrais : MonoBehaviour
     private IEnumerator Mover(Transform alvo, Vector3 destino, float duracao)
     {
         Vector3 origem = alvo.position;
+        if (alvo == mari.transform || alvo == pai || alvo == mae || alvo == irma ||
+            alvo == baleia || alvo == cabo || alvo == guardaRetaguarda || alvo == bento || alvo == meninoBusca)
+            destino.y = origem.y;
         float tempo = 0f;
         Animator animador = alvo.GetComponent<Animator>();
         if (animador != null && animador.enabled) animador.SetBool("IsWalking", true);

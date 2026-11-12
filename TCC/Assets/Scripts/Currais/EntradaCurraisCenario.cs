@@ -2,6 +2,8 @@ using UnityEngine;
 
 public partial class EntradaCurrais
 {
+    public Vector3 PosicaoDaRevista => mariEntrada.position;
+
     public static Vector3 AtualizarPosicaoCenario(Vector3 posicao, GameProgressData dados)
     {
         float anterior = posicao.x;
