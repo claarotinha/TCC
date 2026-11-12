@@ -107,21 +107,35 @@ public class ControleJornada : MonoBehaviour
     {
         // Os marcos e seus objetos foram transladados juntos, preservando a posição
         // relativa dentro de cada parada dos checkpoints anteriores à ampliação.
-        if (dados.estradaAcampamentoConcluido || dados.estradaParadasConcluidas >= 5)
-            posicao.x += posicao.x >= 162f ? 2120f : 1800f;
-        else if (dados.estradaAcampamentoIniciado || dados.estradaParadasConcluidas >= 4)
-            posicao.x += posicao.x >= 135f ? 1800f : 1500f;
-        else if (dados.estradaJuazeiroIniciado || dados.estradaParadasConcluidas >= 3)
-            posicao.x += posicao.x >= 105f ? 1500f : 1200f;
-        else if (dados.estradaAbrigoConcluido || dados.estradaParadasConcluidas >= 2)
+        if (dados.estradaVersaoPercurso < 1)
         {
-            if (!dados.estradaTerceiraAguaIniciada && posicao.x < 79f && caminhada != null)
-                posicao.x = caminhada.InicioCaminhadaDaManhaX;
-            else posicao.x += 1200f;
+            if (dados.estradaAcampamentoConcluido || dados.estradaParadasConcluidas >= 5)
+                posicao.x += posicao.x >= 162f ? 2120f : 1800f;
+            else if (dados.estradaAcampamentoIniciado || dados.estradaParadasConcluidas >= 4)
+                posicao.x += posicao.x >= 135f ? 1800f : 1500f;
+            else if (dados.estradaJuazeiroIniciado || dados.estradaParadasConcluidas >= 3)
+                posicao.x += posicao.x >= 105f ? 1500f : 1200f;
+            else if (dados.estradaAbrigoConcluido || dados.estradaParadasConcluidas >= 2)
+            {
+                if (!dados.estradaTerceiraAguaIniciada && posicao.x < 79f && caminhada != null)
+                    posicao.x = 1028.47262f;
+                else posicao.x += 1200f;
+            }
+            else if (dados.estradaParadasConcluidas >= 1)
+                // A busca ainda não possui checkpoint próprio: retoma a caminhada inicial.
+                posicao.x = Mathf.Min(posicao.x + 260f, 311.45262f);
         }
-        else if (dados.estradaParadasConcluidas >= 1)
-            // A busca ainda não possui checkpoint próprio: retoma a caminhada inicial.
-            posicao.x = Mathf.Min(posicao.x + 260f, caminhada != null ? caminhada.transform.position.x : posicao.x + 260f);
+        float[] anterior = { 29.57262f, 311.45262f, 841.45262f, 1024.47262f, 1028.47262f, 1278.85262f, 1297.72262f, 1610.96262f, 1620.59262f, 1939.45261f, 1942.25261f, 2283.83262f, 2350.00000f };
+        float[] atual = { 29.57262f, 131.45262f, 401.45262f, 530.00000f, 534.00000f, 619.00000f, 637.87000f, 722.87000f, 732.50000f, 817.50000f, 820.30000f, 905.30000f, 950.00000f };
+        for (int i = 1; i < anterior.Length; i++)
+        {
+            if (posicao.x > anterior[i]) continue;
+            if (posicao.x >= anterior[0])
+                posicao.x = Mathf.Lerp(atual[i - 1], atual[i],
+                    Mathf.InverseLerp(anterior[i - 1], anterior[i], posicao.x));
+            return posicao;
+        }
+        posicao.x += atual[atual.Length - 1] - anterior[anterior.Length - 1];
         return posicao;
     }
 

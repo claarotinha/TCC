@@ -299,7 +299,7 @@ public class SegundaParada : MonoBehaviour
         ControleJornada jornada = ControleJornada.Instance;
         if (id == "riacho") return false;
         if (id == "casa") return etapa == 6;
-        if (id == "baleia") return etapa == 2 && pegadas == pistasBusca.Length;
+        if (id == "baleia") return etapa == 2 && !fugindo && pegadas == pistasBusca.Length;
         if (id.StartsWith("pegada")) return etapa == 2 && id == "pegada" + pegadas;
         if (id == "barriguda") return jornada != null && jornada.ParadaAtiva && jornada.ParadaAtual == 3 &&
             dialogoTerceiraConcluido && !aguaTerceiraConcluida;
@@ -478,8 +478,8 @@ public class SegundaParada : MonoBehaviour
 
     private void ContinuarCaminhada()
     {
-        limiteConversa = transform.position.x + 270f;
-        StartCoroutine(ConversaDepoisDeCaminhar(30f, ConversaSorvete));
+        limiteConversa = transform.position.x + 90f;
+        StartCoroutine(ConversaDepoisDeCaminhar(10f, ConversaSorvete));
     }
 
     private IEnumerator ConversaDepoisDeCaminhar(float segundos, Action conversa)
@@ -505,8 +505,8 @@ public class SegundaParada : MonoBehaviour
                 "Eu acho que tem sim…", "Eu nunca vi. Nos pode comer quando chegar lá?",
                 "A gente pode pedir a painho e mainha sim."
             }, () => {
-                limiteConversa = transform.position.x + 410f;
-                StartCoroutine(ConversaDepoisDeCaminhar(15f, ConversaSertao));
+                limiteConversa = transform.position.x + 180f;
+                StartCoroutine(ConversaDepoisDeCaminhar(10f, ConversaSertao));
             }, true);
     }
 
@@ -517,8 +517,8 @@ public class SegundaParada : MonoBehaviour
                 "Meu pai dizia que o sertão escuta. Quando o vento muda… É porque ele tá conversando. Quando num venta… É porque tá zangado. E quando chove… É porque perdoou nóis.",
                 "Que Deus nos conceda a graça da chuva."
             }, () => {
-                limiteConversa = transform.position.x + 530f;
-                StartCoroutine(ConversaDepoisDeCaminhar(12f, ConversaBaleia));
+                limiteConversa = transform.position.x + 270f;
+                StartCoroutine(ConversaDepoisDeCaminhar(10f, ConversaBaleia));
             }, true);
     }
 
@@ -597,8 +597,8 @@ public class SegundaParada : MonoBehaviour
 
     private IEnumerator PrepararBusca()
     {
-        BloquearMovimento();
-        while (fugindo) yield return null;
+        // A corrida segue em paralelo: a distância da cachorra não bloqueia Mari.
+        yield return null;
         GameProgress.Instance?.UnlockDiaryPage("josefa-04");
         etapa = 2;
         foreach (GameObject pista in pistasBusca) pista.SetActive(true);
@@ -693,7 +693,7 @@ public class SegundaParada : MonoBehaviour
             AtualizarPegadas();
             return;
         }
-        if (alvo == "baleia" && etapa == 2 && pegadas == pistasBusca.Length)
+        if (alvo == "baleia" && etapa == 2 && !fugindo && pegadas == pistasBusca.Length)
         {
             if (prea == null || InventoryManager.Instance == null) return;
             etapa = 5;
