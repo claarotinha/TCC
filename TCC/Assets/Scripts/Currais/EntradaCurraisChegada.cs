@@ -146,6 +146,32 @@ public partial class EntradaCurrais
                 () => Iniciar(ConcluirRevista()), FecharMenu });
     }
 
+    public bool SoltarItemNoCenario(ItemData item, Vector2 posicaoTela)
+    {
+        if (!isActiveAndEnabled || !pronto || ocupado || menuAberto || dialogando || encerrando ||
+            PauseHelper.BlockInput() || Time.timeScale <= 0f || item == null || !TemItem(item) ||
+            SobreControle(posicaoTela)) return false;
+        if (Dados.curraisEtapaEntrada == 2) return SoltarFerramentaNaRevista(item, posicaoTela);
+        if (mari == null || cameraCena == null) return false;
+        Ray raio = cameraCena.ScreenPointToRay(posicaoTela);
+        Plane plano = new Plane(Vector3.forward, mari.transform.position);
+        if (!plano.Raycast(raio, out float distancia)) return false;
+        Vector2 ponto = raio.GetPoint(distancia);
+        Collider2D[] alvos = Dados.curraisEtapaEntrada == 3 ? AlvosChegada() : AlvosAtuais();
+        foreach (Collider2D alvo in alvos)
+        {
+            if (alvo == null || !alvo.enabled || !alvo.gameObject.activeInHierarchy || !alvo.OverlapPoint(ponto)) continue;
+            if (Mathf.Abs(mari.transform.position.x - alvo.bounds.center.x) > alcanceInteracao)
+            { objetivoTexto.text = "Aproxime-se para entregar o objeto."; return false; }
+            InventoryManager.Instance.SelectItem(item);
+            if (Dados.curraisEtapaEntrada == 3 && alvo == areaMae)
+            { Iniciar(AcomodarPai()); return true; }
+            if (Dados.curraisEtapaEntrada == 4) return InteragirBusca(ponto);
+            return false;
+        }
+        return false;
+    }
+
     public bool SoltarFerramentaNaRevista(ItemData item, Vector2 posicaoTela)
     {
         // O inventário deve permanecer aberto durante o arraste; pausa e diálogos bloqueiam.
@@ -241,7 +267,7 @@ public partial class EntradaCurrais
         AtualizarVisuaisChegada();
         Salvar();
         yield return Dizer(panoDisponivel);
-        objetivoTexto.text = "O pano está no inventário. Selecione com TAB, feche e entregue à sua mãe.";
+        objetivoTexto.text = "O pano está no inventário. Arraste até sua mãe, ou selecione e clique nela.";
     }
 
     private IEnumerator AcomodarPai()

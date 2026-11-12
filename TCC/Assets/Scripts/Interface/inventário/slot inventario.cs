@@ -110,7 +110,7 @@ public class InventorySlot : MonoBehaviour,
 
         // A revista aceita a ferramenta apenas quando solta sobre o cabo.
         EntradaCurrais entradaCurrais = FindAnyObjectByType<EntradaCurrais>();
-        if (entradaCurrais != null && entradaCurrais.SoltarFerramentaNaRevista(item, eventData.position))
+        if (entradaCurrais != null && entradaCurrais.SoltarItemNoCenario(item, eventData.position))
             return;
 
         // Usa os métodos existentes da jornada.

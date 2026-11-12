@@ -363,16 +363,19 @@ public partial class EntradaCurrais : MonoBehaviour
         return false;
     }
 
-    private static bool SobreControle()
+    private static bool SobreControle(Vector2? posicaoTela = null)
     {
         EventSystem sistema = EventSystem.current;
         if (sistema == null) return false;
-        PointerEventData ponteiro = new PointerEventData(sistema) { position = Input.mousePosition };
+        PointerEventData ponteiro = new PointerEventData(sistema) { position = posicaoTela ?? (Vector2)Input.mousePosition };
         List<RaycastResult> resultados = new List<RaycastResult>();
         sistema.RaycastAll(ponteiro, resultados);
         foreach (RaycastResult resultado in resultados)
             if (resultado.gameObject != null && resultado.module is GraphicRaycaster &&
-                (resultado.gameObject.GetComponentInParent<Selectable>() != null ||
+                (resultado.gameObject.GetComponentInParent<Button>() != null ||
+                 resultado.gameObject.GetComponentInParent<Slider>() != null ||
+                 resultado.gameObject.GetComponentInParent<Scrollbar>() != null ||
+                 resultado.gameObject.GetComponentInParent<TMP_InputField>() != null ||
                  resultado.gameObject.GetComponentInParent<InventorySlot>() != null)) return true;
         return false;
     }
@@ -786,7 +789,7 @@ public partial class EntradaCurrais : MonoBehaviour
         if (!TemItem(cabacaVaziaBusca) || InventoryManager.Instance.SelectedItem != cabacaVaziaBusca)
         {
             yield return Dizer(new[] { new Fala { personagem = "Funcionária", texto =
-                "Selecione sua cabaça vazia no inventário, feche com TAB e apresente aqui. Espere sua vez; não mexa no reservatório." } });
+                "Selecione a cabaça e clique aqui, ou arraste ela até mim. Pode deixar o inventário aberto. Espere sua vez; não mexa no reservatório." } });
             yield break;
         }
         InventoryManager.Instance.RemoveItem(cabacaVaziaBusca);

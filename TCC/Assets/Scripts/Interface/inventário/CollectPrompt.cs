@@ -53,7 +53,7 @@ public class CollectPrompt : MonoBehaviour
         pendingItem = item;
         onCollected = afterCollect;
 
-        itemImage.gameObject.SetActive(true);
+        SetItemVisible(item.icon != null);
         itemImage.color = Color.white;
         itemImage.sprite = item.icon;
         itemImage.enabled = item.icon != null;
@@ -70,7 +70,7 @@ public class CollectPrompt : MonoBehaviour
         examining = !alreadyExamined && !examinedItems.Contains(item);
         if (examining)
         {
-            itemImage.gameObject.SetActive(false);
+            SetItemVisible(false);
             collectText.text = string.IsNullOrWhiteSpace(item.description) ? item.itemName : item.description;
             yesButton.gameObject.SetActive(false);
             noButton.gameObject.SetActive(false);
@@ -91,11 +91,20 @@ public class CollectPrompt : MonoBehaviour
             !Input.GetMouseButtonDown(0)) return;
         examinedItems.Add(pendingItem);
         examining = false;
-        itemImage.gameObject.SetActive(true);
+        SetItemVisible(pendingItem != null && pendingItem.icon != null);
         collectText.text = "Você deseja coletar " + pendingItem.itemName + "?";
         yesButton.gameObject.SetActive(true);
         noButton.gameObject.SetActive(true);
         InvestigationGuard.BlockCurrentClick();
+    }
+
+    private void SetItemVisible(bool visible)
+    {
+        // A moldura é irmã do texto e dos botões; não deve sobrar como quadrado vazio.
+        Transform moldura = itemImage.transform.parent;
+        if (moldura != null && moldura != collectPanel.transform && moldura.IsChildOf(collectPanel.transform))
+            moldura.gameObject.SetActive(visible);
+        itemImage.gameObject.SetActive(visible);
     }
 
     private void Confirm()
