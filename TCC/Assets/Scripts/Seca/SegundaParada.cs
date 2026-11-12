@@ -1550,9 +1550,9 @@ public class SegundaParada : MonoBehaviour
             Button botao = child.GetComponent<Button>();
             if (botao != null) botoes.Add(botao);
         }
-        if (botoes.Count < 4)
+        if (botoes.Count < 3)
         {
-            Debug.LogError("SegundaParada: faltam as tres perguntas e o botao Sair de Antonio.", this);
+            Debug.LogError("SegundaParada: Antônio precisa de duas perguntas e do botão Sair.", this);
             LimparEscolhas();
             return;
         }
@@ -1570,16 +1570,22 @@ public class SegundaParada : MonoBehaviour
         if (portraitImage != null) portraitImage.enabled = false;
         choicesContainer.SetActive(true);
         Grupo(choicesContainer);
-        string[] opcoes = { "Perguntar o nome", "Perguntar de onde ele vem", "Desejar os pêsames", "Sair" };
+        string[] assuntos = { "Perguntar o nome", "Perguntar de onde ele vem", "Desejar os pêsames" };
+        // Mostra primeiro assuntos ainda não lidos, mantendo duas falas e Sair.
+        List<int> visiveis = new List<int>();
+        for (int assunto = 0; assunto < assuntos.Length; assunto++)
+            if ((perguntasAntonio & (1 << assunto)) == 0) visiveis.Add(assunto);
+        for (int assunto = 0; visiveis.Count < 2 && assunto < assuntos.Length; assunto++)
+            if (!visiveis.Contains(assunto)) visiveis.Add(assunto);
         for (int i = 0; i < botoes.Count; i++)
         {
             Button botao = botoes[i];
-            botao.gameObject.SetActive(i < opcoes.Length);
-            if (i >= opcoes.Length) continue;
-            TMP_Text rotulo = botao.GetComponentInChildren<TMP_Text>(true);
-            if (rotulo != null) rotulo.text = opcoes[i];
-            int escolha = i;
             botao.onClick.RemoveAllListeners();
+            botao.gameObject.SetActive(i < 3);
+            if (i >= 3) continue;
+            int escolha = i == 2 ? 3 : visiveis[i];
+            TMP_Text rotulo = botao.GetComponentInChildren<TMP_Text>(true);
+            if (rotulo != null) rotulo.text = i == 2 ? "Sair" : assuntos[escolha];
             botao.onClick.AddListener(() => ResponderAntonio(escolha));
             botao.interactable = true;
         }
