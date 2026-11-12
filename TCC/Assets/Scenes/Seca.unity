@@ -6493,12 +6493,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 920001004}
-  - component: {fileID: 920001005}
-  - component: {fileID: 920001006}
-  - component: {fileID: 920001007}
-  - component: {fileID: 9600000000}
+  m_Component: [{component: {fileID: 920001004}}, {component: {fileID: 920001005}}, {component: {fileID: 920001006}}, {component: {fileID: 920001007}}, {component: {fileID: 9600000000}}, {component: {fileID: 9840000061}}]
   m_Layer: 0
   m_Name: Coleta
   m_TagString: Untagged
@@ -16438,3 +16433,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9840000061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 920001003
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: -499885710787768810
+    guid: 4ff92f74861ba7a4cbd19064a452d29a
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 10.92
+  larguraReferencia: 11.99
+  pivoReferencia:
+    x: 0
+    y: 0
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0

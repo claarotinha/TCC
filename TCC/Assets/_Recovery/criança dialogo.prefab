@@ -7,14 +7,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1587846762086013507}
-  - component: {fileID: 1366993062018738294}
-  - component: {fileID: 6884652336585510242}
-  - component: {fileID: 781287740191782779}
-  - component: {fileID: 7738316262855229623}
-  - component: {fileID: 8103627826929957768}
-  - component: {fileID: 3108340318388813350}
+  m_Component: [{component: {fileID: 1587846762086013507}}, {component: {fileID: 1366993062018738294}}, {component: {fileID: 6884652336585510242}}, {component: {fileID: 781287740191782779}}, {component: {fileID: 7738316262855229623}}, {component: {fileID: 8103627826929957768}}, {component: {fileID: 3108340318388813350}}, {component: {fileID: 9840000021}}]
   m_Layer: 0
   m_Name: "crian\xE7a dialogo"
   m_TagString: Untagged
@@ -229,3 +222,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialInvestigationTrigger
   isCryingBoy: 1
+--- !u!114 &9840000021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 429701677747334223
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: -2893237143523985005
+    guid: 40d0c36b31548d54a8c321f953df8096
+    type: 3
+  - fileID: 3457025215257411371
+    guid: 872658aaa16e5284a8d659cfdae9fab6
+    type: 3
+  - fileID: 1191251998728927951
+    guid: 9a1ce5eb1052cbc4dbcc16e3bd82545d
+    type: 3
+  - fileID: -1609026228018121747
+    guid: dc05d73eadef1494992c7733c4ca14fe
+    type: 3
+  - fileID: 7166735136557848312
+    guid: 6f74ad7bc658b9e4e87deb01a168cca7
+    type: 3
+  - fileID: 6601935601948888724
+    guid: e170455a9544e2348945f67c04edb576
+    type: 3
+  intervalo: 0.18
+  alturaReferencia: 1.8133333333333332
+  larguraReferencia: 0.88
+  pivoReferencia:
+    x: 0.5
+    y: 0.5
+  preservarLargura: 0
+  aposEntregaBola: 1
+  pararQuandoBentoCair: 0

@@ -12486,10 +12486,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3900000018}
-  - component: {fileID: 3900000019}
-  - component: {fileID: 3900000020}
+  m_Component: [{component: {fileID: 3900000018}}, {component: {fileID: 3900000019}}, {component: {fileID: 3900000020}}, {component: {fileID: 9840000022}}]
   m_Layer: 0
   m_Name: Pegada 1
   m_TagString: Untagged
@@ -12561,7 +12558,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
   m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -12625,10 +12622,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3900000022}
-  - component: {fileID: 3900000023}
-  - component: {fileID: 3900000024}
+  m_Component: [{component: {fileID: 3900000022}}, {component: {fileID: 3900000023}}, {component: {fileID: 3900000024}}, {component: {fileID: 9840000023}}]
   m_Layer: 0
   m_Name: Pegada 2
   m_TagString: Untagged
@@ -12700,7 +12694,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
   m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -12764,10 +12758,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3900000026}
-  - component: {fileID: 3900000027}
-  - component: {fileID: 3900000028}
+  m_Component: [{component: {fileID: 3900000026}}, {component: {fileID: 3900000027}}, {component: {fileID: 3900000028}}, {component: {fileID: 9840000024}}]
   m_Layer: 0
   m_Name: Pegada 3
   m_TagString: Untagged
@@ -12839,7 +12830,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
   m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -16992,10 +16983,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9820000031}
-  - component: {fileID: 9820000032}
-  - component: {fileID: 9820000033}
+  m_Component: [{component: {fileID: 9820000031}}, {component: {fileID: 9820000032}}, {component: {fileID: 9820000033}}, {component: {fileID: 9840000025}}]
   m_Layer: 0
   m_Name: Pegada 4
   m_TagString: Untagged
@@ -17067,7 +17055,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
   m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -17131,10 +17119,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9820000041}
-  - component: {fileID: 9820000042}
-  - component: {fileID: 9820000043}
+  m_Component: [{component: {fileID: 9820000041}}, {component: {fileID: 9820000042}}, {component: {fileID: 9820000043}}, {component: {fileID: 9840000026}}]
   m_Layer: 0
   m_Name: Pegada 5
   m_TagString: Untagged
@@ -17206,7 +17191,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
   m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -17270,10 +17255,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9820000051}
-  - component: {fileID: 9820000052}
-  - component: {fileID: 9820000053}
+  m_Component: [{component: {fileID: 9820000051}}, {component: {fileID: 9820000052}}, {component: {fileID: 9820000053}}, {component: {fileID: 9840000027}}]
   m_Layer: 0
   m_Name: Pegada 6
   m_TagString: Untagged
@@ -17345,7 +17327,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
   m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -17409,10 +17391,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9820000061}
-  - component: {fileID: 9820000062}
-  - component: {fileID: 9820000063}
+  m_Component: [{component: {fileID: 9820000061}}, {component: {fileID: 9820000062}}, {component: {fileID: 9820000063}}, {component: {fileID: 9840000028}}]
   m_Layer: 0
   m_Name: Pegada 7
   m_TagString: Untagged
@@ -17484,7 +17463,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
   m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -17548,10 +17527,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9820000071}
-  - component: {fileID: 9820000072}
-  - component: {fileID: 9820000073}
+  m_Component: [{component: {fileID: 9820000071}}, {component: {fileID: 9820000072}}, {component: {fileID: 9820000073}}, {component: {fileID: 9840000029}}]
   m_Layer: 0
   m_Name: Pegada 8
   m_TagString: Untagged
@@ -17623,7 +17599,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
   m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -22171,3 +22147,259 @@ SceneRoots:
   - {fileID: 9821000461}
   - {fileID: 9821000471}
   - {fileID: 9821000481}
+--- !u!114 &9840000022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 3900000017
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 3999985423075485116
+    guid: 8512e17e95a250541b4ef2aad052c4b7
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.0
+  larguraReferencia: 1.0
+  pivoReferencia:
+    x: 0.5
+    y: 0.5
+  preservarLargura: 1
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 3900000021
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 3999985423075485116
+    guid: 8512e17e95a250541b4ef2aad052c4b7
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.0
+  larguraReferencia: 1.0
+  pivoReferencia:
+    x: 0.5
+    y: 0.5
+  preservarLargura: 1
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 3900000025
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 3999985423075485116
+    guid: 8512e17e95a250541b4ef2aad052c4b7
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.0
+  larguraReferencia: 1.0
+  pivoReferencia:
+    x: 0.5
+    y: 0.5
+  preservarLargura: 1
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 9820000030
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 3999985423075485116
+    guid: 8512e17e95a250541b4ef2aad052c4b7
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.0
+  larguraReferencia: 1.0
+  pivoReferencia:
+    x: 0.5
+    y: 0.5
+  preservarLargura: 1
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 9820000040
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 3999985423075485116
+    guid: 8512e17e95a250541b4ef2aad052c4b7
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.0
+  larguraReferencia: 1.0
+  pivoReferencia:
+    x: 0.5
+    y: 0.5
+  preservarLargura: 1
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 9820000050
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 3999985423075485116
+    guid: 8512e17e95a250541b4ef2aad052c4b7
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.0
+  larguraReferencia: 1.0
+  pivoReferencia:
+    x: 0.5
+    y: 0.5
+  preservarLargura: 1
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 9820000060
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 3999985423075485116
+    guid: 8512e17e95a250541b4ef2aad052c4b7
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.0
+  larguraReferencia: 1.0
+  pivoReferencia:
+    x: 0.5
+    y: 0.5
+  preservarLargura: 1
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 9820000070
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 3999985423075485116
+    guid: 8512e17e95a250541b4ef2aad052c4b7
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.0
+  larguraReferencia: 1.0
+  pivoReferencia:
+    x: 0.5
+    y: 0.5
+  preservarLargura: 1
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0

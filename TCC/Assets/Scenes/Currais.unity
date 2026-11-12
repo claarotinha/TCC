@@ -9166,9 +9166,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4100000009}
-  - component: {fileID: 4100000010}
+  m_Component: [{component: {fileID: 4100000009}}, {component: {fileID: 4100000010}}, {component: {fileID: 9840000009}}]
   m_Layer: 0
   m_Name: Fundo Fortaleza - reutilizado
   m_TagString: Untagged
@@ -9857,9 +9855,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4100000031}
-  - component: {fileID: 4100000032}
+  m_Component: [{component: {fileID: 4100000031}}, {component: {fileID: 4100000032}}, {component: {fileID: 9840000010}}]
   m_Layer: 0
   m_Name: Fundo caatinga - reutilizado
   m_TagString: Untagged
@@ -11146,9 +11142,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4100000073}
-  - component: {fileID: 4100000074}
+  m_Component: [{component: {fileID: 4100000073}}, {component: {fileID: 4100000074}}, {component: {fileID: 9840000012}}]
   m_Layer: 0
   m_Name: Abrigo de Luzia - lona
   m_TagString: Untagged
@@ -12054,10 +12048,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4100000101}
-  - component: {fileID: 4100000102}
-  - component: {fileID: 4100000103}
+  m_Component: [{component: {fileID: 4100000101}}, {component: {fileID: 4100000102}}, {component: {fileID: 4100000103}}, {component: {fileID: 9840000006}}]
   m_Layer: 0
   m_Name: Mulher que acompanha Mariquinha
   m_TagString: Untagged
@@ -14318,10 +14309,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4200000017}
-  - component: {fileID: 4200000018}
-  - component: {fileID: 4200000019}
+  m_Component: [{component: {fileID: 4200000017}}, {component: {fileID: 4200000018}}, {component: {fileID: 4200000019}}, {component: {fileID: 9840000018}}]
   m_Layer: 0
   m_Name: Cabaca devolvida - recipiente reutilizado
   m_TagString: Untagged
@@ -14457,10 +14445,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4200000021}
-  - component: {fileID: 4200000022}
-  - component: {fileID: 4200000023}
+  m_Component: [{component: {fileID: 4200000021}}, {component: {fileID: 4200000022}}, {component: {fileID: 4200000023}}, {component: {fileID: 9840000002}}]
   m_Layer: 0
   m_Name: "Funcionario da agua - provis\xF3rio"
   m_TagString: Untagged
@@ -15814,10 +15799,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4300000009}
-  - component: {fileID: 4300000010}
-  - component: {fileID: 4300000011}
+  m_Component: [{component: {fileID: 4300000009}}, {component: {fileID: 4300000010}}, {component: {fileID: 4300000011}}, {component: {fileID: 9840000003}}]
   m_Layer: 0
   m_Name: "Raimundo - adulto provis\xF3rio reutilizado"
   m_TagString: Untagged
@@ -16231,10 +16213,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4300000021}
-  - component: {fileID: 4300000022}
-  - component: {fileID: 4300000023}
+  m_Component: [{component: {fileID: 4300000021}}, {component: {fileID: 4300000022}}, {component: {fileID: 4300000023}}, {component: {fileID: 9840000004}}]
   m_Layer: 0
   m_Name: Lavadeira - personagem reutilizada
   m_TagString: Untagged
@@ -16926,10 +16905,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4300000041}
-  - component: {fileID: 4300000042}
-  - component: {fileID: 4300000043}
+  m_Component: [{component: {fileID: 4300000041}}, {component: {fileID: 4300000042}}, {component: {fileID: 4300000043}}, {component: {fileID: 9840000007}}]
   m_Layer: 0
   m_Name: Pessoa viva atras da cerca
   m_TagString: Untagged
@@ -17920,10 +17896,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4300000071}
-  - component: {fileID: 4300000072}
-  - component: {fileID: 4300000073}
+  m_Component: [{component: {fileID: 4300000071}}, {component: {fileID: 4300000072}}, {component: {fileID: 4300000073}}, {component: {fileID: 9840000014}}]
   m_Layer: 0
   m_Name: Carga de sacos 89
   m_TagString: Untagged
@@ -18059,10 +18032,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4300000075}
-  - component: {fileID: 4300000076}
-  - component: {fileID: 4300000077}
+  m_Component: [{component: {fileID: 4300000075}}, {component: {fileID: 4300000076}}, {component: {fileID: 4300000077}}, {component: {fileID: 9840000015}}]
   m_Layer: 0
   m_Name: Carga de sacos 98
   m_TagString: Untagged
@@ -18198,10 +18168,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4300000079}
-  - component: {fileID: 4300000080}
-  - component: {fileID: 4300000081}
+  m_Component: [{component: {fileID: 4300000079}}, {component: {fileID: 4300000080}}, {component: {fileID: 4300000081}}, {component: {fileID: 9840000016}}]
   m_Layer: 0
   m_Name: Carga de sacos 101
   m_TagString: Untagged
@@ -18337,10 +18304,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4300000083}
-  - component: {fileID: 4300000084}
-  - component: {fileID: 4300000085}
+  m_Component: [{component: {fileID: 4300000083}}, {component: {fileID: 4300000084}}, {component: {fileID: 4300000085}}, {component: {fileID: 9840000001}}]
   m_Layer: 0
   m_Name: "Bento - trabalhador provis\xF3rio"
   m_TagString: Untagged
@@ -19251,9 +19215,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4300000117}
-  - component: {fileID: 4300000118}
+  m_Component: [{component: {fileID: 4300000117}}, {component: {fileID: 4300000118}}, {component: {fileID: 9840000011}}]
   m_Layer: 0
   m_Name: Fundo caatinga - reutilizado - extensao busca
   m_TagString: Untagged
@@ -21776,10 +21738,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4400000030}
-  - component: {fileID: 4400000031}
-  - component: {fileID: 4400000032}
+  m_Component: [{component: {fileID: 4400000030}}, {component: {fileID: 4400000031}}, {component: {fileID: 4400000032}}, {component: {fileID: 9840000013}}]
   m_Layer: 0
   m_Name: Cobertura do quarto - reutilizada
   m_TagString: Untagged
@@ -22471,10 +22430,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4400000050}
-  - component: {fileID: 4400000051}
-  - component: {fileID: 4400000052}
+  m_Component: [{component: {fileID: 4400000050}}, {component: {fileID: 4400000051}}, {component: {fileID: 4400000052}}, {component: {fileID: 9840000008}}]
   m_Layer: 0
   m_Name: Trabalhadora do quarto
   m_TagString: Untagged
@@ -23942,10 +23898,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4400000093}
-  - component: {fileID: 4400000094}
-  - component: {fileID: 4400000095}
+  m_Component: [{component: {fileID: 4400000093}}, {component: {fileID: 4400000094}}, {component: {fileID: 4400000095}}, {component: {fileID: 9840000019}}]
   m_Layer: 0
   m_Name: Cabaca vazia colocada pela mae
   m_TagString: Untagged
@@ -25002,10 +24955,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4500000015}
-  - component: {fileID: 4500000016}
-  - component: {fileID: 4500000017}
+  m_Component: [{component: {fileID: 4500000015}}, {component: {fileID: 4500000016}}, {component: {fileID: 4500000017}}, {component: {fileID: 9840000005}}]
   m_Layer: 0
   m_Name: Lavadeira chamada para identificar Nair
   m_TagString: Untagged
@@ -29125,7 +29075,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component: [{component: {fileID: 9807000401}}, {component: {fileID: 9807000402}}, {component: {fileID: 9807000403}}]
+  m_Component: [{component: {fileID: 9807000401}}, {component: {fileID: 9807000402}}, {component: {fileID: 9807000403}}, {component: {fileID: 9840000017}}]
   m_Layer: 0
   m_Name: Sacos - lugar de espera junto à passagem
   m_TagString: Untagged
@@ -29669,7 +29619,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component: [{component: {fileID: 9808000301}}, {component: {fileID: 9808000302}}, {component: {fileID: 9808000303}}]
+  m_Component: [{component: {fileID: 9808000301}}, {component: {fileID: 9808000302}}, {component: {fileID: 9808000303}}, {component: {fileID: 9840000020}}]
   m_Layer: 0
   m_Name: Cabaça deixada no atendimento - recolher
   m_TagString: Untagged
@@ -31122,3 +31072,715 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &9840000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4300000082
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: -5119195394855896670
+    guid: 3ce9d41ab711425449911aad9c24be12
+    type: 3
+  - fileID: 5678721703618219934
+    guid: d3d5c052fa8659441ac541abe6722dba
+    type: 3
+  - fileID: 5708007054195928830
+    guid: 6768cbcd8779d554d8504d88291229f3
+    type: 3
+  - fileID: -1526712793387446400
+    guid: e5d59ea2929129f4dadc7400534fec96
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 3.37
+  larguraReferencia: 1.63
+  pivoReferencia:
+    x: 0.5
+    y: 0
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 1
+--- !u!114 &9840000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4200000020
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: -7968361852938463354
+    guid: f71a37de590962c45b76822474447a70
+    type: 3
+  - fileID: -47263381469654481
+    guid: 3911a04e654b3ee409937ed8557d2cc4
+    type: 3
+  - fileID: 3432786680517795161
+    guid: 6a0d7907a3d882b4d831d74dd7086f9a
+    type: 3
+  - fileID: 3969801770202671145
+    guid: ac37c68f1eab8f14ca0ce47400f1d166
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 5.09
+  larguraReferencia: 2.12
+  pivoReferencia:
+    x: 0.5
+    y: 0
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4300000008
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 5974667115338313640
+    guid: e25bcec509edf654e8bd4af9a8681dd3
+    type: 3
+  - fileID: 7088010561817980513
+    guid: f3c99728a8b1ef04d8bd2417893175c8
+    type: 3
+  - fileID: 1737815154409465158
+    guid: 79215bb6d63941842bb214f535d3c144
+    type: 3
+  - fileID: -4122371132445981263
+    guid: 53095430e75262f4eb95f59c6c9cd0d6
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 3.37
+  larguraReferencia: 1.63
+  pivoReferencia:
+    x: 0.5
+    y: 0
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4300000020
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 7629871395934276319
+    guid: cd8ec54140dcb0c4db3735d641a58e1c
+    type: 3
+  - fileID: -4914163170019686890
+    guid: c60681a69f78942459e28480d1fc0cbb
+    type: 3
+  - fileID: -3841790359018664433
+    guid: a3c503129cedd8a4a9230be7c50d0ff8
+    type: 3
+  - fileID: -8952730657540786209
+    guid: 69ab4ee746acbac478333a563380a35b
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 5.36
+  larguraReferencia: 2.38
+  pivoReferencia:
+    x: 0.5
+    y: 0
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4500000014
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 7629871395934276319
+    guid: cd8ec54140dcb0c4db3735d641a58e1c
+    type: 3
+  - fileID: -4914163170019686890
+    guid: c60681a69f78942459e28480d1fc0cbb
+    type: 3
+  - fileID: -3841790359018664433
+    guid: a3c503129cedd8a4a9230be7c50d0ff8
+    type: 3
+  - fileID: -8952730657540786209
+    guid: 69ab4ee746acbac478333a563380a35b
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 5.36
+  larguraReferencia: 2.38
+  pivoReferencia:
+    x: 0.5
+    y: 0
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4100000100
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: -4834598713817679122
+    guid: ab8fa6ec46223e8439d6669b54f7aeaa
+    type: 3
+  - fileID: 2415030660776520708
+    guid: d8ff4dacd48678449a02cee0ebedac73
+    type: 3
+  - fileID: 5562800556019509170
+    guid: 02f9d66b99cd1174185c17721fc6a395
+    type: 3
+  - fileID: 3835599621078839661
+    guid: 3141c8a395f77ff449c8f63876bf1566
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 5.36
+  larguraReferencia: 2.38
+  pivoReferencia:
+    x: 0.5
+    y: 0
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4300000040
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 8078415481413921242
+    guid: 7c42b3ab3847b0341ad2d4f615fd4ebe
+    type: 3
+  - fileID: -3446592636566365896
+    guid: 3634a0099d5dfad47bc7ada051a0d2a8
+    type: 3
+  - fileID: 4118901925533188020
+    guid: bda77d24470813044aa738207b20738e
+    type: 3
+  - fileID: -5872792841848090616
+    guid: 875516b0d457b5140af7973e1072ebf4
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.7
+  larguraReferencia: 5.52
+  pivoReferencia:
+    x: 0.5
+    y: 0
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4400000049
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 8513981594617345512
+    guid: ba708ba03549cf2488ff441a758799f4
+    type: 3
+  - fileID: 4766637133699142559
+    guid: 2f1507f45d165564bbbd2ee8e0dd6b1d
+    type: 3
+  - fileID: 7246682849899161395
+    guid: 9f63c1bca60a5e240bb145f9d9063de0
+    type: 3
+  - fileID: 516077240902222888
+    guid: 1dbd4c9df93b6dd48a92c915b4a2934b
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 5.36
+  larguraReferencia: 2.38
+  pivoReferencia:
+    x: 0.5
+    y: 0
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4100000008
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: -5554671796411010656
+    guid: 45cdda5d206123b4f99149f537d1dc82
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 7.24
+  larguraReferencia: 21.72
+  pivoReferencia:
+    x: 0.5
+    y: 0
+  preservarLargura: 1
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4100000030
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: -2949699791521804269
+    guid: 6f43c7d6437410047b0e7b933b220963
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 18.0
+  larguraReferencia: 32.0
+  pivoReferencia:
+    x: 0
+    y: 0
+  preservarLargura: 1
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4300000116
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: -2949699791521804269
+    guid: 6f43c7d6437410047b0e7b933b220963
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 18.0
+  larguraReferencia: 32.0
+  pivoReferencia:
+    x: 0
+    y: 0
+  preservarLargura: 1
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4100000072
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 83203617696994478
+    guid: d93f65230a819ee4e9e790b085e687d8
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 2.52
+  larguraReferencia: 4.1
+  pivoReferencia:
+    x: 0.5
+    y: 0
+  preservarLargura: 1
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4400000029
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: -1793121071165080444
+    guid: 0404cb3113605b0498b0623bb3ea5af7
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 2.52
+  larguraReferencia: 4.1
+  pivoReferencia:
+    x: 0.5
+    y: 0
+  preservarLargura: 1
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4300000070
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 7562777124218086815
+    guid: 9ebcbc9ec70f8ed49b2eca064ca61c4b
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.99
+  larguraReferencia: 3.83
+  pivoReferencia:
+    x: 0.5
+    y: 0
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4300000074
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 7562777124218086815
+    guid: 9ebcbc9ec70f8ed49b2eca064ca61c4b
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.99
+  larguraReferencia: 3.83
+  pivoReferencia:
+    x: 0.5
+    y: 0
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4300000078
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 7562777124218086815
+    guid: 9ebcbc9ec70f8ed49b2eca064ca61c4b
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.99
+  larguraReferencia: 3.83
+  pivoReferencia:
+    x: 0.5
+    y: 0
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 9807000400
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: 7562777124218086815
+    guid: 9ebcbc9ec70f8ed49b2eca064ca61c4b
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.99
+  larguraReferencia: 3.83
+  pivoReferencia:
+    x: 0.5
+    y: 0
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4200000016
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: -499885710787768810
+    guid: 4ff92f74861ba7a4cbd19064a452d29a
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.0
+  larguraReferencia: 1.0
+  pivoReferencia:
+    x: 0.5
+    y: 0.5
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 4400000092
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: -499885710787768810
+    guid: 4ff92f74861ba7a4cbd19064a452d29a
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.0
+  larguraReferencia: 1.0
+  pivoReferencia:
+    x: 0.5
+    y: 0.5
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
+--- !u!114 &9840000020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 9808000300
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: e0ef47f980de5451aa397bbcb649400b
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::QuadrosAmbiente
+  quadros:
+  - fileID: -499885710787768810
+    guid: 4ff92f74861ba7a4cbd19064a452d29a
+    type: 3
+  intervalo: 0.2
+  alturaReferencia: 1.0
+  larguraReferencia: 1.0
+  pivoReferencia:
+    x: 0.5
+    y: 0.5
+  preservarLargura: 0
+  aposEntregaBola: 0
+  pararQuandoBentoCair: 0
