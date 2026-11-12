@@ -28,6 +28,15 @@ public class SleepBed : MonoBehaviour
     [SerializeField] private float fadeDuration = 1f;
     [SerializeField] private float sleepingImageDuration = 3f;
 
+    [Header("Leitura antes de dormir")]
+    [SerializeField] private GameObject readingDiaryPanel;
+    [SerializeField] private SpriteRenderer readingPose;
+    [SerializeField] private SpriteRenderer[] playerRenderers;
+    [SerializeField, Min(0f)] private float readingDuration = 15f;
+    [SerializeField] private GameObject sleepingImage;
+    private bool readBeforeSleeping, awaitingFatigue, fatigueDismissed;
+    private bool[] previousRendererStates;
+
     [Header("Próxima cena")]
     [SerializeField] private string nextScene;
 
@@ -45,8 +54,7 @@ public class SleepBed : MonoBehaviour
 
     private bool CanSleep =>
         GameProgress.Instance != null &&
-        GameProgress.Instance.Data.diaryCollected &&
-        GameProgress.Instance.Data.motherNightConversationCompleted;
+        GameProgress.Instance.Data.diaryCollected;
 
     [RuntimeInitializeOnLoadMethod(
         RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -69,7 +77,8 @@ public class SleepBed : MonoBehaviour
             yesButton != null &&
             noButton != null &&
             sequencePanel != null &&
-            fadeImage != null;
+            fadeImage != null && readingDiaryPanel != null && readingPose != null &&
+            sleepingImage != null && playerRenderers != null && playerRenderers.Length > 0;
 
         if (!configured)
         {
@@ -90,7 +99,9 @@ public class SleepBed : MonoBehaviour
         sequencePanel.SetActive(false);
 
         yesButton.onClick.AddListener(ConfirmSleep);
-        noButton.onClick.AddListener(CloseConfirmation);
+        noButton.onClick.AddListener(DeclineReading);
+        readingDiaryPanel.SetActive(false);
+        readingPose.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -101,8 +112,7 @@ public class SleepBed : MonoBehaviour
             Camera.main == null)
             return;
 
-        Vector2 mousePosition =
-            Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (!InvestigationGuard.TryGetPointerPosition(out Vector2 mousePosition)) return;
 
         if (bedCollider.OverlapPoint(mousePosition))
             OpenConfirmation();
@@ -113,10 +123,12 @@ public class SleepBed : MonoBehaviour
         current = this;
 
         questionText.text = CanSleep
-            ? "Você quer dormir agora?"
+            ? "Quer ler o diário antes de dormir?"
             : "Não quero dormir agora.";
 
         yesButton.gameObject.SetActive(CanSleep);
+        TMP_Text yesText = yesButton.GetComponentInChildren<TMP_Text>(true);
+        if (yesText != null) yesText.text = "Sim";
 
         TMP_Text noText =
             noButton.GetComponentInChildren<TMP_Text>(true);
@@ -144,9 +156,21 @@ public class SleepBed : MonoBehaviour
         InvestigationGuard.BlockCurrentClick();
     }
 
+    private void DeclineReading()
+    {
+        if (!CanSleep) { CloseConfirmation(); return; }
+        BeginSleep(false);
+    }
+
     private void ConfirmSleep()
     {
-        if (!configured ||
+        if (awaitingFatigue) { fatigueDismissed = true; return; }
+        BeginSleep(true);
+    }
+
+    private void BeginSleep(bool read)
+    {
+        if (runningSequence || !configured ||
             !CanSleep ||
             IsSleeping ||
             !confirmPanel.activeInHierarchy)
@@ -166,6 +190,7 @@ public class SleepBed : MonoBehaviour
             return;
         }
 
+        readBeforeSleeping = read;
         CloseConfirmation();
         StartCoroutine(SleepSequence());
     }
@@ -185,8 +210,53 @@ public class SleepBed : MonoBehaviour
         if (CursorManager.Instance != null)
             CursorManager.Instance.SetNormal();
 
-        SetFadeAlpha(1f);
+        if (readBeforeSleeping)
+        {
+            previousRendererStates = new bool[playerRenderers.Length];
+            for (int i = 0; i < playerRenderers.Length; i++)
+            {
+                if (playerRenderers[i] == null) continue;
+                previousRendererStates[i] = playerRenderers[i].enabled;
+                playerRenderers[i].enabled = false;
+            }
+            // Encaixa o novo desenho na largura e na base da cama sem mover a original.
+            Bounds cama = bedCollider.bounds;
+            readingPose.gameObject.SetActive(true);
+            float fator = cama.size.x / Mathf.Max(0.001f, readingPose.bounds.size.x);
+            readingPose.transform.localScale *= fator;
+            Vector3 ajuste = new Vector3(cama.center.x - readingPose.bounds.center.x,
+                cama.min.y - readingPose.bounds.min.y, 0f);
+            readingPose.transform.position += ajuste;
+            readingDiaryPanel.transform.SetAsLastSibling();
+            readingDiaryPanel.SetActive(true);
+            yield return new WaitForSecondsRealtime(Mathf.Max(0f, readingDuration));
+            readingDiaryPanel.SetActive(false);
+            GameProgress.Instance?.MarkFirstDiaryPageRead();
+
+            awaitingFatigue = true;
+            fatigueDismissed = false;
+            questionText.text = "Mari\nTô cansada… Melhor dormir e continuar a leitura outro dia.";
+            noButton.gameObject.SetActive(false);
+            yesButton.gameObject.SetActive(true);
+            TMP_Text continuar = yesButton.GetComponentInChildren<TMP_Text>(true);
+            if (continuar != null) continuar.text = "Continuar";
+            confirmPanel.SetActive(true);
+            yield return null;
+            while (!fatigueDismissed)
+            {
+                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) fatigueDismissed = true;
+                yield return null;
+            }
+            awaitingFatigue = false;
+            confirmPanel.SetActive(false);
+        }
+
+        SetFadeAlpha(0f);
+        sleepingImage.SetActive(false);
         sequencePanel.SetActive(true);
+        yield return FadeTo(1f);
+        sleepingImage.SetActive(true);
+
 
         yield return FadeTo(0f);
 
@@ -243,6 +313,12 @@ public class SleepBed : MonoBehaviour
             Time.timeScale = previousTimeScale;
             runningSequence = false;
             IsSleeping = false;
+            awaitingFatigue = false;
+            if (readingDiaryPanel != null) readingDiaryPanel.SetActive(false);
+            if (readingPose != null) readingPose.gameObject.SetActive(false);
+            if (previousRendererStates != null)
+                for (int i = 0; i < previousRendererStates.Length; i++)
+                    if (playerRenderers[i] != null) playerRenderers[i].enabled = previousRendererStates[i];
 
             if (sequencePanel != null)
                 sequencePanel.SetActive(false);
@@ -263,6 +339,6 @@ public class SleepBed : MonoBehaviour
             yesButton.onClick.RemoveListener(ConfirmSleep);
 
         if (noButton != null)
-            noButton.onClick.RemoveListener(CloseConfirmation);
+            noButton.onClick.RemoveListener(DeclineReading);
     }
 }
