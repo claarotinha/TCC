@@ -85,6 +85,8 @@ public partial class EntradaCurrais
                 "Preciso saber qual lote levar e a quem entregar. Vou perguntar ao escrivão antes de mexer." } });
             yield break;
         }
+        yield return ExaminarOuColetar(itemLotePanos);
+        if (!coletaDoCenarioConfirmada) yield break;
         if (!TemItem(itemLotePanos)) InventoryManager.Instance.AddItem(itemLotePanos);
         Dados.curraisLotePanosRecolhido = true;
         AtualizarEstadoBusca(); Salvar();

@@ -95,6 +95,8 @@ public partial class EntradaCurrais
         if (Dados.curraisPanosSeparados != 3) yield break;
         if (!Dados.curraisTiraPanoRecolhida)
         {
+            yield return ExaminarOuColetar(tiraPanoLavagem);
+            if (!coletaDoCenarioConfirmada) yield break;
             if (!TemItem(tiraPanoLavagem)) InventoryManager.Instance.AddItem(tiraPanoLavagem);
             Dados.curraisTiraPanoRecolhida = true;
             Salvar();

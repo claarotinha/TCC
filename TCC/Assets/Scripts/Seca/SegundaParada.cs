@@ -144,7 +144,7 @@ public class SegundaParada : MonoBehaviour
     private Sprite spriteBaleia;
     private Vector3 escalaBaleia, destinoBaleia;
     private float retornoX;
-    private int indice, quadro, pegadas;
+    private int indice, quadro;
     private readonly List<GameObject> marcadores = new List<GameObject>();
     private readonly List<Button> botoes = new List<Button>();
     private string[] nomes, falas;
@@ -299,8 +299,8 @@ public class SegundaParada : MonoBehaviour
         ControleJornada jornada = ControleJornada.Instance;
         if (id == "riacho") return false;
         if (id == "casa") return etapa == 6;
-        if (id == "baleia") return etapa == 2 && !fugindo && pegadas == pistasBusca.Length;
-        if (id.StartsWith("pegada")) return etapa == 2 && id == "pegada" + pegadas;
+        if (id == "baleia") return etapa == 2 && !fugindo;
+        if (id.StartsWith("pegada")) return etapa == 2;
         if (id == "barriguda") return jornada != null && jornada.ParadaAtiva && jornada.ParadaAtual == 3 &&
             dialogoTerceiraConcluido && !aguaTerceiraConcluida;
         if (id == "plantaMedicinal") return TerceiraEmAndamento() && JanelaQuebrada && !curativoAplicado && !plantaColetada;
@@ -380,7 +380,12 @@ public class SegundaParada : MonoBehaviour
             Debug.LogError("SegundaParada: referencias do dialogo ausentes.", this);
             return;
         }
-        nomes = personagens; falas = textos; depois = fim; indice = 0;
+        var paginas = new List<string>();
+        var autores = new List<string>();
+        for (int i = 0; i < textos.Length; i++)
+            foreach (string pagina in DialogoPaginas.Quebrar(textos[i]))
+            { paginas.Add(pagina); autores.Add(personagens[i]); }
+        nomes = autores.ToArray(); falas = paginas.ToArray(); depois = fim; indice = 0;
         conversando = true; esperandoEscolha = false;
         if (duranteCaminhada) LiberarMovimento();
         else BloquearMovimento();
@@ -608,23 +613,18 @@ public class SegundaParada : MonoBehaviour
         LiberarMovimento();
         Falar(new[] { "Mariquinha", "Mariquinha" }, new[] {
             "Olha as pegadinhas de Baleia, Zefinha! Vão pra aquele lado.",
-            "Vamo seguindo. Clica nas pegadas pra gente conferir por onde ela passou."
+            "Vamo seguindo as pegadas. Se quiser, clica nelas pra olhar melhor."
         }, null, true);
     }
 
     private void AtualizarPegadas()
     {
-        foreach (GameObject obj in marcadores)
+        foreach (GameObject pista in pistasBusca)
         {
-            string pista = IdentificadorCenario(obj);
-            if (pista == null || !pista.StartsWith("pegada")) continue;
-            int numero;
-            if (!int.TryParse(pista.Substring(6), out numero)) continue;
-            SpriteRenderer desenho = obj.GetComponent<SpriteRenderer>();
-            if (desenho != null)
-                desenho.color = numero == pegadas
-                    ? new Color(0.55f, 0.4f, 0.25f)
-                    : new Color(0.39f, 0.28f, 0.18f, 0.6f);
+            if (pista == null) continue;
+            pista.SetActive(etapa == 2);
+            SpriteRenderer desenho = pista.GetComponent<SpriteRenderer>();
+            if (desenho != null) { desenho.enabled = true; desenho.color = Color.white; }
         }
     }
 
@@ -690,14 +690,10 @@ public class SegundaParada : MonoBehaviour
         }
         if (alvo.StartsWith("pegada") && etapa == 2)
         {
-            int n;
-            if (!int.TryParse(alvo.Substring(6), out n) || n != pegadas) return;
-            pegadas++;
-            pistasBusca[pegadas - 1].SetActive(false);
-            AtualizarPegadas();
+            Falar(new[] { "Zefinha" }, new[] { "São as pegadas de Baleia. Ela passou por aqui, mais adiante." }, null, true);
             return;
         }
-        if (alvo == "baleia" && etapa == 2 && !fugindo && pegadas == pistasBusca.Length)
+        if (alvo == "baleia" && etapa == 2 && !fugindo)
         {
             if (prea == null || InventoryManager.Instance == null) return;
             InventoryManager.Instance.AddItem(prea);

@@ -18,6 +18,8 @@ public class ExamineObject : MonoBehaviour
     private bool showingTutorialLupa = false;
     private int lastClosedFrame = -1;
 
+    public bool PanelIsOpen => currentObject == this && isShowing && examinePanel != null && examinePanel.activeInHierarchy;
+
     public bool ClosedThisFrame => lastClosedFrame == Time.frameCount;
 
     private static ExamineObject currentObject = null;

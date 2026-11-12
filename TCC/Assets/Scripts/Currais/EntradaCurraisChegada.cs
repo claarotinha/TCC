@@ -234,6 +234,8 @@ public partial class EntradaCurrais
     private IEnumerator RecolherPanoAbrigo()
     {
         if (Dados.curraisPanoAbrigoRecolhido || Dados.curraisPaiAcomodado) yield break;
+        yield return ExaminarOuColetar(itemPanoAbrigo);
+        if (!coletaDoCenarioConfirmada) yield break;
         if (!TemItem(itemPanoAbrigo)) InventoryManager.Instance.AddItem(itemPanoAbrigo);
         Dados.curraisPanoAbrigoRecolhido = true;
         AtualizarVisuaisChegada();

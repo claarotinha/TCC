@@ -684,10 +684,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 783911841}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 414, y: 20}
-  m_SizeDelta: {x: 500, y: 520}
+  m_AnchorMin: {x: 0.54, y: 0.2}
+  m_AnchorMax: {x: 0.92, y: 0.87}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &105098523
 MonoBehaviour:
@@ -703,7 +703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4971,10 +4971,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 783911841}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -429, y: 20}
-  m_SizeDelta: {x: 500, y: 520}
+  m_AnchorMin: {x: 0.08, y: 0.2}
+  m_AnchorMax: {x: 0.46, y: 0.87}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &705590621
 MonoBehaviour:
@@ -4990,7 +4990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6493,7 +6493,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component: [{component: {fileID: 920001004}}, {component: {fileID: 920001005}}, {component: {fileID: 920001006}}, {component: {fileID: 920001007}}, {component: {fileID: 9600000000}}, {component: {fileID: 9840000061}}]
+  m_Component: [{component: {fileID: 920001004}}, {component: {fileID: 920001005}}, {component: {fileID: 920001006}}, {component: {fileID: 920001007}}, {component: {fileID: 9600000000}}, {component: {fileID: 9840000061}}, {component: {fileID: 9851000571}}]
   m_Layer: 0
   m_Name: Coleta
   m_TagString: Untagged
@@ -6688,12 +6688,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 920001014}
-  - component: {fileID: 920001015}
-  - component: {fileID: 920001016}
-  - component: {fileID: 920001017}
-  - component: {fileID: 9600000001}
+  m_Component: [{component: {fileID: 920001014}}, {component: {fileID: 920001015}}, {component: {fileID: 920001016}}, {component: {fileID: 920001017}}, {component: {fileID: 9600000001}}, {component: {fileID: 9851000572}}]
   m_Layer: 0
   m_Name: Coleta
   m_TagString: Untagged
@@ -6888,12 +6883,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 920001024}
-  - component: {fileID: 920001025}
-  - component: {fileID: 920001026}
-  - component: {fileID: 920001027}
-  - component: {fileID: 9600000002}
+  m_Component: [{component: {fileID: 920001024}}, {component: {fileID: 920001025}}, {component: {fileID: 920001026}}, {component: {fileID: 920001027}}, {component: {fileID: 9600000002}}, {component: {fileID: 9851000573}}]
   m_Layer: 0
   m_Name: Coleta
   m_TagString: Untagged
@@ -7088,11 +7078,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 920001034}
-  - component: {fileID: 920001035}
-  - component: {fileID: 920001036}
-  - component: {fileID: 920001037}
+  m_Component: [{component: {fileID: 920001034}}, {component: {fileID: 920001035}}, {component: {fileID: 920001036}}, {component: {fileID: 920001037}}, {component: {fileID: 9851000574}}]
   m_Layer: 0
   m_Name: Coleta
   m_TagString: Untagged
@@ -7287,11 +7273,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 920001044}
-  - component: {fileID: 920001045}
-  - component: {fileID: 920001046}
-  - component: {fileID: 920001047}
+  m_Component: [{component: {fileID: 920001044}}, {component: {fileID: 920001045}}, {component: {fileID: 920001046}}, {component: {fileID: 920001047}}, {component: {fileID: 9851000575}}]
   m_Layer: 0
   m_Name: Coleta
   m_TagString: Untagged
@@ -16465,3 +16447,123 @@ MonoBehaviour:
   preservarLargura: 0
   aposEntregaBola: 0
   pararQuandoBentoCair: 0
+--- !u!114 &9851000571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 920001003
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: 01563f0e1bb2d514aba7eb7c4a3d5e20
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel:
+    fileID: 723950145
+  examineText:
+    fileID: 1747564118
+  message: Recipiente para transportar água durante a viagem.
+--- !u!114 &9851000572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 920001013
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: 01563f0e1bb2d514aba7eb7c4a3d5e20
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel:
+    fileID: 723950145
+  examineText:
+    fileID: 1747564118
+  message: Ferramenta que pode ajudar durante o caminho.
+--- !u!114 &9851000573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 920001023
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: 01563f0e1bb2d514aba7eb7c4a3d5e20
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel:
+    fileID: 723950145
+  examineText:
+    fileID: 1747564118
+  message: Um pedaço de tecido que pode ser útil.
+--- !u!114 &9851000574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 920001033
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: 01563f0e1bb2d514aba7eb7c4a3d5e20
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel:
+    fileID: 723950145
+  examineText:
+    fileID: 1747564118
+  message: Proteção para enfrentar o sol.
+--- !u!114 &9851000575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 920001043
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: 01563f0e1bb2d514aba7eb7c4a3d5e20
+    type: 3
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel:
+    fileID: 723950145
+  examineText:
+    fileID: 1747564118
+  message: O resto de farinha que a família vai levar.

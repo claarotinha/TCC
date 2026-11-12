@@ -286,6 +286,8 @@ public partial class EntradaCurrais
     private IEnumerator AjudarBento()
     {
         if (!PrecisaRecolherPanoSocorro) yield break;
+        yield return ExaminarOuColetar(panoAuxilio);
+        if (!coletaDoCenarioConfirmada) yield break;
         if (!TemItem(panoAuxilio)) InventoryManager.Instance.AddItem(panoAuxilio);
         AtualizarEstadoBusca(); Salvar();
         yield return Dizer(new[] { new Fala { personagem = "Luzia", texto = Dados.curraisBentoMorto

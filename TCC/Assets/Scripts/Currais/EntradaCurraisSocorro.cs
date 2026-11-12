@@ -176,6 +176,8 @@ public partial class EntradaCurrais
     private IEnumerator RecolherCabacaSocorro()
     {
         if (!Dados.curraisBentoMorto || Dados.curraisCabacaSocorroRecolhida) yield break;
+        yield return ExaminarOuColetar(cabacaVaziaBusca);
+        if (!coletaDoCenarioConfirmada) yield break;
         if (!TemItem(cabacaVaziaBusca)) InventoryManager.Instance.AddItem(cabacaVaziaBusca);
         Dados.curraisCabacaSocorroRecolhida = true;
         AtualizarEstadoBusca(); Salvar();

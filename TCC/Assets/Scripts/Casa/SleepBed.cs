@@ -34,7 +34,8 @@ public class SleepBed : MonoBehaviour
     [SerializeField] private SpriteRenderer[] playerRenderers;
     [SerializeField, Min(0f)] private float readingDuration = 15f;
     [SerializeField] private GameObject sleepingImage;
-    private bool readBeforeSleeping, awaitingFatigue, fatigueDismissed;
+    [SerializeField] private ExamineObject tiredExamine;
+    private bool readBeforeSleeping;
     private bool[] previousRendererStates;
 
     [Header("Próxima cena")]
@@ -78,7 +79,7 @@ public class SleepBed : MonoBehaviour
             noButton != null &&
             sequencePanel != null &&
             fadeImage != null && readingDiaryPanel != null && readingPose != null &&
-            sleepingImage != null && playerRenderers != null && playerRenderers.Length > 0;
+            sleepingImage != null && tiredExamine != null && playerRenderers != null && playerRenderers.Length > 0;
 
         if (!configured)
         {
@@ -164,7 +165,6 @@ public class SleepBed : MonoBehaviour
 
     private void ConfirmSleep()
     {
-        if (awaitingFatigue) { fatigueDismissed = true; return; }
         BeginSleep(true);
     }
 
@@ -201,6 +201,8 @@ public class SleepBed : MonoBehaviour
         runningSequence = true;
         IsSleeping = true;
 
+        ExamineObject.HideCurrentPanel();
+        CollectableExamine.HideCurrentPanel();
         previousTimeScale = Time.timeScale;
         Time.timeScale = 0f;
 
@@ -233,22 +235,13 @@ public class SleepBed : MonoBehaviour
             readingDiaryPanel.SetActive(false);
             GameProgress.Instance?.MarkFirstDiaryPageRead();
 
-            awaitingFatigue = true;
-            fatigueDismissed = false;
-            questionText.text = "Mari\nTô cansada… Melhor dormir e continuar a leitura outro dia.";
-            noButton.gameObject.SetActive(false);
-            yesButton.gameObject.SetActive(true);
-            TMP_Text continuar = yesButton.GetComponentInChildren<TMP_Text>(true);
-            if (continuar != null) continuar.text = "Continuar";
-            confirmPanel.SetActive(true);
+            tiredExamine.ShowMessage("Tô cansada… Melhor dormir e continuar a leitura outro dia.");
             yield return null;
-            while (!fatigueDismissed)
+            while (tiredExamine.PanelIsOpen)
             {
-                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) fatigueDismissed = true;
+                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) tiredExamine.HidePanel();
                 yield return null;
             }
-            awaitingFatigue = false;
-            confirmPanel.SetActive(false);
         }
 
         SetFadeAlpha(0f);
@@ -313,7 +306,7 @@ public class SleepBed : MonoBehaviour
             Time.timeScale = previousTimeScale;
             runningSequence = false;
             IsSleeping = false;
-            awaitingFatigue = false;
+            if (tiredExamine != null && tiredExamine.PanelIsOpen) tiredExamine.HidePanel();
             if (readingDiaryPanel != null) readingDiaryPanel.SetActive(false);
             if (readingPose != null) readingPose.gameObject.SetActive(false);
             if (previousRendererStates != null)

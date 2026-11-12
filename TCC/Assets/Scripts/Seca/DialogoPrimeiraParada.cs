@@ -19,12 +19,13 @@ public class DialogoPrimeiraParada : MonoBehaviour
 
     private readonly string[] nomes =
     {
-        "Pai"
+        "Pai", "Pai"
     };
 
     private readonly string[] falas =
     {
-        "Se a gente não parar agora para arrumar comida, não vamos longe, é melhor aproveitar que o sol já esfriou e ainda não anoiteceu. Zefinha, procure um galho mais flexível, uma pedra lisa e um elástico para a gente montar um estilingue e pegar aqueles pássaros."
+        "Se a gente não parar agora para arrumar comida, não vamos longe, é melhor aproveitar que o sol já esfriou e ainda não anoiteceu.",
+        "Zefinha, procure um galho mais flexível, uma pedra lisa e um elástico para a gente montar um estilingue e pegar aqueles pássaros."
     };
 
     public bool Finished => terminou;

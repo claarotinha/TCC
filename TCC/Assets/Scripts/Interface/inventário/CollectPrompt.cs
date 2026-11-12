@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,9 @@ public class CollectPrompt : MonoBehaviour
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
 
+    private readonly HashSet<ItemData> examinedItems = new HashSet<ItemData>();
+    private bool examining;
+    private int openedFrame;
     private ItemData pendingItem;
     private Action onCollected;
 
@@ -33,7 +37,7 @@ public class CollectPrompt : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    public bool Show(ItemData item, Action afterCollect = null)
+    public bool Show(ItemData item, Action afterCollect = null, bool alreadyExamined = false)
     {
         if (item == null || collectPanel == null ||
             itemImage == null || collectText == null ||
@@ -63,8 +67,35 @@ public class CollectPrompt : MonoBehaviour
         yesButton.onClick.AddListener(Confirm);
         noButton.onClick.AddListener(Cancel);
 
+        examining = !alreadyExamined && !examinedItems.Contains(item);
+        if (examining)
+        {
+            itemImage.gameObject.SetActive(false);
+            collectText.text = string.IsNullOrWhiteSpace(item.description) ? item.itemName : item.description;
+            yesButton.gameObject.SetActive(false);
+            noButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            yesButton.gameObject.SetActive(true);
+            noButton.gameObject.SetActive(true);
+        }
+        openedFrame = Time.frameCount;
         collectPanel.SetActive(true);
         return true;
+    }
+
+    private void Update()
+    {
+        if (!examining || !IsOpen || PauseHelper.BlockInput() || Time.frameCount <= openedFrame ||
+            !Input.GetMouseButtonDown(0)) return;
+        examinedItems.Add(pendingItem);
+        examining = false;
+        itemImage.gameObject.SetActive(true);
+        collectText.text = "Você deseja coletar " + pendingItem.itemName + "?";
+        yesButton.gameObject.SetActive(true);
+        noButton.gameObject.SetActive(true);
+        InvestigationGuard.BlockCurrentClick();
     }
 
     private void Confirm()
@@ -94,6 +125,7 @@ public class CollectPrompt : MonoBehaviour
 
     private void Close()
     {
+        examining = false;
         InvestigationGuard.BlockCurrentClick();
         if (collectPanel != null)
             collectPanel.SetActive(false);

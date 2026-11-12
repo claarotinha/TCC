@@ -807,8 +807,7 @@ MonoBehaviour:
     type: 3
   m_Name: null
   m_EditorClassIdentifier: Assembly-CSharp::AvisoInicial
-  textoAviso:
-    fileID: 772981991
+  textoAviso: {fileID: 772981991}
   textoFones: {fileID: 9800000003}
   typingSound:
     fileID: 2032015077
@@ -1756,7 +1755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9800000001
 RectTransform:
   m_ObjectHideFlags: 0

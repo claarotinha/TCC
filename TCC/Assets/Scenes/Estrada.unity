@@ -495,10 +495,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 940723836}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 414, y: 20}
-  m_SizeDelta: {x: 500, y: 520}
+  m_AnchorMin: {x: 0.54, y: 0.2}
+  m_AnchorMax: {x: 0.92, y: 0.87}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &185452030
 MonoBehaviour:
@@ -514,7 +514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3870,10 +3870,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 940723836}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -429, y: 20}
-  m_SizeDelta: {x: 500, y: 520}
+  m_AnchorMin: {x: 0.08, y: 0.2}
+  m_AnchorMax: {x: 0.46, y: 0.87}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &967760448
 MonoBehaviour:
@@ -3889,7 +3889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -11355,12 +11355,7 @@ GameObject:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3300000001}
-  - component: {fileID: 3300000002}
-  - component: {fileID: 3300000003}
-  - component: {fileID: 3300000004}
-  - component: {fileID: 9702000000}
+  m_Component: [{component: {fileID: 3300000001}}, {component: {fileID: 3300000002}}, {component: {fileID: 3300000003}}, {component: {fileID: 3300000004}}, {component: {fileID: 9702000000}}, {component: {fileID: 9852000000}}]
   m_Layer: 0
   m_Name: Passarinho
   m_TagString: Untagged
@@ -12559,7 +12554,7 @@ SpriteRenderer:
   m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
-  m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -12695,7 +12690,7 @@ SpriteRenderer:
   m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
-  m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -12831,7 +12826,7 @@ SpriteRenderer:
   m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
-  m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -17056,7 +17051,7 @@ SpriteRenderer:
   m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
-  m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -17192,7 +17187,7 @@ SpriteRenderer:
   m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
-  m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -17328,7 +17323,7 @@ SpriteRenderer:
   m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
-  m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -17464,7 +17459,7 @@ SpriteRenderer:
   m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
-  m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -17600,7 +17595,7 @@ SpriteRenderer:
   m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3999985423075485116, guid: 8512e17e95a250541b4ef2aad052c4b7, type: 3}
-  m_Color: {r: 0.39, g: 0.28, b: 0.18, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -22172,7 +22167,7 @@ MonoBehaviour:
     type: 3
   intervalo: 0.2
   alturaReferencia: 1.0
-  larguraReferencia: 1.0
+  larguraReferencia: 2.4
   pivoReferencia:
     x: 0.5
     y: 0.5
@@ -22204,7 +22199,7 @@ MonoBehaviour:
     type: 3
   intervalo: 0.2
   alturaReferencia: 1.0
-  larguraReferencia: 1.0
+  larguraReferencia: 2.4
   pivoReferencia:
     x: 0.5
     y: 0.5
@@ -22236,7 +22231,7 @@ MonoBehaviour:
     type: 3
   intervalo: 0.2
   alturaReferencia: 1.0
-  larguraReferencia: 1.0
+  larguraReferencia: 2.4
   pivoReferencia:
     x: 0.5
     y: 0.5
@@ -22268,7 +22263,7 @@ MonoBehaviour:
     type: 3
   intervalo: 0.2
   alturaReferencia: 1.0
-  larguraReferencia: 1.0
+  larguraReferencia: 2.4
   pivoReferencia:
     x: 0.5
     y: 0.5
@@ -22300,7 +22295,7 @@ MonoBehaviour:
     type: 3
   intervalo: 0.2
   alturaReferencia: 1.0
-  larguraReferencia: 1.0
+  larguraReferencia: 2.4
   pivoReferencia:
     x: 0.5
     y: 0.5
@@ -22332,7 +22327,7 @@ MonoBehaviour:
     type: 3
   intervalo: 0.2
   alturaReferencia: 1.0
-  larguraReferencia: 1.0
+  larguraReferencia: 2.4
   pivoReferencia:
     x: 0.5
     y: 0.5
@@ -22364,7 +22359,7 @@ MonoBehaviour:
     type: 3
   intervalo: 0.2
   alturaReferencia: 1.0
-  larguraReferencia: 1.0
+  larguraReferencia: 2.4
   pivoReferencia:
     x: 0.5
     y: 0.5
@@ -22396,10 +22391,39 @@ MonoBehaviour:
     type: 3
   intervalo: 0.2
   alturaReferencia: 1.0
-  larguraReferencia: 1.0
+  larguraReferencia: 2.4
   pivoReferencia:
     x: 0.5
     y: 0.5
   preservarLargura: 1
   aposEntregaBola: 0
   pararQuandoBentoCair: 0
+--- !u!114 &9852000000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject:
+    fileID: 0
+  m_PrefabInstance:
+    fileID: 0
+  m_PrefabAsset:
+    fileID: 0
+  m_GameObject:
+    fileID: 3300000000
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script:
+    fileID: 11500000
+    guid: 01563f0e1bb2d514aba7eb7c4a3d5e20
+    type: 3
+  m_Name: null
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel:
+    fileID: 3000000053
+  examineText:
+    fileID: 3000000061
+  itemData:
+    fileID: 11400000
+    guid: e63009695780991438885d5c9a147b36
+    type: 2
+  isTutorialBall: 0
+  message: O passarinho procura alguma coisa entre os galhos secos. Até ele precisa achar comida neste sertão.

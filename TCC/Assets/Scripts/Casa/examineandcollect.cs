@@ -12,6 +12,7 @@ public class CollectableExamine : MonoBehaviour
     public string message;
 
     private bool isShowing = false;
+    private bool examined;
     private static CollectableExamine currentObject = null;
     private Collider2D myCollider;
 
@@ -87,8 +88,8 @@ public class CollectableExamine : MonoBehaviour
                 if (clickedThis)
                 {
                     // Depois da conversa com o grupo, vai direto à confirmação.
-                    if (isTutorialBall && tutorial != null &&
-                        tutorial.CurrentStep == TutorialManager.TutorialStep.FindBall)
+                    if (examined && (!isTutorialBall || (tutorial != null &&
+                        tutorial.CurrentStep == TutorialManager.TutorialStep.FindBall)))
                     {
                         if (isShowing) HidePanel();
                         CollectItem();
@@ -175,6 +176,8 @@ public class CollectableExamine : MonoBehaviour
 
     public void ShowPanel()
     {
+        examined = true;
+        currentObject = this;
         if (examinePanel != null)
         {
             examinePanel.SetActive(true);
@@ -236,7 +239,7 @@ public class CollectableExamine : MonoBehaviour
             if (isTutorialBall)
                 TutorialManager.Instance?.ReportBallCollected();
             Destroy(gameObject);
-        });
+        }, alreadyExamined: true);
     }
 
     public static bool IsShowing()
@@ -260,7 +263,7 @@ public class CollectableExamine : MonoBehaviour
 
         item.HidePanel();
 
-        if (canCollectBall)
+        if (!item.isTutorialBall || canCollectBall)
             item.CollectItem();
     }
 

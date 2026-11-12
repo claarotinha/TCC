@@ -260,6 +260,8 @@ public class SecaMealDialogue : MonoBehaviour
 
         choicesContainer.SetActive(false);
 
+        ExamineObject.HideCurrentPanel();
+        CollectableExamine.HideCurrentPanel();
         if (familyImagePanel != null) familyImagePanel.SetActive(true);
         running = true;
         StartCoroutine(InitialSilence());

@@ -69,6 +69,7 @@ public class HistoriaPaiCaminhada : MonoBehaviour
     private int indice;
     private int quadro;
     private bool escolhendo;
+    private bool introduzindo;
     private bool ativo;
     private GameObject dialogueUI, dialoguePanel, choicesContainer;
     private TMP_Text characterNameText, dialogueText;
@@ -91,7 +92,8 @@ public class HistoriaPaiCaminhada : MonoBehaviour
         }
         ativo = true;
         indice = 0;
-        falas = Introducao;
+        introduzindo = true;
+        falas = Paginar(Introducao);
         dialogueUI.SetActive(true);
         dialoguePanel.SetActive(true);
         AtivarGrupo(dialogueUI);
@@ -128,7 +130,7 @@ public class HistoriaPaiCaminhada : MonoBehaviour
             Time.frameCount <= quadro || !Input.GetMouseButtonDown(0)) return;
         indice++;
         if (indice < falas.Length) { Mostrar(); return; }
-        if (falas == Introducao) MostrarEscolhas();
+        if (introduzindo) MostrarEscolhas();
         else Encerrar();
     }
 
@@ -182,12 +184,22 @@ public class HistoriaPaiCaminhada : MonoBehaviour
         }
         botoes.Clear();
         choicesContainer.SetActive(false);
-        falas = escolha == 1 ? CorpoSeco : escolha == 2 ? ComadreFulozinha : MaeDAgua;
+        introduzindo = false;
+        falas = Paginar(escolha == 1 ? CorpoSeco : escolha == 2 ? ComadreFulozinha : MaeDAgua);
         if (GameProgress.Instance != null)
             GameProgress.Instance.Data.estradaHistoriaEscolhida = escolha;
         indice = 0;
         escolhendo = false;
         Mostrar();
+    }
+
+    private static Fala[] Paginar(Fala[] origem)
+    {
+        var resultado = new List<Fala>();
+        foreach (Fala fala in origem)
+            foreach (string pagina in DialogoPaginas.Quebrar(fala.Texto))
+                resultado.Add(new Fala(fala.Nome, pagina));
+        return resultado.ToArray();
     }
 
     private void Encerrar()

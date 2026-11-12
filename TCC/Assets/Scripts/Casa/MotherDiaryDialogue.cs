@@ -19,6 +19,7 @@ public class MotherDiaryDialogue : MonoBehaviour
     private bool ready;
     private bool discussedDiary;
     private bool tellingDiary;
+    private bool askingToRead;
     private int diaryLine, speechStartedFrame;
 
     private void Start()
@@ -89,8 +90,9 @@ public class MotherDiaryDialogue : MonoBehaviour
                 if (diaryLine == 0)
                 {
                     diaryLine = 1;
-                    ShowMother("Pode ser, minha filha. Guarde com cuidado. " +
-                        "Essas coisas fazem parte da nossa história.");
+                    ShowMother(askingToRead
+                        ? "Pode ler um pouco, minha filha, mas já está ficando tarde. É bom ir dormir e continuar a leitura depois."
+                        : "Pode ser, minha filha. Guarde com cuidado. Essas coisas fazem parte da nossa história.");
                 }
                 else
                 {
@@ -175,6 +177,7 @@ public class MotherDiaryDialogue : MonoBehaviour
 
         discussedDiary = true;
 
+        askingToRead = false;
         tellingDiary = true;
         diaryLine = 0;
         speechStartedFrame = Time.frameCount;
@@ -197,12 +200,18 @@ public class MotherDiaryDialogue : MonoBehaviour
 
         discussedDiary = true;
 
-        ShowMother(
-            "Pode ler um pouco, minha filha, mas já está ficando tarde. " +
-            "É bom ir dormir e continuar a leitura depois."
-        );
-
-        ShowChoices();
+        askingToRead = true;
+        tellingDiary = true;
+        diaryLine = 0;
+        speechStartedFrame = Time.frameCount;
+        original.choice1.gameObject.SetActive(false);
+        original.choice2.gameObject.SetActive(false);
+        original.choice3.gameObject.SetActive(false);
+        original.ConfigureDialogueText();
+        original.characterNameText.text = "Mari";
+        original.dialogueText.text = "Posso ler um pouquinho do diário antes de dormir, mãe?";
+        original.portraitImage.sprite = original.mariPortrait;
+        original.portraitImage.enabled = original.mariPortrait != null;
         InvestigationGuard.BlockCurrentClick();
     }
 

@@ -26,6 +26,12 @@ public class AvisoInicial : MonoBehaviour
 
     private void Start()
     {
+        foreach (GameObject raiz in gameObject.scene.GetRootGameObjects())
+            foreach (TMP_Text texto in raiz.GetComponentsInChildren<TMP_Text>(true))
+            {
+                if (textoAviso == null && texto.name == "TextoAviso") textoAviso = texto;
+                if (textoFones == null && texto.name.ToLowerInvariant().Contains("fones")) textoFones = texto;
+            }
         if (textoAviso == null || textoFones == null)
         {
             Debug.LogError("AvisoInicial: configure os textos da data e do aviso de fones na Hierarchy.", this);
@@ -33,6 +39,9 @@ public class AvisoInicial : MonoBehaviour
             return;
         }
         // A data e os avisos são escritos nos próprios textos da Hierarchy.
+        textoAviso.enabled = true;
+        textoAviso.gameObject.SetActive(true);
+        textoFones.enabled = true;
         mensagem = textoAviso.text;
         textoAviso.text = string.Empty;
         textoFones.gameObject.SetActive(false);

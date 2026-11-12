@@ -76,6 +76,11 @@ public static class InvestigationGuard
     {
         get
         {
+            if (SleepBed.IsSleeping) return "leitura ou sono";
+            SecaMealDialogue refeicao = Object.FindAnyObjectByType<SecaMealDialogue>();
+            if (refeicao != null && refeicao.MealInProgress) return "refeição da família";
+            SegundaParada estrada = Object.FindAnyObjectByType<SegundaParada>();
+            if (estrada != null && estrada.BloqueiaCursor) return "diálogo da estrada";
             if (HouseEntrance.IsChangingScene)
                 return "entrada em casa";
 

@@ -44,7 +44,7 @@ public class SecaCabinetItem : MonoBehaviour
                 GameProgress.Instance?.MarkObjectCollected(GameProgress.ObjectId(collectable));
                 Destroy(collectable);
             }
-        });
+        }, alreadyExamined: true);
     }
 
     private void OnDestroy()

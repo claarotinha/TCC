@@ -111,6 +111,8 @@ public partial class EntradaCurrais
     private IEnumerator PegarBaldeRaimundo()
     {
         if (!Dados.curraisBaldeSolicitado || Dados.curraisBaldeRecolhido) yield break;
+        yield return ExaminarOuColetar(baldeRaimundoItem);
+        if (!coletaDoCenarioConfirmada) yield break;
         if (!TemItem(baldeRaimundoItem) && !TemItem(baldeProtegidoItem)) InventoryManager.Instance.AddItem(baldeRaimundoItem);
         Dados.curraisBaldeRecolhido = true;
         AtualizarFamiliaAlternativa(); Salvar();
