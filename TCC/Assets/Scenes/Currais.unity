@@ -13686,7 +13686,7 @@ MonoBehaviour:
   luziaCurral: [{"personagem": "Zefinha", "texto": "Por que chamam aqui de curral?"}, {"personagem": "Luzia", "texto": "Porque juntam nós atrás da cerca e mandam quando pode passar."}, {"personagem": "Zefinha", "texto": "Eu pensei que era um lugar pra descansar."}, {"personagem": "Luzia", "texto": "Era o que muita gente pensava quando chegou."}]
   luziaSaida: [{"personagem": "Zefinha", "texto": "Quem pode sair?"}, {"personagem": "Luzia", "texto": "Quem recebe ordem. Tem homem que sai pro serviço e volta escoltado."}, {"personagem": "Zefinha", "texto": "Nem pra procurar alguém?"}, {"personagem": "Luzia", "texto": "Seu pai perguntou na entrada. Tu ouviu a resposta."}]
   luziaIrma: [{"personagem": "Zefinha", "texto": "A senhora viu minha irmã? É parecida comigo."}, {"personagem": "Luzia", "texto": "Hoje eu num vi. Qual é o nome dela?"}, {"personagem": "Zefinha", "texto": "Maria Severina. Nós chama Mariquinha."}, {"personagem": "Luzia", "texto": "Vou perguntar na lavagem. Tem muita gente chegando por caminhos diferentes."}]
-  objetivoRevista: "Entregue as ferramentas ao fiscal: TAB para abrir, clique no item, TAB para fechar e clique no fiscal. Depois confira a revista com ele."
+  objetivoRevista: "Entregue as ferramentas ao cabo: abra o inventário com TAB, arraste cada ferramenta e solte sobre ele. Depois confira a revista com ele."
   objetivoPano: "Explore o abrigo e converse com Luzia. Pegue o pano que ela cedeu e entregue à sua mãe pelo inventário."
   lotePanosCenario: {"fileID": 9806000200}
   areaLotePanos: {"fileID": 9806000203}

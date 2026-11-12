@@ -139,14 +139,37 @@ public partial class EntradaCurrais
 
     private void MenuRevista()
     {
-        ItemData selecionado = InventoryManager.Instance.SelectedItem;
-        if (selecionado != null && Array.IndexOf(ferramentasRevista, selecionado) >= 0 && TemItem(selecionado))
-        { Iniciar(EntregarFerramenta(selecionado)); return; }
         MostrarOpcoes("Fiscal", objetivoRevista,
             new[] { "Como entregar os pertences?", "Conferir a revista", "Sair" }, new Action[] {
                 () => Iniciar(Dizer(new[] { new Fala { personagem = "Zefinha", texto =
-                    "Vou abrir o inventário com TAB, selecionar uma ferramenta, fechar com TAB e clicar no fiscal para entregar." } })),
+                    "Vou abrir o inventário com TAB, arrastar cada ferramenta e soltar sobre o cabo. Depois confiro a revista com ele." } })),
                 () => Iniciar(ConcluirRevista()), FecharMenu });
+    }
+
+    public bool SoltarFerramentaNaRevista(ItemData item, Vector2 posicaoTela)
+    {
+        // O inventário deve permanecer aberto durante o arraste; pausa e diálogos bloqueiam.
+        if (!isActiveAndEnabled || !pronto || ocupado || menuAberto || dialogando || encerrando ||
+            PauseHelper.BlockInput() || Time.timeScale <= 0f || Dados.curraisEtapaEntrada != 2 ||
+            Dados.curraisPertencesRetidos || item == null || ferramentasRevista == null ||
+            Array.IndexOf(ferramentasRevista, item) < 0 || !TemItem(item) || mari == null ||
+            areaFiscalEntrada == null || !areaFiscalEntrada.enabled ||
+            !areaFiscalEntrada.gameObject.activeInHierarchy) return false;
+
+        Camera camera = Camera.main;
+        if (camera == null || camera.gameObject.scene != gameObject.scene) return false;
+        Ray raio = camera.ScreenPointToRay(posicaoTela);
+        Plane plano = new Plane(Vector3.forward, Vector3.zero);
+        if (!plano.Raycast(raio, out float distancia) ||
+            !areaFiscalEntrada.OverlapPoint(raio.GetPoint(distancia))) return false;
+        if (Mathf.Abs(mari.transform.position.x - areaFiscalEntrada.bounds.center.x) > alcanceInteracao)
+        {
+            objetivoTexto.text = "Aproxime-se do cabo para entregar as ferramentas.";
+            return false;
+        }
+
+        Iniciar(EntregarFerramenta(item));
+        return true;
     }
 
     private IEnumerator EntregarFerramenta(ItemData item)
@@ -169,7 +192,7 @@ public partial class EntradaCurrais
             if (TemItem(ferramenta))
             {
                 yield return Dizer(new[] { new Fala { personagem = "Fiscal", texto =
-                    "Ainda tem ferramenta com você. Abra o inventário, selecione e entregue aqui." } });
+                    "Ainda tem ferramenta com você. Abra o inventário, arraste cada uma e solte sobre mim." } });
                 yield break;
             }
         if (!ReterPertences())
