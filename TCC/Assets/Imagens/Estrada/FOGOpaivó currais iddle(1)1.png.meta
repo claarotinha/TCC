@@ -4,7 +4,7 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 7199680572340872079
-    second: "FOGOpaiv\xF3 currais iddle(1)1_0"
+    second: FOGOpaivó currais iddle(1)1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -50,9 +50,15 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePivot:
+    x: 0.5
+    y: 0.5
+  spritePixelsToUnits: 67.97385620915033
+  spriteBorder:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -75,7 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -88,7 +94,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,17 +106,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "FOGOpaiv\xF3 currais iddle(1)1_0"
+      name: FOGOpaivó currais iddle(1)1_0
       rect:
         serializedVersion: 2
         x: 249
         y: 179
         width: 162
         height: 312
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
+      alignment: 9
+      pivot:
+        x: 0.5
+        y: 0
+      border:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      customData: null
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -118,26 +130,26 @@ TextureImporter:
       spriteID: f83a8a2c5576ae360800000000000000
       internalID: 7199680572340872079
       vertices: []
-      indices: 
+      indices: null
       edges: []
       weights: []
     outline: []
-    customData: 
+    customData: null
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: null
     internalID: 0
     vertices: []
-    indices: 
+    indices: null
     edges: []
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "FOGOpaiv\xF3 currais iddle(1)1_0": 7199680572340872079
-  mipmapLimitGroupName: 
+      FOGOpaivó currais iddle(1)1_0: 7199680572340872079
+  mipmapLimitGroupName: null
   pSDRemoveMatte: 0
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  userData: null
+  assetBundleName: null
+  assetBundleVariant: null

@@ -79,6 +79,10 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private Sprite paisAcordados;
     [SerializeField] private GameObject arvoreAcampamento, fogueiraCenario, irmasCenario, paisCenario;
     [SerializeField] private GameObject[] materiaisCenario = new GameObject[3];
+    [Header("Novas artes da passagem de tempo")]
+    [SerializeField] private Sprite[] fundosDaJornada;
+    [SerializeField] private SpriteRenderer[] panoramasJornada;
+    [SerializeField] private SpriteRenderer[] panoramasAcampamento;
     private SpriteRenderer[] cenarioHorario;
     private Color[] coresHorario;
     private bool acampamentoIniciado, introAcampamentoConcluida, fogueiraPreparada, pedidoAlecrimConcluido;
@@ -203,6 +207,7 @@ public class SegundaParada : MonoBehaviour
 
     private void Update()
     {
+        AtualizarPanoramasJornada();
         if (carregandoCurrais || PauseHelper.BlockInput() || Time.timeScale == 0f || sequenciaAbrigo) return;
         ControleJornada j = ControleJornada.Instance;
         AtualizarFortaleza();
@@ -1979,6 +1984,18 @@ public class SegundaParada : MonoBehaviour
     private void MostrarFogueira(Sprite sprite)
     {
         TrocarVisualCenario(fogueiraCenario, sprite, true);
+    }
+
+    private void AtualizarPanoramasJornada()
+    {
+        if (fundosDaJornada == null || fundosDaJornada.Length < 5 || panoramasAcampamento == null) return;
+        // Os demais trechos já possuem suas artes repetidas e distribuídas na Hierarchy.
+        // Só a última parada acompanha a refeição, a noite e o amanhecer, sem trocar toda a estrada.
+        int indice = acampamentoConcluido ? 2 : refeicaoPreparada ? 4 : 3;
+        Sprite fundo = fundosDaJornada[indice];
+        if (fundo == null) return;
+        foreach (SpriteRenderer panorama in panoramasAcampamento)
+            if (panorama != null) panorama.sprite = fundo;
     }
 
     private void AplicarHorarioAcampamento()
