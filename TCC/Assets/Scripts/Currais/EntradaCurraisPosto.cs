@@ -89,7 +89,7 @@ public partial class EntradaCurrais
         curativoRaimundo.SetActive(Dados.curraisEscolhaPosto != 0);
         Posicionar(areaRaimundo.transform, etapa == 0 ? raimundoNoPosto :
             Dados.curraisEscolhaPosto == 1 ? raimundoSentado : raimundoOutroSetor);
-        areaRaimundo.transform.localRotation = Quaternion.Euler(0f, 0f, Dados.curraisEscolhaPosto == 1 ? -12f : 0f);
+        areaRaimundo.transform.localRotation = Quaternion.identity;
         if (etapa >= 2 && (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))
         {
             bool duranteNoite = noiteEmCurso || etapa == 4;

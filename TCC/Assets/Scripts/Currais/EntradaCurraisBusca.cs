@@ -90,7 +90,11 @@ public partial class EntradaCurrais
         trabalhadorRetorno.SetActive(etapa >= 6);
         bento.gameObject.SetActive(etapa < 6 && !Dados.curraisBentoMorto);
         Posicionar(bento, etapa >= 5 ? bentoCaido : bentoEmPe);
-        bento.rotation = (etapa >= 5 ? bentoCaido : bentoEmPe).rotation;
+        // Não gira nem inclina o sprite para representar ferimentos.
+        Vector3 baseBento = bento.position;
+        baseBento.y = bentoEmPe.position.y;
+        bento.position = baseBento;
+        bento.rotation = bentoEmPe.rotation;
         if (etapa >= 1 && (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))
         {
             if (seguidoraMae != null) seguidoraMae.enabled = false;
@@ -266,12 +270,14 @@ public partial class EntradaCurrais
 
     private IEnumerator AgressaoNoPatio()
     {
-        yield return Mover(bento, bentoCaido.position, tempoPlano);
-        bento.rotation = bentoCaido.rotation;
+        Vector3 destinoBento = bentoCaido.position;
+        destinoBento.y = bentoEmPe.position.y;
+        yield return Mover(bento, destinoBento, tempoPlano);
+        bento.rotation = bentoEmPe.rotation;
         Quaternion fiscalOriginal = fiscalTrabalho.localRotation;
         try
         {
-            fiscalTrabalho.localRotation = Quaternion.Euler(0, 0, -12);
+            fiscalTrabalho.localRotation = Quaternion.identity;
             yield return Dizer(patioAgressao);
             manchaRoda.SetActive(true);
             yield return Esperar(tempoPlano);

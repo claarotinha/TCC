@@ -433,10 +433,10 @@ public partial class EntradaCurrais : MonoBehaviour
         yield return Dizer(barreira);
         yield return Mover(pai, paiReacao.position, tempoPlano);
         yield return Dizer(protestoPai);
-        // O avanço da guarda, o corte e a pose curvada mostram a origem da lesão.
+        // O avanço da guarda, o corte e as falas mostram a origem da lesão.
         yield return Mover(guardaRetaguarda, guardaGolpe.position, tempoPlano * .5f);
         CorFade(1f);
-        pai.localRotation = rotacaoPai * Quaternion.Euler(0f, 0f, -18f);
+        pai.localRotation = rotacaoPai;
         yield return Esperar(.15f);
         CorFade(0f);
         Dados.curraisPaiFerido = true;
@@ -549,7 +549,7 @@ public partial class EntradaCurrais : MonoBehaviour
         Posicionar(mari.transform, mariAbrigo); Posicionar(pai, paiAbrigo);
         Posicionar(mae, maeAbrigo); Posicionar(baleia, baleiaAbrigo);
         lacoPanela.SetActive(false);
-        pai.localRotation = rotacaoPai * Quaternion.Euler(0f, 0f, -18f);
+        pai.localRotation = rotacaoPai;
     }
 
     private static void Posicionar(Transform alvo, Transform marca)
@@ -940,7 +940,7 @@ public partial class EntradaCurrais : MonoBehaviour
             (!Dados.curraisPanelaConcluida || Dados.curraisEtapaBusca == 0))
         {
             luzia.transform.position = luziaRepouso.position;
-            luzia.transform.localRotation = Quaternion.Euler(0f, 0f, -8f);
+            luzia.transform.localRotation = Quaternion.identity;
         }
         else if (Dados.curraisEscolhaAgua == 2 &&
             (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))

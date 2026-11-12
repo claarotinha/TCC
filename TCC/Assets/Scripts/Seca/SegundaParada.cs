@@ -2509,6 +2509,8 @@ public class SegundaParada : MonoBehaviour
 
     private void PrepararFortaleza()
     {
+        foreach (GameObject policial in policiais) if (policial != null) policial.SetActive(false);
+        if (familiaFinal != null) familiaFinal.SetActive(false);
         if (GameProgress.Instance != null)
         {
             GameProgressData d = GameProgress.Instance.Data;
@@ -2563,9 +2565,19 @@ public class SegundaParada : MonoBehaviour
         BloquearMovimento(); CapturarGrupoAbrigo();
         if (seguirCamera != null) seguirCamera.enabled = false;
         SalvarFortaleza();
-        Falar(new[] { "Policial" }, new[] {
-            "Parados! Onde pensam que estão indo? Larguem essas trouxas."
-        }, () => { BloquearMovimento(); sequenciaAbrigo = true; StartCoroutine(EncerrarJornada()); });
+        // A abordagem acontece uma única vez, com os guardas dos Currais.
+        sequenciaAbrigo = true;
+        StartCoroutine(EntrarNoAtoCurrais());
+    }
+
+    private IEnumerator EntrarNoAtoCurrais()
+    {
+        PrepararFade();
+        yield return Escurecer(1f);
+        atoConcluido = true;
+        SalvarFortaleza();
+        MostrarFimAto();
+        sequenciaAbrigo = false;
     }
 
     private void PosePolicial(GameObject policial, Sprite pose, bool olharDireita)

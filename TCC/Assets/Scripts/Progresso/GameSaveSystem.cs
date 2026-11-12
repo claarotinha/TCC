@@ -241,6 +241,13 @@ public class GameSaveSystem : MonoBehaviour
             save.progress.estradaVersaoPercurso = 2;
         }
 
+        if (scene.name == "Currais" && save.progress != null && save.progress.curraisVersaoCenario < 1)
+        {
+            if (save.hasPlayerPosition)
+                save.playerPosition = EntradaCurrais.AtualizarPosicaoCenario(save.playerPosition, save.progress);
+            save.progress.curraisVersaoCenario = 1;
+        }
+
         if (save.hasPlayerPosition)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -308,6 +315,7 @@ public class GameSaveSystem : MonoBehaviour
         }
 
         if (SceneManager.GetActiveScene().name == "Estrada") progress.Data.estradaVersaoPercurso = 2;
+        if (SceneManager.GetActiveScene().name == "Currais") progress.Data.curraisVersaoCenario = 1;
         progress.SyncDiaryPages();
         GameSaveFile save = new GameSaveFile
         {
