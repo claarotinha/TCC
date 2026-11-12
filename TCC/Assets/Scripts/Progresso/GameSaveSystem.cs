@@ -248,6 +248,9 @@ public class GameSaveSystem : MonoBehaviour
             save.progress.curraisVersaoCenario = 1;
         }
 
+        if (scene.name == "Currais" && save.progress != null && save.progress.curraisEtapaEntrada == 2)
+            save.playerPosition.x = 33.45f;
+
         if (save.hasPlayerPosition)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
