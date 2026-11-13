@@ -26,6 +26,7 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private Sprite baleiaComPrea;
     [SerializeField, Min(0.1f)] private float velocidadeFuga = 6.5f;
     [SerializeField, Min(0.02f)] private float intervaloCorrida = 0.13f;
+    [SerializeField, Min(8f)] private float alcanceBuscaBaleia = 18f;
 
     [Header("Casa abandonada")]
     [SerializeField] private Sprite casaFechada;
@@ -571,16 +572,28 @@ public class SegundaParada : MonoBehaviour
 
         retornoX = mae != null ? mae.transform.position.x + 1.2f : mari.transform.position.x;
         destinoBaleia = destinoBuscaBaleia.position;
-        // The run starts after a player-paced conversation, so keep the search nearby.
-        float distancia = destinoBaleia.x - mari.transform.position.x;
-        if (distancia > 70f || distancia < 50f)
+        // A busca fica perto da família, dentro do cenário, sem deslocar as pistas por 65 unidades.
+        float minimo = mari.transform.position.x + 8f;
+        float maximo = mari.transform.position.x + alcanceBuscaBaleia;
+        if (limitesEstrada != null) maximo = Mathf.Min(maximo, limitesEstrada.bounds.max.x - 1f);
+        if (casa != null && casa.position.x > minimo) maximo = Mathf.Min(maximo, casa.position.x - 4f);
+        float destinoX = Mathf.Clamp(destinoBaleia.x, Mathf.Min(minimo, maximo), maximo);
+        if (!Mathf.Approximately(destinoX, destinoBaleia.x))
         {
-            float ajuste = mari.transform.position.x + 65f - destinoBaleia.x;
+            float ajuste = destinoX - destinoBaleia.x;
             Vector3 deslocamento = Vector3.right * ajuste;
             destinoBuscaBaleia.position += deslocamento;
             foreach (GameObject pista in pistasBusca) if (pista != null) pista.transform.position += deslocamento;
             if (alvoBaleia != null) alvoBaleia.transform.position += deslocamento;
             destinoBaleia = destinoBuscaBaleia.position;
+        }
+        for (int i = 0; i < pistasBusca.Length; i++)
+        {
+            if (pistasBusca[i] == null) continue;
+            Vector3 posicao = pistasBusca[i].transform.position;
+            posicao.x = Mathf.Lerp(mari.transform.position.x + 2f, destinoBaleia.x - 2f,
+                (i + 1f) / (pistasBusca.Length + 1f));
+            pistasBusca[i].transform.position = posicao;
         }
     }
 
@@ -590,7 +603,8 @@ public class SegundaParada : MonoBehaviour
         BaleiaAnimacao animacaoBaleia = baleia != null ? baleia.GetComponent<BaleiaAnimacao>() : null;
         if (animacaoBaleia != null) animacaoBaleia.DefinirPoseExterna(true);
         float tempo = 0f;
-        while (baleia != null && Mathf.Abs(baleia.position.x - destinoBaleia.x) > 0.01f)
+        while (baleia != null && (etapa == 1 || etapa == 2) &&
+            Mathf.Abs(baleia.position.x - destinoBaleia.x) > 0.01f)
         {
             if (!PauseHelper.BlockInput() && Time.timeScale > 0f)
             {
@@ -2128,7 +2142,7 @@ public class SegundaParada : MonoBehaviour
         if (!AcampamentoEmAndamento() || !introAcampamentoConcluida || noiteEmAndamento ||
             conversando || sequenciaAbrigo || PauseHelper.BlockInput() || Time.timeScale == 0f ||
             Time.frameCount <= quadro || (!peloInventario && InvestigationGuard.Blocked) ||
-            mari == null || mae == null || Vector2.Distance(mari.transform.position, mae.transform.position) > 5f) return false;
+            mari == null || mae == null || !PertoDoAcampamento()) return false;
         InventoryTabController.Instance?.Close();
         if (!fogueiraPreparada)
         {
@@ -2159,6 +2173,14 @@ public class SegundaParada : MonoBehaviour
         }
         else PrepararRefeicaoAcampamento();
         return true;
+    }
+
+    private bool PertoDoAcampamento()
+    {
+        Vector2 posicao = mari.transform.position;
+        if (Vector2.Distance(posicao, mae.transform.position) <= 5f) return true;
+        Collider2D area = fogueiraCenario != null ? fogueiraCenario.GetComponent<Collider2D>() : null;
+        return area != null && Vector2.Distance(posicao, area.ClosestPoint(posicao)) <= 5f;
     }
 
     private void PrepararRefeicaoAcampamento()

@@ -7436,7 +7436,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
+  m_Sprite: {fileID: -193737309377430385, guid: c73eb0240950e084c9478495ece7472f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -21027,12 +21027,16 @@ MonoBehaviour:
   mae: {fileID: 467838416}
   pai: {fileID: 1156249498}
   corridaBaleia:
-  - {fileID: 21300000, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
-  - {fileID: 21300001, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
-  - {fileID: 21300002, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
-  - {fileID: 21300003, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
-  - {fileID: 21300004, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
-  - {fileID: 21300005, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
+  - {fileID: -5875844968660352615, guid: e11108352ff5ae94d890fe998fd2a678, type: 3}
+  - {fileID: -7616355321146355650, guid: 0ac8fc2b64f8d52408aea0bbb6ea93da, type: 3}
+  - {fileID: -241078450660672146, guid: c9312843d039aa44fb16b6bac23b3470, type: 3}
+  - {fileID: 9220475082984395783, guid: 7e2684841e89a2b40a747f5252657a8f, type: 3}
+  - {fileID: 3711966729472983836, guid: 624a9c5e327c5bd4a921f97e01f3e130, type: 3}
+  - {fileID: 4064679449338315098, guid: c10cd9567c3a179488bc44a17b708301, type: 3}
+  - {fileID: -8421053823309928008, guid: d5dad3148bd5dfa4d8cba5f357cee41c, type: 3}
+  - {fileID: -1047243561838273805, guid: d2c7572b2dbf7f14fa8d420e84f1e8e8, type: 3}
+  - {fileID: -1033106279093040478, guid: 0dbd95381d9e78342b16a3cb0a265416, type: 3}
+  - {fileID: 8871759756971928399, guid: 333fe988f882dae4d9dfb1477ac6cded, type: 3}
   baleiaComPrea: {fileID: 21300006, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
   velocidadeFuga: 6.5
   intervaloCorrida: 0.13
@@ -21141,6 +21145,7 @@ MonoBehaviour:
   - {fileID: 3900000140}
   materialFogueira: {fileID: 11400000, guid: 60248864ae334570970f2a6fcdf2383b, type: 2}
   combinacaoFogueira: {fileID: 11400000, guid: b2d1aa8e4121466ea10e19d353568725, type: 2}
+  alcanceBuscaBaleia: 18
 --- !u!1 &3500000010
 GameObject:
   m_ObjectHideFlags: 0
@@ -26346,6 +26351,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso:
+  - {fileID: -8561304719070173820, guid: bab042b856930f943a44ba6dea95a752, type: 3}
+  - {fileID: 1920275876103528799, guid: 71f7ab2aeeb84ec439ce7fd6e0a23d39, type: 3}
+  - {fileID: 5209255166025893193, guid: 4b7cf765b3c46ce44a50cd4974bd4479, type: 3}
+  - {fileID: 1099646552322126284, guid: 56911385aa68b994983675e3b545f4b7, type: 3}
+  corrida:
+  - {fileID: 2789988318048547764, guid: 19f130e539cb1ae4a89a175532992fe6, type: 3}
+  - {fileID: -8209417295599736700, guid: fe91743c526856e4f8371eb2cda51d87, type: 3}
+  - {fileID: 1664200945172900154, guid: e1c7a62af3ffe034a8104b4f7fbd56bc, type: 3}
+  - {fileID: -9122426401251989118, guid: 68b878e8e38343b419b3cf5449db2a1f, type: 3}
+  - {fileID: -8261348417330541405, guid: 2ee2a709f00023c4586f08f9dd92e238, type: 3}
+  - {fileID: 3098725948356902953, guid: 65fc49ed11fee6f44a62af29c4b0470b, type: 3}
+  - {fileID: 3193869495001138380, guid: 348f589bcd42b224a8e66cb1836093f5, type: 3}
+  - {fileID: 4598935829265107066, guid: d3dc63c9ebf1ee84ca54e77843721de1, type: 3}
+  - {fileID: -529812223599539475, guid: 759620ad9934eae4fb3a57ff00b6af7a, type: 3}
+  - {fileID: 3208866549339444020, guid: 9fa9db86de9138e4eb67bf9cecf7c271, type: 3}
 --- !u!114 &8800001001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26418,17 +26439,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BaleiaAnimacao
   parada: {fileID: -193737309377430385, guid: c73eb0240950e084c9478495ece7472f, type: 3}
   caminhada:
-  - {fileID: 21300000, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
-  - {fileID: 21300005, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
-  - {fileID: 21300004, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
-  - {fileID: 21300003, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
+  - {fileID: -2444217145917560610, guid: c6e6f09d3bacca64992eafb9d7abdadc, type: 3}
+  - {fileID: -3821675748634931847, guid: 3c3b885a3864e3842bc976ed794f7d78, type: 3}
+  - {fileID: -4268533286712193181, guid: 90c479bb902ad4a4fb26746fbcc9025d, type: 3}
+  - {fileID: -1402701936809197265, guid: 4d77a3c3a37858648b2110015ef1e329, type: 3}
+  - {fileID: 1012854326684103856, guid: 56cffca6d140cf248930ef5b707ca13d, type: 3}
+  - {fileID: -2406897721554542246, guid: 4ed7091d15236ad4e8c2bc3557a948fe, type: 3}
+  - {fileID: 6779469515468519209, guid: 201b336384251644eb5c754a9679b69b, type: 3}
+  - {fileID: -9095472927022157255, guid: 491d849c844d6ea46a8019992282fa7b, type: 3}
   corrida:
-  - {fileID: 21300000, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
-  - {fileID: 21300001, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
-  - {fileID: 21300002, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
-  - {fileID: 21300003, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
-  - {fileID: 21300004, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
-  - {fileID: 21300005, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
+  - {fileID: -5875844968660352615, guid: e11108352ff5ae94d890fe998fd2a678, type: 3}
+  - {fileID: -7616355321146355650, guid: 0ac8fc2b64f8d52408aea0bbb6ea93da, type: 3}
+  - {fileID: -241078450660672146, guid: c9312843d039aa44fb16b6bac23b3470, type: 3}
+  - {fileID: 9220475082984395783, guid: 7e2684841e89a2b40a747f5252657a8f, type: 3}
+  - {fileID: 3711966729472983836, guid: 624a9c5e327c5bd4a921f97e01f3e130, type: 3}
+  - {fileID: 4064679449338315098, guid: c10cd9567c3a179488bc44a17b708301, type: 3}
+  - {fileID: -8421053823309928008, guid: d5dad3148bd5dfa4d8cba5f357cee41c, type: 3}
+  - {fileID: -1047243561838273805, guid: d2c7572b2dbf7f14fa8d420e84f1e8e8, type: 3}
+  - {fileID: -1033106279093040478, guid: 0dbd95381d9e78342b16a3cb0a265416, type: 3}
+  - {fileID: 8871759756971928399, guid: 333fe988f882dae4d9dfb1477ac6cded, type: 3}
   intervaloCaminhada: 0.24
   intervaloCorrida: 0.13
   repouso:

@@ -90,6 +90,7 @@ public class SeguidorFamilia : MonoBehaviour
     private void Awake()
     {
         if (animator == null) animator = GetComponent<Animator>();
+        if (animator != null) animator.applyRootMotion = false;
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -126,8 +127,19 @@ public class SeguidorFamilia : MonoBehaviour
             return;
         }
         rastro.Atualizar(mari);
+        // Não corrige a posição editada na cena enquanto Mari está parada ou em diálogo.
+        PlayerMovement lider = mari.GetComponent<PlayerMovement>();
+        if ((lider != null && !lider.enabled) || rastro.velocidadeMari <= 0.01f)
+        {
+            EstaAndando = EstaCorrendo = false;
+            AtualizarAnimacoes();
+            return;
+        }
         float origem = transform.position.x;
-        float destino = rastro.Destino(distanciaAtras);
+        float destino = Mathf.Clamp(rastro.Destino(distanciaAtras),
+            mari.position.x - distanciaAtras, mari.position.x + distanciaAtras);
+        if (ControleJornada.Instance != null)
+            destino = Mathf.Min(destino, ControleJornada.Instance.LimiteAvancoX);
         bool correndo = rastro.velocidadeMari > (velocidade + velocidadeCorrida) * 0.5f;
         Vector3 posicao = transform.position;
         float tolerancia = rastro.velocidadeMari > 0.01f ? 0.00001f : distanciaParada;

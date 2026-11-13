@@ -19,7 +19,10 @@ public class InventorySlot : MonoBehaviour,
         {
             icon.sprite = item != null ? item.icon : null;
             icon.enabled = item != null;
-            icon.raycastTarget = true;
+            // O slot recebe os cliques; a margem transparente do ícone não cobre outros slots.
+            icon.raycastTarget = false;
+            icon.preserveAspect = true;
+            icon.rectTransform.localScale = Vector3.one * (item != null ? item.inventoryIconScale : 1f);
 
             icon.color = item != null && item.itemName == "Cabaça cheia"
                 ? new Color(0.65f, 0.85f, 1f, 1f)
@@ -62,7 +65,7 @@ public class InventorySlot : MonoBehaviour,
         dragIcon.transform.SetAsLastSibling();
 
         RectTransform rect = dragIcon.GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(120, 120);
+        rect.sizeDelta = new Vector2(120, 120) * item.inventoryIconScale;
 
         Image dragImage = dragIcon.GetComponent<Image>();
         dragImage.sprite = item.icon;
