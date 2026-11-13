@@ -1661,12 +1661,7 @@ MonoBehaviour:
   paradasConcluidas: 0
   mari: {fileID: 1304905425}
   caminhada: {fileID: 3500000000}
-  limitesDasParadas:
-  - {fileID: 2113098075}
-  - {fileID: 3500000011}
-  - {fileID: 513277210}
-  - {fileID: 1574179965}
-  - {fileID: 845846474}
+  limitesDasParadas: [{fileID: 9891000001}, {fileID: 3500000011}, {fileID: 513277210}, {fileID: 1574179965}, {fileID: 845846474}]
   trechoAguaTerceira: 5
   trechoAposAguaTerceira: 75
   trechoJuazeiro: 14
@@ -7732,11 +7727,7 @@ Transform:
   m_LocalPosition: {x: 24.57, y: -0.95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2113098075}
-  - {fileID: 1302052791}
-  - {fileID: 3300000001}
-  - {fileID: 1071842524}
+  m_Children: [{fileID: 2113098075}, {fileID: 1302052791}, {fileID: 3300000001}, {fileID: 1071842524}, {fileID: 9891000001}]
   m_Father: {fileID: 789316125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1397325034
@@ -15486,7 +15477,7 @@ MonoBehaviour:
   movimentoMari: {fileID: 1304905420}
   abertura: {fileID: 3100000000}
   primeiraParada: {fileID: 2113098078}
-  distanciaInteracao: 2.3
+  distanciaInteracao: 3.5
   dialogueUI: {fileID: 3000000009}
   dialoguePanel: {fileID: 3000000099}
   choicesContainer: {fileID: 3000000093}
@@ -15804,70 +15795,8 @@ MonoBehaviour:
   - {fileID: -7045695409093356454, guid: 58656825698a92d44bd696dacd14e9de, type: 3}
   - {fileID: 2350033748748547408, guid: 893cae394599ab046b9f7b4bf99936ef, type: 3}
   - {fileID: -495449887597061455, guid: 10088df4f455d5a48aa496683ab15f1b, type: 3}
-  panoramasJornada:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 1540967464}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  panoramasAcampamento:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  panoramasJornada: [{fileID: 1540967464}]
+  panoramasAcampamento: []
   descansoTelaCheia: {fileID: 9890000000}
   cenarioFortaleza: {fileID: 21300000, guid: c9a90000000040008000000000000001, type: 3}
   policialParado: {fileID: 21300000, guid: c9a90000000040008000000000000002, type: 3}
@@ -15934,7 +15863,7 @@ Transform:
   m_GameObject: {fileID: 3500000010}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 414.2274, y: 0, z: 0}
+  m_LocalPosition: {x: 256.98, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16397,7 +16326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3900000008
 Transform:
   m_ObjectHideFlags: 0
@@ -16407,7 +16336,7 @@ Transform:
   m_GameObject: {fileID: 3900000007}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 409.2274, y: -1.53, z: 0}
+  m_LocalPosition: {x: 253.98000000000002, y: -1.53, z: 0}
   m_LocalScale: {x: 0.75581396, y: 0.75581396, z: 0.75581396}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23181,3 +23110,33 @@ SceneRoots:
   - {fileID: 514213736}
   - {fileID: 832283712}
   - {fileID: 1980803231}
+--- !u!1 &9891000000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component: [{component: {fileID: 9891000001}}]
+  m_Layer: 0
+  m_Name: Limite da primeira coleta - após os materiais
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9891000001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9891000000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25.650000000000006, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1373618560}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

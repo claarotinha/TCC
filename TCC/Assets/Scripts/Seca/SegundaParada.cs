@@ -1429,9 +1429,9 @@ public class SegundaParada : MonoBehaviour
     {
         bool ativa = TerceiraEmAndamento();
         bool precisaCurativo = JanelaQuebrada && !curativoAplicado;
-        if (plantaCenario != null) plantaCenario.SetActive(ativa && precisaCurativo && !plantaColetada);
+        if (plantaCenario != null) plantaCenario.SetActive(!plantaColetada);
         // O grupo permanece no cenario depois da despedida, sem repetir a conversa.
-        bool mostrarGrupo = ativa || encontroConcluido;
+        bool mostrarGrupo = true;
         if (mulherCenario != null) mulherCenario.SetActive(mostrarGrupo);
         if (meninoCenario != null) meninoCenario.SetActive(mostrarGrupo);
         if (pessoaCenario != null) pessoaCenario.SetActive(mostrarGrupo);
@@ -1945,11 +1945,11 @@ public class SegundaParada : MonoBehaviour
     {
         for (int i = 0; i < materiaisCenario.Length; i++)
             if (materiaisCenario[i] != null)
-                materiaisCenario[i].SetActive(introAcampamentoConcluida && !acampamentoConcluido &&
+                materiaisCenario[i].SetActive(!acampamentoConcluido &&
                     (materiaisAcampamento & (1 << i)) == 0);
         if (fogueiraCenario != null)
         {
-            fogueiraCenario.SetActive(acampamentoIniciado);
+            fogueiraCenario.SetActive(true);
             Sprite sprite = acampamentoConcluido || conversaFogueiraConcluida ? fogueiraBrasas :
                 refeicaoPreparada && !conversaFogueiraConcluida ? fogueiraAssando :
                 fogueiraPreparada ? fogueiraAcesa : fogueiraMontada;
