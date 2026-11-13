@@ -138,7 +138,7 @@ public class DialogoPrimeiraParada : MonoBehaviour
         if (jornada != null &&
             jornada.ParadaAtiva &&
             jornada.ParadaAtual == 1 &&
-            !terminou)
+            !terminou && !conversando)
         {
             Iniciar();
         }
@@ -146,6 +146,11 @@ public class DialogoPrimeiraParada : MonoBehaviour
 
     private void Iniciar()
     {
+        // O gatilho e o Update podem tentar iniciar a mesma conversa no mesmo quadro.
+        // Preserve o estado capturado antes do primeiro bloqueio de movimento.
+        if (conversando || terminou)
+            return;
+
         if (mari == null || dialogueUI == null ||
             dialoguePanel == null ||
             characterNameText == null || dialogueText == null)
