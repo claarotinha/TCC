@@ -64,7 +64,7 @@ public class CasaKeychain : MonoBehaviour
         {
             collected = true;
             GameProgress.Instance?.MarkKeyCollected();
-        });
+        }, alreadyExamined: true);
     }
 
     private void OnMouseEnter()

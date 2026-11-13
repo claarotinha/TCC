@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,7 @@ public class SecaOpeningDialogue : MonoBehaviour
     [Header("Personagens")]
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private GameObject mariquinha;
+    [SerializeField] private Transform saidaMariquinha;
     [SerializeField] private Sprite mariquinhaPortrait;
     [SerializeField] private Sprite mariPortrait;
 
@@ -121,7 +123,11 @@ public class SecaOpeningDialogue : MonoBehaviour
 
         // A irmã sai antes dos pensamentos de Mari.
         if (currentLine == 1 && mariquinha != null)
-            mariquinha.SetActive(false);
+        {
+            dialogueRunning = false;
+            StartCoroutine(SairDoQuarto());
+            return;
+        }
 
         if (currentLine >= lines.Length)
         {
@@ -129,6 +135,28 @@ public class SecaOpeningDialogue : MonoBehaviour
             return;
         }
 
+        ShowLine();
+    }
+
+    private IEnumerator SairDoQuarto()
+    {
+        Transform irma = mariquinha.transform;
+        Vector3 destino = saidaMariquinha != null ? saidaMariquinha.position : irma.position + Vector3.right * 3f;
+        destino.y = irma.position.y;
+        destino.z = irma.position.z;
+        Animator animador = mariquinha.GetComponent<Animator>();
+        SpriteRenderer visual = mariquinha.GetComponent<SpriteRenderer>();
+        if (visual != null) visual.flipX = (destino.x - irma.position.x) * irma.lossyScale.x < 0f;
+        while (Vector3.Distance(irma.position, destino) > .02f)
+        {
+            bool andando = !PauseHelper.BlockInput() && Time.timeScale > 0f;
+            if (animador != null) animador.SetBool("IsWalking", andando);
+            if (andando) irma.position = Vector3.MoveTowards(irma.position, destino, 2.5f * Time.deltaTime);
+            yield return null;
+        }
+        if (animador != null) animador.SetBool("IsWalking", false);
+        mariquinha.SetActive(false);
+        dialogueRunning = true;
         ShowLine();
     }
 

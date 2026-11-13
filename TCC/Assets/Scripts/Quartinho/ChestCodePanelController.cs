@@ -159,7 +159,7 @@ public class ChestCodePanelController : MonoBehaviour
         digits[index] = (digits[index] + amount + 10) % 10;
         digitTexts[index].text = digits[index].ToString();
 
-        // Mantém o aviso de erro até os dois segundos terminarem.
+        // Mantém o aviso de erro até os três segundos terminarem.
     }
 
     private void TryCode()
@@ -190,7 +190,7 @@ public class ChestCodePanelController : MonoBehaviour
     private IEnumerator ShowWrongCode()
     {
         feedbackText.text = "Combinação incorreta. Tente novamente.";
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(3f);
         feedbackText.text = Prompt;
         feedbackRoutine = null;
     }
