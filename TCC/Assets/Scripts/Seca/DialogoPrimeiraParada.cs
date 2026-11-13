@@ -17,6 +17,10 @@ public class DialogoPrimeiraParada : MonoBehaviour
     [SerializeField] private Image portraitImage;
     [SerializeField] private Sprite retratoPainho;
 
+    [Header("Dica editável na Hierarchy")]
+    [SerializeField] private TMP_Text dicaCombinacao;
+    [SerializeField] private CacaPassarinho cacaPassarinho;
+
     private readonly string[] nomes =
     {
         "Pai", "Pai"
@@ -46,6 +50,8 @@ public class DialogoPrimeiraParada : MonoBehaviour
 
     private void Update()
     {
+        if (dicaCombinacao != null)
+            dicaCombinacao.gameObject.SetActive(terminou && cacaPassarinho != null && cacaPassarinho.CanInteract);
         if (!conversando || Time.timeScale == 0f)
             return;
 

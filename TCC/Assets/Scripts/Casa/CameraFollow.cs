@@ -7,6 +7,8 @@ public class CameraFollow : MonoBehaviour
     public Collider2D levelBounds;
     [SerializeField] private SpriteRenderer[] backgroundPieces;
 
+    [SerializeField] private float horizontalOffset;
+
     private float fixedY;
     private float fixedZ;
     private Camera sceneCamera;
@@ -43,7 +45,7 @@ public class CameraFollow : MonoBehaviour
 
         // Começa no trecho onde a personagem está, sem mostrar a área vazia.
         if (target != null)
-            transform.position = new Vector3(ClampX(target.position.x), fixedY, fixedZ);
+            transform.position = new Vector3(ClampX(target.position.x + horizontalOffset), fixedY, fixedZ);
     }
 
     // Chamado pelo setor quando uma passagem é liberada; outras cenas mantêm seus limites.
@@ -70,7 +72,7 @@ public class CameraFollow : MonoBehaviour
         if (target == null)
             return;
 
-        float desiredX = ClampX(target.position.x);
+        float desiredX = ClampX(target.position.x + horizontalOffset);
 
         Vector3 desiredPosition = new Vector3(
             desiredX,

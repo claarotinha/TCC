@@ -529,7 +529,7 @@ public class SegundaParada : MonoBehaviour
                 "Que Deus nos conceda a graça da chuva."
             }, () => {
                 limiteConversa = transform.position.x + 270f;
-                StartCoroutine(ConversaDepoisDeCaminhar(5f, ConversaBaleia));
+                StartCoroutine(ConversaDepoisDeCaminhar(3f, ConversaBaleia));
             }, true);
     }
 
@@ -557,6 +557,17 @@ public class SegundaParada : MonoBehaviour
 
         retornoX = mae != null ? mae.transform.position.x + 1.2f : mari.transform.position.x;
         destinoBaleia = destinoBuscaBaleia.position;
+        // The run starts after a player-paced conversation, so keep the search nearby.
+        float distancia = destinoBaleia.x - mari.transform.position.x;
+        if (distancia > 70f || distancia < 50f)
+        {
+            float ajuste = mari.transform.position.x + 65f - destinoBaleia.x;
+            Vector3 deslocamento = Vector3.right * ajuste;
+            destinoBuscaBaleia.position += deslocamento;
+            foreach (GameObject pista in pistasBusca) if (pista != null) pista.transform.position += deslocamento;
+            if (alvoBaleia != null) alvoBaleia.transform.position += deslocamento;
+            destinoBaleia = destinoBuscaBaleia.position;
+        }
     }
 
     private IEnumerator CorrerBaleia()
