@@ -1,4 +1,5 @@
 
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,11 @@ public class DialogoPrimeiraParada : MonoBehaviour
     [Header("Dica editável na Hierarchy")]
     [SerializeField] private TMP_Text dicaCombinacao;
     [SerializeField] private CacaPassarinho cacaPassarinho;
+
+    [SerializeField] private ItemData[] materiaisCombinacao;
+    [SerializeField] private ItemData estilingueParcial, estilinguePronto;
+    private bool inventarioDicaAnterior;
+    private float proximaChecagemDica;
 
     private readonly string[] nomes =
     {
@@ -50,8 +56,10 @@ public class DialogoPrimeiraParada : MonoBehaviour
 
     private void Update()
     {
-        if (dicaCombinacao != null)
-            dicaCombinacao.gameObject.SetActive(terminou && cacaPassarinho != null && cacaPassarinho.CanInteract);
+        AtualizarDicaCombinacao();
+        ControleJornada jornada = ControleJornada.Instance;
+        if (!terminou && !conversando && jornada != null && jornada.ParadaAtiva && jornada.ParadaAtual == 1 &&
+            dialogueUI != null && !dialogueUI.activeInHierarchy) Iniciar();
         if (!conversando || Time.timeScale == 0f)
             return;
 
@@ -65,6 +73,32 @@ public class DialogoPrimeiraParada : MonoBehaviour
             else
                 MostrarFala();
         }
+    }
+
+    private void AtualizarDicaCombinacao()
+    {
+        bool aberto = InventoryTabController.Instance != null && InventoryTabController.Instance.IsOpen;
+        InventoryManager inventario = InventoryManager.Instance;
+        bool materiais = inventario != null && materiaisCombinacao != null && materiaisCombinacao.Length == 3 &&
+            (materiaisCombinacao.All(item => item != null && inventario.Items.Contains(item)) ||
+             (estilingueParcial != null && inventario.Items.Contains(estilingueParcial) && inventario.Items.Contains(materiaisCombinacao[1])));
+        bool mostrar = terminou && aberto && materiais && cacaPassarinho != null && cacaPassarinho.CanInteract &&
+            (estilinguePronto == null || !inventario.Items.Contains(estilinguePronto));
+        if (dicaCombinacao != null)
+        {
+            dicaCombinacao.gameObject.SetActive(mostrar);
+            dicaCombinacao.enabled = true;
+        }
+        // Keep just the authored Hierarchy text if an older persistent canvas carries the same hint.
+        if (aberto != inventarioDicaAnterior || Time.unscaledTime >= proximaChecagemDica)
+        {
+            foreach (TMP_Text texto in FindObjectsByType<TMP_Text>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+                if (texto != dicaCombinacao && texto.text != null &&
+                    texto.text.Contains("Arraste um item sobre o outro") && texto.text.Contains("Confirme"))
+                    texto.enabled = false;
+            proximaChecagemDica = Time.unscaledTime + .5f;
+        }
+        inventarioDicaAnterior = aberto;
     }
 
     private void FixedUpdate()

@@ -630,7 +630,7 @@ public class SegundaParada : MonoBehaviour
         LiberarMovimento();
         Falar(new[] { "Mariquinha", "Mariquinha" }, new[] {
             "Olha as pegadinhas de Baleia, Zefinha! Vão pra aquele lado.",
-            "Vamo seguindo as pegadas. Se quiser, clica nelas pra olhar melhor."
+            "Vamo seguindo as pegadas de Baleia. Ela passou por aqui."
         }, null, true);
     }
 
@@ -1494,7 +1494,7 @@ public class SegundaParada : MonoBehaviour
                 AtualizarVisuaisEncontro();
                 quadro = Time.frameCount;
                 SalvarAguaTerceira();
-            });
+            }, alreadyExamined: true);
             return;
         }
         encontroVisitado = true;

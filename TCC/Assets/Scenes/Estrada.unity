@@ -1665,7 +1665,7 @@ MonoBehaviour:
   trechoAguaTerceira: 5
   trechoAposAguaTerceira: 75
   trechoJuazeiro: 14
-  trechoAcampamento: 22
+  trechoAcampamento: 37.07000000000005
   trechoAposAcampamento: 22.5
   limiteFortaleza: {fileID: 3900000134}
 --- !u!4 &406039565
@@ -1995,6 +1995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GatilhoParada
   numeroDaParada: 2
   concluirComTeclaT: 0
+  personagem: {fileID: 1304905420}
 --- !u!61 &465652023
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2586,6 +2587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GatilhoParada
   numeroDaParada: 3
   concluirComTeclaT: 0
+  personagem: {fileID: 1304905420}
 --- !u!61 &513277212
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4216,6 +4218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GatilhoParada
   numeroDaParada: 5
   concluirComTeclaT: 0
+  personagem: {fileID: 1304905420}
 --- !u!61 &845846476
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8738,6 +8741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GatilhoParada
   numeroDaParada: 4
   concluirComTeclaT: 0
+  personagem: {fileID: 1304905420}
 --- !u!61 &1574179967
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12575,6 +12579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GatilhoParada
   numeroDaParada: 1
   concluirComTeclaT: 0
+  personagem: {fileID: 1304905420}
 --- !u!61 &2113098077
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12643,6 +12648,12 @@ MonoBehaviour:
   retratoPainho: {fileID: 6458995221465509233, guid: 0b7a2c6214b28d04d9e775ef3eb45661, type: 3}
   dicaCombinacao: {fileID: 9892000003}
   cacaPassarinho: {fileID: 3300000004}
+  materiaisCombinacao:
+  - {fileID: 11400000, guid: e63009695780991438885d5c9a147b36, type: 2}
+  - {fileID: 11400000, guid: 1166bada09fb148478e04d7eaa8fefef, type: 2}
+  - {fileID: 11400000, guid: aa17c14a2df34f789bd319f7012a0004, type: 2}
+  estilingueParcial: {fileID: 11400000, guid: aa17c14a2df34f789bd319f7012a0011, type: 2}
+  estilinguePronto: {fileID: 11400000, guid: aa17c14a2df34f789bd319f7012a0041, type: 2}
 --- !u!1 &3000000000
 GameObject:
   m_ObjectHideFlags: 0
@@ -15747,7 +15758,7 @@ MonoBehaviour:
   curativo: {fileID: 11400000, guid: c6a60000000040008000000000000005, type: 2}
   mariquinhaComCurativo: {fileID: 21300000, guid: c6a60000000040008000000000000002, type: 3}
   mulherRetirante: {fileID: -3680328172193789781, guid: e929017815c240c4fa996bb970e17bee, type: 3}
-  meninoRetirante: {fileID: 21300002, guid: c6a60000000040008000000000000002, type: 3}
+  meninoRetirante: {fileID: -677328869230992964, guid: e929017815c240c4fa996bb970e17bee, type: 3}
   pessoaDeitada: {fileID: 3282603817959738641, guid: 144ea2cc2a476c6408a16885f4ffa057, type: 3}
   plantaCenario: {fileID: 3900000039}
   mulherCenario: {fileID: 3900000049}
@@ -16793,7 +16804,7 @@ Transform:
   m_GameObject: {fileID: 3900000021}
   serializedVersion: 2
   m_LocalRotation: {x: 0.027771784, y: -0.027980411, z: -0.70919466, w: 0.7039097}
-  m_LocalPosition: {x: -39.417700000000025, y: -0.5284, z: 0}
+  m_LocalPosition: {x: -41.917700000000025, y: -0.5284, z: 0}
   m_LocalScale: {x: 0.22858249, y: 0.20564978, z: 0.22858249}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16933,7 +16944,7 @@ Transform:
   m_GameObject: {fileID: 3900000025}
   serializedVersion: 2
   m_LocalRotation: {x: 0.027771784, y: -0.027980411, z: -0.70919466, w: 0.7039097}
-  m_LocalPosition: {x: -33.417700000000025, y: -0.5284, z: 0}
+  m_LocalPosition: {x: -38.417700000000025, y: -0.5284, z: 0}
   m_LocalScale: {x: 0.22858249, y: 0.20564978, z: 0.22858249}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17070,7 +17081,7 @@ Transform:
   m_GameObject: {fileID: 3900000029}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.582299999999975, y: -0.27, z: 0}
+  m_LocalPosition: {x: -13.917700000000025, y: -0.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17103,7 +17114,7 @@ Transform:
   m_GameObject: {fileID: 3900000031}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.582299999999975, y: -0.2400000000000002, z: 0}
+  m_LocalPosition: {x: -13.917700000000025, y: -0.2400000000000002, z: 0}
   m_LocalScale: {x: 1.2, y: 0.9, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17821,7 +17832,7 @@ GameObject:
   - component: {fileID: 3900000055}
   - component: {fileID: 3900000056}
   m_Layer: 0
-  m_Name: Antonio - conversa
+  m_Name: Antônio - menino da arte da mãe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17836,7 +17847,7 @@ Transform:
   m_GameObject: {fileID: 3900000053}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.03, y: -0.94, z: 0}
+  m_LocalPosition: {x: 31.140000000000015, y: -0.94, z: 0}
   m_LocalScale: {x: 0.58857805, y: 0.58857805, z: 0.58857805}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17891,7 +17902,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300002, guid: c6a60000000040008000000000000002, type: 3}
+  m_Sprite: {fileID: -677328869230992964, guid: e929017815c240c4fa996bb970e17bee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -21173,7 +21184,7 @@ Transform:
   m_GameObject: {fileID: 9820000030}
   serializedVersion: 2
   m_LocalRotation: {x: 0.027771784, y: -0.027980411, z: -0.70919466, w: 0.7039097}
-  m_LocalPosition: {x: -27.417700000000025, y: -0.5284, z: 0}
+  m_LocalPosition: {x: -34.917700000000025, y: -0.5284, z: 0}
   m_LocalScale: {x: 0.22858249, y: 0.20564978, z: 0.22858249}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21313,7 +21324,7 @@ Transform:
   m_GameObject: {fileID: 9820000040}
   serializedVersion: 2
   m_LocalRotation: {x: 0.027771784, y: -0.027980411, z: -0.70919466, w: 0.7039097}
-  m_LocalPosition: {x: -21.417700000000025, y: -0.5284, z: 0}
+  m_LocalPosition: {x: -31.417700000000025, y: -0.5284, z: 0}
   m_LocalScale: {x: 0.22858249, y: 0.20564978, z: 0.22858249}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21453,7 +21464,7 @@ Transform:
   m_GameObject: {fileID: 9820000050}
   serializedVersion: 2
   m_LocalRotation: {x: 0.027771784, y: -0.027980411, z: -0.70919466, w: 0.7039097}
-  m_LocalPosition: {x: -15.417700000000025, y: -0.5284, z: 0}
+  m_LocalPosition: {x: -27.917700000000025, y: -0.5284, z: 0}
   m_LocalScale: {x: 0.22858249, y: 0.20564978, z: 0.22858249}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21593,7 +21604,7 @@ Transform:
   m_GameObject: {fileID: 9820000060}
   serializedVersion: 2
   m_LocalRotation: {x: 0.027771784, y: -0.027980411, z: -0.70919466, w: 0.7039097}
-  m_LocalPosition: {x: -9.417700000000025, y: -0.5284, z: 0}
+  m_LocalPosition: {x: -24.417700000000025, y: -0.5284, z: 0}
   m_LocalScale: {x: 0.22858249, y: 0.20564978, z: 0.22858249}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21733,7 +21744,7 @@ Transform:
   m_GameObject: {fileID: 9820000070}
   serializedVersion: 2
   m_LocalRotation: {x: 0.027771784, y: -0.027980411, z: -0.70919466, w: 0.7039097}
-  m_LocalPosition: {x: -3.417700000000025, y: -0.5284, z: 0}
+  m_LocalPosition: {x: -20.917700000000025, y: -0.5284, z: 0}
   m_LocalScale: {x: 0.22858249, y: 0.20564978, z: 0.22858249}
   m_ConstrainProportionsScale: 0
   m_Children: []
