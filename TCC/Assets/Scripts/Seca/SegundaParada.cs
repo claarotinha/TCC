@@ -83,6 +83,7 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private Sprite[] fundosDaJornada;
     [SerializeField] private SpriteRenderer[] panoramasJornada;
     [SerializeField] private SpriteRenderer[] panoramasAcampamento;
+    [SerializeField] private GameObject descansoTelaCheia;
     private SpriteRenderer[] cenarioHorario;
     private Color[] coresHorario;
     private bool acampamentoIniciado, introAcampamentoConcluida, fogueiraPreparada, pedidoAlecrimConcluido;
@@ -971,10 +972,10 @@ public class SegundaParada : MonoBehaviour
         PrepararFade();
         yield return Escurecer(1f);
         interiorAbrigo.SetActive(true);
+        if (descansoTelaCheia != null) descansoTelaCheia.SetActive(true);
         Bounds interior = interiorAbrigo.GetComponent<SpriteRenderer>().bounds;
         cameraAbrigo.transform.position = new Vector3(interior.center.x, interior.center.y, cameraOriginal.z);
-        cameraAbrigo.orthographicSize = Mathf.Min(zoomOriginal, interior.extents.y,
-            interior.extents.x / cameraAbrigo.aspect);
+        cameraAbrigo.orthographicSize = Mathf.Max(interior.extents.y, interior.extents.x / cameraAbrigo.aspect);
         if (seguirCamera != null) seguirCamera.enabled = false;
         for (int i = 0; i < desenhosAbrigo.Length; i++)
             if (desenhosAbrigo[i] != null) desenhosAbrigo[i].enabled = false;
@@ -1097,6 +1098,7 @@ public class SegundaParada : MonoBehaviour
 
     private void RestaurarExterior()
     {
+        if (descansoTelaCheia != null) descansoTelaCheia.SetActive(false);
         if (interiorAbrigo != null) interiorAbrigo.SetActive(false);
     }
 
@@ -1377,7 +1379,11 @@ public class SegundaParada : MonoBehaviour
         LiberarMovimento();
         RestaurarInventarioAbrigo();
         quadro = Time.frameCount;
-        if (aguaTerceiraConcluida) SalvarAguaTerceira();
+        if (aguaTerceiraConcluida)
+        {
+            SalvarAguaTerceira();
+            Falar(new[] { "Mãe" }, new[] { "Pronto, a cabaça tá cheia. Guarde o facão, Zefinha. Vamos repartir essa água e seguir caminho." }, null);
+        }
     }
 
     private void PrepararEncontroTerceira()
@@ -1416,7 +1422,7 @@ public class SegundaParada : MonoBehaviour
         bool precisaCurativo = JanelaQuebrada && !curativoAplicado;
         if (plantaCenario != null) plantaCenario.SetActive(ativa && precisaCurativo && !plantaColetada);
         // O grupo permanece no cenario depois da despedida, sem repetir a conversa.
-        bool mostrarGrupo = ativa && !encontroConcluido;
+        bool mostrarGrupo = ativa || encontroConcluido;
         if (mulherCenario != null) mulherCenario.SetActive(mostrarGrupo);
         if (meninoCenario != null) meninoCenario.SetActive(mostrarGrupo);
         if (pessoaCenario != null) pessoaCenario.SetActive(mostrarGrupo);
@@ -2151,9 +2157,16 @@ public class SegundaParada : MonoBehaviour
 
     private void EnquadrarNoite()
     {
-        Bounds area = AreaFocoNoite();
-        cameraAbrigo.orthographicSize = zoomOriginal;
-        cameraAbrigo.transform.position = new Vector3(LimitarCameraNoiteX(area.center.x, zoomOriginal), cameraOriginal.y, cameraOriginal.z);
+        // One stable composition includes everyone, even when the speaker changes.
+        Bounds area = paisCenario.GetComponent<SpriteRenderer>().bounds;
+        area.Encapsulate(irmasCenario.GetComponent<SpriteRenderer>().bounds);
+        area.Encapsulate(fogueiraCenario.GetComponent<SpriteRenderer>().bounds);
+        float espacoUtil = Mathf.Max(.35f, 1f - fracaoPainelNoite);
+        float zoom = Mathf.Max(zoomOriginal, (area.size.y + 1.2f) / (2f * espacoUtil),
+            (area.size.x + 2f) / (2f * cameraAbrigo.aspect));
+        cameraAbrigo.orthographicSize = zoom;
+        cameraAbrigo.transform.position = new Vector3(LimitarCameraNoiteX(area.center.x, zoom),
+            area.min.y - .6f + zoom * (1f - 2f * fracaoPainelNoite), cameraOriginal.z);
     }
 
     private float LimitarCameraNoiteX(float x, float zoom)
@@ -2168,7 +2181,7 @@ public class SegundaParada : MonoBehaviour
     private void MostrarPoseNoite(GameObject alvo, Sprite sprite)
     {
         TrocarVisualCenario(alvo, sprite, true);
-        alvo.GetComponent<SpriteRenderer>().color = new Color(0.82f, 0.84f, 0.94f);
+        alvo.GetComponent<SpriteRenderer>().color = Color.white;
         alvo.SetActive(true);
     }
 
@@ -2189,7 +2202,10 @@ public class SegundaParada : MonoBehaviour
         Vector3 lugar = mari.transform.position; lugar.x = quintaParada.position.x + 2f; Posicionar(mari.transform, lugar);
         for (int i = 0; i < desenhosAbrigo.Length; i++)
             if (desenhosAbrigo[i] != null) desenhosAbrigo[i].enabled = false;
-        MostrarPoseNoite(familiaAcampamento, JanelaQuebrada && curativoAplicado ? familiaJuazeiroCurativo : familiaJuazeiro);
+        familiaAcampamento.SetActive(false);
+        MostrarPoseNoite(paisCenario, paisAcordados);
+        MostrarPoseNoite(irmasCenario, JanelaQuebrada ? irmasAcordadasCurativo : irmasAcordadas);
+        MostrarFogueira(fogueiraAssando);
         focoNoite = 0;
         if (conversaFogueiraConcluida)
         {
@@ -2422,18 +2438,8 @@ public class SegundaParada : MonoBehaviour
         familiaAcampamento.SetActive(false);
         MostrarPoseNoite(paisCenario, paisAcordados);
         focoNoite = 2; EnquadrarNoite();
-        float zoom = cameraAbrigo.orthographicSize;
-        Bounds area = paisCenario.GetComponent<SpriteRenderer>().bounds;
-        float tempo = 0f;
-        while (tempo < 2.5f)
-        {
-            tempo += Time.deltaTime;
-            float tamanho = Mathf.Lerp(zoom, zoom + 1.2f, Mathf.Clamp01(tempo / 2.5f));
-            cameraAbrigo.orthographicSize = tamanho;
-            cameraAbrigo.transform.position = new Vector3(LimitarCameraNoiteX(area.center.x, tamanho),
-                cameraOriginal.y, cameraOriginal.z);
-            yield return null;
-        }
+        EnquadrarNoite();
+        yield return new WaitForSeconds(2.5f);
         PrepararFade(); yield return Escurecer(1f);
         yield return new WaitForSeconds(1.4f);
         irmasCenario.SetActive(false); paisCenario.SetActive(false);

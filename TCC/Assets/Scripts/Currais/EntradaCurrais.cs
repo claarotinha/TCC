@@ -400,7 +400,7 @@ public partial class EntradaCurrais : MonoBehaviour
                 if (!menuAberto)
                 {
                     FecharDialogo();
-                    if (Dados.curraisEtapaEntrada >= 3) LiberarMari();
+                    if (Dados.curraisEtapaEntrada >= 2) LiberarMari();
                 }
             }
         }
@@ -564,7 +564,7 @@ public partial class EntradaCurrais : MonoBehaviour
     private void LiberarMari()
     {
         // Não aplica os limites do campo enquanto a inicialização estiver incompleta.
-        if (mari != null) mari.enabled = pronto && GameProgress.Instance != null && Dados.curraisEtapaEntrada >= 3;
+        if (mari != null) mari.enabled = pronto && GameProgress.Instance != null && Dados.curraisEtapaEntrada >= 2;
         bool explorarSetor = pronto && GameProgress.Instance != null &&
             Dados.curraisEtapaEntrada == 4 && campo != null && campo.activeInHierarchy;
         if (seguirCamera != null) seguirCamera.enabled = explorarSetor;
@@ -645,7 +645,7 @@ public partial class EntradaCurrais : MonoBehaviour
         menuAberto = false;
         FecharDialogo();
         acao?.Invoke();
-        if (!ocupado && Dados.curraisEtapaEntrada >= 3) LiberarMari();
+        if (!ocupado && Dados.curraisEtapaEntrada >= 2) LiberarMari();
     }
 
     private void MostrarOpcoes(string personagem, string texto, string[] rotulos, Action[] acoes)
