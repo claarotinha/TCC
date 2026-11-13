@@ -6,6 +6,7 @@ public class SecaPreparationItem : MonoBehaviour
 {
     [Header("Pedido da mãe")]
     [SerializeField] private SecaPreparationRequest preparationRequest;
+    [SerializeField] private bool mostrarSprite = true;
 
     private static readonly HashSet<SecaPreparationItem> activeItems = new HashSet<SecaPreparationItem>();
     private void OnEnable() => activeItems.Add(this);
@@ -72,6 +73,6 @@ public class SecaPreparationItem : MonoBehaviour
         released = true;
         discovery.enabled = true;
         if (itemCollider != null) itemCollider.enabled = true;
-        if (itemRenderer != null) itemRenderer.enabled = true;
+        if (itemRenderer != null) itemRenderer.enabled = mostrarSprite;
     }
 }

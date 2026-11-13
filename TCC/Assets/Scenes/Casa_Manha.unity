@@ -9698,9 +9698,9 @@ MonoBehaviour:
   readingPose: {fileID: 9832100002}
   playerRenderers:
   - {fileID: 716483946}
-  readingDuration: 15
   sleepingImage: {fileID: 1363291826}
   tiredExamine: {fileID: 1969619170}
+  closeReadingButton: {fileID: 9832000009}
 --- !u!1 &1981426194
 GameObject:
   m_ObjectHideFlags: 0
@@ -11161,12 +11161,12 @@ GameObject:
   - component: {fileID: 5700000001}
   - component: {fileID: 5700000002}
   m_Layer: 0
-  m_Name: Porta do quartinho aberta - porta.png
+  m_Name: Porta aberta do quartinho - EDITAR posição e escala
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5700000001
 Transform:
   m_ObjectHideFlags: 0
@@ -12438,12 +12438,12 @@ GameObject:
   - component: {fileID: 9832000008}
   - component: {fileID: 9832000009}
   m_Layer: 5
-  m_Name: BackDiaryButton
+  m_Name: X - fechar leitura e continuar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9832000006
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12541,7 +12541,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 9832000008}
   m_OnClick: {m_PersistentCalls: {m_Calls: []}}
 --- !u!1 &9832000010
@@ -13754,12 +13754,12 @@ GameObject:
   serializedVersion: 6
   m_Component: [{component: {fileID: 9832100001}}, {component: {fileID: 9832100002}}]
   m_Layer: 0
-  m_Name: Mari sentada - leitura do diário
+  m_Name: Mari sentada na cama - EDITAR posição e escala
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9832100001
 Transform:
   m_ObjectHideFlags: 0
@@ -13769,8 +13769,8 @@ Transform:
   m_GameObject: {fileID: 9832100000}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.217926, y: -0.5, z: 0}
+  m_LocalScale: {x: 0.2921270833, y: 0.2921270833, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1969619169}

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class SecaPreparationRequest : MonoBehaviour
 {
+    public const string RequestMessage =
+        "Josefa, já que terminou de comer, vá pegar algumas coisas " +
+        "antes de sairmos. Pegue a cabaça, o facão e um pano.";
     [Header("Refeição")]
     [SerializeField] private SecaMealDialogue mealDialogue;
 
@@ -105,9 +108,7 @@ public class SecaPreparationRequest : MonoBehaviour
             choicesContainer.SetActive(false);
 
         characterNameText.text = "Mãe";
-        dialogueText.text =
-            "Josefa, já que terminou de comer, vá pegar algumas coisas " +
-            "antes de sairmos. Pegue a cabaça, o facão e um pano.";
+        dialogueText.text = RequestMessage;
 
         if (portraitImage != null)
         {

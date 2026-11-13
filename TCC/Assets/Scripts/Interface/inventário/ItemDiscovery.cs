@@ -4,10 +4,12 @@ using UnityEngine;
 public class ItemDiscovery : MonoBehaviour
 {
     [SerializeField] private ItemData item;
+    [SerializeField] private bool directConfirmation;
     private Collider2D itemCollider;
     private string progressId;
     private ExamineObject examine;
     private bool inspected;
+    public bool CanCollect => isActiveAndEnabled && itemCollider != null && itemCollider.enabled && item != null;
 
     private void Awake()
     {
@@ -35,12 +37,18 @@ public class ItemDiscovery : MonoBehaviour
         if (!itemCollider.OverlapPoint(mousePosition))
             return;
 
-        if (!inspected && examine != null)
+        if (!directConfirmation && !inspected && examine != null)
         {
             inspected = true;
             examine.ShowMessage(string.IsNullOrWhiteSpace(examine.message) ? item.description : examine.message);
             return;
         }
+        TryCollectDirect();
+    }
+
+    public bool TryCollectDirect()
+    {
+        if (!CanCollect || InventoryTabController.Instance == null) return false;
         if (examine != null && examine.PanelIsOpen) examine.HidePanel();
 
         CollectPrompt prompt =
@@ -49,14 +57,14 @@ public class ItemDiscovery : MonoBehaviour
         if (prompt == null)
         {
             Debug.LogError("CollectPrompt não encontrado no InventoryCanvas.");
-            return;
+            return false;
         }
 
-        prompt.Show(item, () =>
+        return prompt.Show(item, () =>
         {
             GameProgress.Instance?.MarkObjectCollected(progressId);
             Destroy(gameObject);
-        }, alreadyExamined: examine != null && inspected);
+        }, alreadyExamined: directConfirmation || (examine != null && inspected));
     }
 }
 

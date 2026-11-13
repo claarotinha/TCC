@@ -69,6 +69,8 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private Transform quintaParada;
     [SerializeField] private Collider2D limitesEstrada;
     [SerializeField] private ItemData galhosSecos, folhasSecas, galhosAlecrim, passaro;
+    [SerializeField] private ItemData materialFogueira;
+    [SerializeField] private ItemCombination combinacaoFogueira;
     [SerializeField] private Sprite fogueiraMontada, fogueiraAcesa, fogueiraAssando, fogueiraBrasas;
     [SerializeField] private Sprite irmasAcordadas, irmasAcordadasCurativo;
     [SerializeField] private Sprite irmasDormindo;
@@ -172,6 +174,7 @@ public class SegundaParada : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(RegistrarCombinacaoFogueira());
         ferimentoSemProgresso = false;
         RegistrarCenario();
         if (riacho != null) riacho.gameObject.SetActive(false);
@@ -204,6 +207,17 @@ public class SegundaParada : MonoBehaviour
             return;
         }
         if (casa != null) TrocarCasa(casaFechada);
+    }
+
+    private IEnumerator RegistrarCombinacaoFogueira()
+    {
+        CombinationPrompt prompt = null;
+        while (prompt == null)
+        {
+            yield return null;
+            prompt = FindAnyObjectByType<CombinationPrompt>();
+        }
+        prompt.RegisterRecipe(combinacaoFogueira);
     }
 
     private void Update()
@@ -2088,7 +2102,7 @@ public class SegundaParada : MonoBehaviour
     public bool SoltarNoAcampamento(ItemData item, Vector2 posicaoTela)
     {
         if (item == null || !AcampamentoEmAndamento() || noiteEmAndamento || Camera.main == null ||
-            (item != galhosSecos && item != folhasSecas && item != galhosAlecrim && item != passaro && item != prea)) return false;
+            (item != galhosSecos && item != folhasSecas && item != materialFogueira && item != galhosAlecrim && item != passaro && item != prea)) return false;
         Ray raio = Camera.main.ScreenPointToRay(posicaoTela); float distancia;
         Plane plano = new Plane(Vector3.forward, Vector3.zero);
         if (!plano.Raycast(raio, out distancia)) return false;
@@ -2118,14 +2132,19 @@ public class SegundaParada : MonoBehaviour
         InventoryTabController.Instance?.Close();
         if (!fogueiraPreparada)
         {
-            if (!Possui(galhosSecos) || !Possui(folhasSecas))
+            bool combinados = materialFogueira != null && Possui(materialFogueira);
+            if (!combinados && (!Possui(galhosSecos) || !Possui(folhasSecas)))
             {
                 Falar(new[] { "Mãe" }, new[] {
                     "Zefinha, vá junto de tua irmã procurar uns galhos secos e folhas secas, vamo montar uma fogueira debaixo daquele juazeiro."
                 }, null);
                 return true;
             }
-            if (!ConsumirItensAcampamento(galhosSecos, folhasSecas)) return false;
+            if (combinados)
+            {
+                if (!ConsumirItensAcampamento(materialFogueira)) return false;
+            }
+            else if (!ConsumirItensAcampamento(galhosSecos, folhasSecas)) return false;
             fogueiraPreparada = true; AtualizarMateriaisAcampamento(); SalvarAcampamento();
         }
         if (!pedidoAlecrimConcluido || !Possui(galhosAlecrim))

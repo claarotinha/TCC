@@ -9,6 +9,7 @@ public class SecaMotherReturn : MonoBehaviour
     [Header("Preparativos")]
     [SerializeField] private SecaPreparationRequest preparationRequest;
     [SerializeField] private SecaPreparationTracker preparationTracker;
+    [SerializeField] private ItemDiscovery cabacaNaMesa;
 
     [Header("Personagem")]
     [SerializeField] private PlayerMovement playerMovement;
@@ -30,6 +31,13 @@ public class SecaMotherReturn : MonoBehaviour
 
     public bool DepartureReady { get; private set; }
 
+    public bool TryCollectCabaca()
+    {
+        if (preparationRequest == null || !preparationRequest.RequestCompleted ||
+            cabacaNaMesa == null || !cabacaNaMesa.CanCollect) return false;
+        return cabacaNaMesa.TryCollectDirect();
+    }
+
     private ExamineObject examineObject;
     private Rigidbody2D playerBody;
     private bool configured;
@@ -47,9 +55,7 @@ public class SecaMotherReturn : MonoBehaviour
         examineObject.enabled = false;
         examineObject.Opened += HandleInteraction;
 
-        examineObject.message =
-            "Ainda preciso pegar tudo que mainha pediu: " +
-            "a cabaça, o facão e o pano.";
+        examineObject.message = SecaPreparationRequest.RequestMessage;
     }
 
     private void Start()

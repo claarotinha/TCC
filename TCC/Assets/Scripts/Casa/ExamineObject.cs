@@ -129,6 +129,9 @@ public class ExamineObject : MonoBehaviour
         if (!myCollider.OverlapPoint(mousePosition))
             return;
 
+        SecaMotherReturn mesa = GetComponent<SecaMotherReturn>();
+        if (mesa != null && mesa.TryCollectCabaca()) return;
+
         // Na Seca, o item sobre a mesa/rede tem prioridade sobre o cenário
         // atrás dele. Os outros objetos e cenas mantêm sua interação.
         if (gameObject.scene.name == "Seca" &&

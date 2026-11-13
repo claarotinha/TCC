@@ -20,8 +20,5 @@ MonoBehaviour:
   m_Name: ItemFacao
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Facão
-  icon:
-    fileID: -2476593778705490128
-    guid: 442bf633beefe454e8e68d43464d6a7e
-    type: 3
+  icon: {fileID: 6701968959509149145, guid: 4368798b3ef7ce140b5a6dadca176dad, type: 3}
   description: Ferramenta que pode ajudar durante o caminho.

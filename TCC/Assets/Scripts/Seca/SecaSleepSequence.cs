@@ -13,6 +13,10 @@ public class SecaSleepSequence : MonoBehaviour
     [SerializeField] private Image fadeImage;
     [SerializeField, Min(0.1f)] private float fadeDuration = 0.7f;
     [SerializeField, Min(0f)] private float darkDuration = 0.8f;
+    [Header("Aviso de local e data - editável na Hierarchy")]
+    [SerializeField] private GameObject locationCard;
+    [SerializeField] private TMP_Text locationText;
+    [SerializeField, Min(1f)] private float locationCardDuration = 4f;
 
     [Header("Diálogo")]
     [SerializeField] private GameObject dialogueUI;
@@ -35,6 +39,7 @@ public class SecaSleepSequence : MonoBehaviour
     private void Awake()
     {
         SetFade(0f);
+        if (locationCard != null) locationCard.SetActive(false);
     }
 
     public void TrySleep()
@@ -84,7 +89,23 @@ public class SecaSleepSequence : MonoBehaviour
         fadeImage.raycastTarget = true;
 
         yield return FadeTo(1f);
-        yield return new WaitForSeconds(darkDuration);
+        if (locationCard != null)
+        {
+            locationCard.SetActive(true);
+            if (locationText != null)
+            {
+                locationText.maxVisibleCharacters = 0;
+                locationText.ForceMeshUpdate();
+                for (int i = 1; i <= locationText.textInfo.characterCount; i++)
+                {
+                    locationText.maxVisibleCharacters = i;
+                    yield return new WaitForSeconds(0.08f);
+                }
+            }
+            yield return new WaitForSeconds(locationCardDuration);
+            locationCard.SetActive(false);
+        }
+        else yield return new WaitForSeconds(darkDuration);
         yield return FadeTo(0f);
 
         fadeImage.raycastTarget = false;
@@ -234,6 +255,7 @@ public class SecaSleepSequence : MonoBehaviour
             dialogueUI.SetActive(false);
 
         SetFade(0f);
+        if (locationCard != null) locationCard.SetActive(false);
 
         if (fadeImage != null)
             fadeImage.raycastTarget = false;

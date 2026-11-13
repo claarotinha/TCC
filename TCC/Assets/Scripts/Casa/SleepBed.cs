@@ -32,10 +32,11 @@ public class SleepBed : MonoBehaviour
     [SerializeField] private GameObject readingDiaryPanel;
     [SerializeField] private SpriteRenderer readingPose;
     [SerializeField] private SpriteRenderer[] playerRenderers;
-    [SerializeField, Min(0f)] private float readingDuration = 15f;
+    [SerializeField] private Button closeReadingButton;
     [SerializeField] private GameObject sleepingImage;
     [SerializeField] private ExamineObject tiredExamine;
     private bool readBeforeSleeping;
+    private bool readingClosed;
     private bool[] previousRendererStates;
 
     [Header("Próxima cena")]
@@ -79,7 +80,8 @@ public class SleepBed : MonoBehaviour
             noButton != null &&
             sequencePanel != null &&
             fadeImage != null && readingDiaryPanel != null && readingPose != null &&
-            sleepingImage != null && tiredExamine != null && playerRenderers != null && playerRenderers.Length > 0;
+            sleepingImage != null && tiredExamine != null && closeReadingButton != null &&
+            playerRenderers != null && playerRenderers.Length > 0;
 
         if (!configured)
         {
@@ -101,6 +103,7 @@ public class SleepBed : MonoBehaviour
 
         yesButton.onClick.AddListener(ConfirmSleep);
         noButton.onClick.AddListener(DeclineReading);
+        closeReadingButton.onClick.AddListener(CloseReading);
         readingDiaryPanel.SetActive(false);
         readingPose.gameObject.SetActive(false);
     }
@@ -221,17 +224,12 @@ public class SleepBed : MonoBehaviour
                 previousRendererStates[i] = playerRenderers[i].enabled;
                 playerRenderers[i].enabled = false;
             }
-            // Encaixa o novo desenho na largura e na base da cama sem mover a original.
-            Bounds cama = bedCollider.bounds;
+            // A posição e a escala são as que foram editadas na Hierarchy.
             readingPose.gameObject.SetActive(true);
-            float fator = cama.size.x / Mathf.Max(0.001f, readingPose.bounds.size.x);
-            readingPose.transform.localScale *= fator;
-            Vector3 ajuste = new Vector3(cama.center.x - readingPose.bounds.center.x,
-                cama.min.y - readingPose.bounds.min.y, 0f);
-            readingPose.transform.position += ajuste;
+            readingClosed = false;
             readingDiaryPanel.transform.SetAsLastSibling();
             readingDiaryPanel.SetActive(true);
-            yield return new WaitForSecondsRealtime(Mathf.Max(0f, readingDuration));
+            while (!readingClosed) yield return null;
             readingDiaryPanel.SetActive(false);
             GameProgress.Instance?.MarkFirstDiaryPageRead();
 
@@ -265,6 +263,14 @@ public class SleepBed : MonoBehaviour
 
         // O bloqueio é retirado quando este objeto sai da cena.
         SceneManager.LoadScene(nextScene);
+    }
+
+    public void CloseReading()
+    {
+        if (!runningSequence || readingDiaryPanel == null || !readingDiaryPanel.activeInHierarchy) return;
+        readingClosed = true;
+        readingDiaryPanel.SetActive(false);
+        InvestigationGuard.BlockCurrentClick();
     }
 
     private IEnumerator FadeTo(float targetAlpha)
@@ -328,6 +334,8 @@ public class SleepBed : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (closeReadingButton != null)
+            closeReadingButton.onClick.RemoveListener(CloseReading);
         if (yesButton != null)
             yesButton.onClick.RemoveListener(ConfirmSleep);
 

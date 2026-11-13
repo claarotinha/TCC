@@ -6,6 +6,8 @@ using UnityEngine;
 public class BaleiaAnimacao : MonoBehaviour
 {
     [SerializeField] private Sprite parada;
+    [SerializeField] private Sprite[] repouso;
+    [SerializeField, Min(0.02f)] private float intervaloRepouso = 0.25f;
     [SerializeField] private Sprite[] caminhada;
     [SerializeField] private Sprite[] corrida;
     [SerializeField, Min(0.02f)] private float intervaloCaminhada = 0.24f;
@@ -57,7 +59,9 @@ public class BaleiaAnimacao : MonoBehaviour
         estadoAnterior = estado;
         if (!andando)
         {
-            if (parada != null) desenho.sprite = parada;
+            if (repouso != null && repouso.Length > 0)
+                desenho.sprite = repouso[Mathf.FloorToInt(tempo / intervaloRepouso) % repouso.Length];
+            else if (parada != null) desenho.sprite = parada;
             return;
         }
         Sprite[] quadros = correndo ? corrida : caminhada;

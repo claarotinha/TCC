@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8890e5fa6127254daa7cbff75a03dd3, type: 3}
+  m_Name: CombinacaoFogueira
+  m_EditorClassIdentifier: Assembly-CSharp::ItemCombination
+  itemA: {fileID: 11400000, guid: c8a80000000040008000000000000010, type: 2}
+  itemB: {fileID: 11400000, guid: c8a80000000040008000000000000011, type: 2}
+  result: {fileID: 11400000, guid: 60248864ae334570970f2a6fcdf2383b, type: 2}
