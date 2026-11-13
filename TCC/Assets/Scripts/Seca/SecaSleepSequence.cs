@@ -17,6 +17,7 @@ public class SecaSleepSequence : MonoBehaviour
     [SerializeField] private GameObject locationCard;
     [SerializeField] private TMP_Text locationText;
     [SerializeField, Min(1f)] private float locationCardDuration = 4f;
+    [SerializeField, Min(0.01f)] private float typingInterval = 0.1f;
 
     [Header("Diálogo")]
     [SerializeField] private GameObject dialogueUI;
@@ -91,19 +92,25 @@ public class SecaSleepSequence : MonoBehaviour
         yield return FadeTo(1f);
         if (locationCard != null)
         {
+            string mensagem = locationText != null ? locationText.text : string.Empty;
+            if (locationText != null)
+            {
+                locationText.text = string.Empty;
+                locationText.maxVisibleCharacters = int.MaxValue;
+            }
             locationCard.SetActive(true);
             if (locationText != null)
             {
-                locationText.maxVisibleCharacters = 0;
-                locationText.ForceMeshUpdate();
-                for (int i = 1; i <= locationText.textInfo.characterCount; i++)
+                // Usa a mensagem editada na Hierarchy, sem depender do mesh estar pronto.
+                for (int i = 1; i <= mensagem.Length; i++)
                 {
-                    locationText.maxVisibleCharacters = i;
-                    yield return new WaitForSeconds(0.08f);
+                    yield return new WaitForSecondsRealtime(typingInterval);
+                    locationText.text = mensagem.Substring(0, i);
                 }
             }
-            yield return new WaitForSeconds(locationCardDuration);
+            yield return new WaitForSecondsRealtime(locationCardDuration);
             locationCard.SetActive(false);
+            if (locationText != null) locationText.text = mensagem;
         }
         else yield return new WaitForSeconds(darkDuration);
         yield return FadeTo(0f);

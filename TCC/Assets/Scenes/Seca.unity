@@ -11327,6 +11327,7 @@ MonoBehaviour:
   locationCard: {fileID: 9861000000}
   locationText: {fileID: 9861000003}
   locationCardDuration: 4
+  typingInterval: 0.1
 --- !u!4 &1658920427
 Transform:
   m_ObjectHideFlags: 0
@@ -15999,6 +16000,7 @@ MonoBehaviour:
   semMariSemCabaca: {fileID: 4757415209180144061, guid: 275b50e87c1ccc245888433fba11f7b8, type: 3}
   cabaca: {fileID: 11400000, guid: f0c6e92250400ab42871c53f7ebf8161, type: 2}
   dialoguePanel: {fileID: 191222202}
+  margem: 0.08
 --- !u!114 &9701000010
 MonoBehaviour:
   m_ObjectHideFlags: 0

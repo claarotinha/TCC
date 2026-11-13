@@ -10,9 +10,12 @@ public class SecaTableVisual : MonoBehaviour
     [SerializeField] private ItemData cabaca;
     [SerializeField] private SpriteRenderer mari;
     [Header("Enquadramento da refeição")]
-    [SerializeField] private RectTransform dialoguePanel;
+    [SerializeField] private GameObject dialoguePanel;
     [SerializeField, Min(0.1f)] private float duracaoZoom = 0.65f;
-    [SerializeField, Min(0f)] private float margem = 0.4f;
+    [SerializeField, Min(0f)] private float margem = 0.08f;
+    [SerializeField] private Color corFundoRefeicao = new Color(0.294f, 0.263f, 0.247f, 1f);
+    private Color corCameraAnterior;
+    private CameraClearFlags limpezaAnterior;
     private Camera cameraRefeicao;
     private CameraFollow seguirCamera;
     private Vector3 posicaoCamera;
@@ -53,6 +56,7 @@ public class SecaTableVisual : MonoBehaviour
             foreach (ItemData item in InventoryManager.Instance.Items)
                 if (item == cabaca) recolheuCabaca = true;
         table.sprite = seated ? comMari : recolheuCabaca && semMariSemCabaca != null ? semMariSemCabaca : semMari;
+        AjustarAreaDaMesa();
         if (seated) EnquadrarMesa();
         else RestaurarCamera();
         if (seated && mari != null && !hidMari)
@@ -63,6 +67,17 @@ public class SecaTableVisual : MonoBehaviour
         else if (!seated) RestoreMari();
     }
 
+    private void AjustarAreaDaMesa()
+    {
+        BoxCollider2D caixa = area as BoxCollider2D;
+        if (caixa == null || table.sprite == null) return;
+        // O desenho e a interação continuam juntos quando a mesa é redimensionada na Hierarchy.
+        Vector3 minimo = caixa.transform.InverseTransformPoint(table.bounds.min);
+        Vector3 maximo = caixa.transform.InverseTransformPoint(table.bounds.max);
+        caixa.offset = (Vector2)((minimo + maximo) * 0.5f);
+        caixa.size = new Vector2(Mathf.Abs(maximo.x - minimo.x), Mathf.Abs(maximo.y - minimo.y));
+    }
+
     private void EnquadrarMesa()
     {
         if (!enquadrando)
@@ -71,6 +86,10 @@ public class SecaTableVisual : MonoBehaviour
             if (cameraRefeicao == null || !cameraRefeicao.orthographic) return;
             posicaoCamera = cameraRefeicao.transform.position;
             zoomCamera = cameraRefeicao.orthographicSize;
+            corCameraAnterior = cameraRefeicao.backgroundColor;
+            limpezaAnterior = cameraRefeicao.clearFlags;
+            cameraRefeicao.clearFlags = CameraClearFlags.SolidColor;
+            cameraRefeicao.backgroundColor = corFundoRefeicao;
             seguirCamera = cameraRefeicao.GetComponent<CameraFollow>();
             seguiaAntes = seguirCamera != null && seguirCamera.enabled;
             if (seguirCamera != null) seguirCamera.enabled = false;
@@ -80,7 +99,8 @@ public class SecaTableVisual : MonoBehaviour
         float fracaoPainel = 0f;
         if (dialoguePanel != null)
         {
-            dialoguePanel.GetWorldCorners(cantos);
+            RectTransform painel = dialoguePanel.GetComponent<RectTransform>();
+            painel.GetWorldCorners(cantos);
             Canvas canvas = dialoguePanel.GetComponentInParent<Canvas>();
             Camera uiCamera = canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay ? canvas.worldCamera : null;
             fracaoPainel = Mathf.Clamp(RectTransformUtility.WorldToScreenPoint(uiCamera, cantos[1]).y / Mathf.Max(1f, Screen.height), 0f, 0.65f);
@@ -102,6 +122,8 @@ public class SecaTableVisual : MonoBehaviour
         {
             cameraRefeicao.transform.position = posicaoCamera;
             cameraRefeicao.orthographicSize = zoomCamera;
+            cameraRefeicao.backgroundColor = corCameraAnterior;
+            cameraRefeicao.clearFlags = limpezaAnterior;
         }
         if (seguirCamera != null) seguirCamera.enabled = seguiaAntes;
         enquadrando = false;

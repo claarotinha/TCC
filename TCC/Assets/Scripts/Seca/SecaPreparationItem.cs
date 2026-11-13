@@ -71,8 +71,16 @@ public class SecaPreparationItem : MonoBehaviour
             return;
 
         released = true;
+        // Após o pedido da mãe, o clique abre a coleta, sem outro Examine bloqueando o item.
+        discovery.EnableDirectConfirmation();
         discovery.enabled = true;
         if (itemCollider != null) itemCollider.enabled = true;
         if (itemRenderer != null) itemRenderer.enabled = mostrarSprite;
+        BoxCollider2D caixa = itemCollider as BoxCollider2D;
+        if (mostrarSprite && caixa != null && itemRenderer != null && itemRenderer.sprite != null)
+        {
+            caixa.offset = itemRenderer.sprite.bounds.center;
+            caixa.size = itemRenderer.sprite.bounds.size;
+        }
     }
 }

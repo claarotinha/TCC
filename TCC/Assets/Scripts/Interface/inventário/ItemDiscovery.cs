@@ -11,6 +11,8 @@ public class ItemDiscovery : MonoBehaviour
     private bool inspected;
     public bool CanCollect => isActiveAndEnabled && itemCollider != null && itemCollider.enabled && item != null;
 
+    public void EnableDirectConfirmation() => directConfirmation = true;
+
     private void Awake()
     {
         itemCollider = GetComponent<Collider2D>();
