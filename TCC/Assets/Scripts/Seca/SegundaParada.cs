@@ -1259,7 +1259,16 @@ public class SegundaParada : MonoBehaviour
 
     private void MostrarBarriguda(Sprite sprite)
     {
-        if (barriguda != null) TrocarVisualCenario(barriguda.gameObject, sprite, false);
+        if (barriguda == null || sprite == null) return;
+        TrocarVisualCenario(barriguda.gameObject, sprite, false);
+        BoxCollider2D area = barriguda.GetComponent<BoxCollider2D>();
+        if (area != null)
+        {
+            area.offset = sprite.bounds.center;
+            area.size = sprite.bounds.size;
+            area.enabled = true;
+        }
+        Physics2D.SyncTransforms();
     }
 
     private bool TrocarCabaca(ItemData origem, ItemData destino)
@@ -1314,14 +1323,14 @@ public class SegundaParada : MonoBehaviour
         Camera camera = Camera.main;
         if (barriguda == null || camera == null || item != facao) return false;
         Ray raio = camera.ScreenPointToRay(posicaoTela);
-        Plane plano = new Plane(Vector3.forward, Vector3.zero);
-        float distancia;
-        if (!plano.Raycast(raio, out distancia)) return false;
-        BoxCollider2D area = barriguda.GetComponent<BoxCollider2D>();
-        Vector2 ponto = barriguda.InverseTransformPoint(raio.GetPoint(distancia));
-        Vector2 diferenca = ponto - area.offset;
-        if (Mathf.Abs(diferenca.x) > area.size.x * 0.5f ||
-            Mathf.Abs(diferenca.y) > area.size.y * 0.5f) return false;
+        Plane plano = new Plane(Vector3.forward, barriguda.position);
+        if (!plano.Raycast(raio, out float distancia)) return false;
+        Vector3 ponto = raio.GetPoint(distancia);
+        SpriteRenderer desenho = barriguda.GetComponent<SpriteRenderer>();
+        if (desenho == null || !desenho.enabled) return false;
+        Bounds area = desenho.bounds;
+        area.Expand(new Vector3(.4f, .4f, 0f));
+        if (ponto.x < area.min.x || ponto.x > area.max.x || ponto.y < area.min.y || ponto.y > area.max.y) return false;
         return UsarNaBarriguda(item);
     }
 
@@ -1333,7 +1342,7 @@ public class SegundaParada : MonoBehaviour
             recolhendoAgua || conversando || sequenciaAbrigo || PauseHelper.BlockInput() ||
             Time.timeScale == 0f || item != facao || !Possui(facao) || !Possui(cabacaVazia) ||
             barriguda == null || mari == null ||
-            Vector2.Distance(mari.transform.position, barriguda.position) > 5f)
+            Mathf.Abs(mari.transform.position.x - barriguda.position.x) > 5f)
             return false;
         recolhendoAgua = true;
         sequenciaAbrigo = true;
