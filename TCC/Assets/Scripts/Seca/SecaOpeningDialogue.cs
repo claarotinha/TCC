@@ -151,7 +151,7 @@ public class SecaOpeningDialogue : MonoBehaviour
         {
             bool andando = !PauseHelper.BlockInput() && Time.timeScale > 0f;
             if (animador != null) animador.SetBool("IsWalking", andando);
-            if (andando) irma.position = Vector3.MoveTowards(irma.position, destino, 2.5f * Time.deltaTime);
+            if (andando) irma.position = Vector3.MoveTowards(irma.position, destino, 1.1f * Time.deltaTime);
             yield return null;
         }
         if (animador != null) animador.SetBool("IsWalking", false);

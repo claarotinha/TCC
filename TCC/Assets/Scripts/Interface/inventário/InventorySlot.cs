@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour,
-    IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+    IPointerClickHandler, IInitializePotentialDragHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private Image icon;
     [SerializeField] private GameObject highlight;
@@ -18,7 +18,8 @@ public class InventorySlot : MonoBehaviour,
         if (icon != null)
         {
             icon.sprite = item != null ? item.icon : null;
-            icon.enabled = item != null && item.icon != null;
+            icon.enabled = item != null;
+            icon.raycastTarget = true;
 
             icon.color = item != null && item.itemName == "Cabaça cheia"
                 ? new Color(0.65f, 0.85f, 1f, 1f)
@@ -38,9 +39,11 @@ public class InventorySlot : MonoBehaviour,
         UpdateAllSlots();
     }
 
+    public void OnInitializePotentialDrag(PointerEventData eventData) => eventData.useDragThreshold = false;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (item == null || item.icon == null)
+        if (item == null)
             return;
 
         Canvas canvas = GetComponentInParent<Canvas>();

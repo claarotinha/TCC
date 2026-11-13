@@ -12711,7 +12711,7 @@ Transform:
   m_GameObject: {fileID: 4100000122}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49.43000000000001, y: -0.77, z: 0}
+  m_LocalPosition: {x: 47.93000000000001, y: -0.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13340,7 +13340,7 @@ MonoBehaviour:
   cabacaCheiaBusca: {fileID: 11400000, guid: aa17c14a2df34f789bd319f7012a0031, type: 2}
   itemLaco: {fileID: 11400000, guid: 1083a2fec9775e2c9829a6a959228da0, type: 2}
   itemCanhoto: {fileID: 11400000, guid: 8c45070f39885b448afa8363afcb0774, type: 2}
-  alcanceInteracao: 3
+  alcanceInteracao: 4.6
   aguaFuncionario:
   - personagem: "Funcion\xE1ria"
     texto: "Ponha a caba\xE7a aqui. \xC9 o que tem nessa rodada. Volte quando chamar."

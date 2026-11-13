@@ -489,7 +489,7 @@ public class SegundaParada : MonoBehaviour
     private void ContinuarCaminhada()
     {
         limiteConversa = transform.position.x + 90f;
-        StartCoroutine(ConversaDepoisDeCaminhar(10f, ConversaSorvete));
+        StartCoroutine(ConversaDepoisDeCaminhar(5f, ConversaSorvete));
     }
 
     private IEnumerator ConversaDepoisDeCaminhar(float segundos, Action conversa)
@@ -516,7 +516,7 @@ public class SegundaParada : MonoBehaviour
                 "A gente pode pedir a painho e mainha sim."
             }, () => {
                 limiteConversa = transform.position.x + 180f;
-                StartCoroutine(ConversaDepoisDeCaminhar(10f, ConversaSertao));
+                StartCoroutine(ConversaDepoisDeCaminhar(5f, ConversaSertao));
             }, true);
     }
 
@@ -528,7 +528,7 @@ public class SegundaParada : MonoBehaviour
                 "Que Deus nos conceda a graça da chuva."
             }, () => {
                 limiteConversa = transform.position.x + 270f;
-                StartCoroutine(ConversaDepoisDeCaminhar(10f, ConversaBaleia));
+                StartCoroutine(ConversaDepoisDeCaminhar(5f, ConversaBaleia));
             }, true);
     }
 
@@ -1068,16 +1068,9 @@ public class SegundaParada : MonoBehaviour
 
     private IEnumerator Escurecer(float alpha)
     {
-        float inicio = imagemFade.color.a;
-        float tempo = 0f;
-        float duracao = Mathf.Max(0.1f, duracaoTransicao);
-        while (tempo < duracao)
-        {
-            tempo += Time.deltaTime;
-            imagemFade.color = new Color(0f, 0f, 0f, Mathf.Lerp(inicio, alpha, Mathf.Clamp01(tempo / duracao)));
-            yield return null;
-        }
-        imagemFade.color = new Color(0f, 0f, 0f, alpha);
+        // A Estrada mantém a iluminação da arte; mudanças de enquadramento são imediatas.
+        if (imagemFade != null) imagemFade.color = new Color(0f, 0f, 0f, 0f);
+        yield break;
     }
 
     private void RestaurarFade()
@@ -1423,7 +1416,7 @@ public class SegundaParada : MonoBehaviour
         bool precisaCurativo = JanelaQuebrada && !curativoAplicado;
         if (plantaCenario != null) plantaCenario.SetActive(ativa && precisaCurativo && !plantaColetada);
         // O grupo permanece no cenario depois da despedida, sem repetir a conversa.
-        bool mostrarGrupo = ativa || encontroConcluido;
+        bool mostrarGrupo = ativa && !encontroConcluido;
         if (mulherCenario != null) mulherCenario.SetActive(mostrarGrupo);
         if (meninoCenario != null) meninoCenario.SetActive(mostrarGrupo);
         if (pessoaCenario != null) pessoaCenario.SetActive(mostrarGrupo);
@@ -1639,48 +1632,7 @@ public class SegundaParada : MonoBehaviour
 
     private void ConfirmarSaidaEncontro()
     {
-        LimparEscolhas();
-        Button[] opcoes = choicesContainer.GetComponentsInChildren<Button>(true);
-        if (opcoes.Length < 2)
-        {
-            Debug.LogError("Estrada: a saída do encontro precisa de dois botões de escolha.", this);
-            return;
-        }
-        conversando = true;
-        esperandoEscolha = true;
-        BloquearMovimento();
-        dialogueUI.SetActive(true);
-        dialoguePanel.SetActive(true);
-        choicesContainer.SetActive(true);
-        Grupo(dialogueUI); Grupo(dialoguePanel); Grupo(choicesContainer);
-        characterNameText.text = "Zefinha";
-        dialogueText.text = "Ainda posso conversar com aquele menino. Já vamos seguir viagem?";
-        if (portraitImage != null) portraitImage.enabled = false;
-        for (int i = 0; i < opcoes.Length; i++)
-        {
-            Button botao = opcoes[i];
-            botoes.Add(botao);
-            botao.onClick.RemoveAllListeners();
-            botao.gameObject.SetActive(i < 2);
-            if (i >= 2) continue;
-            TMP_Text rotulo = botao.GetComponentInChildren<TMP_Text>(true);
-            if (rotulo != null) rotulo.text = i == 0 ? "Ficar e conversar" : "Seguir viagem";
-            botao.interactable = true;
-            bool conversar = i == 0;
-            botao.onClick.AddListener(() =>
-            {
-                if (!esperandoEscolha || PauseHelper.BlockInput() || Time.timeScale <= 0f) return;
-                esperandoEscolha = false;
-                LimparEscolhas();
-                choicesContainer.SetActive(false);
-                if (!conversar) { EncerrarEncontroTerceira(); return; }
-                conversando = false;
-                dialogueUI.SetActive(false);
-                LiberarMovimento();
-                InteragirEncontroTerceira("meninoRetirante");
-            });
-        }
-        quadro = Time.frameCount;
+        if (!conversando && !perguntasAbertas) EncerrarEncontroTerceira();
     }
 
     private void EncerrarEncontroTerceira()
@@ -1728,22 +1680,31 @@ public class SegundaParada : MonoBehaviour
     private void AtualizarJuazeiro()
     {
         ControleJornada jornada = ControleJornada.Instance;
-        if (restaurandoFamilia || juazeiroConcluido || sequenciaJuazeiroIniciada ||
-            conversando || juazeiroCenario == null || familiaDescanso == null || Camera.main == null ||
-            jornada == null || !jornada.ParadaAtiva || jornada.ParadaAtual != 4 ||
-            dialogueUI == null || dialogueUI.activeInHierarchy || InvestigationGuard.Blocked) return;
-        sequenciaJuazeiroIniciada = true;
-        if (!juazeiroIniciado)
+        if (juazeiroConcluido || conversando || jornada == null || !jornada.ParadaAtiva || jornada.ParadaAtual != 4) return;
+        juazeiroIniciado = true;
+        juazeiroConcluido = true;
+        placaJuazeiroLida = true;
+        letrasJuazeiroConcluidas = true;
+        if (GameProgress.Instance != null)
         {
-            juazeiroIniciado = true;
-            if (GameProgress.Instance != null)
-                GameProgress.Instance.Data.estradaJuazeiroIniciado = true;
-            SalvarAguaTerceira();
+            GameProgressData d = GameProgress.Instance.Data;
+            d.estradaJuazeiroIniciado = true;
+            d.estradaJuazeiroConcluido = true;
+            d.estradaPlacaJuazeiroLida = true;
+            d.estradaLetrasJuazeiroConcluidas = true;
         }
-        if (placaJuazeiroLida) IniciarDescansoJuazeiro();
-        else Falar(new[] { "Mariquinha" }, new[] {
-            "To cansada painho, será que a gente num pode senta um pouco?"
-        }, () => StartCoroutine(AproximarJuazeiro()));
+        jornada.ConcluirParada(4);
+        LiberarMovimento();
+        Falar(new[] { "Zefinha", "Pai", "Mariquinha", "Pai", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha" }, new[] {
+            "A placa tá dizendo que ainda faltam umas doze léguas pra Fortaleza.",
+            "Ainda tem muita estrada pela frente. Vamos seguindo à sombra do juazeiro.",
+            "Doze légua ainda? Ave Maria…", "Uma légua de cada vez, minha filha. Uma de cada vez.",
+            "Como tu fez isso?", "Isso o quê?", "Tu olhou e já sabia o que estava escrito.",
+            "Ah… Foi a Sinhazinha da fazenda, a filha do patrão, ela me ensinou escondida.",
+            "As letra é bonita. Parece desenho.", "Parece mesmo.", "Tu me ensina?", "Ensino.",
+            "Quem fez as letras?", "Eu não sei.",
+            "Deve ser alguém muito inteligente, porque mesmo depois de morto, num deixa de falar.", "É… Acho que sim."
+        }, SalvarAguaTerceira, true);
     }
 
     private Vector3 CentroCameraJuazeiro()
@@ -2000,11 +1961,7 @@ public class SegundaParada : MonoBehaviour
 
     private void AplicarHorarioAcampamento()
     {
-        if (cenarioHorario == null) return;
-        Color luz = !acampamentoIniciado || acampamentoConcluido ? Color.white :
-            refeicaoPreparada ? new Color(0.23f, 0.28f, 0.45f) : new Color(0.86f, 0.68f, 0.63f);
-        for (int i = 0; i < cenarioHorario.Length; i++)
-            if (cenarioHorario[i] != null) cenarioHorario[i].color = coresHorario[i] * luz;
+        RestaurarCoresAcampamento();
     }
 
     private void RestaurarCoresAcampamento()
@@ -2090,7 +2047,7 @@ public class SegundaParada : MonoBehaviour
         {
             materiaisAcampamento |= 1 << indiceMaterial;
             AtualizarMateriaisAcampamento(); quadro = Time.frameCount; SalvarAcampamento();
-        });
+        }, alreadyExamined: true);
     }
 
     private bool AcertouMaeAcampamento(Vector3 ponto)
@@ -2195,11 +2152,8 @@ public class SegundaParada : MonoBehaviour
     private void EnquadrarNoite()
     {
         Bounds area = AreaFocoNoite();
-        float zoom = Mathf.Max(2.5f, (area.size.y + 0.9f) / (2f * (1f - fracaoPainelNoite)),
-            (area.size.x + 1f) / (2f * cameraAbrigo.aspect));
-        cameraAbrigo.orthographicSize = zoom;
-        cameraAbrigo.transform.position = new Vector3(LimitarCameraNoiteX(area.center.x, zoom),
-            area.min.y - 0.25f + zoom * (1f - 2f * fracaoPainelNoite), cameraOriginal.z);
+        cameraAbrigo.orthographicSize = zoomOriginal;
+        cameraAbrigo.transform.position = new Vector3(LimitarCameraNoiteX(area.center.x, zoomOriginal), cameraOriginal.y, cameraOriginal.z);
     }
 
     private float LimitarCameraNoiteX(float x, float zoom)
@@ -2477,7 +2431,7 @@ public class SegundaParada : MonoBehaviour
             float tamanho = Mathf.Lerp(zoom, zoom + 1.2f, Mathf.Clamp01(tempo / 2.5f));
             cameraAbrigo.orthographicSize = tamanho;
             cameraAbrigo.transform.position = new Vector3(LimitarCameraNoiteX(area.center.x, tamanho),
-                area.min.y - 0.25f + tamanho * (1f - 2f * fracaoPainelNoite), cameraOriginal.z);
+                cameraOriginal.y, cameraOriginal.z);
             yield return null;
         }
         PrepararFade(); yield return Escurecer(1f);

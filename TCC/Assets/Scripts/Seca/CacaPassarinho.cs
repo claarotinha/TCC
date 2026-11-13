@@ -124,7 +124,7 @@ public class CacaPassarinho : MonoBehaviour
     {
         ControleJornada jornada = ControleJornada.Instance;
         if (jornada == null) yield break;
-        yield return jornada.EsperarCaminhada(10f);
+        yield return jornada.EsperarCaminhada(5f);
         if (GameProgress.Instance != null && GameProgress.Instance.Data.estradaHistoriaEscolhida > 0) yield break;
         while (PauseHelper.BlockInput() || InvestigationGuard.Blocked ||
             (dialogueUI != null && dialogueUI.activeInHierarchy)) yield return null;
