@@ -167,6 +167,7 @@ public partial class EntradaCurrais
     private IEnumerator AmanhecerNoCampo()
     {
         yield return Escurecer(1f);
+        yield return ChapterCard.Show("josefa-10");
         Dados.curraisEtapaConsulta = 1;
         AtualizarEstadoBusca();
         Posicionar(pai, paiAbrigo); Posicionar(mae, maeAbrigo);

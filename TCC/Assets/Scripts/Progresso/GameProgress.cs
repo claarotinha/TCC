@@ -39,6 +39,7 @@ public class GameProgress : MonoBehaviour
     public void NormalizeData()
     {
         if (data == null) data = new GameProgressData();
+        if (data.chapterCardsSeen == null) data.chapterCardsSeen = new System.Collections.Generic.List<string>();
         data.curraisEtapaBusca = Mathf.Clamp(data.curraisEtapaBusca, 0, 6);
         data.curraisEtapaPosto = Mathf.Clamp(data.curraisEtapaPosto, 0, 4);
         data.curraisEtapaConsulta = Mathf.Clamp(data.curraisEtapaConsulta, 0, 4);
@@ -237,6 +238,8 @@ public class GameProgress : MonoBehaviour
         if (data.epilogoEtapa >= 1 || data.epilogoConcluido) ultima = 14;
         for (int i = 1; i <= ultima; i++)
         {
+            // A noite (11) vem antes da última consulta (10) na leitura.
+            if (i == 10 && data.curraisEtapaConsulta == 0 && !data.ato2Concluido) continue;
             string id = "josefa-" + i.ToString("00");
             if (!data.unlockedDiaryPages.Contains(id)) data.unlockedDiaryPages.Add(id);
         }

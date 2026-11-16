@@ -131,6 +131,7 @@ public class EpilogoSceneController : MonoBehaviour
 
         if (etapa == 0)
         {
+            yield return ChapterCard.Show("retorno-presente");
             foreach (Fala fala in falasDespertar) yield return Dizer(fala);
             yield return TrocarAmbiente(1);
             SalvarEtapa(1);

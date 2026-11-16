@@ -16,6 +16,7 @@ public class DiaryUI : MonoBehaviour
         public string unlockId;
 
         public string title;
+        public string date;
 
         [TextArea(6, 20)]
         public string leftText;
@@ -90,6 +91,7 @@ public class DiaryUI : MonoBehaviour
         PrepararTexto(leftPageText, 32f, 22f);
         PrepararTexto(rightPageText, 32f, 22f);
         PrepararTexto(titleText, 30f, 22f);
+        titleText.alignment = TextAlignmentOptions.Center;
         PrepararTexto(pageNumberText, 24f, 18f);
         previousButton.onClick.AddListener(Previous);
         nextButton.onClick.AddListener(Next);
@@ -193,7 +195,7 @@ public class DiaryUI : MonoBehaviour
 
         DiaryEntry entry = availableEntries[currentIndex];
 
-        titleText.text = entry.title;
+        titleText.text = entry.title + "\n" + entry.date;
         leftPageText.text = entry.leftText;
         rightPageText.text = entry.rightText;
 

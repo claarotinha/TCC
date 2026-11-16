@@ -4,6 +4,7 @@ using System.Collections.Generic;
 [Serializable]
 public class GameProgressData
 {
+    public List<string> chapterCardsSeen = new List<string>();
     public bool tutorialCompleted;
     public bool motherWorkConversationCompleted;
     public bool quartinhoUnlocked;

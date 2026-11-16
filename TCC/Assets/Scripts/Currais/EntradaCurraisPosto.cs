@@ -205,6 +205,7 @@ public partial class EntradaCurrais
 
     private IEnumerator PassarANoite()
     {
+        yield return ChapterCard.Show("josefa-11");
         yield return Escurecer(1f);
         Posicionar(mari.transform, mariNoite);
         Posicionar(mae, maeNoite);

@@ -4,6 +4,6 @@ public static class PauseHelper
 {
     public static bool BlockInput()
     {
-        return UniversalPauseManager.IsPaused || GameSaveSystem.IsRestoring;
+        return UniversalPauseManager.IsPaused || GameSaveSystem.IsRestoring || ChapterCard.IsShowing;
     }
 }

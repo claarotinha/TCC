@@ -202,6 +202,7 @@ public partial class EntradaCurrais
             yield return Esperar(tempoPlano);
             yield return Escurecer(0f);
             yield return Dizer(retornoSepultamento);
+            yield return ChapterCard.Show("josefa-09");
             yield return Escurecer(1f);
             RestaurarPlanoSepultamento();
             Dados.curraisSepultamentoConcluido = true;

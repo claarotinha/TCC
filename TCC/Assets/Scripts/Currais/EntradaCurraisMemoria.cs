@@ -149,6 +149,7 @@ public partial class EntradaCurrais
         int inicio = rever ? 0 : Mathf.Clamp(Dados.curraisPaginaMemoria, 0, 3);
         for (int i = inicio; i < paginasMemoria.Length; i++)
         {
+            yield return ChapterCard.Show("josefa-" + (12 + i).ToString("00"), rever);
             MostrarPassagemMemoria(i);
             yield return LerPaginaMemoria(paginasMemoria[i]);
             if (!rever)

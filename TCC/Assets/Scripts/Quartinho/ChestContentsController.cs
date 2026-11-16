@@ -200,6 +200,7 @@ public class ChestContentsController : MonoBehaviour
         HidePanels();
         selectedItem = -1;
         BlockClick();
+        if (DiaryCollected) StartCoroutine(ChapterCard.Show("josefa-01"));
     }
 
     private void HidePanels()

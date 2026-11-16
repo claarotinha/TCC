@@ -178,6 +178,12 @@ public class SecaFarewellSequence : MonoBehaviour
         RestoreMovement();
         InvestigationGuard.BlockCurrentClick();
 
+        StartCoroutine(CompleteFarewell());
+    }
+
+    private IEnumerator CompleteFarewell()
+    {
+        yield return ChapterCard.Show("josefa-02");
         onFarewellCompleted.Invoke();
     }
 

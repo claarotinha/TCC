@@ -444,6 +444,7 @@ public partial class EntradaCurrais : MonoBehaviour
         yield return Dizer(new[] { Dados.estradaSegundaEscolhaNoturna == 1 ? promessa : semPromessa, respostaZefinha });
         yield return PartirOutraFila();
         yield return Dizer(depoisSeparacao);
+        yield return ChapterCard.Show("josefa-06");
         Dados.curraisEtapaEntrada = 2;
         Salvar();
         yield return Entrar();

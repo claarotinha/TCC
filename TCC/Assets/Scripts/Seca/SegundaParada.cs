@@ -1011,6 +1011,7 @@ public class SegundaParada : MonoBehaviour
         dialogueUI.SetActive(false);
         if (InventoryTabController.Instance != null) InventoryTabController.Instance.Close();
         yield return EntrarNoAbrigo();
+        yield return ChapterCard.Show("josefa-05");
         PrepararFade();
         yield return Escurecer(1f);
         interiorAbrigo.SetActive(true);
