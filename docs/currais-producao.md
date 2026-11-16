@@ -1,0 +1,171 @@
+# Currais — organização e produção (etapa 2)
+
+Base: `c9f0d66278b2f3909a6424ed7d660bf67e2c365f`. Cena: `TCC/Assets/Scenes/Currais.unity`.
+
+## Onde encontrar as coisas
+
+Abra a cena Currais e expanda `02 Currais - entrada e abrigo`. Os grupos estão em ordem: 00 Ambiente, 01 Revista, 02 Abrigo, 03 Água, 04 Espera, 05 Registros, 06 Busca, 07 Posto/quarto/noite, 08 Manhã/consulta e 09 Passagens. Os grupos de fases mantêm a ativação controlada pelos scripts existentes.
+
+Selecione a área e consulte **Area Currais** no Inspector: acontecimentos, artes existentes, variantes pendentes, camadas e referências para marcas/estados. São notas editáveis; o componente não executa ações, não cria limites e não governa a progressão.
+
+As marcas estão em `03 Marcas de encenacao - arraste para ajustar`, agrupadas por momento. Edite a arte e as marcas correspondentes: mover um grupo de artes não desloca automaticamente marcas que pertencem ao grupo de encenação.
+
+Família, protagonista, câmera e interfaces continuam compartilhadas. Pano do pai, balde e caderno permanecem ligados às pessoas que os carregam. O sepultamento permanece no Canvas; cartelas e pausa mantêm seus espaços.
+
+Os 34 grupos novos usam posição zero, rotação neutra e escala um. As matrizes mundiais dos **355 Transforms originais** foram conferidas e preservadas. Não foram alterados tamanhos, posições ou proporções autoradas.
+
+Grupos **Legado** guardam laços e limites antigos desativados. Não são tarefas novas e não devem ser reativados para jogar.
+
+## Mapa das áreas e variantes
+
+| Área | Caminho na Hierarchy | Acontecimento | Arte existente | Variantes previstas |
+|---|---|---|---|---|
+| 01 - Entrada e separação | `01 Rua - separacao antes do portao` | Chegada, escolta, separação de Mariquinha e ferimento do pai. | EntradaObjetos: portão, cercas e carroça; currais.png; família; guardas; Nair em quatro quadros. | Mão estendida da irmã, reação do pai ao golpe e roda em movimento: etapa 3. |
+| 02 - Revista | `02 Currais - entrada e abrigo/01 Revista - mesa, fiscal e diário` | Entregar todos os pertences e recuperar o caderno permitido. | Mesa e portão de EntradaObjetos; Fiscal animado; diário já ligado à cena. | Mesa com entregas parciais/completas e gestos de conferência: etapa 4. |
+| 03 - Primeiro abrigo | `02 Currais - entrada e abrigo/02 Abrigo - Luzia e cuidado com o pai` | Luzia acolhe; Zefinha leva o pano para acomodar o pai. | casa2.png; esteira; pano disponível; pano no ombro do pai. | Mãe ajeitando o pano, pai acomodado e gestos de entrega: etapa 5. |
+| 04 - Distribuição de água | `02 Currais - entrada e abrigo/03 Água - distribuição e cabaça` | Recuperar cabaça, receber porção e decidir destinatário no abrigo. | Mesa; cabaça; cozinheira1 a 4 ligados à funcionária da água. | Gesto de servir, beber e leitura de recipiente cheio/vazio: etapa 5. |
+| 05 - Criança que espera | `02 Currais - entrada e abrigo/04 Espera - criança e lata` | Conversa sobre a irmã, espera do tio e lata. | Criança e lata presentes; pose de espera na cena. | Reação ao chamado, fala de reencontro e identidade visual própria: etapa 6. |
+| 06 - Nomes e canhoto | `02 Currais - entrada e abrigo/05 Registros - nomes, canhoto e lote` | Perguntar por Mariquinha, transportar lote e consultar encaminhamento. | Escrivão animado; mesa; Canhoto.png; paninho.png usado no lote. | Folhas antes/depois, escrita e lote entregue: etapa 6. |
+| 07 - Raimundo | `02 Currais - entrada e abrigo/06 Busca - Raimundo, lavagem e pátio/01 Lavagem e Raimundo/06 Raimundo - relato e baldes` | Relato sobre irmã e mulher; reencontro na manhã; balde opcional. | funcionario currais1 a 4 em QuadrosAmbiente; baldes e pano da alça. | Carregar/apoiar peso, mão ferida e alça protegida: etapas 7 e 10. |
+| 08 - Lavagem | `02 Currais - entrada e abrigo/06 Busca - Raimundo, lavagem e pátio/01 Lavagem e Raimundo/07 Lavagem - tanque e panos` | Entregar lote, separar dois grupos e recolher tira limpa. | lavadeira1 a 4; tanque e panos de BuscaObjetos; tira de paninho.png. | Lavagem/torção, panos manchados distintos, varal e gesto de autorização: etapa 7. |
+| 09 - Corredor e lembranças | `02 Currais - entrada e abrigo/06 Busca - Raimundo, lavagem e pátio/02 Corredor e lembrancas` | Ronda sem retorno forçado; lenda escolhida modifica percepção. | Guarda; sacos; tanque; galho; reflexos; pessoa da cerca em rasgo npc1 a 4. | Reações da protagonista e retorno de Luzia; preservar caráter de lembrança: etapa 7. |
+| 10 - Pátio de trabalho | `02 Currais - entrada e abrigo/06 Busca - Raimundo, lavagem e pátio/03 Patio de trabalho/09 Trabalho - cargas e fiscalização` | Apoio com água e pano; pai trabalha ferido e Bento perde força. | saco.png; carroça; Fiscal; ponto de água e apoio do pano. | Pai com carga, Bento exausto e tarefas com diferença visual: etapa 8. |
+| 11 - Socorro e despedida | `02 Currais - entrada e abrigo/06 Busca - Raimundo, lavagem e pátio/03 Patio de trabalho/10 Socorro - Bento, panos e cabaça` | Queda de Bento, pano e água, morte, pertences e retirada. | bento1 a 4: ciclo existente; corpo coberto, sangue e pano em BuscaObjetos. | Pose real de queda/ferimento, corpo sem respiração e sequência de cobertura: etapa 8. |
+| 12 - Sepultamento | `CanvasDialogoCurrais - modelo Estrada/Sepultamento - plano estático editável` | Plano de despedida; corpo deixa a imagem; cruzes e memória de Bento. | Plano estático no Canvas; terra, cruzes e corpo coberto. | Familiares/companhia e poses de luto específicas: etapa 9. |
+| 13 - Posto | `02 Currais - entrada e abrigo/07 Posto, quarto e noite/01 Posto - escolha E3` | Ajudar Raimundo ou copiar papel; sair adia a decisão. | Mesa, folha, baldes e vigia editáveis. | Peso apoiado, gesto de cópia e papel depois da decisão: etapa 9. |
+| 14 - Quarto sem Mariquinha | `02 Currais - entrada e abrigo/07 Posto, quarto e noite/02 Quarto sem Mariquinha` | Ouvir lembrança, investigar porta, conversar e emprestar cabaça. | casa1.png; porta fechada; interior com duas esteiras/adultos; trabalhadora em vizinha dona zélia1 a 4. | Folha aberta com pivô, dois doentes próprios, busca/devolução da cabaça: etapa 9. |
+| 15 - Abrigo à noite | `02 Currais - entrada e abrigo/07 Posto, quarto e noite/03 Abrigo - espaco vazio e noite` | Notícias, lembranças da família, acolhimento da mãe e descanso. | Lugar vazio da irmã; cabaça; caderno ligado à Mari; marcas noturnas. | Família deitada, mãe acolhendo e respiração em poses próprias: etapa 10. |
+| 16 - Última consulta | `02 Currais - entrada e abrigo/08 Manhã e última consulta/01 Ultima consulta - documentos e testemunha` | Pela manhã: confirmar destino ou identidade, com testemunha. | Papel; Escrivão; testemunha com ciclo lavadeira1 a 4. | Gestos de consulta, entrada/saída da testemunha e confirmação sem duplicar personagem: etapa 11. |
+| 17 - Portão e recusa | `02 Currais - entrada e abrigo/01 Revista - mesa, fiscal e diário/Portao fechado do setor` | Pai pede para procurar a filha; Cabo nega; movimento livre após conversa. | Mesmo portão do campo e marcas do pedido de saída. | Gesto de bloqueio, reação do pai e retorno da família: etapa 11. |
+| 18 - Passagens do tempo | `02 Currais - entrada e abrigo/09 Passagens do tempo` | Páginas, espera, saída sem a irmã e retorno ao presente. | MemoriaObjetos: página e mão; três imagens atuais de objetos; quarto sobreposto. | Composições completas de dias/meses/anos: etapa 11. As imagens atuais são objetos de apoio. |
+| Ambiente contínuo | `00 Ambiente contínuo - panoramas` | Panoramas distribuídos por posição; não é barreira de movimento. | Trechos existentes e sprites originais. | Conferir transições de dia/noite em Play Mode; acabamento nas etapas das áreas. |
+
+## Artes próprias encontradas
+
+Foram identificadas 37 imagens em `Assets/Imagens/Currais`. A tabela confirma arquivos e referências; a aprovação visual depende de conferência no Unity.
+
+| Arquivo | Referenciado na cena |
+|---|---|
+| `BuscaObjetos.png` | Sim |
+| `Canhoto.png` | Sim |
+| `EntradaObjetos.png` | Sim |
+| `MemoriaObjetos.png` | Sim |
+| `bento1.png` | Sim |
+| `bento2.png` | Sim |
+| `bento3.png` | Sim |
+| `bento4.png` | Sim |
+| `casa1.png` | Sim |
+| `casa2.png` | Sim |
+| `cozinheira1.png` | Sim |
+| `cozinheira2.png` | Sim |
+| `cozinheira3.png` | Sim |
+| `cozinheira4.png` | Sim |
+| `curraidentros.png` | Sim |
+| `currais.png` | Sim |
+| `funcionario currais1.png` | Sim |
+| `funcionario currais2.png` | Sim |
+| `funcionario currais3.png` | Sim |
+| `funcionario currais4.png` | Sim |
+| `lavadeira1.png` | Sim |
+| `lavadeira2.png` | Sim |
+| `lavadeira3.png` | Sim |
+| `lavadeira4.png` | Sim |
+| `nair pereira1.png` | Sim |
+| `nair pereira2.png` | Sim |
+| `nair pereira3.png` | Sim |
+| `nair pereira4.png` | Sim |
+| `rasgo npc1.png` | Sim |
+| `rasgo npc2.png` | Sim |
+| `rasgo npc3.png` | Sim |
+| `rasgo npc4.png` | Sim |
+| `saco.png` | Sim |
+| `vizinha dona zélia1.png` | Sim |
+| `vizinha dona zélia2.png` | Sim |
+| `vizinha dona zélia3.png` | Sim |
+| `vizinha dona zélia4.png` | Sim |
+
+### Ciclos existentes
+
+| Personagem/elemento | Arquivos já ligados | O que ainda não está resolvido pelo ciclo |
+|---|---|---|
+| Bento | bento1–4.png | Queda, ferimento e corpo sem respiração precisam de poses próprias. |
+| Funcionária da água | cozinheira1–4.png | Servir e receber o recipiente. |
+| Raimundo | funcionario currais1–4.png | Carregar/apoiar peso e reação à alça. |
+| Lavadeira e testemunha | lavadeira1–4.png | Lavar/torcer e continuidade sem duplicação visível. |
+| Mulher com Mariquinha | nair pereira1–4.png | Gestos da separação; não criar encontro posterior com Nair. |
+| Pessoa atrás da cerca | rasgo npc1–4.png | Reação/percepção conforme a lenda. |
+| Trabalhadora do quarto | vizinha dona zélia1–4.png | Atendimento, empréstimo e devolução da cabaça. |
+| Sacos | saco.png | Gestos de carregamento pertencem aos personagens. |
+| Abrigo/quarto | casa2.png e casa1.png | Encaixe e estado aberto da porta precisam revisão na etapa 9. |
+| Família e guardas | Animaçoes/Currais/PersonagensAnimados | Preservar proporções e acrescentar poses específicas por acontecimento. |
+
+A cena contém **162 SpriteRenderers** e **15 componentes QuadrosAmbiente ativos** no arquivo. O inventário `currais-elementos.csv` lista área, caminho, IDs, posição local, camada, sprite serializado e artes do ciclo de cada renderer.
+
+**Prévia versus ciclo:** QuadrosAmbiente prepara sprites normalizados em tempo de execução. Alguns SpriteRenderers ainda guardam a imagem anterior no arquivo. O CSV separa essa imagem dos arquivos efetivamente usados no ciclo. Esta etapa não troca esses sprites à força nem altera seus pivôs/escala.
+
+**Passagens do tempo:** as três imagens atuais são objetos de apoio — baldes, sacos e esteira —, e não três composições completas da família ao longo dos anos. As composições completas estão previstas na etapa 11.
+
+## Posições e marcas relacionadas
+
+| Momento | Marcas editáveis |
+|---|---|
+| 01 - Entrada e separação | `03 Marcas de encenacao - arraste para ajustar/01 Entrada e separação/cameraRua`; `03 Marcas de encenacao - arraste para ajustar/01 Entrada e separação/irmaSeparada`; `03 Marcas de encenacao - arraste para ajustar/01 Entrada e separação/irmaSaida`; `03 Marcas de encenacao - arraste para ajustar/01 Entrada e separação/caboBarreira`; `03 Marcas de encenacao - arraste para ajustar/01 Entrada e separação/carrocaSaida`; `03 Marcas de encenacao - arraste para ajustar/01 Entrada e separação/pontoColeta`; `03 Marcas de encenacao - arraste para ajustar/01 Entrada e separação/deslocamentoEscolta`; `03 Marcas de encenacao - arraste para ajustar/01 Entrada e separação/guardaSeparacao`; `03 Marcas de encenacao - arraste para ajustar/01 Entrada e separação/guardaGolpe`; `03 Marcas de encenacao - arraste para ajustar/01 Entrada e separação/paiReacao` |
+| 02 - Revista | `03 Marcas de encenacao - arraste para ajustar/02 Revista/mariEntrada`; `03 Marcas de encenacao - arraste para ajustar/02 Revista/paiEntrada`; `03 Marcas de encenacao - arraste para ajustar/02 Revista/maeEntrada`; `03 Marcas de encenacao - arraste para ajustar/02 Revista/baleiaEntrada`; `03 Marcas de encenacao - arraste para ajustar/02 Revista/cameraRevista` |
+| 03 - Primeiro abrigo | `03 Marcas de encenacao - arraste para ajustar/03 Abrigo e água/cameraCampo`; `03 Marcas de encenacao - arraste para ajustar/03 Abrigo e água/mariAbrigo`; `03 Marcas de encenacao - arraste para ajustar/03 Abrigo e água/paiAbrigo`; `03 Marcas de encenacao - arraste para ajustar/03 Abrigo e água/maeAbrigo`; `03 Marcas de encenacao - arraste para ajustar/03 Abrigo e água/baleiaAbrigo`; `03 Marcas de encenacao - arraste para ajustar/03 Abrigo e água/luziaRepouso` |
+| 04 - Distribuição de água | `03 Marcas de encenacao - arraste para ajustar/03 Abrigo e água/cameraCampo`; `03 Marcas de encenacao - arraste para ajustar/03 Abrigo e água/mariAbrigo`; `03 Marcas de encenacao - arraste para ajustar/03 Abrigo e água/paiAbrigo`; `03 Marcas de encenacao - arraste para ajustar/03 Abrigo e água/maeAbrigo`; `03 Marcas de encenacao - arraste para ajustar/03 Abrigo e água/baleiaAbrigo`; `03 Marcas de encenacao - arraste para ajustar/03 Abrigo e água/luziaRepouso` |
+| 05 - Criança que espera | `03 Marcas de encenacao - arraste para ajustar/04 Criança e registros/meninoFimPasso`; `03 Marcas de encenacao - arraste para ajustar/04 Criança e registros/panelaNoChao`; `03 Marcas de encenacao - arraste para ajustar/04 Criança e registros/panelaRecolhida` |
+| 06 - Nomes e canhoto | `03 Marcas de encenacao - arraste para ajustar/04 Criança e registros/meninoFimPasso`; `03 Marcas de encenacao - arraste para ajustar/04 Criança e registros/panelaNoChao`; `03 Marcas de encenacao - arraste para ajustar/04 Criança e registros/panelaRecolhida` |
+| 07 - Raimundo | `03 Marcas de encenacao - arraste para ajustar/07 Posto e noite/Raimundo - posto`; `03 Marcas de encenacao - arraste para ajustar/07 Posto e noite/Raimundo - perto do abrigo`; `03 Marcas de encenacao - arraste para ajustar/07 Posto e noite/Raimundo - outro setor`; `03 Marcas de encenacao - arraste para ajustar/08 Manhã e consulta/Raimundo - perto do posto na manha`; `03 Marcas de encenacao - arraste para ajustar/08 Manhã e consulta/Raimundo - outro setor na manha` |
+| 09 - Corredor e lembranças | `03 Marcas de encenacao - arraste para ajustar/05 Corredor e ronda/rondaInicio`; `03 Marcas de encenacao - arraste para ajustar/05 Corredor e ronda/rondaFim`; `03 Marcas de encenacao - arraste para ajustar/05 Corredor e ronda/retornoRonda`; `03 Marcas de encenacao - arraste para ajustar/05 Corredor e ronda/fimPassagem` |
+| 10 - Pátio de trabalho | `03 Marcas de encenacao - arraste para ajustar/06 Pátio e Bento/Pai - posto de trabalho`; `03 Marcas de encenacao - arraste para ajustar/06 Pátio e Bento/Bento - antes da queda`; `03 Marcas de encenacao - arraste para ajustar/06 Pátio e Bento/Bento - caido junto a roda` |
+| 11 - Socorro e despedida | `03 Marcas de encenacao - arraste para ajustar/06 Pátio e Bento/Pai - posto de trabalho`; `03 Marcas de encenacao - arraste para ajustar/06 Pátio e Bento/Bento - antes da queda`; `03 Marcas de encenacao - arraste para ajustar/06 Pátio e Bento/Bento - caido junto a roda` |
+| 13 - Posto | `03 Marcas de encenacao - arraste para ajustar/07 Posto e noite/Raimundo - posto`; `03 Marcas de encenacao - arraste para ajustar/07 Posto e noite/Raimundo - outro setor` |
+| 15 - Abrigo à noite | `03 Marcas de encenacao - arraste para ajustar/07 Posto e noite/Raimundo - posto`; `03 Marcas de encenacao - arraste para ajustar/07 Posto e noite/Raimundo - perto do abrigo`; `03 Marcas de encenacao - arraste para ajustar/07 Posto e noite/Raimundo - outro setor`; `03 Marcas de encenacao - arraste para ajustar/07 Posto e noite/Mari - noite sem a irma`; `03 Marcas de encenacao - arraste para ajustar/07 Posto e noite/Mae - perto de Mari na noite`; `03 Marcas de encenacao - arraste para ajustar/07 Posto e noite/Pai - repouso durante a noite`; `03 Marcas de encenacao - arraste para ajustar/07 Posto e noite/Luzia - noite no abrigo`; `03 Marcas de encenacao - arraste para ajustar/07 Posto e noite/Baleia - gesto da refeicao` |
+| 16 - Última consulta | `03 Marcas de encenacao - arraste para ajustar/08 Manhã e consulta/Mae - limite do acompanhamento`; `03 Marcas de encenacao - arraste para ajustar/08 Manhã e consulta/Raimundo - perto do posto na manha`; `03 Marcas de encenacao - arraste para ajustar/08 Manhã e consulta/Pai - diante do escrivao`; `03 Marcas de encenacao - arraste para ajustar/08 Manhã e consulta/Mari - diante do escrivao`; `03 Marcas de encenacao - arraste para ajustar/08 Manhã e consulta/Raimundo - outro setor na manha` |
+| 17 - Portão e recusa | `03 Marcas de encenacao - arraste para ajustar/09 Portão e recusa/Portao - passagem vigiada`; `03 Marcas de encenacao - arraste para ajustar/09 Portão e recusa/Portao - fechado apos recusa`; `03 Marcas de encenacao - arraste para ajustar/09 Portão e recusa/Mari - pedido de saida`; `03 Marcas de encenacao - arraste para ajustar/09 Portão e recusa/Pai - pedido de saida`; `03 Marcas de encenacao - arraste para ajustar/09 Portão e recusa/Mae - pedido de saida` |
+| 18 - Passagens do tempo | `03 Marcas de encenacao - arraste para ajustar/10 Páginas e câmera/Mari - leitura das paginas`; `03 Marcas de encenacao - arraste para ajustar/10 Páginas e câmera/Camera - abrigo e paginas` |
+
+Use as referências do Inspector para localizar as marcas. Não usar coordenadas fixas de outro cenário nem aplicar reset de Transform nos personagens.
+
+## Camadas de desenho
+
+A Sorting Layer permanece a existente, Default (ID 0). A separação é feita pelo campo **Order in Layer**.
+
+| Elemento | Ordem |
+|---|---|
+| Céu / panoramas / chão | -120 / -100 / -90 a -80 |
+| Pessoa atrás da cerca | **-45**, corrigida de -35 |
+| Cercas / portões ao fundo | -40 / -30 |
+| Abrigo / esteiras | -20 / -10 |
+| Pessoas de apoio | 17 a 28, conforme a composição |
+| Mari | 30 |
+| Panos entregues na lavagem | **27**, acima das pilhas de origem em 26 |
+| Objetos carregados e detalhes de frente | 32 a 36 |
+| Página / documento / mão / quarto da memória | 60 / 62 / 64 / 80 |
+
+Porta fechada e Cabo do quarto preservam suas ordens 30 e 31. O encaixe da folha aberta será produzido na etapa 9. Os Canvas de diálogo, sepultamento, pausa e cartelas mantêm seus valores existentes.
+
+## Produção pendente por etapa
+
+| Etapa | Variantes e implementação |
+|---|---|
+| 3 — Entrada | Irmã chama/estende mão; pai protesta e se fere; mãe ampara; guarda interrompe; carroça sai. |
+| 4 — Revista | Mesa com entregas parciais e totais; Fiscal confere; diário permitido/retirado; pertences persistentes. |
+| 5 — Abrigo/água | Pai acomodado; mãe ajeita pano; entrega; servir/beber; cabaça cheia/vazia; acompanhante e respostas. |
+| 6 — Criança/registros | Criança espera/reage; reencontros; Escrivão escreve/confere; papéis antes/depois; lote e canhoto. |
+| 7 — Raimundo/lavagem | Peso e mão; lavar/torcer; panos distintos e varal; lembrança e retorno de Luzia. |
+| 8 — Trabalho/Bento | Pai trabalha ferido; Bento perde força/cai; atendimento; corpo coberto; pertences e retirada. |
+| 9 — Sepultamento/posto/quarto | Luto; família se representada; peso/cópia; porta fechada/aberta; doentes próprios; cabaça emprestada/devolvida. |
+| 10 — Família/noite/manhã | Notícias condicionais; família deitada; mãe acolhe; lugar vazio; manhã; alça protegida. |
+| 11 — Consulta/encerramento | Testemunha entra/sai; portão recusado; reação da família; composições de dias/meses/anos. |
+| 12 — Revisão | Todos os NPCs respondem; poses acompanham fatos; duas linhas por balão; som, pausa e salvamento. |
+
+Um arquivo importado não significa ação pronta. Quatro imagens de Bento não substituem sua queda; um portão em atlas não garante um estado aberto; uma imagem de balde não representa toda a espera da família.
+
+## Verificação e limites
+
+Conferidos: IDs únicos; todos os objetos/componentes anteriores presentes; reciprocidade de pais e filhos; ausência de ciclos; raízes válidas; matrizes mundiais preservadas; estados ativos e ancestrais controlados pela história preservados; referências do controlador e componentes anteriores de física, câmera, animação e UI intactos.
+
+Somente três ordens de SpriteRenderer foram corrigidas. Os scripts da história e os dados de save não foram alterados nesta etapa. O novo AreaCurrais só contém campos de organização.
+
+**Pendente:** importar/compilar no Unity, conferir visualmente os grupos e as três mudanças de desenho, percorrer as fases em Play Mode e testar Continuar. Este ambiente não executa o Unity.
