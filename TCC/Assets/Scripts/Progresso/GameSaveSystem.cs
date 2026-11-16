@@ -55,6 +55,18 @@ public class GameSaveSystem : MonoBehaviour
         }
     }
 
+    // A cena captura este sinal antes de aguardar a conclusão do restore.
+    // Checkpoints sem posição devem usar as marcas de entrada da própria cena.
+    public static bool HasPendingPlayerPosition
+    {
+        get
+        {
+            if (GameProgress.Instance == null) return false;
+            GameSaveSystem system = GameProgress.Instance.GetComponent<GameSaveSystem>();
+            return system != null && system.pendingRestore != null && system.pendingRestore.hasPlayerPosition;
+        }
+    }
+
     private void Awake()
     {
         progress = GetComponent<GameProgress>();
@@ -248,11 +260,8 @@ public class GameSaveSystem : MonoBehaviour
             save.progress.curraisVersaoCenario = 1;
         }
 
-        if (scene.name == "Currais" && save.progress != null && save.progress.curraisEtapaEntrada == 2)
-        {
-            EntradaCurrais entrada = FindFirstObjectByType<EntradaCurrais>();
-            if (entrada != null) save.playerPosition = entrada.PosicaoDaRevista;
-        }
+        // Currais restaura a posição gravada também durante a revista.
+        // A migração de cenários antigos continua sendo aplicada acima.
 
         if (save.hasPlayerPosition)
         {

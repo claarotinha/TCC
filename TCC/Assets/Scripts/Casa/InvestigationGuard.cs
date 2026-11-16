@@ -81,6 +81,8 @@ public static class InvestigationGuard
             if (refeicao != null && refeicao.MealInProgress) return "refeição da família";
             SegundaParada estrada = Object.FindAnyObjectByType<SegundaParada>();
             if (estrada != null && estrada.BloqueiaCursor) return "diálogo da estrada";
+            EntradaCurrais currais = Object.FindAnyObjectByType<EntradaCurrais>();
+            if (currais != null && currais.isActiveAndEnabled && currais.BloqueiaCursor) return "sequência dos currais";
             if (HouseEntrance.IsChangingScene)
                 return "entrada em casa";
 

@@ -14,6 +14,7 @@ public class CameraFollow : MonoBehaviour
     private Camera sceneCamera;
     private Bounds cameraBounds;
     private bool hasBounds;
+    private bool preparada;
 
     public void LiberarLimites()
     {
@@ -24,6 +25,33 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
+        if (preparada) return;
+        PrepararCamera();
+        // Outras cenas preservam o posicionamento inicial já utilizado.
+        if (target != null)
+            transform.position = new Vector3(ClampX(target.position.x + horizontalOffset), fixedY, fixedZ);
+    }
+
+    public void RetomarSemReposicionar()
+    {
+        if (!preparada) PrepararCamera();
+        fixedY = transform.position.y;
+        fixedZ = transform.position.z;
+        enabled = true;
+    }
+
+    public void RestaurarEnquadramentoDoAlvo()
+    {
+        if (!preparada) PrepararCamera();
+        fixedY = transform.position.y;
+        fixedZ = transform.position.z;
+        if (target != null)
+            transform.position = new Vector3(ClampX(target.position.x + horizontalOffset), fixedY, fixedZ);
+    }
+
+    private void PrepararCamera()
+    {
+        preparada = true;
         fixedY = transform.position.y;
         fixedZ = transform.position.z;
         sceneCamera = GetComponent<Camera>();
@@ -49,10 +77,6 @@ public class CameraFollow : MonoBehaviour
                     cameraBounds.Encapsulate(piece.bounds);
             }
         }
-
-        // Começa no trecho onde a personagem está, sem mostrar a área vazia.
-        if (target != null)
-            transform.position = new Vector3(ClampX(target.position.x + horizontalOffset), fixedY, fixedZ);
     }
 
     // Chamado pelo setor quando uma passagem é liberada; outras cenas mantêm seus limites.

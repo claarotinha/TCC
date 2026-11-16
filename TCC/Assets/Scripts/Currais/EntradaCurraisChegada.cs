@@ -108,7 +108,7 @@ public partial class EntradaCurrais
     {
         if (ocupado || menuAberto || Time.frameCount <= quadroBloqueado) return;
         Collider2D alvo = null;
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && !InventarioAbertoMemoria())
         {
             float menor = alcanceInteracao;
             foreach (Collider2D area in AlvosChegada())
@@ -118,7 +118,7 @@ public partial class EntradaCurrais
                 if (distancia < menor) { alvo = area; menor = distancia; }
             }
         }
-        else if (Input.GetMouseButtonDown(0) && !SobreControle() &&
+        else if (Input.GetMouseButtonDown(0) && !SobreInterface() &&
             InvestigationGuard.TryGetPointerPosition(out Vector2 ponto))
         {
             foreach (Collider2D area in AlvosChegada())
@@ -145,7 +145,7 @@ public partial class EntradaCurrais
     {
         if (!isActiveAndEnabled || !pronto || ocupado || menuAberto || dialogando || encerrando ||
             PauseHelper.BlockInput() || Time.timeScale <= 0f || item == null || !TemItem(item) ||
-            SobreControle(posicaoTela)) return false;
+            SobreInterface(posicaoTela) || Time.frameCount <= quadroBloqueado || PainelAuxiliarAberto()) return false;
         if (Dados.curraisEtapaEntrada == 2) return SoltarFerramentaNaRevista(item, posicaoTela);
         if (mari == null || cameraCena == null) return false;
         Ray raio = cameraCena.ScreenPointToRay(posicaoTela);
@@ -171,7 +171,8 @@ public partial class EntradaCurrais
         // O inventário deve permanecer aberto durante o arraste; pausa e diálogos bloqueiam.
         if (!isActiveAndEnabled || !pronto || ocupado || menuAberto || dialogando || encerrando ||
             PauseHelper.BlockInput() || Time.timeScale <= 0f || Dados.curraisEtapaEntrada != 2 ||
-            Dados.curraisPertencesRetidos || item == null || !TemItem(item) || mari == null ||
+            Dados.curraisPertencesRetidos || Time.frameCount <= quadroBloqueado || PainelAuxiliarAberto() ||
+            SobreInterface(posicaoTela) || item == null || !TemItem(item) || mari == null ||
             areaFiscalEntrada == null || !areaFiscalEntrada.enabled ||
             !areaFiscalEntrada.gameObject.activeInHierarchy) return false;
 

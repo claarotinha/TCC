@@ -57,6 +57,16 @@ public class InventoryTabController : MonoBehaviour
         }
     }
 
+    public bool PonteiroSobrePainel(Vector2 posicaoTela)
+    {
+        if (!IsOpen) return false;
+        RectTransform area = inventoryPanel.transform as RectTransform;
+        Canvas canvas = inventoryPanel.GetComponentInParent<Canvas>();
+        Camera cameraUI = canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay
+            ? canvas.worldCamera : null;
+        return area != null && RectTransformUtility.RectangleContainsScreenPoint(area, posicaoTela, cameraUI);
+    }
+
     public void Close()
     {
         if (inventoryPanel != null)

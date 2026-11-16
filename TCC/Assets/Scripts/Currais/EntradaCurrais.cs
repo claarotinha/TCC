@@ -115,17 +115,22 @@ public partial class EntradaCurrais : MonoBehaviour
         if (!ReferenciasValidas())
         {
             Debug.LogError("EntradaCurrais: inicialização interrompida. Confira os campos identificados acima no objeto " + name + ".", this);
+            FecharDialogo();
+            if (fade != null) CorFade(0f);
             LiberarMari();
             yield break;
         }
         if (GameProgress.Instance == null) Instantiate(progressoPrefab);
         if (InventoryManager.Instance == null) Instantiate(inventarioPrefab);
         bool restaurandoPartida = GameSaveSystem.IsRestoring;
+        bool restaurandoPosicao = GameSaveSystem.HasPendingPlayerPosition;
         yield return null;
         while (GameSaveSystem.IsRestoring) yield return null;
         if (GameProgress.Instance == null || InventoryManager.Instance == null)
         {
             Debug.LogError("EntradaCurrais: confira os prefabs existentes de progresso e inventário.", this);
+            FecharDialogo();
+            if (fade != null) CorFade(0f);
             LiberarMari();
             yield break;
         }
@@ -160,25 +165,61 @@ public partial class EntradaCurrais : MonoBehaviour
         PrepararFamiliaAlternativa();
         pronto = true;
         int etapa = Mathf.Clamp(Dados.curraisEtapaEntrada, 0, 4);
+        Dados.curraisEtapaEntrada = etapa;
         if (etapa == 0) Iniciar(Separar());
+        else if (etapa == 2 && Dados.curraisRevistaApresentada)
+        {
+            MostrarEntrada();
+            RetomarExploracao(posicaoRestaurada, restaurandoPartida, restaurandoPosicao);
+        }
         else if (etapa == 1 || etapa == 2) Iniciar(Entrar());
+        else if (etapa == 3 && Dados.curraisAbrigoApresentado && !Dados.curraisPaiAcomodado)
+        {
+            MostrarAbrigo();
+            if (Dados.curraisPanoAbrigoRecolhido && !TemItem(itemPanoAbrigo))
+                InventoryManager.Instance.AddItem(itemPanoAbrigo);
+            RetomarExploracao(posicaoRestaurada, restaurandoPartida, restaurandoPosicao);
+        }
         else if (etapa == 3) Iniciar(ChegarAbrigo());
         else
         {
             MostrarAbrigo();
-            if (restaurandoPartida)
+            RetomarExploracao(posicaoRestaurada, restaurandoPartida, restaurandoPosicao);
+            if (MemoriaDisponivel && Dados.curraisMemoriaIniciada) Iniciar(RetomarMemoria());
+        }
+    }
+
+    private void RetomarExploracao(Vector3 posicaoRestaurada, bool restaurandoPartida, bool restaurandoPosicao)
+    {
+        if (restaurandoPosicao)
+        {
+            if (!float.IsNaN(posicaoRestaurada.x) && !float.IsInfinity(posicaoRestaurada.x) &&
+                !float.IsNaN(posicaoRestaurada.y) && !float.IsInfinity(posicaoRestaurada.y) &&
+                !float.IsNaN(posicaoRestaurada.z) && !float.IsInfinity(posicaoRestaurada.z))
             {
                 mari.transform.position = posicaoRestaurada;
                 Rigidbody2D corpo = mari.GetComponent<Rigidbody2D>();
-                if (corpo != null) { corpo.position = posicaoRestaurada; corpo.linearVelocity = Vector2.zero; }
+                if (corpo != null)
+                {
+                    corpo.position = posicaoRestaurada;
+                    corpo.linearVelocity = Vector2.zero;
+                    corpo.angularVelocity = 0f;
+                }
                 Physics2D.SyncTransforms();
             }
-            CorFade(0f);
-            AtualizarEstadoBusca();
-            if (restaurandoPartida) RestaurarAcompanhante();
-            LiberarMari();
-            if (MemoriaDisponivel && Dados.curraisMemoriaIniciada) Iniciar(RetomarMemoria());
+            else Debug.LogWarning("Currais: posição inválida no checkpoint; usando a entrada da área.", this);
         }
+        CorFade(0f);
+        AtualizarVisuaisChegada();
+        AtualizarEstadoBusca();
+        if (restaurandoPartida)
+        {
+            if (Dados.curraisEtapaEntrada == 4) RestaurarAcompanhante();
+            if (seguirCamera != null) seguirCamera.RestaurarEnquadramentoDoAlvo();
+        }
+        quadroBloqueado = Time.frameCount;
+        InvestigationGuard.BlockCurrentClick();
+        LiberarMari();
     }
 
     private bool ReferenciasValidas()
@@ -297,24 +338,27 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void Update()
     {
-        if (!pronto || PauseHelper.BlockInput() || Time.timeScale == 0f) return;
+        if (!pronto || PauseHelper.BlockInput() || Time.timeScale <= 0f) return;
         AtualizarPatrulha();
         if (dialogando)
         {
-            if (Time.frameCount > quadroBloqueado && Input.GetMouseButtonDown(0) && !SobreControle() &&
+            if (Time.frameCount > quadroBloqueado && Input.GetMouseButtonDown(0) &&
+                !PainelAuxiliarAberto() && !InventarioAbertoMemoria() && !SobreControle() &&
                 (!leituraPaginaMemoria || (paginaMemoriaPodeAvancar && !InventarioAbertoMemoria())))
             {
                 aguardandoClique = false;
                 quadroBloqueado = Time.frameCount;
+                InvestigationGuard.BlockCurrentClick();
             }
             return;
         }
+        if (PainelAuxiliarAberto() || Time.frameCount <= quadroBloqueado) return;
         if (Dados.curraisEtapaEntrada == 2 || Dados.curraisEtapaEntrada == 3)
         {
             AtualizarInteracaoChegada();
             return;
         }
-        if (!ocupado && !menuAberto && Dados.curraisEtapaEntrada == 4 && Input.GetKeyDown(KeyCode.E))
+        if (!ocupado && !menuAberto && Dados.curraisEtapaEntrada == 4 && !InventarioAbertoMemoria() && Input.GetKeyDown(KeyCode.E))
         {
             Collider2D[] alvos = AlvosAtuais();
             Collider2D maisPerto = null;
@@ -329,7 +373,7 @@ public partial class EntradaCurrais : MonoBehaviour
             return;
         }
         if (ocupado || menuAberto || Time.frameCount <= quadroBloqueado ||
-            !Input.GetMouseButtonDown(0) || SobreControle()) return;
+            !Input.GetMouseButtonDown(0) || SobreInterface()) return;
         Ray raio = cameraCena.ScreenPointToRay(Input.mousePosition);
         Plane plano = new Plane(Vector3.forward, mari.transform.position);
         if (!plano.Raycast(raio, out float distanciaDoRaio)) return;
@@ -361,6 +405,33 @@ public partial class EntradaCurrais : MonoBehaviour
         return false;
     }
 
+    private static bool PainelAuxiliarAberto()
+    {
+        InventoryTabController inventario = InventoryTabController.Instance;
+        if (inventario == null) return false;
+        CollectPrompt coleta = inventario.GetComponent<CollectPrompt>();
+        CombinationPrompt combinacao = inventario.GetComponent<CombinationPrompt>();
+        return (coleta != null && coleta.IsOpen) || (combinacao != null && combinacao.IsOpen);
+    }
+
+    private bool SobreInterface(Vector2? posicaoTela = null)
+    {
+        if (SobreControle(posicaoTela)) return true;
+        InventoryTabController inventario = InventoryTabController.Instance;
+        if (inventario != null && inventario.PonteiroSobrePainel(posicaoTela ?? (Vector2)Input.mousePosition))
+            return true;
+        EventSystem sistema = EventSystem.current;
+        if (sistema == null || dialogoUI == null || !dialogoUI.activeInHierarchy) return false;
+        PointerEventData ponteiro = new PointerEventData(sistema)
+            { position = posicaoTela ?? (Vector2)Input.mousePosition };
+        List<RaycastResult> resultados = new List<RaycastResult>();
+        sistema.RaycastAll(ponteiro, resultados);
+        foreach (RaycastResult resultado in resultados)
+            if (resultado.gameObject != null && resultado.module is GraphicRaycaster &&
+                resultado.gameObject.transform.IsChildOf(dialogoUI.transform)) return true;
+        return false;
+    }
+
     private static bool SobreControle(Vector2? posicaoTela = null)
     {
         EventSystem sistema = EventSystem.current;
@@ -380,28 +451,77 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void Iniciar(IEnumerator sequencia)
     {
-        if (ocupado || encerrando) return;
+        if (ocupado || encerrando || sequencia == null) return;
         ocupado = true;
-        mari.enabled = false;
+        PausarExploracao();
+        InvestigationGuard.BlockCurrentClick();
         if (InventoryTabController.Instance != null) InventoryTabController.Instance.Close();
         StartCoroutine(Executar(sequencia));
     }
 
     private IEnumerator Executar(IEnumerator sequencia)
     {
-        try { yield return sequencia; }
+        // Dirige também os enumeradores filhos: uma falha neles não deixa o
+        // controlador ocupado para sempre nem depende da ordem das corrotinas do Unity.
+        Stack<IEnumerator> pilha = new Stack<IEnumerator>();
+        pilha.Push(sequencia);
+        Exception falha = null;
+        try
+        {
+            while (pilha.Count > 0)
+            {
+                IEnumerator atual = pilha.Peek();
+                bool continuar = false;
+                object espera = null;
+                try
+                {
+                    continuar = atual.MoveNext();
+                    if (continuar) espera = atual.Current;
+                }
+                catch (Exception erro)
+                {
+                    falha = erro;
+                    Debug.LogException(erro, this);
+                }
+                if (falha != null) yield break;
+                if (!continuar)
+                {
+                    pilha.Pop();
+                    DescartarSequencia(atual);
+                    continue;
+                }
+                if (espera is IEnumerator filha) pilha.Push(filha);
+                else yield return espera;
+            }
+        }
         finally
         {
+            while (pilha.Count > 0) DescartarSequencia(pilha.Pop());
             ocupado = false;
             if (!encerrando)
             {
+                if (falha != null)
+                {
+                    menuAberto = false;
+                    acoesMenu = null;
+                    RestaurarPlanoSepultamento();
+                    RestaurarDesenhoSaida();
+                    RestaurarApresentacaoMemoria();
+                    if (fade != null) CorFade(0f);
+                }
                 if (!menuAberto)
                 {
                     FecharDialogo();
-                    if (Dados.curraisEtapaEntrada >= 2) LiberarMari();
+                    LiberarMari();
                 }
             }
         }
+    }
+
+    private void DescartarSequencia(IEnumerator sequencia)
+    {
+        try { (sequencia as IDisposable)?.Dispose(); }
+        catch (Exception erro) { Debug.LogException(erro, this); }
     }
 
     private IEnumerator Separar()
@@ -499,7 +619,8 @@ public partial class EntradaCurrais : MonoBehaviour
         lacoPanela.SetActive(false);
         Posicionar(mari.transform, mariEntrada); Posicionar(pai, paiEntrada);
         Posicionar(mae, maeEntrada); Posicionar(baleia, baleiaEntrada);
-        cameraCena.transform.position = cameraCampo.position;
+        Transform enquadramento = Dados.curraisEtapaEntrada == 2 && cameraRevista != null ? cameraRevista : cameraCampo;
+        cameraCena.transform.position = enquadramento.position;
     }
 
     private bool ReterPertences()
@@ -554,20 +675,28 @@ public partial class EntradaCurrais : MonoBehaviour
         Physics2D.SyncTransforms();
     }
 
+    private void PausarExploracao()
+    {
+        if (mari != null) mari.enabled = false;
+        // Conversas comuns congelam o enquadramento atual, sem buscar marcas da cena.
+        if (seguirCamera != null) seguirCamera.enabled = false;
+        if (seguidores != null)
+            foreach (SeguidorFamilia seguidor in seguidores)
+                if (seguidor != null) seguidor.enabled = false;
+        if (seguidoraLuzia != null) seguidoraLuzia.enabled = false;
+        if (seguidoraMae != null) seguidoraMae.enabled = false;
+        if (seguidorPaiConsulta != null) seguidorPaiConsulta.enabled = false;
+    }
+
     private void LiberarMari()
     {
-        // Uma referência narrativa incompleta não deve prender a personagem.
-        if (!pronto || GameProgress.Instance == null)
+        bool livre = !encerrando && !ocupado && !menuAberto && !dialogando && !planoMemoriaAtivo;
+        if (mari != null) mari.enabled = livre;
+        if (seguirCamera != null)
         {
-            if (mari != null) mari.enabled = true;
-            if (seguirCamera != null) seguirCamera.enabled = true;
-            return;
+            if (livre) seguirCamera.RetomarSemReposicionar();
+            else seguirCamera.enabled = false;
         }
-        if (mari != null) mari.enabled = Dados.curraisEtapaEntrada >= 2;
-        bool explorarSetor = pronto && GameProgress.Instance != null &&
-            Dados.curraisEtapaEntrada >= 2 && !ocupado && !menuAberto && !dialogando;
-        if (seguirCamera != null) seguirCamera.enabled = explorarSetor;
-        if (!explorarSetor) FixarCameraDaSequencia();
     }
 
     private void FixarCameraDaSequencia()
@@ -623,6 +752,7 @@ public partial class EntradaCurrais : MonoBehaviour
         if (escolhas != null) escolhas.SetActive(false);
         if (dialogoUI != null) dialogoUI.SetActive(false);
         quadroBloqueado = Time.frameCount;
+        InvestigationGuard.BlockCurrentClick();
     }
 
     private void PrepararOpcoes()
@@ -637,7 +767,7 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void SelecionarOpcao(int indice)
     {
-        if (!menuAberto || PauseHelper.BlockInput() || Time.timeScale == 0f ||
+        if (!menuAberto || Time.frameCount <= quadroBloqueado || PauseHelper.BlockInput() || Time.timeScale <= 0f ||
             acoesMenu == null || indice < 0 || indice >= acoesMenu.Length) return;
         Action acao = acoesMenu[indice];
         acoesMenu = null;
@@ -650,7 +780,8 @@ public partial class EntradaCurrais : MonoBehaviour
     private void MostrarOpcoes(string personagem, string texto, string[] rotulos, Action[] acoes)
     {
         if (InventoryTabController.Instance != null) InventoryTabController.Instance.Close();
-        mari.enabled = false;
+        PausarExploracao();
+        InvestigationGuard.BlockCurrentClick();
         dialogando = false;
         menuAberto = true;
         acoesMenu = acoes;
@@ -948,12 +1079,9 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (!pronto) return;
         if (Dados.curraisEtapaEntrada == 2 || Dados.curraisEtapaEntrada == 3) AtualizarVisuaisChegada();
-        if (Dados.curraisEtapaEntrada != 4)
-        {
-            if (ocupado || menuAberto || dialogando || Dados.curraisEtapaEntrada < 2)
-                FixarCameraDaSequencia();
-            return;
-        }
+        // Marcas de câmera são aplicadas somente pela inicialização/transições.
+        // Uma fala na revista ou no abrigo não reposiciona nem redefine o zoom.
+        if (Dados.curraisEtapaEntrada != 4) return;
         bool livre = !ocupado && !menuAberto && !dialogando && !PauseHelper.BlockInput();
         if (planoMemoriaAtivo)
         {
@@ -1061,6 +1189,9 @@ public partial class EntradaCurrais : MonoBehaviour
         RestaurarPlanoSepultamento();
         RestaurarDesenhoSaida();
         RestaurarApresentacaoMemoria();
+        menuAberto = false;
+        ocupado = false;
+        acoesMenu = null;
         FecharDialogo();
         if (mari != null) mari.enabled = true;
         if (seguirCamera != null) seguirCamera.enabled = true;
