@@ -317,7 +317,7 @@ public partial class EntradaCurrais : MonoBehaviour
         foreach (Fala[] sequencia in sequencias) if (!FalasValidas(sequencia)) return false;
         return opcoesLuziaInicio != null && opcoesLuziaInicio.Length == 3 &&
             opcoesAgua != null && opcoesAgua.Length == 2 && opcoesMenino != null && opcoesMenino.Length == 3 &&
-            opcoesRegistro != null && opcoesRegistro.Length == 2 && opcoesPanela != null && opcoesPanela.Length == 2;
+            opcoesRegistro != null && opcoesRegistro.Length == 2 && opcoesPanela != null && opcoesPanela.Length == 3;
     }
 
     private bool ConferirReferencia(UnityEngine.Object referencia, string campo)
@@ -831,6 +831,7 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private bool InteragirBusca(Vector2 ponto)
     {
+        if (InteragirCriancaERegistros(ponto)) return true;
         if (Dados.curraisPanelaConcluida) return InteragirCampo(ponto);
         Collider2D[] areas = { areaLotePanos, areaLuzia, areaAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela };
         foreach (Collider2D area in areas)
@@ -858,11 +859,11 @@ public partial class EntradaCurrais : MonoBehaviour
             {
                 if (Dados.curraisEscolhaAgua == 0) objetivoTexto.text = string.Empty;
                 else if (!Dados.curraisMeninoVisitado) Iniciar(ConhecerMenino());
-                else AbrirMenuMenino();
+                else Iniciar(ReencontrarMenino());
             }
             else if (area == areaRegistro)
             {
-                if (Dados.curraisEscolhaAgua == 0) objetivoTexto.text = string.Empty;
+                if (Dados.curraisEscolhaAgua == 0) Iniciar(Dizer(mesaAntesAgua));
                 else if (!Dados.curraisRegistroConcluido) Iniciar(ConsultarRegistro());
                 else MenuTarefaPanos();
             }
@@ -969,7 +970,8 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private IEnumerator ConhecerMenino()
     {
-        yield return Mover(meninoBusca, meninoFimPasso.position, tempoPlano);
+        // A arte existente possui idle; a criança permanece no lugar enquanto responde.
+        OlharParaMari(meninoBusca);
         yield return Dizer(meninoApresentacao);
         Dados.curraisMeninoVisitado = true;
         Salvar();
@@ -978,7 +980,10 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void AbrirMenuMenino()
     {
-        MostrarOpcoes("Criança", meninoApresentacao[meninoApresentacao.Length - 1].texto,
+        OlharParaMari(meninoBusca);
+        MostrarOpcoes("Criança", (Dados.curraisPerguntasMenino & 2) != 0
+                ? meninoNomeLembrado[meninoNomeLembrado.Length - 1].texto
+                : meninoApresentacao[meninoApresentacao.Length - 1].texto,
             opcoesMenino, new Action[] {
                 () => Iniciar(ResponderMenino(1, meninoEspera)),
                 () => Iniciar(ResponderMenino(2, meninoNome)),
@@ -1007,6 +1012,7 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private IEnumerator ConsultarRegistro()
     {
+        yield return ConsultarFolhaNaMesa();
         yield return Dizer(ComAcompanhante(pedidoPanos));
         Dados.curraisTarefaPanosIniciada = true;
         Dados.curraisRegistroConcluido = true;
@@ -1019,9 +1025,7 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         yield return Dizer(ComAcompanhante(registroInicio));
         yield return Dizer(Dados.curraisEscolhaAgua == 1 ? registroMae : registroLuzia);
-        guardaRegistro.sprite = guardaRegistroBloqueio;
-        yield return Esperar(tempoPlano);
-        guardaRegistro.sprite = guardaRegistroParado;
+        yield return ConsultarFolhaNaMesa();
     }
 
     private IEnumerator EscolherPertence()
@@ -1029,9 +1033,12 @@ public partial class EntradaCurrais : MonoBehaviour
         if (Dados.curraisPanelaConcluida || !Dados.curraisLotePanosRecolhido) yield break;
         yield return Dizer(panelaInicio);
         yield return Escolher("Zefinha", perguntaPanela, opcoesPanela);
+        if (escolhaRecebida < 0 || escolhaRecebida > 1) yield break;
         bool perguntar = escolhaRecebida == 0;
         if (perguntar)
         {
+            yield return ExaminarOuColetar(itemCanhoto);
+            if (!coletaDoCenarioConfirmada) yield break;
             if (!TemItem(itemCanhoto)) InventoryManager.Instance.AddItem(itemCanhoto);
             Dados.curraisDestinoConfirmado = true;
         }
@@ -1065,7 +1072,7 @@ public partial class EntradaCurrais : MonoBehaviour
         lacoPanela.SetActive(false);
         areaPanela.enabled = panelaAcessivel;
         meninoBusca.gameObject.SetActive(Dados.curraisEscolhaAgua != 0);
-        if (Dados.curraisMeninoVisitado) meninoBusca.position = meninoFimPasso.position;
+        // Conversar não muda a posição editada da criança.
         if (Dados.curraisEscolhaAgua == 1 &&
             (!Dados.curraisPanelaConcluida || Dados.curraisEtapaBusca == 0))
         {

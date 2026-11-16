@@ -195,3 +195,19 @@ Verificações disponíveis: estrutura da cena, referências removidas e preserv
 - As proporções, animações e controladores dos personagens não são substituídos. Gestos corporais de servir/beber/amparar que não possuem arte aprovada permanecem pendentes; não foram produzidas novas imagens de personagens.
 
 Conferência necessária no Unity: coleta/cancelamento do pano; entrega por conversa e arraste; resposta do pai; Luzia antes/depois; retorno da cabaça; enchimento; ambos os destinatários; pausa durante deslocamento/inclinação; Continue após acomodação e escolha; saída para a busca seguinte.
+
+## Etapa 6 — criança, mesa dos nomes e canhoto
+
+- A criança passa a usar sua própria arte e o AnimatorOverrideController Crianca_471_50_0, com os quatro quadros de idle existentes. A imagem anterior de Mariquinha não é usada nela.
+- A criança fica na posição definida na cena. Não desliza até outra marca ao conversar. Sua reação usa a orientação do sprite e o idle da autora.
+- A lata ganha uma área de exame própria e falas. Conversas de retorno dependem de ter contado o nome da irmã e de já ter procurado a mesa. O NPC continua respondendo durante as etapas seguintes enquanto estiver visível.
+- A mesa responde quando a família ainda precisa cuidar da água. Escrivão, criança e acompanhante mantêm suas identidades; ACOMPANHANTE é resolvido para Mãe ou Luzia.
+- Duas folhas reutilizam Canhoto.png como representação dos papéis em espera e após o atendimento. A folha é aproximada de uma marca editável durante a consulta e volta à origem mesmo em cancelamento/desativação.
+- O Escrivão conserva seu idle original. Não foi criada uma animação corporal de escrita.
+- O lote antes colocado junto da criança passa para a mesa dos nomes. Uma cópia visual acompanha Mari entre a coleta e a entrega; o lote entregue existente continua junto da lavadeira.
+- O canhoto ganha interação pelo próprio papel, além da panela. A área de clique é centralizada no desenho.
+- Perguntar pelo encaminhamento abre a confirmação de coleta existente; cancelar mantém o papel disponível. A opção Voltar não confirma destino nem avança a história. Seguir com os panos mantém a alternativa sem canhoto.
+- A confirmação do destino e a página do diário só são liberadas após confirmar a coleta. Os estados visuais usam os flags já salvos; nenhum save antigo é obrigado a repetir a criança ou as perguntas.
+- Folhas, área de exame, marca de conferência, lata e lote carregado ficam na Hierarchy. Nenhuma imagem de personagem, sprite sheet ou animação da autora foi gerada ou substituída.
+
+Pendente no Unity: compilação; proporções e encaixes; criança antes/depois de informar nome e consultar mesa; lata; papéis com ambos os acompanhantes; coleta/cancelamento/Voltar do canhoto; passagem com e sem canhoto; lote visível durante transporte; pausa durante consulta; Continuar nos estados intermediários. Gestos corporais específicos de escrita ou chamada aguardam animações aprovadas.

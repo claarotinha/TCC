@@ -23,7 +23,7 @@ public partial class EntradaCurrais
             ConferirReferencia(itemLotePanos, nameof(itemLotePanos));
         foreach (Fala[] falas in new[] { orientacaoAgua, pedidoPanos, qualLotePanos, destinatariaPanos, seguirPanos })
             valida &= FalasValidas(falas);
-        return valida;
+        return valida & ReferenciasRegistrosValidas();
     }
 
     private void PrepararTarefaPanos()
@@ -51,11 +51,14 @@ public partial class EntradaCurrais
         lotePanosCenario.SetActive(disponivel);
         areaLotePanos.enabled = disponivel;
         lotePanosRecebido.SetActive(Dados.curraisLotePanosEntregue && Dados.curraisEtapaBusca < 2);
+        AtualizarRegistrosVisuais();
     }
 
     private void MenuTarefaPanos()
     {
-        MostrarOpcoes("Escrivão", "Leve os panos até a lavagem. Depois eu vejo a relação.",
+        MostrarOpcoes("Escrivão", Dados.curraisLotePanosRecolhido
+                ? "O lote já está com vocês. A mulher da lavagem espera por ele."
+                : "Leve os panos até a lavagem. Depois eu vejo a relação.",
             new[] { "Qual lote eu devo levar?", "A quem devo entregar?", "E a minha irmã?", "Sair" },
             new Action[] { () => Iniciar(PerguntarTarefaPanos(1, qualLotePanos)),
                 () => Iniciar(PerguntarTarefaPanos(2, destinatariaPanos)),
@@ -78,7 +81,8 @@ public partial class EntradaCurrais
 
     private IEnumerator RecolherLotePanos()
     {
-        if (!Dados.curraisTarefaPanosIniciada || Dados.curraisLotePanosRecolhido) yield break;
+        if (!Dados.curraisTarefaPanosIniciada) yield break;
+        if (Dados.curraisLotePanosRecolhido) { yield return Dizer(ComAcompanhante(lotePanosComVoce)); yield break; }
 
         yield return ExaminarOuColetar(itemLotePanos);
         if (!coletaDoCenarioConfirmada) yield break;

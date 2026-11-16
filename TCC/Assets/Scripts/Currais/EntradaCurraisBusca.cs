@@ -40,10 +40,10 @@ public partial class EntradaCurrais
 
     private Collider2D[] AlvosAtuais()
     {
-        if (PostoDisponivel) return AlvosPosto();
+        if (PostoDisponivel) return ComCriancaERegistros(AlvosPosto());
         if (Dados.curraisPanelaConcluida)
-            return new[] { areaAguaPatio, areaPanosPatio, areaSocorroBento, areaCabacaSocorro, areaPanosUso, areaPanosAtendimento, areaRaimundo, areaLavadeira, areaPanoLavagem, areaLembranca, areaPatio, areaPanoAtendimento };
-        return new[] { areaLotePanos, areaLuzia, areaAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela };
+            return ComCriancaERegistros(new[] { areaAguaPatio, areaPanosPatio, areaSocorroBento, areaCabacaSocorro, areaPanosUso, areaPanosAtendimento, areaRaimundo, areaLavadeira, areaPanoLavagem, areaLembranca, areaPatio, areaPanoAtendimento });
+        return ComCriancaERegistros(new[] { areaLotePanos, areaLuzia, areaAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela });
     }
 
     private string ObjetivoCampo() => string.Empty;
