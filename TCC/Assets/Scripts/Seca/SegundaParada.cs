@@ -161,6 +161,8 @@ public class SegundaParada : MonoBehaviour
 
     [Header("Posicionamento na Hierarchy")]
     [SerializeField] private GameObject interiorAbrigo, familiaAcampamento;
+    [Header("Foto da família dormindo - editar no Canvas da cena")]
+    [SerializeField] private GameObject fotoFamiliaDormindo;
     [SerializeField] private GameObject placaJuazeiroCenario, placaEntradaFortaleza;
     [SerializeField] private GameObject[] pistasBusca = new GameObject[3];
     [SerializeField] private GameObject alvoBaleia;
@@ -263,6 +265,7 @@ public class SegundaParada : MonoBehaviour
 
         if (!conversando || esperandoEscolha || Time.frameCount <= quadro ||
             !Input.GetMouseButtonDown(0)) return;
+        if (DialogoPaginas.Avancar(dialogueText)) return;
         indice++;
         if (indice < falas.Length) { Mostrar(); return; }
         Fechar();
@@ -419,7 +422,7 @@ public class SegundaParada : MonoBehaviour
     private void Mostrar()
     {
         characterNameText.text = nomes[indice];
-        dialogueText.text = falas[indice];
+        DialogoPaginas.Exibir(dialogueText, falas[indice]);
         if (portraitImage != null) portraitImage.enabled = false;
         quadro = Time.frameCount;
     }
@@ -2496,6 +2499,7 @@ public class SegundaParada : MonoBehaviour
 
     private IEnumerator AmanhecerAcampamento()
     {
+        if (fotoFamiliaDormindo != null) fotoFamiliaDormindo.SetActive(true);
         familiaAcampamento.SetActive(false);
         MostrarPoseNoite(paisCenario, paisAcordados);
         focoNoite = 2; EnquadrarNoite();
@@ -2503,6 +2507,7 @@ public class SegundaParada : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         PrepararFade(); yield return Escurecer(1f);
         yield return new WaitForSeconds(1.4f);
+        if (fotoFamiliaDormindo != null) fotoFamiliaDormindo.SetActive(false);
         irmasCenario.SetActive(false); paisCenario.SetActive(false);
         RestaurarCoresAcampamento(); MostrarFogueira(fogueiraBrasas);
         Vector3 lugar = mari.transform.position; lugar.x = quintaParada.position.x + 2.8f; Posicionar(mari.transform, lugar);

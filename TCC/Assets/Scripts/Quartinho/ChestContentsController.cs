@@ -180,7 +180,7 @@ public class ChestContentsController : MonoBehaviour
         diaryCollectedThisSession = true;
         selectedItem = -1;
         collectDiaryButton.gameObject.SetActive(false);
-        itemText.text = "Guardei o diário. Posso consultá-lo pelo menu de pausa.";
+        itemText.text = "Guardei o diário. Posso consultá-lo pelo menu de pausa (ESC).";
         RefreshDiary();
         BlockClick();
     }

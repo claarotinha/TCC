@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Primeira parada: usar o estilingue no passarinho, com pedra no inventario.
+// Primeira parada: usar no passarinho o estilingue já combinado com a pedra.
 public class CacaPassarinho : MonoBehaviour
 {
     [SerializeField] private ItemData estilingue;
@@ -48,8 +48,8 @@ public class CacaPassarinho : MonoBehaviour
             return false;
 
         bool pronto = item == estilingue && InventoryManager.Instance.Items.Contains(estilingue);
-        bool improvisado = item == estilingueSemPedra && InventoryManager.Instance.Items.Contains(estilingueSemPedra) && pedra != null && InventoryManager.Instance.Items.Contains(pedra);
-        if (!pronto && !improvisado) return false;
+        // Só a receita concluída (estilingue + pedra) permite caçar.
+        if (!pronto) return false;
 
 
         if (dialogueUI == null || dialoguePanel == null ||
@@ -59,7 +59,6 @@ public class CacaPassarinho : MonoBehaviour
             return true;
         }
 
-        if (improvisado) InventoryManager.Instance.RemoveItem(pedra);
         if (passaro != null) InventoryManager.Instance.AddItem(passaro);
         acertou = true;
         Collider2D colliderPassaro = GetComponent<Collider2D>();
@@ -96,7 +95,7 @@ public class CacaPassarinho : MonoBehaviour
     private void Mostrar()
     {
         characterNameText.text = nomes[indice];
-        dialogueText.text = falas[indice];
+        DialogoPaginas.Exibir(dialogueText, falas[indice]);
         if (portraitImage != null)
         {
             bool painho = nomes[indice] == "Painho";
@@ -110,6 +109,7 @@ public class CacaPassarinho : MonoBehaviour
     {
         if (!conversando || Time.timeScale == 0f) return;
         if (Time.frameCount <= quadro || !Input.GetMouseButtonDown(0)) return;
+        if (DialogoPaginas.Avancar(dialogueText)) return;
         indice++;
         if (indice < falas.Length) { Mostrar(); return; }
         conversando = false;

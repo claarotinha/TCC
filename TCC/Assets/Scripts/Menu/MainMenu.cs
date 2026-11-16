@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -13,7 +14,10 @@ public class MainMenu : MonoBehaviour
         if (InventoryTabController.Instance != null)
             InventoryTabController.Instance.Close();
         Time.timeScale = 1f;
-        GameManager.Instance.LoadScene("AvisoInicial");
+        if (GameManager.Instance != null)
+            GameManager.Instance.LoadScene("AvisoInicial");
+        else
+            SceneManager.LoadScene("AvisoInicial");
     }
 
     public void ExitGame()

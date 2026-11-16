@@ -67,7 +67,7 @@ public class SchoolDialogue : MonoBehaviour
             yield return null;
 
             // Avança com clique
-            if (Input.GetMouseButtonDown(0))
+            if (!PauseHelper.BlockInput() && Input.GetMouseButtonDown(0))
             {
                 currentDialogue++;
 
@@ -89,7 +89,7 @@ public class SchoolDialogue : MonoBehaviour
         {
             yield return null;
 
-            if (Input.GetMouseButtonDown(0))
+            if (!PauseHelper.BlockInput() && Input.GetMouseButtonDown(0))
                 break;
         }
 

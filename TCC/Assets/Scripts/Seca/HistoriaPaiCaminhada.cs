@@ -114,7 +114,7 @@ public class HistoriaPaiCaminhada : MonoBehaviour
     private void Mostrar()
     {
         characterNameText.text = falas[indice].Nome;
-        dialogueText.text = falas[indice].Texto;
+        DialogoPaginas.Exibir(dialogueText, falas[indice].Texto);
         if (portraitImage != null)
         {
             bool pai = falas[indice].Nome == "Pai";
@@ -128,6 +128,7 @@ public class HistoriaPaiCaminhada : MonoBehaviour
     {
         if (!ativo || escolhendo || PauseHelper.BlockInput() || Time.timeScale == 0f ||
             Time.frameCount <= quadro || !Input.GetMouseButtonDown(0)) return;
+        if (DialogoPaginas.Avancar(dialogueText)) return;
         indice++;
         if (indice < falas.Length) { Mostrar(); return; }
         if (introduzindo) MostrarEscolhas();

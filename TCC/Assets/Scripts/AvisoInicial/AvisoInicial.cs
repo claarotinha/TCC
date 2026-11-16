@@ -59,7 +59,7 @@ public class AvisoInicial : MonoBehaviour
     {
         // O conteúdo é editado no TMP da Hierarchy, não neste código.
         textoFones.gameObject.SetActive(true);
-        yield return new WaitForSecondsRealtime(tempoAvisoFones);
+        yield return WaitUnpaused(tempoAvisoFones);
         textoFones.gameObject.SetActive(false);
 
         if (orientacoes != null)
@@ -68,7 +68,7 @@ public class AvisoInicial : MonoBehaviour
             orientacoes.interactable = false;
             orientacoes.blocksRaycasts = false;
             yield return FadeOrientacoes(0f, 1f);
-            yield return new WaitForSecondsRealtime(tempoOrientacoes);
+            yield return WaitUnpaused(tempoOrientacoes);
             yield return FadeOrientacoes(1f, 0f);
             orientacoes.gameObject.SetActive(false);
         }
@@ -77,10 +77,10 @@ public class AvisoInicial : MonoBehaviour
         foreach (char letra in mensagem)
         {
             textoAviso.text += letra;
-            yield return new WaitForSecondsRealtime(Mathf.Max(0f, tempoEntreLetras));
+            yield return WaitUnpaused(Mathf.Max(0f, tempoEntreLetras));
         }
         if (typingSound != null) typingSound.Stop();
-        yield return new WaitForSecondsRealtime(Mathf.Max(0f, tempoDepoisDoTexto));
+        yield return WaitUnpaused(Mathf.Max(0f, tempoDepoisDoTexto));
         SceneManager.LoadScene("Escola");
     }
 
@@ -101,4 +101,14 @@ public class AvisoInicial : MonoBehaviour
     {
         if (typingSound != null) typingSound.Stop();
     }
+    private IEnumerator WaitUnpaused(float seconds)
+    {
+        float elapsed = 0f;
+        while (elapsed < seconds)
+        {
+            if (!UniversalPauseManager.IsPaused) elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+    }
+
 }

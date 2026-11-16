@@ -104,11 +104,11 @@ public class SecaSleepSequence : MonoBehaviour
                 // Usa a mensagem editada na Hierarchy, sem depender do mesh estar pronto.
                 for (int i = 1; i <= mensagem.Length; i++)
                 {
-                    yield return new WaitForSecondsRealtime(typingInterval);
+                    yield return WaitUnpaused(typingInterval);
                     locationText.text = mensagem.Substring(0, i);
                 }
             }
-            yield return new WaitForSecondsRealtime(locationCardDuration);
+            yield return WaitUnpaused(locationCardDuration);
             locationCard.SetActive(false);
             if (locationText != null) locationText.text = mensagem;
         }
@@ -271,4 +271,14 @@ public class SecaSleepSequence : MonoBehaviour
         running = false;
         RestoreMovement();
     }
+    private IEnumerator WaitUnpaused(float seconds)
+    {
+        float elapsed = 0f;
+        while (elapsed < seconds)
+        {
+            if (!UniversalPauseManager.IsPaused) elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+    }
+
 }

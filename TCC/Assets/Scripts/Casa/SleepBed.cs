@@ -237,7 +237,7 @@ public class SleepBed : MonoBehaviour
             yield return null;
             while (tiredExamine.PanelIsOpen)
             {
-                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) tiredExamine.HidePanel();
+                if (!UniversalPauseManager.IsPaused && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))) tiredExamine.HidePanel();
                 yield return null;
             }
         }
@@ -251,9 +251,7 @@ public class SleepBed : MonoBehaviour
 
         yield return FadeTo(0f);
 
-        yield return new WaitForSecondsRealtime(
-            Mathf.Max(0f, sleepingImageDuration)
-        );
+        yield return WaitUnpaused(Mathf.Max(0f, sleepingImageDuration));
 
         yield return FadeTo(1f);
 
@@ -267,7 +265,7 @@ public class SleepBed : MonoBehaviour
 
     public void CloseReading()
     {
-        if (!runningSequence || readingDiaryPanel == null || !readingDiaryPanel.activeInHierarchy) return;
+        if (UniversalPauseManager.IsPaused || !runningSequence || readingDiaryPanel == null || !readingDiaryPanel.activeInHierarchy) return;
         readingClosed = true;
         readingDiaryPanel.SetActive(false);
         InvestigationGuard.BlockCurrentClick();
@@ -281,6 +279,7 @@ public class SleepBed : MonoBehaviour
 
         while (elapsed < duration)
         {
+            if (UniversalPauseManager.IsPaused) { yield return null; continue; }
             elapsed += Time.unscaledDeltaTime;
 
             SetFadeAlpha(
@@ -295,6 +294,16 @@ public class SleepBed : MonoBehaviour
         }
 
         SetFadeAlpha(targetAlpha);
+    }
+
+    private IEnumerator WaitUnpaused(float seconds)
+    {
+        float elapsed = 0f;
+        while (elapsed < seconds)
+        {
+            if (!UniversalPauseManager.IsPaused) elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
     }
 
     private void SetFadeAlpha(float alpha)

@@ -66,6 +66,7 @@ public class DialogoPrimeiraParada : MonoBehaviour
         if (Time.frameCount > quadroDaFala &&
             Input.GetMouseButtonDown(0))
         {
+            if (DialogoPaginas.Avancar(dialogueText)) return;
             linhaAtual++;
 
             if (linhaAtual >= falas.Length)
@@ -183,7 +184,7 @@ public class DialogoPrimeiraParada : MonoBehaviour
     private void MostrarFala()
     {
         characterNameText.text = nomes[linhaAtual];
-        dialogueText.text = falas[linhaAtual];
+        DialogoPaginas.Exibir(dialogueText, falas[linhaAtual]);
 
         if (portraitImage != null)
         {

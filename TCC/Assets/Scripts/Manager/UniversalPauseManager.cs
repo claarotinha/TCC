@@ -105,7 +105,7 @@ public class UniversalPauseManager : MonoBehaviour
 
     private void Update()
     {
-        if (SleepBed.IsSleeping || HouseEntrance.IsChangingScene)
+        if (HouseEntrance.IsChangingScene)
             return;
 
         RefreshButtons();
@@ -138,7 +138,7 @@ public class UniversalPauseManager : MonoBehaviour
 
     public void TogglePause()
     {
-        if (SleepBed.IsSleeping || HouseEntrance.IsChangingScene)
+        if (HouseEntrance.IsChangingScene)
             return;
 
         if (IsPaused)
@@ -149,7 +149,7 @@ public class UniversalPauseManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (SleepBed.IsSleeping || HouseEntrance.IsChangingScene ||
+        if (HouseEntrance.IsChangingScene ||
             IsPaused ||
             pausePanel == null ||
             pauseWindow == null)
@@ -163,6 +163,8 @@ public class UniversalPauseManager : MonoBehaviour
         pausePanel.SetActive(true);
 
         Time.timeScale = 0f;
+        Canvas canvas = pausePanel.GetComponentInParent<Canvas>(true);
+        if (canvas != null) canvas.sortingOrder = 1000;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
@@ -212,7 +214,7 @@ public class UniversalPauseManager : MonoBehaviour
 
     private void OpenSubpanel(GameObject panel)
     {
-        if (!IsPaused || panel == null || SleepBed.IsSleeping)
+        if (!IsPaused || panel == null)
             return;
 
         HideSubpanels();
@@ -246,7 +248,7 @@ public class UniversalPauseManager : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        if (SleepBed.IsSleeping || HouseEntrance.IsChangingScene)
+        if (HouseEntrance.IsChangingScene)
             return;
 
         if (!Application.CanStreamedLevelBeLoaded(mainMenuScene))

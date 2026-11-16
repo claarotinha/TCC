@@ -17970,6 +17970,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 9890000001}
   - {fileID: 3000000054}
   - {fileID: 3000000010}
   - {fileID: 3000000024}
@@ -18213,7 +18214,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9890000001}
   - {fileID: 3000000100}
   m_Father: {fileID: 3000000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21146,6 +21146,7 @@ MonoBehaviour:
   materialFogueira: {fileID: 11400000, guid: 60248864ae334570970f2a6fcdf2383b, type: 2}
   combinacaoFogueira: {fileID: 11400000, guid: b2d1aa8e4121466ea10e19d353568725, type: 2}
   alcanceBuscaBaleia: 18
+  fotoFamiliaDormindo: {fileID: 9890000000}
 --- !u!1 &3500000010
 GameObject:
   m_ObjectHideFlags: 0
@@ -24449,7 +24450,7 @@ GameObject:
   - component: {fileID: 3900000095}
   - component: {fileID: 3900000096}
   m_Layer: 0
-  m_Name: Familia reunida - fogueira
+  m_Name: Reserva - arte antiga da família no juazeiro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24589,7 +24590,7 @@ GameObject:
   - component: {fileID: 3900000100}
   - component: {fileID: 9885000060}
   m_Layer: 0
-  m_Name: Irmas - conversa noturna
+  m_Name: Fogueira - irmãs e poses noturnas - EDITAR aqui
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24732,7 +24733,7 @@ GameObject:
   - component: {fileID: 3900000104}
   - component: {fileID: 9885000020}
   m_Layer: 0
-  m_Name: Pais - conversa noturna
+  m_Name: Fogueira - pais e poses noturnas - EDITAR aqui
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28242,7 +28243,7 @@ GameObject:
   - component: {fileID: 9890000002}
   - component: {fileID: 9890000003}
   m_Layer: 5
-  m_Name: Dormindo - FUNDO PRETO tela inteira
+  m_Name: Família dormindo - EDITAR foto abaixo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28261,7 +28262,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9890000011}
-  m_Father: {fileID: 3000000010}
+  m_Father: {fileID: 3000000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -28318,7 +28319,7 @@ GameObject:
   - component: {fileID: 9890000012}
   - component: {fileID: 9890000013}
   m_Layer: 5
-  m_Name: Dormindo - FOTO centralizada completa
+  m_Name: Foto da família dormindo - EDITAR posição e tamanho
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -15127,8 +15127,7 @@ MonoBehaviour:
     texto: "Meu caderno\u2026 Ainda bem que ele deixou eu levar."
   - personagem: "M\xE3e"
     texto: Guarde junto de tu, Josefa. Vamos acudir seu pai.
-  objetivoRevista: "Abra o invent\xE1rio (TAB). Arraste as ferramentas at\xE9 o cabo
-    e fale com ele para confirmar."
+  objetivoRevista: "Abra o inventário (TAB). Arraste TODOS os itens até o cabo e fale com ele para confirmar."
   areaPanoAbrigo: {fileID: 9805000303}
   panoAbrigo: {fileID: 9805000300}
   panoNoPai: {fileID: 9805000400}
@@ -29834,7 +29833,7 @@ Transform:
   m_GameObject: {fileID: 9805000150}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 74.33, y: 0, z: 0}
+  m_LocalPosition: {x: 88.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

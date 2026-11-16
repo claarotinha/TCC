@@ -142,7 +142,7 @@ public partial class EntradaCurrais
         MostrarOpcoes("Fiscal", objetivoRevista,
             new[] { "Como entregar os pertences?", "Conferir a revista", "Sair" }, new Action[] {
                 () => Iniciar(Dizer(new[] { new Fala { personagem = "Zefinha", texto =
-                    "Vou abrir o inventário com TAB, arrastar cada ferramenta e soltar sobre o cabo. Depois confiro a revista com ele." } })),
+                    "Vou abrir o inventário com TAB, arrastar todos os itens e soltar sobre o cabo. Depois confiro a revista com ele." } })),
                 () => Iniciar(ConcluirRevista()), FecharMenu });
     }
 
@@ -177,8 +177,7 @@ public partial class EntradaCurrais
         // O inventário deve permanecer aberto durante o arraste; pausa e diálogos bloqueiam.
         if (!isActiveAndEnabled || !pronto || ocupado || menuAberto || dialogando || encerrando ||
             PauseHelper.BlockInput() || Time.timeScale <= 0f || Dados.curraisEtapaEntrada != 2 ||
-            Dados.curraisPertencesRetidos || item == null || ferramentasRevista == null ||
-            Array.IndexOf(ferramentasRevista, item) < 0 || !TemItem(item) || mari == null ||
+            Dados.curraisPertencesRetidos || item == null || !TemItem(item) || mari == null ||
             areaFiscalEntrada == null || !areaFiscalEntrada.enabled ||
             !areaFiscalEntrada.gameObject.activeInHierarchy) return false;
 
@@ -214,13 +213,12 @@ public partial class EntradaCurrais
     {
         if (Dados.curraisPertencesRetidos)
         { objetivoTexto.text = "Recolha seu caderno na mesa do fiscal."; yield break; }
-        foreach (ItemData ferramenta in ferramentasRevista)
-            if (TemItem(ferramenta))
-            {
-                yield return Dizer(new[] { new Fala { personagem = "Fiscal", texto =
-                    "Ainda tem ferramenta com você. Abra o inventário, arraste cada uma e solte sobre mim." } });
-                yield break;
-            }
+        if (InventoryManager.Instance != null && InventoryManager.Instance.Items.Count > 0)
+        {
+            yield return Dizer(new[] { new Fala { personagem = "Fiscal", texto =
+                "Ainda tem pertences com você. Abra o inventário e entregue todos os itens antes de confirmar a revista." } });
+            yield break;
+        }
         if (!ReterPertences())
         { objetivoTexto.text = "Não foi possível registrar os pertences. Eles continuam no inventário."; yield break; }
         yield return Dizer(revista);
@@ -305,6 +303,13 @@ public partial class EntradaCurrais
         // Guarda a borda original antes de restringir este pequeno trecho.
         if (limiteEsquerdoBusca == 0f) limiteEsquerdoBusca = limites.bounds.min.x;
         float esquerda = limiteAbrigoEsquerda.position.x, direita = limiteAbrigoDireita.position.x;
+        // Mover as artes/marcas na Hierarchy não pode deixar os alvos atrás do limite.
+        foreach (Transform alvo in new[] { mariAbrigo, paiAbrigo, maeAbrigo,
+            panoAbrigo.transform, luzia.transform })
+        {
+            esquerda = Mathf.Min(esquerda, alvo.position.x - 2f);
+            direita = Mathf.Max(direita, alvo.position.x + 2f);
+        }
         Vector3 centro = limites.transform.InverseTransformPoint(new Vector3((esquerda + direita) * .5f,
             limites.bounds.center.y, limites.transform.position.z));
         limites.offset = new Vector2(centro.x, limites.offset.y);

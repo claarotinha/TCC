@@ -21,7 +21,15 @@ public class CollectableExamine : MonoBehaviour
         TutorialManager.Instance.CurrentStep == TutorialManager.TutorialStep.FindBall;
 
     private string progressId;
-    private void Awake() => progressId = GameProgress.ObjectId(gameObject);
+    private void Awake()
+    {
+        progressId = GameProgress.ObjectId(gameObject);
+        if (isTutorialBall && itemData == null)
+        {
+            InventorySaveCatalog catalog = Resources.Load<InventorySaveCatalog>("InventorySaveCatalog");
+            if (catalog != null) catalog.TryGetItem("6fc0f984454c60b48a915b9620fa24f2", out itemData);
+        }
+    }
 
     void Start()
     {

@@ -54,6 +54,7 @@ public class DialogoMariquinha : MonoBehaviour
         {
             if (Time.frameCount > quadro && Input.GetMouseButtonDown(0))
             {
+                if (DialogoPaginas.Avancar(dialogueText)) return;
                 linha++;
                 if (linha >= falas.Length || entregou)
                     Encerrar();
@@ -141,7 +142,7 @@ public class DialogoMariquinha : MonoBehaviour
         else
         {
             characterNameText.text = nomes[linha];
-            dialogueText.text = falas[linha];
+            DialogoPaginas.Exibir(dialogueText, falas[linha]);
         }
         if (portraitImage != null)
         {

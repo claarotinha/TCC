@@ -507,14 +507,10 @@ public partial class EntradaCurrais : MonoBehaviour
     private bool ReterPertences()
     {
         if (Dados.curraisPertencesRetidos) return true;
-        if (!InventorySaveCatalog.TryCapture(out List<string> ids, out string erro))
-        {
-            Debug.LogError("EntradaCurrais: pertences preservados no inventário. " + erro, this);
-            return false;
-        }
-        Dados.curraisItensRetidos.AddRange(ids);
+        // As entregas individuais já registraram os itens retidos. Não remover
+        // silenciosamente o que ainda não foi entregue pelo jogador.
+        if (InventoryManager.Instance == null || InventoryManager.Instance.Items.Count > 0) return false;
         Dados.curraisPertencesRetidos = true;
-        InventoryManager.Instance.ReplaceItems(new ItemData[0]);
         return true;
     }
 

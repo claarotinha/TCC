@@ -107,6 +107,7 @@ public class DialogoInicialEstrada : MonoBehaviour
 
     private void Advance()
     {
+        if (DialogoPaginas.Avancar(dialogueText)) return;
         currentLine++;
         if (currentLine >= lines.Length)
         {
@@ -120,7 +121,7 @@ public class DialogoInicialEstrada : MonoBehaviour
     private void ShowLine()
     {
         characterNameText.text = names[currentLine];
-        dialogueText.text = lines[currentLine];
+        DialogoPaginas.Exibir(dialogueText, lines[currentLine]);
 
         if (portraitImage != null)
         {
