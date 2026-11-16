@@ -25,6 +25,13 @@ public class PlayerMovement : MonoBehaviour
     private bool isRunning;
     private bool isGrounded;
 
+    public void LiberarLimites()
+    {
+        movementBounds = null;
+        journeyBounds = null;
+        movementBackground = new SpriteRenderer[0];
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

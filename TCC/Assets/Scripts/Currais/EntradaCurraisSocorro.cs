@@ -56,21 +56,7 @@ public partial class EntradaCurrais
         AtualizarSocorro();
     }
 
-    private string ObjetivoSocorro()
-    {
-        if (Dados.curraisEtapaBusca == 4)
-        {
-            if (!Dados.curraisTrabalhoPatioIniciado) return "Aproxime-se do pátio e converse com seu pai.";
-            if (!Dados.curraisAguaPatioPreparada) return "Apresente a cabaça vazia no ponto de água dos trabalhadores.";
-            if (!Dados.curraisPanosPatioEntregues) return "Selecione o pano de auxílio e entregue no ponto de apoio do pátio.";
-            return "Volte até seu pai no pátio.";
-        }
-        if (!Dados.curraisBentoMorto)
-            return "Pegue o pano de auxílio e use-o em Bento. Apresente também a cabaça com água no atendimento.";
-        if (!Dados.curraisPanoSepultamentoEntregue) return "Pegue um pano limpo e entregue junto de Bento, para os pertences dele.";
-        if (!Dados.curraisCabacaSocorroRecolhida) return "Recolha a cabaça deixada no atendimento.";
-        return "Aproxime-se de Bento para acompanhar a despedida.";
-    }
+    private string ObjetivoSocorro() => string.Empty;
 
     private void AtualizarSocorro()
     {
@@ -137,8 +123,7 @@ public partial class EntradaCurrais
             }
             else
             {
-                yield return Dizer(new[] { new Fala { personagem = "Luzia", texto =
-                    "Precisamos do pano e da cabaça com água. Selecione um deles no inventário e apresente aqui." } });
+
                 yield break;
             }
             if (Dados.curraisItensAtendimentoBento != 3) yield break;
@@ -212,7 +197,7 @@ public partial class EntradaCurrais
         finally
         {
             RestaurarPlanoSepultamento();
-            if (objetivoTexto != null) objetivoTexto.gameObject.SetActive(objetivoVisivel);
+            if (objetivoTexto != null) objetivoTexto.gameObject.SetActive(false);
         }
     }
 
@@ -233,7 +218,7 @@ public partial class EntradaCurrais
     private void RestaurarPlanoSepultamento()
     {
         if (planoSepultamento != null) planoSepultamento.SetActive(false);
-        if (sepultamentoNaTela && objetivoTexto != null) objetivoTexto.gameObject.SetActive(true);
+        if (sepultamentoNaTela && objetivoTexto != null) objetivoTexto.gameObject.SetActive(false);
         sepultamentoNaTela = false;
     }
 }

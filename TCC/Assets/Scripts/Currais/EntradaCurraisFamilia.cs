@@ -105,7 +105,7 @@ public partial class EntradaCurrais
         yield return Dizer(pedidoBaldeFalas);
         Dados.curraisBaldeSolicitado = true;
         AtualizarFamiliaAlternativa(); Salvar();
-        objetivoTexto.text = "Pegue o balde junto de Raimundo. Combine com a tira de pano no inventário e devolva a ele.";
+        objetivoTexto.text = string.Empty;
     }
 
     private IEnumerator PegarBaldeRaimundo()
@@ -116,8 +116,7 @@ public partial class EntradaCurrais
         if (!TemItem(baldeRaimundoItem) && !TemItem(baldeProtegidoItem)) InventoryManager.Instance.AddItem(baldeRaimundoItem);
         Dados.curraisBaldeRecolhido = true;
         AtualizarFamiliaAlternativa(); Salvar();
-        yield return Dizer(new[] { new Fala { personagem = "Zefinha", texto =
-            "A tira que trouxe da lavagem pode proteger essa alça. Vou arrastar um item sobre o outro no inventário." } });
+
     }
 
     private IEnumerator DevolverBaldeRaimundo()
@@ -126,8 +125,7 @@ public partial class EntradaCurrais
         { yield return Dizer(baldeDevolvidoFalas); yield break; }
         if (!TemItem(baldeProtegidoItem))
         {
-            yield return Dizer(new[] { new Fala { personagem = "Raimundo", texto =
-                "Pegue o balde e combine com a tira de pano no inventário. Depois pode devolver aqui." } });
+
             yield break;
         }
         InventoryManager.Instance.RemoveItem(baldeProtegidoItem);

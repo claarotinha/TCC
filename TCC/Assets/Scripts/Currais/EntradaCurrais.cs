@@ -30,7 +30,6 @@ public partial class EntradaCurrais : MonoBehaviour
     [SerializeField] private PlayerMovement mari;
     [SerializeField] private Camera cameraCena;
     [SerializeField] private CameraFollow seguirCamera;
-    [SerializeField] private Collider2D limiteSetor;
 
     [Header("Canvas reutilizado da Estrada")]
     [SerializeField] private GameObject dialogoUI, painelDialogo, escolhas;
@@ -98,6 +97,9 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void Awake()
     {
+        if (mari != null) mari.LiberarLimites();
+        if (seguirCamera != null) seguirCamera.LiberarLimites();
+        if (objetivoTexto != null) objetivoTexto.gameObject.SetActive(false);
         if (mari != null) inicioMariNaRua = mari.transform.position;
         if (cameraCena != null) zoomInicial = cameraCena.orthographicSize;
         FixarCameraDaSequencia();
@@ -164,11 +166,8 @@ public partial class EntradaCurrais : MonoBehaviour
         else
         {
             MostrarAbrigo();
-            AplicarLimitesBusca();
             if (restaurandoPartida)
             {
-                Bounds limites = limiteSetor.bounds;
-                posicaoRestaurada.x = Mathf.Clamp(posicaoRestaurada.x, limites.min.x + 1f, limites.max.x - 1f);
                 mari.transform.position = posicaoRestaurada;
                 Rigidbody2D corpo = mari.GetComponent<Rigidbody2D>();
                 if (corpo != null) { corpo.position = posicaoRestaurada; corpo.linearVelocity = Vector2.zero; }
@@ -190,7 +189,6 @@ public partial class EntradaCurrais : MonoBehaviour
         referenciasPresentes &= ConferirReferencia(mari, nameof(mari));
         referenciasPresentes &= ConferirReferencia(cameraCena, nameof(cameraCena));
         referenciasPresentes &= ConferirReferencia(seguirCamera, nameof(seguirCamera));
-        referenciasPresentes &= ConferirReferencia(limiteSetor, nameof(limiteSetor));
         referenciasPresentes &= ConferirReferencia(dialogoUI, nameof(dialogoUI));
         referenciasPresentes &= ConferirReferencia(painelDialogo, nameof(painelDialogo));
         referenciasPresentes &= ConferirReferencia(escolhas, nameof(escolhas));
@@ -489,8 +487,7 @@ public partial class EntradaCurrais : MonoBehaviour
         }
         Dados.curraisEtapaEntrada = 2;
         AtualizarVisuaisChegada();
-        objetivoTexto.text = Dados.curraisPertencesRetidos
-            ? "Recolha seu caderno na mesa do fiscal." : objetivoRevista;
+        objetivoTexto.text = string.Empty;
         Salvar();
     }
 
@@ -535,9 +532,8 @@ public partial class EntradaCurrais : MonoBehaviour
         if (Dados.curraisPanoAbrigoRecolhido && !TemItem(itemPanoAbrigo))
             InventoryManager.Instance.AddItem(itemPanoAbrigo);
         Dados.curraisEtapaEntrada = 3;
-        LimitarPrimeiroAbrigo();
         AtualizarVisuaisChegada();
-        objetivoTexto.text = objetivoPano;
+        objetivoTexto.text = string.Empty;
         Salvar();
     }
 
@@ -560,10 +556,16 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void LiberarMari()
     {
-        // Não aplica os limites do campo enquanto a inicialização estiver incompleta.
-        if (mari != null) mari.enabled = pronto && GameProgress.Instance != null && Dados.curraisEtapaEntrada >= 2;
+        // Uma referência narrativa incompleta não deve prender a personagem.
+        if (!pronto || GameProgress.Instance == null)
+        {
+            if (mari != null) mari.enabled = true;
+            if (seguirCamera != null) seguirCamera.enabled = true;
+            return;
+        }
+        if (mari != null) mari.enabled = Dados.curraisEtapaEntrada >= 2;
         bool explorarSetor = pronto && GameProgress.Instance != null &&
-            Dados.curraisEtapaEntrada == 4 && campo != null && campo.activeInHierarchy;
+            Dados.curraisEtapaEntrada >= 2 && !ocupado && !menuAberto && !dialogando;
         if (seguirCamera != null) seguirCamera.enabled = explorarSetor;
         if (!explorarSetor) FixarCameraDaSequencia();
     }
@@ -687,11 +689,7 @@ public partial class EntradaCurrais : MonoBehaviour
         foreach (Collider2D area in areas)
         {
             if (area == null || !area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
-            if (Mathf.Abs(mari.transform.position.x - area.bounds.center.x) > alcanceInteracao)
-            {
-                objetivoTexto.text = "Aproxime-se para interagir. " + ObjetivoAtual();
-                return true;
-            }
+
             if (area == areaLotePanos) Iniciar(RecolherLotePanos());
             else if (area == areaLuzia)
             {
@@ -700,31 +698,31 @@ public partial class EntradaCurrais : MonoBehaviour
             }
             else if (area == areaAgua)
             {
-                if (!Dados.curraisDistribuicaoIniciada) objetivoTexto.text = objetivosBusca[0];
+                if (!Dados.curraisDistribuicaoIniciada) objetivoTexto.text = string.Empty;
                 else if (!Dados.curraisAguaRecebida) Iniciar(ReceberAgua());
-                else objetivoTexto.text = ObjetivoAtual();
+                else objetivoTexto.text = string.Empty;
             }
             else if (area == areaMae)
             {
                 if (Dados.curraisAguaRecebida && Dados.curraisEscolhaAgua == 0) Iniciar(DestinarAgua());
-                else objetivoTexto.text = ObjetivoAtual();
+                else objetivoTexto.text = string.Empty;
             }
             else if (area == areaMenino)
             {
-                if (Dados.curraisEscolhaAgua == 0) objetivoTexto.text = ObjetivoAtual();
+                if (Dados.curraisEscolhaAgua == 0) objetivoTexto.text = string.Empty;
                 else if (!Dados.curraisMeninoVisitado) Iniciar(ConhecerMenino());
                 else AbrirMenuMenino();
             }
             else if (area == areaRegistro)
             {
-                if (Dados.curraisEscolhaAgua == 0) objetivoTexto.text = ObjetivoAtual();
+                if (Dados.curraisEscolhaAgua == 0) objetivoTexto.text = string.Empty;
                 else if (!Dados.curraisRegistroConcluido) Iniciar(ConsultarRegistro());
                 else MenuTarefaPanos();
             }
             else if (area == areaPanela)
             {
                 if (Dados.curraisRegistroConcluido && !Dados.curraisPanelaConcluida) Iniciar(EscolherPertence());
-                else objetivoTexto.text = ObjetivoAtual();
+                else objetivoTexto.text = string.Empty;
             }
             return true;
         }
@@ -735,12 +733,12 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (!Dados.curraisDistribuicaoIniciada)
         {
-            MostrarOpcoes("Luzia", objetivosBusca[0], opcoesLuziaInicio, new Action[] {
+            MostrarOpcoes("Luzia", string.Empty, opcoesLuziaInicio, new Action[] {
                 () => { Dados.curraisDistribuicaoIniciada = true; AtualizarEstadoBusca(); Salvar(); },
                 () => Iniciar(Dizer(abrigo)), FecharMenu });
         }
         else
-            MostrarOpcoes("Luzia", ObjetivoAtual(), opcoesRegistro,
+            MostrarOpcoes("Luzia", string.Empty, opcoesRegistro,
                 new Action[] { () => Iniciar(Dizer(abrigo)), FecharMenu });
     }
 
@@ -774,7 +772,7 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (!DevolverCabaca())
         {
-            objetivoTexto.text = "A cabaça precisa ser devolvida na distribuição antes de receber água.";
+            objetivoTexto.text = string.Empty;
             yield break;
         }
         if (!Dados.curraisAguaOrientada)
@@ -786,8 +784,7 @@ public partial class EntradaCurrais : MonoBehaviour
         }
         if (!TemItem(cabacaVaziaBusca) || InventoryManager.Instance.SelectedItem != cabacaVaziaBusca)
         {
-            yield return Dizer(new[] { new Fala { personagem = "Funcionária", texto =
-                "Selecione a cabaça e clique aqui, ou arraste ela até mim. Pode deixar o inventário aberto. Espere sua vez; não mexa no reservatório." } });
+
             yield break;
         }
         InventoryManager.Instance.RemoveItem(cabacaVaziaBusca);
@@ -800,15 +797,10 @@ public partial class EntradaCurrais : MonoBehaviour
     private IEnumerator DestinarAgua()
     {
         if (Dados.curraisEscolhaAgua != 0) yield break;
-        if (mari.transform.position.x < limiteAbrigoEsquerda.position.x ||
-            mari.transform.position.x > limiteAbrigoDireita.position.x)
-        {
-            objetivoTexto.text = objetivosBusca[2];
-            yield break;
-        }
+
         if (!TemItem(cabacaCheiaBusca) || InventoryManager.Instance.SelectedItem != cabacaCheiaBusca)
         {
-            objetivoTexto.text = "Selecione a cabaça cheia no inventário, feche com TAB e fale com sua mãe ou Luzia no abrigo.";
+            objetivoTexto.text = string.Empty;
             yield break;
         }
         yield return Dizer(aguaAntesEscolha);
@@ -900,27 +892,14 @@ public partial class EntradaCurrais : MonoBehaviour
         yield return Dizer(perguntar ? panelaCanhoto : seguirPanos);
     }
 
-    private string ObjetivoAtual()
-    {
-        if (Dados.curraisPanelaConcluida) return ObjetivoCampo();
-        if (objetivosBusca == null || objetivosBusca.Length < 6) return objetivoBusca;
-        if (!Dados.curraisDistribuicaoIniciada) return objetivosBusca[0];
-        if (!Dados.curraisAguaRecebida) return Dados.curraisAguaOrientada
-            ? "Selecione a cabaça vazia no inventário e apresente na distribuição." : objetivosBusca[1];
-        if (Dados.curraisEscolhaAgua == 0) return objetivosBusca[2];
-        if (!Dados.curraisRegistroConcluido) return objetivosBusca[3];
-        if (!Dados.curraisLotePanosRecolhido)
-            return (Dados.curraisPerguntasTarefaPanos & 3) == 3 ? objetivoLotePanos : "Pergunte ao escrivão qual lote levar e a quem entregar.";
-        if (!Dados.curraisPanelaConcluida) return objetivosBusca[4];
-        return objetivosBusca[5];
-    }
+    private string ObjetivoAtual() => string.Empty;
 
     private void AtualizarEstadoBusca()
     {
         if (Dados.curraisEtapaEntrada != 4) return;
         AtualizarVisuaisChegada();
         AtualizarTarefaPanos();
-        objetivoTexto.text = ObjetivoAtual();
+        objetivoTexto.text = string.Empty;
         bool panelaAcessivel = Dados.curraisLotePanosRecolhido && !Dados.curraisPanelaConcluida;
         if (panelaAcessivel)
         {
@@ -960,8 +939,7 @@ public partial class EntradaCurrais : MonoBehaviour
         if (!Dados.curraisDistribuicaoIniciada) return;
         SeguidorFamilia seguidor = Dados.curraisEscolhaAgua == 1 ? seguidoraMae : seguidoraLuzia;
         Vector3 posicao = seguidor.transform.position;
-        posicao.x = Mathf.Clamp(mari.transform.position.x - seguidor.DistanciaAtras,
-            limiteSetor.bounds.min.x + 1f, limiteSetor.bounds.max.x - 1f);
+        posicao.x = mari.transform.position.x - seguidor.DistanciaAtras;
         seguidor.transform.position = posicao;
         Physics2D.SyncTransforms();
     }
@@ -972,8 +950,8 @@ public partial class EntradaCurrais : MonoBehaviour
         if (Dados.curraisEtapaEntrada == 2 || Dados.curraisEtapaEntrada == 3) AtualizarVisuaisChegada();
         if (Dados.curraisEtapaEntrada != 4)
         {
-            // Os limites do setor interno não devem deslocar a câmera da separação na rua.
-            FixarCameraDaSequencia();
+            if (ocupado || menuAberto || dialogando || Dados.curraisEtapaEntrada < 2)
+                FixarCameraDaSequencia();
             return;
         }
         bool livre = !ocupado && !menuAberto && !dialogando && !PauseHelper.BlockInput();

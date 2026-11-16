@@ -72,7 +72,7 @@ public partial class EntradaCurrais
         return valido;
     }
 
-    private string ObjetivoConsulta() => MemoriaDisponivel ? ObjetivoMemoria() : objetivosConsulta[Mathf.Clamp(Dados.curraisEtapaConsulta, 0, 4)];
+    private string ObjetivoConsulta() => string.Empty;
 
     private string InformacoesConsulta() => rotuloLugar + ": " +
         (Dados.curraisDestinoConfirmado ? lugarConsulta : naoConfirmado) + "\n" + rotuloNome + ": " +
@@ -85,10 +85,10 @@ public partial class EntradaCurrais
         bool ativa = ConsultaDisponivel;
         int etapa = Dados.curraisEtapaConsulta;
         setorConsulta.SetActive(ativa && etapa >= 1);
-        bloqueioSaida.enabled = ativa && etapa >= 1;
+        bloqueioSaida.enabled = false;
         AtualizarFamiliaAlternativa();
         if (!ativa) { AtualizarMemoria(); return; }
-        objetivoTexto.text = ObjetivoConsulta();
+        objetivoTexto.text = string.Empty;
         areaAmanhecer.enabled = etapa == 0;
         areaUltimaConsulta.enabled = etapa == 1;
         areaSaidaConsulta.enabled = etapa == 2;
@@ -129,14 +129,12 @@ public partial class EntradaCurrais
     {
         if (Dados.curraisEtapaConsulta < 1 || Dados.curraisEtapaConsulta > 3) return;
         Vector3 destinoPai = pai.position;
-        destinoPai.x = Mathf.Clamp(mari.transform.position.x - seguidorPaiConsulta.DistanciaAtras,
-            limiteSetor.bounds.min.x + 1f, limiteSetor.bounds.max.x - 1f);
+        destinoPai.x = mari.transform.position.x - seguidorPaiConsulta.DistanciaAtras;
         pai.position = destinoPai;
         if (Dados.curraisEtapaConsulta == 3 || mari.transform.position.x < maeLimiteConsulta.position.x)
         {
             Vector3 destinoMae = mae.position;
-            destinoMae.x = Mathf.Clamp(mari.transform.position.x - seguidoraMae.DistanciaAtras - 1f,
-                limiteSetor.bounds.min.x + 1f, limiteSetor.bounds.max.x - 1f);
+            destinoMae.x = mari.transform.position.x - seguidoraMae.DistanciaAtras - 1f;
             mae.position = destinoMae;
         }
         else Posicionar(mae, maeLimiteConsulta);
@@ -149,8 +147,7 @@ public partial class EntradaCurrais
         foreach (Collider2D area in AlvosConsulta())
         {
             if (!area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
-            if (Mathf.Abs(mari.transform.position.x - area.bounds.center.x) > alcanceInteracao)
-            { objetivoTexto.text = "Aproxime-se para interagir. " + ObjetivoConsulta(); return true; }
+
             if (area == areaBaldeRaimundo) Iniciar(PegarBaldeRaimundo());
             else if (area == areaRaimundo) MenuRaimundoManha();
             else if (area == areaAmanhecer) Iniciar(AmanhecerNoCampo());

@@ -48,7 +48,7 @@ public partial class EntradaCurrais
         return valido;
     }
 
-    private string ObjetivoPosto() => ConsultaDisponivel ? ObjetivoConsulta() : objetivosPosto[Mathf.Clamp(Dados.curraisEtapaPosto, 0, 4)];
+    private string ObjetivoPosto() => string.Empty;
 
     private Collider2D[] AlvosPosto() => ConsultaDisponivel ? AlvosConsulta() : new[] { areaPostoEscolha, areaPortaQuarto, areaFamiliaAbrigo, areaEsteiraNoite };
 
@@ -76,7 +76,7 @@ public partial class EntradaCurrais
         AplicarNoite(ativo && (noiteEmCurso || Dados.curraisEtapaPosto == 4));
         if (!ativo) { AtualizarConsulta(); return; }
         int etapa = Dados.curraisEtapaPosto;
-        objetivoTexto.text = ObjetivoPosto();
+        objetivoTexto.text = string.Empty;
         areaPostoEscolha.enabled = etapa == 0;
         areaPortaQuarto.enabled = etapa == 1;
         areaFamiliaAbrigo.enabled = etapa >= 2;
@@ -107,8 +107,7 @@ public partial class EntradaCurrais
         foreach (Collider2D area in AlvosPosto())
         {
             if (!area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
-            if (Mathf.Abs(mari.transform.position.x - area.bounds.center.x) > alcanceInteracao)
-            { objetivoTexto.text = "Aproxime-se para interagir. " + ObjetivoPosto(); return true; }
+
             if (area == areaPostoEscolha) Iniciar(EscolherNoPosto());
             else if (area == areaPortaQuarto) Iniciar(InvestigarQuarto());
             else if (area == areaFamiliaAbrigo)

@@ -20,7 +20,6 @@ public partial class EntradaCurrais
     [Header("Chegada alternativa — acomodar o pai")]
     [SerializeField] private Collider2D areaPanoAbrigo;
     [SerializeField] private GameObject panoAbrigo, panoNoPai;
-    [SerializeField] private Transform limiteAbrigoEsquerda, limiteAbrigoDireita;
     [SerializeField] private ItemData itemPanoAbrigo;
     [SerializeField] private Fala[] panoDisponivel, paiAcomodado;
     [SerializeField] private Fala[] luziaCurral, luziaSaida, luziaIrma;
@@ -30,11 +29,10 @@ public partial class EntradaCurrais
     {
         UnityEngine.Object[] refs = { guardaRetaguarda, deslocamentoEscolta, guardaSeparacao,
             guardaGolpe, paiReacao, cameraRevista, areaFiscalEntrada, areaDiarioEntrada, diarioEntrada,
-            areaPanoAbrigo, panoAbrigo, panoNoPai, itemPanoAbrigo, limiteAbrigoEsquerda, limiteAbrigoDireita };
+            areaPanoAbrigo, panoAbrigo, panoNoPai, itemPanoAbrigo };
         string[] nomes = { nameof(guardaRetaguarda), nameof(deslocamentoEscolta), nameof(guardaSeparacao),
             nameof(guardaGolpe), nameof(paiReacao), nameof(cameraRevista), nameof(areaFiscalEntrada), nameof(areaDiarioEntrada), nameof(diarioEntrada),
-            nameof(areaPanoAbrigo), nameof(panoAbrigo), nameof(panoNoPai), nameof(itemPanoAbrigo),
-            nameof(limiteAbrigoEsquerda), nameof(limiteAbrigoDireita) };
+            nameof(areaPanoAbrigo), nameof(panoAbrigo), nameof(panoNoPai), nameof(itemPanoAbrigo) };
         bool valido = true;
         for (int i = 0; i < refs.Length; i++) valido &= ConferirReferencia(refs[i], nomes[i]);
         if (ferramentasRevista == null || ferramentasRevista.Length == 0) return false;
@@ -128,8 +126,7 @@ public partial class EntradaCurrais
                 { alvo = area; break; }
         }
         if (alvo == null) return;
-        if (Mathf.Abs(mari.transform.position.x - alvo.bounds.center.x) > alcanceInteracao)
-        { objetivoTexto.text = "Aproxime-se para interagir. " + (Dados.curraisEtapaEntrada == 2 ? objetivoRevista : objetivoPano); return; }
+
         if (alvo == areaFiscalEntrada) MenuRevista();
         else if (alvo == areaDiarioEntrada) Iniciar(RecuperarDiarioEntrada());
         else if (alvo == areaPanoAbrigo) Iniciar(RecolherPanoAbrigo());
@@ -139,11 +136,9 @@ public partial class EntradaCurrais
 
     private void MenuRevista()
     {
-        MostrarOpcoes("Fiscal", objetivoRevista,
-            new[] { "Como entregar os pertences?", "Conferir a revista", "Sair" }, new Action[] {
-                () => Iniciar(Dizer(new[] { new Fala { personagem = "Zefinha", texto =
-                    "Vou abrir o inventário com TAB, arrastar todos os itens e soltar sobre o cabo. Depois confiro a revista com ele." } })),
-                () => Iniciar(ConcluirRevista()), FecharMenu });
+        MostrarOpcoes("Fiscal", string.Empty,
+            new[] { "Conferir a revista", "Sair" },
+            new Action[] { () => Iniciar(ConcluirRevista()), FecharMenu });
     }
 
     public bool SoltarItemNoCenario(ItemData item, Vector2 posicaoTela)
@@ -161,8 +156,7 @@ public partial class EntradaCurrais
         foreach (Collider2D alvo in alvos)
         {
             if (alvo == null || !alvo.enabled || !alvo.gameObject.activeInHierarchy || !alvo.OverlapPoint(ponto)) continue;
-            if (Mathf.Abs(mari.transform.position.x - alvo.bounds.center.x) > alcanceInteracao)
-            { objetivoTexto.text = "Aproxime-se para entregar o objeto."; return false; }
+
             InventoryManager.Instance.SelectItem(item);
             if (Dados.curraisEtapaEntrada == 3 && alvo == areaMae)
             { Iniciar(AcomodarPai()); return true; }
@@ -187,11 +181,7 @@ public partial class EntradaCurrais
         Plane plano = new Plane(Vector3.forward, Vector3.zero);
         if (!plano.Raycast(raio, out float distancia) ||
             !areaFiscalEntrada.OverlapPoint(raio.GetPoint(distancia))) return false;
-        if (Mathf.Abs(mari.transform.position.x - areaFiscalEntrada.bounds.center.x) > alcanceInteracao)
-        {
-            objetivoTexto.text = "Aproxime-se do cabo para entregar as ferramentas.";
-            return false;
-        }
+
 
         Iniciar(EntregarFerramenta(item));
         return true;
@@ -204,7 +194,7 @@ public partial class EntradaCurrais
         { Debug.LogError("Currais: ferramenta sem registro no catálogo; entrega cancelada.", this); yield break; }
         Dados.curraisItensRetidos.Add(id);
         InventoryManager.Instance.RemoveItem(item);
-        objetivoTexto.text = objetivoRevista;
+        objetivoTexto.text = string.Empty;
         Salvar();
         yield return Dizer(new[] { new Fala { personagem = "Fiscal", texto = item.itemName + ": deixe na mesa. O resto também vai passar pela revista." } });
     }
@@ -212,18 +202,17 @@ public partial class EntradaCurrais
     private IEnumerator ConcluirRevista()
     {
         if (Dados.curraisPertencesRetidos)
-        { objetivoTexto.text = "Recolha seu caderno na mesa do fiscal."; yield break; }
+        { objetivoTexto.text = string.Empty; yield break; }
         if (InventoryManager.Instance != null && InventoryManager.Instance.Items.Count > 0)
         {
-            yield return Dizer(new[] { new Fala { personagem = "Fiscal", texto =
-                "Ainda tem pertences com você. Abra o inventário e entregue todos os itens antes de confirmar a revista." } });
+
             yield break;
         }
         if (!ReterPertences())
-        { objetivoTexto.text = "Não foi possível registrar os pertences. Eles continuam no inventário."; yield break; }
+        { objetivoTexto.text = string.Empty; yield break; }
         yield return Dizer(revista);
         AtualizarVisuaisChegada();
-        objetivoTexto.text = "O fiscal deixou seu caderno na mesa. Clique para recolher.";
+        objetivoTexto.text = string.Empty;
         Salvar();
     }
 
@@ -265,15 +254,14 @@ public partial class EntradaCurrais
         AtualizarVisuaisChegada();
         Salvar();
         yield return Dizer(panoDisponivel);
-        objetivoTexto.text = "O pano está no inventário. Arraste até sua mãe, ou selecione e clique nela.";
+        objetivoTexto.text = string.Empty;
     }
 
     private IEnumerator AcomodarPai()
     {
         if (!TemItem(itemPanoAbrigo) || InventoryManager.Instance.SelectedItem != itemPanoAbrigo)
         {
-            yield return Dizer(new[] { new Fala { personagem = "Mãe", texto =
-                "Luzia deixou um pano pra nós. Pegue, selecione no inventário e traga pra cá, minha filha." } });
+
             yield break;
         }
         InventoryManager.Instance.RemoveItem(itemPanoAbrigo);
@@ -296,25 +284,4 @@ public partial class EntradaCurrais
         panoNoPai.SetActive(Dados.curraisPaiAcomodado && Dados.curraisEtapaBusca < 1);
     }
 
-    private void LimitarPrimeiroAbrigo()
-    {
-        BoxCollider2D limites = limiteSetor as BoxCollider2D;
-        if (limites == null) return;
-        // Guarda a borda original antes de restringir este pequeno trecho.
-        if (limiteEsquerdoBusca == 0f) limiteEsquerdoBusca = limites.bounds.min.x;
-        float esquerda = limiteAbrigoEsquerda.position.x, direita = limiteAbrigoDireita.position.x;
-        // Mover as artes/marcas na Hierarchy não pode deixar os alvos atrás do limite.
-        foreach (Transform alvo in new[] { mariAbrigo, paiAbrigo, maeAbrigo,
-            panoAbrigo.transform, luzia.transform })
-        {
-            esquerda = Mathf.Min(esquerda, alvo.position.x - 2f);
-            direita = Mathf.Max(direita, alvo.position.x + 2f);
-        }
-        Vector3 centro = limites.transform.InverseTransformPoint(new Vector3((esquerda + direita) * .5f,
-            limites.bounds.center.y, limites.transform.position.z));
-        limites.offset = new Vector2(centro.x, limites.offset.y);
-        limites.size = new Vector2((direita - esquerda) / Mathf.Abs(limites.transform.lossyScale.x), limites.size.y);
-        Physics2D.SyncTransforms();
-        if (seguirCamera != null) seguirCamera.AtualizarLimites();
-    }
 }

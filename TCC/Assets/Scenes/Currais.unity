@@ -3850,7 +3850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   target: {fileID: 1304905425}
   smoothSpeed: 5
-  levelBounds: {fileID: 4100000081}
+  levelBounds: {fileID: 0}
   backgroundPieces: []
   horizontalOffset: 0
 --- !u!114 &1148415095
@@ -4408,7 +4408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   walkSpeed: 5
   runSpeed: 8
-  movementBounds: {fileID: 4100000081}
+  movementBounds: {fileID: 0}
   journeyBounds: {fileID: 0}
   movementBackground: []
   groundCheck: {fileID: 0}
@@ -9282,12 +9282,12 @@ GameObject:
   - component: {fileID: 3000000069}
   - component: {fileID: 3000000070}
   m_Layer: 5
-  m_Name: Objetivo
+  m_Name: Objetivos antigos - DESATIVADO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3000000068
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9322,7 +9322,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3000000067}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: null
@@ -9335,7 +9335,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Descobrir para onde levaram Mariquinha.
+  m_text: ""
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -13000,7 +13000,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4100000080
 Transform:
   m_ObjectHideFlags: 0
@@ -13023,7 +13023,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4100000079}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -14658,7 +14658,6 @@ MonoBehaviour:
   mari: {fileID: 1304905420}
   cameraCena: {fileID: 1148415097}
   seguirCamera: {fileID: 1148415094}
-  limiteSetor: {fileID: 4100000081}
   dialogoUI: {fileID: 3000000009}
   painelDialogo: {fileID: 3000000099}
   escolhas: {fileID: 3000000093}
@@ -14783,8 +14782,8 @@ MonoBehaviour:
     titulo: "Port\xE3o"
     texto: "O port\xE3o \xE9 vis\xEDvel daqui. O guarda n\xE3o deixa a fam\xEDlia
       voltar para a rua."
-  objetivoBusca: Descobrir para onde levaram Mariquinha.
-  objetivoLaco: "Clique no peda\xE7o do la\xE7o que caiu no ch\xE3o."
+  objetivoBusca: ""
+  objetivoLaco: ""
   botoesEtapa2:
   - {fileID: 3000000032}
   - {fileID: 3000000049}
@@ -14925,12 +14924,12 @@ MonoBehaviour:
   - Perguntar pelo encaminhamento
   - Seguir com os panos
   objetivosBusca:
-  - "Fale com Luzia para buscar \xE1gua."
-  - "V\xE1 \xE0 distribui\xE7\xE3o e pergunte como receber \xE1gua."
-  - "Selecione a caba\xE7a cheia e volte ao abrigo para decidir com quem dividir."
-  - "Procure a mesa dos nomes. Voc\xEA tamb\xE9m pode conversar com o menino."
-  - "Veja o canhoto junto \xE0 mesa dos nomes antes de seguir com os panos."
-  - "Leve o lote \xE0 lavadeira. Fale com Raimundo para seguir pela passagem."
+  - ""
+  - ""
+  - ""
+  - ""
+  - ""
+  - ""
   perguntaAgua: "A caba\xE7a tem \xE1gua para uma por\xE7\xE3o. A quem entregar?"
   perguntaPanela: Perguntar pelo encaminhamento ou seguir com os panos?
   setorBusca: {fileID: 4300000000}
@@ -14940,11 +14939,6 @@ MonoBehaviour:
   areaLembranca: {fileID: 4300000058}
   areaPatio: {fileID: 4300000061}
   areaPanoAtendimento: {fileID: 4300000065}
-  limitesBusca:
-  - {fileID: 4300000109}
-  - {fileID: 4300000111}
-  - {fileID: 4300000113}
-  - {fileID: 4300000115}
   paiTrabalhoMarca: {fileID: 4300000103}
   bento: {fileID: 4300000083}
   bentoCaido: {fileID: 4300000107}
@@ -15082,14 +15076,13 @@ MonoBehaviour:
   - "Como \xE9 trabalhar aqui?"
   - Preciso continuar
   objetivosCampo:
-  - "Fale com Raimundo sobre a passagem at\xE9 a lavagem."
-  - "Selecione o lote de panos no invent\xE1rio e entregue \xE0 lavadeira."
-  - "Separe os panos: selecione no invent\xE1rio e entregue \xE0 esquerda ou \xE0
-    direita, conforme a orienta\xE7\xE3o."
-  - "Espere nos sacos e atravesse atr\xE1s do guarda quando ele se afastar."
-  - "Siga at\xE9 o p\xE1tio de trabalho e procure seu pai."
-  - Ajude Luzia no atendimento de Bento.
-  - Volte ao posto com Luzia.
+  - ""
+  - ""
+  - ""
+  - ""
+  - ""
+  - ""
+  - ""
   guardaRetaguarda: {fileID: 9805000001}
   deslocamentoEscolta: {fileID: 9805000101}
   cameraRevista: {fileID: 9805000161}
@@ -15127,12 +15120,10 @@ MonoBehaviour:
     texto: "Meu caderno\u2026 Ainda bem que ele deixou eu levar."
   - personagem: "M\xE3e"
     texto: Guarde junto de tu, Josefa. Vamos acudir seu pai.
-  objetivoRevista: "Abra o inventário (TAB). Arraste TODOS os itens até o cabo e fale com ele para confirmar."
+  objetivoRevista: ""
   areaPanoAbrigo: {fileID: 9805000303}
   panoAbrigo: {fileID: 9805000300}
   panoNoPai: {fileID: 9805000400}
-  limiteAbrigoEsquerda: {fileID: 9805000141}
-  limiteAbrigoDireita: {fileID: 9805000151}
   itemPanoAbrigo: {fileID: 11400000, guid: 696180fc49fd457ead3d4ad6ee729c99, type: 2}
   panoDisponivel:
   - personagem: Luzia
@@ -15176,8 +15167,7 @@ MonoBehaviour:
     texto: "Maria Severina. N\xF3s chama Mariquinha."
   - personagem: Luzia
     texto: Vou perguntar na lavagem. Tem muita gente chegando por caminhos diferentes.
-  objetivoPano: "Explore o abrigo e converse com Luzia. Pegue o pano que ela cedeu
-    e entregue \xE0 sua m\xE3e pelo invent\xE1rio."
+  objetivoPano: ""
   setorConsulta: {fileID: 4500000000}
   papelConsulta: {fileID: 4500000006}
   testemunhaConsulta: {fileID: 4500000014}
@@ -15304,11 +15294,11 @@ MonoBehaviour:
   - "Relembrar as informa\xE7\xF5es"
   - Sair
   objetivosConsulta:
-  - Aproxime-se da esteira e interaja para amanhecer e voltar ao posto com o pai.
-  - "Caminhe com o pai at\xE9 o posto, \xE0 direita do p\xE1tio."
-  - "Volte ao port\xE3o e acompanhe o pedido de sa\xEDda do pai."
-  - "Volte ao abrigo com a fam\xEDlia e repita o que conseguiu descobrir."
-  - Guardamos os nomes e as pistas. A busca por Maria Severina continua.
+  - ""
+  - ""
+  - ""
+  - ""
+  - ""
   perguntaConsulta: "Qual informa\xE7\xE3o confirmar?"
   rotuloLugar: Lugar conhecido
   rotuloNome: Nome conhecido
@@ -15417,12 +15407,9 @@ MonoBehaviour:
   baldeRaimundoCenario: {fileID: 9809000000}
   pedidoBaldeFalas:
   - personagem: Zefinha
-    texto: "Posso proteger a al\xE7a? A lavadeira me deixou uma tira limpa."
+    texto: Posso proteger a alça? A lavadeira me deixou uma tira limpa.
   - personagem: Raimundo
-    texto: "Pode. Pegue o balde aqui do lado, vazio. Enrole o pano na parte que pega
-      na m\xE3o."
-  - personagem: Zefinha
-    texto: "Vou combinar os dois no invent\xE1rio e devolver."
+    texto: Pode. Pegue o balde aqui do lado, vazio. Enrole o pano na parte que pega na mão.
   baldeDevolvidoFalas:
   - personagem: Raimundo
     texto: Assim num corta tanto. Obrigado, Josefa.
@@ -15457,23 +15444,13 @@ MonoBehaviour:
   panoUsoEntregue: {fileID: 9807000030}
   panoAtendimentoEntregue: {fileID: 9807000130}
   instrucoesLavagem:
-  - personagem: Lavadeira
-    texto: "Os panos de uso ficam \xE0 esquerda. As pe\xE7as do atendimento, separadas
-      \xE0 direita."
   - personagem: Zefinha
-    texto: "Essas aqui t\xEAm sangue\u2026"
+    texto: Essas aqui têm sangue…
   - personagem: Lavadeira
-    texto: "T\xEAm. Amanh\xE3 chegam outras. Selecione cada pe\xE7a no invent\xE1rio
-      e ponha no lugar que eu mostrei."
+    texto: Têm. Amanhã chegam outras.
   tiraPanoAutorizada:
   - personagem: Lavadeira
-    texto: "Pode levar esse retalho limpo. Raimundo tava precisando proteger a al\xE7a
-      do balde."
-  - personagem: Luzia
-    texto: "Agora observe o guarda no corredor. Espere junto dos sacos e passe atr\xE1s
-      dele quando se afastar."
-  - personagem: Zefinha
-    texto: "A tira ficou guardada no invent\xE1rio."
+    texto: Pode levar esse retalho limpo. Raimundo tava precisando proteger a alça do balde.
   guardaRepreensao:
   - personagem: Guarda
     texto: Eu mandei esperar! Volte pra perto dos sacos.
@@ -15531,9 +15508,8 @@ MonoBehaviour:
   - Revisar as pistas
   - Voltar ao abrigo
   - Voltar ao menu
-  objetivoPaginasMemoria: "Aproxime-se da esteira para acompanhar as p\xE1ginas seguintes
-    da vida de Zefinha."
-  objetivoFimMemoria: "A busca por Maria Severina continuou. As lembran\xE7as permanecem."
+  objetivoPaginasMemoria: ""
+  objetivoFimMemoria: ""
   tituloFimMemoria: Fim do Ato 2
   duracaoPaginaMemoria: 6
   leituraMinimaMemoria: 1.5
@@ -15721,13 +15697,11 @@ MonoBehaviour:
   - "Contar a \xFAltima coisa que ouvi"
   - "Pedir que a m\xE3e fique perto"
   objetivosPosto:
-  - "V\xE1 ao posto, \xE0 direita do p\xE1tio. Luzia pode ajudar a conseguir uma
-    informa\xE7\xE3o."
-  - Volte pelo corredor e investigue a porta junto ao cabo.
-  - Volte ao abrigo e conte aos pais o que descobriu.
-  - "Converse com a fam\xEDlia se quiser. Depois, aproxime-se da esteira para passar
-    a noite."
-  - "Ainda preciso encontrar Mariquinha. Amanh\xE3, voltaremos ao posto."
+  - ""
+  - ""
+  - ""
+  - ""
+  - ""
   perguntaPosto: Ajudar Raimundo e ouvir o que descobriu, ou copiar o encaminhamento
     antes que levem a folha?
   perguntaNoite: "O que dizer \xE0 m\xE3e?"
@@ -15740,15 +15714,12 @@ MonoBehaviour:
   panosEntreguesPatio: {fileID: 9808000400}
   tarefaPatioFalas:
   - personagem: Pai
-    texto: "Meu ombro num aguenta levantar a carga. Eu j\xE1 disse a eles."
+    texto: Meu ombro num aguenta levantar a carga. Eu já disse a eles.
   - personagem: Fiscal
-    texto: "O servi\xE7o num vai fazer sozinho."
+    texto: O serviço num vai fazer sozinho.
   - personagem: Luzia
-    texto: "Josefa, leve esse pano at\xE9 o apoio, do outro lado do p\xE1tio. Apresente
-      tamb\xE9m a caba\xE7a vazia no ponto de \xE1gua dos trabalhadores."
-  - personagem: Zefinha
-    texto: "O pano de aux\xEDlio ficou no invent\xE1rio. Vou selecionar o item antes
-      de entregar."
+    texto: Josefa, leve esse pano até o apoio, do outro lado do pátio. Apresente também a cabaça vazia no ponto de
+      água dos trabalhadores.
   aguaPatioFalas:
   - personagem: Trabalhador
     texto: "Enchi a caba\xE7a com a por\xE7\xE3o reservada pro servi\xE7o e pro atendimento.
@@ -15842,8 +15813,7 @@ MonoBehaviour:
   - personagem: Zefinha
     texto: "Vou levar o lote \xE0 lavadeira. Ainda posso perguntar pelo encaminhamento
       no posto."
-  objetivoLotePanos: "Recolha o lote dobrado ao lado da mesa dos nomes. Voc\xEA j\xE1
-    sabe a quem entregar."
+  objetivoLotePanos: ""
 --- !u!1 &4200000000
 GameObject:
   m_ObjectHideFlags: 0
@@ -21250,7 +21220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4300000109
 Transform:
   m_ObjectHideFlags: 0
@@ -21281,7 +21251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4300000111
 Transform:
   m_ObjectHideFlags: 0
@@ -21312,7 +21282,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4300000113
 Transform:
   m_ObjectHideFlags: 0
@@ -21343,7 +21313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4300000115
 Transform:
   m_ObjectHideFlags: 0
@@ -29792,7 +29762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9805000141
 Transform:
   m_ObjectHideFlags: 0
@@ -29823,7 +29793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9805000151
 Transform:
   m_ObjectHideFlags: 0

@@ -15,6 +15,13 @@ public class CameraFollow : MonoBehaviour
     private Bounds cameraBounds;
     private bool hasBounds;
 
+    public void LiberarLimites()
+    {
+        levelBounds = null;
+        backgroundPieces = new SpriteRenderer[0];
+        hasBounds = false;
+    }
+
     void Start()
     {
         fixedY = transform.position.y;

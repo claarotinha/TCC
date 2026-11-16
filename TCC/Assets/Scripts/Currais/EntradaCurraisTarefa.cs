@@ -79,18 +79,12 @@ public partial class EntradaCurrais
     private IEnumerator RecolherLotePanos()
     {
         if (!Dados.curraisTarefaPanosIniciada || Dados.curraisLotePanosRecolhido) yield break;
-        if ((Dados.curraisPerguntasTarefaPanos & 3) != 3)
-        {
-            yield return Dizer(new[] { new Fala { personagem = "Zefinha", texto =
-                "Preciso saber qual lote levar e a quem entregar. Vou perguntar ao escrivão antes de mexer." } });
-            yield break;
-        }
+
         yield return ExaminarOuColetar(itemLotePanos);
         if (!coletaDoCenarioConfirmada) yield break;
         if (!TemItem(itemLotePanos)) InventoryManager.Instance.AddItem(itemLotePanos);
         Dados.curraisLotePanosRecolhido = true;
         AtualizarEstadoBusca(); Salvar();
-        yield return Dizer(new[] { new Fala { personagem = "Zefinha", texto =
-            "É este lote dobrado. Vou levar à lavadeira, junto do tanque." } });
+
     }
 }

@@ -84,10 +84,8 @@ public partial class EntradaCurrais
         InventoryManager.Instance.RemoveItem(esperado);
         Dados.curraisPanosSeparados |= bit;
         AtualizarEstadoBusca(); Salvar();
-        yield return Dizer(new[] { new Fala { personagem = "Lavadeira", texto = atendimento
-            ? "Isso. As peças do atendimento ficam separadas, à direita. Lave as mãos depois de mexer nelas."
-            : "Certo. Os panos de uso ficam do lado esquerdo." } });
-        if (Dados.curraisPanosSeparados == 3) objetivoTexto.text = "Os lotes estão separados. Pegue a tira que a lavadeira deixou para você.";
+
+        if (Dados.curraisPanosSeparados == 3) objetivoTexto.text = string.Empty;
     }
 
     private IEnumerator RecolherTiraLavagem()
@@ -130,25 +128,11 @@ public partial class EntradaCurrais
             Salvar(); Iniciar(LembrarLenda());
             return;
         }
-        float delta = mari.transform.position.x - guardaRonda.position.x;
-        SpriteRenderer olhar = guardaRonda.GetComponent<SpriteRenderer>();
-        bool olhaDireita = olhar != null ? !olhar.flipX : rondaVaiAoFim;
-        bool naFrente = olhaDireita ? delta > 0f : delta < 0f;
-        bool escondida = abrigoDosSacos.bounds.Contains(new Vector3(mari.transform.position.x,
-            abrigoDosSacos.bounds.center.y, abrigoDosSacos.bounds.center.z));
-        if (naFrente && Mathf.Abs(delta) < alcanceVigia &&
-            mari.transform.position.x > retornoRonda.position.x + .5f && !escondida)
-            Iniciar(VoltarDaRonda());
+
     }
 
     private IEnumerator VoltarDaRonda()
     {
-        yield return Dizer(guardaRepreensao);
-        // Retorno curto, sem perda de itens e mantendo o nível dos pés da personagem.
-        Vector3 destino = retornoRonda.position;
-        destino.y = mari.transform.position.y;
-        yield return Mover(mari.transform, destino, tempoPlano);
-        pausaRonda = 1.2f;
-        objetivoTexto.text = "Espere junto dos sacos e observe para onde o guarda está olhando antes de atravessar.";
+        yield break;
     }
 }

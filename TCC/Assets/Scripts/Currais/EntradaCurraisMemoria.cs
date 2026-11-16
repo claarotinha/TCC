@@ -39,14 +39,13 @@ public partial class EntradaCurrais
         valido &= idsPaginasMemoria != null && idsPaginasMemoria.Length == 3 &&
             opcoesFimMemoria != null && opcoesFimMemoria.Length == 4 &&
             imagensPassagem != null && imagensPassagem.Length == 3;
-        valido &= !string.IsNullOrWhiteSpace(objetivoPaginasMemoria) &&
-            !string.IsNullOrWhiteSpace(objetivoFimMemoria) && !string.IsNullOrWhiteSpace(tituloFimMemoria);
+        valido &= !string.IsNullOrWhiteSpace(tituloFimMemoria);
         if (imagensPassagem != null)
             foreach (GameObject imagem in imagensPassagem) valido &= ConferirReferencia(imagem, nameof(imagensPassagem));
         return valido;
     }
 
-    private string ObjetivoMemoria() => Dados.ato2Concluido ? objetivoFimMemoria : objetivoPaginasMemoria;
+    private string ObjetivoMemoria() => string.Empty;
 
     private Collider2D[] AlvosMemoria() => new[] { areaRetornoConsulta, areaPaginasMemoria };
 
@@ -54,7 +53,7 @@ public partial class EntradaCurrais
     {
         planoMemoria.SetActive(planoMemoriaAtivo);
         if (!MemoriaDisponivel) return;
-        objetivoTexto.text = ObjetivoMemoria();
+        objetivoTexto.text = string.Empty;
         areaPaginasMemoria.enabled = true;
         lacoMemoria.SetActive(false);
         documentoMemoria.SetActive(planoMemoriaAtivo && (TemItem(itemCanhoto) || Dados.curraisEscolhaPosto == 2));
@@ -65,8 +64,7 @@ public partial class EntradaCurrais
         foreach (Collider2D area in AlvosMemoria())
         {
             if (!area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
-            if (Mathf.Abs(mari.transform.position.x - area.bounds.center.x) > alcanceInteracao)
-            { objetivoTexto.text = "Aproxime-se para interagir. " + ObjetivoMemoria(); return true; }
+
             if (area == areaPaginasMemoria)
             {
                 if (Dados.ato2Concluido) AbrirMenuFimMemoria();
@@ -230,7 +228,7 @@ public partial class EntradaCurrais
     {
         if (!Dados.ato2Concluido)
         {
-            objetivoTexto.text = objetivoPaginasMemoria;
+            objetivoTexto.text = string.Empty;
             yield break;
         }
         if (string.IsNullOrWhiteSpace(cenaEpilogo) || !Application.CanStreamedLevelBeLoaded(cenaEpilogo))

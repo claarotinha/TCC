@@ -8,7 +8,6 @@ public partial class EntradaCurrais
     [Header("Etapa 3 - busca dentro do campo")]
     [SerializeField] private GameObject setorBusca;
     [SerializeField] private Collider2D areaRaimundo, areaLavadeira, areaPanoLavagem, areaLembranca, areaPatio, areaPanoAtendimento;
-    [SerializeField] private Transform[] limitesBusca;
     [SerializeField] private Transform paiTrabalhoMarca, bento, bentoCaido, bentoEmPe, fiscalTrabalho;
     [SerializeField] private GameObject panoCarregado, manchaRoda, corpoCoberto, trabalhadorRetorno;
     [SerializeField] private GameObject sombraGalho, pessoaNaCerca, reflexoIrma, reflexoZefinha, sinalGuarda;
@@ -16,7 +15,6 @@ public partial class EntradaCurrais
     [SerializeField] private Fala[] lavagemFalas, lembrancaCorpo, lembrancaComadre, lembrancaAgua, lembrancaRetorno;
     [SerializeField] private Fala[] patioInicio, patioAgressao, patioRetirada, corpoDistante, atendimentoFalas, noticiaBento;
     [SerializeField] private string[] opcoesRaimundo, objetivosCampo;
-    private float limiteEsquerdoBusca;
 
     private bool ReferenciasCampoValidas()
     {
@@ -31,9 +29,8 @@ public partial class EntradaCurrais
             nameof(sombraGalho), nameof(pessoaNaCerca), nameof(reflexoIrma), nameof(reflexoZefinha), nameof(sinalGuarda) };
         bool valido = true;
         for (int i = 0; i < referencias.Length; i++) valido &= ConferirReferencia(referencias[i], nomes[i]);
-        if (limitesBusca == null || limitesBusca.Length != 4 || opcoesRaimundo == null ||
+        if (opcoesRaimundo == null ||
             opcoesRaimundo.Length != 4 || objetivosCampo == null || objetivosCampo.Length != 7) valido = false;
-        else foreach (Transform marca in limitesBusca) valido &= ConferirReferencia(marca, nameof(limitesBusca));
         Fala[][] sequencias = { raimundoInicio, raimundoBando, raimundoMulher, raimundoSaida, lavagemFalas,
             lembrancaCorpo, lembrancaComadre, lembrancaAgua, lembrancaRetorno, patioInicio, patioAgressao,
             patioRetirada, corpoDistante, atendimentoFalas, noticiaBento };
@@ -49,34 +46,15 @@ public partial class EntradaCurrais
         return new[] { areaLotePanos, areaLuzia, areaAgua, areaMae, areaMenino, areaRegistro, areaPanela };
     }
 
-    private string ObjetivoCampo() => PostoDisponivel ? ObjetivoPosto() :
-        Dados.curraisEtapaBusca >= 4 && Dados.curraisEtapaBusca <= 5 ? ObjetivoSocorro() :
-        objetivosCampo[Mathf.Clamp(Dados.curraisEtapaBusca, 0, 6)];
-
-    private void AplicarLimitesBusca()
-    {
-        BoxCollider2D limite = limiteSetor as BoxCollider2D;
-        if (limite == null || limitesBusca == null || limitesBusca.Length != 4) return;
-        if (limiteEsquerdoBusca == 0f) limiteEsquerdoBusca = limite.bounds.min.x;
-        int indice = !Dados.curraisPanelaConcluida ? 0 : Dados.curraisEtapaBusca == 0 ? 0 :
-            Dados.curraisEtapaBusca <= 2 ? 1 : Dados.curraisEtapaBusca == 3 ? 2 : 3;
-        float direita = limitesBusca[indice].position.x;
-        Vector3 centro = limite.transform.InverseTransformPoint(new Vector3((limiteEsquerdoBusca + direita) * .5f,
-            limite.bounds.center.y, limite.transform.position.z));
-        limite.offset = new Vector2(centro.x, limite.offset.y);
-        limite.size = new Vector2((direita - limiteEsquerdoBusca) / Mathf.Abs(limite.transform.lossyScale.x), limite.size.y);
-        Physics2D.SyncTransforms();
-        if (seguirCamera != null) seguirCamera.AtualizarLimites();
-    }
+    private string ObjetivoCampo() => string.Empty;
 
     private void AtualizarCampo()
     {
         bool ativo = Dados.curraisPanelaConcluida;
         setorBusca.SetActive(ativo);
-        AplicarLimitesBusca();
         if (!ativo) { AtualizarPosto(); return; }
         int etapa = Dados.curraisEtapaBusca;
-        objetivoTexto.text = ObjetivoCampo();
+        objetivoTexto.text = string.Empty;
         areaRaimundo.enabled = etapa == 0;
         areaLavadeira.enabled = etapa == 1;
         areaPanoLavagem.enabled = etapa == 2 && Dados.curraisPanosSeparados == 3;
@@ -121,8 +99,7 @@ public partial class EntradaCurrais
         foreach (Collider2D area in AlvosAtuais())
         {
             if (area == null || !area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
-            if (Mathf.Abs(mari.transform.position.x - area.bounds.center.x) > alcanceInteracao)
-            { objetivoTexto.text = "Aproxime-se para interagir. " + ObjetivoCampo(); return true; }
+
             int etapa = Dados.curraisEtapaBusca;
             if (area == areaAguaPatio && etapa == 4) Iniciar(PrepararAguaPatio());
             else if (area == areaPanosPatio && etapa == 4) Iniciar(EntregarPanosPatio());
@@ -139,12 +116,11 @@ public partial class EntradaCurrais
             else if (area == areaPanoLavagem && etapa == 2) Iniciar(RecolherTiraLavagem());
             else if (area == areaLembranca && etapa == 3)
             {
-                if (Dados.curraisPassagemVigiadaConcluida) Iniciar(LembrarLenda());
-                else objetivoTexto.text = "Observe a ronda. Espere junto dos sacos e atravesse atrás do guarda quando ele se afastar.";
+                Iniciar(LembrarLenda());
             }
             else if (area == areaPatio && etapa == 4) Iniciar(TestemunharTrabalho());
             else if (area == areaPanoAtendimento && etapa == 5) Iniciar(AjudarBento());
-            else objetivoTexto.text = ObjetivoCampo();
+            else objetivoTexto.text = string.Empty;
             return true;
         }
         return false;
@@ -193,8 +169,7 @@ public partial class EntradaCurrais
     {
         if (!Dados.curraisPanelaConcluida || Dados.curraisEtapaBusca < 1) return;
         Vector3 posicao = luzia.transform.position;
-        posicao.x = Mathf.Clamp(mari.transform.position.x - seguidoraLuzia.DistanciaAtras,
-            limiteSetor.bounds.min.x + 1f, limiteSetor.bounds.max.x - 1f);
+        posicao.x = mari.transform.position.x - seguidoraLuzia.DistanciaAtras;
         luzia.transform.position = posicao;
         Physics2D.SyncTransforms();
     }
@@ -205,8 +180,7 @@ public partial class EntradaCurrais
         {
             if (!TemItem(itemLotePanos) || InventoryManager.Instance.SelectedItem != itemLotePanos)
             {
-                yield return Dizer(new[] { new Fala { personagem = "Lavadeira", texto =
-                    "Você trouxe o lote da mesa dos nomes? Selecione os panos no inventário, feche com TAB e entregue aqui." } });
+
                 yield break;
             }
             InventoryManager.Instance.RemoveItem(itemLotePanos);
@@ -296,8 +270,6 @@ public partial class EntradaCurrais
         if (!coletaDoCenarioConfirmada) yield break;
         if (!TemItem(panoAuxilio)) InventoryManager.Instance.AddItem(panoAuxilio);
         AtualizarEstadoBusca(); Salvar();
-        yield return Dizer(new[] { new Fala { personagem = "Luzia", texto = Dados.curraisBentoMorto
-            ? "Leve esse pano limpo para cobrir os pertences dele. Os homens vão preparar a saída."
-            : "Pegue esse pano. Selecione no inventário e traga até Bento. A água também vai ser necessária." } });
+
     }
 }
