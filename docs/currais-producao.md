@@ -170,30 +170,15 @@ Somente três ordens de SpriteRenderer foram corrigidas. Os scripts da história
 
 **Pendente:** importar/compilar no Unity, conferir visualmente os grupos e as três mudanças de desenho, percorrer as fases em Play Mode e testar Continuar. Este ambiente não executa o Unity.
 
-## Etapa 3 — entrada e separação implementadas
+## Etapas 3 e 4 — correção para preservar a arte da autora
 
-- EntradaPoses.png: 16 quadros, quatro para a irmã chamando, mãe amparando, pai protegendo o braço e guarda bloqueando. Folha transparente, importada sem filtro/mipmaps/compressão.
-- RodaCarroca.png: roda com fundo interno opaco e exterior transparente; duas rodas filhas da carroça, com giro proporcional ao deslocamento e pausa respeitada.
-- As poses ficam como filhos editáveis de Mariquinha, Mainha, Painho e Guarda da retaguarda. Não substituem os sprites de repouso/caminhada aprovados. O corpo original fica oculto somente enquanto a pose é mostrada; pivô e altura são normalizados, sem mudar os Transforms/colliders originais.
-- A irmã olha para Zefinha ao chamar. Detalhes do ferimento/curativo respeitam as escolhas da Estrada.
-- A mãe se aproxima da marca maeAmparoEntrada; o pai mantém a lesão nos checkpoints posteriores. A irmã, a outra fila, o guarda e a carroça são ocultados após a saída.
-- Novas falas breves da mulher/criança da fila e da irmã precedem as ordens da chegada. As falas existentes e suas alternativas foram preservadas.
-- O inventário passa de 162 para 170 SpriteRenderers. O CSV mantém as linhas anteriores e acrescenta os oito visuais novos.
-- Estas notas atualizam o estado da etapa 3; as indicações anteriores de produção são a referência da etapa 2. Etapas 4–12 continuam pendentes.
+- Removidas as duas folhas geradas para personagens, os filhos que as sobrepunham aos corpos originais e o componente exclusivo dessas poses.
+- Mariquinha, Mainha, Painho, guarda e Fiscal conservam seus SpriteRenderers, Transforms, Animators e controladores originais. Nenhuma animação da autora é substituída.
+- Deslocamento da mãe, saída da fila e aproximação do Fiscal usam as animações existentes. A lesão do pai continua registrada no progresso e nas falas.
+- As variantes anteriores de Mariquinha ferida/com curativo e suas condições da Estrada são preservadas.
+- Gestos específicos de chamar, amparar, proteger o braço, bloquear e receber objetos ficam pendentes de arte aprovada; não são simulados com novos desenhos dos personagens.
+- Rodas independentes, marcas editáveis, diálogos, entrega de TODOS os itens, 40 lugares da mesa, diário e retomada dos saves são preservados.
+- A conferência final também aproxima o Fiscal da mesa, usando sua caminhada existente.
+- O inventário visual passa de 214 para 207 SpriteRenderers: sete sobreposições/detalhes adicionados nas etapas 3 e 4 foram retirados.
 
-**Verificação disponível:** referências, recortes da folha, scripts e grafo da cena. **Pendente:** compilação, importação das PNGs e teste visual/Play Mode no Unity.
-
-## Etapa 4 — revista dos pertences implementada
-
-- FiscalRevista.png possui quatro quadros de solicitação/recebimento/conferência. A pose é um filho editável do Fiscal e usa o animador de poses da entrada.
-- A marca fiscalConferencia fica em Marcas de encenação / 02 Revista. O Fiscal se aproxima da mesa durante a entrega e a conferência; sua posição é reconstituída em checkpoints com pertences já retidos.
-- A entrega aceita o Fiscal e a área sobre a mesa. Também pode ser feita pela opção “Entregar este pertence” quando um item está selecionado.
-- TODOS os itens presentes no inventário são exigidos. A lista fixa de três ferramentas foi retirada. Cada unidade é retirada individualmente e seu ID é acrescentado aos pertences retidos; duplicatas continuam representadas e salvas separadamente.
-- Tentativas de concluir antes da última entrega recebem uma fala indireta, sem instruções de teclado ou inventário.
-- Revista / Mesa / Pertences retidos contém 40 lugares editáveis (4 sobre a mesa e 36 nas pilhas), cada um com SpriteRenderer próprio. O ícone do ItemData é normalizado e aplicado ao lugar correspondente. Mais de 40 itens continuam podendo ser entregues/salvos; o volume adicional representa o excedente.
-- O diário possui três estados: separado durante a conferência, autorizado após o diálogo do Fiscal e ausente depois de recolhido. Antes da autorização, examiná-lo recebe resposta coerente. Depois, a confirmação permite levar ou deixar por enquanto.
-- O diário continua usando o sistema existente da pausa. Não é criada outra cópia de ItemData nem adicionada uma obrigação aos saves que já passaram desta etapa.
-- Os visuais são reconstituídos a partir de curraisItensRetidos e dos flags já existentes. Quando a cabaça sai da lista de retenção para voltar à família, sua representação também sai da mesa.
-- O CSV passa de 170 para 214 SpriteRenderers, com 44 visuais novos. A atualização dos ícones só ocorre quando a lista muda; objetos não são instanciados durante o jogo.
-
-As tabelas anteriores registram o planejamento da etapa 2; esta seção atualiza a implementação da etapa 4. **Pendente:** importação/compilação e Play Mode no Unity, incluindo entrega parcial, todas as unidades, retomada, caderno deixado e coletado e teste em outro computador.
+Verificações disponíveis: estrutura da cena, referências removidas e preservação dos componentes originais. Pendente: compilação, importação e Play Mode no Unity.

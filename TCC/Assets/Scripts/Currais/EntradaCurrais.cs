@@ -506,7 +506,6 @@ public partial class EntradaCurrais : MonoBehaviour
                 {
                     menuAberto = false;
                     acoesMenu = null;
-                    OcultarGestosDaEntrada();
                     EncerrarGestoRevista();
                     RestaurarPlanoSepultamento();
                     RestaurarDesenhoSaida();
@@ -545,7 +544,6 @@ public partial class EntradaCurrais : MonoBehaviour
         carroca.gameObject.SetActive(true);
         outraFila.SetActive(true);
         guardaRetaguarda.gameObject.SetActive(true);
-        OcultarGestosDaEntrada();
         luzia.SetActive(false); lacoChao.SetActive(false); lacoPanela.SetActive(false);
         cameraCena.transform.position = cameraRua.position;
         CorFade(1f);
@@ -554,7 +552,6 @@ public partial class EntradaCurrais : MonoBehaviour
         yield return Dizer(chegadaFamilia);
         yield return Dizer(antesSeparacao);
         yield return MarcharEscolta();
-        poseGuardaBloqueio.DefinirVisivel(true);
         yield return Dizer(ordemSeparar);
         yield return Mover(guardaRetaguarda, guardaSeparacao.position, tempoPlano);
         yield return Mover(irma, irmaSeparada.position + Vector3.up * ajustePivoIrma, tempoSeparacao);
@@ -569,14 +566,10 @@ public partial class EntradaCurrais : MonoBehaviour
         yield return Esperar(.15f);
         CorFade(0f);
         Dados.curraisPaiFerido = true;
-        AtualizarFerimentoEntrada();
         yield return AmpararPaiNaEntrada();
         yield return Dizer(reacaoGolpe);
-        MostrarChamadoDaIrma(true);
         yield return Dizer(new[] { Dados.estradaSegundaEscolhaNoturna == 1 ? promessa : semPromessa, respostaZefinha });
-        poseGuardaBloqueio.DefinirVisivel(false);
         yield return PartirOutraFila();
-        MostrarChamadoDaIrma(false);
         yield return Dizer(depoisSeparacao);
         yield return ChapterCard.Show("josefa-06");
         Dados.curraisEtapaEntrada = 2;
@@ -635,8 +628,6 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         rua.SetActive(false); campo.SetActive(true);
         Dados.curraisPaiFerido = true;
-        OcultarGestosDaEntrada();
-        AtualizarFerimentoEntrada();
         carroca.gameObject.SetActive(false);
         guardaRetaguarda.gameObject.SetActive(false);
         irma.gameObject.SetActive(false); outraFila.SetActive(false);
@@ -1103,7 +1094,6 @@ public partial class EntradaCurrais : MonoBehaviour
     private void LateUpdate()
     {
         if (!pronto) return;
-        AtualizarFerimentoEntrada();
         if (Dados.curraisEtapaEntrada == 2 || Dados.curraisEtapaEntrada == 3) AtualizarVisuaisChegada();
         // Marcas de câmera são aplicadas somente pela inicialização/transições.
         // Uma fala na revista ou no abrigo não reposiciona nem redefine o zoom.
@@ -1213,8 +1203,6 @@ public partial class EntradaCurrais : MonoBehaviour
         encerrando = true;
         StopAllCoroutines();
         EncerrarGestoRevista();
-        OcultarGestosDaEntrada();
-        if (posePaiFerido != null) posePaiFerido.DefinirVisivel(false);
         RestaurarPlanoSepultamento();
         RestaurarDesenhoSaida();
         RestaurarApresentacaoMemoria();

@@ -8,7 +8,6 @@ public partial class EntradaCurrais
     [SerializeField] private Collider2D areaMesaRevista, areaDiarioRetido;
     [SerializeField] private GameObject diarioRetido;
     [SerializeField] private MesaRevistaCurrais mesaPertences;
-    [SerializeField] private PoseEntradaCurrais poseFiscalRevista;
     [SerializeField] private Transform fiscalConferencia;
     [SerializeField] private Fala[] revistaPendente, cadernoEmConferencia, cadernoAutorizado;
     private bool revistaEmConferencia;
@@ -19,7 +18,6 @@ public partial class EntradaCurrais
             ConferirReferencia(areaDiarioRetido, nameof(areaDiarioRetido)) &
             ConferirReferencia(diarioRetido, nameof(diarioRetido)) &
             ConferirReferencia(mesaPertences, nameof(mesaPertences)) &
-            ConferirReferencia(poseFiscalRevista, nameof(poseFiscalRevista)) &
             ConferirReferencia(fiscalConferencia, nameof(fiscalConferencia)) &
             FalasValidas(revistaPendente) & FalasValidas(cadernoEmConferencia) &
             FalasValidas(cadernoAutorizado);
@@ -83,9 +81,8 @@ public partial class EntradaCurrais
         try
         {
             yield return FiscalVaiAteAMesa();
-            poseFiscalRevista.DefinirVisivel(true);
             yield return Esperar(.5f);
-            // O jogador pode ter aberto o inventário e combinado o item durante o gesto.
+            // O jogador pode ter aberto o inventário e combinado o item durante a conferência.
             if (!TemItem(item) || Dados.curraisPertencesRetidos) yield break;
             Dados.curraisItensRetidos.Add(id);
             InventoryManager.Instance.RemoveItem(item);
@@ -97,7 +94,7 @@ public partial class EntradaCurrais
                 yield return Dizer(new[] { new Fala { personagem = "Fiscal",
                     texto = "Está tudo aqui. Agora falta conferir o caderno." } });
         }
-        finally { poseFiscalRevista.DefinirVisivel(false); }
+        finally { EncerrarGestoRevista(); }
     }
 
     private IEnumerator ConferirTodosOsPertences()
@@ -110,9 +107,9 @@ public partial class EntradaCurrais
         try
         {
             revistaEmConferencia = true;
-            poseFiscalRevista.DefinirVisivel(true);
+            yield return FiscalVaiAteAMesa();
             yield return Esperar(.5f);
-            // Confere novamente após a animação; nenhuma lista fixa de ferramentas é usada.
+            // Confere novamente após a conferência; nenhuma lista fixa de ferramentas é usada.
             if (!ReterPertences())
             { yield return Dizer(revistaPendente); yield break; }
             AtualizarVisuaisChegada();
@@ -121,7 +118,6 @@ public partial class EntradaCurrais
         finally
         {
             revistaEmConferencia = false;
-            poseFiscalRevista.DefinirVisivel(false);
             if (!encerrando && GameProgress.Instance != null) AtualizarVisuaisChegada();
         }
         Salvar();
@@ -130,6 +126,5 @@ public partial class EntradaCurrais
     private void EncerrarGestoRevista()
     {
         revistaEmConferencia = false;
-        if (poseFiscalRevista != null) poseFiscalRevista.DefinirVisivel(false);
     }
 }
