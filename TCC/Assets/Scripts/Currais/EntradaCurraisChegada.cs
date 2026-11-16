@@ -13,7 +13,6 @@ public partial class EntradaCurrais
     [Header("Chegada alternativa — revista e diário")]
     [SerializeField] private Collider2D areaFiscalEntrada, areaDiarioEntrada;
     [SerializeField] private GameObject diarioEntrada;
-    [SerializeField] private ItemData[] ferramentasRevista;
     [SerializeField] private Fala[] diarioFalas;
     [SerializeField, TextArea] private string objetivoRevista;
 
@@ -35,8 +34,6 @@ public partial class EntradaCurrais
             nameof(areaPanoAbrigo), nameof(panoAbrigo), nameof(panoNoPai), nameof(itemPanoAbrigo) };
         bool valido = true;
         for (int i = 0; i < refs.Length; i++) valido &= ConferirReferencia(refs[i], nomes[i]);
-        if (ferramentasRevista == null || ferramentasRevista.Length == 0) return false;
-        foreach (ItemData item in ferramentasRevista) valido &= ConferirReferencia(item, nameof(ferramentasRevista));
         foreach (Fala[] falas in new[] { ordemSeparar, protestoPai, reacaoGolpe, diarioFalas,
             panoDisponivel, paiAcomodado, luziaCurral, luziaSaida, luziaIrma }) valido &= FalasValidas(falas);
         return valido;
@@ -94,7 +91,7 @@ public partial class EntradaCurrais
     }
 
     private Collider2D[] AlvosChegada() => Dados.curraisEtapaEntrada == 2
-        ? new[] { areaFiscalEntrada, areaDiarioEntrada }
+        ? new[] { areaDiarioEntrada, areaDiarioRetido, areaFiscalEntrada, areaMesaRevista }
         : new[] { areaPanoAbrigo, areaLuzia, areaMae };
 
     private bool PonteiroSobreChegada(Vector2 ponto)
@@ -127,19 +124,15 @@ public partial class EntradaCurrais
         }
         if (alvo == null) return;
 
-        if (alvo == areaFiscalEntrada) MenuRevista();
+        if (alvo == areaFiscalEntrada || alvo == areaMesaRevista) MenuRevista();
+        else if (alvo == areaDiarioRetido) Iniciar(Dizer(cadernoEmConferencia));
         else if (alvo == areaDiarioEntrada) Iniciar(RecuperarDiarioEntrada());
         else if (alvo == areaPanoAbrigo) Iniciar(RecolherPanoAbrigo());
         else if (alvo == areaLuzia) MenuPrimeiroAbrigo();
         else if (alvo == areaMae) Iniciar(AcomodarPai());
     }
 
-    private void MenuRevista()
-    {
-        MostrarOpcoes("Fiscal", string.Empty,
-            new[] { "Conferir a revista", "Sair" },
-            new Action[] { () => Iniciar(ConcluirRevista()), FecharMenu });
-    }
+    private void MenuRevista() => MenuConferenciaRevista();
 
     public bool SoltarItemNoCenario(ItemData item, Vector2 posicaoTela)
     {
@@ -176,12 +169,14 @@ public partial class EntradaCurrais
             areaFiscalEntrada == null || !areaFiscalEntrada.enabled ||
             !areaFiscalEntrada.gameObject.activeInHierarchy) return false;
 
-        Camera camera = Camera.main;
+        Camera camera = cameraCena;
         if (camera == null || camera.gameObject.scene != gameObject.scene) return false;
         Ray raio = camera.ScreenPointToRay(posicaoTela);
         Plane plano = new Plane(Vector3.forward, Vector3.zero);
         if (!plano.Raycast(raio, out float distancia) ||
-            !areaFiscalEntrada.OverlapPoint(raio.GetPoint(distancia))) return false;
+            (!areaFiscalEntrada.OverlapPoint(raio.GetPoint(distancia)) &&
+             (areaMesaRevista == null || !areaMesaRevista.enabled ||
+              !areaMesaRevista.OverlapPoint(raio.GetPoint(distancia))))) return false;
 
 
         Iniciar(EntregarFerramenta(item));
@@ -190,36 +185,20 @@ public partial class EntradaCurrais
 
     private IEnumerator EntregarFerramenta(ItemData item)
     {
-        InventorySaveCatalog catalogo = Resources.Load<InventorySaveCatalog>("InventorySaveCatalog");
-        if (catalogo == null || !catalogo.TryGetId(item, out string id))
-        { Debug.LogError("Currais: ferramenta sem registro no catálogo; entrega cancelada.", this); yield break; }
-        Dados.curraisItensRetidos.Add(id);
-        InventoryManager.Instance.RemoveItem(item);
-        objetivoTexto.text = string.Empty;
-        Salvar();
-        yield return Dizer(new[] { new Fala { personagem = "Fiscal", texto = item.itemName + ": deixe na mesa. O resto também vai passar pela revista." } });
+        yield return EntregarPertenceRevista(item);
     }
 
     private IEnumerator ConcluirRevista()
     {
-        if (Dados.curraisPertencesRetidos)
-        { objetivoTexto.text = string.Empty; yield break; }
-        if (InventoryManager.Instance != null && InventoryManager.Instance.Items.Count > 0)
-        {
-
-            yield break;
-        }
-        if (!ReterPertences())
-        { objetivoTexto.text = string.Empty; yield break; }
-        yield return Dizer(revista);
-        AtualizarVisuaisChegada();
-        objetivoTexto.text = string.Empty;
-        Salvar();
+        yield return ConferirTodosOsPertences();
     }
 
     private IEnumerator RecuperarDiarioEntrada()
     {
-        if (!Dados.curraisPertencesRetidos || Dados.curraisDiarioRecuperado) yield break;
+        if (!Dados.curraisPertencesRetidos || Dados.curraisDiarioRecuperado || revistaEmConferencia) yield break;
+        yield return Escolher("Zefinha", "O Fiscal deixou meu caderno separado.",
+            new[] { "Levar o caderno", "Deixar por enquanto" });
+        if (escolhaRecebida != 0) yield break;
         yield return Dizer(diarioFalas);
         Dados.curraisDiarioRecuperado = true;
         // O diário usa a leitura da pausa; não cria uma segunda cópia do item do presente.
@@ -278,11 +257,12 @@ public partial class EntradaCurrais
     {
         bool revistaAtiva = Dados.curraisEtapaEntrada == 2;
         areaFiscalEntrada.enabled = revistaAtiva;
-        diarioEntrada.SetActive(revistaAtiva && Dados.curraisPertencesRetidos && !Dados.curraisDiarioRecuperado);
+        diarioEntrada.SetActive(revistaAtiva && Dados.curraisPertencesRetidos && !Dados.curraisDiarioRecuperado && !revistaEmConferencia);
         areaDiarioEntrada.enabled = diarioEntrada.activeSelf;
         panoAbrigo.SetActive(Dados.curraisEtapaEntrada == 3 && !Dados.curraisPanoAbrigoRecolhido && !Dados.curraisPaiAcomodado);
         areaPanoAbrigo.enabled = panoAbrigo.activeSelf;
         panoNoPai.SetActive(Dados.curraisPaiAcomodado && Dados.curraisEtapaBusca < 1);
+        AtualizarMesaRevista();
     }
 
 }

@@ -182,3 +182,18 @@ Somente três ordens de SpriteRenderer foram corrigidas. Os scripts da história
 - Estas notas atualizam o estado da etapa 3; as indicações anteriores de produção são a referência da etapa 2. Etapas 4–12 continuam pendentes.
 
 **Verificação disponível:** referências, recortes da folha, scripts e grafo da cena. **Pendente:** compilação, importação das PNGs e teste visual/Play Mode no Unity.
+
+## Etapa 4 — revista dos pertences implementada
+
+- FiscalRevista.png possui quatro quadros de solicitação/recebimento/conferência. A pose é um filho editável do Fiscal e usa o animador de poses da entrada.
+- A marca fiscalConferencia fica em Marcas de encenação / 02 Revista. O Fiscal se aproxima da mesa durante a entrega e a conferência; sua posição é reconstituída em checkpoints com pertences já retidos.
+- A entrega aceita o Fiscal e a área sobre a mesa. Também pode ser feita pela opção “Entregar este pertence” quando um item está selecionado.
+- TODOS os itens presentes no inventário são exigidos. A lista fixa de três ferramentas foi retirada. Cada unidade é retirada individualmente e seu ID é acrescentado aos pertences retidos; duplicatas continuam representadas e salvas separadamente.
+- Tentativas de concluir antes da última entrega recebem uma fala indireta, sem instruções de teclado ou inventário.
+- Revista / Mesa / Pertences retidos contém 40 lugares editáveis (4 sobre a mesa e 36 nas pilhas), cada um com SpriteRenderer próprio. O ícone do ItemData é normalizado e aplicado ao lugar correspondente. Mais de 40 itens continuam podendo ser entregues/salvos; o volume adicional representa o excedente.
+- O diário possui três estados: separado durante a conferência, autorizado após o diálogo do Fiscal e ausente depois de recolhido. Antes da autorização, examiná-lo recebe resposta coerente. Depois, a confirmação permite levar ou deixar por enquanto.
+- O diário continua usando o sistema existente da pausa. Não é criada outra cópia de ItemData nem adicionada uma obrigação aos saves que já passaram desta etapa.
+- Os visuais são reconstituídos a partir de curraisItensRetidos e dos flags já existentes. Quando a cabaça sai da lista de retenção para voltar à família, sua representação também sai da mesa.
+- O CSV passa de 170 para 214 SpriteRenderers, com 44 visuais novos. A atualização dos ícones só ocorre quando a lista muda; objetos não são instanciados durante o jogo.
+
+As tabelas anteriores registram o planejamento da etapa 2; esta seção atualiza a implementação da etapa 4. **Pendente:** importação/compilação e Play Mode no Unity, incluindo entrega parcial, todas as unidades, retomada, caderno deixado e coletado e teste em outro computador.

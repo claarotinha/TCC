@@ -159,6 +159,7 @@ public partial class EntradaCurrais : MonoBehaviour
         FecharDialogo();
         PrepararOpcoes();
         PrepararChegadaAlternativa();
+        PrepararRevistaNoCheckpoint();
         PrepararEncenacaoEntrada();
         PrepararTarefaPanos();
         PrepararEtapaLavagem();
@@ -269,7 +270,7 @@ public partial class EntradaCurrais : MonoBehaviour
         referenciasPresentes &= ConferirReferencia(paiAbrigo, nameof(paiAbrigo));
         referenciasPresentes &= ConferirReferencia(maeAbrigo, nameof(maeAbrigo));
         referenciasPresentes &= ConferirReferencia(baleiaAbrigo, nameof(baleiaAbrigo));
-        if (!referenciasPresentes || !ReferenciasChegadaValidas() || !ReferenciasTarefaValidas() || !ReferenciasLavagemValidas() || !ReferenciasSocorroValidas() || !ReferenciasFamiliaAlternativaValidas() || !ReferenciasEncerramentoValidas() || !ReferenciasEncenacaoValidas()) return false;
+        if (!referenciasPresentes || !ReferenciasChegadaValidas() || !ReferenciasTarefaValidas() || !ReferenciasLavagemValidas() || !ReferenciasSocorroValidas() || !ReferenciasFamiliaAlternativaValidas() || !ReferenciasEncerramentoValidas() || !ReferenciasEncenacaoValidas() || !ReferenciasRevistaValidas()) return false;
         return FalasValidas(antesSeparacao) && FalasValidas(barreira) &&
             FalasValidas(depoisSeparacao) && FalasValidas(entrada) &&
             FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() && ReferenciasCampoValidas() && ReferenciasPostoValidas() && ReferenciasConsultaValidas() && ReferenciasMemoriaValidas() &&
@@ -506,6 +507,7 @@ public partial class EntradaCurrais : MonoBehaviour
                     menuAberto = false;
                     acoesMenu = null;
                     OcultarGestosDaEntrada();
+                    EncerrarGestoRevista();
                     RestaurarPlanoSepultamento();
                     RestaurarDesenhoSaida();
                     RestaurarApresentacaoMemoria();
@@ -1210,6 +1212,7 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         encerrando = true;
         StopAllCoroutines();
+        EncerrarGestoRevista();
         OcultarGestosDaEntrada();
         if (posePaiFerido != null) posePaiFerido.DefinirVisivel(false);
         RestaurarPlanoSepultamento();
