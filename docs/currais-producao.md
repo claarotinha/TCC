@@ -182,3 +182,16 @@ Somente três ordens de SpriteRenderer foram corrigidas. Os scripts da história
 - O inventário visual passa de 214 para 207 SpriteRenderers: sete sobreposições/detalhes adicionados nas etapas 3 e 4 foram retirados.
 
 Verificações disponíveis: estrutura da cena, referências removidas e preservação dos componentes originais. Pendente: compilação, importação e Play Mode no Unity.
+
+## Etapa 5 — primeiro abrigo e água
+
+- Mãe, pai, Luzia e funcionária respondem de acordo com o progresso. Falta de pano/recipiente recebe fala indireta; não há comandos de teclado.
+- O pai ganha uma área de interação própria, sem colisão física. Suas conversas não deslocam a câmera.
+- A mãe aceita o pano pelo diálogo ou arraste, caminha até uma marca editável ao lado do pai e aplica o pano existente. O resultado é salvo antes da fala de confirmação e reconstituído em Continuar.
+- Luzia explica a busca da cabaça e da água. A distribuição usa a cabaça existente e devolve somente uma unidade; os demais pertences continuam na mesa. Saves sem a unidade registrada recuperam o recipiente visível na distribuição.
+- A entrega confere novamente a existência do item depois da escolha. A escolha de destinatário e as páginas do diário existentes são preservadas.
+- Três cabaças ficam na Hierarchy: com Mari, mãe e Luzia. Reutilizam o mesmo ícone aprovado. Cheia usa o destaque azulado do inventário; vazia volta à cor normal. A inclinação durante o consumo move apenas o recipiente.
+- Mãe: marca “Mãe - acomodar pai no primeiro abrigo”, no grupo de marcas do abrigo. Pano no ombro mantém seu objeto original sob Painho.
+- As proporções, animações e controladores dos personagens não são substituídos. Gestos corporais de servir/beber/amparar que não possuem arte aprovada permanecem pendentes; não foram produzidas novas imagens de personagens.
+
+Conferência necessária no Unity: coleta/cancelamento do pano; entrega por conversa e arraste; resposta do pai; Luzia antes/depois; retorno da cabaça; enchimento; ambos os destinatários; pausa durante deslocamento/inclinação; Continue após acomodação e escolha; saída para a busca seguinte.

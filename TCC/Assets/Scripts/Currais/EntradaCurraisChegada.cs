@@ -92,7 +92,7 @@ public partial class EntradaCurrais
 
     private Collider2D[] AlvosChegada() => Dados.curraisEtapaEntrada == 2
         ? new[] { areaDiarioEntrada, areaDiarioRetido, areaFiscalEntrada, areaMesaRevista }
-        : new[] { areaPanoAbrigo, areaLuzia, areaMae };
+        : new[] { areaPanoAbrigo, areaLuzia, areaMae, areaPaiAbrigo };
 
     private bool PonteiroSobreChegada(Vector2 ponto)
     {
@@ -129,7 +129,8 @@ public partial class EntradaCurrais
         else if (alvo == areaDiarioEntrada) Iniciar(RecuperarDiarioEntrada());
         else if (alvo == areaPanoAbrigo) Iniciar(RecolherPanoAbrigo());
         else if (alvo == areaLuzia) MenuPrimeiroAbrigo();
-        else if (alvo == areaMae) Iniciar(AcomodarPai());
+        else if (alvo == areaMae) MenuMaePrimeiroAbrigo();
+        else if (alvo == areaPaiAbrigo) Iniciar(ConversarPaiPrimeiroAbrigo());
     }
 
     private void MenuRevista() => MenuConferenciaRevista();
@@ -152,8 +153,17 @@ public partial class EntradaCurrais
 
             InventoryManager.Instance.SelectItem(item);
             if (Dados.curraisEtapaEntrada == 3 && alvo == areaMae)
-            { Iniciar(AcomodarPai()); return true; }
-            if (Dados.curraisEtapaEntrada == 4) return InteragirBusca(ponto);
+            {
+                if (item != itemPanoAbrigo) return false;
+                Iniciar(AcomodarPai()); return true;
+            }
+            if (Dados.curraisEtapaEntrada == 4)
+            {
+                if (!Dados.curraisPanelaConcluida &&
+                    ((alvo == areaAgua && item != cabacaVaziaBusca) ||
+                     ((alvo == areaMae || alvo == areaLuzia) && item != cabacaCheiaBusca))) return false;
+                return InteragirBusca(ponto);
+            }
             return false;
         }
         return false;
@@ -239,18 +249,21 @@ public partial class EntradaCurrais
 
     private IEnumerator AcomodarPai()
     {
-        if (!TemItem(itemPanoAbrigo) || InventoryManager.Instance.SelectedItem != itemPanoAbrigo)
+        if (Dados.curraisPaiAcomodado) { yield return Dizer(paiAcomodado); yield break; }
+        if (!TemItem(itemPanoAbrigo))
         {
-
+            yield return Dizer(maePrecisaPano);
             yield break;
         }
+        yield return Mover(mae, maeCuidadoAbrigo.position, tempoPlano);
+        if (!TemItem(itemPanoAbrigo)) { yield return Dizer(maePrecisaPano); yield break; }
         InventoryManager.Instance.RemoveItem(itemPanoAbrigo);
         Dados.curraisPaiAcomodado = true;
         AtualizarVisuaisChegada();
-        yield return Dizer(paiAcomodado);
         Dados.curraisEtapaEntrada = 4;
         AtualizarEstadoBusca();
         Salvar();
+        yield return Dizer(paiAcomodado);
     }
 
     private void AtualizarVisuaisChegada()
@@ -263,6 +276,7 @@ public partial class EntradaCurrais
         areaPanoAbrigo.enabled = panoAbrigo.activeSelf;
         panoNoPai.SetActive(Dados.curraisPaiAcomodado && Dados.curraisEtapaBusca < 1);
         AtualizarMesaRevista();
+        AtualizarAbrigoVisual();
     }
 
 }

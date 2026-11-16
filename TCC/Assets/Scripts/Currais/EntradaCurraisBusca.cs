@@ -43,7 +43,7 @@ public partial class EntradaCurrais
         if (PostoDisponivel) return AlvosPosto();
         if (Dados.curraisPanelaConcluida)
             return new[] { areaAguaPatio, areaPanosPatio, areaSocorroBento, areaCabacaSocorro, areaPanosUso, areaPanosAtendimento, areaRaimundo, areaLavadeira, areaPanoLavagem, areaLembranca, areaPatio, areaPanoAtendimento };
-        return new[] { areaLotePanos, areaLuzia, areaAgua, areaMae, areaMenino, areaRegistro, areaPanela };
+        return new[] { areaLotePanos, areaLuzia, areaAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela };
     }
 
     private string ObjetivoCampo() => string.Empty;

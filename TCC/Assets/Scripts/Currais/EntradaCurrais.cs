@@ -270,7 +270,7 @@ public partial class EntradaCurrais : MonoBehaviour
         referenciasPresentes &= ConferirReferencia(paiAbrigo, nameof(paiAbrigo));
         referenciasPresentes &= ConferirReferencia(maeAbrigo, nameof(maeAbrigo));
         referenciasPresentes &= ConferirReferencia(baleiaAbrigo, nameof(baleiaAbrigo));
-        if (!referenciasPresentes || !ReferenciasChegadaValidas() || !ReferenciasTarefaValidas() || !ReferenciasLavagemValidas() || !ReferenciasSocorroValidas() || !ReferenciasFamiliaAlternativaValidas() || !ReferenciasEncerramentoValidas() || !ReferenciasEncenacaoValidas() || !ReferenciasRevistaValidas()) return false;
+        if (!referenciasPresentes || !ReferenciasChegadaValidas() || !ReferenciasAbrigoValidas() || !ReferenciasTarefaValidas() || !ReferenciasLavagemValidas() || !ReferenciasSocorroValidas() || !ReferenciasFamiliaAlternativaValidas() || !ReferenciasEncerramentoValidas() || !ReferenciasEncenacaoValidas() || !ReferenciasRevistaValidas()) return false;
         return FalasValidas(antesSeparacao) && FalasValidas(barreira) &&
             FalasValidas(depoisSeparacao) && FalasValidas(entrada) &&
             FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() && ReferenciasCampoValidas() && ReferenciasPostoValidas() && ReferenciasConsultaValidas() && ReferenciasMemoriaValidas() &&
@@ -678,7 +678,7 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         MostrarEntrada();
         Posicionar(mari.transform, mariAbrigo); Posicionar(pai, paiAbrigo);
-        Posicionar(mae, maeAbrigo); Posicionar(baleia, baleiaAbrigo);
+        Posicionar(mae, Dados.curraisPaiAcomodado ? maeCuidadoAbrigo : maeAbrigo); Posicionar(baleia, baleiaAbrigo);
         lacoPanela.SetActive(false);
         pai.localRotation = rotacaoPai;
     }
@@ -832,7 +832,7 @@ public partial class EntradaCurrais : MonoBehaviour
     private bool InteragirBusca(Vector2 ponto)
     {
         if (Dados.curraisPanelaConcluida) return InteragirCampo(ponto);
-        Collider2D[] areas = { areaLotePanos, areaLuzia, areaAgua, areaMae, areaMenino, areaRegistro, areaPanela };
+        Collider2D[] areas = { areaLotePanos, areaLuzia, areaAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela };
         foreach (Collider2D area in areas)
         {
             if (area == null || !area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
@@ -845,15 +845,15 @@ public partial class EntradaCurrais : MonoBehaviour
             }
             else if (area == areaAgua)
             {
-                if (!Dados.curraisDistribuicaoIniciada) objetivoTexto.text = string.Empty;
+                if (!Dados.curraisDistribuicaoIniciada) Iniciar(Dizer(aguaAguardar));
                 else if (!Dados.curraisAguaRecebida) Iniciar(ReceberAgua());
-                else objetivoTexto.text = string.Empty;
+                else Iniciar(Dizer(aguaJaRecebida));
             }
             else if (area == areaMae)
             {
-                if (Dados.curraisAguaRecebida && Dados.curraisEscolhaAgua == 0) Iniciar(DestinarAgua());
-                else objetivoTexto.text = string.Empty;
+                MenuMaePrimeiroAbrigo();
             }
+            else if (area == areaPaiAbrigo) Iniciar(ConversarPaiPrimeiroAbrigo());
             else if (area == areaMenino)
             {
                 if (Dados.curraisEscolhaAgua == 0) objetivoTexto.text = string.Empty;
@@ -880,13 +880,15 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (!Dados.curraisDistribuicaoIniciada)
         {
-            MostrarOpcoes("Luzia", string.Empty, opcoesLuziaInicio, new Action[] {
-                () => { Dados.curraisDistribuicaoIniciada = true; AtualizarEstadoBusca(); Salvar(); },
+            MostrarOpcoes("Luzia", luziaBuscarAgua[0].texto, opcoesLuziaInicio, new Action[] {
+                () => Iniciar(IniciarBuscaAguaAbrigo()),
                 () => Iniciar(Dizer(abrigo)), FecharMenu });
         }
         else
-            MostrarOpcoes("Luzia", string.Empty, opcoesRegistro,
-                new Action[] { () => Iniciar(Dizer(abrigo)), FecharMenu });
+            MostrarOpcoes("Luzia", Dados.curraisEscolhaAgua == 0 ? luziaBuscarAgua[0].texto : familiaDepoisAgua[0].texto,
+                new[] { "Sobre a água", "Minha irmã", "Sair" },
+                new Action[] { () => Iniciar(Dizer(Dados.curraisEscolhaAgua == 0 ? luziaBuscarAgua : familiaDepoisAgua)),
+                    () => Iniciar(Dizer(luziaIrma)), FecharMenu });
     }
 
     private bool DevolverCabaca()
@@ -897,14 +899,15 @@ public partial class EntradaCurrais : MonoBehaviour
             !catalogo.TryGetId(cabacaCheiaBusca, out string idCheia)) return false;
         int indice = Dados.curraisItensRetidos.FindIndex(id => id == idVazia || id == idCheia);
         if (indice >= 0) Dados.curraisItensRetidos.RemoveAt(indice);
-        else if (Dados.CanSave && !TemItem(cabacaVaziaBusca) && !TemItem(cabacaCheiaBusca))
-        {
-            Debug.LogError("Currais: a cabaça não está entre os pertences retidos. Os outros itens foram preservados.", this);
-            return false;
-        }
-        // Em teste isolado, o recipiente existente permite verificar a cena sem alterar saves anteriores.
+        // A cabaça visível na distribuição permite recuperar saves sem registro do recipiente.
+        // Somente esta unidade é devolvida; os outros pertences permanecem retidos.
         if (!TemItem(cabacaVaziaBusca) && !TemItem(cabacaCheiaBusca))
             InventoryManager.Instance.AddItem(cabacaVaziaBusca);
+        if (!TemItem(cabacaVaziaBusca) && TemItem(cabacaCheiaBusca))
+        {
+            InventoryManager.Instance.RemoveItem(cabacaCheiaBusca);
+            InventoryManager.Instance.AddItem(cabacaVaziaBusca);
+        }
         Dados.curraisCabacaDevolvida = true;
         return true;
     }
@@ -919,7 +922,7 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (!DevolverCabaca())
         {
-            objetivoTexto.text = string.Empty;
+            yield return Dizer(cabacaIndisponivel);
             yield break;
         }
         if (!Dados.curraisAguaOrientada)
@@ -931,7 +934,7 @@ public partial class EntradaCurrais : MonoBehaviour
         }
         if (!TemItem(cabacaVaziaBusca) || InventoryManager.Instance.SelectedItem != cabacaVaziaBusca)
         {
-
+            yield return Dizer(aguaApresentar);
             yield break;
         }
         InventoryManager.Instance.RemoveItem(cabacaVaziaBusca);
@@ -945,14 +948,17 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (Dados.curraisEscolhaAgua != 0) yield break;
 
-        if (!TemItem(cabacaCheiaBusca) || InventoryManager.Instance.SelectedItem != cabacaCheiaBusca)
+        if (!TemItem(cabacaCheiaBusca))
         {
-            objetivoTexto.text = string.Empty;
+            yield return Dizer(maeEsperaAgua);
             yield break;
         }
         yield return Dizer(aguaAntesEscolha);
         yield return Escolher("Zefinha", perguntaAgua, opcoesAgua);
         int opcao = escolhaRecebida;
+        if (opcao < 0 || opcao > 1 || !TemItem(cabacaCheiaBusca)) yield break;
+        yield return BeberAguaAbrigo(opcao + 1);
+        if (!TemItem(cabacaCheiaBusca)) yield break;
         InventoryManager.Instance.RemoveItem(cabacaCheiaBusca);
         InventoryManager.Instance.AddItem(cabacaVaziaBusca);
         Dados.curraisEscolhaAgua = opcao + 1;
@@ -1069,7 +1075,7 @@ public partial class EntradaCurrais : MonoBehaviour
         else if (Dados.curraisEscolhaAgua == 2 &&
             (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))
         {
-            Posicionar(mae, maeAbrigo);
+            Posicionar(mae, maeCuidadoAbrigo);
         }
         AtualizarCampo();
         Physics2D.SyncTransforms();
