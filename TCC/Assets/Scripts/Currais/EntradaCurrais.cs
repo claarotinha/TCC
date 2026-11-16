@@ -159,6 +159,7 @@ public partial class EntradaCurrais : MonoBehaviour
         FecharDialogo();
         PrepararOpcoes();
         PrepararChegadaAlternativa();
+        PrepararEncenacaoEntrada();
         PrepararTarefaPanos();
         PrepararEtapaLavagem();
         PrepararSocorro();
@@ -268,7 +269,7 @@ public partial class EntradaCurrais : MonoBehaviour
         referenciasPresentes &= ConferirReferencia(paiAbrigo, nameof(paiAbrigo));
         referenciasPresentes &= ConferirReferencia(maeAbrigo, nameof(maeAbrigo));
         referenciasPresentes &= ConferirReferencia(baleiaAbrigo, nameof(baleiaAbrigo));
-        if (!referenciasPresentes || !ReferenciasChegadaValidas() || !ReferenciasTarefaValidas() || !ReferenciasLavagemValidas() || !ReferenciasSocorroValidas() || !ReferenciasFamiliaAlternativaValidas() || !ReferenciasEncerramentoValidas()) return false;
+        if (!referenciasPresentes || !ReferenciasChegadaValidas() || !ReferenciasTarefaValidas() || !ReferenciasLavagemValidas() || !ReferenciasSocorroValidas() || !ReferenciasFamiliaAlternativaValidas() || !ReferenciasEncerramentoValidas() || !ReferenciasEncenacaoValidas()) return false;
         return FalasValidas(antesSeparacao) && FalasValidas(barreira) &&
             FalasValidas(depoisSeparacao) && FalasValidas(entrada) &&
             FalasValidas(revista) && FalasValidas(abrigo) && ReferenciasBuscaValidas() && ReferenciasCampoValidas() && ReferenciasPostoValidas() && ReferenciasConsultaValidas() && ReferenciasMemoriaValidas() &&
@@ -504,6 +505,7 @@ public partial class EntradaCurrais : MonoBehaviour
                 {
                     menuAberto = false;
                     acoesMenu = null;
+                    OcultarGestosDaEntrada();
                     RestaurarPlanoSepultamento();
                     RestaurarDesenhoSaida();
                     RestaurarApresentacaoMemoria();
@@ -537,13 +539,20 @@ public partial class EntradaCurrais : MonoBehaviour
         }
         Physics2D.SyncTransforms();
         rua.SetActive(true); campo.SetActive(false);
+        irma.gameObject.SetActive(true);
+        carroca.gameObject.SetActive(true);
+        outraFila.SetActive(true);
+        guardaRetaguarda.gameObject.SetActive(true);
+        OcultarGestosDaEntrada();
         luzia.SetActive(false); lacoChao.SetActive(false); lacoPanela.SetActive(false);
         cameraCena.transform.position = cameraRua.position;
         CorFade(1f);
         yield return Esperar(tempoPlano);
         yield return Escurecer(0f);
+        yield return Dizer(chegadaFamilia);
         yield return Dizer(antesSeparacao);
         yield return MarcharEscolta();
+        poseGuardaBloqueio.DefinirVisivel(true);
         yield return Dizer(ordemSeparar);
         yield return Mover(guardaRetaguarda, guardaSeparacao.position, tempoPlano);
         yield return Mover(irma, irmaSeparada.position + Vector3.up * ajustePivoIrma, tempoSeparacao);
@@ -558,9 +567,14 @@ public partial class EntradaCurrais : MonoBehaviour
         yield return Esperar(.15f);
         CorFade(0f);
         Dados.curraisPaiFerido = true;
+        AtualizarFerimentoEntrada();
+        yield return AmpararPaiNaEntrada();
         yield return Dizer(reacaoGolpe);
+        MostrarChamadoDaIrma(true);
         yield return Dizer(new[] { Dados.estradaSegundaEscolhaNoturna == 1 ? promessa : semPromessa, respostaZefinha });
+        poseGuardaBloqueio.DefinirVisivel(false);
         yield return PartirOutraFila();
+        MostrarChamadoDaIrma(false);
         yield return Dizer(depoisSeparacao);
         yield return ChapterCard.Show("josefa-06");
         Dados.curraisEtapaEntrada = 2;
@@ -577,6 +591,7 @@ public partial class EntradaCurrais : MonoBehaviour
         destinoIrma.y = origemIrma.y;
         Vector3 deslocamento = destinoIrma - origemIrma;
         float tempo = 0f;
+        AnimarSaidaDaFila(true);
         while (tempo < tempoCarroca)
         {
             if (!PauseHelper.BlockInput() && Time.timeScale > 0f)
@@ -588,8 +603,11 @@ public partial class EntradaCurrais : MonoBehaviour
                 outraFila.transform.position = origemFila + deslocamento * t;
                 guardaRetaguarda.position = origemGuarda + deslocamento * t;
             }
+            AnimarSaidaDaFila(!PauseHelper.BlockInput() && Time.timeScale > 0f);
             yield return null;
         }
+        AnimarSaidaDaFila(false);
+        carroca.gameObject.SetActive(false);
         irma.gameObject.SetActive(false);
         outraFila.SetActive(false);
         guardaRetaguarda.gameObject.SetActive(false);
@@ -614,6 +632,11 @@ public partial class EntradaCurrais : MonoBehaviour
     private void MostrarEntrada()
     {
         rua.SetActive(false); campo.SetActive(true);
+        Dados.curraisPaiFerido = true;
+        OcultarGestosDaEntrada();
+        AtualizarFerimentoEntrada();
+        carroca.gameObject.SetActive(false);
+        guardaRetaguarda.gameObject.SetActive(false);
         irma.gameObject.SetActive(false); outraFila.SetActive(false);
         luzia.SetActive(true); lacoChao.SetActive(false);
         lacoPanela.SetActive(false);
@@ -1078,6 +1101,7 @@ public partial class EntradaCurrais : MonoBehaviour
     private void LateUpdate()
     {
         if (!pronto) return;
+        AtualizarFerimentoEntrada();
         if (Dados.curraisEtapaEntrada == 2 || Dados.curraisEtapaEntrada == 3) AtualizarVisuaisChegada();
         // Marcas de câmera são aplicadas somente pela inicialização/transições.
         // Uma fala na revista ou no abrigo não reposiciona nem redefine o zoom.
@@ -1186,6 +1210,8 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         encerrando = true;
         StopAllCoroutines();
+        OcultarGestosDaEntrada();
+        if (posePaiFerido != null) posePaiFerido.DefinirVisivel(false);
         RestaurarPlanoSepultamento();
         RestaurarDesenhoSaida();
         RestaurarApresentacaoMemoria();

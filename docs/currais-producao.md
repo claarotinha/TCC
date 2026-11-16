@@ -169,3 +169,16 @@ Conferidos: IDs únicos; todos os objetos/componentes anteriores presentes; reci
 Somente três ordens de SpriteRenderer foram corrigidas. Os scripts da história e os dados de save não foram alterados nesta etapa. O novo AreaCurrais só contém campos de organização.
 
 **Pendente:** importar/compilar no Unity, conferir visualmente os grupos e as três mudanças de desenho, percorrer as fases em Play Mode e testar Continuar. Este ambiente não executa o Unity.
+
+## Etapa 3 — entrada e separação implementadas
+
+- EntradaPoses.png: 16 quadros, quatro para a irmã chamando, mãe amparando, pai protegendo o braço e guarda bloqueando. Folha transparente, importada sem filtro/mipmaps/compressão.
+- RodaCarroca.png: roda com fundo interno opaco e exterior transparente; duas rodas filhas da carroça, com giro proporcional ao deslocamento e pausa respeitada.
+- As poses ficam como filhos editáveis de Mariquinha, Mainha, Painho e Guarda da retaguarda. Não substituem os sprites de repouso/caminhada aprovados. O corpo original fica oculto somente enquanto a pose é mostrada; pivô e altura são normalizados, sem mudar os Transforms/colliders originais.
+- A irmã olha para Zefinha ao chamar. Detalhes do ferimento/curativo respeitam as escolhas da Estrada.
+- A mãe se aproxima da marca maeAmparoEntrada; o pai mantém a lesão nos checkpoints posteriores. A irmã, a outra fila, o guarda e a carroça são ocultados após a saída.
+- Novas falas breves da mulher/criança da fila e da irmã precedem as ordens da chegada. As falas existentes e suas alternativas foram preservadas.
+- O inventário passa de 162 para 170 SpriteRenderers. O CSV mantém as linhas anteriores e acrescenta os oito visuais novos.
+- Estas notas atualizam o estado da etapa 3; as indicações anteriores de produção são a referência da etapa 2. Etapas 4–12 continuam pendentes.
+
+**Verificação disponível:** referências, recortes da folha, scripts e grafo da cena. **Pendente:** compilação, importação das PNGs e teste visual/Play Mode no Unity.
