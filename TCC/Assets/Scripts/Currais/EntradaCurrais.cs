@@ -732,7 +732,7 @@ public partial class EntradaCurrais : MonoBehaviour
         if (retrato != null) retrato.enabled = false;
         foreach (Fala fala in falas)
         {
-            nomeTexto.text = fala.personagem;
+            nomeTexto.text = NomeDaPessoa(fala.personagem);
             falaTexto.text = fala.texto;
             aguardandoClique = true;
             quadroBloqueado = Time.frameCount;
@@ -793,6 +793,13 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void MostrarOpcoes(string personagem, string texto, string[] rotulos, Action[] acoes)
     {
+        if (personagem == "Luzia" && !Dados.curraisLuziaApresentada)
+        {
+            MostrarOpcoes("Mulher", "A mulher faz um pouco de espaço debaixo da lona.",
+                new[] { "Com licença...", "Sair" },
+                new Action[] { () => Iniciar(ApresentarLuzia(() => MostrarOpcoes(personagem, texto, rotulos, acoes))), FecharMenu });
+            return;
+        }
         if (InventoryTabController.Instance != null) InventoryTabController.Instance.Close();
         PausarExploracao();
         InvestigationGuard.BlockCurrentClick();
@@ -800,7 +807,7 @@ public partial class EntradaCurrais : MonoBehaviour
         menuAberto = true;
         acoesMenu = acoes;
         AbrirPainelDialogo(); escolhas.SetActive(true);
-        nomeTexto.text = personagem; falaTexto.text = texto;
+        nomeTexto.text = NomeDaPessoa(personagem); falaTexto.text = texto;
         if (retrato != null) retrato.enabled = false;
         for (int i = 0; i < botoesEtapa2.Length; i++)
         {

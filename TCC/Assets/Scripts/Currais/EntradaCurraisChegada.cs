@@ -274,4 +274,31 @@ public partial class EntradaCurrais
         AtualizarAbrigoVisual();
     }
 
+    [Header("Primeiro encontro — apresentação de Luzia")]
+    [SerializeField] private Fala[] apresentacaoLuziaInicio, apresentacaoLuziaDepoisDoNome, apresentacaoLuziaTardia;
+
+    private string NomeDaPessoa(string pessoa) => pessoa == "Luzia" && !Dados.curraisLuziaApresentada ? "Mulher" : pessoa;
+
+    private IEnumerator ApresentarLuzia(Action continuar)
+    {
+        if (!Dados.curraisLuziaApresentada)
+        {
+            bool jaConversaram = Dados.curraisDistribuicaoIniciada || Dados.curraisPanelaConcluida ||
+                Dados.curraisPerguntasAbrigo != 0;
+            Fala[] inicio = jaConversaram ? apresentacaoLuziaTardia : apresentacaoLuziaInicio;
+            if (!FalasValidas(inicio))
+                inicio = new[] {
+                    new Fala { personagem = "Mãe", texto = "Com licença… como a senhora se chama?" },
+                    new Fala { personagem = "Mulher", texto = "Eu sou Luzia. Pode falar." }
+                };
+            yield return Dizer(inicio);
+            // O nome só é revelado depois que ela mesma o diz. Continue preserva isso.
+            Dados.curraisLuziaApresentada = true;
+            Salvar();
+            if (!jaConversaram && FalasValidas(apresentacaoLuziaDepoisDoNome))
+                yield return Dizer(apresentacaoLuziaDepoisDoNome);
+        }
+        continuar?.Invoke();
+    }
+
 }

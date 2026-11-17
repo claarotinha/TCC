@@ -14907,7 +14907,7 @@ MonoBehaviour:
   - personagem: "M\xE3e"
     texto: "O ombro t\xE1 apoiado, mas a boca dele t\xE1 seca."
   - personagem: "M\xE3e"
-    texto: "Luzia sabe onde t\xE3o distribuindo \xE1gua."
+    texto: "Aquela mulher deve saber onde tão distribuindo água."
   familiaDepoisAgua:
   - personagem: Luzia
     texto: "A caba\xE7a ficou vazia de novo. Guarde ela."
@@ -16287,6 +16287,21 @@ MonoBehaviour:
     texto: "Vou levar o lote \xE0 lavadeira. Ainda posso perguntar pelo encaminhamento
       no posto."
   objetivoLotePanos: 
+  apresentacaoLuziaInicio:
+  - personagem: "Mãe"
+    texto: "Com licença… tem algum canto onde a gente possa ficar?"
+  - personagem: "Mulher"
+    texto: "Ali debaixo da lona tem sombra. Eu sou Luzia. Vocês chegaram agora?"
+  apresentacaoLuziaDepoisDoNome:
+  - personagem: "Mãe"
+    texto: "Foi. E separaram uma das minhas meninas na entrada."
+  - personagem: "Luzia"
+    texto: "Ô, minha filha… venham sentar um pouco. Me contem como foi."
+  apresentacaoLuziaTardia:
+  - personagem: "Mãe"
+    texto: "A senhora já ajudou tanto… e eu nem perguntei seu nome."
+  - personagem: "Mulher"
+    texto: "Eu sou Luzia. Pode contar comigo no que eu puder."
 --- !u!1 &4200000000
 GameObject:
   m_ObjectHideFlags: 0
