@@ -7,6 +7,56 @@ public partial class EntradaCurrais
     [Header("Família — assuntos que não alteram os finais")]
     [SerializeField] private Fala[] familiaPromessas, familiaTrabalho, familiaCaderno, noiteCaderno;
     [SerializeField] private GameObject diarioNaNoite;
+    [Header("Noite — poses opcionais da autora na Hierarchy")]
+    [SerializeField] private SpriteRenderer[] personagensNoAbrigo, posesDeRepouso;
+    [SerializeField] private Fala[] amanhecerFamilia, baldeAindaSemPano;
+    private bool[] visibilidadeAntesDoRepouso;
+    private bool repousoAplicado;
+
+    private void AtualizarRepousoFamilia()
+    {
+        bool ativa = PostoDisponivel && Dados.curraisEtapaPosto == 4 && Dados.curraisEtapaConsulta == 0;
+        if (repousoAplicado == ativa) return;
+        repousoAplicado = ativa;
+        if (personagensNoAbrigo == null || posesDeRepouso == null) return;
+        if (ativa) visibilidadeAntesDoRepouso = new bool[personagensNoAbrigo.Length];
+        for (int i = 0; i < personagensNoAbrigo.Length && i < posesDeRepouso.Length; i++)
+        {
+            SpriteRenderer original = personagensNoAbrigo[i], pose = posesDeRepouso[i];
+            if (original == null || pose == null) continue;
+            if (ativa)
+            {
+                visibilidadeAntesDoRepouso[i] = original.enabled;
+                // Slot vazio preserva o ciclo da autora. Não gira idle para fingir sono.
+                bool temPose = pose.sprite != null;
+                pose.gameObject.SetActive(temPose);
+                if (temPose) original.enabled = false;
+            }
+            else
+            {
+                pose.gameObject.SetActive(false);
+                if (visibilidadeAntesDoRepouso != null && i < visibilidadeAntesDoRepouso.Length)
+                    original.enabled = visibilidadeAntesDoRepouso[i];
+            }
+        }
+    }
+
+    private void EncerrarNoiteFamilia()
+    {
+        noiteEmCurso = false;
+        // A restauração visual também ocorre ao desativar o componente ou interromper uma fala.
+        if (repousoAplicado)
+        {
+            repousoAplicado = false;
+            for (int i = 0; i < personagensNoAbrigo.Length && i < posesDeRepouso.Length; i++)
+            {
+                if (posesDeRepouso[i] != null) posesDeRepouso[i].gameObject.SetActive(false);
+                if (personagensNoAbrigo[i] != null && visibilidadeAntesDoRepouso != null && i < visibilidadeAntesDoRepouso.Length)
+                    personagensNoAbrigo[i].enabled = visibilidadeAntesDoRepouso[i];
+            }
+        }
+        AplicarNoite(false);
+    }
 
     [Header("Raimundo — balde e alça protegida")]
     [SerializeField] private ItemData baldeRaimundoItem, baldeProtegidoItem;
@@ -24,7 +74,13 @@ public partial class EntradaCurrais
             ConferirReferencia(areaBaldeRaimundo, nameof(areaBaldeRaimundo)) &
             ConferirReferencia(baldeRaimundoCenario, nameof(baldeRaimundoCenario));
         foreach (Fala[] falas in new[] { familiaPromessas, familiaTrabalho, familiaCaderno, noiteCaderno,
-            pedidoBaldeFalas, baldeDevolvidoFalas, nomeRaimundoFalas, papelApresentado }) ok &= FalasValidas(falas);
+            pedidoBaldeFalas, baldeDevolvidoFalas, nomeRaimundoFalas, papelApresentado, amanhecerFamilia, baldeAindaSemPano }) ok &= FalasValidas(falas);
+        ok &= personagensNoAbrigo != null && posesDeRepouso != null &&
+            personagensNoAbrigo.Length == 4 && posesDeRepouso.Length == 4;
+        if (ok)
+            for (int i = 0; i < 4; i++)
+                ok &= ConferirReferencia(personagensNoAbrigo[i], "personagensNoAbrigo[" + i + "]") &
+                    ConferirReferencia(posesDeRepouso[i], "posesDeRepouso[" + i + "]");
         return ok && combinacaoBalde.itemA == baldeRaimundoItem &&
             combinacaoBalde.itemB == tiraPanoLavagem && combinacaoBalde.result == baldeProtegidoItem;
     }
@@ -43,6 +99,7 @@ public partial class EntradaCurrais
 
     private void AtualizarFamiliaAlternativa()
     {
+        AtualizarRepousoFamilia();
         bool manha = ConsultaDisponivel && Dados.curraisEtapaConsulta == 1;
         // A mesma pessoa e o mesmo collider da conversa inicial são reutilizados.
         if (manha) areaRaimundo.enabled = true;
@@ -110,11 +167,11 @@ public partial class EntradaCurrais
 
     private IEnumerator PegarBaldeRaimundo()
     {
-        if (!Dados.curraisBaldeSolicitado || Dados.curraisBaldeRecolhido) yield break;
+        if (!ConsultaDisponivel || Dados.curraisEtapaConsulta != 1 || !Dados.curraisBaldeSolicitado || Dados.curraisBaldeRecolhido || Dados.curraisBaldeApoiado) yield break;
         yield return ExaminarOuColetar(baldeRaimundoItem);
         if (!coletaDoCenarioConfirmada) yield break;
-        if (!TemItem(baldeRaimundoItem) && !TemItem(baldeProtegidoItem)) InventoryManager.Instance.AddItem(baldeRaimundoItem);
         Dados.curraisBaldeRecolhido = true;
+        InventoryManager.Instance.AddItem(baldeRaimundoItem);
         AtualizarFamiliaAlternativa(); Salvar();
 
     }
@@ -123,16 +180,17 @@ public partial class EntradaCurrais
     {
         if (Dados.curraisBaldeApoiado)
         { yield return Dizer(baldeDevolvidoFalas); yield break; }
-        if (!TemItem(baldeProtegidoItem))
+        if (!Dados.curraisBaldeRecolhido || !TemItem(baldeProtegidoItem))
         {
-
+            yield return Dizer(baldeAindaSemPano);
+            MenuRaimundoManha();
             yield break;
         }
-        InventoryManager.Instance.RemoveItem(baldeProtegidoItem);
         Dados.curraisBaldeApoiado = true;
+        InventoryManager.Instance.RemoveItem(baldeProtegidoItem);
         Dados.curraisIdentidadeConfirmada = true;
         GameProgress.Instance.UnlockDiaryPage("currais-nair");
-        AtualizarEstadoBusca(); Salvar();
+        AtualizarFamiliaAlternativa(); Salvar();
         yield return Dizer(baldeDevolvidoFalas);
         yield return Dizer(nomeRaimundoFalas);
     }

@@ -269,3 +269,16 @@ Pendente no Unity: compilar; conferir encaixes/áreas; água e pano nas duas ord
 - Falas longas foram fragmentadas sem retirar palavras. A câmera, seus limites e os arquivos de animação não foram alterados.
 
 Pendente no Unity: compilar e importar; conferir enquadramento do plano; pausa e interrupção durante descida/porta/empréstimo; escolha de cada ramo e Sair; revisitas; Continue antes/depois da abertura e durante o empréstimo; confirmar uma única cabaça devolvida; passagem para a conversa noturna. Poses de luto, Raimundo apoiando a carga e artes próprias dos doentes aguardam aprovação/produção da autora.
+
+
+## Etapa 10 — família, noite e amanhecer
+
+- A esteira abre uma conversa da mãe com três opções: ficar perto, conversar mais e sair. Descansar só inicia depois das notícias, sem obrigar a esgotar todos os assuntos opcionais.
+- Promessas, trabalho/Bento, refeição, notícias e caderno permanecem acessíveis. Relembrar a refeição não teleporta Baleia. As conversas comuns não alteram a câmera.
+- A escolha noturna e a página do diário foram preservadas. A sequência usa as marcas existentes; interrupções removem o estado transitório e a iluminação noturna é restaurada ao desativar o controlador.
+- Hierarchy: cada personagem (Zefinha, mãe, pai e Luzia) recebe um SpriteRenderer filho de repouso OPCIONAL, inicialmente vazio/inativo. Atribuir uma pose própria substitui apenas a visibilidade do sprite em pé enquanto a noite concluída aguarda o amanhecer. Slots vazios preservam os ciclos originais. Não foi gerada arte nem girado idle para simular sono; poses de repouso/acolhimento e respiração própria continuam pendentes da autora.
+- Caderno, lugar vazio, laço/roupa e cabaça existentes continuam editáveis na cena. A cabaça e os estados noturnos saem ao amanhecer. O checkpoint da manhã antecede sua nova conversa familiar; a última consulta não foi antecipada.
+- A mãe reconhece o lugar vazio; o pai menciona Raimundo por uma fala indireta. As falas novas são editáveis no componente EntradaCurrais.
+- O empréstimo do balde marca a coleta antes do evento de inventário e adiciona exatamente uma unidade. A devolução exige esse empréstimo e o balde protegido, registra a conclusão antes de retirar uma unidade e não reposiciona toda a família. Uma tentativa incompleta recebe uma fala, em vez de silêncio. Perguntar pela mulher continua independente de ajudar o funcionário.
+
+Pendente no Unity: compilar, conferir enquadramentos e slots opcionais com/sem arte; Sair na esteira; cada escolha noturna; pausa/interrupção; Continue durante noite e manhã; iluminação; balde nas ordens perguntar/ajudar, item errado, combinação, devolução repetida e salvamento durante eventos de inventário. Não houve compilação nem Play Mode neste ambiente.

@@ -511,6 +511,7 @@ public partial class EntradaCurrais : MonoBehaviour
                     EncerrarLavagemELembranca();
                     EncerrarPatioDetalhado();
                     EncerrarDespedidaEQuarto();
+                    EncerrarNoiteFamilia();
                     RestaurarPlanoSepultamento();
                     RestaurarDesenhoSaida();
                     RestaurarApresentacaoMemoria();
@@ -1224,6 +1225,7 @@ public partial class EntradaCurrais : MonoBehaviour
         EncerrarLavagemELembranca();
         EncerrarPatioDetalhado();
         EncerrarDespedidaEQuarto();
+        EncerrarNoiteFamilia();
         RestaurarPlanoSepultamento();
         RestaurarDesenhoSaida();
         RestaurarApresentacaoMemoria();
@@ -1241,4 +1243,3 @@ public partial class EntradaCurrais : MonoBehaviour
         if (seguidorPaiConsulta != null) seguidorPaiConsulta.enabled = false;
     }
 }
-

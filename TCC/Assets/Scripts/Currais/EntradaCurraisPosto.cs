@@ -118,7 +118,7 @@ public partial class EntradaCurrais
                 if (Dados.curraisEtapaPosto == 2) Iniciar(ContarAosPais());
                 else MenuAbrigo();
             }
-            else if (area == areaEsteiraNoite) Iniciar(PassarANoite());
+            else if (area == areaEsteiraNoite) MenuDescansoFamilia();
             return true;
         }
         return false;
@@ -204,34 +204,51 @@ public partial class EntradaCurrais
 
     private IEnumerator RelembrarRefeicao()
     {
-        if (Dados.secaFoodChoice == 2) Posicionar(baleia, baleiaCarinho);
+        // A lembrança não teleporta Baleia nem altera o enquadramento.
         yield return Dizer(Dados.secaFoodChoice == 1 ? refeicaoTudo : Dados.secaFoodChoice == 2 ? refeicaoBaleia : refeicaoIrma);
         Dados.curraisRefeicaoRelembrada = true;
         Salvar(); MenuAbrigo();
     }
 
+    private void MenuDescansoFamilia()
+    {
+        MostrarOpcoes("Mãe", "Teu lugar tá aqui, perto de mim. Ainda posso te escutar antes de a gente descansar.",
+            new[] { "Ficar perto da mãe", "Conversar mais um pouco", "Sair" },
+            new Action[] { () => Iniciar(PassarANoite()), MenuAbrigo, FecharMenu });
+    }
+
     private IEnumerator PassarANoite()
     {
+        if (!PostoDisponivel || Dados.curraisEtapaPosto != 3) yield break;
         yield return ChapterCard.Show("josefa-11");
         yield return Escurecer(1f);
-        Posicionar(mari.transform, mariNoite);
-        Posicionar(mae, maeNoite);
-        noiteEmCurso = true;
-        AtualizarPosto();
-        yield return Escurecer(0f);
-        int promessa = Dados.estradaSegundaEscolhaNoturna;
-        if (promessa >= 1 && promessa <= 3)
-            yield return Dizer(promessa == 1 ? noitePromessa : promessa == 2 ? noiteTranquilizou : noiteSilencio);
-        yield return Dizer(noiteCaderno);
-        yield return Dizer(noiteInicio);
-        yield return Escolher("Zefinha", perguntaNoite, opcoesNoite);
-        int opcao = escolhaRecebida;
-        yield return Dizer(opcao == 0 ? noiteContar : noitePerto);
-        Dados.curraisEscolhaNoite = opcao + 1;
-        Dados.curraisEtapaPosto = 4;
-        noiteEmCurso = false;
-        GameProgress.Instance.UnlockDiaryPage("currais-noite");
-        AtualizarEstadoBusca(); Salvar();
+        Vector3 posicaoAntesDaNoite = mari.transform.position;
+        try
+        {
+            Posicionar(mari.transform, mariNoite);
+            Posicionar(mae, maeNoite);
+            noiteEmCurso = true;
+            AtualizarPosto();
+            yield return Escurecer(0f);
+            int promessa = Dados.estradaSegundaEscolhaNoturna;
+            if (promessa >= 1 && promessa <= 3)
+                yield return Dizer(promessa == 1 ? noitePromessa : promessa == 2 ? noiteTranquilizou : noiteSilencio);
+            yield return Dizer(noiteCaderno);
+            yield return Dizer(noiteInicio);
+            yield return Escolher("Zefinha", perguntaNoite, opcoesNoite);
+            int opcao = escolhaRecebida;
+            yield return Dizer(opcao == 0 ? noiteContar : noitePerto);
+            Dados.curraisEscolhaNoite = opcao + 1;
+            Dados.curraisEtapaPosto = 4;
+            noiteEmCurso = false;
+            GameProgress.Instance.UnlockDiaryPage("currais-noite");
+            AtualizarEstadoBusca(); Salvar();
+        }
+        finally
+        {
+            noiteEmCurso = false;
+            if (Dados.curraisEtapaPosto < 4) mari.transform.position = posicaoAntesDaNoite;
+            if (!encerrando) AtualizarPosto();
+        }
     }
 }
-

@@ -163,14 +163,17 @@ public partial class EntradaCurrais
 
     private IEnumerator AmanhecerNoCampo()
     {
+        if (!ConsultaDisponivel || Dados.curraisEtapaConsulta != 0) yield break;
         yield return Escurecer(1f);
         yield return ChapterCard.Show("josefa-10");
         Dados.curraisEtapaConsulta = 1;
         AtualizarEstadoBusca();
         Posicionar(pai, paiAbrigo); Posicionar(mae, maeAbrigo);
         RestaurarFamiliaConsulta();
-        yield return Escurecer(0f);
+        // Checkpoint antes da conversa: Continue não repete a passagem da noite.
         Salvar();
+        yield return Escurecer(0f);
+        yield return Dizer(amanhecerFamilia);
     }
 
     private IEnumerator FazerUltimaConsulta()
