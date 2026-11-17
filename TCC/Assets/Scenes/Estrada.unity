@@ -4920,6 +4920,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 9995000100}
   - component: {fileID: 700555846}
   - component: {fileID: 700555847}
   - component: {fileID: 700555848}
@@ -8554,6 +8555,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 9995001021}
+  - {fileID: 9995001011}
+  - {fileID: 9995001001}
   - {fileID: 845846474}
   - {fileID: 3900000074}
   - {fileID: 3900000078}
@@ -21037,12 +21041,12 @@ MonoBehaviour:
   - {fileID: -1047243561838273805, guid: d2c7572b2dbf7f14fa8d420e84f1e8e8, type: 3}
   - {fileID: -1033106279093040478, guid: 0dbd95381d9e78342b16a3cb0a265416, type: 3}
   - {fileID: 8871759756971928399, guid: 333fe988f882dae4d9dfb1477ac6cded, type: 3}
-  baleiaComPrea: {fileID: 21300006, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
+  baleiaComPrea: {fileID: 3841626780839957239, guid: 7cfde41d27b660b4dbd8a6f0cac01e0a, type: 3}
   velocidadeFuga: 6.5
   intervaloCorrida: 0.13
-  casaFechada: {fileID: 21300000, guid: c4a40000000040008000000000000001, type: 3}
-  casaPortaAberta: {fileID: 21300001, guid: c4a40000000040008000000000000001, type: 3}
-  casaJanelaQuebrada: {fileID: 21300002, guid: c4a40000000040008000000000000001, type: 3}
+  casaFechada: {fileID: 8739116325870537038, guid: 48d7a1b5694dee84fb7052224a03eeec, type: 3}
+  casaPortaAberta: {fileID: 6116156947140435365, guid: 48d7a1b5694dee84fb7052224a03eeec, type: 3}
+  casaJanelaQuebrada: {fileID: 1708902183735649297, guid: 48d7a1b5694dee84fb7052224a03eeec, type: 3}
   descansoFamilia: {fileID: 3631947809945867824, guid: bd4ae8ef22591af4295a0a14743fa97a, type: 3}
   mariquinhaFerida: {fileID: 21300000, guid: c4a40000000040008000000000000002, type: 3}
   terceiraParada: {fileID: 513277210}
@@ -21075,7 +21079,7 @@ MonoBehaviour:
   passaro: {fileID: 11400000, guid: aa17c14a2df34f789bd319f7012a0042, type: 2}
   fogueiraMontada: {fileID: 21300000, guid: c8a80000000040008000000000000001, type: 3}
   fogueiraAcesa: {fileID: 1727185058426006253, guid: 426a045e680e8ee4eb7e7f0850dc42f0, type: 3}
-  fogueiraAssando: {fileID: 21300002, guid: c8a80000000040008000000000000001, type: 3}
+  fogueiraAssando: {fileID: -3414632849480974069, guid: e94c0d650ea268b4eb515ba157f2bd64, type: 3}
   fogueiraBrasas: {fileID: 21300003, guid: c8a80000000040008000000000000001, type: 3}
   irmasAcordadas: {fileID: 21300000, guid: c8a80000000040008000000000000002, type: 3}
   irmasAcordadasCurativo: {fileID: 21300001, guid: c8a80000000040008000000000000002, type: 3}
@@ -21147,6 +21151,17 @@ MonoBehaviour:
   combinacaoFogueira: {fileID: 11400000, guid: b2d1aa8e4121466ea10e19d353568725, type: 2}
   alcanceBuscaBaleia: 18
   fotoFamiliaDormindo: {fileID: 9890000000}
+  baleiaComPreaQuadros:
+  - {fileID: 3841626780839957239, guid: 7cfde41d27b660b4dbd8a6f0cac01e0a, type: 3}
+  - {fileID: 698821985764846748, guid: 62781d18cf9456141a0978f42ad789c0, type: 3}
+  - {fileID: -3834177834234645712, guid: 8e504ebb698e6924d88a7fceb52d492a, type: 3}
+  - {fileID: -405159863766381728, guid: 56f206819e7fb7a40871c620d04f5699, type: 3}
+  fogueiraAssandoQuadros:
+  - {fileID: -3414632849480974069, guid: e94c0d650ea268b4eb515ba157f2bd64, type: 3}
+  - {fileID: -1292190139899694319, guid: 6331727094454404b8d4a58474ba542b, type: 3}
+  - {fileID: 6226263224082158656, guid: 6ab0aa4314eeec84a802bc9559ec55ee, type: 3}
+  - {fileID: 9192864192034117387, guid: 6be9372a7d41a5243803061acbd13fa4, type: 3}
+  - {fileID: -1711603480702790762, guid: 4973a2bbbd9547e4d891e7ebf8655834, type: 3}
 --- !u!1 &3500000010
 GameObject:
   m_ObjectHideFlags: 0
@@ -21645,8 +21660,8 @@ Transform:
   m_GameObject: {fileID: 3900000007}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 253.19, y: 0.02, z: 0}
-  m_LocalScale: {x: 1.1180351, y: 1.1180351, z: 1.1180351}
+  m_LocalPosition: {x: 253.19, y: 2.59148073, z: 0}
+  m_LocalScale: {x: 1.10839687, y: 1.10839687, z: 1.1180351}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1266320024}
@@ -21700,7 +21715,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: c4a40000000040008000000000000001, type: 3}
+  m_Sprite: {fileID: 8739116325870537038, guid: 48d7a1b5694dee84fb7052224a03eeec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -22694,7 +22709,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 32.02, y: -1.08, z: 0}
-  m_LocalScale: {x: 1.0833334, y: 1.0833334, z: 1.0833334}
+  m_LocalScale: {x: 0.580357179, y: 0.580357179, z: 1.0833334}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 69823725}
@@ -22748,7 +22763,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: c6a60000000040008000000000000001, type: 3}
+  m_Sprite: {fileID: -1840234952479221394, guid: d7042317f3a7076488cb863ad56997f3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -24048,8 +24063,8 @@ Transform:
   m_GameObject: {fileID: 3900000081}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -59.19, y: -1.84, z: 0}
-  m_LocalScale: {x: 1.09375, y: 1.09375, z: 1.09375}
+  m_LocalPosition: {x: -59.19, y: -1.49, z: 0}
+  m_LocalScale: {x: 0.573770492, y: 0.573770492, z: 1.09375}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1024783715}
@@ -24103,7 +24118,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: c8a80000000040008000000000000004, type: 3}
+  m_Sprite: {fileID: -8667849993053523720, guid: 2f6711dc1e3f16b4da6b3f6d5b822f88, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -29164,3 +29179,329 @@ MonoBehaviour:
   typingInterval: 0.065
   readingTime: 3
   fadeDuration: 0.5
+--- !u!114 &9995000100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700555845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 986fd7dddf974bd191221aa6332e961a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::MariquinhaFerimentoVisual
+  feridaIdle:
+  - {fileID: 5073225881691398983, guid: 3acd7fac1a0b4074f8556db0072ad72f, type: 3}
+  - {fileID: 8414150907590870724, guid: c8be725ec8121da4a8dbca58a5d708ea, type: 3}
+  - {fileID: -7101343977209242273, guid: eeabfa6e2f8974444a86d58290aa1d7a, type: 3}
+  - {fileID: 2033353855907849251, guid: a27e52aeba5cb734a931d7b1ec2c1377, type: 3}
+  feridaWalk:
+  - {fileID: 613845572587093068, guid: 1d68ff05d48589a419364077d2c1b0df, type: 3}
+  - {fileID: 3432461142006063988, guid: 3ed95490c4ed65e4fb10e072ab9df73a, type: 3}
+  - {fileID: 5995724485588091329, guid: 88cd23681949974439141117a30eaba7, type: 3}
+  - {fileID: -5085055394234140416, guid: 5c5fa50b35fc8fd498c40693b36c587c, type: 3}
+  - {fileID: -1586342180760176781, guid: 6ecc1dc0ebbcf0a418200ff0b2d56b80, type: 3}
+  - {fileID: -8065483335986947937, guid: cc5c531346915824f92fe35af976782f, type: 3}
+  feridaRun:
+  - {fileID: 2524106896055525380, guid: e0ef32e35d58e9b4d89ce37cced8eb44, type: 3}
+  - {fileID: -2907524592158075881, guid: 276d71fac47142f4ba59d03d506c1e97, type: 3}
+  - {fileID: 7188023375209960450, guid: 2b2e97bdbcca46d4e9d6413d3c63aac3, type: 3}
+  - {fileID: 8705837212459275872, guid: 85b3f01dd5de5884385056a3b177f2d7, type: 3}
+  - {fileID: -301201036915393342, guid: f4d8f26f1c218814ea645127cb6c64c5, type: 3}
+  - {fileID: 4902625866576589158, guid: 7561a09ed9fabe14c9dac73814da0844, type: 3}
+  - {fileID: 192489056912479132, guid: fffaab1a4f135bf4dbd290a4fa5743fa, type: 3}
+  - {fileID: 8096969710845661998, guid: 1cc077c36a645874f97ebf9c3f44e080, type: 3}
+  - {fileID: -6928957480357924816, guid: a5782db97abc6fb428f2733651cd9a21, type: 3}
+  - {fileID: -9090892636367479611, guid: 3324c3a67d1d5194295850e73235b4e5, type: 3}
+  curativoIdle:
+  - {fileID: 3079930689697535499, guid: 50ccc6c31ce9ade4e97e285c15415f21, type: 3}
+  - {fileID: -5291168754297172916, guid: 0acb3f9da29a74145815e306da8761bc, type: 3}
+  - {fileID: 5523388791772368547, guid: 13935fbef44a52446b3573651e60a008, type: 3}
+  - {fileID: -3542165797155754447, guid: d499febcb8936084d82221c24189d7be, type: 3}
+  curativoWalk:
+  - {fileID: -5876670717709617726, guid: b45f5e18c61c3d44bb7fdd664aca5615, type: 3}
+  - {fileID: 8051684969345713996, guid: a2e91dee3653cc045953ebc708a52d0d, type: 3}
+  - {fileID: -3254384927155211770, guid: 57360df48f3e8aa47b8b129a88cfefc7, type: 3}
+  - {fileID: -8269476193732195236, guid: 97042f03db6e70546b6a71224ab3a4e4, type: 3}
+  - {fileID: 8362046598343261434, guid: e4637ff4069745349be796d44175ba93, type: 3}
+  - {fileID: -4473758967441573256, guid: f390a0d5b27a39a45b27c53a12fc572b, type: 3}
+  intervaloIdle: 0.25
+  intervaloWalk: 0.16
+  intervaloRun: 0.1
+--- !u!1 &9995001000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9995001001}
+  - component: {fileID: 9995001002}
+  m_Layer: 0
+  m_Name: Árvore seca - arte nova - EDITAR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9995001001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9995001000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -78.6, y: 1.9, z: 0}
+  m_LocalScale: {x: 0.644122383252818, y: 0.644122383252818, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1024783715}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &9995001002
+SpriteRenderer:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9995001000}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -15
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 1264397796286042295, guid: f6506ef1cb19842409b7c264df80d78b, type: 3}
+  m_Color: {r: 0.972549, g: 0.83137256, b: 0.83137256, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
+--- !u!1 &9995001010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9995001011}
+  - component: {fileID: 9995001012}
+  m_Layer: 0
+  m_Name: Cacto grande - arte nova - EDITAR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9995001011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9995001010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -57.599999999999994, y: 1.9, z: 0}
+  m_LocalScale: {x: 0.5924170616113744, y: 0.5924170616113744, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1024783715}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &9995001012
+SpriteRenderer:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9995001010}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -15
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 3171904329767591053, guid: 697ad4064ff2a374cb67546c8dc77f87, type: 3}
+  m_Color: {r: 0.972549, g: 0.83137256, b: 0.83137256, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
+--- !u!1 &9995001020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9995001021}
+  - component: {fileID: 9995001022}
+  m_Layer: 0
+  m_Name: Cacto baixo - arte nova - EDITAR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9995001021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9995001020}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -84.6, y: 1.9, z: 0}
+  m_LocalScale: {x: 0.42613636363636365, y: 0.42613636363636365, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1024783715}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &9995001022
+SpriteRenderer:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9995001020}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -15
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 8967696269949112246, guid: 084e11464b20588499b71cbc2c9b27af, type: 3}
+  m_Color: {r: 0.972549, g: 0.83137256, b: 0.83137256, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []

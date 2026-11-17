@@ -138,7 +138,7 @@ public partial class EntradaCurrais : MonoBehaviour
         GameProgress.Instance.NormalizeData();
         GameProgress.Instance.UnlockDiaryPage("josefa-06");
         rotacaoPai = pai.localRotation;
-        if (Dados.estradaMariquinhaFerida && visualIrma != null)
+        if (Dados.estradaMariquinhaFerida && visualIrma != null && visualIrma.GetComponent<MariquinhaFerimentoVisual>() == null)
         {
             Sprite pose = Dados.estradaCurativoAplicado ? irmaCurativo : irmaFerida;
             if (pose != null)
