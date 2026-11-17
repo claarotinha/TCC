@@ -37,22 +37,10 @@ public class SecaTableVisual : MonoBehaviour
 
     private SpriteRenderer table;
     private bool hidMari;
-    private Sprite[] estadosPreparados;
 
     private void Awake()
     {
         table = GetComponent<SpriteRenderer>();
-        Sprite referencia = table.sprite;
-        if (referencia != null)
-        {
-            Sprite[] fontes = { comMari, semMari, semMariSemCabaca };
-            estadosPreparados = new Sprite[fontes.Length];
-            Vector2 pivo = new Vector2(referencia.pivot.x / referencia.rect.width, referencia.pivot.y / referencia.rect.height);
-            for (int i = 0; i < fontes.Length; i++)
-                if (fontes[i] != null)
-                    estadosPreparados[i] = Sprite.Create(fontes[i].texture, fontes[i].rect, pivo,
-                        fontes[i].rect.height / Mathf.Max(.001f, referencia.bounds.size.y), 0, SpriteMeshType.FullRect);
-        }
         if (mealDialogue != null)
         {
             interaction = mealDialogue.GetComponent<ExamineObject>();
@@ -67,9 +55,7 @@ public class SecaTableVisual : MonoBehaviour
         if (InventoryManager.Instance != null && cabaca != null)
             foreach (ItemData item in InventoryManager.Instance.Items)
                 if (item == cabaca) recolheuCabaca = true;
-        int estado = seated ? 0 : recolheuCabaca && semMariSemCabaca != null ? 2 : 1;
-        table.sprite = estadosPreparados != null && estadosPreparados[estado] != null ? estadosPreparados[estado] :
-            seated ? comMari : estado == 2 ? semMariSemCabaca : semMari;
+        table.sprite = seated ? comMari : recolheuCabaca && semMariSemCabaca != null ? semMariSemCabaca : semMari;
         AjustarAreaDaMesa();
         if (seated) EnquadrarMesa();
         else RestaurarCamera();
@@ -147,12 +133,6 @@ public class SecaTableVisual : MonoBehaviour
     {
         if (hidMari && mari != null) mari.enabled = true;
         hidMari = false;
-    }
-
-    private void OnDestroy()
-    {
-        if (estadosPreparados != null)
-            foreach (Sprite estado in estadosPreparados) if (estado != null) Destroy(estado);
     }
 
     private void OnDisable()

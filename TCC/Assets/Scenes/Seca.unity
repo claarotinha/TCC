@@ -4347,7 +4347,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8739116325870537038, guid: ecb2b3b58636c614f81528d2aba43c93, type: 3}
+  m_Sprite: {fileID: 4407686849995312572, guid: a509479e66e1be14b848586ae41c8eab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7585,7 +7585,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1439237706664494520, guid: 0d20535983aa71c45bb5a88df9c582d2, type: 3}
+  m_Sprite: {fileID: -4189950966298796407, guid: 4eb620b2be85e6048a8169a528a4c2fb, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -16047,7 +16047,7 @@ Transform:
   m_GameObject: {fileID: 9701000000}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -277.6513, y: -115.740746, z: 0}
+  m_LocalPosition: {x: -277.6513, y: -117.82, z: 0}
   m_LocalScale: {x: 0.65282696, y: 0.65282696, z: 0.85730535}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16102,7 +16102,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 11
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2518201865955713321, guid: 55de7caaad097134b9c963a8cc565111, type: 3}
+  m_Sprite: {fileID: 2828311773262276774, guid: c519ad733f8891b46b05c73ec183ca1c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -16126,8 +16126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SecaTableVisual
   mealDialogue: {fileID: 2125664712}
-  comMari: {fileID: 3386395188903284557, guid: f7f9f3188fb985b4c8a173dfea673d26, type: 3}
-  semMari: {fileID: -2518201865955713321, guid: 55de7caaad097134b9c963a8cc565111, type: 3}
+  comMari: {fileID: 5975583182840929099, guid: 5455543966d95d842aa82391af08ff43, type: 3}
+  semMari: {fileID: 2828311773262276774, guid: c519ad733f8891b46b05c73ec183ca1c, type: 3}
   semMariSemCabaca: {fileID: 4757415209180144061, guid: 275b50e87c1ccc245888433fba11f7b8, type: 3}
   cabaca: {fileID: 11400000, guid: f0c6e92250400ab42871c53f7ebf8161, type: 2}
   mari: {fileID: 331809459}

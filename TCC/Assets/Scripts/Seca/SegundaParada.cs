@@ -24,11 +24,6 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private SeguidorFamilia pai;
     [SerializeField] private Sprite[] corridaBaleia;
     [SerializeField] private Sprite baleiaComPrea;
-    [Header("Artes novas — ciclos editáveis")]
-    [SerializeField] private Sprite[] baleiaComPreaQuadros, fogueiraAssandoQuadros;
-    [SerializeField, Min(.02f)] private float intervaloPrea = .2f, intervaloFogueiraAssando = .18f;
-    private bool preaNaBoca, assandoAnimado;
-    private float tempoPrea, tempoAssando;
     [SerializeField, Min(0.1f)] private float velocidadeFuga = 6.5f;
     [SerializeField, Min(0.02f)] private float intervaloCorrida = 0.13f;
     [SerializeField, Min(8f)] private float alcanceBuscaBaleia = 18f;
@@ -226,24 +221,6 @@ public class SegundaParada : MonoBehaviour
             prompt = FindAnyObjectByType<CombinationPrompt>();
         }
         prompt.RegisterRecipe(combinacaoFogueira);
-    }
-
-    private void LateUpdate()
-    {
-        if (PauseHelper.BlockInput() || Time.timeScale <= 0f) return;
-        if (preaNaBoca && desenhoBaleia != null && desenhoBaleia.enabled &&
-            baleiaComPreaQuadros != null && baleiaComPreaQuadros.Length > 0)
-        {
-            tempoPrea += Time.deltaTime;
-            desenhoBaleia.sprite = baleiaComPreaQuadros[Mathf.FloorToInt(tempoPrea / intervaloPrea) % baleiaComPreaQuadros.Length];
-        }
-        if (assandoAnimado && fogueiraCenario != null && fogueiraCenario.activeInHierarchy &&
-            fogueiraAssandoQuadros != null && fogueiraAssandoQuadros.Length > 0)
-        {
-            tempoAssando += Time.deltaTime;
-            fogueiraCenario.GetComponent<SpriteRenderer>().sprite = fogueiraAssandoQuadros[
-                Mathf.FloorToInt(tempoAssando / intervaloFogueiraAssando) % fogueiraAssandoQuadros.Length];
-        }
     }
 
     private void Update()
@@ -655,8 +632,6 @@ public class SegundaParada : MonoBehaviour
     private void MostrarBaleia(Sprite sprite)
     {
         if (desenhoBaleia == null || sprite == null) return;
-        preaNaBoca = sprite == baleiaComPrea;
-        if (!preaNaBoca) tempoPrea = 0f;
         BaleiaAnimacao animacaoBaleia = desenhoBaleia.GetComponent<BaleiaAnimacao>();
         if (animacaoBaleia != null) animacaoBaleia.DefinirPoseExterna(sprite != spriteBaleia || fugindo);
         desenhoBaleia.sprite = sprite;
@@ -1005,12 +980,6 @@ public class SegundaParada : MonoBehaviour
     private void AplicarFerimento()
     {
         if (visualMariquinha == null || spriteMariquinhaNormal == null) return;
-        MariquinhaFerimentoVisual ciclo = visualMariquinha.GetComponent<MariquinhaFerimentoVisual>();
-        if (ciclo != null)
-        {
-            ciclo.AtualizarFerimento(JanelaQuebrada, curativoAplicado);
-            return;
-        }
         float pe = visualMariquinha.bounds.min.y;
         Sprite sprite = spriteMariquinhaNormal;
         if (JanelaQuebrada)
@@ -2033,8 +2002,6 @@ public class SegundaParada : MonoBehaviour
 
     private void MostrarFogueira(Sprite sprite)
     {
-        assandoAnimado = sprite == fogueiraAssando;
-        if (!assandoAnimado) tempoAssando = 0f;
         TrocarVisualCenario(fogueiraCenario, sprite, true);
     }
 
