@@ -1,0 +1,741 @@
+fileFormatVersion: 2
+guid: 48d7a1b5694dee84fb7052224a03eeec
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8739116325870537038
+    second: casa arrumada_0
+  - first:
+      213: 6116156947140435365
+    second: casa arrumada_1
+  - first:
+      213: 1708902183735649297
+    second: casa arrumada_2
+  - first:
+      213: -1348383847121341319
+    second: casa arrumada_3
+  - first:
+      213: -7112599777355305026
+    second: casa arrumada_4
+  - first:
+      213: -7321821037860796048
+    second: casa arrumada_5
+  - first:
+      213: 5066335898708848694
+    second: casa arrumada_6
+  - first:
+      213: -394917238749317991
+    second: casa arrumada_7
+  - first:
+      213: 4045637643521490443
+    second: casa arrumada_8
+  - first:
+      213: -6280189419398115844
+    second: casa arrumada_9
+  - first:
+      213: 3472482997541795358
+    second: casa arrumada_10
+  - first:
+      213: -4490206984566896992
+    second: casa arrumada_11
+  - first:
+      213: -38704547682383416
+    second: casa arrumada_12
+  - first:
+      213: 5662210931237569425
+    second: casa arrumada_13
+  - first:
+      213: -4656606695701623004
+    second: casa arrumada_14
+  - first:
+      213: 4071203036815458062
+    second: casa arrumada_15
+  - first:
+      213: 919014742337849796
+    second: casa arrumada_16
+  - first:
+      213: -6711890573496652754
+    second: casa arrumada_17
+  - first:
+      213: 4936005821260375496
+    second: casa arrumada_18
+  - first:
+      213: -395782339231099971
+    second: casa arrumada_19
+  - first:
+      213: 6554334743104115577
+    second: casa arrumada_20
+  - first:
+      213: -2961415356785235092
+    second: casa arrumada_21
+  - first:
+      213: -4470066684047746182
+    second: casa arrumada_22
+  - first:
+      213: -599099655737839811
+    second: casa arrumada_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: casa arrumada_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 659
+        width: 170
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e49845e1ff3974970800000000000000
+      internalID: 8739116325870537038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_1
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 629
+        width: 89
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5add7d0b654f0e450800000000000000
+      internalID: 6116156947140435365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_2
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 596
+        width: 242
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 114e3716b7d37b710800000000000000
+      internalID: 1708902183735649297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_3
+      rect:
+        serializedVersion: 2
+        x: 881
+        y: 697
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 974357bf804994de0800000000000000
+      internalID: -1348383847121341319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_4
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 674
+        width: 41
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebfe639cf28fa4d90800000000000000
+      internalID: -7112599777355305026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_5
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 593
+        width: 96
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07943590f8aa36a90800000000000000
+      internalID: -7321821037860796048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_6
+      rect:
+        serializedVersion: 2
+        x: 1359
+        y: 17
+        width: 802
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 630b95348ad3f4640800000000000000
+      internalID: 5066335898708848694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_7
+      rect:
+        serializedVersion: 2
+        x: 1561
+        y: 693
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9943bac1dd8f48af0800000000000000
+      internalID: -394917238749317991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_8
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 646
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0efb08800ef42830800000000000000
+      internalID: 4045637643521490443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_9
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 651
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfdcb963ff848d8a0800000000000000
+      internalID: -6280189419398115844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_10
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 645
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e16ff0563ecb03030800000000000000
+      internalID: 3472482997541795358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_11
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 650
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a689e4a9849fa1c0800000000000000
+      internalID: -4490206984566896992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_12
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 630
+        width: 32
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c903304b6e767ff0800000000000000
+      internalID: -38704547682383416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_13
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 594
+        width: 70
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 193cfbf97d6349e40800000000000000
+      internalID: 5662210931237569425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_14
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 626
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42fcffbc1e8606fb0800000000000000
+      internalID: -4656606695701623004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_15
+      rect:
+        serializedVersion: 2
+        x: 977
+        y: 629
+        width: 32
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0f70e18791df7830800000000000000
+      internalID: 4071203036815458062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_16
+      rect:
+        serializedVersion: 2
+        x: 1008
+        y: 628
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c9056cf90ff0cc00800000000000000
+      internalID: 919014742337849796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_17
+      rect:
+        serializedVersion: 2
+        x: 1207
+        y: 628
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2c6073a5139ad2a0800000000000000
+      internalID: -6711890573496652754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_18
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 613
+        width: 51
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c52c717427308440800000000000000
+      internalID: 4936005821260375496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_19
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 35
+        width: 701
+        height: 536
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db3d1c53f06e18af0800000000000000
+      internalID: -395782339231099971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_20
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 81
+        width: 513
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 973d8b5f8bca5fa50800000000000000
+      internalID: 6554334743104115577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_21
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 58
+        width: 695
+        height: 488
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6bed6a5c60f6e6d0800000000000000
+      internalID: -2961415356785235092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_22
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 80
+        width: 513
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7b9607c80227f1c0800000000000000
+      internalID: -4470066684047746182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: casa arrumada_23
+      rect:
+        serializedVersion: 2
+        x: 1595
+        y: 80
+        width: 513
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3fefaa89029fa7f0800000000000000
+      internalID: -599099655737839811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      casa arrumada_0: 8739116325870537038
+      casa arrumada_1: 6116156947140435365
+      casa arrumada_10: 3472482997541795358
+      casa arrumada_11: -4490206984566896992
+      casa arrumada_12: -38704547682383416
+      casa arrumada_13: 5662210931237569425
+      casa arrumada_14: -4656606695701623004
+      casa arrumada_15: 4071203036815458062
+      casa arrumada_16: 919014742337849796
+      casa arrumada_17: -6711890573496652754
+      casa arrumada_18: 4936005821260375496
+      casa arrumada_19: -395782339231099971
+      casa arrumada_2: 1708902183735649297
+      casa arrumada_20: 6554334743104115577
+      casa arrumada_21: -2961415356785235092
+      casa arrumada_22: -4470066684047746182
+      casa arrumada_23: -599099655737839811
+      casa arrumada_3: -1348383847121341319
+      casa arrumada_4: -7112599777355305026
+      casa arrumada_5: -7321821037860796048
+      casa arrumada_6: 5066335898708848694
+      casa arrumada_7: -394917238749317991
+      casa arrumada_8: 4045637643521490443
+      casa arrumada_9: -6280189419398115844
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

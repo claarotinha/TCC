@@ -1200,7 +1200,7 @@ MonoBehaviour:
   mari: {fileID: 1304905425}
   animator: {fileID: 8800000011}
   spriteRenderer: {fileID: 0}
-  distanciaAtras: 2.4
+  distanciaAtras: 4.959265
   velocidade: 5
   velocidadeCorrida: 8
   distanciaParada: 0.08
@@ -2215,7 +2215,7 @@ Transform:
   m_LocalPosition: {x: 0.49, y: -0.72, z: 0}
   m_LocalScale: {x: 0.9755137, y: 0.9755137, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
+  m_Children: []
   m_Father: {fileID: 1673554085}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &700555847
@@ -3188,7 +3188,7 @@ MonoBehaviour:
   mari: {fileID: 1304905425}
   animator: {fileID: 8800010000}
   spriteRenderer: {fileID: 0}
-  distanciaAtras: 6.6
+  distanciaAtras: 9.594965
   velocidade: 5
   velocidadeCorrida: 8
   distanciaParada: 0.08
@@ -3251,7 +3251,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Diário de Maria Josefa\nTítulo e data do capítulo"
+  m_text: "Di\xE1rio de Maria Josefa\nT\xEDtulo e data do cap\xEDtulo"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -3981,9 +3981,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 1156249496}
   - component: {fileID: 9988000002}
   - component: {fileID: 9955000002}
-  - component: {fileID: 1156249496}
   - component: {fileID: 1156249497}
   - component: {fileID: 1156249498}
   - component: {fileID: 8800000012}
@@ -4088,7 +4088,7 @@ MonoBehaviour:
   mari: {fileID: 1304905425}
   animator: {fileID: 8800000012}
   spriteRenderer: {fileID: 0}
-  distanciaAtras: 4.6
+  distanciaAtras: 7.174006
   velocidade: 5
   velocidadeCorrida: 8
   distanciaParada: 0.08
@@ -7743,8 +7743,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7761,7 +7761,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
+  m_fontSize: 11
   m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8053,8 +8053,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8071,7 +8071,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
+  m_fontSize: 11
   m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8330,8 +8330,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 36}
+  m_AnchoredPosition: {x: -36.8, y: -63.3}
+  m_SizeDelta: {x: -103.7766, y: 16.7821}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3000000030
 CanvasRenderer:
@@ -8449,8 +8449,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -15.9253, y: -47.633713}
+  m_SizeDelta: {x: -144.5308, y: -34.3215}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3000000035
 CanvasRenderer:
@@ -8524,8 +8524,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0.44, y: 1}
-  m_AnchoredPosition: {x: 12, y: -2}
-  m_SizeDelta: {x: -24, y: 23}
+  m_AnchoredPosition: {x: 68.80267, y: -68.486206}
+  m_SizeDelta: {x: -80.7272, y: 11.0668}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &3000000039
 CanvasRenderer:
@@ -8585,7 +8585,7 @@ MonoBehaviour:
   m_fontSize: 16
   m_fontSizeBase: 16
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 12
   m_fontSizeMax: 16
   m_fontStyle: 0
@@ -8701,8 +8701,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8719,7 +8719,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
+  m_fontSize: 11
   m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8800,8 +8800,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -38}
-  m_SizeDelta: {x: 0, y: 36}
+  m_AnchoredPosition: {x: -36.800007, y: -81.01445}
+  m_SizeDelta: {x: -103.7766, y: 16.7821}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3000000047
 CanvasRenderer:
@@ -9347,7 +9347,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ""
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -9667,8 +9667,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -76}
-  m_SizeDelta: {x: 0, y: 36}
+  m_AnchoredPosition: {x: -36.800007, y: -98.7289}
+  m_SizeDelta: {x: -103.7766, y: 16.7821}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3000000081
 CanvasRenderer:
@@ -10136,7 +10136,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 49.726105, y: 68.58498, z: -33.37776, w: 3.1124916}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -10355,8 +10355,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10373,7 +10373,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
+  m_fontSize: 11
   m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10454,8 +10454,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -114}
-  m_SizeDelta: {x: 0, y: 36}
+  m_AnchoredPosition: {x: -36.800007, y: -116.44336}
+  m_SizeDelta: {x: -103.7766, y: 16.7821}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3600000106
 CanvasRenderer:
@@ -10603,7 +10603,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9994000001}
   - {fileID: 9922000051}
   - {fileID: 9922000061}
   - {fileID: 9922000071}
@@ -13159,11 +13158,11 @@ Transform:
   m_GameObject: {fileID: 4100000086}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.2, y: -0.97, z: 0.0}
-  m_LocalScale: {x: 0.6286837, y: 0.6286837, z: 1.0}
+  m_LocalPosition: {x: 47.2, y: -0.97, z: 0}
+  m_LocalScale: {x: 0.6286837, y: 0.6286837, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  m_Father: {fileID: 9994000001}
+  m_Children: []
+  m_Father: {fileID: 9922000061}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4100000088
 SpriteRenderer:
@@ -13443,13 +13442,13 @@ Transform:
   m_GameObject: {fileID: 4100000094}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 79.79, y: -0.68, z: 0.0}
-  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1.0}
+  m_LocalPosition: {x: 79.79, y: -0.68, z: 0}
+  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9992000031}
   - {fileID: 9955000041}
-  m_Father: {fileID: 9994000001}
+  m_Father: {fileID: 9922000071}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4100000096
 SpriteRenderer:
@@ -14144,7 +14143,7 @@ Transform:
   m_GameObject: {fileID: 4100000124}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.33, y: -0.77000004, z: 0}
+  m_LocalPosition: {x: 62.122, y: -0.77000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14175,7 +14174,7 @@ Transform:
   m_GameObject: {fileID: 4100000126}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.53, y: -0.69000006, z: 0}
+  m_LocalPosition: {x: 65.524, y: -0.69000006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14206,7 +14205,7 @@ Transform:
   m_GameObject: {fileID: 4100000128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.33, y: -0.5, z: 0}
+  m_LocalPosition: {x: 68.44, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14662,12 +14661,16 @@ MonoBehaviour:
     personagem: Zefinha
     texto: "Eu t\xF4 vendo tu! Eu vou te achar!"
   entrada:
-  - personagem: "Fiscal"
-    texto: "Deixem os pertences aqui pra revista."
-  - personagem: "Pai"
-    texto: "Depois nós pega de volta?"
-  - personagem: "Fiscal"
-    texto: "Primeiro eu confiro. O caderno fica separado."
+  - personagem: Fiscal
+    texto: "Ferramenta fica aqui. Depois v\xEA o que devolve."
+  - personagem: Pai
+    texto: "O fac\xE3o \xE9 de trabalho. Eu preciso dele."
+  - personagem: Fiscal
+    texto: "Aqui o servi\xE7o \xE9 o que mandarem fazer."
+  - personagem: "M\xE3e"
+    texto: Disseram que aqui tinha socorro. Onde atendem meu marido?
+  - personagem: Fiscal
+    texto: Primeiro passa pela revista. Depois pergunta.
   revista:
   - personagem: Fiscal
     texto: "O restante dos pertences fica retido. A caba\xE7a voc\xEAs pedem na distribui\xE7\xE3o
@@ -14681,18 +14684,21 @@ MonoBehaviour:
   - personagem: Fiscal
     texto: Pois pegue. E desocupe a mesa.
   abrigo:
-  - personagem: "Luzia"
-    texto: "Podem ficar desse lado. Tem um pouco de sombra."
-  - personagem: "Mãe"
-    texto: "Obrigada. Nós precisa sentar um instante."
-  - personagem: "Pai"
-    texto: "A senhora viu pra onde levaram o outro grupo?"
-  - personagem: "Luzia"
-    texto: "Vi passar. Venham com calma, que eu conto o que sei."
+  - personagem: Luzia
+    texto: Encoste ele aqui. Esse lado pega sombra um pouco mais cedo.
+  - personagem: "M\xE3e"
+    texto: "N\xF3s veio atr\xE1s de comida e trabalho. Ningu\xE9m falou que iam fechar
+      n\xF3s aqui."
+  - personagem: Luzia
+    texto: "Tem gente que chega pensando que vai descansar e seguir viagem. Depois
+      descobre o port\xE3o."
+  - personagem: "M\xE3e"
+    texto: "Josefa, veja o pano que Luzia deixou pra n\xF3s. Seu pai precisa de ajuda."
   exames:
   - area: {fileID: 4100000078}
     titulo: Esteira
-    texto: "Uma esteira no chão do abrigo. Aqui o pai pode apoiar o braço e descansar."
+    texto: "Uma esteira dividida no ch\xE3o do abrigo. O pai precisa descansar o
+      ombro."
   - area: {fileID: 4100000140}
     titulo: Cerca
     texto: "A cerca divide o setor. A rua est\xE1 perto, mas a passagem \xE9 vigiada."
@@ -14704,8 +14710,8 @@ MonoBehaviour:
     titulo: "Port\xE3o"
     texto: "O port\xE3o \xE9 vis\xEDvel daqui. O guarda n\xE3o deixa a fam\xEDlia
       voltar para a rua."
-  objetivoBusca: ""
-  objetivoLaco: ""
+  objetivoBusca: 
+  objetivoLaco: 
   botoesEtapa2:
   - {fileID: 3000000032}
   - {fileID: 3000000049}
@@ -14847,14 +14853,78 @@ MonoBehaviour:
   - Seguir com os panos
   - Voltar
   objetivosBusca:
-  - ""
-  - ""
-  - ""
-  - ""
-  - ""
-  - ""
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   perguntaAgua: "A caba\xE7a tem \xE1gua para uma por\xE7\xE3o. A quem entregar?"
   perguntaPanela: Perguntar pelo encaminhamento ou seguir com os panos?
+  areaPaiAbrigo: {fileID: 9955000002}
+  maeCuidadoAbrigo: {fileID: 9955000011}
+  cabacaComMari: {fileID: 9955000022}
+  cabacaComMae: {fileID: 9955000032}
+  cabacaComLuzia: {fileID: 9955000042}
+  maePrecisaPano:
+  - personagem: "M\xE3e"
+    texto: O pano que Luzia deixou serve de apoio.
+  - personagem: "M\xE3e"
+    texto: Sem ele, o ombro do seu pai fica pesando.
+  paiRepouso:
+  - personagem: Pai
+    texto: "Eu t\xF4 aqui, Josefa. O bra\xE7o d\xF3i, mas eu t\xF4 aqui."
+  - personagem: Pai
+    texto: "Fique perto de sua m\xE3e. E num esque\xE7a sua irm\xE3."
+  paiDepoisAgua:
+  - personagem: Pai
+    texto: "Essa pouca \xE1gua j\xE1 ajudou. Obrigado, minha filha."
+  - personagem: Pai
+    texto: "Guarde a caba\xE7a. N\xF3s ainda vai precisar dela."
+  luziaBuscarAgua:
+  - personagem: Luzia
+    texto: "Seu pai j\xE1 t\xE1 apoiado. Falta uma pouca d'\xE1gua."
+  - personagem: Luzia
+    texto: "A mulher da distribui\xE7\xE3o ficou com a caba\xE7a de voc\xEAs."
+  - personagem: Luzia
+    texto: "Vou com tu at\xE9 l\xE1. Depois n\xF3s volta pro abrigo."
+  aguaAguardar:
+  - personagem: "Funcion\xE1ria"
+    texto: "A fila anda devagar. Aqui \xE9 uma por\xE7\xE3o por vez."
+  - personagem: "Funcion\xE1ria"
+    texto: "Veja primeiro se o homem de voc\xEAs ficou acomodado."
+  aguaApresentar:
+  - personagem: "Funcion\xE1ria"
+    texto: "A caba\xE7a de voc\xEAs j\xE1 foi devolvida."
+  - personagem: "Funcion\xE1ria"
+    texto: "Ponha ela aqui, que eu separo a por\xE7\xE3o."
+  aguaJaRecebida:
+  - personagem: "Funcion\xE1ria"
+    texto: "A por\xE7\xE3o de voc\xEAs j\xE1 saiu."
+  - personagem: "Funcion\xE1ria"
+    texto: "\xC9 pouca. Leve pra quem t\xE1 esperando no abrigo."
+  maeEsperaAgua:
+  - personagem: "M\xE3e"
+    texto: "O ombro t\xE1 apoiado, mas a boca dele t\xE1 seca."
+  - personagem: "M\xE3e"
+    texto: "Luzia sabe onde t\xE3o distribuindo \xE1gua."
+  familiaDepoisAgua:
+  - personagem: Luzia
+    texto: "A caba\xE7a ficou vazia de novo. Guarde ela."
+  - personagem: Luzia
+    texto: "N\xF3s continua procurando not\xEDcia de Mariquinha."
+  cabacaIndisponivel:
+  - personagem: "Funcion\xE1ria"
+    texto: "Num achei a caba\xE7a entre esses pertences."
+  - personagem: "Funcion\xE1ria"
+    texto: "Vou conferir a mesa. N\xE3o precisa largar mais nada."
+  pontoParadaFamilia: {fileID: 0}
+  seguidoraBaleiaCurrais: {fileID: 0}
+  familiaDecideParar: []
+  familiaSegueCaminho: []
+  familiaBuscaIrma: []
+  proximidadeParada: 3
+  pessoasPresentes: []
   setorBusca: {fileID: 4300000000}
   areaRaimundo: {fileID: 4300000011}
   areaLavadeira: {fileID: 4300000023}
@@ -14877,70 +14947,72 @@ MonoBehaviour:
   reflexoZefinha: {fileID: 4300000048}
   sinalGuarda: {fileID: 4300000052}
   raimundoInicio:
-  - personagem: "Raimundo"
-    texto: "O que tu tá procurando nesse lugar?"
-  - personagem: "Zefinha"
-    texto: "Minha irmã. Ela foi naquele carro antes de nós entrar."
-  - personagem: "Raimundo"
-    texto: "Uma menina parecida contigo?"
-  - personagem: "Zefinha"
-    texto: "O senhor viu?"
-  - personagem: "Raimundo"
-    texto: "Vi ela passando com uma mulher. Viva, andando. Foi antes de trazerem esses baldes."
-  - personagem: "Zefinha"
-    texto: "Pra onde?"
-  - personagem: "Raimundo"
-    texto: "Eu não vi o fim do caminho. Não vou te dizer que vi."
-  - personagem: "Zefinha"
-    texto: "Como o senhor se chama?"
-  - personagem: "Raimundo"
-    texto: "Me chamam de Raimundo."
-  - personagem: "Raimundo"
-    texto: "Nome de quando eu andava com uns homens no sertão."
-  - personagem: "Zefinha"
-    texto: "Que homens?"
-  - personagem: "Raimundo"
-    texto: "Bando de cangaço."
-  - personagem: "Zefinha"
-    texto: "O senhor era cangaceiro?"
-  - personagem: "Raimundo"
-    texto: "Era."
-  - personagem: "Zefinha"
-    texto: "E num pode fazer nada com esses guardas?"
-  - personagem: "Raimundo"
-    texto: "Eu faço uma besteira, eles me matam ou me prendem."
-  - personagem: "Raimundo"
-    texto: "Tua irmã continua longe e tua mãe perde outra pessoa pra perguntar."
+  - personagem: Raimundo
+    texto: "O que tu t\xE1 procurando nesse lugar?"
+  - personagem: Zefinha
+    texto: "Minha irm\xE3. Ela foi naquele carro antes de n\xF3s entrar."
+  - personagem: Raimundo
+    texto: Uma menina parecida contigo?
+  - personagem: Zefinha
+    texto: O senhor viu?
+  - personagem: Raimundo
+    texto: Vi ela passando com uma mulher. Viva, andando. Foi antes de trazerem esses
+      baldes.
+  - personagem: Zefinha
+    texto: Pra onde?
+  - personagem: Raimundo
+    texto: "Eu n\xE3o vi o fim do caminho. N\xE3o vou te dizer que vi."
+  - personagem: Zefinha
+    texto: Como o senhor se chama?
+  - personagem: Raimundo
+    texto: Me chamam de Raimundo.
+  - personagem: Raimundo
+    texto: "Nome de quando eu andava com uns homens no sert\xE3o."
+  - personagem: Zefinha
+    texto: Que homens?
+  - personagem: Raimundo
+    texto: "Bando de canga\xE7o."
+  - personagem: Zefinha
+    texto: O senhor era cangaceiro?
+  - personagem: Raimundo
+    texto: Era.
+  - personagem: Zefinha
+    texto: E num pode fazer nada com esses guardas?
+  - personagem: Raimundo
+    texto: "Eu fa\xE7o uma besteira, eles me matam ou me prendem."
+  - personagem: Raimundo
+    texto: "Tua irm\xE3 continua longe e tua m\xE3e perde outra pessoa pra perguntar."
   raimundoBando:
-  - personagem: "Raimundo"
-    texto: "Naquele tempo achei que andar armado era jeito de num baixar a cabeça."
-  - personagem: "Zefinha"
-    texto: "E foi?"
-  - personagem: "Raimundo"
-    texto: "Pra muita gente eu virei outro homem mandando baixar."
-  - personagem: "Raimundo"
-    texto: "Num vou te contar só a parte que me deixa bonito."
+  - personagem: Raimundo
+    texto: "Naquele tempo achei que andar armado era jeito de num baixar a cabe\xE7a."
+  - personagem: Zefinha
+    texto: E foi?
+  - personagem: Raimundo
+    texto: Pra muita gente eu virei outro homem mandando baixar.
+  - personagem: Raimundo
+    texto: "Num vou te contar s\xF3 a parte que me deixa bonito."
   raimundoMulher:
-  - personagem: "Raimundo"
-    texto: "A voz eu conheci. O rosto foi de longe."
-  - personagem: "Raimundo"
-    texto: "Quero falar com as lavadeiras antes de te dar um nome errado."
+  - personagem: Raimundo
+    texto: A voz eu conheci. O rosto foi de longe.
+  - personagem: Raimundo
+    texto: Quero falar com as lavadeiras antes de te dar um nome errado.
   raimundoSaida:
-  - personagem: "Zefinha"
-    texto: "Se o senhor lembrar, procure mainha. Ela tá com Baleia, perto das esteiras."
-  - personagem: "Raimundo"
-    texto: "Eu sei onde é. Vou perguntar."
+  - personagem: Zefinha
+    texto: "Se o senhor lembrar, procure mainha. Ela t\xE1 com Baleia, perto das
+      esteiras."
+  - personagem: Raimundo
+    texto: "Eu sei onde \xE9. Vou perguntar."
   lavagemFalas:
-  - personagem: "Lavadeira"
-    texto: "Trouxe o lote da mesa? Deixe aqui. Vou precisar que me ajude a separar."
-  - personagem: "Zefinha"
-    texto: "O escrivão disse que depois ia procurar minha irmã."
-  - personagem: "Lavadeira"
-    texto: "É sempre depois… Eu vi uma menina com uma mulher."
-  - personagem: "Lavadeira"
-    texto: "Perguntava se a mãe vinha no carro de trás."
-  - personagem: "Luzia"
-    texto: "Nós pergunta mais quando terminar de ajudar."
+  - personagem: Lavadeira
+    texto: Trouxe o lote da mesa? Deixe aqui. Vou precisar que me ajude a separar.
+  - personagem: Zefinha
+    texto: "O escriv\xE3o disse que depois ia procurar minha irm\xE3."
+  - personagem: Lavadeira
+    texto: "\xC9 sempre depois\u2026 Eu vi uma menina com uma mulher."
+  - personagem: Lavadeira
+    texto: "Perguntava se a m\xE3e vinha no carro de tr\xE1s."
+  - personagem: Luzia
+    texto: "N\xF3s pergunta mais quando terminar de ajudar."
   lembrancaCorpo:
   - personagem: "Pai (lembran\xE7a)"
     texto: "A terra tamb\xE9m num quis guardar o corpo dele."
@@ -14963,53 +15035,55 @@ MonoBehaviour:
   - personagem: Pai
     texto: "Fique com Luzia. Eu t\xF4 vendo tu."
   patioAgressao:
-  - personagem: "Fiscal"
-    texto: "Deixe de demora. Tem mais carro esperando."
-  - personagem: "Bento"
-    texto: "Eu num tô conseguindo..."
-  - personagem: "Pai"
-    texto: "Ele caiu! O homem caiu!"
-  - personagem: "Fiscal"
-    texto: "Cada um no seu serviço."
+  - personagem: Fiscal
+    texto: Deixe de demora. Tem mais carro esperando.
+  - personagem: Bento
+    texto: "Eu num t\xF4 conseguindo..."
+  - personagem: Pai
+    texto: Ele caiu! O homem caiu!
+  - personagem: Fiscal
+    texto: "Cada um no seu servi\xE7o."
   patioRetirada:
   - personagem: Cabo
     texto: Tire daqui.
   corpoDistante:
-  - personagem: "Zefinha (em pensamentos)"
-    texto: "Eu tô aqui… Essa mão é minha? É da bisa. Eu preciso fazer alguma coisa."
-  - personagem: "Luzia"
-    texto: "Josefa, olhe pra mim. Pegue o pano limpo do apoio e traga a água. Nós ainda pode ajudar."
+  - personagem: Zefinha (em pensamentos)
+    texto: "Eu t\xF4 aqui\u2026 Essa m\xE3o \xE9 minha? \xC9 da bisa. Eu preciso
+      fazer alguma coisa."
+  - personagem: Luzia
+    texto: "Josefa, olhe pra mim. Pegue o pano limpo do apoio e traga a \xE1gua.
+      N\xF3s ainda pode ajudar."
   atendimentoFalas:
-  - personagem: "Zefinha"
-    texto: "O nome dele..."
-  - personagem: "Pai"
-    texto: "Bento."
-  - personagem: "Zefinha"
-    texto: "Ele tem família?"
-  - personagem: "Pai"
-    texto: "Tem. Vou buscar quem tá com ele."
+  - personagem: Zefinha
+    texto: O nome dele...
+  - personagem: Pai
+    texto: Bento.
+  - personagem: Zefinha
+    texto: "Ele tem fam\xEDlia?"
+  - personagem: Pai
+    texto: "Tem. Vou buscar quem t\xE1 com ele."
   noticiaBento:
-  - personagem: "Pai"
-    texto: "Bento morreu, Josefa."
-  - personagem: "Luzia"
-    texto: "Venha pra sombra. Os homens vão cobrir ele."
-  - personagem: "Zefinha"
-    texto: "O serviço num para?"
-  - personagem: "Pai"
-    texto: "Mandaram continuar."
+  - personagem: Pai
+    texto: Bento morreu, Josefa.
+  - personagem: Luzia
+    texto: "Venha pra sombra. Os homens v\xE3o cobrir ele."
+  - personagem: Zefinha
+    texto: "O servi\xE7o num para?"
+  - personagem: Pai
+    texto: Mandaram continuar.
   opcoesRaimundo:
   - Por que entrou no bando?
   - O que sabe da mulher?
   - "Como \xE9 trabalhar aqui?"
   - Preciso continuar
   objetivosCampo:
-  - ""
-  - ""
-  - ""
-  - ""
-  - ""
-  - ""
-  - ""
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   guardaRetaguarda: {fileID: 9805000001}
   deslocamentoEscolta: {fileID: 9805000101}
   cameraRevista: {fileID: 9805000161}
@@ -15029,12 +15103,12 @@ MonoBehaviour:
   - personagem: Pai
     texto: Num separe minhas filhas!
   reacaoGolpe:
-  - personagem: "Pai"
-    texto: "Ah! Meu braço..."
-  - personagem: "Mãe"
-    texto: "Ele só foi atrás da menina!"
-  - personagem: "Guarda"
-    texto: "Continuem andando."
+  - personagem: Pai
+    texto: "Ah! Meu bra\xE7o\u2026"
+  - personagem: "M\xE3e"
+    texto: "Pare! Ele s\xF3 foi buscar a menina!"
+  - personagem: Guarda
+    texto: "Ent\xE3o mande ele andar."
   areaFiscalEntrada: {fileID: 4100000089}
   areaDiarioEntrada: {fileID: 9805000203}
   diarioEntrada: {fileID: 9805000200}
@@ -15043,19 +15117,26 @@ MonoBehaviour:
     texto: "Meu caderno\u2026 Ainda bem que ele deixou eu levar."
   - personagem: "M\xE3e"
     texto: Guarde junto de tu, Josefa. Vamos acudir seu pai.
-  objetivoRevista: ""
+  objetivoRevista: 
   areaPanoAbrigo: {fileID: 9805000303}
   panoAbrigo: {fileID: 9805000300}
   panoNoPai: {fileID: 9805000400}
   itemPanoAbrigo: {fileID: 11400000, guid: 696180fc49fd457ead3d4ad6ee729c99, type: 2}
   panoDisponivel:
-  - personagem: "Zefinha"
-    texto: "Esse pano serve pra apoiar o braço de painho."
+  - personagem: Luzia
+    texto: "Pode levar esse pano, Josefa. D\xEA \xE0 sua m\xE3e pra ela acomodar
+      o ombro dele."
+  - personagem: Zefinha
+    texto: Obrigada, dona Luzia.
   paiAcomodado:
-  - personagem: "Mãe"
-    texto: "Assim fica melhor. Obrigada, minha filha."
-  - personagem: "Pai"
-    texto: "Agora o braço num fica pesando tanto."
+  - personagem: "M\xE3e"
+    texto: Isso. Obrigada, minha filha. Deixe eu ajeitar, devagar.
+  - personagem: Pai
+    texto: "O golpe pegou bem aqui\u2026"
+  - personagem: "M\xE3e"
+    texto: Encoste um pouco. Eu fico com tu.
+  - personagem: Luzia
+    texto: "Quando puder, venha falar comigo, Josefa. N\xF3s precisa buscar \xE1gua."
   luziaCurral:
   - personagem: Zefinha
     texto: Por que chamam aqui de curral?
@@ -15083,30 +15164,7 @@ MonoBehaviour:
     texto: "Maria Severina. N\xF3s chama Mariquinha."
   - personagem: Luzia
     texto: Vou perguntar na lavagem. Tem muita gente chegando por caminhos diferentes.
-  objetivoPano: ""
-  cameraSaidaConsulta: {fileID: 9993000001}
-  canhotoApresentadoConsulta: {fileID: 9993000010}
-  consultaConcluida:
-  - personagem: "Escrivão"
-    texto: "É o que consegui conferir hoje. A relação vai seguir."
-  - personagem: Pai
-    texto: "Então nós guarda o que sabe. Lá no portão ainda precisam ouvir nós."
-  semCanhotoConsulta:
-  - personagem: "Escrivão"
-    texto: "Mesmo sem o papel, eu escuto. Diga o que precisa confirmar."
-  retornoAbrigoOrientacao:
-  - personagem: "Mãe"
-    texto: "Luzia ficou no abrigo. Vamos voltar pra perto dela, sem deixar esses nomes se perder."
-  luziaConsultaFinal:
-  - personagem: Luzia
-    texto: "Eu guardo o lugar de vocês. Teu pai ainda tem pergunta pra fazer naquela mesa."
-  - personagem: Luzia
-    texto: "Depois tem o portão. Num deixa tua mãe atravessar isso sozinha."
-  luziaRetornoFinal:
-  - personagem: Luzia
-    texto: "Sente um pouco. Tua mãe quer ouvir o que vocês conseguiram saber."
-  - personagem: Luzia
-    texto: "O que ainda falta ninguém precisa inventar. Vamos guardar o que tem nome."
+  objetivoPano: 
   setorConsulta: {fileID: 4500000000}
   papelConsulta: {fileID: 4500000006}
   testemunhaConsulta: {fileID: 4500000014}
@@ -15233,17 +15291,195 @@ MonoBehaviour:
   - "Relembrar as informa\xE7\xF5es"
   - Sair
   objetivosConsulta:
-  - ""
-  - ""
-  - ""
-  - ""
-  - ""
+  - 
+  - 
+  - 
+  - 
+  - 
   perguntaConsulta: "Qual informa\xE7\xE3o confirmar?"
   rotuloLugar: Lugar conhecido
   rotuloNome: Nome conhecido
   lugarConsulta: Lagoa do Meio
   nomeConsulta: Nair Pereira
   naoConfirmado: "Ainda n\xE3o confirmado"
+  cameraSaidaConsulta: {fileID: 9993000001}
+  canhotoApresentadoConsulta: {fileID: 9993000010}
+  consultaConcluida:
+  - personagem: "Escriv\xE3o"
+    texto: "\xC9 o que consegui conferir hoje. A rela\xE7\xE3o vai seguir."
+  - personagem: Pai
+    texto: "Ent\xE3o n\xF3s guarda o que sabe. L\xE1 no port\xE3o ainda precisam
+      ouvir n\xF3s."
+  semCanhotoConsulta:
+  - personagem: "Escriv\xE3o"
+    texto: Mesmo sem o papel, eu escuto. Diga o que precisa confirmar.
+  retornoAbrigoOrientacao:
+  - personagem: "M\xE3e"
+    texto: Luzia ficou no abrigo. Vamos voltar pra perto dela, sem deixar esses nomes
+      se perder.
+  luziaConsultaFinal:
+  - personagem: Luzia
+    texto: "Eu guardo o lugar de voc\xEAs. Teu pai ainda tem pergunta pra fazer naquela
+      mesa."
+  - personagem: Luzia
+    texto: "Depois tem o port\xE3o. Num deixa tua m\xE3e atravessar isso sozinha."
+  luziaRetornoFinal:
+  - personagem: Luzia
+    texto: "Sente um pouco. Tua m\xE3e quer ouvir o que voc\xEAs conseguiram saber."
+  - personagem: Luzia
+    texto: "O que ainda falta ningu\xE9m precisa inventar. Vamos guardar o que tem
+      nome."
+  companhiaSepultamento:
+  - {fileID: 9991000103}
+  - {fileID: 9991000113}
+  - {fileID: 9991000123}
+  - {fileID: 9991000133}
+  origensCompanhiaSepultamento:
+  - {fileID: 467838415}
+  - {fileID: 1156249497}
+  - {fileID: 1304905424}
+  - {fileID: 4100000096}
+  cruzDeBento: {fileID: 9991000000}
+  dobradicaPortaQuarto: {fileID: 9991000201}
+  papelPostoLeitura: {fileID: 9991000221}
+  raimundoApoiadoPosto: {fileID: 9991000231}
+  registroCopiado: {fileID: 9991000240}
+  baldesApoiadosPosto: {fileID: 4400000016}
+  cabacaComTrabalhadora: {fileID: 9991000252}
+  areaMesaDocumento: {fileID: 4400000011}
+  areaTrabalhadoraQuarto: {fileID: 4400000052}
+  areaCaboQuarto: {fileID: 4400000068}
+  areaDoenteUm: {fileID: 4400000040}
+  areaDoenteDois: {fileID: 4400000048}
+  postoSeguinte:
+  - personagem: Luzia
+    texto: O quarto de atendimento fica perto do tanque grande.
+  - personagem: Luzia
+    texto: "Se algu\xE9m viu o outro grupo, pode t\xE1 l\xE1."
+  registroRevisado:
+  - personagem: Zefinha
+    texto: Lagoa do Meio. Eu guardei esse lugar no caderno.
+  - personagem: Zefinha
+    texto: "O papel num diz se Mariquinha chegou l\xE1."
+  folhaRetirada:
+  - personagem: Zefinha
+    texto: "J\xE1 levaram a folha."
+  - personagem: Raimundo
+    texto: Eu ainda vou perguntar pelo grupo da menina.
+  quartoRevisita:
+  - personagem: Trabalhadora
+    texto: "Aqui s\xF3 est\xE3o as pessoas que tu j\xE1 viu."
+  - personagem: Trabalhadora
+    texto: Se eu ouvir Maria Severina, procuro dona Luzia.
+  quartoVoltarFamilia:
+  - personagem: Luzia
+    texto: "Sua m\xE3e ficou com Baleia, perto das esteiras."
+  - personagem: Luzia
+    texto: "Vamos contar o que n\xF3s viu, Josefa."
+  quartoSemCabaca:
+  - personagem: Trabalhadora
+    texto: "Preciso de um recipiente vazio para buscar \xE1gua."
+  - personagem: Trabalhadora
+    texto: Se tu puder emprestar depois, eu devolvo.
+  caboQuartoFalas:
+  - personagem: Cabo
+    texto: "J\xE1 viu quem t\xE1 aqui. Deixe o atendimento seguir."
+  doenteUmFalas:
+  - personagem: Pessoa em repouso
+    texto: "Disseram que eu ia descansar um pouco\u2026"
+  - personagem: Trabalhadora
+    texto: "Fique aqui. N\xF3s t\xE1 perto."
+  doenteDoisFalas:
+  - personagem: Outra pessoa em repouso
+    texto: "\xC1gua\u2026 por favor."
+  - personagem: Trabalhadora
+    texto: "Eu j\xE1 trago. Espere um pouco."
+  maeAmparoEntrada: {fileID: 9933000111}
+  chegadaFamilia:
+  - personagem: Mulher da fila
+    texto: "Fique comigo. A fila t\xE1 andando."
+  - personagem: "Crian\xE7a da fila"
+    texto: "Mainha, \xE9 pra entrar aqui?"
+  - personagem: Mulher da fila
+    texto: "\xC9. Num se afaste de mim."
+  - personagem: Mariquinha
+    texto: Fica pertinho de mim, Zefinha.
+  - personagem: Zefinha
+    texto: "T\xF4 aqui."
+  areaGuardaRonda: {fileID: 9807000203}
+  panoEmLavagem: {fileID: 9977000012}
+  panoMergulhoLavagem: {fileID: 9977000021}
+  luziaRetornoLembranca: {fileID: 9977000041}
+  inicioLembranca: {fileID: 9977000051}
+  varalPanosUso: {fileID: 9977000030}
+  lavadeiraEsperaLote:
+  - personagem: Lavadeira
+    texto: "O lote da mesa dos nomes vem pra c\xE1."
+  - personagem: Lavadeira
+    texto: Com esses panos aqui, eu consigo abrir lugar no tanque.
+  lavadeiraIrma:
+  - personagem: Lavadeira
+    texto: "Eu vi uma menina perguntando pela m\xE3e."
+  - personagem: Lavadeira
+    texto: Tava com uma mulher. Num sei pra onde seguiram.
+  raimundoRetorno:
+  - personagem: Raimundo
+    texto: "Ainda t\xF4 perguntando por aquela mulher."
+  - personagem: Raimundo
+    texto: "S\xF3 vou dar um nome quando tiver certeza."
+  lavagemFaltaUso:
+  - personagem: Lavadeira
+    texto: Os panos que voltam ao uso ficam deste lado.
+  - personagem: Lavadeira
+    texto: "N\xE3o misture com as pe\xE7as do atendimento."
+  lavagemFaltaAtendimento:
+  - personagem: Lavadeira
+    texto: "As pe\xE7as do atendimento ficam do outro lado."
+  - personagem: Lavadeira
+    texto: "Mesmo depois da \xE1gua, elas continuam separadas."
+  lavagemConcluida:
+  - personagem: Lavadeira
+    texto: Agora cada coisa ficou no seu lugar.
+  - personagem: Lavadeira
+    texto: Separei um retalho limpo ali pra tu.
+  lavagemUsoRecebido:
+  - personagem: Lavadeira
+    texto: Esses podem ir secar. Deixe os outros separados.
+  lavagemAtendimentoRecebido:
+  - personagem: Lavadeira
+    texto: "Essas ficam aqui. Amanh\xE3 chegam outras."
+  luziaAntesRaimundo:
+  - personagem: Luzia
+    texto: Aquele homem tava perto dos baldes quando o carro passou.
+  - personagem: Luzia
+    texto: Talvez tenha visto o outro grupo.
+  luziaAntesLavagem:
+  - personagem: Luzia
+    texto: A mulher da lavagem espera o lote que tu trouxe.
+  - personagem: Luzia
+    texto: Raimundo vai perguntar pela mulher que viu.
+  luziaNaPassagem:
+  - personagem: Luzia
+    texto: "Guarde o retalho. Esse caminho leva pro p\xE1tio."
+  - personagem: Luzia
+    texto: Eu vou junto de tu.
+  luziaDepoisPassagem:
+  - personagem: Luzia
+    texto: "Eu t\xF4 aqui, Josefa."
+  - personagem: Luzia
+    texto: "Seu pai t\xE1 no carregamento, depois dessa passagem."
+  guardaPassagemFalas:
+  - personagem: Guarda
+    texto: "Essa passagem d\xE1 no servi\xE7o. Nada de mexer nos sacos."
+  - personagem: Luzia
+    texto: "N\xF3s s\xF3 t\xE1 passando."
+  lembrancaSemLenda:
+  - personagem: Luzia
+    texto: "Josefa. Olhe pra mim. N\xF3s ainda t\xE1 aqui."
+  - personagem: Zefinha
+    texto: Por um instante eu perdi o caminho.
+  - personagem: Luzia
+    texto: Vem. Eu fico perto de tu.
   aberturaEncerramento:
   - personagem: "M\xE3e"
     texto: "Sente aqui, Josefa. Vamos repetir o que sabemos, pra ningu\xE9m esquecer."
@@ -15306,20 +15542,20 @@ MonoBehaviour:
   - personagem: "M\xE3e"
     texto: "E tem um homem mandando n\xF3s ficar deste lado. Num foi isso que prometeram."
   familiaTrabalho:
-  - personagem: "Zefinha"
-    texto: "O senhor vai trabalhar amanhã?"
-  - personagem: "Pai"
-    texto: "Disseram que vão chamar cedo."
-  - personagem: "Zefinha"
-    texto: "E a gente ainda vai procurar Mariquinha?"
-  - personagem: "Pai"
-    texto: "Vai, sim. Eu num esqueci dela."
-  - personagem: "Mãe"
-    texto: "A gente precisa descansar um pouco hoje."
-  - personagem: "Zefinha"
-    texto: "Fiquei pensando na família de Bento."
-  - personagem: "Pai"
-    texto: "Eu também. Amanhã vou ver como eles tão."
+  - personagem: Zefinha
+    texto: "O senhor vai trabalhar amanh\xE3?"
+  - personagem: Pai
+    texto: "V\xE3o chamar."
+  - personagem: Zefinha
+    texto: "Mesmo com o bra\xE7o assim?"
+  - personagem: Pai
+    texto: Vou falar de novo. Hoje falar num adiantou.
+  - personagem: "M\xE3e"
+    texto: "Tu precisa de descanso, num \xE9 de mais carga."
+  - personagem: Zefinha
+    texto: "E a fam\xEDlia de Bento?"
+  - personagem: Pai
+    texto: Ficaram os que estavam com ele. Agora precisam atravessar mais esse dia.
   familiaCaderno:
   - personagem: Zefinha
     texto: "Eu queria lembrar das coisas de casa. Agora s\xF3 penso no que vi hoje."
@@ -15338,6 +15574,7 @@ MonoBehaviour:
     texto: Eu num quero esquecer dos nomes.
   - personagem: "M\xE3e"
     texto: "N\xF3s vai lembrar junto."
+  diarioNaNoite: {fileID: 9809000100}
   personagensNoAbrigo:
   - {fileID: 1304905424}
   - {fileID: 467838415}
@@ -15349,18 +15586,19 @@ MonoBehaviour:
   - {fileID: 9992000022}
   - {fileID: 9992000032}
   amanhecerFamilia:
-  - personagem: "Mãe"
-    texto: "Já tão chamando lá fora. Tu conseguiu descansar um pouquinho?"
+  - personagem: "M\xE3e"
+    texto: "J\xE1 t\xE3o chamando l\xE1 fora. Tu conseguiu descansar um pouquinho?"
   - personagem: Zefinha
-    texto: "Eu pensei que ia ouvir Mariquinha acordando do meu lado."
-  - personagem: "Mãe"
-    texto: "Eu também. O lugar dela continua aqui."
+    texto: Eu pensei que ia ouvir Mariquinha acordando do meu lado.
+  - personagem: "M\xE3e"
+    texto: "Eu tamb\xE9m. O lugar dela continua aqui."
   - personagem: Pai
-    texto: "Raimundo ficou de ouvir mais alguma coisa. Antes de irem pro serviço, ainda dá pra falar com ele."
+    texto: "Raimundo ficou de ouvir mais alguma coisa. Antes de irem pro servi\xE7o,
+      ainda d\xE1 pra falar com ele."
   baldeAindaSemPano:
   - personagem: Raimundo
-    texto: "A alça ainda tá descoberta. Aquele pedacinho de pano limpo já fazia diferença na mão."
-  diarioNaNoite: {fileID: 9809000100}
+    texto: "A al\xE7a ainda t\xE1 descoberta. Aquele pedacinho de pano limpo j\xE1
+      fazia diferen\xE7a na m\xE3o."
   baldeRaimundoItem: {fileID: 11400000, guid: b11e09ebfa2649e9bcdebf9897576196, type: 2}
   baldeProtegidoItem: {fileID: 11400000, guid: ecc5ce58a0624777a7649e4462b72229, type: 2}
   combinacaoBalde: {fileID: 11400000, guid: 319b55230cb740d0bf923ad305ab076a, type: 2}
@@ -15368,9 +15606,10 @@ MonoBehaviour:
   baldeRaimundoCenario: {fileID: 9809000000}
   pedidoBaldeFalas:
   - personagem: Zefinha
-    texto: Posso proteger a alça? A lavadeira me deixou uma tira limpa.
+    texto: "Posso proteger a al\xE7a? A lavadeira me deixou uma tira limpa."
   - personagem: Raimundo
-    texto: Pode. Pegue o balde aqui do lado, vazio. Enrole o pano na parte que pega na mão.
+    texto: "Pode. Pegue o balde aqui do lado, vazio. Enrole o pano na parte que pega
+      na m\xE3o."
   baldeDevolvidoFalas:
   - personagem: Raimundo
     texto: Assim num corta tanto. Obrigado, Josefa.
@@ -15406,30 +15645,34 @@ MonoBehaviour:
   panoAtendimentoEntregue: {fileID: 9807000130}
   instrucoesLavagem:
   - personagem: Zefinha
-    texto: "Essas aqui têm sangue…"
+    texto: "Essas aqui t\xEAm sangue\u2026"
   - personagem: Lavadeira
-    texto: "Têm. Amanhã chegam outras."
+    texto: "T\xEAm. Amanh\xE3 chegam outras."
   - personagem: Lavadeira
-    texto: "As peças do atendimento ficam do lado direito."
+    texto: "As pe\xE7as do atendimento ficam do lado direito."
   - personagem: Lavadeira
-    texto: "Os panos de uso ficam à esquerda, longe delas."
+    texto: "Os panos de uso ficam \xE0 esquerda, longe delas."
   tiraPanoAutorizada:
   - personagem: Lavadeira
-    texto: Pode levar esse retalho limpo. Raimundo tava precisando proteger a alça do balde.
+    texto: "Pode levar esse retalho limpo. Raimundo tava precisando proteger a al\xE7a
+      do balde."
   guardaRepreensao:
   - personagem: Guarda
-    texto: "Essa passagem dá no serviço. Nada de mexer nos sacos."
+    texto: "Essa passagem d\xE1 no servi\xE7o. Nada de mexer nos sacos."
   - personagem: Luzia
-    texto: "Nós só tá passando."
+    texto: "N\xF3s s\xF3 t\xE1 passando."
   raimundoTrabalho:
-  - personagem: "Zefinha"
-    texto: "Disseram que aqui tinha serviço. Por que ninguém pode ir embora?"
-  - personagem: "Raimundo"
-    texto: "Serviço tem. Mas num deixam a gente escolher nem a hora de parar."
-  - personagem: "Zefinha"
-    texto: "Painho quer procurar minha irmã."
-  - personagem: "Raimundo"
-    texto: "Eu sei, menina. Se eu ouvir alguma coisa, conto a vocês."
+  - personagem: Zefinha
+    texto: "Disseram que aqui tinha servi\xE7o. Por que ningu\xE9m pode ir embora?"
+  - personagem: Raimundo
+    texto: "Servi\xE7o tem. Escolher a hora de parar, o que fazer, quando sair\u2026
+      isso j\xE1 num deixam."
+  - personagem: Zefinha
+    texto: "Painho t\xE1 com o bra\xE7o machucado."
+  - personagem: Raimundo
+    texto: Eu vi. Vou ficar perto dele no carregamento.
+  - personagem: Raimundo
+    texto: "A m\xE3o j\xE1 num aguenta essa al\xE7a do balde."
   guardaRonda: {fileID: 9807000201}
   rondaInicio: {fileID: 9807000301}
   rondaFim: {fileID: 9807000311}
@@ -15472,13 +15715,100 @@ MonoBehaviour:
   - Revisar as pistas
   - Voltar ao abrigo
   - Voltar ao menu
-  objetivoPaginasMemoria: ""
-  objetivoFimMemoria: ""
+  objetivoPaginasMemoria: 
+  objetivoFimMemoria: 
   tituloFimMemoria: Fim do Ato 2
   duracaoPaginaMemoria: 6
   leituraMinimaMemoria: 1.5
   duracaoCorteMemoria: 1.5
   cenaEpilogo: epilogo
+  areaPaiPatio: {fileID: 9988000002}
+  areaBentoPatio: {fileID: 4300000085}
+  areaFiscalPatio: {fileID: 4300000089}
+  poseBentoSocorro: {fileID: 9988000012}
+  panoNoSocorro: {fileID: 9988000022}
+  pertencesBentoCobertos: {fileID: 9988000032}
+  cabacaPatioComMari: {fileID: 9988000042}
+  bentoTrabalhoFalas:
+  - personagem: Trabalhador
+    texto: "A carga num acaba. Eu s\xF3 preciso de um pouco de ar."
+  - personagem: Trabalhador
+    texto: Desde cedo num deixam a gente parar.
+  fiscalPatioFalas:
+  - personagem: Fiscal
+    texto: Tem carro esperando. Cada um cuida da sua carga.
+  - personagem: Zefinha
+    texto: "Meu pai t\xE1 machucado."
+  patioVoltarPai:
+  - personagem: Luzia
+    texto: "O apoio t\xE1 pronto. Seu pai ficou perto da carro\xE7a."
+  - personagem: Luzia
+    texto: Vamos voltar pra perto dele.
+  luziaInicioPatio:
+  - personagem: Luzia
+    texto: "Seu pai ficou perto da carro\xE7a."
+  - personagem: Luzia
+    texto: Vamos ouvir o que ele precisa.
+  luziaTarefasPatio:
+  - personagem: Luzia
+    texto: "O pano vai pro apoio, do outro lado do p\xE1tio."
+  - personagem: Luzia
+    texto: "A por\xE7\xE3o de \xE1gua fica perto da passagem."
+  luziaAguaPatio:
+  - personagem: Luzia
+    texto: "O pano j\xE1 ficou no apoio."
+  - personagem: Luzia
+    texto: "Falta buscar a por\xE7\xE3o de \xE1gua na caba\xE7a."
+  luziaPanoPatio:
+  - personagem: Luzia
+    texto: "A \xE1gua j\xE1 t\xE1 contigo."
+  - personagem: Luzia
+    texto: "O pano ainda precisa ficar no apoio do p\xE1tio."
+  patioFaltaAgua:
+  - personagem: Trabalhador
+    texto: "A por\xE7\xE3o do servi\xE7o fica neste ponto."
+  - personagem: Trabalhador
+    texto: "Com a caba\xE7a vazia, eu separo \xE1gua pro atendimento."
+  patioFaltaPano:
+  - personagem: Trabalhador
+    texto: "O apoio do p\xE1tio ainda t\xE1 sem pano limpo."
+  - personagem: Trabalhador
+    texto: Deixe aqui o que trouxeram. Pode fazer falta.
+  socorroFaltaAgua:
+  - personagem: Luzia
+    texto: "O pano j\xE1 t\xE1 com n\xF3s. Falta a \xE1gua da caba\xE7a."
+  - personagem: Luzia
+    texto: "A por\xE7\xE3o que tu buscou \xE9 pro atendimento."
+  socorroFaltaPano:
+  - personagem: Luzia
+    texto: "A \xE1gua j\xE1 t\xE1 aqui. Falta um pano limpo."
+  - personagem: Luzia
+    texto: Tem outros no apoio, perto da passagem.
+  socorroFaltamAmbos:
+  - personagem: Luzia
+    texto: "N\xF3s precisa do pano limpo e da \xE1gua."
+  - personagem: Luzia
+    texto: Traga o que tu conseguiu, Josefa.
+  pertencesSemPano:
+  - personagem: Trabalhador
+    texto: Os pertences de Bento precisam de um pano limpo.
+  - personagem: Pai
+    texto: "N\xF3s vai acompanhar ele. A caba\xE7a tamb\xE9m \xE9 de voc\xEAs."
+  despedidaPronta:
+  - personagem: Pai
+    texto: "Os pertences t\xE3o guardados. Podemos acompanhar Bento."
+  - personagem: Luzia
+    texto: Eu vou junto de tu, Josefa.
+  cabacaGuardada:
+  - personagem: Zefinha
+    texto: "Vou guardar a caba\xE7a da fam\xEDlia."
+  - personagem: Luzia
+    texto: "Guarde. N\xF3s ainda vai precisar dela."
+  socorroGuardarCabaca:
+  - personagem: Luzia
+    texto: "Os pertences j\xE1 t\xE3o guardados."
+  - personagem: Luzia
+    texto: "A caba\xE7a de voc\xEAs ainda t\xE1 junto do atendimento."
   setorPosto: {fileID: 4400000000}
   quartoInterior: {fileID: 4400000027}
   portaQuartoFechada: {fileID: 4400000061}
@@ -15551,34 +15881,35 @@ MonoBehaviour:
   - personagem: Luzia
     texto: "Fa\xE7a o que tu veio fazer, menina. Depois n\xF3s volta pra tua m\xE3e."
   postoAjuda:
-  - personagem: "Zefinha"
-    texto: "Solte esse peso um pouco. Tá cortando tua mão."
-  - personagem: "Raimundo"
-    texto: "Luzia vai me ajudar a deixar aqui. Depois, se tu puder, a alça precisa de uma proteção."
-  - personagem: "Zefinha"
-    texto: "Eu volto pra falar com o senhor."
+  - personagem: Zefinha
+    texto: "Solte esse peso um pouco. T\xE1 cortando tua m\xE3o."
+  - personagem: Raimundo
+    texto: "Luzia vai me ajudar a deixar aqui. Depois, se tu puder, a al\xE7a precisa
+      de uma prote\xE7\xE3o."
+  - personagem: Zefinha
+    texto: Eu volto pra falar com o senhor.
   postoCopia:
-  - personagem: "Zefinha (em pensamentos)"
-    texto: "Se levarem essa folha, eu num sei onde procuro outra."
-  - personagem: "Zefinha"
-    texto: "Lagoa do Meio. Eu li. Eu li direito."
+  - personagem: Zefinha (em pensamentos)
+    texto: Se levarem essa folha, eu num sei onde procuro outra.
+  - personagem: Zefinha
+    texto: Lagoa do Meio. Eu li. Eu li direito.
   postoRepetido:
-  - personagem: "Zefinha"
-    texto: "É o mesmo lugar do canhoto."
+  - personagem: Zefinha
+    texto: "\xC9 o mesmo lugar do canhoto."
   quartoVoz:
-  - personagem: "Mariquinha (lembrança)"
-    texto: "Tu acha que na cidade tem sorvete?"
-  - personagem: "Zefinha"
-    texto: "Mariquinha?"
+  - personagem: "Mariquinha (lembran\xE7a)"
+    texto: Tu acha que na cidade tem sorvete?
+  - personagem: Zefinha
+    texto: Mariquinha?
   quartoFalas:
-  - personagem: "Zefinha"
-    texto: "Tinha uma menina falando aqui."
-  - personagem: "Trabalhadora"
-    texto: "Aqui num tem menina, minha filha. Essas duas chegaram de manhã."
-  - personagem: "Cabo"
-    texto: "Já olhou. Volte pro setor."
-  - personagem: "Zefinha (em pensamentos)"
-    texto: "Ele tá vendo que eu tô procurando. Ele sabe."
+  - personagem: Zefinha
+    texto: Tinha uma menina falando aqui.
+  - personagem: Trabalhadora
+    texto: "Aqui num tem menina, minha filha. Essas duas chegaram de manh\xE3."
+  - personagem: Cabo
+    texto: "J\xE1 olhou. Volte pro setor."
+  - personagem: Zefinha (em pensamentos)
+    texto: "Ele t\xE1 vendo que eu t\xF4 procurando. Ele sabe."
   familiaInicio:
   - personagem: "M\xE3e"
     texto: Tu viu ela?
@@ -15596,12 +15927,12 @@ MonoBehaviour:
     texto: "Eu tenho a marca do carro na cabe\xE7a. S\xF3 isso. Eu preciso perguntar
       outra vez."
   familiaFim:
-  - personagem: "Pai"
-    texto: "Amanhã eu vou no posto com tu."
-  - personagem: "Mãe"
-    texto: "Eu vou também. Quero ouvir o que eles vão dizer."
-  - personagem: "Zefinha"
-    texto: "Então nós vai junto."
+  - personagem: Pai
+    texto: "Amanh\xE3 eu vou no posto com tu."
+  - personagem: "M\xE3e"
+    texto: "Tu mal consegue levantar esse bra\xE7o."
+  - personagem: Pai
+    texto: Eu consigo falar.
   refeicaoTudo:
   - personagem: Zefinha
     texto: Eu lembro de ter ficado com medo de faltar comida pra mim.
@@ -15660,14 +15991,79 @@ MonoBehaviour:
   - "Contar a \xFAltima coisa que ouvi"
   - "Pedir que a m\xE3e fique perto"
   objetivosPosto:
-  - ""
-  - ""
-  - ""
-  - ""
-  - ""
+  - 
+  - 
+  - 
+  - 
+  - 
   perguntaPosto: Ajudar Raimundo e ouvir o que descobriu, ou copiar o encaminhamento
     antes que levem a folha?
   perguntaNoite: "O que dizer \xE0 m\xE3e?"
+  areaLataMenino: {fileID: 9966000003}
+  areaCanhotoMesa: {fileID: 4200000046}
+  areaFolhasRegistro: {fileID: 9966000012}
+  folhasAntesRegistro: {fileID: 9966000020}
+  folhasDepoisRegistro: {fileID: 9966000030}
+  lotePanosComMari: {fileID: 9966000040}
+  folhaEmConsulta: {fileID: 9966000021}
+  folhaConsultaFim: {fileID: 9966000051}
+  meninoReencontro:
+  - personagem: "Crian\xE7a"
+    texto: "Tu voltou. Teve not\xEDcia?"
+  - personagem: Zefinha
+    texto: "Ainda t\xF4 procurando. E teu tio?"
+  - personagem: "Crian\xE7a"
+    texto: Ainda num chegou. Eu fico aqui.
+  meninoNomeLembrado:
+  - personagem: "Crian\xE7a"
+    texto: Maria Severina. Eu num esqueci.
+  - personagem: "Crian\xE7a"
+    texto: Se eu ouvir o nome dela, eu te aviso.
+  meninoDepoisRegistro:
+  - personagem: "Crian\xE7a"
+    texto: Na mesa, disseram alguma coisa?
+  - personagem: Zefinha
+    texto: Mandaram procurar em outro lugar.
+  - personagem: "Crian\xE7a"
+    texto: "Meu tio tamb\xE9m era pra vir de outro lugar."
+  lataMeninoFalas:
+  - personagem: Zefinha
+    texto: Tu guarda essa lata bem junto de tu.
+  - personagem: "Crian\xE7a"
+    texto: "\xC9 da comida. Mainha disse pra num perder."
+  - personagem: "Crian\xE7a"
+    texto: "Se chamarem, eu preciso t\xE1 com ela."
+  mesaAntesAgua:
+  - personagem: "Escriv\xE3o"
+    texto: "A rela\xE7\xE3o fica aqui. Agora \xE9 a vez dessa fam\xEDlia."
+  - personagem: ACOMPANHANTE
+    texto: "Vamos levar a \xE1gua primeiro. Depois perguntamos."
+  folhasRegistroFalas:
+  - personagem: Zefinha
+    texto: Tanto nome nessas folhas.
+  - personagem: Zefinha
+    texto: "O de Mariquinha pode t\xE1 no meio deles."
+  - personagem: "Escriv\xE3o"
+    texto: A menina da lavagem espera os panos.
+  lotePanosComVoce:
+  - personagem: Zefinha
+    texto: "Os panos j\xE1 t\xE3o comigo."
+  - personagem: ACOMPANHANTE
+    texto: A mulher da lavagem fica depois dessa passagem.
+  areaMesaRevista: {fileID: 9944000480}
+  areaDiarioRetido: {fileID: 9944000500}
+  diarioRetido: {fileID: 9944000490}
+  mesaPertences: {fileID: 9944000460}
+  fiscalConferencia: {fileID: 9944000511}
+  revistaPendente:
+  - personagem: Fiscal
+    texto: "Ainda tem coisa com voc\xEAs. Ponham junto das outras."
+  cadernoEmConferencia:
+  - personagem: Fiscal
+    texto: "O caderno fica a\xED enquanto eu confiro os outros pertences."
+  cadernoAutorizado:
+  - personagem: Fiscal
+    texto: O caderno ficou separado. Esse a menina pode levar.
   areaAguaPatio: {fileID: 9808000003}
   areaPanosPatio: {fileID: 9808000103}
   areaSocorroBento: {fileID: 9808000203}
@@ -15676,179 +16072,63 @@ MonoBehaviour:
   cabacaSocorro: {fileID: 9808000300}
   panosEntreguesPatio: {fileID: 9808000400}
   tarefaPatioFalas:
-  - personagem: "Pai"
-    texto: "Mandaram levar essas coisas até lá. Num deram nem tempo de beber água."
-  - personagem: "Fiscal"
-    texto: "O carro num vai esperar o dia todo."
-  - personagem: "Luzia"
-    texto: "Tem um pano ali no apoio. E um pouco de água pra quem tá trabalhando."
+  - personagem: Pai
+    texto: "Meu ombro num aguenta levantar a carga. Eu j\xE1 disse a eles."
+  - personagem: Fiscal
+    texto: "O servi\xE7o num vai fazer sozinho."
+  - personagem: Luzia
+    texto: "Josefa, leve esse pano at\xE9 o apoio, do outro lado do p\xE1tio."
+  - personagem: Luzia
+    texto: "Apresente tamb\xE9m a caba\xE7a vazia no ponto de \xE1gua dos trabalhadores."
   aguaPatioFalas:
-  - personagem: "Trabalhador"
-    texto: "Enchi a cabaça com a porção reservada pro serviço e pro atendimento. Leve com cuidado."
-  - personagem: "Zefinha"
-    texto: "Vou deixar perto de quem precisar."
+  - personagem: Trabalhador
+    texto: "Enchi a caba\xE7a com a por\xE7\xE3o reservada pro servi\xE7o e pro atendimento.
+      Leve com cuidado."
+  - personagem: Zefinha
+    texto: Vou deixar perto de quem precisar.
   despedidaPatio:
-  - personagem: "Trabalhador"
-    texto: "Obrigado. Vamos cobrir os pertences dele com esse pano."
-  - personagem: "Pai"
-    texto: "Deixe nós acompanhar Bento."
-  - personagem: "Fiscal"
-    texto: "Dois vão. Os outros ficam no serviço."
+  - personagem: Trabalhador
+    texto: Obrigado. Vamos cobrir os pertences dele com esse pano.
+  - personagem: Pai
+    texto: "Deixe n\xF3s acompanhar Bento."
+  - personagem: Fiscal
+    texto: "Dois v\xE3o. Os outros ficam no servi\xE7o."
   sepultamentoFalas:
-  - personagem: "Luzia"
-    texto: "Fique aqui comigo, Josefa. Os homens vão baixar ele."
-  - personagem: "Pai"
-    texto: "Bento. Nós num esquece teu nome."
-  - personagem: "Zefinha"
-    texto: "E a família dele?"
-  - personagem: "Pai"
-    texto: "Tá aqui. Eu fui buscar. Nem todos deixaram acompanhar."
+  - personagem: Luzia
+    texto: "Fique aqui comigo, Josefa. Os homens v\xE3o baixar ele."
+  - personagem: Pai
+    texto: "Bento. N\xF3s num esquece teu nome."
+  - personagem: Zefinha
+    texto: "E a fam\xEDlia dele?"
+  - personagem: Pai
+    texto: "T\xE1 aqui. Eu fui buscar. Nem todos deixaram acompanhar."
   retornoSepultamento:
-  - personagem: "Zefinha"
-    texto: "Mainha… Essas outras cruzes?"
-  - personagem: "Mãe"
-    texto: "São de outras pessoas que morreram aqui."
-  - personagem: "Luzia"
-    texto: "Ontem levaram mais gente. A fome e a doença num dão descanso."
-  - personagem: "Mãe"
-    texto: "Trouxeram nós dizendo que iam acudir."
-  - personagem: "Mãe"
-    texto: "Agora a gente pede até licença pra enterrar os nossos."
-  - personagem: "Pai"
-    texto: "Vamos voltar juntos."
+  - personagem: Zefinha
+    texto: "Mainha\u2026 Essas outras cruzes?"
+  - personagem: "M\xE3e"
+    texto: "S\xE3o de outras pessoas que morreram aqui."
+  - personagem: Luzia
+    texto: "Ontem levaram mais gente. A fome e a doen\xE7a num d\xE3o descanso."
+  - personagem: "M\xE3e"
+    texto: "Trouxeram n\xF3s dizendo que iam acudir."
+  - personagem: "M\xE3e"
+    texto: "Agora a gente pede at\xE9 licen\xE7a pra enterrar os nossos."
+  - personagem: Pai
+    texto: Vamos voltar juntos.
   emprestimoQuarto:
-  - personagem: "Zefinha"
-    texto: "Pode levar a cabaça. Eu espero."
-  - personagem: "Trabalhadora"
-    texto: "Obrigada. Fique desse lado, longe de quem tá deitado."
+  - personagem: Zefinha
+    texto: "Pode levar a caba\xE7a. Eu espero."
+  - personagem: Trabalhadora
+    texto: "Obrigada. Fique desse lado, longe de quem t\xE1 deitado."
   devolucaoQuarto:
-  - personagem: "Trabalhadora"
-    texto: "Já deixei a água com eles. Aqui está sua cabaça."
-  - personagem: "Zefinha"
-    texto: "Se chegar uma menina chamada Maria Severina, pode avisar à dona Luzia?"
-  - personagem: "Trabalhadora"
-    texto: "Eu pergunto por ela. Pode deixar."
+  - personagem: Trabalhadora
+    texto: "J\xE1 deixei a \xE1gua com eles. Aqui est\xE1 sua caba\xE7a."
+  - personagem: Zefinha
+    texto: "Se chegar uma menina chamada Maria Severina, pode avisar \xE0 dona Luzia?"
+  - personagem: Trabalhadora
+    texto: Eu pergunto por ela. Pode deixar.
   planoSepultamento: {fileID: 9808000500}
   corpoNoPlano: {fileID: 9808000600}
-  pessoasPresentes:
-  - personagem: {fileID: 4100000094}
-    desenho: {fileID: 4100000096}
-    nome: "Luzia"
-    conversa:
-    - personagem: "Luzia"
-      texto: "Tem gente chegando desde cedo. Vamos achar um canto pra vocês."
-  - personagem: {fileID: 4300000008}
-    desenho: {fileID: 4300000010}
-    nome: "Raimundo"
-    conversa:
-    - personagem: "Raimundo"
-      texto: "Esses baldes num param quietos. Quando eu acabar aqui, escuto melhor."
-  - personagem: {fileID: 4300000020}
-    desenho: {fileID: 4300000022}
-    nome: "Lavadeira"
-    conversa:
-    - personagem: "Lavadeira"
-      texto: "Tô separando o que chegou. Cada coisa vai pra um lado."
-  - personagem: {fileID: 4200000036}
-    desenho: {fileID: 4200000038}
-    nome: "Criança"
-    conversa:
-    - personagem: "Criança"
-      texto: "Fico olhando quem passa. Tem muita gente que eu num conheço."
-  - personagem: {fileID: 4200000028}
-    desenho: {fileID: 4200000030}
-    nome: "Escrivão"
-    conversa:
-    - personagem: "Escrivão"
-      texto: "Tô conferindo os nomes. Espere eu acabar essa linha."
-  - personagem: {fileID: 4300000082}
-    desenho: {fileID: 4300000084}
-    nome: "Bento"
-    conversa:
-    - personagem: "Bento"
-      texto: "Hoje o serviço começou cedo. Ainda num consegui sentar."
-  - personagem: {fileID: 4300000086}
-    desenho: {fileID: 4300000088}
-    nome: "Fiscal"
-    conversa:
-    - personagem: "Fiscal"
-      texto: "A carga precisa seguir. Num atrapalhe a passagem."
-  - personagem: {fileID: 4300000098}
-    desenho: {fileID: 4300000100}
-    nome: "Trabalhador"
-    conversa:
-    - personagem: "Trabalhador"
-      texto: "Vim buscar água. Tem mais gente esperando lá."
-  - personagem: {fileID: 4400000049}
-    desenho: {fileID: 4400000051}
-    nome: "Trabalhadora"
-    conversa:
-    - personagem: "Trabalhadora"
-      texto: "Tô cuidando de quem ficou aqui dentro."
-  - personagem: {fileID: 4400000037}
-    desenho: {fileID: 4400000039}
-    nome: "Mulher"
-    conversa:
-    - personagem: "Mulher"
-      texto: "Só queria um pouco de sossego."
-  - personagem: {fileID: 4400000045}
-    desenho: {fileID: 4400000047}
-    nome: "Homem"
-    conversa:
-    - personagem: "Homem"
-      texto: "O dia custa a passar aqui dentro."
-  - personagem: {fileID: 4400000065}
-    desenho: {fileID: 4400000067}
-    nome: "Cabo"
-    conversa:
-    - personagem: "Cabo"
-      texto: "Essa passagem tem gente esperando. Diga logo."
-  - personagem: {fileID: 4500000014}
-    desenho: {fileID: 4500000016}
-    nome: "Lavadeira"
-    conversa:
-    - personagem: "Lavadeira"
-      texto: "Daqui eu vejo o pessoal indo e vindo. É gente demais pra guardar todos os rostos."
-  - personagem: {fileID: 4100000086}
-    desenho: {fileID: 4100000088}
-    nome: "Fiscal"
-    conversa:
-    - personagem: "Fiscal"
-      texto: "Primeiro eu confiro os pertences. Depois vocês seguem."
-  - personagem: {fileID: 9807000200}
-    desenho: {fileID: 9807000202}
-    nome: "Guarda"
-    conversa:
-    - personagem: "Guarda"
-      texto: "Deixe a passagem livre."
-  - personagem: {fileID: 4500000010}
-    desenho: {fileID: 4500000012}
-    nome: "Escrivão do posto"
-    conversa:
-    - personagem: "Escrivão do posto"
-      texto: "Eu preciso terminar de conferir a relação antes de ela seguir."
-  pontoParadaFamilia: {fileID: 4100000131}
-  seguidoraBaleiaCurrais: {fileID: 953090005}
-  proximidadeParada: 3
-  familiaDecideParar:
-  - personagem: "Mãe"
-    texto: "Aqui tem sombra. Vamos parar um pouco? Teu braço precisa descansar."
-  - personagem: "Pai"
-    texto: "Vamos. Mas eu ainda quero perguntar pela menina."
-  - personagem: "Mãe"
-    texto: "Nós vai perguntar. Primeiro sente aqui perto de nós."
-  familiaSegueCaminho:
-  - personagem: Pai
-    texto: "Vamos andando mais um pouquinho. Ali adiante parece ter sombra."
-  - personagem: "Mãe"
-    texto: "Eu tô logo atrás de tu, Josefa."
-  familiaBuscaIrma:
-  - personagem: Zefinha
-    texto: "E se Mariquinha procurar nós e num encontrar?"
-  - personagem: "Mãe"
-    texto: "Vamos ficar juntos. Quem souber dela vai encontrar nós aqui."
-  - personagem: Pai
-    texto: "Eu também tô pensando nisso, minha filha. Nós vai continuar procurando."
   orientacaoAgua:
   - personagem: "Funcion\xE1ria"
     texto: "\xC9 a caba\xE7a de voc\xEAs? Pode levar de volta. Espere na fila pra
@@ -15894,361 +16174,7 @@ MonoBehaviour:
   - personagem: Zefinha
     texto: "Vou levar o lote \xE0 lavadeira. Ainda posso perguntar pelo encaminhamento
       no posto."
-  objetivoLotePanos: ""
-  maeAmparoEntrada: {fileID: 9933000111}
-  chegadaFamilia:
-  - personagem: Mulher da fila
-    texto: Fique comigo. A fila tá andando.
-  - personagem: Criança da fila
-    texto: Mainha, é pra entrar aqui?
-  - personagem: Mulher da fila
-    texto: É. Num se afaste de mim.
-  - personagem: Mariquinha
-    texto: Fica pertinho de mim, Zefinha.
-  - personagem: Zefinha
-    texto: Tô aqui.
-  areaMesaRevista: {fileID: 9944000480}
-  areaDiarioRetido: {fileID: 9944000500}
-  diarioRetido: {fileID: 9944000490}
-  mesaPertences: {fileID: 9944000460}
-  fiscalConferencia: {fileID: 9944000511}
-  revistaPendente:
-  - personagem: Fiscal
-    texto: Ainda tem coisa com vocês. Ponham junto das outras.
-  cadernoEmConferencia:
-  - personagem: Fiscal
-    texto: O caderno fica aí enquanto eu confiro os outros pertences.
-  cadernoAutorizado:
-  - personagem: Fiscal
-    texto: O caderno ficou separado. Esse a menina pode levar.
-  areaPaiAbrigo: {fileID: 9955000002}
-  maeCuidadoAbrigo: {fileID: 9955000011}
-  cabacaComMari: {fileID: 9955000022}
-  cabacaComMae: {fileID: 9955000032}
-  cabacaComLuzia: {fileID: 9955000042}
-  maePrecisaPano:
-  - personagem: "Mãe"
-    texto: "O braço dele tá doendo desde a entrada."
-  - personagem: "Mãe"
-    texto: "Tinha um pano separado nas nossas coisas... Queria apoiar o ombro dele."
-  paiRepouso:
-  - personagem: "Pai"
-    texto: "O braço ainda dói, minha filha. Mas diga, tô te ouvindo."
-  paiDepoisAgua:
-  - personagem: "Pai"
-    texto: "Essa pouca água já ajudou. Obrigado, minha filha."
-  - personagem: "Pai"
-    texto: "Guarde a cabaça. Nós ainda vai precisar dela."
-  luziaBuscarAgua:
-  - personagem: "Luzia"
-    texto: "Seu pai já tá apoiado. Falta uma pouca d'água."
-  - personagem: "Luzia"
-    texto: "A mulher da distribuição ficou com a cabaça de vocês."
-  - personagem: "Luzia"
-    texto: "Vou com tu até lá. Depois nós volta pro abrigo."
-  aguaAguardar:
-  - personagem: "Funcionária"
-    texto: "A fila anda devagar. Aqui é uma porção por vez."
-  - personagem: "Funcionária"
-    texto: "Veja primeiro se o homem de vocês ficou acomodado."
-  aguaApresentar:
-  - personagem: "Funcionária"
-    texto: "A cabaça de vocês já foi devolvida."
-  - personagem: "Funcionária"
-    texto: "Ponha ela aqui, que eu separo a porção."
-  aguaJaRecebida:
-  - personagem: "Funcionária"
-    texto: "A porção de vocês já saiu."
-  - personagem: "Funcionária"
-    texto: "É pouca. Leve pra quem tá esperando no abrigo."
-  maeEsperaAgua:
-  - personagem: "Mãe"
-    texto: "A caminhada deu uma sede... Será que ali tem água?"
-  familiaDepoisAgua:
-  - personagem: "Mãe"
-    texto: "Tô tentando entender esse lugar. É gente demais chegando."
-  - personagem: "Pai"
-    texto: "Vamos perguntar uma coisa de cada vez. Alguém há de ter visto tua irmã."
-  cabacaIndisponivel:
-  - personagem: "Funcionária"
-    texto: "Num achei a cabaça entre esses pertences."
-  - personagem: "Funcionária"
-    texto: "Vou conferir a mesa. Não precisa largar mais nada."
-  areaLataMenino: {fileID: 9966000003}
-  areaCanhotoMesa: {fileID: 4200000046}
-  areaFolhasRegistro: {fileID: 9966000012}
-  folhasAntesRegistro: {fileID: 9966000020}
-  folhasDepoisRegistro: {fileID: 9966000030}
-  lotePanosComMari: {fileID: 9966000040}
-  folhaEmConsulta: {fileID: 9966000021}
-  folhaConsultaFim: {fileID: 9966000051}
-  meninoReencontro:
-  - personagem: "Criança"
-    texto: "Tu voltou. Teve notícia?"
-  - personagem: "Zefinha"
-    texto: "Ainda tô procurando. E teu tio?"
-  - personagem: "Criança"
-    texto: "Ainda num chegou. Eu fico aqui."
-  meninoNomeLembrado:
-  - personagem: "Criança"
-    texto: "Maria Severina. Eu num esqueci."
-  - personagem: "Criança"
-    texto: "Se eu ouvir o nome dela, eu te aviso."
-  meninoDepoisRegistro:
-  - personagem: "Criança"
-    texto: "Na mesa, disseram alguma coisa?"
-  - personagem: "Zefinha"
-    texto: "Mandaram procurar em outro lugar."
-  - personagem: "Criança"
-    texto: "Meu tio também era pra vir de outro lugar."
-  lataMeninoFalas:
-  - personagem: "Zefinha"
-    texto: "Tu guarda essa lata bem junto de tu."
-  - personagem: "Criança"
-    texto: "É da comida. Mainha disse pra num perder."
-  - personagem: "Criança"
-    texto: "Se chamarem, eu preciso tá com ela."
-  mesaAntesAgua:
-  - personagem: "Escrivão"
-    texto: "A relação fica aqui. Agora é a vez dessa família."
-  - personagem: "ACOMPANHANTE"
-    texto: "Vamos levar a água primeiro. Depois perguntamos."
-  folhasRegistroFalas:
-  - personagem: "Zefinha"
-    texto: "Tanto nome nessas folhas."
-  - personagem: "Zefinha"
-    texto: "O de Mariquinha pode tá no meio deles."
-  - personagem: "Escrivão"
-    texto: "A menina da lavagem espera os panos."
-  lotePanosComVoce:
-  - personagem: "Zefinha"
-    texto: "Os panos já tão comigo."
-  - personagem: "ACOMPANHANTE"
-    texto: "A mulher da lavagem fica depois dessa passagem."
-  areaGuardaRonda: {fileID: 9807000203}
-  panoEmLavagem: {fileID: 9977000012}
-  panoMergulhoLavagem: {fileID: 9977000021}
-  luziaRetornoLembranca: {fileID: 9977000041}
-  varalPanosUso: {fileID: 9977000030}
-  lavadeiraEsperaLote:
-  - personagem: "Lavadeira"
-    texto: "O lote da mesa dos nomes vem pra cá."
-  - personagem: "Lavadeira"
-    texto: "Com esses panos aqui, eu consigo abrir lugar no tanque."
-  lavadeiraIrma:
-  - personagem: "Lavadeira"
-    texto: "Eu vi uma menina perguntando pela mãe."
-  - personagem: "Lavadeira"
-    texto: "Tava com uma mulher. Num sei pra onde seguiram."
-  raimundoRetorno:
-  - personagem: "Raimundo"
-    texto: "Ainda tô perguntando por aquela mulher."
-  - personagem: "Raimundo"
-    texto: "Só vou dar um nome quando tiver certeza."
-  lavagemFaltaUso:
-  - personagem: "Lavadeira"
-    texto: "Os panos que voltam ao uso ficam deste lado."
-  - personagem: "Lavadeira"
-    texto: "Não misture com as peças do atendimento."
-  lavagemFaltaAtendimento:
-  - personagem: "Lavadeira"
-    texto: "As peças do atendimento ficam do outro lado."
-  - personagem: "Lavadeira"
-    texto: "Mesmo depois da água, elas continuam separadas."
-  lavagemConcluida:
-  - personagem: "Lavadeira"
-    texto: "Agora cada coisa ficou no seu lugar."
-  - personagem: "Lavadeira"
-    texto: "Separei um retalho limpo ali pra tu."
-  lavagemUsoRecebido:
-  - personagem: "Lavadeira"
-    texto: "Esses podem ir secar. Deixe os outros separados."
-  lavagemAtendimentoRecebido:
-  - personagem: "Lavadeira"
-    texto: "Essas ficam aqui. Amanhã chegam outras."
-  luziaAntesRaimundo:
-  - personagem: "Luzia"
-    texto: "Aquele homem tava perto dos baldes quando o carro passou."
-  - personagem: "Luzia"
-    texto: "Talvez tenha visto o outro grupo."
-  luziaAntesLavagem:
-  - personagem: "Luzia"
-    texto: "A mulher da lavagem espera o lote que tu trouxe."
-  - personagem: "Luzia"
-    texto: "Raimundo vai perguntar pela mulher que viu."
-  luziaNaPassagem:
-  - personagem: "Luzia"
-    texto: "Guarde o retalho. Esse caminho leva pro pátio."
-  - personagem: "Luzia"
-    texto: "Eu vou junto de tu."
-  luziaDepoisPassagem:
-  - personagem: "Luzia"
-    texto: "Eu tô aqui, Josefa."
-  - personagem: "Luzia"
-    texto: "Seu pai tá no carregamento, depois dessa passagem."
-  guardaPassagemFalas:
-  - personagem: "Guarda"
-    texto: "Essa passagem dá no serviço. Nada de mexer nos sacos."
-  - personagem: "Luzia"
-    texto: "Nós só tá passando."
-  lembrancaSemLenda:
-  - personagem: "Luzia"
-    texto: "Josefa. Olhe pra mim. Nós ainda tá aqui."
-  - personagem: "Zefinha"
-    texto: "Por um instante eu perdi o caminho."
-  - personagem: "Luzia"
-    texto: "Vem. Eu fico perto de tu."
-  inicioLembranca: {fileID: 9977000051}
-  areaPaiPatio: {fileID: 9988000002}
-  areaBentoPatio: {fileID: 4300000085}
-  areaFiscalPatio: {fileID: 4300000089}
-  poseBentoSocorro: {fileID: 9988000012}
-  panoNoSocorro: {fileID: 9988000022}
-  pertencesBentoCobertos: {fileID: 9988000032}
-  cabacaPatioComMari: {fileID: 9988000042}
-  bentoTrabalhoFalas:
-  - personagem: "Trabalhador"
-    texto: "A carga num acaba. Eu só preciso de um pouco de ar."
-  - personagem: "Trabalhador"
-    texto: "Desde cedo num deixam a gente parar."
-  fiscalPatioFalas:
-  - personagem: "Fiscal"
-    texto: "Tem carro esperando. Cada um cuida da sua carga."
-  - personagem: "Zefinha"
-    texto: "O senhor num vê que eles tão cansados?"
-  patioVoltarPai:
-  - personagem: "Luzia"
-    texto: "O apoio tá pronto. Seu pai ficou perto da carroça."
-  - personagem: "Luzia"
-    texto: "Vamos voltar pra perto dele."
-  patioFaltaAgua:
-  - personagem: "Trabalhador"
-    texto: "A porção do serviço fica neste ponto."
-  - personagem: "Trabalhador"
-    texto: "Com a cabaça vazia, eu separo água pro atendimento."
-  patioFaltaPano:
-  - personagem: "Trabalhador"
-    texto: "O apoio do pátio ainda tá sem pano limpo."
-  - personagem: "Trabalhador"
-    texto: "Deixe aqui o que trouxeram. Pode fazer falta."
-  socorroFaltaAgua:
-  - personagem: "Luzia"
-    texto: "O pano já tá com nós. Falta a água da cabaça."
-  - personagem: "Luzia"
-    texto: "A porção que tu buscou é pro atendimento."
-  socorroFaltaPano:
-  - personagem: "Luzia"
-    texto: "A água já tá aqui. Falta um pano limpo."
-  - personagem: "Luzia"
-    texto: "Tem outros no apoio, perto da passagem."
-  socorroFaltamAmbos:
-  - personagem: "Luzia"
-    texto: "Nós precisa do pano limpo e da água."
-  - personagem: "Luzia"
-    texto: "Traga o que tu conseguiu, Josefa."
-  pertencesSemPano:
-  - personagem: "Trabalhador"
-    texto: "Os pertences de Bento precisam de um pano limpo."
-  - personagem: "Pai"
-    texto: "Nós vai acompanhar ele. A cabaça também é de vocês."
-  despedidaPronta:
-  - personagem: "Pai"
-    texto: "Os pertences tão guardados. Podemos acompanhar Bento."
-  - personagem: "Luzia"
-    texto: "Eu vou junto de tu, Josefa."
-  cabacaGuardada:
-  - personagem: "Zefinha"
-    texto: "Vou guardar a cabaça da família."
-  - personagem: "Luzia"
-    texto: "Guarde. Nós ainda vai precisar dela."
-  socorroGuardarCabaca:
-  - personagem: "Luzia"
-    texto: "Os pertences já tão guardados."
-  - personagem: "Luzia"
-    texto: "A cabaça de vocês ainda tá junto do atendimento."
-  luziaInicioPatio:
-  - personagem: "Luzia"
-    texto: "Seu pai ficou perto da carroça."
-  - personagem: "Luzia"
-    texto: "Vamos ouvir o que ele precisa."
-  luziaTarefasPatio:
-  - personagem: "Luzia"
-    texto: "O pano vai pro apoio, do outro lado do pátio."
-  - personagem: "Luzia"
-    texto: "A porção de água fica perto da passagem."
-  luziaAguaPatio:
-  - personagem: "Luzia"
-    texto: "O pano já ficou no apoio."
-  - personagem: "Luzia"
-    texto: "Falta buscar a porção de água na cabaça."
-  luziaPanoPatio:
-  - personagem: "Luzia"
-    texto: "A água já tá contigo."
-  - personagem: "Luzia"
-    texto: "O pano ainda precisa ficar no apoio do pátio."
-  companhiaSepultamento:
-  - {fileID: 9991000103}
-  - {fileID: 9991000113}
-  - {fileID: 9991000123}
-  - {fileID: 9991000133}
-  origensCompanhiaSepultamento:
-  - {fileID: 467838415}
-  - {fileID: 1156249497}
-  - {fileID: 1304905424}
-  - {fileID: 4100000096}
-  cruzDeBento: {fileID: 9991000000}
-  dobradicaPortaQuarto: {fileID: 9991000201}
-  papelPostoLeitura: {fileID: 9991000221}
-  raimundoApoiadoPosto: {fileID: 9991000231}
-  registroCopiado: {fileID: 9991000240}
-  baldesApoiadosPosto: {fileID: 4400000016}
-  cabacaComTrabalhadora: {fileID: 9991000252}
-  areaMesaDocumento: {fileID: 4400000011}
-  areaTrabalhadoraQuarto: {fileID: 4400000052}
-  areaCaboQuarto: {fileID: 4400000068}
-  areaDoenteUm: {fileID: 4400000040}
-  areaDoenteDois: {fileID: 4400000048}
-  postoSeguinte:
-  - personagem: "Luzia"
-    texto: "O quarto de atendimento fica perto do tanque grande."
-  - personagem: "Luzia"
-    texto: "Se alguém viu o outro grupo, pode tá lá."
-  registroRevisado:
-  - personagem: "Zefinha"
-    texto: "Lagoa do Meio. Eu guardei esse lugar no caderno."
-  - personagem: "Zefinha"
-    texto: "O papel num diz se Mariquinha chegou lá."
-  folhaRetirada:
-  - personagem: "Zefinha"
-    texto: "Já levaram a folha."
-  - personagem: "Raimundo"
-    texto: "Eu ainda vou perguntar pelo grupo da menina."
-  quartoRevisita:
-  - personagem: "Trabalhadora"
-    texto: "Aqui só estão as pessoas que tu já viu."
-  - personagem: "Trabalhadora"
-    texto: "Se eu ouvir Maria Severina, procuro dona Luzia."
-  quartoVoltarFamilia:
-  - personagem: "Luzia"
-    texto: "Sua mãe ficou com Baleia, perto das esteiras."
-  - personagem: "Luzia"
-    texto: "Vamos contar o que nós viu, Josefa."
-  quartoSemCabaca:
-  - personagem: "Trabalhadora"
-    texto: "Preciso de uma cabaça vazia pra levar água até os doentes. Depois devolvo a vocês."
-  caboQuartoFalas:
-  - personagem: "Cabo"
-    texto: "Já viu quem tá aqui. Deixe o atendimento seguir."
-  doenteUmFalas:
-  - personagem: "Pessoa em repouso"
-    texto: "Disseram que eu ia descansar um pouco…"
-  - personagem: "Trabalhadora"
-    texto: "Fique aqui. Nós tá perto."
-  doenteDoisFalas:
-  - personagem: "Outra pessoa em repouso"
-    texto: "Água… por favor."
-  - personagem: "Trabalhadora"
-    texto: "Eu já trago. Espere um pouco."
+  objetivoLotePanos: 
 --- !u!1 &4200000000
 GameObject:
   m_ObjectHideFlags: 0
@@ -16958,7 +16884,7 @@ GameObject:
   - component: {fileID: 4200000023}
   - component: {fileID: 9840000002}
   m_Layer: 0
-  m_Name: "Funcionária da água - ciclo cozinheira"
+  m_Name: "Funcion\xE1ria da \xE1gua - ciclo cozinheira"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17253,11 +17179,11 @@ Transform:
   m_GameObject: {fileID: 4200000028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 115.11, y: -0.86, z: 0.0}
-  m_LocalScale: {x: 0.8902077, y: 0.8902077, z: 1.0}
+  m_LocalPosition: {x: 115.11, y: -0.86, z: 0}
+  m_LocalScale: {x: 0.8902077, y: 0.8902077, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9994000001}
+  m_Father: {fileID: 9922000101}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4200000030
 SpriteRenderer:
@@ -17514,17 +17440,17 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9966000002}
   - component: {fileID: 4200000037}
+  - component: {fileID: 9966000002}
   - component: {fileID: 4200000038}
   - component: {fileID: 4200000039}
   m_Layer: 0
-  m_Name: Criança esperando o tio - arte original
+  m_Name: "Crian\xE7a esperando o tio - arte original"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4200000037
 Transform:
   m_ObjectHideFlags: 0
@@ -17534,12 +17460,12 @@ Transform:
   m_GameObject: {fileID: 4200000036}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 98.16, y: -0.36, z: 0.0}
-  m_LocalScale: {x: 0.4564756, y: 0.4564756, z: 1.0}
+  m_LocalPosition: {x: 98.16, y: -0.36, z: 0}
+  m_LocalScale: {x: 0.4564756, y: 0.4564756, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4200000041}
-  m_Father: {fileID: 9994000001}
+  m_Father: {fileID: 9922000091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4200000038
 SpriteRenderer:
@@ -17639,7 +17565,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 2.03, y: 4.71}
+    oldSize: {x: 2.355, y: 4.71}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -17655,8 +17581,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9966000003}
   - component: {fileID: 4200000041}
+  - component: {fileID: 9966000003}
   - component: {fileID: 4200000042}
   m_Layer: 0
   m_Name: Lata do menino - recipiente reutilizado
@@ -18157,7 +18083,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4300000001}
   m_Layer: 0
-  m_Name: "06 Busca - Raimundo, lavagem e pátio"
+  m_Name: "06 Busca - Raimundo, lavagem e p\xE1tio"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18252,6 +18178,7 @@ Transform:
   - {fileID: 4300000045}
   - {fileID: 4300000049}
   - {fileID: 4300000053}
+  - {fileID: 9807000201}
   - {fileID: 9807000401}
   m_Father: {fileID: 4300000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18301,7 +18228,7 @@ GameObject:
   - component: {fileID: 4300000011}
   - component: {fileID: 9840000003}
   m_Layer: 0
-  m_Name: "Raimundo - ciclo funcionário currais"
+  m_Name: "Raimundo - ciclo funcion\xE1rio currais"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18316,13 +18243,13 @@ Transform:
   m_GameObject: {fileID: 4300000008}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 110.21, y: -0.46, z: 0.0}
-  m_LocalScale: {x: 0.9643917, y: 0.9643917, z: 1.0}
+  m_LocalPosition: {x: 110.21, y: -0.46, z: 0}
+  m_LocalScale: {x: 0.9643917, y: 0.9643917, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4400000077}
   - {fileID: 9809000001}
-  m_Father: {fileID: 9994000001}
+  m_Father: {fileID: 9922000131}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4300000010
 SpriteRenderer:
@@ -18421,8 +18348,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 1.685}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1.63, y: 3.37}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.52, y: 4.02}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -18721,7 +18648,7 @@ GameObject:
   - component: {fileID: 4300000023}
   - component: {fileID: 9840000004}
   m_Layer: 0
-  m_Name: "Lavadeira - ciclo próprio"
+  m_Name: "Lavadeira - ciclo pr\xF3prio"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18736,11 +18663,11 @@ Transform:
   m_GameObject: {fileID: 4300000020}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 136.16, y: -0.07, z: 0.0}
-  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1.0}
+  m_LocalPosition: {x: 136.16, y: -0.07, z: 0}
+  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9994000001}
+  m_Father: {fileID: 9922000141}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4300000022
 SpriteRenderer:
@@ -18839,8 +18766,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 2.68}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 2.38, y: 5.36}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.92, y: 3.22}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -20832,7 +20759,7 @@ GameObject:
   - component: {fileID: 4300000085}
   - component: {fileID: 9840000001}
   m_Layer: 0
-  m_Name: "Bento - ciclo original e posição do socorro"
+  m_Name: "Bento - ciclo original e posi\xE7\xE3o do socorro"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20847,12 +20774,12 @@ Transform:
   m_GameObject: {fileID: 4300000082}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 196.0, y: -0.05, z: 0.0}
-  m_LocalScale: {x: 0.9347181, y: 0.9347181, z: 1.0}
+  m_LocalPosition: {x: 196, y: -0.05, z: 0}
+  m_LocalScale: {x: 0.9347181, y: 0.9347181, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9988000011}
-  m_Father: {fileID: 9994000001}
+  m_Father: {fileID: 9922000161}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4300000084
 SpriteRenderer:
@@ -20951,8 +20878,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 1.685}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1.63, y: 3.37}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.52, y: 3.72}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -20989,11 +20916,11 @@ Transform:
   m_GameObject: {fileID: 4300000086}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200.93, y: -0.05, z: 0.0}
-  m_LocalScale: {x: 0.6188605, y: 0.6188605, z: 1.0}
+  m_LocalPosition: {x: 200.93, y: -0.05, z: 0}
+  m_LocalScale: {x: 0.6188605, y: 0.6188605, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9994000001}
+  m_Father: {fileID: 9922000151}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4300000088
 SpriteRenderer:
@@ -21396,7 +21323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4300000099
 Transform:
   m_ObjectHideFlags: 0
@@ -21406,11 +21333,11 @@ Transform:
   m_GameObject: {fileID: 4300000098}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 207.98, y: 0.0, z: 0.0}
-  m_LocalScale: {x: 0.9198813, y: 0.9198813, z: 1.0}
+  m_LocalPosition: {x: 207.98, y: 0, z: 0}
+  m_LocalScale: {x: 0.9198813, y: 0.9198813, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9994000001}
+  m_Father: {fileID: 9922000151}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4300000100
 SpriteRenderer:
@@ -23459,7 +23386,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4400000001}
   m_Layer: 0
-  m_Name: "07 Posto, quarto e noite"
+  m_Name: 07 Posto, quarto e noite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24249,9 +24176,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4400000050}
   - {fileID: 4400000054}
   - {fileID: 4400000034}
+  - {fileID: 4400000038}
   - {fileID: 4400000042}
+  - {fileID: 4400000046}
   m_Father: {fileID: 9922000201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4400000029
@@ -24560,11 +24490,11 @@ Transform:
   m_GameObject: {fileID: 4400000037}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 211.044, y: 0.18, z: 0.0}
-  m_LocalScale: {x: 0.47058824, y: 0.47058824, z: 1.0}
+  m_LocalPosition: {x: 171.044, y: 0.18, z: 0}
+  m_LocalScale: {x: 0.47058824, y: 0.47058824, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9994000001}
+  m_Father: {fileID: 4400000028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4400000039
 SpriteRenderer:
@@ -24838,11 +24768,11 @@ Transform:
   m_GameObject: {fileID: 4400000045}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 216.876, y: 0.18, z: 0.0}
-  m_LocalScale: {x: 0.47058824, y: 0.47058824, z: 1.0}
+  m_LocalPosition: {x: 176.876, y: 0.18, z: 0}
+  m_LocalScale: {x: 0.47058824, y: 0.47058824, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9994000001}
+  m_Father: {fileID: 4400000028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4400000047
 SpriteRenderer:
@@ -24963,7 +24893,7 @@ GameObject:
   - component: {fileID: 4400000052}
   - component: {fileID: 9840000008}
   m_Layer: 0
-  m_Name: "Trabalhadora do quarto - ciclo dona Zélia"
+  m_Name: "Trabalhadora do quarto - ciclo dona Z\xE9lia"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24978,13 +24908,13 @@ Transform:
   m_GameObject: {fileID: 4400000049}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 219.792, y: 0.0, z: 0.0}
-  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1.0}
+  m_LocalPosition: {x: 179.792, y: 0, z: 0}
+  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9991000251}
   - {fileID: 4400000058}
-  m_Father: {fileID: 9994000001}
+  m_Father: {fileID: 4400000028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4400000051
 SpriteRenderer:
@@ -25083,8 +25013,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 2.68}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 2.38, y: 5.36}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.92, y: 3.22}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -25538,11 +25468,11 @@ Transform:
   m_GameObject: {fileID: 4400000065}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 224.16600000000003, y: 0.0, z: 0.0}
-  m_LocalScale: {x: 0.6189555, y: 0.6189555, z: 1.0}
+  m_LocalPosition: {x: 184.166, y: 0, z: 0}
+  m_LocalScale: {x: 0.6189555, y: 0.6189555, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9994000001}
+  m_Father: {fileID: 9922000211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4400000067
 SpriteRenderer:
@@ -27116,7 +27046,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4500000001}
   m_Layer: 0
-  m_Name: "08 Manhã e última consulta"
+  m_Name: "08 Manh\xE3 e \xFAltima consulta"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27170,6 +27100,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4500000007}
+  - {fileID: 4500000011}
+  - {fileID: 4500000015}
   m_Father: {fileID: 4500000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4500000004
@@ -27371,11 +27303,11 @@ Transform:
   m_GameObject: {fileID: 4500000010}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 219.644, y: 0.0, z: 0.0}
-  m_LocalScale: {x: 0.9198813, y: 0.9198813, z: 1.0}
+  m_LocalPosition: {x: 219.644, y: 0, z: 0}
+  m_LocalScale: {x: 0.9198813, y: 0.9198813, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9994000001}
+  m_Father: {fileID: 4500000003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4500000012
 SpriteRenderer:
@@ -27511,11 +27443,11 @@ Transform:
   m_GameObject: {fileID: 4500000014}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 208.49, y: -0.04, z: 0.0}
-  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1.0}
+  m_LocalPosition: {x: 208.49, y: -0.04, z: 0}
+  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9994000001}
+  m_Father: {fileID: 4500000003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4500000016
 SpriteRenderer:
@@ -28269,7 +28201,7 @@ GameObject:
   - component: {fileID: 4600000001}
   - component: {fileID: 9922000520}
   m_Layer: 0
-  m_Name: "09 Passagens do tempo"
+  m_Name: 09 Passagens do tempo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29619,6 +29551,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!114 &8800001001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29631,6 +29567,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!114 &8800001002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29643,6 +29583,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!114 &8800001003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29655,6 +29599,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!114 &8800001004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29667,6 +29615,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!114 &8800001005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29679,6 +29631,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!114 &8800001006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29691,6 +29647,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!114 &8800001007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29703,6 +29663,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!114 &8800001008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29715,6 +29679,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!114 &8800001009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29727,6 +29695,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!114 &8800001010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29739,6 +29711,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!114 &8800001011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29751,6 +29727,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!114 &8800001012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29763,6 +29743,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!114 &8800001013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29775,6 +29759,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!114 &8800001014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29787,6 +29775,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!95 &8800010000
 Animator:
   serializedVersion: 7
@@ -29821,6 +29813,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!114 &8800020000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29834,6 +29830,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaleiaAnimacao
   parada: {fileID: 21300000, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
+  repouso: []
+  intervaloRepouso: 0.25
   caminhada:
   - {fileID: 21300000, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
   - {fileID: 21300005, guid: bda1e1a300034c9c9f97b4e300000001, type: 3}
@@ -29880,7 +29878,7 @@ Transform:
   m_LocalPosition: {x: -8.99, y: -0.35, z: 0}
   m_LocalScale: {x: 0.6286837, y: 0.6286837, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
+  m_Children: []
   m_Father: {fileID: 9922000031}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9805000002
@@ -30023,6 +30021,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!1 &9805000100
 GameObject:
   m_ObjectHideFlags: 0
@@ -31366,7 +31368,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9807000201
 Transform:
   m_ObjectHideFlags: 0
@@ -31376,11 +31378,11 @@ Transform:
   m_GameObject: {fileID: 9807000200}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 171.79, y: -0.14, z: 0.0}
+  m_LocalPosition: {x: 171.79, y: -0.14, z: 0}
   m_LocalScale: {x: 0.8877872, y: 0.8877872, z: 1.4806}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9994000001}
+  m_Father: {fileID: 4300000005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9807000202
 SpriteRenderer:
@@ -31522,6 +31524,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e559a8bad2cd5542aafc4de7ad8d8be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
+  repouso: []
+  corrida: []
+  intervaloRepouso: 0.25
+  intervaloCorrida: 0.13
 --- !u!1 &9807000300
 GameObject:
   m_ObjectHideFlags: 0
@@ -35106,25 +35112,6 @@ MonoBehaviour:
   preservarLargura: 1
   aposEntregaBola: 0
   pararQuandoBentoCair: 0
---- !u!1660057539 &9223372036854775807
-SceneRoots:
-  m_ObjectHideFlags: 0
-  m_Roots:
-  - {fileID: 9922000011}
-  - {fileID: 282311972}
-  - {fileID: 1148415098}
-  - {fileID: 1304905425}
-  - {fileID: 1673554085}
-  - {fileID: 2093131751}
-  - {fileID: 3000000001}
-  - {fileID: 4100000001}
-  - {fileID: 4100000003}
-  - {fileID: 4100000005}
-  - {fileID: 4100000007}
-  - {fileID: 4700000000}
-  - {fileID: 9806000000}
-  - {fileID: 9806000010}
-  - {fileID: 9910000001}
 --- !u!1 &9910000000
 GameObject:
   m_ObjectHideFlags: 0
@@ -35139,7 +35126,7 @@ GameObject:
   - component: {fileID: 9910000004}
   - component: {fileID: 9910000005}
   m_Layer: 5
-  m_Name: "Capítulos - CARTELAS editáveis"
+  m_Name: "Cap\xEDtulos - CARTELAS edit\xE1veis"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35154,7 +35141,7 @@ RectTransform:
   m_GameObject: {fileID: 9910000000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9910000101}
@@ -35167,10 +35154,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!223 &9910000002
 Canvas:
   m_ObjectHideFlags: 0
@@ -35205,7 +35192,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
@@ -35228,13 +35215,64 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
   m_IgnoreReversedGraphics: 1
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &9910000005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9910000000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22697d5b64534edc86c2fdb0a9261712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChapterCard
+  cards:
+  - id: josefa-06
+    panel: {fileID: 9910000100}
+    group: {fileID: 9910000104}
+    dateText: {fileID: 9910000108}
+    titleText: {fileID: 9910000113}
+  - id: josefa-09
+    panel: {fileID: 9910000120}
+    group: {fileID: 9910000124}
+    dateText: {fileID: 9910000128}
+    titleText: {fileID: 9910000133}
+  - id: josefa-11
+    panel: {fileID: 9910000140}
+    group: {fileID: 9910000144}
+    dateText: {fileID: 9910000148}
+    titleText: {fileID: 9910000153}
+  - id: josefa-10
+    panel: {fileID: 9910000160}
+    group: {fileID: 9910000164}
+    dateText: {fileID: 9910000168}
+    titleText: {fileID: 9910000173}
+  - id: josefa-12
+    panel: {fileID: 9910000180}
+    group: {fileID: 9910000184}
+    dateText: {fileID: 9910000188}
+    titleText: {fileID: 9910000193}
+  - id: josefa-13
+    panel: {fileID: 9910000200}
+    group: {fileID: 9910000204}
+    dateText: {fileID: 9910000208}
+    titleText: {fileID: 9910000213}
+  - id: josefa-14
+    panel: {fileID: 9910000220}
+    group: {fileID: 9910000224}
+    dateText: {fileID: 9910000228}
+    titleText: {fileID: 9910000233}
+  typingInterval: 0.065
+  readingTime: 3
+  fadeDuration: 0.5
 --- !u!1 &9910000100
 GameObject:
   m_ObjectHideFlags: 0
@@ -35248,7 +35286,7 @@ GameObject:
   - component: {fileID: 9910000103}
   - component: {fileID: 9910000104}
   m_Layer: 5
-  m_Name: "Do lado de dentro - CARTELA"
+  m_Name: Do lado de dentro - CARTELA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35293,7 +35331,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -35337,7 +35375,7 @@ GameObject:
   - component: {fileID: 9910000107}
   - component: {fileID: 9910000108}
   m_Layer: 5
-  m_Name: "Data e local - TEXTO editável"
+  m_Name: "Data e local - TEXTO edit\xE1vel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35390,7 +35428,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Fortaleza, Ceará\n14 de abril de 1932"
+  m_text: "Fortaleza, Cear\xE1\n14 de abril de 1932"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -35462,7 +35500,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  m_maxVisibleCharacters: 2147483647
 --- !u!1 &9910000110
 GameObject:
   m_ObjectHideFlags: 0
@@ -35475,7 +35512,7 @@ GameObject:
   - component: {fileID: 9910000112}
   - component: {fileID: 9910000113}
   m_Layer: 5
-  m_Name: "Título - TEXTO editável"
+  m_Name: "T\xEDtulo - TEXTO edit\xE1vel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35528,7 +35565,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Do lado de dentro"
+  m_text: Do lado de dentro
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -35600,7 +35637,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  m_maxVisibleCharacters: 2147483647
 --- !u!1 &9910000120
 GameObject:
   m_ObjectHideFlags: 0
@@ -35614,7 +35650,7 @@ GameObject:
   - component: {fileID: 9910000123}
   - component: {fileID: 9910000124}
   m_Layer: 5
-  m_Name: "O nome dele era Bento - CARTELA"
+  m_Name: O nome dele era Bento - CARTELA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35659,7 +35695,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -35703,7 +35739,7 @@ GameObject:
   - component: {fileID: 9910000127}
   - component: {fileID: 9910000128}
   m_Layer: 5
-  m_Name: "Data e local - TEXTO editável"
+  m_Name: "Data e local - TEXTO edit\xE1vel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35756,7 +35792,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Fortaleza, Ceará\n14 de abril de 1932"
+  m_text: "Fortaleza, Cear\xE1\n14 de abril de 1932"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -35828,7 +35864,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  m_maxVisibleCharacters: 2147483647
 --- !u!1 &9910000130
 GameObject:
   m_ObjectHideFlags: 0
@@ -35841,7 +35876,7 @@ GameObject:
   - component: {fileID: 9910000132}
   - component: {fileID: 9910000133}
   m_Layer: 5
-  m_Name: "Título - TEXTO editável"
+  m_Name: "T\xEDtulo - TEXTO edit\xE1vel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35894,7 +35929,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "O nome dele era Bento"
+  m_text: O nome dele era Bento
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -35966,7 +36001,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  m_maxVisibleCharacters: 2147483647
 --- !u!1 &9910000140
 GameObject:
   m_ObjectHideFlags: 0
@@ -35980,7 +36014,7 @@ GameObject:
   - component: {fileID: 9910000143}
   - component: {fileID: 9910000144}
   m_Layer: 5
-  m_Name: "O lado vazio da esteira - CARTELA"
+  m_Name: O lado vazio da esteira - CARTELA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36025,7 +36059,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -36069,7 +36103,7 @@ GameObject:
   - component: {fileID: 9910000147}
   - component: {fileID: 9910000148}
   m_Layer: 5
-  m_Name: "Data e local - TEXTO editável"
+  m_Name: "Data e local - TEXTO edit\xE1vel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36122,7 +36156,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Fortaleza, Ceará\n14 de abril de 1932"
+  m_text: "Fortaleza, Cear\xE1\n14 de abril de 1932"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -36194,7 +36228,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  m_maxVisibleCharacters: 2147483647
 --- !u!1 &9910000150
 GameObject:
   m_ObjectHideFlags: 0
@@ -36207,7 +36240,7 @@ GameObject:
   - component: {fileID: 9910000152}
   - component: {fileID: 9910000153}
   m_Layer: 5
-  m_Name: "Título - TEXTO editável"
+  m_Name: "T\xEDtulo - TEXTO edit\xE1vel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36260,7 +36293,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "O lado vazio da esteira"
+  m_text: O lado vazio da esteira
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -36332,7 +36365,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  m_maxVisibleCharacters: 2147483647
 --- !u!1 &9910000160
 GameObject:
   m_ObjectHideFlags: 0
@@ -36346,7 +36378,7 @@ GameObject:
   - component: {fileID: 9910000163}
   - component: {fileID: 9910000164}
   m_Layer: 5
-  m_Name: "Pra ninguém esquecer - CARTELA"
+  m_Name: "Pra ningu\xE9m esquecer - CARTELA"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36391,7 +36423,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -36435,7 +36467,7 @@ GameObject:
   - component: {fileID: 9910000167}
   - component: {fileID: 9910000168}
   m_Layer: 5
-  m_Name: "Data e local - TEXTO editável"
+  m_Name: "Data e local - TEXTO edit\xE1vel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36488,7 +36520,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Fortaleza, Ceará\n15 de abril de 1932"
+  m_text: "Fortaleza, Cear\xE1\n15 de abril de 1932"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -36560,7 +36592,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  m_maxVisibleCharacters: 2147483647
 --- !u!1 &9910000170
 GameObject:
   m_ObjectHideFlags: 0
@@ -36573,7 +36604,7 @@ GameObject:
   - component: {fileID: 9910000172}
   - component: {fileID: 9910000173}
   m_Layer: 5
-  m_Name: "Título - TEXTO editável"
+  m_Name: "T\xEDtulo - TEXTO edit\xE1vel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36626,7 +36657,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Pra ninguém esquecer"
+  m_text: "Pra ningu\xE9m esquecer"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -36698,7 +36729,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  m_maxVisibleCharacters: 2147483647
 --- !u!1 &9910000180
 GameObject:
   m_ObjectHideFlags: 0
@@ -36712,7 +36742,7 @@ GameObject:
   - component: {fileID: 9910000183}
   - component: {fileID: 9910000184}
   m_Layer: 5
-  m_Name: "Toda vez que alguém chegava - CARTELA"
+  m_Name: "Toda vez que algu\xE9m chegava - CARTELA"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36757,7 +36787,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -36801,7 +36831,7 @@ GameObject:
   - component: {fileID: 9910000187}
   - component: {fileID: 9910000188}
   m_Layer: 5
-  m_Name: "Data e local - TEXTO editável"
+  m_Name: "Data e local - TEXTO edit\xE1vel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36854,7 +36884,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ceará\n22 de abril de 1932"
+  m_text: "Cear\xE1\n22 de abril de 1932"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -36926,7 +36956,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  m_maxVisibleCharacters: 2147483647
 --- !u!1 &9910000190
 GameObject:
   m_ObjectHideFlags: 0
@@ -36939,7 +36968,7 @@ GameObject:
   - component: {fileID: 9910000192}
   - component: {fileID: 9910000193}
   m_Layer: 5
-  m_Name: "Título - TEXTO editável"
+  m_Name: "T\xEDtulo - TEXTO edit\xE1vel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36992,7 +37021,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Toda vez que alguém chegava"
+  m_text: "Toda vez que algu\xE9m chegava"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -37064,7 +37093,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  m_maxVisibleCharacters: 2147483647
 --- !u!1 &9910000200
 GameObject:
   m_ObjectHideFlags: 0
@@ -37078,7 +37106,7 @@ GameObject:
   - component: {fileID: 9910000203}
   - component: {fileID: 9910000204}
   m_Layer: 5
-  m_Name: "Saímos sem ela - CARTELA"
+  m_Name: "Sa\xEDmos sem ela - CARTELA"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37123,7 +37151,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -37167,7 +37195,7 @@ GameObject:
   - component: {fileID: 9910000207}
   - component: {fileID: 9910000208}
   m_Layer: 5
-  m_Name: "Data e local - TEXTO editável"
+  m_Name: "Data e local - TEXTO edit\xE1vel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37220,7 +37248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ceará\n19 de agosto de 1932"
+  m_text: "Cear\xE1\n19 de agosto de 1932"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -37292,7 +37320,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  m_maxVisibleCharacters: 2147483647
 --- !u!1 &9910000210
 GameObject:
   m_ObjectHideFlags: 0
@@ -37305,7 +37332,7 @@ GameObject:
   - component: {fileID: 9910000212}
   - component: {fileID: 9910000213}
   m_Layer: 5
-  m_Name: "Título - TEXTO editável"
+  m_Name: "T\xEDtulo - TEXTO edit\xE1vel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37358,7 +37385,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Saímos sem ela"
+  m_text: "Sa\xEDmos sem ela"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -37430,7 +37457,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  m_maxVisibleCharacters: 2147483647
 --- !u!1 &9910000220
 GameObject:
   m_ObjectHideFlags: 0
@@ -37444,7 +37470,7 @@ GameObject:
   - component: {fileID: 9910000223}
   - component: {fileID: 9910000224}
   m_Layer: 5
-  m_Name: "Ainda olho outra vez - CARTELA"
+  m_Name: Ainda olho outra vez - CARTELA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37489,7 +37515,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -37533,7 +37559,7 @@ GameObject:
   - component: {fileID: 9910000227}
   - component: {fileID: 9910000228}
   m_Layer: 5
-  m_Name: "Data e local - TEXTO editável"
+  m_Name: "Data e local - TEXTO edit\xE1vel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37586,7 +37612,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ceará\n12 de abril de 1982"
+  m_text: "Cear\xE1\n12 de abril de 1982"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -37658,7 +37684,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  m_maxVisibleCharacters: 2147483647
 --- !u!1 &9910000230
 GameObject:
   m_ObjectHideFlags: 0
@@ -37671,7 +37696,7 @@ GameObject:
   - component: {fileID: 9910000232}
   - component: {fileID: 9910000233}
   m_Layer: 5
-  m_Name: "Título - TEXTO editável"
+  m_Name: "T\xEDtulo - TEXTO edit\xE1vel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37724,7 +37749,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ainda olho outra vez"
+  m_text: Ainda olho outra vez
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -37796,58 +37821,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  m_maxVisibleCharacters: 2147483647
---- !u!114 &9910000005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9910000000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22697d5b64534edc86c2fdb0a9261712, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ChapterCard
-  cards:
-  - id: josefa-06
-    panel: {fileID: 9910000100}
-    group: {fileID: 9910000104}
-    dateText: {fileID: 9910000108}
-    titleText: {fileID: 9910000113}
-  - id: josefa-09
-    panel: {fileID: 9910000120}
-    group: {fileID: 9910000124}
-    dateText: {fileID: 9910000128}
-    titleText: {fileID: 9910000133}
-  - id: josefa-11
-    panel: {fileID: 9910000140}
-    group: {fileID: 9910000144}
-    dateText: {fileID: 9910000148}
-    titleText: {fileID: 9910000153}
-  - id: josefa-10
-    panel: {fileID: 9910000160}
-    group: {fileID: 9910000164}
-    dateText: {fileID: 9910000168}
-    titleText: {fileID: 9910000173}
-  - id: josefa-12
-    panel: {fileID: 9910000180}
-    group: {fileID: 9910000184}
-    dateText: {fileID: 9910000188}
-    titleText: {fileID: 9910000193}
-  - id: josefa-13
-    panel: {fileID: 9910000200}
-    group: {fileID: 9910000204}
-    dateText: {fileID: 9910000208}
-    titleText: {fileID: 9910000213}
-  - id: josefa-14
-    panel: {fileID: 9910000220}
-    group: {fileID: 9910000224}
-    dateText: {fileID: 9910000228}
-    titleText: {fileID: 9910000233}
-  typingInterval: 0.065
-  readingTime: 3
-  fadeDuration: 0.5
 --- !u!1 &9922000010
 GameObject:
   m_ObjectHideFlags: 0
@@ -37859,7 +37832,7 @@ GameObject:
   - component: {fileID: 9922000011}
   - component: {fileID: 9922000530}
   m_Layer: 0
-  m_Name: "00 Ambiente contínuo - panoramas"
+  m_Name: "00 Ambiente cont\xEDnuo - panoramas"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37906,7 +37879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000021}
   m_Layer: 0
-  m_Name: "01 Cenário - rua e portão"
+  m_Name: "01 Cen\xE1rio - rua e port\xE3o"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37945,7 +37918,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000031}
   m_Layer: 0
-  m_Name: "02 Escolta - carroça e outra fila"
+  m_Name: "02 Escolta - carro\xE7a e outra fila"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37980,7 +37953,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000041}
   m_Layer: 0
-  m_Name: "99 Legado - laço desativado"
+  m_Name: "99 Legado - la\xE7o desativado"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38012,7 +37985,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000051}
   m_Layer: 0
-  m_Name: "00 Ambiente - fundo, chão e cercas"
+  m_Name: "00 Ambiente - fundo, ch\xE3o e cercas"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38064,7 +38037,7 @@ GameObject:
   - component: {fileID: 9922000061}
   - component: {fileID: 9922000360}
   m_Layer: 0
-  m_Name: "01 Revista - mesa, fiscal e diário"
+  m_Name: "01 Revista - mesa, fiscal e di\xE1rio"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38085,6 +38058,7 @@ Transform:
   m_Children:
   - {fileID: 4100000061}
   - {fileID: 4100000064}
+  - {fileID: 4100000087}
   - {fileID: 4100000091}
   - {fileID: 4100000142}
   - {fileID: 4100000145}
@@ -38103,7 +38077,7 @@ GameObject:
   - component: {fileID: 9922000071}
   - component: {fileID: 9922000370}
   m_Layer: 0
-  m_Name: "02 Abrigo - Luzia e cuidado com o pai"
+  m_Name: 02 Abrigo - Luzia e cuidado com o pai
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38124,6 +38098,7 @@ Transform:
   m_Children:
   - {fileID: 4100000073}
   - {fileID: 4100000076}
+  - {fileID: 4100000095}
   - {fileID: 9805000301}
   m_Father: {fileID: 4100000003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -38138,7 +38113,7 @@ GameObject:
   - component: {fileID: 9922000081}
   - component: {fileID: 9922000380}
   m_Layer: 0
-  m_Name: "03 Água - distribuição e cabaça"
+  m_Name: "03 \xC1gua - distribui\xE7\xE3o e caba\xE7a"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38173,7 +38148,7 @@ GameObject:
   - component: {fileID: 9922000091}
   - component: {fileID: 9922000390}
   m_Layer: 0
-  m_Name: "04 Espera - criança e lata"
+  m_Name: "04 Espera - crian\xE7a e lata"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38191,7 +38166,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4200000037}
   m_Father: {fileID: 4100000003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9922000100
@@ -38205,7 +38181,7 @@ GameObject:
   - component: {fileID: 9922000101}
   - component: {fileID: 9922000400}
   m_Layer: 0
-  m_Name: "05 Registros - nomes, canhoto e lote"
+  m_Name: 05 Registros - nomes, canhoto e lote
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38226,6 +38202,7 @@ Transform:
   m_Children:
   - {fileID: 9966000011}
   - {fileID: 4200000025}
+  - {fileID: 4200000029}
   - {fileID: 4200000033}
   - {fileID: 4200000044}
   - {fileID: 4100000067}
@@ -38242,7 +38219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000111}
   m_Layer: 0
-  m_Name: "99 Legado - limites e laço desativados"
+  m_Name: "99 Legado - limites e la\xE7o desativados"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38275,7 +38252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000121}
   m_Layer: 0
-  m_Name: "00 Ambiente - extensão do campo"
+  m_Name: "00 Ambiente - extens\xE3o do campo"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38320,7 +38297,7 @@ GameObject:
   - component: {fileID: 9922000131}
   - component: {fileID: 9922000410}
   m_Layer: 0
-  m_Name: "06 Raimundo - relato e baldes"
+  m_Name: 06 Raimundo - relato e baldes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38339,6 +38316,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4300000009}
   - {fileID: 4300000013}
   m_Father: {fileID: 4300000003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -38353,7 +38331,7 @@ GameObject:
   - component: {fileID: 9922000141}
   - component: {fileID: 9922000420}
   m_Layer: 0
-  m_Name: "07 Lavagem - tanque e panos"
+  m_Name: 07 Lavagem - tanque e panos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38376,6 +38354,7 @@ Transform:
   - {fileID: 9977000021}
   - {fileID: 9977000031}
   - {fileID: 4300000017}
+  - {fileID: 4300000021}
   - {fileID: 4300000025}
   - {fileID: 9806000301}
   - {fileID: 9807000001}
@@ -38393,7 +38372,7 @@ GameObject:
   - component: {fileID: 9922000151}
   - component: {fileID: 9922000440}
   m_Layer: 0
-  m_Name: "09 Trabalho - cargas e fiscalização"
+  m_Name: "09 Trabalho - cargas e fiscaliza\xE7\xE3o"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38417,6 +38396,8 @@ Transform:
   - {fileID: 4300000071}
   - {fileID: 4300000075}
   - {fileID: 4300000079}
+  - {fileID: 4300000087}
+  - {fileID: 4300000099}
   - {fileID: 9808000001}
   - {fileID: 9808000101}
   - {fileID: 9808000401}
@@ -38433,7 +38414,7 @@ GameObject:
   - component: {fileID: 9922000161}
   - component: {fileID: 9922000450}
   m_Layer: 0
-  m_Name: "10 Socorro - Bento, panos e cabaça"
+  m_Name: "10 Socorro - Bento, panos e caba\xE7a"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38455,6 +38436,7 @@ Transform:
   - {fileID: 9988000021}
   - {fileID: 9988000031}
   - {fileID: 4300000063}
+  - {fileID: 4300000083}
   - {fileID: 4300000091}
   - {fileID: 4300000095}
   - {fileID: 9808000201}
@@ -38471,7 +38453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000171}
   m_Layer: 0
-  m_Name: "01 Mesa e documentos"
+  m_Name: 01 Mesa e documentos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38506,7 +38488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000181}
   m_Layer: 0
-  m_Name: "02 Vigia e interação"
+  m_Name: "02 Vigia e intera\xE7\xE3o"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38539,7 +38521,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000191}
   m_Layer: 0
-  m_Name: "01 Porta - estado fechado"
+  m_Name: 01 Porta - estado fechado
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38573,7 +38555,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000201}
   m_Layer: 0
-  m_Name: "02 Interior - estado após visita"
+  m_Name: "02 Interior - estado ap\xF3s visita"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38605,7 +38587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000211}
   m_Layer: 0
-  m_Name: "03 Cabo e interação"
+  m_Name: "03 Cabo e intera\xE7\xE3o"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38624,6 +38606,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4400000066}
   - {fileID: 4400000070}
   m_Father: {fileID: 4400000005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -38637,7 +38620,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000221}
   m_Layer: 0
-  m_Name: "01 Objetos - cabaça e lugar vazio"
+  m_Name: "01 Objetos - caba\xE7a e lugar vazio"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38670,7 +38653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000231}
   m_Layer: 0
-  m_Name: "02 Interações - família e descanso"
+  m_Name: "02 Intera\xE7\xF5es - fam\xEDlia e descanso"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38703,7 +38686,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000241}
   m_Layer: 0
-  m_Name: "01 Entrada e separação"
+  m_Name: "01 Entrada e separa\xE7\xE3o"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38745,7 +38728,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000251}
   m_Layer: 0
-  m_Name: "02 Revista"
+  m_Name: 02 Revista
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38782,7 +38765,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000261}
   m_Layer: 0
-  m_Name: "03 Abrigo e água"
+  m_Name: "03 Abrigo e \xE1gua"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38820,7 +38803,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000271}
   m_Layer: 0
-  m_Name: "04 Criança e registros"
+  m_Name: "04 Crian\xE7a e registros"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38854,7 +38837,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000281}
   m_Layer: 0
-  m_Name: "05 Corredor e ronda"
+  m_Name: 05 Corredor e ronda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38890,7 +38873,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000291}
   m_Layer: 0
-  m_Name: "06 Pátio e Bento"
+  m_Name: "06 P\xE1tio e Bento"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38924,7 +38907,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000301}
   m_Layer: 0
-  m_Name: "07 Posto e noite"
+  m_Name: 07 Posto e noite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38964,7 +38947,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000311}
   m_Layer: 0
-  m_Name: "08 Manhã e consulta"
+  m_Name: "08 Manh\xE3 e consulta"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39000,7 +38983,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000321}
   m_Layer: 0
-  m_Name: "09 Portão e recusa"
+  m_Name: "09 Port\xE3o e recusa"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39037,7 +39020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000331}
   m_Layer: 0
-  m_Name: "10 Páginas e câmera"
+  m_Name: "10 P\xE1ginas e c\xE2mera"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39070,7 +39053,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9922000341}
   m_Layer: 0
-  m_Name: "99 Legado - limites e laço"
+  m_Name: "99 Legado - limites e la\xE7o"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39108,13 +39091,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "01 - Entrada e separação"
-  acontecimentos: "Chegada, escolta, separação de Mariquinha e ferimento do pai."
-  artesExistentes: "Cenário, personagens e animações originais da autora; rodas independentes da carroça."
-  variantesPendentes: "Gestos específicos de chamar, amparar, proteger o braço e bloquear pendentes de arte aprovada. Deslocamentos usam as animações existentes."
-  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
+  titulo: "01 - Entrada e separa\xE7\xE3o"
+  acontecimentos: "Chegada, escolta, separa\xE7\xE3o de Mariquinha e ferimento do
+    pai."
+  artesExistentes: "Cen\xE1rio, personagens e anima\xE7\xF5es originais da autora;
+    rodas independentes da carro\xE7a."
+  variantesPendentes: "Gestos espec\xEDficos de chamar, amparar, proteger o bra\xE7o
+    e bloquear pendentes de arte aprovada. Deslocamentos usam as anima\xE7\xF5es
+    existentes."
+  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a
+    28; Mari 30; objetos em m\xE3os 32 a 36."
   marcasRelacionadas:
   - {fileID: 4100000109}
   - {fileID: 4100000113}
@@ -39139,13 +39127,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "02 - Revista"
-  acontecimentos: "Entregar todos os pertences e recuperar o caderno permitido."
-  artesExistentes: "Mesa, diário, 40 lugares de entrega e animações originais do Fiscal."
-  variantesPendentes: "Conferência usa caminhada e idle existentes. Gesto específico de receber pendente de arte aprovada. Falta teste no Unity."
-  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
+  titulo: 02 - Revista
+  acontecimentos: Entregar todos os pertences e recuperar o caderno permitido.
+  artesExistentes: "Mesa, di\xE1rio, 40 lugares de entrega e anima\xE7\xF5es originais
+    do Fiscal."
+  variantesPendentes: "Confer\xEAncia usa caminhada e idle existentes. Gesto espec\xEDfico
+    de receber pendente de arte aprovada. Falta teste no Unity."
+  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a
+    28; Mari 30; objetos em m\xE3os 32 a 36."
   marcasRelacionadas:
   - {fileID: 4100000123}
   - {fileID: 4100000125}
@@ -39167,13 +39158,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "03 - Primeiro abrigo"
-  acontecimentos: "Luzia acolhe; Zefinha leva o pano para acomodar o pai."
-  artesExistentes: "casa2.png; esteira; pano disponível; pano no ombro do pai."
-  variantesPendentes: "Etapa 5: mãe se aproxima com caminhada existente; pano aplicado e persistente; pai responde. Gestos corporais específicos aguardam arte aprovada."
-  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
+  titulo: 03 - Primeiro abrigo
+  acontecimentos: Luzia acolhe; Zefinha leva o pano para acomodar o pai.
+  artesExistentes: "casa2.png; esteira; pano dispon\xEDvel; pano no ombro do pai."
+  variantesPendentes: "Etapa 5: m\xE3e se aproxima com caminhada existente; pano
+    aplicado e persistente; pai responde. Gestos corporais espec\xEDficos aguardam
+    arte aprovada."
+  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a
+    28; Mari 30; objetos em m\xE3os 32 a 36."
   marcasRelacionadas:
   - {fileID: 4100000111}
   - {fileID: 4100000131}
@@ -39196,13 +39190,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "04 - Distribuição de água"
-  acontecimentos: "Recuperar cabaça, receber porção e decidir destinatário no abrigo."
-  artesExistentes: "Mesa; cabaça; cozinheira1 a 4 ligados à funcionária da água."
-  variantesPendentes: "Etapa 5: cabaça cheia azulada, entrega e inclinação do recipiente, vazia após beber. Sem novos desenhos de personagens. Falta Play Mode."
-  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
+  titulo: "04 - Distribui\xE7\xE3o de \xE1gua"
+  acontecimentos: "Recuperar caba\xE7a, receber por\xE7\xE3o e decidir destinat\xE1rio
+    no abrigo."
+  artesExistentes: "Mesa; caba\xE7a; cozinheira1 a 4 ligados \xE0 funcion\xE1ria
+    da \xE1gua."
+  variantesPendentes: "Etapa 5: caba\xE7a cheia azulada, entrega e inclina\xE7\xE3o
+    do recipiente, vazia ap\xF3s beber. Sem novos desenhos de personagens. Falta
+    Play Mode."
+  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a
+    28; Mari 30; objetos em m\xE3os 32 a 36."
   marcasRelacionadas:
   - {fileID: 4100000111}
   - {fileID: 4100000131}
@@ -39223,13 +39222,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "05 - Criança que espera"
-  acontecimentos: "Conversa sobre a irmã, espera do tio e lata."
-  artesExistentes: "Arte e idle próprios da criança, lata original examinável, falas de reencontro condicionais."
-  variantesPendentes: "Etapa 6: criança permanece na posição editada e vira para responder. Gestos corporais sem ciclo aprovado continuam pendentes."
-  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
+  titulo: "05 - Crian\xE7a que espera"
+  acontecimentos: "Conversa sobre a irm\xE3, espera do tio e lata."
+  artesExistentes: "Arte e idle pr\xF3prios da crian\xE7a, lata original examin\xE1vel,
+    falas de reencontro condicionais."
+  variantesPendentes: "Etapa 6: crian\xE7a permanece na posi\xE7\xE3o editada e vira
+    para responder. Gestos corporais sem ciclo aprovado continuam pendentes."
+  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a
+    28; Mari 30; objetos em m\xE3os 32 a 36."
   marcasRelacionadas:
   - {fileID: 4200000051}
   - {fileID: 4200000053}
@@ -39245,13 +39247,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "06 - Nomes e canhoto"
-  acontecimentos: "Perguntar por Mariquinha, transportar lote e consultar encaminhamento."
-  artesExistentes: "Escrivão animado; mesa; Canhoto.png; paninho.png usado no lote."
-  variantesPendentes: "Etapa 6: folhas antes/depois e deslocamento durante atendimento, lote carregado, canhoto coletável com confirmação. Escrita corporal aguarda animação aprovada."
-  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
+  titulo: 06 - Nomes e canhoto
+  acontecimentos: Perguntar por Mariquinha, transportar lote e consultar encaminhamento.
+  artesExistentes: "Escriv\xE3o animado; mesa; Canhoto.png; paninho.png usado no
+    lote."
+  variantesPendentes: "Etapa 6: folhas antes/depois e deslocamento durante atendimento,
+    lote carregado, canhoto colet\xE1vel com confirma\xE7\xE3o. Escrita corporal
+    aguarda anima\xE7\xE3o aprovada."
+  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a
+    28; Mari 30; objetos em m\xE3os 32 a 36."
   marcasRelacionadas:
   - {fileID: 4200000051}
   - {fileID: 4200000053}
@@ -39272,13 +39278,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "07 - Raimundo"
-  acontecimentos: "Relato sobre irmã e mulher; reencontro na manhã; balde opcional."
-  artesExistentes: "funcionario currais1 a 4 em QuadrosAmbiente; baldes e pano da alça."
-  variantesPendentes: "Etapa 7: ciclo original preservado, reencontros sem voltar etapas e baldes já presentes na arte. Alça e empréstimo seguem na manhã."
-  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
+  titulo: 07 - Raimundo
+  acontecimentos: "Relato sobre irm\xE3 e mulher; reencontro na manh\xE3; balde opcional."
+  artesExistentes: "funcionario currais1 a 4 em QuadrosAmbiente; baldes e pano da
+    al\xE7a."
+  variantesPendentes: "Etapa 7: ciclo original preservado, reencontros sem voltar
+    etapas e baldes j\xE1 presentes na arte. Al\xE7a e empr\xE9stimo seguem na manh\xE3."
+  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a
+    28; Mari 30; objetos em m\xE3os 32 a 36."
   marcasRelacionadas:
   - {fileID: 4400000107}
   - {fileID: 4400000109}
@@ -39298,13 +39307,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "08 - Lavagem"
-  acontecimentos: "Entregar lote, separar dois grupos e recolher tira limpa."
-  artesExistentes: "lavadeira1 a 4; tanque e panos de BuscaObjetos; tira de paninho.png."
-  variantesPendentes: "Etapa 7: ciclo original, lavagem animada do objeto, pilhas distintas e varal após entrega. Retalho só aparece autorizado e some ao recolher."
-  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
+  titulo: 08 - Lavagem
+  acontecimentos: Entregar lote, separar dois grupos e recolher tira limpa.
+  artesExistentes: lavadeira1 a 4; tanque e panos de BuscaObjetos; tira de paninho.png.
+  variantesPendentes: "Etapa 7: ciclo original, lavagem animada do objeto, pilhas
+    distintas e varal ap\xF3s entrega. Retalho s\xF3 aparece autorizado e some ao
+    recolher."
+  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a
+    28; Mari 30; objetos em m\xE3os 32 a 36."
   marcasRelacionadas: []
   estadosRelacionados:
   - {fileID: 9977000010}
@@ -39322,13 +39334,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "09 - Corredor e lembranças"
-  acontecimentos: "Ronda sem retorno forçado; lenda escolhida modifica percepção."
-  artesExistentes: "Guarda; sacos; tanque; galho; reflexos; pessoa da cerca em rasgo npc1 a 4."
-  variantesPendentes: "Etapa 7: aparição gradual das artes existentes, retorno de Luzia por caminhada e conclusão só após as falas. Ronda sem empurrar ou devolver Mari."
-  camadas: "Pessoa atrás da cerca -45; cerca -40; reflexos 19; guarda 25; Mari 30."
+  titulo: "09 - Corredor e lembran\xE7as"
+  acontecimentos: "Ronda sem retorno for\xE7ado; lenda escolhida modifica percep\xE7\xE3o."
+  artesExistentes: Guarda; sacos; tanque; galho; reflexos; pessoa da cerca em rasgo
+    npc1 a 4.
+  variantesPendentes: "Etapa 7: apari\xE7\xE3o gradual das artes existentes, retorno
+    de Luzia por caminhada e conclus\xE3o s\xF3 ap\xF3s as falas. Ronda sem empurrar
+    ou devolver Mari."
+  camadas: "Pessoa atr\xE1s da cerca -45; cerca -40; reflexos 19; guarda 25; Mari
+    30."
   marcasRelacionadas:
   - {fileID: 9977000051}
   - {fileID: 9977000041}
@@ -39352,13 +39368,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "10 - Pátio de trabalho"
-  acontecimentos: "Apoio com água e pano; pai trabalha ferido e Bento perde força."
-  artesExistentes: "saco.png; carroça; Fiscal; ponto de água e apoio do pano."
-  variantesPendentes: "Etapa 8: tarefas com respostas, pano no ombro do pai, cabaça visível e retorno ao pai antes do acontecimento. Gestos de carga sem arte aprovada seguem pendentes."
-  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
+  titulo: "10 - P\xE1tio de trabalho"
+  acontecimentos: "Apoio com \xE1gua e pano; pai trabalha ferido e Bento perde for\xE7a."
+  artesExistentes: "saco.png; carro\xE7a; Fiscal; ponto de \xE1gua e apoio do pano."
+  variantesPendentes: "Etapa 8: tarefas com respostas, pano no ombro do pai, caba\xE7a
+    vis\xEDvel e retorno ao pai antes do acontecimento. Gestos de carga sem arte
+    aprovada seguem pendentes."
+  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a
+    28; Mari 30; objetos em m\xE3os 32 a 36."
   marcasRelacionadas:
   - {fileID: 4300000103}
   - {fileID: 4300000105}
@@ -39376,13 +39395,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "11 - Socorro e despedida"
-  acontecimentos: "Queda de Bento, pano e água, morte, pertences e retirada."
-  artesExistentes: "bento1 a 4: ciclo existente; corpo coberto, sangue e pano em BuscaObjetos."
-  variantesPendentes: "Etapa 8: socorro exige pano e água, cobertura gradual e pertences, cabaça recuperável. Pose de queda pendente: atribuir arte no filho de Bento; não girar idle."
-  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
+  titulo: 11 - Socorro e despedida
+  acontecimentos: "Queda de Bento, pano e \xE1gua, morte, pertences e retirada."
+  artesExistentes: 'bento1 a 4: ciclo existente; corpo coberto, sangue e pano em
+    BuscaObjetos.'
+  variantesPendentes: "Etapa 8: socorro exige pano e \xE1gua, cobertura gradual e
+    pertences, caba\xE7a recuper\xE1vel. Pose de queda pendente: atribuir arte no
+    filho de Bento; n\xE3o girar idle."
+  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a
+    28; Mari 30; objetos em m\xE3os 32 a 36."
   marcasRelacionadas:
   - {fileID: 4300000103}
   - {fileID: 4300000105}
@@ -39404,13 +39427,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "12 - Sepultamento"
-  acontecimentos: "Plano de despedida; corpo deixa a imagem; cruzes e memória de Bento."
-  artesExistentes: "Plano estático no Canvas; terra, cruzes e corpo coberto."
-  variantesPendentes: "Etapa 9: companhia com sprites originais, descida gradual do corpo e cruz com nome. Poses específicas de luto aguardam arte aprovada."
-  camadas: "Plano de Canvas: manter na ordem existente, abaixo dos diálogos e do fade."
+  titulo: 12 - Sepultamento
+  acontecimentos: "Plano de despedida; corpo deixa a imagem; cruzes e mem\xF3ria
+    de Bento."
+  artesExistentes: "Plano est\xE1tico no Canvas; terra, cruzes e corpo coberto."
+  variantesPendentes: "Etapa 9: companhia com sprites originais, descida gradual
+    do corpo e cruz com nome. Poses espec\xEDficas de luto aguardam arte aprovada."
+  camadas: "Plano de Canvas: manter na ordem existente, abaixo dos di\xE1logos e
+    do fade."
   marcasRelacionadas: []
   estadosRelacionados:
   - {fileID: 9808000600}
@@ -39424,13 +39450,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "13 - Posto"
-  acontecimentos: "Ajudar Raimundo ou copiar papel; sair adia a decisão."
-  artesExistentes: "Mesa, folha, baldes e vigia editáveis."
-  variantesPendentes: "Etapa 9: peso apoiado, cópia visível e documento revisitado; decisão exclusiva preservada. Gestos corporais sem arte aprovada continuam pendentes."
-  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
+  titulo: 13 - Posto
+  acontecimentos: "Ajudar Raimundo ou copiar papel; sair adia a decis\xE3o."
+  artesExistentes: "Mesa, folha, baldes e vigia edit\xE1veis."
+  variantesPendentes: "Etapa 9: peso apoiado, c\xF3pia vis\xEDvel e documento revisitado;
+    decis\xE3o exclusiva preservada. Gestos corporais sem arte aprovada continuam
+    pendentes."
+  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a
+    28; Mari 30; objetos em m\xE3os 32 a 36."
   marcasRelacionadas:
   - {fileID: 4400000107}
   - {fileID: 4400000111}
@@ -39446,13 +39475,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "14 - Quarto sem Mariquinha"
-  acontecimentos: "Ouvir lembrança, investigar porta, conversar e emprestar cabaça."
-  artesExistentes: "casa1.png; porta fechada; interior com duas esteiras/adultos; trabalhadora em vizinha dona zélia1 a 4."
-  variantesPendentes: "Etapa 9: porta com dobradiça e folha aberta, NPCs revisitáveis, cabaça emprestada/devolvida com recuperação no save. Artes próprias dos doentes continuam pendentes."
-  camadas: "Cobertura -20; esteiras 20; pessoas 24/25; porta 30; Cabo 31; preservar encaixe antes de redesenhar."
+  titulo: 14 - Quarto sem Mariquinha
+  acontecimentos: "Ouvir lembran\xE7a, investigar porta, conversar e emprestar caba\xE7a."
+  artesExistentes: "casa1.png; porta fechada; interior com duas esteiras/adultos;
+    trabalhadora em vizinha dona z\xE9lia1 a 4."
+  variantesPendentes: "Etapa 9: porta com dobradi\xE7a e folha aberta, NPCs revisit\xE1veis,
+    caba\xE7a emprestada/devolvida com recupera\xE7\xE3o no save. Artes pr\xF3prias
+    dos doentes continuam pendentes."
+  camadas: Cobertura -20; esteiras 20; pessoas 24/25; porta 30; Cabo 31; preservar
+    encaixe antes de redesenhar.
   marcasRelacionadas: []
   estadosRelacionados:
   - {fileID: 4400000061}
@@ -39467,13 +39500,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "15 - Abrigo à noite"
-  acontecimentos: "Notícias, lembranças da família, acolhimento da mãe e descanso."
-  artesExistentes: "Lugar vazio da irmã; cabaça; caderno ligado à Mari; marcas noturnas."
-  variantesPendentes: "Etapa 10: slots opcionais de repouso nos próprios personagens. Sem sprite atribuído, preservam o idle original. Pose própria de acolhimento e ciclos de respiração continuam pendentes da autora."
-  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
+  titulo: "15 - Abrigo \xE0 noite"
+  acontecimentos: "Not\xEDcias, lembran\xE7as da fam\xEDlia, acolhimento da m\xE3e
+    e descanso."
+  artesExistentes: "Lugar vazio da irm\xE3; caba\xE7a; caderno ligado \xE0 Mari;
+    marcas noturnas."
+  variantesPendentes: "Etapa 10: slots opcionais de repouso nos pr\xF3prios personagens.
+    Sem sprite atribu\xEDdo, preservam o idle original. Pose pr\xF3pria de acolhimento
+    e ciclos de respira\xE7\xE3o continuam pendentes da autora."
+  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a
+    28; Mari 30; objetos em m\xE3os 32 a 36."
   marcasRelacionadas:
   - {fileID: 4400000107}
   - {fileID: 4400000109}
@@ -39497,13 +39535,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "16 - Última consulta"
-  acontecimentos: "Pela manhã: confirmar destino ou identidade, com testemunha."
-  artesExistentes: "Papel; Escrivão; testemunha com ciclo lavadeira1 a 4."
-  variantesPendentes: "Etapa 11: menus com Sair, canhoto visual sem consumo, revisita e confirmação exclusiva preservada. Conferir encaixe da testemunha no Unity."
-  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
+  titulo: "16 - \xDAltima consulta"
+  acontecimentos: "Pela manh\xE3: confirmar destino ou identidade, com testemunha."
+  artesExistentes: "Papel; Escriv\xE3o; testemunha com ciclo lavadeira1 a 4."
+  variantesPendentes: "Etapa 11: menus com Sair, canhoto visual sem consumo, revisita
+    e confirma\xE7\xE3o exclusiva preservada. Conferir encaixe da testemunha no Unity."
+  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a
+    28; Mari 30; objetos em m\xE3os 32 a 36."
   marcasRelacionadas:
   - {fileID: 4500000028}
   - {fileID: 4500000030}
@@ -39523,13 +39563,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "17 - Portão e recusa"
-  acontecimentos: "Pai pede para procurar a filha; Cabo nega; movimento livre após conversa."
-  artesExistentes: "Mesmo portão do campo e marcas do pedido de saída."
-  variantesPendentes: "Etapa 11: enquadramento editável, fechamento pausável e retomada sem bloquear o caminho. Gesto próprio do Cabo depende de arte da autora."
-  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
+  titulo: "17 - Port\xE3o e recusa"
+  acontecimentos: "Pai pede para procurar a filha; Cabo nega; movimento livre ap\xF3s
+    conversa."
+  artesExistentes: "Mesmo port\xE3o do campo e marcas do pedido de sa\xEDda."
+  variantesPendentes: "Etapa 11: enquadramento edit\xE1vel, fechamento paus\xE1vel
+    e retomada sem bloquear o caminho. Gesto pr\xF3prio do Cabo depende de arte da
+    autora."
+  camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a
+    28; Mari 30; objetos em m\xE3os 32 a 36."
   marcasRelacionadas:
   - {fileID: 4500000038}
   - {fileID: 4500000040}
@@ -39547,13 +39591,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "18 - Passagens do tempo"
-  acontecimentos: "Páginas, espera, saída sem a irmã e retorno ao presente."
-  artesExistentes: "MemoriaObjetos: página e mão; três imagens atuais de objetos; quarto sobreposto."
-  variantesPendentes: "Composições completas de dias/meses/anos: etapa 11. As imagens atuais são objetos de apoio."
-  camadas: "Página 60; documentos 62; mão 64; quarto 80; cartelas em Canvas separado."
+  titulo: 18 - Passagens do tempo
+  acontecimentos: "P\xE1ginas, espera, sa\xEDda sem a irm\xE3 e retorno ao presente."
+  artesExistentes: "MemoriaObjetos: p\xE1gina e m\xE3o; tr\xEAs imagens atuais de
+    objetos; quarto sobreposto."
+  variantesPendentes: "Composi\xE7\xF5es completas de dias/meses/anos: etapa 11.
+    As imagens atuais s\xE3o objetos de apoio."
+  camadas: "P\xE1gina 60; documentos 62; m\xE3o 64; quarto 80; cartelas em Canvas
+    separado."
   marcasRelacionadas:
   - {fileID: 4600000031}
   - {fileID: 4600000033}
@@ -39571,13 +39618,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a6f935a2b104df8b737c931effd2460, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaCurrais
-  titulo: "Ambiente contínuo"
-  acontecimentos: "Panoramas distribuídos por posição; não é barreira de movimento."
-  artesExistentes: "Trechos existentes e sprites originais."
-  variantesPendentes: "Conferir transições de dia/noite em Play Mode; acabamento nas etapas das áreas."
-  camadas: "Panoramas originais mantidos; chão/céu do campo em seus grupos próprios."
+  titulo: "Ambiente cont\xEDnuo"
+  acontecimentos: "Panoramas distribu\xEDdos por posi\xE7\xE3o; n\xE3o \xE9 barreira
+    de movimento."
+  artesExistentes: Trechos existentes e sprites originais.
+  variantesPendentes: "Conferir transi\xE7\xF5es de dia/noite em Play Mode; acabamento
+    nas etapas das \xE1reas."
+  camadas: "Panoramas originais mantidos; ch\xE3o/c\xE9u do campo em seus grupos
+    pr\xF3prios."
   marcasRelacionadas: []
   estadosRelacionados: []
 --- !u!1 &9933000110
@@ -39590,7 +39640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9933000111}
   m_Layer: 0
-  m_Name: "maeAmparoEntrada - apoio após o golpe"
+  m_Name: "maeAmparoEntrada - apoio ap\xF3s o golpe"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39622,7 +39672,7 @@ GameObject:
   - component: {fileID: 9933000121}
   - component: {fileID: 9933000122}
   m_Layer: 0
-  m_Name: "Roda esquerda - giro da saída"
+  m_Name: "Roda esquerda - giro da sa\xEDda"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39714,7 +39764,7 @@ GameObject:
   - component: {fileID: 9933000131}
   - component: {fileID: 9933000132}
   m_Layer: 0
-  m_Name: "Roda direita - giro da saída"
+  m_Name: "Roda direita - giro da sa\xEDda"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39805,7 +39855,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82906fce17440d589cf38a1e1b6c0a7, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RodasEntradaCurrais
   rodas:
   - {fileID: 9933000121}
@@ -39822,7 +39872,7 @@ GameObject:
   - component: {fileID: 9944000031}
   - component: {fileID: 9944000460}
   m_Layer: 0
-  m_Name: "Revista - pertences retidos e lugares editáveis"
+  m_Name: "Revista - pertences retidos e lugares edit\xE1veis"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39896,7 +39946,7 @@ GameObject:
   - component: {fileID: 9944000041}
   - component: {fileID: 9944000042}
   m_Layer: 0
-  m_Name: "01 - pertence entregue (mesa)"
+  m_Name: 01 - pertence entregue (mesa)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39988,7 +40038,7 @@ GameObject:
   - component: {fileID: 9944000051}
   - component: {fileID: 9944000052}
   m_Layer: 0
-  m_Name: "02 - pertence entregue (mesa)"
+  m_Name: 02 - pertence entregue (mesa)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40080,7 +40130,7 @@ GameObject:
   - component: {fileID: 9944000061}
   - component: {fileID: 9944000062}
   m_Layer: 0
-  m_Name: "03 - pertence entregue (mesa)"
+  m_Name: 03 - pertence entregue (mesa)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40172,7 +40222,7 @@ GameObject:
   - component: {fileID: 9944000071}
   - component: {fileID: 9944000072}
   m_Layer: 0
-  m_Name: "04 - pertence entregue (mesa)"
+  m_Name: 04 - pertence entregue (mesa)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40264,7 +40314,7 @@ GameObject:
   - component: {fileID: 9944000081}
   - component: {fileID: 9944000082}
   m_Layer: 0
-  m_Name: "05 - pertence entregue (pilha)"
+  m_Name: 05 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40356,7 +40406,7 @@ GameObject:
   - component: {fileID: 9944000091}
   - component: {fileID: 9944000092}
   m_Layer: 0
-  m_Name: "06 - pertence entregue (pilha)"
+  m_Name: 06 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40371,7 +40421,7 @@ Transform:
   m_GameObject: {fileID: 9944000090}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.0949999999999998, y: 0.35, z: 0}
+  m_LocalPosition: {x: 3.095, y: 0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40448,7 +40498,7 @@ GameObject:
   - component: {fileID: 9944000101}
   - component: {fileID: 9944000102}
   m_Layer: 0
-  m_Name: "07 - pertence entregue (pilha)"
+  m_Name: 07 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40540,7 +40590,7 @@ GameObject:
   - component: {fileID: 9944000111}
   - component: {fileID: 9944000112}
   m_Layer: 0
-  m_Name: "08 - pertence entregue (pilha)"
+  m_Name: 08 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40632,7 +40682,7 @@ GameObject:
   - component: {fileID: 9944000121}
   - component: {fileID: 9944000122}
   m_Layer: 0
-  m_Name: "09 - pertence entregue (pilha)"
+  m_Name: 09 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40647,7 +40697,7 @@ Transform:
   m_GameObject: {fileID: 9944000120}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.9050000000000002, y: 0.35, z: 0}
+  m_LocalPosition: {x: 3.905, y: 0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40724,7 +40774,7 @@ GameObject:
   - component: {fileID: 9944000131}
   - component: {fileID: 9944000132}
   m_Layer: 0
-  m_Name: "10 - pertence entregue (pilha)"
+  m_Name: 10 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40816,7 +40866,7 @@ GameObject:
   - component: {fileID: 9944000141}
   - component: {fileID: 9944000142}
   m_Layer: 0
-  m_Name: "11 - pertence entregue (pilha)"
+  m_Name: 11 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40908,7 +40958,7 @@ GameObject:
   - component: {fileID: 9944000151}
   - component: {fileID: 9944000152}
   m_Layer: 0
-  m_Name: "12 - pertence entregue (pilha)"
+  m_Name: 12 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40923,7 +40973,7 @@ Transform:
   m_GameObject: {fileID: 9944000150}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.0949999999999998, y: 0.6, z: 0}
+  m_LocalPosition: {x: 3.095, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41000,7 +41050,7 @@ GameObject:
   - component: {fileID: 9944000161}
   - component: {fileID: 9944000162}
   m_Layer: 0
-  m_Name: "13 - pertence entregue (pilha)"
+  m_Name: 13 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41092,7 +41142,7 @@ GameObject:
   - component: {fileID: 9944000171}
   - component: {fileID: 9944000172}
   m_Layer: 0
-  m_Name: "14 - pertence entregue (pilha)"
+  m_Name: 14 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41184,7 +41234,7 @@ GameObject:
   - component: {fileID: 9944000181}
   - component: {fileID: 9944000182}
   m_Layer: 0
-  m_Name: "15 - pertence entregue (pilha)"
+  m_Name: 15 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41199,7 +41249,7 @@ Transform:
   m_GameObject: {fileID: 9944000180}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.9050000000000002, y: 0.6, z: 0}
+  m_LocalPosition: {x: 3.905, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41276,7 +41326,7 @@ GameObject:
   - component: {fileID: 9944000191}
   - component: {fileID: 9944000192}
   m_Layer: 0
-  m_Name: "16 - pertence entregue (pilha)"
+  m_Name: 16 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41368,7 +41418,7 @@ GameObject:
   - component: {fileID: 9944000201}
   - component: {fileID: 9944000202}
   m_Layer: 0
-  m_Name: "17 - pertence entregue (pilha)"
+  m_Name: 17 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41460,7 +41510,7 @@ GameObject:
   - component: {fileID: 9944000211}
   - component: {fileID: 9944000212}
   m_Layer: 0
-  m_Name: "18 - pertence entregue (pilha)"
+  m_Name: 18 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41475,7 +41525,7 @@ Transform:
   m_GameObject: {fileID: 9944000210}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.0949999999999998, y: 0.85, z: 0}
+  m_LocalPosition: {x: 3.095, y: 0.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41552,7 +41602,7 @@ GameObject:
   - component: {fileID: 9944000221}
   - component: {fileID: 9944000222}
   m_Layer: 0
-  m_Name: "19 - pertence entregue (pilha)"
+  m_Name: 19 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41644,7 +41694,7 @@ GameObject:
   - component: {fileID: 9944000231}
   - component: {fileID: 9944000232}
   m_Layer: 0
-  m_Name: "20 - pertence entregue (pilha)"
+  m_Name: 20 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41736,7 +41786,7 @@ GameObject:
   - component: {fileID: 9944000241}
   - component: {fileID: 9944000242}
   m_Layer: 0
-  m_Name: "21 - pertence entregue (pilha)"
+  m_Name: 21 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41751,7 +41801,7 @@ Transform:
   m_GameObject: {fileID: 9944000240}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.9050000000000002, y: 0.85, z: 0}
+  m_LocalPosition: {x: 3.905, y: 0.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41828,7 +41878,7 @@ GameObject:
   - component: {fileID: 9944000251}
   - component: {fileID: 9944000252}
   m_Layer: 0
-  m_Name: "22 - pertence entregue (pilha)"
+  m_Name: 22 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41920,7 +41970,7 @@ GameObject:
   - component: {fileID: 9944000261}
   - component: {fileID: 9944000262}
   m_Layer: 0
-  m_Name: "23 - pertence entregue (pilha)"
+  m_Name: 23 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42012,7 +42062,7 @@ GameObject:
   - component: {fileID: 9944000271}
   - component: {fileID: 9944000272}
   m_Layer: 0
-  m_Name: "24 - pertence entregue (pilha)"
+  m_Name: 24 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42027,7 +42077,7 @@ Transform:
   m_GameObject: {fileID: 9944000270}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.0949999999999998, y: 1.1, z: 0}
+  m_LocalPosition: {x: 3.095, y: 1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42104,7 +42154,7 @@ GameObject:
   - component: {fileID: 9944000281}
   - component: {fileID: 9944000282}
   m_Layer: 0
-  m_Name: "25 - pertence entregue (pilha)"
+  m_Name: 25 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42196,7 +42246,7 @@ GameObject:
   - component: {fileID: 9944000291}
   - component: {fileID: 9944000292}
   m_Layer: 0
-  m_Name: "26 - pertence entregue (pilha)"
+  m_Name: 26 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42288,7 +42338,7 @@ GameObject:
   - component: {fileID: 9944000301}
   - component: {fileID: 9944000302}
   m_Layer: 0
-  m_Name: "27 - pertence entregue (pilha)"
+  m_Name: 27 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42303,7 +42353,7 @@ Transform:
   m_GameObject: {fileID: 9944000300}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.9050000000000002, y: 1.1, z: 0}
+  m_LocalPosition: {x: 3.905, y: 1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42380,7 +42430,7 @@ GameObject:
   - component: {fileID: 9944000311}
   - component: {fileID: 9944000312}
   m_Layer: 0
-  m_Name: "28 - pertence entregue (pilha)"
+  m_Name: 28 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42472,7 +42522,7 @@ GameObject:
   - component: {fileID: 9944000321}
   - component: {fileID: 9944000322}
   m_Layer: 0
-  m_Name: "29 - pertence entregue (pilha)"
+  m_Name: 29 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42564,7 +42614,7 @@ GameObject:
   - component: {fileID: 9944000331}
   - component: {fileID: 9944000332}
   m_Layer: 0
-  m_Name: "30 - pertence entregue (pilha)"
+  m_Name: 30 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42579,7 +42629,7 @@ Transform:
   m_GameObject: {fileID: 9944000330}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.0949999999999998, y: 1.35, z: 0}
+  m_LocalPosition: {x: 3.095, y: 1.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42656,7 +42706,7 @@ GameObject:
   - component: {fileID: 9944000341}
   - component: {fileID: 9944000342}
   m_Layer: 0
-  m_Name: "31 - pertence entregue (pilha)"
+  m_Name: 31 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42748,7 +42798,7 @@ GameObject:
   - component: {fileID: 9944000351}
   - component: {fileID: 9944000352}
   m_Layer: 0
-  m_Name: "32 - pertence entregue (pilha)"
+  m_Name: 32 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42840,7 +42890,7 @@ GameObject:
   - component: {fileID: 9944000361}
   - component: {fileID: 9944000362}
   m_Layer: 0
-  m_Name: "33 - pertence entregue (pilha)"
+  m_Name: 33 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42855,7 +42905,7 @@ Transform:
   m_GameObject: {fileID: 9944000360}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.9050000000000002, y: 1.35, z: 0}
+  m_LocalPosition: {x: 3.905, y: 1.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42932,7 +42982,7 @@ GameObject:
   - component: {fileID: 9944000371}
   - component: {fileID: 9944000372}
   m_Layer: 0
-  m_Name: "34 - pertence entregue (pilha)"
+  m_Name: 34 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43024,7 +43074,7 @@ GameObject:
   - component: {fileID: 9944000381}
   - component: {fileID: 9944000382}
   m_Layer: 0
-  m_Name: "35 - pertence entregue (pilha)"
+  m_Name: 35 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43116,7 +43166,7 @@ GameObject:
   - component: {fileID: 9944000391}
   - component: {fileID: 9944000392}
   m_Layer: 0
-  m_Name: "36 - pertence entregue (pilha)"
+  m_Name: 36 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43131,7 +43181,7 @@ Transform:
   m_GameObject: {fileID: 9944000390}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.0949999999999998, y: 1.6, z: 0}
+  m_LocalPosition: {x: 3.095, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43208,7 +43258,7 @@ GameObject:
   - component: {fileID: 9944000401}
   - component: {fileID: 9944000402}
   m_Layer: 0
-  m_Name: "37 - pertence entregue (pilha)"
+  m_Name: 37 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43300,7 +43350,7 @@ GameObject:
   - component: {fileID: 9944000411}
   - component: {fileID: 9944000412}
   m_Layer: 0
-  m_Name: "38 - pertence entregue (pilha)"
+  m_Name: 38 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43392,7 +43442,7 @@ GameObject:
   - component: {fileID: 9944000421}
   - component: {fileID: 9944000422}
   m_Layer: 0
-  m_Name: "39 - pertence entregue (pilha)"
+  m_Name: 39 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43407,7 +43457,7 @@ Transform:
   m_GameObject: {fileID: 9944000420}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.9050000000000002, y: 1.6, z: 0}
+  m_LocalPosition: {x: 3.905, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43484,7 +43534,7 @@ GameObject:
   - component: {fileID: 9944000431}
   - component: {fileID: 9944000432}
   m_Layer: 0
-  m_Name: "40 - pertence entregue (pilha)"
+  m_Name: 40 - pertence entregue (pilha)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43576,7 +43626,7 @@ GameObject:
   - component: {fileID: 9944000441}
   - component: {fileID: 9944000442}
   m_Layer: 0
-  m_Name: "Pilha - pertences além da mesa"
+  m_Name: "Pilha - pertences al\xE9m da mesa"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43668,7 +43718,7 @@ GameObject:
   - component: {fileID: 9944000451}
   - component: {fileID: 9944000452}
   m_Layer: 0
-  m_Name: "Volume adicional - demais pertences"
+  m_Name: Volume adicional - demais pertences
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43759,7 +43809,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 489a85ff4773474f83b0cadb88a3b752, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MesaRevistaCurrais
   catalogo: {fileID: 11400000, guid: 1919fc44d4234cd191bc35d03651738f, type: 2}
   lugares:
@@ -43819,7 +43869,7 @@ GameObject:
   - component: {fileID: 9944000471}
   - component: {fileID: 9944000480}
   m_Layer: 0
-  m_Name: "Revista - área de entrega sobre a mesa"
+  m_Name: "Revista - \xE1rea de entrega sobre a mesa"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43898,7 +43948,7 @@ GameObject:
   - component: {fileID: 9944000492}
   - component: {fileID: 9944000500}
   m_Layer: 0
-  m_Name: "Diário - separado enquanto os pertences são conferidos"
+  m_Name: "Di\xE1rio - separado enquanto os pertences s\xE3o conferidos"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44035,7 +44085,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9944000511}
   m_Layer: 0
-  m_Name: "fiscalConferencia - junto da mesa"
+  m_Name: fiscalConferencia - junto da mesa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44056,6 +44106,83 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9922000251}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &9955000002
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156249495}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.7, y: 1.6}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.8722223, y: 3.6508334}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.8, y: 3.2}
+  m_EdgeRadius: 0
+--- !u!1 &9955000010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9955000011}
+  m_Layer: 0
+  m_Name: "M\xE3e - acomodar pai no primeiro abrigo"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9955000011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9955000010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 73.6, y: -0.69000006, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9922000261}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9955000020
 GameObject:
   m_ObjectHideFlags: 0
@@ -44067,7 +44194,7 @@ GameObject:
   - component: {fileID: 9955000021}
   - component: {fileID: 9955000022}
   m_Layer: 0
-  m_Name: "Água do abrigo - cabaça com Mari"
+  m_Name: "\xC1gua do abrigo - caba\xE7a com Mari"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44159,7 +44286,7 @@ GameObject:
   - component: {fileID: 9955000031}
   - component: {fileID: 9955000032}
   m_Layer: 0
-  m_Name: "Água do abrigo - cabaça da mãe"
+  m_Name: "\xC1gua do abrigo - caba\xE7a da m\xE3e"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44251,7 +44378,7 @@ GameObject:
   - component: {fileID: 9955000041}
   - component: {fileID: 9955000042}
   m_Layer: 0
-  m_Name: "Água do abrigo - cabaça de Luzia"
+  m_Name: "\xC1gua do abrigo - caba\xE7a de Luzia"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44332,83 +44459,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!1 &9955000010
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9955000011}
-  m_Layer: 0
-  m_Name: "Mãe - acomodar pai no primeiro abrigo"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9955000011
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9955000010}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 73.6, y: -0.69000006, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9922000261}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &9955000002
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1156249495}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.7, y: 1.6}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.0952381, y: 0}
-    oldSize: {x: 2.1110525, y: 3.82}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1.8, y: 3.2}
-  m_EdgeRadius: 0
 --- !u!95 &9966000002
 Animator:
   serializedVersion: 7
@@ -44469,7 +44519,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 2.03, y: 4.71}
+    oldSize: {x: 3.24, y: 2.24}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -44488,7 +44538,7 @@ GameObject:
   - component: {fileID: 9966000011}
   - component: {fileID: 9966000012}
   m_Layer: 0
-  m_Name: "Relação de nomes - folhas e área de exame"
+  m_Name: "Rela\xE7\xE3o de nomes - folhas e \xE1rea de exame"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44569,7 +44619,7 @@ GameObject:
   - component: {fileID: 9966000021}
   - component: {fileID: 9966000022}
   m_Layer: 0
-  m_Name: "Folhas - antes do atendimento"
+  m_Name: Folhas - antes do atendimento
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44661,7 +44711,7 @@ GameObject:
   - component: {fileID: 9966000031}
   - component: {fileID: 9966000032}
   m_Layer: 0
-  m_Name: "Folhas - após o atendimento"
+  m_Name: "Folhas - ap\xF3s o atendimento"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44742,37 +44792,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!1 &9966000050
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9966000051}
-  m_Layer: 0
-  m_Name: "Folha - posição de conferência"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9966000051
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9966000050}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 0.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9966000011}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9966000040
 GameObject:
   m_ObjectHideFlags: 0
@@ -44784,7 +44803,7 @@ GameObject:
   - component: {fileID: 9966000041}
   - component: {fileID: 9966000042}
   m_Layer: 0
-  m_Name: "Lote de panos - carregado por Mari"
+  m_Name: Lote de panos - carregado por Mari
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44865,6 +44884,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &9966000050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9966000051}
+  m_Layer: 0
+  m_Name: "Folha - posi\xE7\xE3o de confer\xEAncia"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9966000051
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9966000050}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9966000011}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9977000010
 GameObject:
   m_ObjectHideFlags: 0
@@ -44876,7 +44926,7 @@ GameObject:
   - component: {fileID: 9977000011}
   - component: {fileID: 9977000012}
   m_Layer: 0
-  m_Name: "Pano em lavagem - movimento no tanque"
+  m_Name: Pano em lavagem - movimento no tanque
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44967,7 +45017,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9977000021}
   m_Layer: 0
-  m_Name: "Pano - marca de mergulho no tanque"
+  m_Name: Pano - marca de mergulho no tanque
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44999,7 +45049,7 @@ GameObject:
   - component: {fileID: 9977000031}
   - component: {fileID: 9977000032}
   m_Layer: 0
-  m_Name: "Varal - panos de uso postos a secar"
+  m_Name: Varal - panos de uso postos a secar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45090,7 +45140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9977000041}
   m_Layer: 0
-  m_Name: "Luzia - retorno ao lado de Mari"
+  m_Name: Luzia - retorno ao lado de Mari
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45121,7 +45171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9977000051}
   m_Layer: 0
-  m_Name: "Lembranças - início junto do tanque"
+  m_Name: "Lembran\xE7as - in\xEDcio junto do tanque"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45179,8 +45229,8 @@ BoxCollider2D:
   m_Offset: {x: 0.7, y: 1.6}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.0952381, y: 0}
-    oldSize: {x: 2.1110525, y: 3.82}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.8722223, y: 3.6508334}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -45199,7 +45249,7 @@ GameObject:
   - component: {fileID: 9988000011}
   - component: {fileID: 9988000012}
   m_Layer: 0
-  m_Name: "Bento - pose de socorro (atribuir arte aprovada)"
+  m_Name: Bento - pose de socorro (atribuir arte aprovada)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45277,7 +45327,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!1 &9988000020
@@ -45291,7 +45341,7 @@ GameObject:
   - component: {fileID: 9988000021}
   - component: {fileID: 9988000022}
   m_Layer: 0
-  m_Name: "Pano usado no socorro de Bento"
+  m_Name: Pano usado no socorro de Bento
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45383,7 +45433,7 @@ GameObject:
   - component: {fileID: 9988000031}
   - component: {fileID: 9988000032}
   m_Layer: 0
-  m_Name: "Pertences de Bento - pano entregue"
+  m_Name: Pertences de Bento - pano entregue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45475,7 +45525,7 @@ GameObject:
   - component: {fileID: 9988000041}
   - component: {fileID: 9988000042}
   m_Layer: 0
-  m_Name: "Cabaça - porção para o pátio"
+  m_Name: "Caba\xE7a - por\xE7\xE3o para o p\xE1tio"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45556,7 +45606,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
-
 --- !u!1 &9991000000
 GameObject:
   m_ObjectHideFlags: 0
@@ -45567,7 +45616,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9991000001}
   m_Layer: 5
-  m_Name: "Bento - cruz e nome após a despedida"
+  m_Name: "Bento - cruz e nome ap\xF3s a despedida"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45607,7 +45656,7 @@ GameObject:
   - component: {fileID: 9991000012}
   - component: {fileID: 9991000013}
   m_Layer: 5
-  m_Name: "Cruz de Bento - haste"
+  m_Name: Cruz de Bento - haste
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45682,7 +45731,7 @@ GameObject:
   - component: {fileID: 9991000022}
   - component: {fileID: 9991000023}
   m_Layer: 5
-  m_Name: "Cruz de Bento - travessa"
+  m_Name: Cruz de Bento - travessa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45757,7 +45806,7 @@ GameObject:
   - component: {fileID: 9991000032}
   - component: {fileID: 9991000033}
   m_Layer: 5
-  m_Name: "Bento - nome preservado"
+  m_Name: Bento - nome preservado
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45894,7 +45943,7 @@ GameObject:
   - component: {fileID: 9991000102}
   - component: {fileID: 9991000103}
   m_Layer: 5
-  m_Name: "Mãe - companhia no sepultamento"
+  m_Name: "M\xE3e - companhia no sepultamento"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45969,7 +46018,7 @@ GameObject:
   - component: {fileID: 9991000112}
   - component: {fileID: 9991000113}
   m_Layer: 5
-  m_Name: "Pai - companhia no sepultamento"
+  m_Name: Pai - companhia no sepultamento
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46044,7 +46093,7 @@ GameObject:
   - component: {fileID: 9991000122}
   - component: {fileID: 9991000123}
   m_Layer: 5
-  m_Name: "Zefinha - companhia no sepultamento"
+  m_Name: Zefinha - companhia no sepultamento
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46119,7 +46168,7 @@ GameObject:
   - component: {fileID: 9991000132}
   - component: {fileID: 9991000133}
   m_Layer: 5
-  m_Name: "Luzia - companhia no sepultamento"
+  m_Name: Luzia - companhia no sepultamento
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46192,7 +46241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9991000201}
   m_Layer: 0
-  m_Name: "Porta do quarto - dobradiça editável"
+  m_Name: "Porta do quarto - dobradi\xE7a edit\xE1vel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46225,7 +46274,7 @@ GameObject:
   - component: {fileID: 9991000211}
   - component: {fileID: 9991000212}
   m_Layer: 0
-  m_Name: "Porta do quarto - folha aberta"
+  m_Name: Porta do quarto - folha aberta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46316,7 +46365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9991000221}
   m_Layer: 0
-  m_Name: "Folha do posto - posição de leitura"
+  m_Name: "Folha do posto - posi\xE7\xE3o de leitura"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46347,7 +46396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9991000231}
   m_Layer: 0
-  m_Name: "Raimundo - peso apoiado no posto"
+  m_Name: Raimundo - peso apoiado no posto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46379,7 +46428,7 @@ GameObject:
   - component: {fileID: 9991000241}
   - component: {fileID: 9991000242}
   m_Layer: 0
-  m_Name: "Registro copiado - anotação com Mari"
+  m_Name: "Registro copiado - anota\xE7\xE3o com Mari"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46471,7 +46520,7 @@ GameObject:
   - component: {fileID: 9991000251}
   - component: {fileID: 9991000252}
   m_Layer: 0
-  m_Name: "Cabaça emprestada - com a trabalhadora"
+  m_Name: "Caba\xE7a emprestada - com a trabalhadora"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46552,7 +46601,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
-
 --- !u!1 &9992000000
 GameObject:
   m_ObjectHideFlags: 0
@@ -46564,7 +46612,7 @@ GameObject:
   - component: {fileID: 9992000001}
   - component: {fileID: 9992000002}
   m_Layer: 0
-  m_Name: Zefinha - repouso OPCIONAL - atribuir arte própria
+  m_Name: "Zefinha - repouso OPCIONAL - atribuir arte pr\xF3pria"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46656,7 +46704,7 @@ GameObject:
   - component: {fileID: 9992000011}
   - component: {fileID: 9992000012}
   m_Layer: 0
-  m_Name: Mãe - repouso OPCIONAL - atribuir arte própria
+  m_Name: "M\xE3e - repouso OPCIONAL - atribuir arte pr\xF3pria"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46748,7 +46796,7 @@ GameObject:
   - component: {fileID: 9992000021}
   - component: {fileID: 9992000022}
   m_Layer: 0
-  m_Name: Pai - repouso OPCIONAL - atribuir arte própria
+  m_Name: "Pai - repouso OPCIONAL - atribuir arte pr\xF3pria"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46840,7 +46888,7 @@ GameObject:
   - component: {fileID: 9992000031}
   - component: {fileID: 9992000032}
   m_Layer: 0
-  m_Name: Luzia - repouso OPCIONAL - atribuir arte própria
+  m_Name: "Luzia - repouso OPCIONAL - atribuir arte pr\xF3pria"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46931,7 +46979,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9993000001}
   m_Layer: 0
-  m_Name: Saída - enquadramento da família e portão
+  m_Name: "Sa\xEDda - enquadramento da fam\xEDlia e port\xE3o"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46963,7 +47011,7 @@ GameObject:
   - component: {fileID: 9993000011}
   - component: {fileID: 9993000012}
   m_Layer: 0
-  m_Name: Canhoto apresentado - não consumido na consulta
+  m_Name: "Canhoto apresentado - n\xE3o consumido na consulta"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47044,50 +47092,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!1 &9994000000
-GameObject:
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9994000001}
-  m_Layer: 0
-  m_Name: Personagens do campo - presença contínua
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9994000001
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9994000000}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4100000095}
-  - {fileID: 4300000009}
-  - {fileID: 4300000021}
-  - {fileID: 4200000037}
-  - {fileID: 4200000029}
-  - {fileID: 4300000083}
-  - {fileID: 4300000087}
-  - {fileID: 4300000099}
-  - {fileID: 4400000050}
-  - {fileID: 4400000038}
-  - {fileID: 4400000046}
-  - {fileID: 4400000066}
-  - {fileID: 4500000015}
-  - {fileID: 4100000087}
-  - {fileID: 9807000201}
-  - {fileID: 4500000011}
-  m_Father: {fileID: 4100000003}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Roots:
+  - {fileID: 9922000011}
+  - {fileID: 282311972}
+  - {fileID: 1148415098}
+  - {fileID: 1304905425}
+  - {fileID: 1673554085}
+  - {fileID: 2093131751}
+  - {fileID: 3000000001}
+  - {fileID: 4100000001}
+  - {fileID: 4100000003}
+  - {fileID: 4100000005}
+  - {fileID: 4100000007}
+  - {fileID: 4700000000}
+  - {fileID: 9806000000}
+  - {fileID: 9806000010}
+  - {fileID: 9910000001}
