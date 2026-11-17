@@ -14918,13 +14918,125 @@ MonoBehaviour:
     texto: "Num achei a caba\xE7a entre esses pertences."
   - personagem: "Funcion\xE1ria"
     texto: "Vou conferir a mesa. N\xE3o precisa largar mais nada."
-  pontoParadaFamilia: {fileID: 0}
-  seguidoraBaleiaCurrais: {fileID: 0}
-  familiaDecideParar: []
-  familiaSegueCaminho: []
-  familiaBuscaIrma: []
+  pontoParadaFamilia: {fileID: 4100000131}
+  seguidoraBaleiaCurrais: {fileID: 953090005}
+  familiaDecideParar:
+  - personagem: "Mãe"
+    texto: "Aqui tem sombra. Vamos parar um pouco? Teu braço precisa descansar."
+  - personagem: "Pai"
+    texto: "Vamos. Mas eu ainda quero perguntar pela menina."
+  - personagem: "Mãe"
+    texto: "Nós vai perguntar. Primeiro sente aqui perto de nós."
+  familiaSegueCaminho:
+  - personagem: Pai
+    texto: "Vamos andando mais um pouquinho. Ali adiante parece ter sombra."
+  - personagem: "Mãe"
+    texto: "Eu tô logo atrás de tu, Josefa."
+  familiaBuscaIrma:
+  - personagem: Zefinha
+    texto: "E se Mariquinha procurar nós e num encontrar?"
+  - personagem: "Mãe"
+    texto: "Vamos ficar juntos. Quem souber dela vai encontrar nós aqui."
+  - personagem: Pai
+    texto: "Eu também tô pensando nisso, minha filha. Nós vai continuar procurando."
   proximidadeParada: 3
-  pessoasPresentes: []
+  pessoasPresentes:
+  - personagem: {fileID: 4100000094}
+    desenho: {fileID: 4100000096}
+    nome: "Luzia"
+    conversa:
+    - personagem: "Luzia"
+      texto: "Tem gente chegando desde cedo. Vamos achar um canto pra vocês."
+  - personagem: {fileID: 4300000008}
+    desenho: {fileID: 4300000010}
+    nome: "Raimundo"
+    conversa:
+    - personagem: "Raimundo"
+      texto: "Esses baldes num param quietos. Quando eu acabar aqui, escuto melhor."
+  - personagem: {fileID: 4300000020}
+    desenho: {fileID: 4300000022}
+    nome: "Lavadeira"
+    conversa:
+    - personagem: "Lavadeira"
+      texto: "Tô separando o que chegou. Cada coisa vai pra um lado."
+  - personagem: {fileID: 4200000036}
+    desenho: {fileID: 4200000038}
+    nome: "Criança"
+    conversa:
+    - personagem: "Criança"
+      texto: "Fico olhando quem passa. Tem muita gente que eu num conheço."
+  - personagem: {fileID: 4200000028}
+    desenho: {fileID: 4200000030}
+    nome: "Escrivão"
+    conversa:
+    - personagem: "Escrivão"
+      texto: "Tô conferindo os nomes. Espere eu acabar essa linha."
+  - personagem: {fileID: 4300000082}
+    desenho: {fileID: 4300000084}
+    nome: "Bento"
+    conversa:
+    - personagem: "Bento"
+      texto: "Hoje o serviço começou cedo. Ainda num consegui sentar."
+  - personagem: {fileID: 4300000086}
+    desenho: {fileID: 4300000088}
+    nome: "Fiscal"
+    conversa:
+    - personagem: "Fiscal"
+      texto: "A carga precisa seguir. Num atrapalhe a passagem."
+  - personagem: {fileID: 4300000098}
+    desenho: {fileID: 4300000100}
+    nome: "Trabalhador"
+    conversa:
+    - personagem: "Trabalhador"
+      texto: "Vim buscar água. Tem mais gente esperando lá."
+  - personagem: {fileID: 4400000049}
+    desenho: {fileID: 4400000051}
+    nome: "Trabalhadora"
+    conversa:
+    - personagem: "Trabalhadora"
+      texto: "Tô cuidando de quem ficou aqui dentro."
+  - personagem: {fileID: 4400000037}
+    desenho: {fileID: 4400000039}
+    nome: "Mulher"
+    conversa:
+    - personagem: "Mulher"
+      texto: "Só queria um pouco de sossego."
+  - personagem: {fileID: 4400000045}
+    desenho: {fileID: 4400000047}
+    nome: "Homem"
+    conversa:
+    - personagem: "Homem"
+      texto: "O dia custa a passar aqui dentro."
+  - personagem: {fileID: 4400000065}
+    desenho: {fileID: 4400000067}
+    nome: "Cabo"
+    conversa:
+    - personagem: "Cabo"
+      texto: "Essa passagem tem gente esperando. Diga logo."
+  - personagem: {fileID: 4500000014}
+    desenho: {fileID: 4500000016}
+    nome: "Lavadeira"
+    conversa:
+    - personagem: "Lavadeira"
+      texto: "Daqui eu vejo o pessoal indo e vindo. É gente demais pra guardar todos os rostos."
+  - personagem: {fileID: 4100000086}
+    desenho: {fileID: 4100000088}
+    nome: "Fiscal"
+    conversa:
+    - personagem: "Fiscal"
+      texto: "Primeiro eu confiro os pertences. Depois vocês seguem."
+  - personagem: {fileID: 9807000200}
+    desenho: {fileID: 9807000202}
+    nome: "Guarda"
+    conversa:
+    - personagem: "Guarda"
+      texto: "Deixe a passagem livre."
+  - personagem: {fileID: 4500000010}
+    desenho: {fileID: 4500000012}
+    nome: "Escrivão do posto"
+    conversa:
+    - personagem: "Escrivão do posto"
+      texto: "Eu preciso terminar de conferir a relação antes de ela seguir."
   setorBusca: {fileID: 4300000000}
   areaRaimundo: {fileID: 4300000011}
   areaLavadeira: {fileID: 4300000023}

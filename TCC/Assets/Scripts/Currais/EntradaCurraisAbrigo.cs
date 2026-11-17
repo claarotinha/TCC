@@ -15,6 +15,10 @@ public partial class EntradaCurrais
 
     private bool ReferenciasAbrigoValidas()
     {
+        // São os mesmos objetos já usados pela cena; recupera cópias com os novos campos vazios.
+        if (pontoParadaFamilia == null) pontoParadaFamilia = mariAbrigo;
+        if (seguidoraBaleiaCurrais == null && baleia != null)
+            seguidoraBaleiaCurrais = baleia.GetComponent<SeguidorFamilia>();
         return ConferirReferencia(areaPaiAbrigo, nameof(areaPaiAbrigo)) &
             ConferirReferencia(maeCuidadoAbrigo, nameof(maeCuidadoAbrigo)) &
             ConferirReferencia(cabacaComMari, nameof(cabacaComMari)) &
