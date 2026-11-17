@@ -274,7 +274,8 @@ public partial class EntradaCurrais
         areaDiarioEntrada.enabled = diarioEntrada.activeSelf;
         panoAbrigo.SetActive(Dados.curraisEtapaEntrada == 3 && !Dados.curraisPanoAbrigoRecolhido && !Dados.curraisPaiAcomodado);
         areaPanoAbrigo.enabled = panoAbrigo.activeSelf;
-        panoNoPai.SetActive(Dados.curraisPaiAcomodado && Dados.curraisEtapaBusca < 1);
+        panoNoPai.SetActive(Dados.curraisPaiAcomodado && (Dados.curraisEtapaBusca < 1 ||
+            (Dados.curraisEtapaBusca >= 4 && Dados.curraisEtapaBusca <= 5)));
         AtualizarMesaRevista();
         AtualizarAbrigoVisual();
     }

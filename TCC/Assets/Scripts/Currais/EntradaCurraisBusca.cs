@@ -42,7 +42,7 @@ public partial class EntradaCurrais
     {
         if (PostoDisponivel) return ComCriancaERegistros(AlvosPosto());
         if (Dados.curraisPanelaConcluida)
-            return ComCriancaERegistros(AlvosLavagemEPassagem());
+            return ComCriancaERegistros(ComAlvosDoPatio(AlvosLavagemEPassagem()));
         return ComCriancaERegistros(new[] { areaLotePanos, areaLuzia, areaAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela });
     }
 
@@ -62,7 +62,8 @@ public partial class EntradaCurrais
         areaLembranca.enabled = etapa == 3;
         areaPatio.enabled = etapa == 4;
         areaPanoAtendimento.enabled = etapa == 5 && PrecisaRecolherPanoSocorro;
-        panoCarregado.SetActive(etapa >= 3 && etapa <= 4 && Dados.curraisEscolhaAgua == 1);
+        panoCarregado.SetActive((etapa == 3 && Dados.curraisEscolhaAgua == 1) ||
+            (etapa == 4 && TemItem(panoAuxilio)));
         manchaRoda.SetActive(etapa >= 5);
         corpoCoberto.SetActive((etapa >= 6 || Dados.curraisBentoMorto) && !Dados.curraisSepultamentoConcluido);
         trabalhadorRetorno.SetActive(etapa >= 6);
@@ -96,14 +97,15 @@ public partial class EntradaCurrais
     private bool InteragirCampo(Vector2 ponto)
     {
         if (PostoDisponivel) return InteragirPosto(ponto);
+        if (InteragirPessoasDoPatio(ponto)) return true;
         foreach (Collider2D area in AlvosAtuais())
         {
             if (area == null || !area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
 
             int etapa = Dados.curraisEtapaBusca;
-            if (area == areaAguaPatio && etapa == 4) Iniciar(PrepararAguaPatio());
-            else if (area == areaPanosPatio && etapa == 4) Iniciar(EntregarPanosPatio());
-            else if (area == areaSocorroBento && etapa == 5) Iniciar(UsarNoSocorro());
+            if (area == areaAguaPatio && etapa == 4) MenuAguaDoPatio();
+            else if (area == areaPanosPatio && etapa == 4) MenuApoioDoPatio();
+            else if (area == areaSocorroBento && etapa == 5) AbrirSocorroOuUsarItem();
             else if (area == areaCabacaSocorro && etapa == 5) Iniciar(RecolherCabacaSocorro());
             else if (area == areaPanosUso && etapa == 2) MenuPilhaLavagem(false);
             else if (area == areaPanosAtendimento && etapa == 2) MenuPilhaLavagem(true);
@@ -257,28 +259,42 @@ public partial class EntradaCurrais
         }
         if (!Dados.curraisAguaPatioPreparada || !Dados.curraisPanosPatioEntregues)
         { yield return Dizer(tarefaPatioFalas); yield break; }
+        if (Mathf.Abs(mari.transform.position.x - pai.position.x) > alcanceInteracao)
+        { yield return Dizer(patioVoltarPai); yield break; }
         yield return AgressaoNoPatio();
     }
 
     private IEnumerator AgressaoNoPatio()
     {
-        Vector3 destinoBento = bentoCaido.position;
-        destinoBento.y = bentoEmPe.position.y;
-        yield return Mover(bento, destinoBento, tempoPlano);
-        bento.rotation = bentoEmPe.rotation;
-        Quaternion fiscalOriginal = fiscalTrabalho.localRotation;
+        if (agressaoPatioEmCurso || Dados.curraisEtapaBusca != 4 ||
+            !Dados.curraisAguaPatioPreparada || !Dados.curraisPanosPatioEntregues) yield break;
+        agressaoPatioEmCurso = true;
+        QuadrosAmbiente cicloBento = bento.GetComponent<QuadrosAmbiente>();
+        bool cicloAtivo = cicloBento != null && cicloBento.enabled;
         try
         {
-            fiscalTrabalho.localRotation = Quaternion.identity;
             yield return Dizer(patioAgressao);
+            yield return Escurecer(1f);
+            if (cicloBento != null) cicloBento.enabled = false;
+            Posicionar(bento, bentoCaido);
+            bento.rotation = bentoEmPe.rotation;
+            bentoEmSocorroEmCena = true;
             manchaRoda.SetActive(true);
-            yield return Esperar(tempoPlano);
+            AtualizarDetalhesPatio();
+            yield return Esperar(.35f);
+            yield return Escurecer(0f);
+            yield return Dizer(patioRetirada);
+            panoCarregado.SetActive(false);
+            yield return Dizer(corpoDistante);
+            AvancarCampo(5);
         }
-        finally { if (fiscalTrabalho != null) fiscalTrabalho.localRotation = fiscalOriginal; }
-        yield return Dizer(patioRetirada);
-        panoCarregado.SetActive(false);
-        yield return Dizer(corpoDistante);
-        AvancarCampo(5);
+        finally
+        {
+            if (cicloBento != null) cicloBento.enabled = cicloAtivo;
+            agressaoPatioEmCurso = false;
+            bentoEmSocorroEmCena = false;
+            if (!encerrando && GameProgress.Instance != null) AtualizarEstadoBusca();
+        }
     }
 
     private IEnumerator AjudarBento()

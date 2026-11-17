@@ -25,7 +25,7 @@ public partial class EntradaCurrais
         for (int i = 0; i < refs.Length; i++) ok &= ConferirReferencia(refs[i], nomes[i]);
         foreach (Fala[] falas in new[] { tarefaPatioFalas, aguaPatioFalas, despedidaPatio, sepultamentoFalas, retornoSepultamento, emprestimoQuarto, devolucaoQuarto })
             ok &= FalasValidas(falas);
-        return ok;
+        return ok && ReferenciasPatioDetalhadoValidas();
     }
 
     private bool PrecisaRecolherPanoSocorro => !TemItem(panoAuxilio) &&
@@ -39,7 +39,7 @@ public partial class EntradaCurrais
             Dados.curraisBentoMorto = true;
             Dados.curraisSepultamentoConcluido = true;
         }
-        if (Dados.curraisEtapaBusca == 5 && !Dados.curraisTrabalhoPatioIniciado)
+        if (Dados.curraisEtapaBusca == 5)
         {
             Dados.curraisTrabalhoPatioIniciado = true;
             Dados.curraisAguaPatioPreparada = true;
@@ -62,20 +62,22 @@ public partial class EntradaCurrais
     {
         bool patio = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca == 4;
         bool socorro = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca == 5;
-        areaAguaPatio.enabled = patio && Dados.curraisTrabalhoPatioIniciado && !Dados.curraisAguaPatioPreparada;
-        areaPanosPatio.enabled = patio && Dados.curraisTrabalhoPatioIniciado && !Dados.curraisPanosPatioEntregues;
+        areaAguaPatio.enabled = patio && Dados.curraisTrabalhoPatioIniciado;
+        areaPanosPatio.enabled = patio && Dados.curraisTrabalhoPatioIniciado;
         areaSocorroBento.enabled = socorro;
         cabacaSocorro.SetActive(socorro && (Dados.curraisItensAtendimentoBento & 2) != 0 && !Dados.curraisCabacaSocorroRecolhida);
         areaCabacaSocorro.enabled = cabacaSocorro.activeSelf && Dados.curraisBentoMorto;
         panosEntreguesPatio.SetActive(Dados.curraisPanosPatioEntregues);
+        areaPanoAtendimento.gameObject.SetActive(socorro && PrecisaRecolherPanoSocorro);
+        AtualizarDetalhesPatio();
     }
 
     private IEnumerator PrepararAguaPatio()
     {
+        if (Dados.curraisAguaPatioPreparada) { yield return Dizer(patioVoltarPai); yield break; }
         if (!TemItem(cabacaVaziaBusca) || InventoryManager.Instance.SelectedItem != cabacaVaziaBusca)
         {
-            yield return Dizer(new[] { new Fala { personagem = "Trabalhador", texto =
-                "Apresente a cabaça vazia. Esta porção é para os homens do serviço e o atendimento daqui." } });
+            yield return Dizer(patioFaltaAgua);
             yield break;
         }
         InventoryManager.Instance.RemoveItem(cabacaVaziaBusca);
@@ -83,11 +85,12 @@ public partial class EntradaCurrais
         Dados.curraisAguaPatioPreparada = true;
         AtualizarEstadoBusca(); Salvar();
         yield return Dizer(aguaPatioFalas);
-        if (Dados.curraisPanosPatioEntregues) yield return AgressaoNoPatio();
+        if (Dados.curraisPanosPatioEntregues) yield return Dizer(patioVoltarPai);
     }
 
     private IEnumerator EntregarPanosPatio()
     {
+        if (Dados.curraisPanosPatioEntregues) { yield return Dizer(patioVoltarPai); yield break; }
         if (!TemItem(panoAuxilio) || InventoryManager.Instance.SelectedItem != panoAuxilio)
         {
             yield return Dizer(tarefaPatioFalas);
@@ -97,7 +100,7 @@ public partial class EntradaCurrais
         Dados.curraisPanosPatioEntregues = true;
         AtualizarEstadoBusca(); Salvar();
         yield return Dizer(new[] { new Fala { personagem = "Trabalhador", texto = "Deixe o pano aqui. Obrigado, menina." } });
-        if (Dados.curraisAguaPatioPreparada) yield return AgressaoNoPatio();
+        if (Dados.curraisAguaPatioPreparada) yield return Dizer(patioVoltarPai);
     }
 
     private IEnumerator UsarNoSocorro()
@@ -123,7 +126,7 @@ public partial class EntradaCurrais
             }
             else
             {
-
+                yield return Dizer(EstadoSocorroBento());
                 yield break;
             }
             if (Dados.curraisItensAtendimentoBento != 3) yield break;
@@ -134,8 +137,7 @@ public partial class EntradaCurrais
         {
             if (selecionado != panoAuxilio || !TemItem(panoAuxilio))
             {
-                yield return Dizer(new[] { new Fala { personagem = "Trabalhador", texto =
-                    "Pode trazer um pano limpo para os pertences de Bento? Os homens vão levar ele ao sepultamento." } });
+                yield return Dizer(pertencesSemPano);
                 yield break;
             }
             InventoryManager.Instance.RemoveItem(panoAuxilio);
@@ -143,30 +145,44 @@ public partial class EntradaCurrais
             AtualizarEstadoBusca(); Salvar();
             yield return Dizer(despedidaPatio);
         }
-        if (Dados.curraisCabacaSocorroRecolhida) yield return SepultarBento();
+        if (Dados.curraisCabacaSocorroRecolhida) yield return Dizer(despedidaPronta);
     }
 
     private IEnumerator ConcluirAtendimentoBento()
     {
-        yield return Dizer(atendimentoFalas);
-        yield return Escurecer(1f);
-        Dados.curraisBentoMorto = true;
-        GameProgress.Instance.UnlockDiaryPage("currais-bento");
-        AtualizarEstadoBusca(); Salvar();
-        yield return Esperar(tempoPlano);
-        yield return Escurecer(0f);
-        yield return Dizer(noticiaBento);
+        if (atendimentoBentoEmCurso || Dados.curraisBentoMorto || (Dados.curraisItensAtendimentoBento & 3) != 3)
+            yield break;
+        atendimentoBentoEmCurso = true;
+        SpriteRenderer cobertura = corpoCoberto.GetComponent<SpriteRenderer>();
+        Color corCobertura = cobertura.color;
+        try
+        {
+            yield return Dizer(atendimentoFalas);
+            yield return Escurecer(1f);
+            Dados.curraisBentoMorto = true;
+            GameProgress.Instance.UnlockDiaryPage("currais-bento");
+            AtualizarEstadoBusca(); Salvar();
+            cobertura.color = new Color(corCobertura.r, corCobertura.g, corCobertura.b, 0f);
+            yield return Esperar(tempoPlano);
+            yield return Escurecer(0f);
+            yield return MostrarCoberturaBento(corCobertura);
+            yield return Dizer(noticiaBento);
+            yield return Dizer(pertencesSemPano);
+        }
+        finally { cobertura.color = corCobertura; atendimentoBentoEmCurso = false; }
     }
 
     private IEnumerator RecolherCabacaSocorro()
     {
-        if (!Dados.curraisBentoMorto || Dados.curraisCabacaSocorroRecolhida) yield break;
+        if (!Dados.curraisBentoMorto) { yield return Dizer(socorroFaltaPano); yield break; }
+        if (Dados.curraisCabacaSocorroRecolhida) { yield return Dizer(cabacaGuardada); yield break; }
         yield return ExaminarOuColetar(cabacaVaziaBusca);
         if (!coletaDoCenarioConfirmada) yield break;
         if (!TemItem(cabacaVaziaBusca)) InventoryManager.Instance.AddItem(cabacaVaziaBusca);
         Dados.curraisCabacaSocorroRecolhida = true;
         AtualizarEstadoBusca(); Salvar();
-        yield return Dizer(new[] { new Fala { personagem = "Zefinha", texto = "Vou guardar a cabaça da família." } });
+        yield return Dizer(cabacaGuardada);
+        if (Dados.curraisPanoSepultamentoEntregue) yield return Dizer(despedidaPronta);
     }
 
     private IEnumerator SepultarBento()

@@ -230,3 +230,23 @@ Pendente no Unity: compilação; proporções e encaixes; criança antes/depois 
 - Nenhuma imagem de personagem ou arquivo de animação da autora foi gerado/substituído. Baldes já presentes na arte de Raimundo foram preservados. Um desenho específico de sua mão ferida continua pendente de arte aprovada; a combinação e o empréstimo do balde da manhã permanecem na etapa correspondente.
 
 Verificação no Unity ainda necessária: entrega por diálogo/arraste; item errado; duas ordens de separação; cancelamento/retomada; retalho antes/depois; pausa durante lavagem, aparição e caminhada; reencontros com NPCs; cada lenda e teste sem lenda; Continue antes/depois da lembrança; caminho livre até o pátio. Sem compilação ou Play Mode disponíveis neste ambiente.
+
+## Etapa 8 — pátio de trabalho, Bento e socorro
+
+- Pai, Bento e Fiscal ganham interação no pátio. Luzia passa a responder sobre as tarefas pendentes e abre o socorro quando Bento precisa de ajuda. O pai inicia a apresentação das tarefas; Bento fala da falta de ar e o Fiscal responde sobre a carga. A conversa comum não muda posição ou zoom da câmera.
+- Água e pano podem ser apresentados por item selecionado/arraste ou pelas opções de conversa. Pontos já atendidos respondem sem consumir outra unidade. A cabaça cheia e o pano aparecem com Mari enquanto ainda estão com ela.
+- O pano de apoio do ombro do pai volta a aparecer no pátio, usando o objeto existente e respeitando a acomodação anterior. Não foi inventada animação de levantar carga com o braço ferido.
+- Terminar a segunda tarefa não inicia o acontecimento longe de Bento. A família é orientada a voltar ao pai, e a sequência só continua na proximidade dele.
+- Posição de trabalho de Bento: marca em x 196. Socorro: marca em x 193,4, junto da área de interação, corpo coberto e mancha existentes. A marca de socorro deixa de ter rotação de 90 graus.
+- A transição usa tela preta e reposicionamento pela marca; o idle de Bento não é girado nem desliza para fingir queda. Seu primeiro quadro próprio já fica no SpriteRenderer da cena, sem tonalização que altere suas cores.
+- O filho editável “Bento - pose de socorro (atribuir arte aprovada)” permite receber um sprite aprovado no Inspector. O espaço está sem sprite: os quatro quadros existentes são em pé e não representam uma queda. Enquanto não houver essa arte, permanece a referência original, parada no socorro. Nenhuma imagem de personagem foi gerada.
+- O atendimento exige os dois itens reais: pano limpo e cabaça cheia. Cada entrega é salva individualmente. Falta de item recebe resposta condicional. Com os dois já entregues em um checkpoint interrompido, voltar a conversar retoma a conclusão do atendimento.
+- Pano usado no atendimento e cabaça deixada ficam visíveis. A cabaça cheia usa destaque azul; depois fica vazia. O corpo coberto existente aparece gradualmente, sem criar um novo desenho de Bento.
+- A morte continua sendo parte da história, não uma punição por ordem de entrega. O diário e as falas originais foram mantidos.
+- Depois, o jogador recolhe a cabaça e leva outro pano para os pertences. O pano entregue ganha representação própria. Cancelar a coleta não avança flags; a retomada restaura os estados.
+- A despedida fica disponível quando pano dos pertences e cabaça estiverem resolvidos. O jogador escolhe “Acompanhar Bento”; o plano de sepultamento existente é mantido para a etapa seguinte.
+- Hierarchy: três estados de Bento/socorro no grupo de atendimento; pose opcional como filha de Bento; cabaça carregada como filha de Mari; área de interação própria no pai; marcas de trabalho/socorro existentes reposicionadas para coincidirem com o acontecimento.
+- Falas longas desta sequência foram fragmentadas sem retirar palavras. Artes, ciclos e proporções dos personagens continuam os da autora.
+
+Pendências de arte: pose de Bento caído/em atendimento e gesto específico do pai com carga, caso a autora deseje essas representações. Os ciclos em pé existentes foram preservados.
+Pendente no Unity: compilar; conferir encaixes/áreas; água e pano nas duas ordens; diálogo/arraste/item errado; voltar ao pai; pausa na transição/cobertura; atendimento nas duas ordens; Continue após cada entrega e antes da notícia; cancelamento de coleta; ambos os últimos itens da despedida em ordens diferentes; entrada no sepultamento. Nenhum teste em Play Mode foi executado neste ambiente.

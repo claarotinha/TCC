@@ -508,6 +508,7 @@ public partial class EntradaCurrais : MonoBehaviour
                     acoesMenu = null;
                     EncerrarGestoRevista();
                     EncerrarLavagemELembranca();
+                    EncerrarPatioDetalhado();
                     RestaurarPlanoSepultamento();
                     RestaurarDesenhoSaida();
                     RestaurarApresentacaoMemoria();
@@ -1218,6 +1219,7 @@ public partial class EntradaCurrais : MonoBehaviour
         StopAllCoroutines();
         EncerrarGestoRevista();
         EncerrarLavagemELembranca();
+        EncerrarPatioDetalhado();
         RestaurarPlanoSepultamento();
         RestaurarDesenhoSaida();
         RestaurarApresentacaoMemoria();
