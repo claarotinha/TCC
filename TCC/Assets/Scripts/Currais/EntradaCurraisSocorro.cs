@@ -96,8 +96,8 @@ public partial class EntradaCurrais
             yield return Dizer(tarefaPatioFalas);
             yield break;
         }
-        InventoryManager.Instance.RemoveItem(panoAuxilio);
         Dados.curraisPanosPatioEntregues = true;
+        InventoryManager.Instance.RemoveItem(panoAuxilio);
         AtualizarEstadoBusca(); Salvar();
         yield return Dizer(new[] { new Fala { personagem = "Trabalhador", texto = "Deixe o pano aqui. Obrigado, menina." } });
         if (Dados.curraisAguaPatioPreparada) yield return Dizer(patioVoltarPai);
@@ -112,15 +112,15 @@ public partial class EntradaCurrais
             { yield return ConcluirAtendimentoBento(); yield break; }
             if (selecionado == panoAuxilio && TemItem(panoAuxilio) && (Dados.curraisItensAtendimentoBento & 1) == 0)
             {
-                InventoryManager.Instance.RemoveItem(panoAuxilio);
                 Dados.curraisItensAtendimentoBento |= 1;
+                InventoryManager.Instance.RemoveItem(panoAuxilio);
                 AtualizarEstadoBusca(); Salvar();
                 yield return Dizer(new[] { new Fala { personagem = "Luzia", texto = "Segure o pano aqui. Isso. Deixe os homens atenderem ele." } });
             }
             else if (selecionado == cabacaCheiaBusca && TemItem(cabacaCheiaBusca) && (Dados.curraisItensAtendimentoBento & 2) == 0)
             {
-                InventoryManager.Instance.RemoveItem(cabacaCheiaBusca);
                 Dados.curraisItensAtendimentoBento |= 2;
+                InventoryManager.Instance.RemoveItem(cabacaCheiaBusca);
                 AtualizarEstadoBusca(); Salvar();
                 yield return Dizer(new[] { new Fala { personagem = "Luzia", texto = "Deixe a água com nós, Josefa. Obrigada." } });
             }
@@ -140,8 +140,8 @@ public partial class EntradaCurrais
                 yield return Dizer(pertencesSemPano);
                 yield break;
             }
-            InventoryManager.Instance.RemoveItem(panoAuxilio);
             Dados.curraisPanoSepultamentoEntregue = true;
+            InventoryManager.Instance.RemoveItem(panoAuxilio);
             AtualizarEstadoBusca(); Salvar();
             yield return Dizer(despedidaPatio);
         }
@@ -178,7 +178,6 @@ public partial class EntradaCurrais
         if (Dados.curraisCabacaSocorroRecolhida) { yield return Dizer(cabacaGuardada); yield break; }
         yield return ExaminarOuColetar(cabacaVaziaBusca);
         if (!coletaDoCenarioConfirmada) yield break;
-        if (!TemItem(cabacaVaziaBusca)) InventoryManager.Instance.AddItem(cabacaVaziaBusca);
         Dados.curraisCabacaSocorroRecolhida = true;
         AtualizarEstadoBusca(); Salvar();
         yield return Dizer(cabacaGuardada);

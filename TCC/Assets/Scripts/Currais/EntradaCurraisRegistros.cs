@@ -51,7 +51,7 @@ public partial class EntradaCurrais
         OlharParaMari(meninoBusca);
         yield return Dizer(Dados.curraisRegistroConcluido ? meninoDepoisRegistro :
             (Dados.curraisPerguntasMenino & 2) != 0 ? meninoNomeLembrado : meninoReencontro);
-        AbrirMenuMenino();
+        if (!Dados.curraisPanelaConcluida) AbrirMenuMenino();
     }
 
     private IEnumerator ExaminarLataMenino()
@@ -69,7 +69,8 @@ public partial class EntradaCurrais
         { Iniciar(ExaminarLataMenino()); return true; }
         if (areaMenino.enabled && areaMenino.gameObject.activeInHierarchy && areaMenino.OverlapPoint(ponto))
         {
-            Iniciar(Dados.curraisMeninoVisitado ? ReencontrarMenino() : ConhecerMenino());
+            // Mesmo se o primeiro encontro foi pulado, não reabre a apresentação antiga após a lavagem.
+            Iniciar(Dados.curraisMeninoVisitado || Dados.curraisPanelaConcluida ? ReencontrarMenino() : ConhecerMenino());
             return true;
         }
         if (areaCanhotoMesa.enabled && areaCanhotoMesa.gameObject.activeInHierarchy && areaCanhotoMesa.OverlapPoint(ponto))

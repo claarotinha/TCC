@@ -86,7 +86,6 @@ public partial class EntradaCurrais
 
         yield return ExaminarOuColetar(itemLotePanos);
         if (!coletaDoCenarioConfirmada) yield break;
-        if (!TemItem(itemLotePanos)) InventoryManager.Instance.AddItem(itemLotePanos);
         Dados.curraisLotePanosRecolhido = true;
         AtualizarEstadoBusca(); Salvar();
 

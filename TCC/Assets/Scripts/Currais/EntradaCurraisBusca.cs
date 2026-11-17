@@ -302,7 +302,6 @@ public partial class EntradaCurrais
         if (!PrecisaRecolherPanoSocorro) yield break;
         yield return ExaminarOuColetar(panoAuxilio);
         if (!coletaDoCenarioConfirmada) yield break;
-        if (!TemItem(panoAuxilio)) InventoryManager.Instance.AddItem(panoAuxilio);
         AtualizarEstadoBusca(); Salvar();
 
     }

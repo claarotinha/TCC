@@ -91,8 +91,8 @@ public partial class EntradaCurrais
         if ((Dados.curraisPanosSeparados & bit) != 0) yield break;
         yield return LavarPecaLavagem(atendimento);
         if (!TemItem(esperado) || (Dados.curraisPanosSeparados & bit) != 0) yield break;
-        InventoryManager.Instance.RemoveItem(esperado);
         Dados.curraisPanosSeparados |= bit;
+        InventoryManager.Instance.RemoveItem(esperado);
         AtualizarEstadoBusca(); Salvar();
 
         yield return Dizer(atendimento ? lavagemAtendimentoRecebido : lavagemUsoRecebido);
@@ -107,7 +107,6 @@ public partial class EntradaCurrais
             yield return Dizer(tiraPanoAutorizada);
             yield return ExaminarOuColetar(tiraPanoLavagem);
             if (!coletaDoCenarioConfirmada) yield break;
-            if (!TemItem(tiraPanoLavagem)) InventoryManager.Instance.AddItem(tiraPanoLavagem);
             Dados.curraisTiraPanoRecolhida = true;
         }
         AvancarCampo(3);

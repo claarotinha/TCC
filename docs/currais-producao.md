@@ -295,3 +295,9 @@ Pendente no Unity: compilar, conferir enquadramentos e slots opcionais com/sem a
 - Hierarchy: marca “Saída - enquadramento da família e portão” nas marcas da saída; “Canhoto apresentado - não consumido na consulta” como filho de Mari. Imagens de passagem, quarto, mão, documento e laço continuam os objetos existentes. Poses específicas de testemunho, mãe acolhendo e gesto do Cabo continuam dependentes das artes da autora.
 
 Pendente no Unity: compilação/importação; proporção do canhoto e enquadramento do portão em várias resoluções; consulta com/sem papel e cada opção/Sair; identidades/destinos já conhecidos e ausentes; interrupção durante testemunho e portão; pause; Continue antes/depois da recusa; revisitas; encerramento em cada combinação de pistas; laço guardado/ausente; retomar cada página; epílogo habilitado/ausente. Não houve compilação nem Play Mode neste ambiente.
+
+## Etapa 12 — revisão de integração
+
+Correções: coleta sem segunda inserção (incluindo o balde duplicado da etapa 10); devolução de exatamente uma cabaça da mesa sem esvaziar outra; limpeza de walk e Rigidbody ao interromper uma sequência; estados de entrega definidos antes dos eventos de inventário; revisita da criança respeitando a fase posterior à lavagem. Nenhuma mudança nas artes, animações, posições ou limites da cena.
+
+Verificações estáticas e roteiro completo de validação manual em [currais-revisao.md](currais-revisao.md). A compilação, Play Mode, build e revisão visual continuam pendentes; não considerar o ato totalmente validado apenas pela revisão de código.

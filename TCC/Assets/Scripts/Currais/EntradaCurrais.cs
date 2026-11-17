@@ -906,16 +906,10 @@ public partial class EntradaCurrais : MonoBehaviour
             !catalogo.TryGetId(cabacaCheiaBusca, out string idCheia)) return false;
         int indice = Dados.curraisItensRetidos.FindIndex(id => id == idVazia || id == idCheia);
         if (indice >= 0) Dados.curraisItensRetidos.RemoveAt(indice);
-        // A cabaça visível na distribuição permite recuperar saves sem registro do recipiente.
-        // Somente esta unidade é devolvida; os outros pertences permanecem retidos.
-        if (!TemItem(cabacaVaziaBusca) && !TemItem(cabacaCheiaBusca))
-            InventoryManager.Instance.AddItem(cabacaVaziaBusca);
-        if (!TemItem(cabacaVaziaBusca) && TemItem(cabacaCheiaBusca))
-        {
-            InventoryManager.Instance.RemoveItem(cabacaCheiaBusca);
-            InventoryManager.Instance.AddItem(cabacaVaziaBusca);
-        }
+        // Esta unidade pertence à mesa, mesmo se o jogador já carrega outra igual.
+        // Não esvazia um recipiente alheio nem deixa de devolver o que ficou retido.
         Dados.curraisCabacaDevolvida = true;
+        InventoryManager.Instance.AddItem(cabacaVaziaBusca);
         return true;
     }
 
@@ -1045,7 +1039,6 @@ public partial class EntradaCurrais : MonoBehaviour
         {
             yield return ExaminarOuColetar(itemCanhoto);
             if (!coletaDoCenarioConfirmada) yield break;
-            if (!TemItem(itemCanhoto)) InventoryManager.Instance.AddItem(itemCanhoto);
             Dados.curraisDestinoConfirmado = true;
         }
         // O laço foi retirado da chegada. Mantém-se apenas o estado de compatibilidade.
@@ -1153,28 +1146,38 @@ public partial class EntradaCurrais : MonoBehaviour
             destino.y = origem.y;
         float tempo = 0f;
         Animator animador = alvo.GetComponent<Animator>();
-        if (animador != null && animador.enabled) animador.SetBool("IsWalking", true);
-        while (tempo < duracao)
+        try
         {
-            if (!PauseHelper.BlockInput() && Time.timeScale > 0f)
+            if (animador != null && animador.enabled) animador.SetBool("IsWalking", true);
+            while (tempo < duracao)
             {
-                tempo += Time.deltaTime;
-                alvo.position = Vector3.Lerp(origem, destino, Mathf.Clamp01(tempo / duracao));
-                Rigidbody2D corpoEmMovimento = alvo.GetComponent<Rigidbody2D>();
-                if (corpoEmMovimento != null)
-                { corpoEmMovimento.position = alvo.position; corpoEmMovimento.linearVelocity = Vector2.zero; }
-                if (animador != null && animador.enabled) animador.SetBool("IsWalking", true);
-                SpriteRenderer visual = alvo.GetComponent<SpriteRenderer>();
-                if (visual != null && Mathf.Abs(destino.x - origem.x) > .01f)
-                    visual.flipX = (destino.x - origem.x) * alvo.lossyScale.x < 0f;
+                if (!PauseHelper.BlockInput() && Time.timeScale > 0f)
+                {
+                    tempo += Time.deltaTime;
+                    alvo.position = Vector3.Lerp(origem, destino, Mathf.Clamp01(tempo / duracao));
+                    Rigidbody2D corpoEmMovimento = alvo.GetComponent<Rigidbody2D>();
+                    if (corpoEmMovimento != null)
+                    { corpoEmMovimento.position = alvo.position; corpoEmMovimento.linearVelocity = Vector2.zero; }
+                    if (animador != null && animador.enabled) animador.SetBool("IsWalking", true);
+                    SpriteRenderer visual = alvo.GetComponent<SpriteRenderer>();
+                    if (visual != null && Mathf.Abs(destino.x - origem.x) > .01f)
+                        visual.flipX = (destino.x - origem.x) * alvo.lossyScale.x < 0f;
+                }
+                else if (animador != null && animador.enabled) animador.SetBool("IsWalking", false);
+                yield return null;
             }
-            else if (animador != null && animador.enabled) animador.SetBool("IsWalking", false);
-            yield return null;
         }
-        if (animador != null && animador.enabled) animador.SetBool("IsWalking", false);
-        Rigidbody2D corpo = alvo.GetComponent<Rigidbody2D>();
-        if (corpo != null) { corpo.position = alvo.position; corpo.linearVelocity = Vector2.zero; }
-        Physics2D.SyncTransforms();
+        finally
+        {
+            // StopAllCoroutines também descarta o enumerador: não deixa walk preso.
+            if (animador != null && animador.enabled) animador.SetBool("IsWalking", false);
+            if (alvo != null)
+            {
+                Rigidbody2D corpo = alvo.GetComponent<Rigidbody2D>();
+                if (corpo != null) { corpo.position = alvo.position; corpo.linearVelocity = Vector2.zero; }
+            }
+            Physics2D.SyncTransforms();
+        }
     }
 
     private IEnumerator Esperar(float duracao)

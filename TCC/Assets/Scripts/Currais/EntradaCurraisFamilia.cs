@@ -171,7 +171,6 @@ public partial class EntradaCurrais
         yield return ExaminarOuColetar(baldeRaimundoItem);
         if (!coletaDoCenarioConfirmada) yield break;
         Dados.curraisBaldeRecolhido = true;
-        InventoryManager.Instance.AddItem(baldeRaimundoItem);
         AtualizarFamiliaAlternativa(); Salvar();
 
     }

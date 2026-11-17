@@ -239,7 +239,6 @@ public partial class EntradaCurrais
         if (Dados.curraisPanoAbrigoRecolhido || Dados.curraisPaiAcomodado) yield break;
         yield return ExaminarOuColetar(itemPanoAbrigo);
         if (!coletaDoCenarioConfirmada) yield break;
-        if (!TemItem(itemPanoAbrigo)) InventoryManager.Instance.AddItem(itemPanoAbrigo);
         Dados.curraisPanoAbrigoRecolhido = true;
         AtualizarVisuaisChegada();
         Salvar();
@@ -257,10 +256,10 @@ public partial class EntradaCurrais
         }
         yield return Mover(mae, maeCuidadoAbrigo.position, tempoPlano);
         if (!TemItem(itemPanoAbrigo)) { yield return Dizer(maePrecisaPano); yield break; }
-        InventoryManager.Instance.RemoveItem(itemPanoAbrigo);
         Dados.curraisPaiAcomodado = true;
-        AtualizarVisuaisChegada();
         Dados.curraisEtapaEntrada = 4;
+        InventoryManager.Instance.RemoveItem(itemPanoAbrigo);
+        AtualizarVisuaisChegada();
         AtualizarEstadoBusca();
         Salvar();
         yield return Dizer(paiAcomodado);
