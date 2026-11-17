@@ -93,8 +93,8 @@ public partial class EntradaCurrais
     }
 
     private Collider2D[] AlvosChegada() => Dados.curraisEtapaEntrada == 2
-        ? new[] { areaDiarioEntrada, areaDiarioRetido, areaFiscalEntrada, areaMesaRevista }
-        : new[] { areaPanoAbrigo, areaLuzia, areaMae, areaPaiAbrigo };
+        ? new[] { AreaCabacaMesa, areaDiarioEntrada, areaDiarioRetido, areaFiscalEntrada, areaMesaRevista }
+        : new[] { AreaCabacaMesa, areaPanoAbrigo, areaLuzia, areaMae, areaPaiAbrigo };
 
     private bool PonteiroSobreChegada(Vector2 ponto)
     {
@@ -132,7 +132,8 @@ public partial class EntradaCurrais
             return;
         }
 
-        if (alvo == areaFiscalEntrada || alvo == areaMesaRevista) MenuRevista();
+        if (alvo == AreaCabacaMesa) Iniciar(RecolherCabacaMesa());
+        else if (alvo == areaFiscalEntrada || alvo == areaMesaRevista) MenuRevista();
         else if (alvo == areaDiarioRetido) Iniciar(Dizer(cadernoEmConferencia));
         else if (alvo == areaDiarioEntrada) Iniciar(RecuperarDiarioEntrada());
         else if (alvo == areaPanoAbrigo) Iniciar(RecolherPanoAbrigo());
@@ -271,6 +272,7 @@ public partial class EntradaCurrais
         areaPanoAbrigo.enabled = panoAbrigo.activeSelf;
         panoNoPai.SetActive(Dados.curraisPaiAcomodado && (Dados.curraisEtapaBusca < 1 || Dados.curraisEtapaBusca == 4 || Dados.curraisEtapaBusca == 5));
         AtualizarMesaRevista();
+        AtualizarCabacaMesa();
         AtualizarAbrigoVisual();
     }
 

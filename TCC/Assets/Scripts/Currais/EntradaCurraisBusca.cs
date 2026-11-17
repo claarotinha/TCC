@@ -43,7 +43,7 @@ public partial class EntradaCurrais
         if (PostoDisponivel) return ComCriancaERegistros(AlvosPosto());
         if (Dados.curraisPanelaConcluida)
             return ComCriancaERegistros(ComAlvosDoPatio(AlvosLavagemEPassagem()));
-        return ComCriancaERegistros(new[] { areaPanoAbrigo, areaLotePanos, areaLuzia, areaAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela });
+        return ComCriancaERegistros(new[] { AreaCabacaMesa, areaPanoAbrigo, areaLotePanos, areaLuzia, areaAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela });
     }
 
     private string ObjetivoCampo() => string.Empty;

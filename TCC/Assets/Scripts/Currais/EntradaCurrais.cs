@@ -836,6 +836,8 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private bool InteragirBusca(Vector2 ponto)
     {
+        if (PodeRecolherCabacaMesa && AreaCabacaMesa != null && AreaCabacaMesa.gameObject.activeInHierarchy && AreaCabacaMesa.OverlapPoint(ponto))
+        { Iniciar(RecolherCabacaMesa()); return true; }
         if (areaPanoAbrigo.enabled && areaPanoAbrigo.OverlapPoint(ponto))
         { Iniciar(RecolherPanoAbrigo()); return true; }
         if (InteragirCriancaERegistros(ponto)) return true;
@@ -900,19 +902,45 @@ public partial class EntradaCurrais : MonoBehaviour
                     () => Iniciar(Dizer(luziaIrma)), FecharMenu });
     }
 
-    private bool DevolverCabaca()
+    private Collider2D areaCabacaMesaCache;
+    private Collider2D AreaCabacaMesa
     {
-        if (Dados.curraisCabacaDevolvida) return true;
+        get
+        {
+            if (areaCabacaMesaCache == null && cabacaMesa != null)
+                areaCabacaMesaCache = cabacaMesa.GetComponent<Collider2D>();
+            return areaCabacaMesaCache;
+        }
+    }
+
+    private bool PodeRecolherCabacaMesa => Dados.curraisPertencesRetidos &&
+        !Dados.curraisCabacaDevolvida && Dados.curraisEtapaEntrada >= 2 &&
+        Dados.curraisEtapaEntrada <= 4 && !Dados.curraisPanelaConcluida;
+
+    private void AtualizarCabacaMesa()
+    {
+        if (cabacaMesa == null) return;
+        cabacaMesa.SetActive(!Dados.curraisCabacaDevolvida);
+        if (AreaCabacaMesa != null) AreaCabacaMesa.enabled = PodeRecolherCabacaMesa;
+    }
+
+    private IEnumerator RecolherCabacaMesa()
+    {
+        if (!PodeRecolherCabacaMesa) yield break;
         InventorySaveCatalog catalogo = Resources.Load<InventorySaveCatalog>("InventorySaveCatalog");
         if (catalogo == null || !catalogo.TryGetId(cabacaVaziaBusca, out string idVazia) ||
-            !catalogo.TryGetId(cabacaCheiaBusca, out string idCheia)) return false;
+            !catalogo.TryGetId(cabacaCheiaBusca, out string idCheia))
+        {
+            yield return Dizer(cabacaIndisponivel);
+            yield break;
+        }
+        yield return ExaminarOuColetar(cabacaVaziaBusca);
+        if (!coletaDoCenarioConfirmada) yield break;
+        // CollectPrompt já adicionou exatamente uma unidade ao confirmar.
         int indice = Dados.curraisItensRetidos.FindIndex(id => id == idVazia || id == idCheia);
         if (indice >= 0) Dados.curraisItensRetidos.RemoveAt(indice);
-        // Esta unidade pertence à mesa, mesmo se o jogador já carrega outra igual.
-        // Não esvazia um recipiente alheio nem deixa de devolver o que ficou retido.
         Dados.curraisCabacaDevolvida = true;
-        InventoryManager.Instance.AddItem(cabacaVaziaBusca);
-        return true;
+        AtualizarVisuaisChegada(); AtualizarEstadoBusca(); Salvar();
     }
 
     private bool TemItem(ItemData itemBusca)
@@ -923,19 +951,20 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private IEnumerator ReceberAgua()
     {
-        if (!DevolverCabaca())
+        if (!Dados.curraisCabacaDevolvida)
         {
-            yield return Dizer(cabacaIndisponivel);
+            yield return Dizer(cabacaSeparadaMesa);
             yield break;
         }
+        if (Dados.curraisAguaRecebida) { yield return Dizer(aguaJaRecebida); yield break; }
+        if (!TemItem(cabacaVaziaBusca)) yield break;
         if (!Dados.curraisAguaOrientada)
         {
             yield return Dizer(orientacaoAgua);
             Dados.curraisAguaOrientada = true;
             AtualizarEstadoBusca(); Salvar();
-            yield break;
         }
-        if (!TemItem(cabacaVaziaBusca) || InventoryManager.Instance.SelectedItem != cabacaVaziaBusca)
+        if (!TemItem(cabacaVaziaBusca))
         {
             yield return Dizer(aguaApresentar);
             yield break;
@@ -1068,7 +1097,7 @@ public partial class EntradaCurrais : MonoBehaviour
         }
         else if (Dados.curraisPanelaConcluida) panelaBusca.position = panelaRecolhida.position;
         canhotoCenario.SetActive(panelaAcessivel);
-        cabacaMesa.SetActive(!Dados.curraisCabacaDevolvida);
+        AtualizarCabacaMesa();
         lacoPanela.SetActive(false);
         areaPanela.enabled = panelaAcessivel;
         meninoBusca.gameObject.SetActive(true);

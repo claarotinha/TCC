@@ -190,11 +190,14 @@ public partial class EntradaCurrais
         Physics2D.SyncTransforms();
     }
 
+    [SerializeField] private Fala[] cabacaSeparadaMesa;
+
     private void MenuFuncionarioAgua()
     {
         MenuAssuntoNPC("Funcionário", "Diga. A fila tá andando.", "Perguntar pela água",
-            () => Dizer(!Dados.curraisDistribuicaoIniciada ? aguaAguardar : aguaApresentar),
-            "Como é a distribuição?", () => Dizer(aguaApresentar));
+            () => Dizer(!Dados.curraisCabacaDevolvida ? cabacaSeparadaMesa :
+                !Dados.curraisDistribuicaoIniciada ? aguaAguardar : aguaApresentar),
+            "Como é a distribuição?", () => Dizer(!Dados.curraisCabacaDevolvida ? cabacaSeparadaMesa : aguaApresentar));
     }
 
     private void MenuPrimeiroRegistro()
