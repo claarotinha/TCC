@@ -46,7 +46,7 @@ public partial class EntradaCurrais
         bool manha = ConsultaDisponivel && Dados.curraisEtapaConsulta == 1;
         // A mesma pessoa e o mesmo collider da conversa inicial são reutilizados.
         if (manha) areaRaimundo.enabled = true;
-        else if (Dados.curraisEtapaBusca > 0) areaRaimundo.enabled = false;
+        else if (Dados.curraisEtapaBusca > 0) areaRaimundo.enabled = PrimeiraBuscaEmCurso;
         bool pegar = manha && Dados.curraisBaldeSolicitado && !Dados.curraisBaldeRecolhido && !Dados.curraisBaldeApoiado;
         baldeRaimundoCenario.SetActive(pegar || (manha && Dados.curraisBaldeApoiado));
         panoAlca.SetActive(manha && Dados.curraisBaldeApoiado);

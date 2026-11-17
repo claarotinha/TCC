@@ -42,7 +42,7 @@ public partial class EntradaCurrais
     {
         if (PostoDisponivel) return ComCriancaERegistros(AlvosPosto());
         if (Dados.curraisPanelaConcluida)
-            return ComCriancaERegistros(new[] { areaAguaPatio, areaPanosPatio, areaSocorroBento, areaCabacaSocorro, areaPanosUso, areaPanosAtendimento, areaRaimundo, areaLavadeira, areaPanoLavagem, areaLembranca, areaPatio, areaPanoAtendimento });
+            return ComCriancaERegistros(AlvosLavagemEPassagem());
         return ComCriancaERegistros(new[] { areaLotePanos, areaLuzia, areaAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela });
     }
 
@@ -55,8 +55,8 @@ public partial class EntradaCurrais
         if (!ativo) { AtualizarPosto(); return; }
         int etapa = Dados.curraisEtapaBusca;
         objetivoTexto.text = string.Empty;
-        areaRaimundo.enabled = etapa == 0;
-        areaLavadeira.enabled = etapa == 1;
+        areaRaimundo.enabled = PrimeiraBuscaEmCurso;
+        areaLavadeira.enabled = PrimeiraBuscaEmCurso;
         areaPanoLavagem.enabled = etapa == 2 && Dados.curraisPanosSeparados == 3;
         AtualizarVisuaisLavagem();
         areaLembranca.enabled = etapa == 3;
@@ -105,14 +105,16 @@ public partial class EntradaCurrais
             else if (area == areaPanosPatio && etapa == 4) Iniciar(EntregarPanosPatio());
             else if (area == areaSocorroBento && etapa == 5) Iniciar(UsarNoSocorro());
             else if (area == areaCabacaSocorro && etapa == 5) Iniciar(RecolherCabacaSocorro());
-            else if (area == areaPanosUso && etapa == 2) Iniciar(SepararPanoLavagem(false));
-            else if (area == areaPanosAtendimento && etapa == 2) Iniciar(SepararPanoLavagem(true));
-            else if (area == areaRaimundo && etapa == 0)
+            else if (area == areaPanosUso && etapa == 2) MenuPilhaLavagem(false);
+            else if (area == areaPanosAtendimento && etapa == 2) MenuPilhaLavagem(true);
+            else if (area == areaRaimundo && PrimeiraBuscaEmCurso)
             {
                 if (!Dados.curraisRaimundoConhecido) Iniciar(ConhecerRaimundo());
                 else MenuRaimundo();
             }
-            else if (area == areaLavadeira && etapa == 1) Iniciar(ConversarLavadeira());
+            else if (area == areaLavadeira && PrimeiraBuscaEmCurso) MenuLavadeiraNaBusca();
+            else if (area == areaLuzia && PrimeiraBuscaEmCurso) ConversarLuziaNaBusca();
+            else if (area == areaGuardaRonda && PrimeiraBuscaEmCurso) Iniciar(Dizer(guardaPassagemFalas));
             else if (area == areaPanoLavagem && etapa == 2) Iniciar(RecolherTiraLavagem());
             else if (area == areaLembranca && etapa == 3)
             {
@@ -144,7 +146,8 @@ public partial class EntradaCurrais
 
     private void MenuRaimundo()
     {
-        MostrarOpcoes("Raimundo", raimundoInicio[raimundoInicio.Length - 1].texto, opcoesRaimundo, new Action[] {
+        OlharParaMari(areaRaimundo.transform);
+        MostrarOpcoes("Raimundo", raimundoRetorno[0].texto, opcoesRaimundo, new Action[] {
             () => Iniciar(PerguntarRaimundo(1, raimundoBando)),
             () => Iniciar(PerguntarRaimundo(2, raimundoMulher)),
             () => Iniciar(PerguntarRaimundo(4, raimundoTrabalho)),
@@ -161,8 +164,11 @@ public partial class EntradaCurrais
     private IEnumerator DeixarRaimundo()
     {
         yield return Dizer(raimundoSaida);
-        AvancarCampo(1);
-        RestaurarLuziaNaBusca();
+        if (Dados.curraisEtapaBusca == 0)
+        {
+            AvancarCampo(1);
+            RestaurarLuziaNaBusca();
+        }
     }
 
     private void RestaurarLuziaNaBusca()
@@ -180,7 +186,7 @@ public partial class EntradaCurrais
         {
             if (!TemItem(itemLotePanos) || InventoryManager.Instance.SelectedItem != itemLotePanos)
             {
-
+                yield return Dizer(lavadeiraEsperaLote);
                 yield break;
             }
             InventoryManager.Instance.RemoveItem(itemLotePanos);
@@ -199,31 +205,43 @@ public partial class EntradaCurrais
 
     private IEnumerator LembrarLenda()
     {
-        int historia = Dados.estradaHistoriaEscolhida;
-        if (historia == 1)
+        if (lembrancaEmCurso || Dados.curraisEtapaBusca != 3) yield break;
+        lembrancaEmCurso = true;
+        try
         {
-            sombraGalho.SetActive(true);
-            yield return Dizer(lembrancaCorpo);
-            pessoaNaCerca.SetActive(true);
-            yield return Esperar(tempoPlano);
+            int historia = Dados.estradaHistoriaEscolhida;
+            if (historia == 1)
+            {
+                yield return MostrarPercepcaoGradual(sombraGalho);
+                yield return Dizer(lembrancaCorpo);
+                yield return MostrarPercepcaoGradual(pessoaNaCerca);
+                yield return Esperar(tempoPlano);
+            }
+            else if (historia == 2)
+            {
+                yield return MostrarPercepcaoGradual(sinalGuarda);
+                yield return Dizer(lembrancaComadre);
+                yield return Esperar(tempoPlano);
+            }
+            else if (historia == 3)
+            {
+                yield return MostrarPercepcaoGradual(reflexoIrma);
+                yield return Dizer(lembrancaAgua);
+                reflexoIrma.SetActive(false);
+                yield return MostrarPercepcaoGradual(reflexoZefinha);
+                yield return Esperar(tempoPlano);
+            }
+            yield return RetornarLuziaDaLembranca();
+            yield return Dizer(historia >= 1 && historia <= 3 ? lembrancaRetorno : lembrancaSemLenda);
+            Dados.curraisPassagemVigiadaConcluida = true;
+            GameProgress.Instance.UnlockDiaryPage("currais-corredor");
+            AvancarCampo(4);
         }
-        else if (historia == 2)
+        finally
         {
-            sinalGuarda.SetActive(true);
-            yield return Dizer(lembrancaComadre);
-            yield return Esperar(tempoPlano);
+            lembrancaEmCurso = false;
+            OcultarPercepcao();
         }
-        else if (historia == 3)
-        {
-            reflexoIrma.SetActive(true);
-            yield return Dizer(lembrancaAgua);
-            reflexoIrma.SetActive(false); reflexoZefinha.SetActive(true);
-            yield return Esperar(tempoPlano);
-        }
-        // Testes diretos sem lenda escolhida seguem pelo chamado de Luzia, sem inventar uma escolha.
-        yield return Dizer(lembrancaRetorno);
-        GameProgress.Instance.UnlockDiaryPage("currais-corredor");
-        AvancarCampo(4);
     }
 
     private IEnumerator TestemunharTrabalho()

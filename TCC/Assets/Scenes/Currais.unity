@@ -4586,6 +4586,7 @@ Transform:
   m_LocalScale: {x: 1.0224217, y: 1.0224217, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 9977000041}
   - {fileID: 9966000041}
   - {fileID: 9955000021}
   - {fileID: 4300000029}
@@ -14874,64 +14875,70 @@ MonoBehaviour:
   reflexoZefinha: {fileID: 4300000048}
   sinalGuarda: {fileID: 4300000052}
   raimundoInicio:
-  - personagem: Raimundo
-    texto: "O que tu t\xE1 procurando nesse lugar?"
-  - personagem: Zefinha
-    texto: "Minha irm\xE3. Ela foi naquele carro antes de n\xF3s entrar."
-  - personagem: Raimundo
-    texto: Uma menina parecida contigo?
-  - personagem: Zefinha
-    texto: O senhor viu?
-  - personagem: Raimundo
-    texto: Vi ela passando com uma mulher. Viva, andando. Foi antes de trazerem esses
-      baldes.
-  - personagem: Zefinha
-    texto: Pra onde?
-  - personagem: Raimundo
-    texto: "Eu n\xE3o vi o fim do caminho. N\xE3o vou te dizer que vi."
-  - personagem: Raimundo
-    texto: "Nome de quando eu andava com uns homens no sert\xE3o."
-  - personagem: Zefinha
-    texto: Que homens?
-  - personagem: Raimundo
-    texto: "Bando de canga\xE7o."
-  - personagem: Zefinha
-    texto: O senhor era cangaceiro?
-  - personagem: Raimundo
-    texto: Era.
-  - personagem: Zefinha
-    texto: E num pode fazer nada com esses guardas?
-  - personagem: Raimundo
-    texto: "Eu fa\xE7o uma besteira, eles me matam ou me prendem. Tua irm\xE3 continua
-      longe e tua m\xE3e perde outra pessoa pra perguntar."
+  - personagem: "Raimundo"
+    texto: "O que tu tá procurando nesse lugar?"
+  - personagem: "Zefinha"
+    texto: "Minha irmã. Ela foi naquele carro antes de nós entrar."
+  - personagem: "Raimundo"
+    texto: "Uma menina parecida contigo?"
+  - personagem: "Zefinha"
+    texto: "O senhor viu?"
+  - personagem: "Raimundo"
+    texto: "Vi ela passando com uma mulher. Viva, andando. Foi antes de trazerem esses baldes."
+  - personagem: "Zefinha"
+    texto: "Pra onde?"
+  - personagem: "Raimundo"
+    texto: "Eu não vi o fim do caminho. Não vou te dizer que vi."
+  - personagem: "Zefinha"
+    texto: "Como o senhor se chama?"
+  - personagem: "Raimundo"
+    texto: "Me chamam de Raimundo."
+  - personagem: "Raimundo"
+    texto: "Nome de quando eu andava com uns homens no sertão."
+  - personagem: "Zefinha"
+    texto: "Que homens?"
+  - personagem: "Raimundo"
+    texto: "Bando de cangaço."
+  - personagem: "Zefinha"
+    texto: "O senhor era cangaceiro?"
+  - personagem: "Raimundo"
+    texto: "Era."
+  - personagem: "Zefinha"
+    texto: "E num pode fazer nada com esses guardas?"
+  - personagem: "Raimundo"
+    texto: "Eu faço uma besteira, eles me matam ou me prendem."
+  - personagem: "Raimundo"
+    texto: "Tua irmã continua longe e tua mãe perde outra pessoa pra perguntar."
   raimundoBando:
-  - personagem: Raimundo
-    texto: "Naquele tempo achei que andar armado era jeito de num baixar a cabe\xE7a."
-  - personagem: Zefinha
-    texto: E foi?
-  - personagem: Raimundo
-    texto: "Pra muita gente eu virei outro homem mandando baixar. Num vou te contar
-      s\xF3 a parte que me deixa bonito."
+  - personagem: "Raimundo"
+    texto: "Naquele tempo achei que andar armado era jeito de num baixar a cabeça."
+  - personagem: "Zefinha"
+    texto: "E foi?"
+  - personagem: "Raimundo"
+    texto: "Pra muita gente eu virei outro homem mandando baixar."
+  - personagem: "Raimundo"
+    texto: "Num vou te contar só a parte que me deixa bonito."
   raimundoMulher:
-  - personagem: Raimundo
-    texto: A voz eu conheci. O rosto foi de longe. Quero falar com as lavadeiras
-      antes de te dar um nome errado.
+  - personagem: "Raimundo"
+    texto: "A voz eu conheci. O rosto foi de longe."
+  - personagem: "Raimundo"
+    texto: "Quero falar com as lavadeiras antes de te dar um nome errado."
   raimundoSaida:
-  - personagem: Zefinha
-    texto: "Se o senhor lembrar, procure mainha. Ela t\xE1 com Baleia, perto das
-      esteiras."
-  - personagem: Raimundo
-    texto: "Eu sei onde \xE9. Vou perguntar."
+  - personagem: "Zefinha"
+    texto: "Se o senhor lembrar, procure mainha. Ela tá com Baleia, perto das esteiras."
+  - personagem: "Raimundo"
+    texto: "Eu sei onde é. Vou perguntar."
   lavagemFalas:
-  - personagem: Lavadeira
-    texto: Trouxe o lote da mesa? Deixe aqui. Vou precisar que me ajude a separar.
-  - personagem: Zefinha
-    texto: "O escriv\xE3o disse que depois ia procurar minha irm\xE3."
-  - personagem: Lavadeira
-    texto: "\xC9 sempre depois\u2026 Eu vi uma menina com uma mulher. Perguntava
-      se a m\xE3e vinha no carro de tr\xE1s."
-  - personagem: Luzia
-    texto: "N\xF3s pergunta mais quando terminar de ajudar."
+  - personagem: "Lavadeira"
+    texto: "Trouxe o lote da mesa? Deixe aqui. Vou precisar que me ajude a separar."
+  - personagem: "Zefinha"
+    texto: "O escrivão disse que depois ia procurar minha irmã."
+  - personagem: "Lavadeira"
+    texto: "É sempre depois… Eu vi uma menina com uma mulher."
+  - personagem: "Lavadeira"
+    texto: "Perguntava se a mãe vinha no carro de trás."
+  - personagem: "Luzia"
+    texto: "Nós pergunta mais quando terminar de ajudar."
   lembrancaCorpo:
   - personagem: "Pai (lembran\xE7a)"
     texto: "A terra tamb\xE9m num quis guardar o corpo dele."
@@ -15361,27 +15368,32 @@ MonoBehaviour:
   panoAtendimentoEntregue: {fileID: 9807000130}
   instrucoesLavagem:
   - personagem: Zefinha
-    texto: Essas aqui têm sangue…
+    texto: "Essas aqui têm sangue…"
   - personagem: Lavadeira
-    texto: Têm. Amanhã chegam outras.
+    texto: "Têm. Amanhã chegam outras."
+  - personagem: Lavadeira
+    texto: "As peças do atendimento ficam do lado direito."
+  - personagem: Lavadeira
+    texto: "Os panos de uso ficam à esquerda, longe delas."
   tiraPanoAutorizada:
   - personagem: Lavadeira
     texto: Pode levar esse retalho limpo. Raimundo tava precisando proteger a alça do balde.
   guardaRepreensao:
   - personagem: Guarda
-    texto: Eu mandei esperar! Volte pra perto dos sacos.
+    texto: "Essa passagem dá no serviço. Nada de mexer nos sacos."
   - personagem: Luzia
-    texto: "Venha, Josefa. Espere ele passar. N\xF3s tenta de novo."
+    texto: "Nós só tá passando."
   raimundoTrabalho:
-  - personagem: Zefinha
-    texto: "Disseram que aqui tinha servi\xE7o. Por que ningu\xE9m pode ir embora?"
-  - personagem: Raimundo
-    texto: "Servi\xE7o tem. Escolher a hora de parar, o que fazer, quando sair\u2026
-      isso j\xE1 num deixam."
-  - personagem: Zefinha
-    texto: "Painho t\xE1 com o bra\xE7o machucado."
-  - personagem: Raimundo
-    texto: Eu vi. Vou ficar perto dele no carregamento.
+  - personagem: "Zefinha"
+    texto: "Disseram que aqui tinha serviço. Por que ninguém pode ir embora?"
+  - personagem: "Raimundo"
+    texto: "Serviço tem. Escolher a hora de parar, o que fazer, quando sair… isso já num deixam."
+  - personagem: "Zefinha"
+    texto: "Painho tá com o braço machucado."
+  - personagem: "Raimundo"
+    texto: "Eu vi. Vou ficar perto dele no carregamento."
+  - personagem: "Raimundo"
+    texto: "A mão já num aguenta essa alça do balde."
   guardaRonda: {fileID: 9807000201}
   rondaInicio: {fileID: 9807000301}
   rondaFim: {fileID: 9807000311}
@@ -15864,6 +15876,80 @@ MonoBehaviour:
     texto: "Os panos já tão comigo."
   - personagem: "ACOMPANHANTE"
     texto: "A mulher da lavagem fica depois dessa passagem."
+  areaGuardaRonda: {fileID: 9807000203}
+  panoEmLavagem: {fileID: 9977000012}
+  panoMergulhoLavagem: {fileID: 9977000021}
+  luziaRetornoLembranca: {fileID: 9977000041}
+  varalPanosUso: {fileID: 9977000030}
+  lavadeiraEsperaLote:
+  - personagem: "Lavadeira"
+    texto: "O lote da mesa dos nomes vem pra cá."
+  - personagem: "Lavadeira"
+    texto: "Com esses panos aqui, eu consigo abrir lugar no tanque."
+  lavadeiraIrma:
+  - personagem: "Lavadeira"
+    texto: "Eu vi uma menina perguntando pela mãe."
+  - personagem: "Lavadeira"
+    texto: "Tava com uma mulher. Num sei pra onde seguiram."
+  raimundoRetorno:
+  - personagem: "Raimundo"
+    texto: "Ainda tô perguntando por aquela mulher."
+  - personagem: "Raimundo"
+    texto: "Só vou dar um nome quando tiver certeza."
+  lavagemFaltaUso:
+  - personagem: "Lavadeira"
+    texto: "Os panos que voltam ao uso ficam deste lado."
+  - personagem: "Lavadeira"
+    texto: "Não misture com as peças do atendimento."
+  lavagemFaltaAtendimento:
+  - personagem: "Lavadeira"
+    texto: "As peças do atendimento ficam do outro lado."
+  - personagem: "Lavadeira"
+    texto: "Mesmo depois da água, elas continuam separadas."
+  lavagemConcluida:
+  - personagem: "Lavadeira"
+    texto: "Agora cada coisa ficou no seu lugar."
+  - personagem: "Lavadeira"
+    texto: "Separei um retalho limpo ali pra tu."
+  lavagemUsoRecebido:
+  - personagem: "Lavadeira"
+    texto: "Esses podem ir secar. Deixe os outros separados."
+  lavagemAtendimentoRecebido:
+  - personagem: "Lavadeira"
+    texto: "Essas ficam aqui. Amanhã chegam outras."
+  luziaAntesRaimundo:
+  - personagem: "Luzia"
+    texto: "Aquele homem tava perto dos baldes quando o carro passou."
+  - personagem: "Luzia"
+    texto: "Talvez tenha visto o outro grupo."
+  luziaAntesLavagem:
+  - personagem: "Luzia"
+    texto: "A mulher da lavagem espera o lote que tu trouxe."
+  - personagem: "Luzia"
+    texto: "Raimundo vai perguntar pela mulher que viu."
+  luziaNaPassagem:
+  - personagem: "Luzia"
+    texto: "Guarde o retalho. Esse caminho leva pro pátio."
+  - personagem: "Luzia"
+    texto: "Eu vou junto de tu."
+  luziaDepoisPassagem:
+  - personagem: "Luzia"
+    texto: "Eu tô aqui, Josefa."
+  - personagem: "Luzia"
+    texto: "Seu pai tá no carregamento, depois dessa passagem."
+  guardaPassagemFalas:
+  - personagem: "Guarda"
+    texto: "Essa passagem dá no serviço. Nada de mexer nos sacos."
+  - personagem: "Luzia"
+    texto: "Nós só tá passando."
+  lembrancaSemLenda:
+  - personagem: "Luzia"
+    texto: "Josefa. Olhe pra mim. Nós ainda tá aqui."
+  - personagem: "Zefinha"
+    texto: "Por um instante eu perdi o caminho."
+  - personagem: "Luzia"
+    texto: "Vem. Eu fico perto de tu."
+  inicioLembranca: {fileID: 9977000051}
 --- !u!1 &4200000000
 GameObject:
   m_ObjectHideFlags: 0
@@ -17989,8 +18075,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 24
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300002, guid: c9a90000000040008000000000000003, type: 3}
-  m_Color: {r: 0.7, g: 0.85, b: 0.9, a: 1}
+  m_Sprite: {fileID: 5974667115338313640, guid: e25bcec509edf654e8bd4af9a8681dd3, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -18407,7 +18493,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 24
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300001, guid: c6a60000000040008000000000000002, type: 3}
+  m_Sprite: {fileID: 7629871395934276319, guid: cd8ec54140dcb0c4db3735d641a58e1c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -30669,8 +30755,8 @@ Transform:
   m_GameObject: {fileID: 9807000030}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.9, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9807000001}
@@ -30724,7 +30810,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 27
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 9028552476046108007, guid: f0d2f06dc137f7a4d88f6192c962c7df, type: 3}
+  m_Sprite: {fileID: 21300002, guid: 2a893ab3a14054f8b015a14fb15b731e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -30901,8 +30987,8 @@ Transform:
   m_GameObject: {fileID: 9807000130}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.12, y: -2.92, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9807000101}
@@ -30957,7 +31043,7 @@ SpriteRenderer:
   m_SortingOrder: 27
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300002, guid: 2a893ab3a14054f8b015a14fb15b731e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.65, g: 0.35, b: 0.28, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -37992,6 +38078,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 9977000011}
+  - {fileID: 9977000021}
+  - {fileID: 9977000031}
   - {fileID: 4300000017}
   - {fileID: 4300000021}
   - {fileID: 4300000025}
@@ -38490,6 +38579,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 9977000051}
   - {fileID: 9807000301}
   - {fileID: 9807000311}
   - {fileID: 9807000321}
@@ -38891,7 +38981,7 @@ MonoBehaviour:
   titulo: "07 - Raimundo"
   acontecimentos: "Relato sobre irmã e mulher; reencontro na manhã; balde opcional."
   artesExistentes: "funcionario currais1 a 4 em QuadrosAmbiente; baldes e pano da alça."
-  variantesPendentes: "Carregar/apoiar peso, mão ferida e alça protegida: etapas 7 e 10."
+  variantesPendentes: "Etapa 7: ciclo original preservado, reencontros sem voltar etapas e baldes já presentes na arte. Alça e empréstimo seguem na manhã."
   camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
   marcasRelacionadas:
   - {fileID: 4400000107}
@@ -38917,10 +39007,12 @@ MonoBehaviour:
   titulo: "08 - Lavagem"
   acontecimentos: "Entregar lote, separar dois grupos e recolher tira limpa."
   artesExistentes: "lavadeira1 a 4; tanque e panos de BuscaObjetos; tira de paninho.png."
-  variantesPendentes: "Lavagem/torção, panos manchados distintos, varal e gesto de autorização: etapa 7."
+  variantesPendentes: "Etapa 7: ciclo original, lavagem animada do objeto, pilhas distintas e varal após entrega. Retalho só aparece autorizado e some ao recolher."
   camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
   marcasRelacionadas: []
   estadosRelacionados:
+  - {fileID: 9977000010}
+  - {fileID: 9977000030}
   - {fileID: 9807000030}
   - {fileID: 9807000130}
   - {fileID: 4300000024}
@@ -38939,9 +39031,11 @@ MonoBehaviour:
   titulo: "09 - Corredor e lembranças"
   acontecimentos: "Ronda sem retorno forçado; lenda escolhida modifica percepção."
   artesExistentes: "Guarda; sacos; tanque; galho; reflexos; pessoa da cerca em rasgo npc1 a 4."
-  variantesPendentes: "Reações da protagonista e retorno de Luzia; preservar caráter de lembrança: etapa 7."
+  variantesPendentes: "Etapa 7: aparição gradual das artes existentes, retorno de Luzia por caminhada e conclusão só após as falas. Ronda sem empurrar ou devolver Mari."
   camadas: "Pessoa atrás da cerca -45; cerca -40; reflexos 19; guarda 25; Mari 30."
   marcasRelacionadas:
+  - {fileID: 9977000051}
+  - {fileID: 9977000041}
   - {fileID: 9807000301}
   - {fileID: 9807000311}
   - {fileID: 9807000321}
@@ -44471,3 +44565,280 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &9977000010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9977000011}
+  - component: {fileID: 9977000012}
+  m_Layer: 0
+  m_Name: "Pano em lavagem - movimento no tanque"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &9977000011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9977000010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 129.21, y: 1.4, z: 0}
+  m_LocalScale: {x: 0.09, y: 0.09, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9922000141}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &9977000012
+SpriteRenderer:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9977000010}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 28
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 9028552476046108007, guid: f0d2f06dc137f7a4d88f6192c962c7df, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
+--- !u!1 &9977000020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9977000021}
+  m_Layer: 0
+  m_Name: "Pano - marca de mergulho no tanque"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9977000021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9977000020}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 129.21, y: 0.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9922000141}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9977000030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9977000031}
+  - component: {fileID: 9977000032}
+  m_Layer: 0
+  m_Name: "Varal - panos de uso postos a secar"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &9977000031
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9977000030}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 144.4, y: 0.2, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9922000141}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &9977000032
+SpriteRenderer:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9977000030}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 25
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 21300002, guid: 2a893ab3a14054f8b015a14fb15b731e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
+--- !u!1 &9977000040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9977000041}
+  m_Layer: 0
+  m_Name: "Luzia - retorno ao lado de Mari"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9977000041
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9977000040}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1304905425}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9977000050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9977000051}
+  m_Layer: 0
+  m_Name: "Lembranças - início junto do tanque"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9977000051
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9977000050}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 156, y: -0.77, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9922000281}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

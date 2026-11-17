@@ -211,3 +211,22 @@ Conferência necessária no Unity: coleta/cancelamento do pano; entrega por conv
 - Folhas, área de exame, marca de conferência, lata e lote carregado ficam na Hierarchy. Nenhuma imagem de personagem, sprite sheet ou animação da autora foi gerada ou substituída.
 
 Pendente no Unity: compilação; proporções e encaixes; criança antes/depois de informar nome e consultar mesa; lata; papéis com ambos os acompanhantes; coleta/cancelamento/Voltar do canhoto; passagem com e sem canhoto; lote visível durante transporte; pausa durante consulta; Continuar nos estados intermediários. Gestos corporais específicos de escrita ou chamada aguardam animações aprovadas.
+
+## Etapa 7 — Raimundo, lavagem e lembranças
+
+- Raimundo, lavadeira, Luzia e guarda respondem durante a primeira busca. Raimundo não fica sem conversa depois da primeira despedida; repetir a despedida não faz a história voltar uma etapa. O nome da mulher continua dependendo da investigação posterior.
+- Raimundo e lavadeira usam já no arquivo da cena os primeiros quadros de seus ciclos próprios, antes inicializados apenas no Play Mode. Os quatro quadros e as proporções originais são preservados. Retirada a tonalização azul que alterava as cores de Raimundo.
+- A lavadeira aceita o lote por conversa ou arraste. Sem o lote, responde com uma indicação narrativa. Luzia fala conforme o momento da busca.
+- Separar os panos pode ser feito pelo diálogo de cada pilha ou pelo arraste do item correspondente. Item errado não é consumido. Os dois grupos têm cores distintas, confirmação falada e estado de entrega salvo separadamente.
+- O movimento de mergulho/torção usa somente o objeto pano e os ciclos já existentes da lavadeira. A animação respeita a pausa, revalida o item antes de consumir e restaura posição/escala/rotação ao terminar ou cancelar.
+- Os panos entregues ficam alinhados às respectivas pilhas. A peça de uso posta a secar reutiliza PanoMolhado de BuscaObjetos, sem nova imagem. O varal aparece após a entrega dos panos de uso e permanece no cenário.
+- O retalho limpo só aparece depois dos dois grupos separados. Cancelar a coleta o deixa disponível. Confirmar recolhe e salva junto com o avanço para a passagem; não fica um checkpoint intermediário sem acesso ao próximo evento. Saves anteriores com retalho recolhido na etapa 2 avançam para a passagem.
+- A lembrança começa perto do tanque pela marca editável “Lembranças - início junto do tanque”. A família não precisa chegar ao outro lado da ronda para ver imagens que ficariam atrás da câmera.
+- As três lendas preservam suas imagens e falas: galho/pessoa da cerca, assobio do guarda ou reflexos da irmã e de Zefinha. As imagens aparecem gradualmente e são ocultadas mesmo se a sequência for interrompida. Sem lenda escolhida, o retorno não afirma que Zefinha ouviu uma voz inexistente.
+- Luzia retorna pela marca “Luzia - retorno ao lado de Mari”, usando sua caminhada existente. O checkpoint da passagem só é concluído após o retorno e as falas, permitindo retomar uma sequência interrompida.
+- A ronda preserva a altura do guarda e vira pela direção real do deslocamento. Ela não empurra Mari, não a devolve aos sacos e não cria limites de caminhada.
+- Falas longas de Raimundo e da lavadeira foram fragmentadas sem retirar palavras; as opções continuam indiretas, sem instruções de teclado.
+- Hierarchy: pano em lavagem e marca de mergulho no grupo da lavagem; varal no mesmo grupo; marca de início junto do tanque nas marcas do corredor; marca de retorno de Luzia como filha de Mari, para acompanhar a posição da protagonista.
+- Nenhuma imagem de personagem ou arquivo de animação da autora foi gerado/substituído. Baldes já presentes na arte de Raimundo foram preservados. Um desenho específico de sua mão ferida continua pendente de arte aprovada; a combinação e o empréstimo do balde da manhã permanecem na etapa correspondente.
+
+Verificação no Unity ainda necessária: entrega por diálogo/arraste; item errado; duas ordens de separação; cancelamento/retomada; retalho antes/depois; pausa durante lavagem, aparição e caminhada; reencontros com NPCs; cada lenda e teste sem lenda; Continue antes/depois da lembrança; caminho livre até o pátio. Sem compilação ou Play Mode disponíveis neste ambiente.

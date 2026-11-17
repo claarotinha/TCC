@@ -28,7 +28,7 @@ public partial class EntradaCurrais
             nameof(guardaRonda), nameof(rondaInicio), nameof(rondaFim), nameof(retornoRonda), nameof(fimPassagem), nameof(abrigoDosSacos) };
         bool ok = true;
         for (int i = 0; i < refs.Length; i++) ok &= ConferirReferencia(refs[i], nomes[i]);
-        return ok && FalasValidas(instrucoesLavagem) && FalasValidas(tiraPanoAutorizada) && FalasValidas(guardaRepreensao) && FalasValidas(raimundoTrabalho);
+        return ok && FalasValidas(instrucoesLavagem) && FalasValidas(tiraPanoAutorizada) && FalasValidas(guardaRepreensao) && FalasValidas(raimundoTrabalho) && ReferenciasEncenacaoLavagemValidas();
     }
 
     private void PrepararEtapaLavagem()
@@ -43,6 +43,13 @@ public partial class EntradaCurrais
             }
         }
         if (Dados.curraisEtapaBusca >= 4) Dados.curraisPassagemVigiadaConcluida = true;
+        if (Dados.curraisEtapaBusca == 2 && Dados.curraisTiraPanoRecolhida)
+        {
+            Dados.curraisEtapaBusca = 3;
+            Dados.curraisPanosSeparados = 3;
+        }
+        // Um save interrompido antes da lembrança deve poder apresentá-la novamente.
+        if (Dados.curraisEtapaBusca == 3) Dados.curraisPassagemVigiadaConcluida = false;
         if (Dados.curraisEtapaBusca == 2) GarantirPanosLavagem();
         AtualizarVisuaisLavagem();
     }
@@ -68,6 +75,7 @@ public partial class EntradaCurrais
             rondaVaiAoFim = false;
             rondaPreparada = true;
         }
+        AtualizarDetalhesLavagem();
     }
 
     private IEnumerator SepararPanoLavagem(bool atendimento)
@@ -81,26 +89,29 @@ public partial class EntradaCurrais
         }
         int bit = atendimento ? 2 : 1;
         if ((Dados.curraisPanosSeparados & bit) != 0) yield break;
+        yield return LavarPecaLavagem(atendimento);
+        if (!TemItem(esperado) || (Dados.curraisPanosSeparados & bit) != 0) yield break;
         InventoryManager.Instance.RemoveItem(esperado);
         Dados.curraisPanosSeparados |= bit;
         AtualizarEstadoBusca(); Salvar();
 
-        if (Dados.curraisPanosSeparados == 3) objetivoTexto.text = string.Empty;
+        yield return Dizer(atendimento ? lavagemAtendimentoRecebido : lavagemUsoRecebido);
+        if (Dados.curraisPanosSeparados == 3) yield return Dizer(lavagemConcluida);
     }
 
     private IEnumerator RecolherTiraLavagem()
     {
-        if (Dados.curraisPanosSeparados != 3) yield break;
+        if (Dados.curraisPanosSeparados != 3) { yield return Dizer(EstadoSeparacaoLavagem()); yield break; }
         if (!Dados.curraisTiraPanoRecolhida)
         {
+            yield return Dizer(tiraPanoAutorizada);
             yield return ExaminarOuColetar(tiraPanoLavagem);
             if (!coletaDoCenarioConfirmada) yield break;
             if (!TemItem(tiraPanoLavagem)) InventoryManager.Instance.AddItem(tiraPanoLavagem);
             Dados.curraisTiraPanoRecolhida = true;
-            Salvar();
         }
-        yield return Dizer(tiraPanoAutorizada);
         AvancarCampo(3);
+        yield return Dizer(luziaNaPassagem);
     }
 
     private void AtualizarPatrulha()
@@ -114,18 +125,20 @@ public partial class EntradaCurrais
         else
         {
             Vector3 destino = rondaVaiAoFim ? rondaFim.position : rondaInicio.position;
+            destino.y = guardaRonda.position.y;
+            float direcao = destino.x - guardaRonda.position.x;
             guardaRonda.position = Vector3.MoveTowards(guardaRonda.position, destino, velocidadeRonda * Time.deltaTime);
             AnimarEscolta(guardaRonda, true);
             SpriteRenderer visual = guardaRonda.GetComponent<SpriteRenderer>();
-            if (visual != null) visual.flipX = !rondaVaiAoFim;
+            if (visual != null && Mathf.Abs(direcao) > .01f)
+                visual.flipX = direcao * guardaRonda.lossyScale.x < 0f;
             if (Vector3.Distance(guardaRonda.position, destino) < .01f)
             { rondaVaiAoFim = !rondaVaiAoFim; pausaRonda = 1.2f; }
         }
         if (Dados.curraisEtapaBusca != 3 || Dados.curraisPassagemVigiadaConcluida) return;
-        if (mari.transform.position.x >= fimPassagem.position.x)
+        if (mari.transform.position.x >= inicioLembranca.position.x)
         {
-            Dados.curraisPassagemVigiadaConcluida = true;
-            Salvar(); Iniciar(LembrarLenda());
+            Iniciar(LembrarLenda());
             return;
         }
 
