@@ -43,7 +43,7 @@ public partial class EntradaCurrais
         if (PostoDisponivel) return ComCriancaERegistros(AlvosPosto());
         if (Dados.curraisPanelaConcluida)
             return ComCriancaERegistros(ComAlvosDoPatio(AlvosLavagemEPassagem()));
-        return ComCriancaERegistros(new[] { areaLotePanos, areaLuzia, areaAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela });
+        return ComCriancaERegistros(new[] { areaPanoAbrigo, areaLotePanos, areaLuzia, areaAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela });
     }
 
     private string ObjetivoCampo() => string.Empty;
@@ -66,8 +66,8 @@ public partial class EntradaCurrais
             (etapa == 4 && TemItem(panoAuxilio)));
         manchaRoda.SetActive(etapa >= 5);
         corpoCoberto.SetActive((etapa >= 6 || Dados.curraisBentoMorto) && !Dados.curraisSepultamentoConcluido);
-        trabalhadorRetorno.SetActive(etapa >= 6);
-        bento.gameObject.SetActive(etapa < 6 && !Dados.curraisBentoMorto);
+        trabalhadorRetorno.SetActive(true);
+        bento.gameObject.SetActive(true);
         Posicionar(bento, etapa >= 5 ? bentoCaido : bentoEmPe);
         // Não gira nem inclina o sprite para representar ferimentos.
         Vector3 baseBento = bento.position;
@@ -111,12 +111,12 @@ public partial class EntradaCurrais
             else if (area == areaPanosAtendimento && etapa == 2) MenuPilhaLavagem(true);
             else if (area == areaRaimundo && PrimeiraBuscaEmCurso)
             {
-                if (!Dados.curraisRaimundoConhecido) Iniciar(ConhecerRaimundo());
+                if (!Dados.curraisRaimundoConhecido) MenuAssuntoNPC("Raimundo", "Diga, menina.", "O senhor viu minha irmã?", ConhecerRaimundo);
                 else MenuRaimundo();
             }
             else if (area == areaLavadeira && PrimeiraBuscaEmCurso) MenuLavadeiraNaBusca();
             else if (area == areaLuzia && PrimeiraBuscaEmCurso) ConversarLuziaNaBusca();
-            else if (area == areaGuardaRonda && PrimeiraBuscaEmCurso) Iniciar(Dizer(guardaPassagemFalas));
+            else if (area == areaGuardaRonda && PrimeiraBuscaEmCurso) MenuAssuntoNPC("Guarda", "O que você quer?", "Perguntar sobre a passagem", () => Dizer(guardaPassagemFalas));
             else if (area == areaPanoLavagem && etapa == 2) Iniciar(RecolherTiraLavagem());
             else if (area == areaLembranca && etapa == 3)
             {

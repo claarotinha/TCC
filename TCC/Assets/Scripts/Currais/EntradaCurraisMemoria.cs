@@ -73,7 +73,7 @@ public partial class EntradaCurrais
                 if (Dados.ato2Concluido) AbrirMenuFimMemoria();
                 else Iniciar(ExibirPaginasMemoria(false));
             }
-            else if (area == areaLuzia) Iniciar(Dizer(luziaRetornoFinal));
+            else if (area == areaLuzia) MenuAssuntoNPC("Luzia", "Tô aqui.", "Conversar sobre a família", () => Dizer(luziaRetornoFinal));
             else MostrarOpcoes("Família", InformacoesConsulta(), opcoesRetornoConsulta, new Action[] {
                 () => Iniciar(RelatarInformacoes()), FecharMenu });
             return true;

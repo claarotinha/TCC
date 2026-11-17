@@ -68,10 +68,10 @@ public partial class EntradaCurrais
         panoUsoEntregue.SetActive((Dados.curraisPanosSeparados & 1) != 0);
         panoAtendimentoEntregue.SetActive((Dados.curraisPanosSeparados & 2) != 0);
         bool vigiaAtiva = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 3 && Dados.curraisEtapaBusca <= 5;
-        guardaRonda.gameObject.SetActive(vigiaAtiva);
+        guardaRonda.gameObject.SetActive(true);
         if (vigiaAtiva && !rondaPreparada)
         {
-            guardaRonda.position = rondaFim.position;
+            // A ronda começa da posição existente, sem reaparecer em outra marca.
             rondaVaiAoFim = false;
             rondaPreparada = true;
         }

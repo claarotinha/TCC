@@ -47,15 +47,15 @@ public partial class EntradaCurrais
             if (alvo == areaPaiPatio)
             {
                 OlharParaMari(pai);
-                if (Dados.curraisEtapaBusca == 4) Iniciar(TestemunharTrabalho());
+                if (Dados.curraisEtapaBusca == 4) MenuAssuntoNPC("Pai", "Diga, minha filha.", "Como tá o serviço?", TestemunharTrabalho);
                 else AbrirSocorroOuUsarItem();
             }
             else if (alvo == areaBentoPatio)
             {
-                if (Dados.curraisEtapaBusca <= 4) { OlharParaMari(bento); Iniciar(Dizer(bentoTrabalhoFalas)); }
+                if (Dados.curraisEtapaBusca <= 4) { OlharParaMari(bento); MenuAssuntoNPC("Bento", "Diga, menina.", "Como tá o senhor?", () => Dizer(bentoTrabalhoFalas)); }
                 else AbrirSocorroOuUsarItem();
             }
-            else { OlharParaMari(fiscalTrabalho); Iniciar(Dizer(fiscalPatioFalas)); }
+            else { OlharParaMari(fiscalTrabalho); MenuAssuntoNPC("Fiscal", "Seja breve.", "Falar do trabalho", () => Dizer(fiscalPatioFalas)); }
             return true;
         }
         return false;
@@ -68,19 +68,10 @@ public partial class EntradaCurrais
             !Dados.curraisAguaPatioPreparada && !Dados.curraisPanosPatioEntregues ? luziaTarefasPatio :
             !Dados.curraisAguaPatioPreparada ? luziaAguaPatio :
             !Dados.curraisPanosPatioEntregues ? luziaPanoPatio : patioVoltarPai;
-        Iniciar(Dizer(falas));
+        MenuAssuntoNPC("Luzia", "Tô aqui, Josefa.", "Sobre o que tá acontecendo", () => Dizer(falas));
     }
 
-    private void AbrirSocorroOuUsarItem()
-    {
-        ItemData item = InventoryManager.Instance.SelectedItem;
-        bool pano = item == panoAuxilio && TemItem(panoAuxilio) &&
-            (Dados.curraisBentoMorto ? !Dados.curraisPanoSepultamentoEntregue : (Dados.curraisItensAtendimentoBento & 1) == 0);
-        bool agua = !Dados.curraisBentoMorto && item == cabacaCheiaBusca &&
-            TemItem(cabacaCheiaBusca) && (Dados.curraisItensAtendimentoBento & 2) == 0;
-        if (pano || agua) Iniciar(UsarNoSocorro());
-        else MenuSocorroBento();
-    }
+    private void AbrirSocorroOuUsarItem() => MenuSocorroBento();
 
     private Fala[] EstadoSocorroBento()
     {
@@ -94,74 +85,26 @@ public partial class EntradaCurrais
     private void MenuSocorroBento()
     {
         if (!Dados.curraisBentoMorto && (Dados.curraisItensAtendimentoBento & 3) == 3)
-        { Iniciar(ConcluirAtendimentoBento()); return; }
-        if (Dados.curraisBentoMorto)
         {
-            if (Dados.curraisPanoSepultamentoEntregue && Dados.curraisCabacaSocorroRecolhida)
-                MostrarOpcoes("Pai", despedidaPronta[0].texto,
-                    new[] { "Acompanhar Bento", "Seus pertences", "Sair" },
-                    new Action[] { () => Iniciar(SepultarBento()), () => Iniciar(Dizer(despedidaPronta)), FecharMenu });
-            else
-                MostrarOpcoes("Luzia", EstadoSocorroBento()[0].texto,
-                    new[] { "Pano para os pertences", "Guardar a cabaça", "Sair" },
-                    new Action[] { () => Iniciar(LevarPanoAoSocorro()), () => Iniciar(RecolherCabacaSocorro()), FecharMenu });
+            MenuAssuntoNPC("Luzia", "Josefa, venha cá.", "O que aconteceu?", ConcluirAtendimentoBento);
             return;
         }
-        MostrarOpcoes("Luzia", EstadoSocorroBento()[0].texto,
-            new[] { TemItem(panoAuxilio) ? "Oferecer o pano" : "Buscar pano limpo", "Deixar a água", "Sair" },
-            new Action[] { () => Iniciar(LevarPanoAoSocorro()), () => Iniciar(LevarAguaAoSocorro()), FecharMenu });
-    }
-
-    private IEnumerator LevarPanoAoSocorro()
-    {
-        if (Dados.curraisBentoMorto ? Dados.curraisPanoSepultamentoEntregue : (Dados.curraisItensAtendimentoBento & 1) != 0)
-        { yield return Dizer(EstadoSocorroBento()); yield break; }
-        if (!TemItem(panoAuxilio))
-        { yield return AjudarBento(); yield break; }
-        InventoryManager.Instance.SelectItem(panoAuxilio);
-        yield return UsarNoSocorro();
-    }
-
-    private IEnumerator LevarAguaAoSocorro()
-    {
-        if (Dados.curraisBentoMorto || (Dados.curraisItensAtendimentoBento & 2) != 0)
-        { yield return Dizer(EstadoSocorroBento()); yield break; }
-        if (!TemItem(cabacaCheiaBusca)) { yield return Dizer(socorroFaltaAgua); yield break; }
-        InventoryManager.Instance.SelectItem(cabacaCheiaBusca);
-        yield return UsarNoSocorro();
+        if (Dados.curraisBentoMorto && Dados.curraisPanoSepultamentoEntregue && Dados.curraisCabacaSocorroRecolhida)
+        {
+            MenuAssuntoNPC("Luzia", "A família dele tá esperando.", "Posso ir com vocês?", SepultarBento);
+            return;
+        }
+        MenuAssuntoNPC("Luzia", "Diga, Josefa.", "Como posso ajudar?", () => Dizer(EstadoSocorroBento()));
     }
 
     private void MenuAguaDoPatio()
     {
-        if (Dados.curraisAguaPatioPreparada)
-        { Iniciar(Dizer(patioVoltarPai)); return; }
-        if (InventoryManager.Instance.SelectedItem == cabacaVaziaBusca && TemItem(cabacaVaziaBusca))
-        { Iniciar(PrepararAguaPatio()); return; }
-        MostrarOpcoes("Trabalhador", patioFaltaAgua[0].texto,
-            new[] { "Encher a cabaça", "Sobre essa porção", "Sair" },
-            new Action[] { () => Iniciar(EncherCabacaPorConversa()), () => Iniciar(Dizer(patioFaltaAgua)), FecharMenu });
-    }
-
-    private IEnumerator EncherCabacaPorConversa()
-    {
-        if (TemItem(cabacaVaziaBusca)) InventoryManager.Instance.SelectItem(cabacaVaziaBusca);
-        yield return PrepararAguaPatio();
+        MenuAssuntoNPC("Trabalhador", "Diga, menina.", "Tem água pra eles?", () => Dizer(patioFaltaAgua));
     }
 
     private void MenuApoioDoPatio()
     {
-        if (Dados.curraisPanosPatioEntregues) { Iniciar(Dizer(patioVoltarPai)); return; }
-        if (InventoryManager.Instance.SelectedItem == panoAuxilio && TemItem(panoAuxilio))
-        { Iniciar(EntregarPanosPatio()); return; }
-        MostrarOpcoes("Trabalhador", patioFaltaPano[0].texto,
-            new[] { "Deixar o pano", "Quem vai usar?", "Sair" },
-            new Action[] { () => Iniciar(EntregarPanoPorConversa()), () => Iniciar(Dizer(patioFaltaPano)), FecharMenu });
-    }
-
-    private IEnumerator EntregarPanoPorConversa()
-    {
-        if (TemItem(panoAuxilio)) InventoryManager.Instance.SelectItem(panoAuxilio);
-        yield return EntregarPanosPatio();
+        MenuAssuntoNPC("Trabalhador", "Tô ouvindo.", "O que tá faltando?", () => Dizer(patioFaltaPano));
     }
 
     private void AtualizarDetalhesPatio()
@@ -175,7 +118,7 @@ public partial class EntradaCurrais
         // Sem desenho atribuído, o ciclo original permanece como referência, sem girar o personagem.
         bool poseAtribuida = vivoNoSocorro && poseBentoSocorro.sprite != null;
         poseBentoSocorro.gameObject.SetActive(poseAtribuida);
-        bento.GetComponent<SpriteRenderer>().enabled = !poseAtribuida;
+        bento.GetComponent<SpriteRenderer>().enabled = !Dados.curraisBentoMorto && !poseAtribuida;
         panoNoSocorro.gameObject.SetActive(vivoNoSocorro && (Dados.curraisItensAtendimentoBento & 1) != 0);
         pertencesBentoCobertos.gameObject.SetActive(ativo && Dados.curraisBentoMorto &&
             Dados.curraisPanoSepultamentoEntregue && !Dados.curraisSepultamentoConcluido);

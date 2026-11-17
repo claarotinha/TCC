@@ -24,21 +24,23 @@ public partial class EntradaCurrais
             FalasValidas(paiDepoisAgua) & FalasValidas(luziaBuscarAgua) &
             FalasValidas(aguaAguardar) & FalasValidas(aguaApresentar) &
             FalasValidas(aguaJaRecebida) & FalasValidas(maeEsperaAgua) &
-            FalasValidas(familiaDepoisAgua) & FalasValidas(cabacaIndisponivel);
+            FalasValidas(familiaDepoisAgua) & FalasValidas(cabacaIndisponivel) &
+            ConferirReferencia(pontoParadaFamilia, nameof(pontoParadaFamilia)) &
+            ConferirReferencia(seguidoraBaleiaCurrais, nameof(seguidoraBaleiaCurrais)) &
+            FalasValidas(familiaDecideParar) & FalasValidas(familiaSegueCaminho) & FalasValidas(familiaBuscaIrma) &
+            PresencasValidas();
     }
 
     private void MenuMaePrimeiroAbrigo()
     {
-        if (Dados.curraisPaiAcomodado)
+        if (!Dados.curraisFamiliaParou)
         {
-            if (Dados.curraisAguaRecebida && Dados.curraisEscolhaAgua == 0)
-                Iniciar(DestinarAgua());
-            else Iniciar(Dizer(Dados.curraisEscolhaAgua == 0 ? maeEsperaAgua : familiaDepoisAgua));
+            MenuFamiliaCaminhando("Mãe");
             return;
         }
-        MostrarOpcoes("Mãe", maePrecisaPano[0].texto,
-            new[] { "Entregar o pano", "Como ele está?", "Sair" },
-            new Action[] { () => Iniciar(AcomodarPai()), () => Iniciar(Dizer(paiRepouso)), FecharMenu });
+        MenuAssuntoNPC("Mãe", "Diga, minha filha. Tô te ouvindo.", "Como painho tá?",
+            () => Dizer(!Dados.curraisPaiAcomodado ? maePrecisaPano : familiaDepoisAgua),
+            "Falar de Mariquinha", () => Dizer(familiaBuscaIrma));
     }
 
     private IEnumerator ConversarPaiPrimeiroAbrigo()
@@ -59,6 +61,7 @@ public partial class EntradaCurrais
         bool primeiroAbrigo = Dados.curraisEtapaEntrada >= 3 &&
             Dados.curraisEtapaEntrada <= 4 && !Dados.curraisPanelaConcluida;
         areaPaiAbrigo.enabled = primeiroAbrigo;
+        if (Dados.curraisEtapaEntrada == 3) areaMae.enabled = true;
         bool agua = primeiroAbrigo && Dados.curraisAguaRecebida;
         cabacaComMari.gameObject.SetActive(agua && Dados.curraisEscolhaAgua == 0 && recebendoAguaAbrigo == 0);
         cabacaComMae.gameObject.SetActive(agua && (recebendoAguaAbrigo == 1 || Dados.curraisEscolhaAgua == 1));
@@ -95,5 +98,207 @@ public partial class EntradaCurrais
             recebendoAguaAbrigo = 0;
             if (!encerrando && GameProgress.Instance != null) AtualizarAbrigoVisual();
         }
+    }
+}
+
+public partial class EntradaCurrais
+{
+    [Header("Família — caminhada e primeira parada")]
+    [SerializeField] private Transform pontoParadaFamilia;
+    [SerializeField] private SeguidorFamilia seguidoraBaleiaCurrais;
+    [SerializeField] private Fala[] familiaDecideParar, familiaSegueCaminho, familiaBuscaIrma;
+    [SerializeField, Min(.5f)] private float proximidadeParada = 3f;
+    private bool paradaSugerida;
+
+    private void MenuAssuntoNPC(string pessoa, string abertura, string assunto, Func<IEnumerator> fala,
+        string outroAssunto = null, Func<IEnumerator> outraFala = null)
+    {
+        if (outraFala == null)
+            MostrarOpcoes(pessoa, abertura, new[] { assunto, "Sair" },
+                new Action[] { () => Iniciar(fala()), FecharMenu });
+        else
+            MostrarOpcoes(pessoa, abertura, new[] { assunto, outroAssunto, "Sair" },
+                new Action[] { () => Iniciar(fala()), () => Iniciar(outraFala()), FecharMenu });
+    }
+
+    private void MenuPaiPrimeiroAbrigo()
+    {
+        if (!Dados.curraisFamiliaParou) { MenuFamiliaCaminhando("Pai"); return; }
+        MenuAssuntoNPC("Pai", "O que foi, Josefa?", "Como o senhor tá?", ConversarPaiPrimeiroAbrigo,
+            "E Mariquinha?", () => Dizer(familiaBuscaIrma));
+    }
+
+    private void MenuFamiliaCaminhando(string pessoa)
+    {
+        MenuAssuntoNPC(pessoa, "Tô aqui perto. Pode falar.", "Vamos parar um pouco?", PararFamilia,
+            "Tô pensando em Mariquinha", () => Dizer(familiaBuscaIrma));
+    }
+
+    private bool AtualizarCaminhadaFamilia(bool livre)
+    {
+        bool caminhando = Dados.curraisEtapaEntrada == 3 && !Dados.curraisFamiliaParou;
+        if (!ConsultaDisponivel) seguidorPaiConsulta.enabled = livre && caminhando;
+        seguidoraBaleiaCurrais.enabled = livre && caminhando;
+        if (!caminhando) return false;
+        seguidoraMae.enabled = livre;
+        seguidoraLuzia.enabled = false;
+        if (livre && !paradaSugerida && Mathf.Abs(mari.transform.position.x - pontoParadaFamilia.position.x) <= proximidadeParada)
+        {
+            paradaSugerida = true;
+            MenuFamiliaCaminhando("Mãe");
+        }
+        return true;
+    }
+
+    private IEnumerator PararFamilia()
+    {
+        if (Dados.curraisFamiliaParou) yield break;
+        if (Mathf.Abs(mari.transform.position.x - pontoParadaFamilia.position.x) > proximidadeParada)
+        {
+            yield return Dizer(familiaSegueCaminho);
+            yield break;
+        }
+        yield return Dizer(familiaDecideParar);
+        Dados.curraisFamiliaParou = true;
+        // A família para primeiro; o pano é entregue depois por arraste.
+        Dados.curraisParadaRegistrada = true;
+        Dados.curraisParadaPaiX = pai.position.x;
+        Dados.curraisParadaMaeX = mae.position.x;
+        Dados.curraisParadaBaleiaX = baleia.position.x;
+        Dados.curraisEtapaEntrada = 4;
+        AtualizarVisuaisChegada(); AtualizarEstadoBusca(); Salvar();
+    }
+
+    private static void RestaurarXParada(Transform pessoa, float x)
+    {
+        if (float.IsNaN(x) || float.IsInfinity(x)) return;
+        Vector3 posicao = pessoa.position; posicao.x = x; pessoa.position = posicao;
+    }
+
+    private void RestaurarFamiliaNaCaminhada()
+    {
+        if (Dados.curraisFamiliaParou) return;
+        SpriteRenderer visual = mari.GetComponent<SpriteRenderer>();
+        float direcao = visual != null && visual.flipX ? -1f : 1f;
+        RestaurarXParada(mae, mari.transform.position.x - direcao * seguidoraMae.DistanciaAtras);
+        RestaurarXParada(pai, mari.transform.position.x - direcao * seguidorPaiConsulta.DistanciaAtras);
+        RestaurarXParada(baleia, mari.transform.position.x - direcao * seguidoraBaleiaCurrais.DistanciaAtras);
+        Physics2D.SyncTransforms();
+    }
+
+    private void MenuFuncionarioAgua()
+    {
+        MenuAssuntoNPC("Funcionário", "Diga. A fila tá andando.", "Perguntar pela água",
+            () => Dizer(!Dados.curraisDistribuicaoIniciada ? aguaAguardar : aguaApresentar),
+            "Como é a distribuição?", () => Dizer(aguaApresentar));
+    }
+
+    private void MenuPrimeiroRegistro()
+    {
+        if (Dados.curraisRegistroConcluido) { MenuTarefaPanos(); return; }
+        MenuAssuntoNPC("Escrivão", "Quem vocês estão procurando?", "Perguntar por Mariquinha",
+            () => Dados.curraisEscolhaAgua == 0 ? Dizer(mesaAntesAgua) : ConsultarRegistro(),
+            "O que tem nessa relação?", () => Dizer(folhasRegistroFalas));
+    }
+}
+
+public partial class EntradaCurrais
+{
+    private bool UsarItemArrastado(Collider2D alvo, ItemData item)
+    {
+        bool antesBusca = !Dados.curraisPanelaConcluida;
+        if (Dados.curraisFamiliaParou && (alvo == areaMae || alvo == areaPaiAbrigo) &&
+            item == itemPanoAbrigo && !Dados.curraisPaiAcomodado)
+        { Iniciar(AcomodarPai()); return true; }
+        if (Dados.curraisEtapaEntrada != 4) return false;
+        if (antesBusca && alvo == areaAgua && item == cabacaVaziaBusca && Dados.curraisDistribuicaoIniciada && !Dados.curraisAguaRecebida)
+        { Iniciar(ReceberAgua()); return true; }
+        if (antesBusca && (alvo == areaMae || alvo == areaLuzia) && item == cabacaCheiaBusca && Dados.curraisEscolhaAgua == 0)
+        { Iniciar(DestinarAgua(alvo == areaMae ? 1 : 2)); return true; }
+        if (Dados.curraisEtapaBusca == 1 && alvo == areaLavadeira && item == itemLotePanos && !Dados.curraisLotePanosEntregue)
+        { Iniciar(ConversarLavadeira()); return true; }
+        if (Dados.curraisEtapaBusca == 2 && ((alvo == areaPanosUso && item == panoUsoLavagem) ||
+            (alvo == areaPanosAtendimento && item == panoAtendimentoLavagem)))
+        { Iniciar(SepararPanoLavagem(alvo == areaPanosAtendimento)); return true; }
+        if (Dados.curraisEtapaBusca == 4 && alvo == areaAguaPatio && item == cabacaVaziaBusca)
+        { Iniciar(PrepararAguaPatio()); return true; }
+        if (Dados.curraisEtapaBusca == 4 && alvo == areaPanosPatio && item == panoAuxilio)
+        { Iniciar(EntregarPanosPatio()); return true; }
+        if (Dados.curraisEtapaBusca == 5 && (alvo == areaSocorroBento || alvo == areaBentoPatio || alvo == areaPaiPatio) &&
+            (item == panoAuxilio || item == cabacaCheiaBusca))
+        { Iniciar(UsarNoSocorro()); return true; }
+        if (Dados.curraisQuartoAberto && alvo == areaTrabalhadoraQuarto && item == cabacaVaziaBusca)
+        { Iniciar(AjudarNoQuarto()); return true; }
+        if (ConsultaDisponivel && Dados.curraisEtapaConsulta == 1 && alvo == areaRaimundo && item == baldeProtegidoItem)
+        { Iniciar(DevolverBaldeRaimundo()); return true; }
+        if (ConsultaDisponivel && Dados.curraisEtapaConsulta == 1 && alvo == areaUltimaConsulta && item == itemCanhoto)
+        { Iniciar(ApresentarCanhotoConsulta()); return true; }
+        return false;
+    }
+
+    [Serializable]
+    private class PessoaPresente
+    {
+        public GameObject personagem;
+        public SpriteRenderer desenho;
+        public string nome;
+        public Fala[] conversa;
+    }
+    [Header("Personagens presentes — assuntos antes da participação principal")]
+    [SerializeField] private PessoaPresente[] pessoasPresentes;
+
+    private bool PresencasValidas()
+    {
+        if (pessoasPresentes == null || pessoasPresentes.Length == 0) return false;
+        bool ok = true;
+        foreach (PessoaPresente pessoa in pessoasPresentes)
+            ok &= pessoa != null && pessoa.personagem != null && pessoa.desenho != null &&
+                !string.IsNullOrWhiteSpace(pessoa.nome) && FalasValidas(pessoa.conversa);
+        return ok;
+    }
+
+    private void ManterPessoasPresentes()
+    {
+        if (pessoasPresentes == null) return;
+        foreach (PessoaPresente pessoa in pessoasPresentes)
+            if (pessoa != null && pessoa.personagem != null && !pessoa.personagem.activeSelf)
+                pessoa.personagem.SetActive(true);
+    }
+
+    private PessoaPresente PessoaNoPonto(Vector2 ponto)
+    {
+        if (pessoasPresentes == null || !campo.activeInHierarchy) return null;
+        foreach (PessoaPresente pessoa in pessoasPresentes)
+        {
+            if (pessoa == null || pessoa.desenho == null || !pessoa.desenho.enabled ||
+                !pessoa.desenho.gameObject.activeInHierarchy) continue;
+            Bounds limites = pessoa.desenho.bounds;
+            if (limites.Contains(new Vector3(ponto.x, ponto.y, limites.center.z))) return pessoa;
+        }
+        return null;
+    }
+
+    private bool SobrePresenca(Vector2 ponto) => PessoaNoPonto(ponto) != null;
+
+    private bool InteragirPresenca(Vector2 ponto)
+    {
+        PessoaPresente pessoa = PessoaNoPonto(ponto);
+        if (pessoa == null) return false;
+        MenuAssuntoNPC(pessoa.nome, "Diga.", "Como estão as coisas por aqui?", () => Dizer(pessoa.conversa));
+        return true;
+    }
+
+    private void ConversarPresencaProxima()
+    {
+        if (pessoasPresentes == null || !campo.activeInHierarchy) return;
+        PessoaPresente perto = null; float distancia = alcanceInteracao;
+        foreach (PessoaPresente pessoa in pessoasPresentes)
+        {
+            if (pessoa == null || pessoa.desenho == null || !pessoa.desenho.enabled ||
+                !pessoa.desenho.gameObject.activeInHierarchy) continue;
+            float d = Mathf.Abs(mari.transform.position.x - pessoa.desenho.bounds.center.x);
+            if (d < distancia) { distancia = d; perto = pessoa; }
+        }
+        if (perto != null) MenuAssuntoNPC(perto.nome, "Diga.", "Como estão as coisas por aqui?", () => Dizer(perto.conversa));
     }
 }

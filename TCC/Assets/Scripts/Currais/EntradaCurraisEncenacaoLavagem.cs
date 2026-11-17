@@ -49,7 +49,7 @@ public partial class EntradaCurrais
             etapa == 1 ? luziaAntesLavagem :
             etapa == 2 ? EstadoSeparacaoLavagem() :
             etapa == 3 ? luziaNaPassagem : luziaDepoisPassagem;
-        Iniciar(Dizer(falas));
+        MenuAssuntoNPC("Luzia", "Pode falar, Josefa.", "O que aconteceu por aqui?", () => Dizer(falas), "Sobre Mariquinha", () => Dizer(luziaIrma));
     }
 
     private Fala[] EstadoSeparacaoLavagem()
@@ -63,12 +63,12 @@ public partial class EntradaCurrais
     {
         OlharParaMari(areaLavadeira.transform);
         if (Dados.curraisEtapaBusca == 0)
-        { Iniciar(Dizer(lavadeiraEsperaLote)); return; }
+        { MenuAssuntoNPC("Lavadeira", "Diga, menina. Tô escutando.", "Perguntar pelos panos", () => Dizer(lavadeiraEsperaLote), "Minha irmã passou aqui?", () => Dizer(lavadeiraIrma)); return; }
         if (Dados.curraisEtapaBusca == 1)
         {
             MostrarOpcoes("Lavadeira", lavadeiraEsperaLote[0].texto,
-                new[] { "Entregar o lote", "Sobre minha irmã", "Sair" },
-                new Action[] { () => Iniciar(EntregarLotePorConversa()),
+                new[] { "Sobre os panos", "Sobre minha irmã", "Sair" },
+                new Action[] { () => Iniciar(Dizer(lavadeiraEsperaLote)),
                     () => Iniciar(Dizer(lavadeiraIrma)), FecharMenu });
             return;
         }
@@ -80,32 +80,10 @@ public partial class EntradaCurrais
                         ? tiraPanoAutorizada : EstadoSeparacaoLavagem())), FecharMenu });
     }
 
-    private IEnumerator EntregarLotePorConversa()
-    {
-        if (!TemItem(itemLotePanos))
-        { yield return Dizer(lavadeiraEsperaLote); yield break; }
-        InventoryManager.Instance.SelectItem(itemLotePanos);
-        yield return ConversarLavadeira();
-    }
-
     private void MenuPilhaLavagem(bool atendimento)
     {
-        ItemData esperado = atendimento ? panoAtendimentoLavagem : panoUsoLavagem;
-        if (InventoryManager.Instance.SelectedItem == esperado && TemItem(esperado))
-        { Iniciar(SepararPanoLavagem(atendimento)); return; }
-        MostrarOpcoes("Lavadeira", atendimento ? lavagemFaltaAtendimento[0].texto : lavagemFaltaUso[0].texto,
-            new[] { atendimento ? "Deixar peças do atendimento" : "Deixar panos de uso",
-                "Ouvir a lavadeira", "Sair" },
-            new Action[] { () => Iniciar(SepararPanosPorConversa(atendimento)),
-                () => Iniciar(Dizer(EstadoSeparacaoLavagem())), FecharMenu });
-    }
-
-    private IEnumerator SepararPanosPorConversa(bool atendimento)
-    {
-        ItemData esperado = atendimento ? panoAtendimentoLavagem : panoUsoLavagem;
-        if (!TemItem(esperado)) { yield return Dizer(EstadoSeparacaoLavagem()); yield break; }
-        InventoryManager.Instance.SelectItem(esperado);
-        yield return SepararPanoLavagem(atendimento);
+        MenuAssuntoNPC("Lavadeira", "Cada pilha tem seu lugar.", "Pra quem são esses panos?",
+            () => Dizer(atendimento ? lavagemFaltaAtendimento : lavagemFaltaUso));
     }
 
     private void AtualizarDetalhesLavagem()

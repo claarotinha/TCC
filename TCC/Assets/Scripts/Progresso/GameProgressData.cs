@@ -83,7 +83,10 @@ public class GameProgressData
     public bool curraisDiarioRecuperado;
     public bool curraisAbrigoApresentado;
     public bool curraisPanoAbrigoRecolhido;
-    public bool curraisPaiAcomodado;
+    public bool curraisPaiAcomodado; // Compatibilidade: a família já fez a primeira parada.
+    public bool curraisFamiliaParou;
+    public bool curraisParadaRegistrada;
+    public float curraisParadaPaiX, curraisParadaMaeX, curraisParadaBaleiaX;
     public int curraisPerguntasAbrigo;
     public bool curraisLacoRecolhido;
     public bool curraisLacoNaPanela;

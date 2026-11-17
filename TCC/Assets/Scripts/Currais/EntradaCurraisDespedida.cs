@@ -127,18 +127,18 @@ public partial class EntradaCurrais
             if ((alvo == areaRaimundo || alvo == areaLuzia) && ConsultaDisponivel) return false;
             if (alvo == areaMesaDocumento || alvo == areaRaimundo)
             {
-                if (Dados.curraisEscolhaPosto == 0) Iniciar(EscolherNoPosto());
-                else Iniciar(Dizer(Dados.curraisEscolhaPosto == 2 ? registroRevisado : folhaRetirada));
+                if (Dados.curraisEscolhaPosto == 0) MenuAssuntoNPC("Raimundo", "Diga, menina.", "O que tá acontecendo?", EscolherNoPosto);
+                else MenuAssuntoNPC("Raimundo", "Diga, menina.", "Sobre a relação", () => Dizer(Dados.curraisEscolhaPosto == 2 ? registroRevisado : folhaRetirada));
             }
             else if (alvo == areaTrabalhadoraQuarto) MenuTrabalhadoraDoQuarto();
-            else if (alvo == areaDoenteUm) Iniciar(Dizer(doenteUmFalas));
-            else if (alvo == areaDoenteDois) Iniciar(Dizer(doenteDoisFalas));
+            else if (alvo == areaDoenteUm) MenuAssuntoNPC("Mulher", "Você quer falar comigo?", "Como a senhora tá?", () => Dizer(doenteUmFalas));
+            else if (alvo == areaDoenteDois) MenuAssuntoNPC("Homem", "Diga.", "O senhor viu uma menina?", () => Dizer(doenteDoisFalas));
             else if (alvo == areaCaboQuarto)
             {
-                if (!Dados.curraisQuartoAberto && Dados.curraisEtapaPosto == 1) Iniciar(InvestigarQuarto());
-                else Iniciar(Dizer(caboQuartoFalas));
+                if (!Dados.curraisQuartoAberto && Dados.curraisEtapaPosto == 1) MenuAssuntoNPC("Cabo", "Tá procurando quem?", "Perguntar pelas pessoas do quarto", InvestigarQuarto);
+                else MenuAssuntoNPC("Cabo", "O que foi?", "Perguntar pelo quarto", () => Dizer(caboQuartoFalas));
             }
-            else Iniciar(Dizer(Dados.curraisEscolhaPosto == 0 ? postoLuzia :
+            else MenuAssuntoNPC("Luzia", "Tô ouvindo.", "Sobre o posto", () => Dizer(Dados.curraisEscolhaPosto == 0 ? postoLuzia :
                 Dados.curraisEtapaPosto < 2 ? postoSeguinte : quartoVoltarFamilia));
             return true;
         }
@@ -148,8 +148,8 @@ public partial class EntradaCurrais
     private void MenuTrabalhadoraDoQuarto()
     {
         MostrarOpcoes("Trabalhadora", quartoRevisita[0].texto,
-            new[] { "Minha irmã", Dados.curraisAjudouAtendimentoQuarto ? "A cabaça devolvida" : "Emprestar a cabaça", "Sair" },
-            new Action[] { () => Iniciar(Dizer(quartoRevisita)), () => Iniciar(AjudarNoQuarto()), FecharMenu });
+            new[] { "Minha irmã", "O que tá faltando?", "Sair" },
+            new Action[] { () => Iniciar(Dizer(quartoRevisita)), () => Iniciar(Dizer(quartoSemCabaca)), FecharMenu });
     }
 
     private IEnumerator AbrirPortaDoQuarto()

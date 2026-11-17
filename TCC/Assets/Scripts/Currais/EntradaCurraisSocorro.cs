@@ -224,10 +224,6 @@ public partial class EntradaCurrais
         if (emprestandoNoQuarto) yield break;
         if (Dados.curraisAjudouAtendimentoQuarto) { yield return Dizer(devolucaoQuarto); yield break; }
         if (!TemItem(cabacaVaziaBusca)) { yield return Dizer(quartoSemCabaca); yield break; }
-        yield return Escolher("Trabalhadora", "Pode emprestar essa cabaça? Preciso levar água a quem tá aqui.",
-            new[] { "Emprestar a cabaça", "Sobre as pessoas daqui", "Sair" });
-        if (escolhaRecebida == 1) { yield return Dizer(quartoRevisita); yield break; }
-        if (escolhaRecebida != 0 || !TemItem(cabacaVaziaBusca)) yield break;
         emprestandoNoQuarto = true;
         try
         {

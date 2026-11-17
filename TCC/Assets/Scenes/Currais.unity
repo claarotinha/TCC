@@ -1200,7 +1200,7 @@ MonoBehaviour:
   mari: {fileID: 1304905425}
   animator: {fileID: 8800000011}
   spriteRenderer: {fileID: 0}
-  distanciaAtras: 4.959265
+  distanciaAtras: 2.4
   velocidade: 5
   velocidadeCorrida: 8
   distanciaParada: 0.08
@@ -3188,7 +3188,7 @@ MonoBehaviour:
   mari: {fileID: 1304905425}
   animator: {fileID: 8800010000}
   spriteRenderer: {fileID: 0}
-  distanciaAtras: 9.594965
+  distanciaAtras: 6.6
   velocidade: 5
   velocidadeCorrida: 8
   distanciaParada: 0.08
@@ -4088,7 +4088,7 @@ MonoBehaviour:
   mari: {fileID: 1304905425}
   animator: {fileID: 8800000012}
   spriteRenderer: {fileID: 0}
-  distanciaAtras: 7.174006
+  distanciaAtras: 4.6
   velocidade: 5
   velocidadeCorrida: 8
   distanciaParada: 0.08
@@ -10603,6 +10603,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 9994000001}
   - {fileID: 9922000051}
   - {fileID: 9922000061}
   - {fileID: 9922000071}
@@ -13158,11 +13159,11 @@ Transform:
   m_GameObject: {fileID: 4100000086}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.2, y: -0.97, z: 0}
-  m_LocalScale: {x: 0.6286837, y: 0.6286837, z: 1}
+  m_LocalPosition: {x: 47.2, y: -0.97, z: 0.0}
+  m_LocalScale: {x: 0.6286837, y: 0.6286837, z: 1.0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  m_Father: {fileID: 9922000061}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4100000088
 SpriteRenderer:
@@ -13442,13 +13443,13 @@ Transform:
   m_GameObject: {fileID: 4100000094}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 79.79, y: -0.68, z: 0}
-  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1}
+  m_LocalPosition: {x: 79.79, y: -0.68, z: 0.0}
+  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1.0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9992000031}
   - {fileID: 9955000041}
-  m_Father: {fileID: 9922000071}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4100000096
 SpriteRenderer:
@@ -14143,7 +14144,7 @@ Transform:
   m_GameObject: {fileID: 4100000124}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 62.122, y: -0.77000004, z: 0}
+  m_LocalPosition: {x: 43.33, y: -0.77000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14174,7 +14175,7 @@ Transform:
   m_GameObject: {fileID: 4100000126}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 65.524, y: -0.69000006, z: 0}
+  m_LocalPosition: {x: 45.53, y: -0.69000006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14205,7 +14206,7 @@ Transform:
   m_GameObject: {fileID: 4100000128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 68.44, y: -0.5, z: 0}
+  m_LocalPosition: {x: 41.33, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14661,16 +14662,12 @@ MonoBehaviour:
     personagem: Zefinha
     texto: "Eu t\xF4 vendo tu! Eu vou te achar!"
   entrada:
-  - personagem: Fiscal
-    texto: "Ferramenta fica aqui. Depois v\xEA o que devolve."
-  - personagem: Pai
-    texto: "O fac\xE3o \xE9 de trabalho. Eu preciso dele."
-  - personagem: Fiscal
-    texto: "Aqui o servi\xE7o \xE9 o que mandarem fazer."
-  - personagem: "M\xE3e"
-    texto: Disseram que aqui tinha socorro. Onde atendem meu marido?
-  - personagem: Fiscal
-    texto: Primeiro passa pela revista. Depois pergunta.
+  - personagem: "Fiscal"
+    texto: "Deixem os pertences aqui pra revista."
+  - personagem: "Pai"
+    texto: "Depois nós pega de volta?"
+  - personagem: "Fiscal"
+    texto: "Primeiro eu confiro. O caderno fica separado."
   revista:
   - personagem: Fiscal
     texto: "O restante dos pertences fica retido. A caba\xE7a voc\xEAs pedem na distribui\xE7\xE3o
@@ -14684,21 +14681,18 @@ MonoBehaviour:
   - personagem: Fiscal
     texto: Pois pegue. E desocupe a mesa.
   abrigo:
-  - personagem: Luzia
-    texto: Encoste ele aqui. Esse lado pega sombra um pouco mais cedo.
-  - personagem: "M\xE3e"
-    texto: "N\xF3s veio atr\xE1s de comida e trabalho. Ningu\xE9m falou que iam fechar
-      n\xF3s aqui."
-  - personagem: Luzia
-    texto: "Tem gente que chega pensando que vai descansar e seguir viagem. Depois
-      descobre o port\xE3o."
-  - personagem: "M\xE3e"
-    texto: "Josefa, veja o pano que Luzia deixou pra n\xF3s. Seu pai precisa de ajuda."
+  - personagem: "Luzia"
+    texto: "Podem ficar desse lado. Tem um pouco de sombra."
+  - personagem: "Mãe"
+    texto: "Obrigada. Nós precisa sentar um instante."
+  - personagem: "Pai"
+    texto: "A senhora viu pra onde levaram o outro grupo?"
+  - personagem: "Luzia"
+    texto: "Vi passar. Venham com calma, que eu conto o que sei."
   exames:
   - area: {fileID: 4100000078}
     titulo: Esteira
-    texto: "Uma esteira dividida no ch\xE3o do abrigo. O pai precisa descansar o
-      ombro."
+    texto: "Uma esteira no chão do abrigo. Aqui o pai pode apoiar o braço e descansar."
   - area: {fileID: 4100000140}
     titulo: Cerca
     texto: "A cerca divide o setor. A rua est\xE1 perto, mas a passagem \xE9 vigiada."
@@ -15035,12 +15029,12 @@ MonoBehaviour:
   - personagem: Pai
     texto: Num separe minhas filhas!
   reacaoGolpe:
-  - personagem: Pai
-    texto: "Ah! Meu bra\xE7o\u2026"
-  - personagem: "M\xE3e"
-    texto: "Pare! Ele s\xF3 foi buscar a menina!"
-  - personagem: Guarda
-    texto: "Ent\xE3o mande ele andar."
+  - personagem: "Pai"
+    texto: "Ah! Meu braço..."
+  - personagem: "Mãe"
+    texto: "Ele só foi atrás da menina!"
+  - personagem: "Guarda"
+    texto: "Continuem andando."
   areaFiscalEntrada: {fileID: 4100000089}
   areaDiarioEntrada: {fileID: 9805000203}
   diarioEntrada: {fileID: 9805000200}
@@ -15055,20 +15049,13 @@ MonoBehaviour:
   panoNoPai: {fileID: 9805000400}
   itemPanoAbrigo: {fileID: 11400000, guid: 696180fc49fd457ead3d4ad6ee729c99, type: 2}
   panoDisponivel:
-  - personagem: Luzia
-    texto: "Pode levar esse pano, Josefa. D\xEA \xE0 sua m\xE3e pra ela acomodar
-      o ombro dele."
-  - personagem: Zefinha
-    texto: Obrigada, dona Luzia.
+  - personagem: "Zefinha"
+    texto: "Esse pano serve pra apoiar o braço de painho."
   paiAcomodado:
-  - personagem: "M\xE3e"
-    texto: Isso. Obrigada, minha filha. Deixe eu ajeitar, devagar.
-  - personagem: Pai
-    texto: "O golpe pegou bem aqui\u2026"
-  - personagem: "M\xE3e"
-    texto: Encoste um pouco. Eu fico com tu.
-  - personagem: Luzia
-    texto: "Quando puder, venha falar comigo, Josefa. N\xF3s precisa buscar \xE1gua."
+  - personagem: "Mãe"
+    texto: "Assim fica melhor. Obrigada, minha filha."
+  - personagem: "Pai"
+    texto: "Agora o braço num fica pesando tanto."
   luziaCurral:
   - personagem: Zefinha
     texto: Por que chamam aqui de curral?
@@ -15319,20 +15306,20 @@ MonoBehaviour:
   - personagem: "M\xE3e"
     texto: "E tem um homem mandando n\xF3s ficar deste lado. Num foi isso que prometeram."
   familiaTrabalho:
-  - personagem: Zefinha
-    texto: "O senhor vai trabalhar amanh\xE3?"
-  - personagem: Pai
-    texto: "V\xE3o chamar."
-  - personagem: Zefinha
-    texto: "Mesmo com o bra\xE7o assim?"
-  - personagem: Pai
-    texto: Vou falar de novo. Hoje falar num adiantou.
-  - personagem: "M\xE3e"
-    texto: "Tu precisa de descanso, num \xE9 de mais carga."
-  - personagem: Zefinha
-    texto: "E a fam\xEDlia de Bento?"
-  - personagem: Pai
-    texto: Ficaram os que estavam com ele. Agora precisam atravessar mais esse dia.
+  - personagem: "Zefinha"
+    texto: "O senhor vai trabalhar amanhã?"
+  - personagem: "Pai"
+    texto: "Disseram que vão chamar cedo."
+  - personagem: "Zefinha"
+    texto: "E a gente ainda vai procurar Mariquinha?"
+  - personagem: "Pai"
+    texto: "Vai, sim. Eu num esqueci dela."
+  - personagem: "Mãe"
+    texto: "A gente precisa descansar um pouco hoje."
+  - personagem: "Zefinha"
+    texto: "Fiquei pensando na família de Bento."
+  - personagem: "Pai"
+    texto: "Eu também. Amanhã vou ver como eles tão."
   familiaCaderno:
   - personagem: Zefinha
     texto: "Eu queria lembrar das coisas de casa. Agora s\xF3 penso no que vi hoje."
@@ -15438,13 +15425,11 @@ MonoBehaviour:
   - personagem: "Zefinha"
     texto: "Disseram que aqui tinha serviço. Por que ninguém pode ir embora?"
   - personagem: "Raimundo"
-    texto: "Serviço tem. Escolher a hora de parar, o que fazer, quando sair… isso já num deixam."
+    texto: "Serviço tem. Mas num deixam a gente escolher nem a hora de parar."
   - personagem: "Zefinha"
-    texto: "Painho tá com o braço machucado."
+    texto: "Painho quer procurar minha irmã."
   - personagem: "Raimundo"
-    texto: "Eu vi. Vou ficar perto dele no carregamento."
-  - personagem: "Raimundo"
-    texto: "A mão já num aguenta essa alça do balde."
+    texto: "Eu sei, menina. Se eu ouvir alguma coisa, conto a vocês."
   guardaRonda: {fileID: 9807000201}
   rondaInicio: {fileID: 9807000301}
   rondaFim: {fileID: 9807000311}
@@ -15611,12 +15596,12 @@ MonoBehaviour:
     texto: "Eu tenho a marca do carro na cabe\xE7a. S\xF3 isso. Eu preciso perguntar
       outra vez."
   familiaFim:
-  - personagem: Pai
-    texto: "Amanh\xE3 eu vou no posto com tu."
-  - personagem: "M\xE3e"
-    texto: "Tu mal consegue levantar esse bra\xE7o."
-  - personagem: Pai
-    texto: Eu consigo falar.
+  - personagem: "Pai"
+    texto: "Amanhã eu vou no posto com tu."
+  - personagem: "Mãe"
+    texto: "Eu vou também. Quero ouvir o que eles vão dizer."
+  - personagem: "Zefinha"
+    texto: "Então nós vai junto."
   refeicaoTudo:
   - personagem: Zefinha
     texto: Eu lembro de ter ficado com medo de faltar comida pra mim.
@@ -15692,13 +15677,11 @@ MonoBehaviour:
   panosEntreguesPatio: {fileID: 9808000400}
   tarefaPatioFalas:
   - personagem: "Pai"
-    texto: "Meu ombro num aguenta levantar a carga. Eu já disse a eles."
+    texto: "Mandaram levar essas coisas até lá. Num deram nem tempo de beber água."
   - personagem: "Fiscal"
-    texto: "O serviço num vai fazer sozinho."
+    texto: "O carro num vai esperar o dia todo."
   - personagem: "Luzia"
-    texto: "Josefa, leve esse pano até o apoio, do outro lado do pátio."
-  - personagem: "Luzia"
-    texto: "Apresente também a cabaça vazia no ponto de água dos trabalhadores."
+    texto: "Tem um pano ali no apoio. E um pouco de água pra quem tá trabalhando."
   aguaPatioFalas:
   - personagem: "Trabalhador"
     texto: "Enchi a cabaça com a porção reservada pro serviço e pro atendimento. Leve com cuidado."
@@ -15747,6 +15730,125 @@ MonoBehaviour:
     texto: "Eu pergunto por ela. Pode deixar."
   planoSepultamento: {fileID: 9808000500}
   corpoNoPlano: {fileID: 9808000600}
+  pessoasPresentes:
+  - personagem: {fileID: 4100000094}
+    desenho: {fileID: 4100000096}
+    nome: "Luzia"
+    conversa:
+    - personagem: "Luzia"
+      texto: "Tem gente chegando desde cedo. Vamos achar um canto pra vocês."
+  - personagem: {fileID: 4300000008}
+    desenho: {fileID: 4300000010}
+    nome: "Raimundo"
+    conversa:
+    - personagem: "Raimundo"
+      texto: "Esses baldes num param quietos. Quando eu acabar aqui, escuto melhor."
+  - personagem: {fileID: 4300000020}
+    desenho: {fileID: 4300000022}
+    nome: "Lavadeira"
+    conversa:
+    - personagem: "Lavadeira"
+      texto: "Tô separando o que chegou. Cada coisa vai pra um lado."
+  - personagem: {fileID: 4200000036}
+    desenho: {fileID: 4200000038}
+    nome: "Criança"
+    conversa:
+    - personagem: "Criança"
+      texto: "Fico olhando quem passa. Tem muita gente que eu num conheço."
+  - personagem: {fileID: 4200000028}
+    desenho: {fileID: 4200000030}
+    nome: "Escrivão"
+    conversa:
+    - personagem: "Escrivão"
+      texto: "Tô conferindo os nomes. Espere eu acabar essa linha."
+  - personagem: {fileID: 4300000082}
+    desenho: {fileID: 4300000084}
+    nome: "Bento"
+    conversa:
+    - personagem: "Bento"
+      texto: "Hoje o serviço começou cedo. Ainda num consegui sentar."
+  - personagem: {fileID: 4300000086}
+    desenho: {fileID: 4300000088}
+    nome: "Fiscal"
+    conversa:
+    - personagem: "Fiscal"
+      texto: "A carga precisa seguir. Num atrapalhe a passagem."
+  - personagem: {fileID: 4300000098}
+    desenho: {fileID: 4300000100}
+    nome: "Trabalhador"
+    conversa:
+    - personagem: "Trabalhador"
+      texto: "Vim buscar água. Tem mais gente esperando lá."
+  - personagem: {fileID: 4400000049}
+    desenho: {fileID: 4400000051}
+    nome: "Trabalhadora"
+    conversa:
+    - personagem: "Trabalhadora"
+      texto: "Tô cuidando de quem ficou aqui dentro."
+  - personagem: {fileID: 4400000037}
+    desenho: {fileID: 4400000039}
+    nome: "Mulher"
+    conversa:
+    - personagem: "Mulher"
+      texto: "Só queria um pouco de sossego."
+  - personagem: {fileID: 4400000045}
+    desenho: {fileID: 4400000047}
+    nome: "Homem"
+    conversa:
+    - personagem: "Homem"
+      texto: "O dia custa a passar aqui dentro."
+  - personagem: {fileID: 4400000065}
+    desenho: {fileID: 4400000067}
+    nome: "Cabo"
+    conversa:
+    - personagem: "Cabo"
+      texto: "Essa passagem tem gente esperando. Diga logo."
+  - personagem: {fileID: 4500000014}
+    desenho: {fileID: 4500000016}
+    nome: "Lavadeira"
+    conversa:
+    - personagem: "Lavadeira"
+      texto: "Daqui eu vejo o pessoal indo e vindo. É gente demais pra guardar todos os rostos."
+  - personagem: {fileID: 4100000086}
+    desenho: {fileID: 4100000088}
+    nome: "Fiscal"
+    conversa:
+    - personagem: "Fiscal"
+      texto: "Primeiro eu confiro os pertences. Depois vocês seguem."
+  - personagem: {fileID: 9807000200}
+    desenho: {fileID: 9807000202}
+    nome: "Guarda"
+    conversa:
+    - personagem: "Guarda"
+      texto: "Deixe a passagem livre."
+  - personagem: {fileID: 4500000010}
+    desenho: {fileID: 4500000012}
+    nome: "Escrivão do posto"
+    conversa:
+    - personagem: "Escrivão do posto"
+      texto: "Eu preciso terminar de conferir a relação antes de ela seguir."
+  pontoParadaFamilia: {fileID: 4100000131}
+  seguidoraBaleiaCurrais: {fileID: 953090005}
+  proximidadeParada: 3
+  familiaDecideParar:
+  - personagem: "Mãe"
+    texto: "Aqui tem sombra. Vamos parar um pouco? Teu braço precisa descansar."
+  - personagem: "Pai"
+    texto: "Vamos. Mas eu ainda quero perguntar pela menina."
+  - personagem: "Mãe"
+    texto: "Nós vai perguntar. Primeiro sente aqui perto de nós."
+  familiaSegueCaminho:
+  - personagem: Pai
+    texto: "Vamos andando mais um pouquinho. Ali adiante parece ter sombra."
+  - personagem: "Mãe"
+    texto: "Eu tô logo atrás de tu, Josefa."
+  familiaBuscaIrma:
+  - personagem: Zefinha
+    texto: "E se Mariquinha procurar nós e num encontrar?"
+  - personagem: "Mãe"
+    texto: "Vamos ficar juntos. Quem souber dela vai encontrar nós aqui."
+  - personagem: Pai
+    texto: "Eu também tô pensando nisso, minha filha. Nós vai continuar procurando."
   orientacaoAgua:
   - personagem: "Funcion\xE1ria"
     texto: "\xC9 a caba\xE7a de voc\xEAs? Pode levar de volta. Espere na fila pra
@@ -15826,14 +15928,12 @@ MonoBehaviour:
   cabacaComLuzia: {fileID: 9955000042}
   maePrecisaPano:
   - personagem: "Mãe"
-    texto: "O pano que Luzia deixou serve de apoio."
+    texto: "O braço dele tá doendo desde a entrada."
   - personagem: "Mãe"
-    texto: "Sem ele, o ombro do seu pai fica pesando."
+    texto: "Tinha um pano separado nas nossas coisas... Queria apoiar o ombro dele."
   paiRepouso:
   - personagem: "Pai"
-    texto: "Eu tô aqui, Josefa. O braço dói, mas eu tô aqui."
-  - personagem: "Pai"
-    texto: "Fique perto de sua mãe. E num esqueça sua irmã."
+    texto: "O braço ainda dói, minha filha. Mas diga, tô te ouvindo."
   paiDepoisAgua:
   - personagem: "Pai"
     texto: "Essa pouca água já ajudou. Obrigado, minha filha."
@@ -15863,14 +15963,12 @@ MonoBehaviour:
     texto: "É pouca. Leve pra quem tá esperando no abrigo."
   maeEsperaAgua:
   - personagem: "Mãe"
-    texto: "O ombro tá apoiado, mas a boca dele tá seca."
-  - personagem: "Mãe"
-    texto: "Luzia sabe onde tão distribuindo água."
+    texto: "A caminhada deu uma sede... Será que ali tem água?"
   familiaDepoisAgua:
-  - personagem: "Luzia"
-    texto: "A cabaça ficou vazia de novo. Guarde ela."
-  - personagem: "Luzia"
-    texto: "Nós continua procurando notícia de Mariquinha."
+  - personagem: "Mãe"
+    texto: "Tô tentando entender esse lugar. É gente demais chegando."
+  - personagem: "Pai"
+    texto: "Vamos perguntar uma coisa de cada vez. Alguém há de ter visto tua irmã."
   cabacaIndisponivel:
   - personagem: "Funcionária"
     texto: "Num achei a cabaça entre esses pertences."
@@ -16017,7 +16115,7 @@ MonoBehaviour:
   - personagem: "Fiscal"
     texto: "Tem carro esperando. Cada um cuida da sua carga."
   - personagem: "Zefinha"
-    texto: "Meu pai tá machucado."
+    texto: "O senhor num vê que eles tão cansados?"
   patioVoltarPai:
   - personagem: "Luzia"
     texto: "O apoio tá pronto. Seu pai ficou perto da carroça."
@@ -16137,9 +16235,7 @@ MonoBehaviour:
     texto: "Vamos contar o que nós viu, Josefa."
   quartoSemCabaca:
   - personagem: "Trabalhadora"
-    texto: "Preciso de um recipiente vazio para buscar água."
-  - personagem: "Trabalhadora"
-    texto: "Se tu puder emprestar depois, eu devolvo."
+    texto: "Preciso de uma cabaça vazia pra levar água até os doentes. Depois devolvo a vocês."
   caboQuartoFalas:
   - personagem: "Cabo"
     texto: "Já viu quem tá aqui. Deixe o atendimento seguir."
@@ -17157,11 +17253,11 @@ Transform:
   m_GameObject: {fileID: 4200000028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 115.11, y: -0.86, z: 0}
-  m_LocalScale: {x: 0.8902077, y: 0.8902077, z: 1}
+  m_LocalPosition: {x: 115.11, y: -0.86, z: 0.0}
+  m_LocalScale: {x: 0.8902077, y: 0.8902077, z: 1.0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9922000101}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4200000030
 SpriteRenderer:
@@ -17428,7 +17524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4200000037
 Transform:
   m_ObjectHideFlags: 0
@@ -17438,12 +17534,12 @@ Transform:
   m_GameObject: {fileID: 4200000036}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 98.16, y: -0.36, z: 0}
-  m_LocalScale: {x: 0.4564756, y: 0.4564756, z: 1}
+  m_LocalPosition: {x: 98.16, y: -0.36, z: 0.0}
+  m_LocalScale: {x: 0.4564756, y: 0.4564756, z: 1.0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4200000041}
-  m_Father: {fileID: 9922000091}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4200000038
 SpriteRenderer:
@@ -18156,7 +18252,6 @@ Transform:
   - {fileID: 4300000045}
   - {fileID: 4300000049}
   - {fileID: 4300000053}
-  - {fileID: 9807000201}
   - {fileID: 9807000401}
   m_Father: {fileID: 4300000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18221,13 +18316,13 @@ Transform:
   m_GameObject: {fileID: 4300000008}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 110.21, y: -0.46, z: 0}
-  m_LocalScale: {x: 0.9643917, y: 0.9643917, z: 1}
+  m_LocalPosition: {x: 110.21, y: -0.46, z: 0.0}
+  m_LocalScale: {x: 0.9643917, y: 0.9643917, z: 1.0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4400000077}
   - {fileID: 9809000001}
-  m_Father: {fileID: 9922000131}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4300000010
 SpriteRenderer:
@@ -18641,11 +18736,11 @@ Transform:
   m_GameObject: {fileID: 4300000020}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 136.16, y: -0.07, z: 0}
-  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1}
+  m_LocalPosition: {x: 136.16, y: -0.07, z: 0.0}
+  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1.0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9922000141}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4300000022
 SpriteRenderer:
@@ -20752,12 +20847,12 @@ Transform:
   m_GameObject: {fileID: 4300000082}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 196, y: -0.05, z: 0}
-  m_LocalScale: {x: 0.9347181, y: 0.9347181, z: 1}
+  m_LocalPosition: {x: 196.0, y: -0.05, z: 0.0}
+  m_LocalScale: {x: 0.9347181, y: 0.9347181, z: 1.0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9988000011}
-  m_Father: {fileID: 9922000161}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4300000084
 SpriteRenderer:
@@ -20894,11 +20989,11 @@ Transform:
   m_GameObject: {fileID: 4300000086}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200.93, y: -0.05, z: 0}
-  m_LocalScale: {x: 0.6188605, y: 0.6188605, z: 1}
+  m_LocalPosition: {x: 200.93, y: -0.05, z: 0.0}
+  m_LocalScale: {x: 0.6188605, y: 0.6188605, z: 1.0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9922000151}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4300000088
 SpriteRenderer:
@@ -21301,7 +21396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4300000099
 Transform:
   m_ObjectHideFlags: 0
@@ -21311,11 +21406,11 @@ Transform:
   m_GameObject: {fileID: 4300000098}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 207.98, y: 0, z: 0}
-  m_LocalScale: {x: 0.9198813, y: 0.9198813, z: 1}
+  m_LocalPosition: {x: 207.98, y: 0.0, z: 0.0}
+  m_LocalScale: {x: 0.9198813, y: 0.9198813, z: 1.0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9922000151}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4300000100
 SpriteRenderer:
@@ -24154,12 +24249,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4400000050}
   - {fileID: 4400000054}
   - {fileID: 4400000034}
-  - {fileID: 4400000038}
   - {fileID: 4400000042}
-  - {fileID: 4400000046}
   m_Father: {fileID: 9922000201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4400000029
@@ -24468,11 +24560,11 @@ Transform:
   m_GameObject: {fileID: 4400000037}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 171.044, y: 0.18, z: 0}
-  m_LocalScale: {x: 0.47058824, y: 0.47058824, z: 1}
+  m_LocalPosition: {x: 211.044, y: 0.18, z: 0.0}
+  m_LocalScale: {x: 0.47058824, y: 0.47058824, z: 1.0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4400000028}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4400000039
 SpriteRenderer:
@@ -24746,11 +24838,11 @@ Transform:
   m_GameObject: {fileID: 4400000045}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 176.876, y: 0.18, z: 0}
-  m_LocalScale: {x: 0.47058824, y: 0.47058824, z: 1}
+  m_LocalPosition: {x: 216.876, y: 0.18, z: 0.0}
+  m_LocalScale: {x: 0.47058824, y: 0.47058824, z: 1.0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4400000028}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4400000047
 SpriteRenderer:
@@ -24886,13 +24978,13 @@ Transform:
   m_GameObject: {fileID: 4400000049}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 179.792, y: 0, z: 0}
-  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1}
+  m_LocalPosition: {x: 219.792, y: 0.0, z: 0.0}
+  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1.0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9991000251}
   - {fileID: 4400000058}
-  m_Father: {fileID: 4400000028}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4400000051
 SpriteRenderer:
@@ -25446,11 +25538,11 @@ Transform:
   m_GameObject: {fileID: 4400000065}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 184.166, y: 0, z: 0}
-  m_LocalScale: {x: 0.6189555, y: 0.6189555, z: 1}
+  m_LocalPosition: {x: 224.16600000000003, y: 0.0, z: 0.0}
+  m_LocalScale: {x: 0.6189555, y: 0.6189555, z: 1.0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9922000211}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4400000067
 SpriteRenderer:
@@ -27078,8 +27170,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4500000007}
-  - {fileID: 4500000011}
-  - {fileID: 4500000015}
   m_Father: {fileID: 4500000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4500000004
@@ -27281,11 +27371,11 @@ Transform:
   m_GameObject: {fileID: 4500000010}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 219.644, y: 0, z: 0}
-  m_LocalScale: {x: 0.9198813, y: 0.9198813, z: 1}
+  m_LocalPosition: {x: 219.644, y: 0.0, z: 0.0}
+  m_LocalScale: {x: 0.9198813, y: 0.9198813, z: 1.0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4500000003}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4500000012
 SpriteRenderer:
@@ -27421,11 +27511,11 @@ Transform:
   m_GameObject: {fileID: 4500000014}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 208.49, y: -0.04, z: 0}
-  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1}
+  m_LocalPosition: {x: 208.49, y: -0.04, z: 0.0}
+  m_LocalScale: {x: 0.57835823, y: 0.57835823, z: 1.0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4500000003}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4500000016
 SpriteRenderer:
@@ -31276,7 +31366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9807000201
 Transform:
   m_ObjectHideFlags: 0
@@ -31286,11 +31376,11 @@ Transform:
   m_GameObject: {fileID: 9807000200}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 171.79, y: -0.14, z: 0}
+  m_LocalPosition: {x: 171.79, y: -0.14, z: 0.0}
   m_LocalScale: {x: 0.8877872, y: 0.8877872, z: 1.4806}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4300000005}
+  m_Father: {fileID: 9994000001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9807000202
 SpriteRenderer:
@@ -37995,7 +38085,6 @@ Transform:
   m_Children:
   - {fileID: 4100000061}
   - {fileID: 4100000064}
-  - {fileID: 4100000087}
   - {fileID: 4100000091}
   - {fileID: 4100000142}
   - {fileID: 4100000145}
@@ -38035,7 +38124,6 @@ Transform:
   m_Children:
   - {fileID: 4100000073}
   - {fileID: 4100000076}
-  - {fileID: 4100000095}
   - {fileID: 9805000301}
   m_Father: {fileID: 4100000003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -38103,8 +38191,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4200000037}
+  m_Children: []
   m_Father: {fileID: 4100000003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9922000100
@@ -38139,7 +38226,6 @@ Transform:
   m_Children:
   - {fileID: 9966000011}
   - {fileID: 4200000025}
-  - {fileID: 4200000029}
   - {fileID: 4200000033}
   - {fileID: 4200000044}
   - {fileID: 4100000067}
@@ -38253,7 +38339,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4300000009}
   - {fileID: 4300000013}
   m_Father: {fileID: 4300000003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -38291,7 +38376,6 @@ Transform:
   - {fileID: 9977000021}
   - {fileID: 9977000031}
   - {fileID: 4300000017}
-  - {fileID: 4300000021}
   - {fileID: 4300000025}
   - {fileID: 9806000301}
   - {fileID: 9807000001}
@@ -38333,8 +38417,6 @@ Transform:
   - {fileID: 4300000071}
   - {fileID: 4300000075}
   - {fileID: 4300000079}
-  - {fileID: 4300000087}
-  - {fileID: 4300000099}
   - {fileID: 9808000001}
   - {fileID: 9808000101}
   - {fileID: 9808000401}
@@ -38373,7 +38455,6 @@ Transform:
   - {fileID: 9988000021}
   - {fileID: 9988000031}
   - {fileID: 4300000063}
-  - {fileID: 4300000083}
   - {fileID: 4300000091}
   - {fileID: 4300000095}
   - {fileID: 9808000201}
@@ -38543,7 +38624,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4400000066}
   - {fileID: 4400000070}
   m_Father: {fileID: 4400000005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -46964,3 +47044,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &9994000000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9994000001}
+  m_Layer: 0
+  m_Name: Personagens do campo - presença contínua
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9994000001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9994000000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4100000095}
+  - {fileID: 4300000009}
+  - {fileID: 4300000021}
+  - {fileID: 4200000037}
+  - {fileID: 4200000029}
+  - {fileID: 4300000083}
+  - {fileID: 4300000087}
+  - {fileID: 4300000099}
+  - {fileID: 4400000050}
+  - {fileID: 4400000038}
+  - {fileID: 4400000046}
+  - {fileID: 4400000066}
+  - {fileID: 4500000015}
+  - {fileID: 4100000087}
+  - {fileID: 9807000201}
+  - {fileID: 4500000011}
+  m_Father: {fileID: 4100000003}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

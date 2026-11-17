@@ -15,7 +15,7 @@ public partial class EntradaCurrais
 
     private void PrepararEncenacaoEntrada()
     {
-        if (Dados.curraisEtapaEntrada >= 2) Dados.curraisPaiFerido = true;
+        Dados.curraisPaiFerido = true;
     }
 
     private IEnumerator AmpararPaiNaEntrada()

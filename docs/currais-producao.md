@@ -301,3 +301,14 @@ Pendente no Unity: compilação/importação; proporção do canhoto e enquadram
 Correções: coleta sem segunda inserção (incluindo o balde duplicado da etapa 10); devolução de exatamente uma cabaça da mesa sem esvaziar outra; limpeza de walk e Rigidbody ao interromper uma sequência; estados de entrega definidos antes dos eventos de inventário; revisita da criança respeitando a fase posterior à lavagem. Nenhuma mudança nas artes, animações, posições ou limites da cena.
 
 Verificações estáticas e roteiro completo de validação manual em [currais-revisao.md](currais-revisao.md). A compilação, Play Mode, build e revisão visual continuam pendentes; não considerar o ato totalmente validado apenas pela revisão de código.
+
+## Revisão solicitada — família, ferimento, arraste e presença
+
+- Pai, mãe e Baleia começam perto de Zefinha e a acompanham da revista até a primeira sombra. A marca pontoParadaFamilia, as distâncias e a proximidade são editáveis na Hierarchy. A família decide parar por conversa; as posições horizontais ficam salvas.
+- O golpe e o ferimento do pai permanecem. Depois de parar, a mãe explica que precisa de um pano para apoiar o braço. O jogador coleta o pano e o arrasta até ela ou até o pai; não existe botão “Entregar pano”. Conversar não consome o item nem muda a câmera.
+- As conversas tratam dos assuntos e necessidades. Entregas da revista, pano do pai, cabaças, lote da lavagem, peças das pilhas, água/pano do pátio, socorro/pertences de Bento, empréstimo no quarto e devolução do balde protegido passam por alvos explícitos de arraste. Item incompatível não é consumido. A destinatária da água é o alvo escolhido pelo jogador, sem menu posterior para escolher quem recebe.
+- Os NPCs do campo foram separados dos grupos que escondiam áreas por etapa. Dezesseis personagens têm presença permanente, ciclos originais e assuntos neutros antes de sua participação principal. Progresso libera novos assuntos e ações, em vez de fazer o personagem aparecer. As posições mundiais foram preservadas no reparentamento; a ronda começa da posição existente.
+- A testemunha e o trabalhador não são mais ligados/desligados durante as consultas. Bento mantém seu objeto ativo, mas sua representação muda para o atendimento/corpo coberto conforme a história; a morte não é revertida. A separação e saída da irmã continuam sendo acontecimentos narrativos.
+- Save antigo já na exploração mantém a primeira parada concluída. Novos saves registram a parada separadamente dos cuidados com o pai. Nenhum sprite ou ciclo novo foi gerado.
+
+Verificado estaticamente: sintaxe C#, grafo da cena, referências, cobertura do CSV, ausência das opções de entrega removidas, contrato de arraste e aplicação do patch sobre a base. Pendente no Unity: compilar, caminhar/pausar/Continuar, usar cada alvo com item correto e errado, repetir entregas, testar todos os assuntos e confirmar as representações de Bento/irmã. Não houve Play Mode nem build neste ambiente.

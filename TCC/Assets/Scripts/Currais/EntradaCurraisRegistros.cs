@@ -70,7 +70,8 @@ public partial class EntradaCurrais
         if (areaMenino.enabled && areaMenino.gameObject.activeInHierarchy && areaMenino.OverlapPoint(ponto))
         {
             // Mesmo se o primeiro encontro foi pulado, não reabre a apresentação antiga após a lavagem.
-            Iniciar(Dados.curraisMeninoVisitado || Dados.curraisPanelaConcluida ? ReencontrarMenino() : ConhecerMenino());
+            MenuAssuntoNPC("Criança", "Oi. Você também tá esperando alguém?", "Perguntar quem ele espera",
+                () => Dados.curraisMeninoVisitado || Dados.curraisPanelaConcluida ? ReencontrarMenino() : ConhecerMenino());
             return true;
         }
         if (areaCanhotoMesa.enabled && areaCanhotoMesa.gameObject.activeInHierarchy && areaCanhotoMesa.OverlapPoint(ponto))

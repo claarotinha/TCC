@@ -176,14 +176,12 @@ public partial class EntradaCurrais : MonoBehaviour
             RetomarExploracao(posicaoRestaurada, restaurandoPartida, restaurandoPosicao);
         }
         else if (etapa == 1 || etapa == 2) Iniciar(Entrar());
-        else if (etapa == 3 && Dados.curraisAbrigoApresentado && !Dados.curraisPaiAcomodado)
+        else if (etapa == 3)
         {
             MostrarAbrigo();
-            if (Dados.curraisPanoAbrigoRecolhido && !TemItem(itemPanoAbrigo))
-                InventoryManager.Instance.AddItem(itemPanoAbrigo);
             RetomarExploracao(posicaoRestaurada, restaurandoPartida, restaurandoPosicao);
+            if (restaurandoPartida) RestaurarFamiliaNaCaminhada();
         }
-        else if (etapa == 3) Iniciar(ChegarAbrigo());
         else
         {
             MostrarAbrigo();
@@ -373,6 +371,7 @@ public partial class EntradaCurrais : MonoBehaviour
                 if (distanciaAoAlvo < menor) { menor = distanciaAoAlvo; maisPerto = alvo; }
             }
             if (maisPerto != null) InteragirBusca(maisPerto.bounds.center);
+            else ConversarPresencaProxima();
             return;
         }
         if (ocupado || menuAberto || Time.frameCount <= quadroBloqueado ||
@@ -382,7 +381,7 @@ public partial class EntradaCurrais : MonoBehaviour
         if (!plano.Raycast(raio, out float distanciaDoRaio)) return;
         Vector2 ponto = raio.GetPoint(distanciaDoRaio);
         if (Dados.curraisEtapaEntrada != 4) return;
-        if (InteragirBusca(ponto)) return;
+        if (InteragirBusca(ponto) || InteragirPresenca(ponto)) return;
         foreach (Exame exame in exames)
         {
             if (exame.area != null && exame.area.enabled && exame.area.OverlapPoint(ponto))
@@ -399,10 +398,11 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (!isActiveAndEnabled || BloqueiaCursor) return false;
         if (Dados.curraisEtapaEntrada == 2 || Dados.curraisEtapaEntrada == 3)
-            return PonteiroSobreChegada(ponto);
+            return PonteiroSobreChegada(ponto) || SobrePresenca(ponto);
         if (Dados.curraisEtapaEntrada != 4) return false;
         foreach (Collider2D alvo in AlvosAtuais())
             if (alvo != null && alvo.enabled && alvo.gameObject.activeInHierarchy && alvo.OverlapPoint(ponto)) return true;
+        if (SobrePresenca(ponto)) return true;
         foreach (Exame exame in exames)
             if (exame.area != null && exame.area.enabled && exame.area.gameObject.activeInHierarchy && exame.area.OverlapPoint(ponto)) return true;
         return false;
@@ -550,7 +550,7 @@ public partial class EntradaCurrais : MonoBehaviour
         carroca.gameObject.SetActive(true);
         outraFila.SetActive(true);
         guardaRetaguarda.gameObject.SetActive(true);
-        luzia.SetActive(false); lacoChao.SetActive(false); lacoPanela.SetActive(false);
+        luzia.SetActive(true); lacoChao.SetActive(false); lacoPanela.SetActive(false);
         cameraCena.transform.position = cameraRua.position;
         CorFade(1f);
         yield return Esperar(tempoPlano);
@@ -657,34 +657,26 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private IEnumerator ChegarAbrigo()
     {
-        yield return Escurecer(1f);
-        MostrarAbrigo();
-        yield return Escurecer(0f);
-        if (!Dados.curraisAbrigoApresentado)
-        {
-            yield return Dizer(abrigo);
-            Dados.curraisAbrigoApresentado = true;
-        }
-        if (Dados.curraisPaiAcomodado)
-        {
-            Dados.curraisEtapaEntrada = 4;
-            AtualizarEstadoBusca();
-            Salvar();
-            yield break;
-        }
-        if (Dados.curraisPanoAbrigoRecolhido && !TemItem(itemPanoAbrigo))
-            InventoryManager.Instance.AddItem(itemPanoAbrigo);
+        // Depois da revista, continuam de onde estão. Nada de salto ao abrigo.
         Dados.curraisEtapaEntrada = 3;
+        Dados.curraisAbrigoApresentado = true;
         AtualizarVisuaisChegada();
-        objetivoTexto.text = string.Empty;
         Salvar();
+        yield break;
     }
 
     private void MostrarAbrigo()
     {
         MostrarEntrada();
+        if (!Dados.curraisFamiliaParou) return;
         Posicionar(mari.transform, mariAbrigo); Posicionar(pai, paiAbrigo);
-        Posicionar(mae, Dados.curraisPaiAcomodado ? maeCuidadoAbrigo : maeAbrigo); Posicionar(baleia, baleiaAbrigo);
+        Posicionar(mae, maeAbrigo); Posicionar(baleia, baleiaAbrigo);
+        if (Dados.curraisParadaRegistrada && Dados.curraisEtapaBusca == 0)
+        {
+            RestaurarXParada(pai, Dados.curraisParadaPaiX);
+            RestaurarXParada(mae, Dados.curraisParadaMaeX);
+            RestaurarXParada(baleia, Dados.curraisParadaBaleiaX);
+        }
         lacoPanela.SetActive(false);
         pai.localRotation = rotacaoPai;
     }
@@ -837,6 +829,8 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private bool InteragirBusca(Vector2 ponto)
     {
+        if (areaPanoAbrigo.enabled && areaPanoAbrigo.OverlapPoint(ponto))
+        { Iniciar(RecolherPanoAbrigo()); return true; }
         if (InteragirCriancaERegistros(ponto)) return true;
         if (Dados.curraisPanelaConcluida) return InteragirCampo(ponto);
         Collider2D[] areas = { areaLotePanos, areaLuzia, areaAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela };
@@ -847,20 +841,17 @@ public partial class EntradaCurrais : MonoBehaviour
             if (area == areaLotePanos) Iniciar(RecolherLotePanos());
             else if (area == areaLuzia)
             {
-                if (Dados.curraisAguaRecebida && Dados.curraisEscolhaAgua == 0) Iniciar(DestinarAgua());
-                else AbrirMenuLuzia();
+                AbrirMenuLuzia();
             }
             else if (area == areaAgua)
             {
-                if (!Dados.curraisDistribuicaoIniciada) Iniciar(Dizer(aguaAguardar));
-                else if (!Dados.curraisAguaRecebida) Iniciar(ReceberAgua());
-                else Iniciar(Dizer(aguaJaRecebida));
+                MenuFuncionarioAgua();
             }
             else if (area == areaMae)
             {
                 MenuMaePrimeiroAbrigo();
             }
-            else if (area == areaPaiAbrigo) Iniciar(ConversarPaiPrimeiroAbrigo());
+            else if (area == areaPaiAbrigo) MenuPaiPrimeiroAbrigo();
             else if (area == areaMenino)
             {
                 if (Dados.curraisEscolhaAgua == 0) objetivoTexto.text = string.Empty;
@@ -869,9 +860,7 @@ public partial class EntradaCurrais : MonoBehaviour
             }
             else if (area == areaRegistro)
             {
-                if (Dados.curraisEscolhaAgua == 0) Iniciar(Dizer(mesaAntesAgua));
-                else if (!Dados.curraisRegistroConcluido) Iniciar(ConsultarRegistro());
-                else MenuTarefaPanos();
+                MenuPrimeiroRegistro();
             }
             else if (area == areaPanela)
             {
@@ -885,6 +874,12 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void AbrirMenuLuzia()
     {
+        if (Dados.curraisAguaRecebida && Dados.curraisEscolhaAgua == 0)
+        {
+            MenuAssuntoNPC("Luzia", "Você conseguiu água?", "Como a senhora tá?", () => Dizer(maeEsperaAgua),
+                "Perguntar por Mariquinha", () => Dizer(luziaIrma));
+            return;
+        }
         if (!Dados.curraisDistribuicaoIniciada)
         {
             MostrarOpcoes("Luzia", luziaBuscarAgua[0].texto, opcoesLuziaInicio, new Action[] {
@@ -945,7 +940,7 @@ public partial class EntradaCurrais : MonoBehaviour
         yield return Dizer(aguaFuncionario);
     }
 
-    private IEnumerator DestinarAgua()
+    private IEnumerator DestinarAgua(int destinatario = 0)
     {
         if (Dados.curraisEscolhaAgua != 0) yield break;
 
@@ -954,9 +949,8 @@ public partial class EntradaCurrais : MonoBehaviour
             yield return Dizer(maeEsperaAgua);
             yield break;
         }
-        yield return Dizer(aguaAntesEscolha);
-        yield return Escolher("Zefinha", perguntaAgua, opcoesAgua);
-        int opcao = escolhaRecebida;
+        int opcao = destinatario - 1;
+        if (destinatario == 0) yield break; // O alvo do arraste define quem recebe.
         if (opcao < 0 || opcao > 1 || !TemItem(cabacaCheiaBusca)) yield break;
         yield return BeberAguaAbrigo(opcao + 1);
         if (!TemItem(cabacaCheiaBusca)) yield break;
@@ -1070,18 +1064,13 @@ public partial class EntradaCurrais : MonoBehaviour
         cabacaMesa.SetActive(!Dados.curraisCabacaDevolvida);
         lacoPanela.SetActive(false);
         areaPanela.enabled = panelaAcessivel;
-        meninoBusca.gameObject.SetActive(Dados.curraisEscolhaAgua != 0);
+        meninoBusca.gameObject.SetActive(true);
         // Conversar não muda a posição editada da criança.
         if (Dados.curraisEscolhaAgua == 1 &&
             (!Dados.curraisPanelaConcluida || Dados.curraisEtapaBusca == 0))
         {
             luzia.transform.position = luziaRepouso.position;
             luzia.transform.localRotation = Quaternion.identity;
-        }
-        else if (Dados.curraisEscolhaAgua == 2 &&
-            (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))
-        {
-            Posicionar(mae, maeCuidadoAbrigo);
         }
         AtualizarCampo();
         Physics2D.SyncTransforms();
@@ -1107,11 +1096,13 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (!pronto) return;
         AtualizarCompanhiaSepultamento();
+        ManterPessoasPresentes();
         if (Dados.curraisEtapaEntrada == 2 || Dados.curraisEtapaEntrada == 3) AtualizarVisuaisChegada();
         // Marcas de câmera são aplicadas somente pela inicialização/transições.
         // Uma fala na revista ou no abrigo não reposiciona nem redefine o zoom.
-        if (Dados.curraisEtapaEntrada != 4) return;
         bool livre = !ocupado && !menuAberto && !dialogando && !PauseHelper.BlockInput();
+        if (AtualizarCaminhadaFamilia(livre)) return;
+        if (Dados.curraisEtapaEntrada != 4) return;
         if (planoMemoriaAtivo)
         {
             cameraCena.transform.position = cameraPlanoMemoria.position;

@@ -45,8 +45,10 @@ public partial class EntradaCurrais
         if (Dados.curraisEtapaEntrada >= 4)
         {
             Dados.curraisDiarioRecuperado = true;
-            Dados.curraisPaiAcomodado = true;
+            if (!Dados.curraisParadaRegistrada) Dados.curraisPaiAcomodado = true;
         }
+        Dados.curraisPaiFerido = true;
+        if (Dados.curraisEtapaEntrada >= 4) Dados.curraisFamiliaParou = true;
         lacoChao.SetActive(false);
         lacoPanela.SetActive(false);
         AtualizarVisuaisChegada();
@@ -122,7 +124,13 @@ public partial class EntradaCurrais
                 if (area != null && area.enabled && area.gameObject.activeInHierarchy && area.OverlapPoint(ponto))
                 { alvo = area; break; }
         }
-        if (alvo == null) return;
+        if (alvo == null)
+        {
+            if (Input.GetKeyDown(KeyCode.E)) ConversarPresencaProxima();
+            else if (Input.GetMouseButtonDown(0) && !SobreInterface() &&
+                InvestigationGuard.TryGetPointerPosition(out Vector2 pontoLivre)) InteragirPresenca(pontoLivre);
+            return;
+        }
 
         if (alvo == areaFiscalEntrada || alvo == areaMesaRevista) MenuRevista();
         else if (alvo == areaDiarioRetido) Iniciar(Dizer(cadernoEmConferencia));
@@ -130,7 +138,7 @@ public partial class EntradaCurrais
         else if (alvo == areaPanoAbrigo) Iniciar(RecolherPanoAbrigo());
         else if (alvo == areaLuzia) MenuPrimeiroAbrigo();
         else if (alvo == areaMae) MenuMaePrimeiroAbrigo();
-        else if (alvo == areaPaiAbrigo) Iniciar(ConversarPaiPrimeiroAbrigo());
+        else if (alvo == areaPaiAbrigo) MenuPaiPrimeiroAbrigo();
     }
 
     private void MenuRevista() => MenuConferenciaRevista();
@@ -152,19 +160,7 @@ public partial class EntradaCurrais
             if (alvo == null || !alvo.enabled || !alvo.gameObject.activeInHierarchy || !alvo.OverlapPoint(ponto)) continue;
 
             InventoryManager.Instance.SelectItem(item);
-            if (Dados.curraisEtapaEntrada == 3 && alvo == areaMae)
-            {
-                if (item != itemPanoAbrigo) return false;
-                Iniciar(AcomodarPai()); return true;
-            }
-            if (Dados.curraisEtapaEntrada == 4)
-            {
-                if (!Dados.curraisPanelaConcluida &&
-                    ((alvo == areaAgua && item != cabacaVaziaBusca) ||
-                     ((alvo == areaMae || alvo == areaLuzia) && item != cabacaCheiaBusca))) return false;
-                return InteragirBusca(ponto);
-            }
-            return false;
+            return UsarItemArrastado(alvo, item);
         }
         return false;
     }
@@ -254,7 +250,7 @@ public partial class EntradaCurrais
             yield return Dizer(maePrecisaPano);
             yield break;
         }
-        yield return Mover(mae, maeCuidadoAbrigo.position, tempoPlano);
+        // O arraste não teleporta a mãe nem muda o enquadramento.
         if (!TemItem(itemPanoAbrigo)) { yield return Dizer(maePrecisaPano); yield break; }
         Dados.curraisPaiAcomodado = true;
         Dados.curraisEtapaEntrada = 4;
@@ -271,10 +267,9 @@ public partial class EntradaCurrais
         areaFiscalEntrada.enabled = revistaAtiva;
         diarioEntrada.SetActive(revistaAtiva && Dados.curraisPertencesRetidos && !Dados.curraisDiarioRecuperado && !revistaEmConferencia);
         areaDiarioEntrada.enabled = diarioEntrada.activeSelf;
-        panoAbrigo.SetActive(Dados.curraisEtapaEntrada == 3 && !Dados.curraisPanoAbrigoRecolhido && !Dados.curraisPaiAcomodado);
+        panoAbrigo.SetActive(Dados.curraisFamiliaParou && !Dados.curraisPanoAbrigoRecolhido && !Dados.curraisPaiAcomodado);
         areaPanoAbrigo.enabled = panoAbrigo.activeSelf;
-        panoNoPai.SetActive(Dados.curraisPaiAcomodado && (Dados.curraisEtapaBusca < 1 ||
-            (Dados.curraisEtapaBusca >= 4 && Dados.curraisEtapaBusca <= 5)));
+        panoNoPai.SetActive(Dados.curraisPaiAcomodado && (Dados.curraisEtapaBusca < 1 || Dados.curraisEtapaBusca == 4 || Dados.curraisEtapaBusca == 5));
         AtualizarMesaRevista();
         AtualizarAbrigoVisual();
     }

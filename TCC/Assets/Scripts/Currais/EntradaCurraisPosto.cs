@@ -70,7 +70,7 @@ public partial class EntradaCurrais
     {
         bool ativo = PostoDisponivel;
         setorPosto.SetActive(ativo);
-        curativoPai.SetActive(ativo && Dados.curraisEtapaPosto >= 2);
+        curativoPai.SetActive(ativo && Dados.curraisPaiFerido);
         lacoNaMao.SetActive(ativo && (noiteEmCurso || Dados.curraisEtapaPosto == 4) && Dados.curraisLacoGuardado);
         maoNaRoupa.SetActive(ativo && (noiteEmCurso || Dados.curraisEtapaPosto == 4) && !Dados.curraisLacoGuardado);
         cabacaNoite.SetActive(ativo && Dados.curraisEtapaPosto == 4);
@@ -111,11 +111,11 @@ public partial class EntradaCurrais
         {
             if (!area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
 
-            if (area == areaPostoEscolha) Iniciar(EscolherNoPosto());
+            if (area == areaPostoEscolha) MenuAssuntoNPC("Raimundo", "Você chegou numa hora apertada, menina.", "O que houve?", EscolherNoPosto);
             else if (area == areaPortaQuarto) Iniciar(InvestigarQuarto());
             else if (area == areaFamiliaAbrigo)
             {
-                if (Dados.curraisEtapaPosto == 2) Iniciar(ContarAosPais());
+                if (Dados.curraisEtapaPosto == 2) MenuAssuntoNPC("Família", "Conseguiu saber alguma coisa, minha filha?", "Contar o que aconteceu", ContarAosPais);
                 else MenuAbrigo();
             }
             else if (area == areaEsteiraNoite) MenuDescansoFamilia();

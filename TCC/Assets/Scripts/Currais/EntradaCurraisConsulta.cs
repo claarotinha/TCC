@@ -109,8 +109,8 @@ public partial class EntradaCurrais
         lacoNaMao.SetActive(false); maoNaRoupa.SetActive(false); cabacaNoite.SetActive(false);
         papelConsulta.SetActive(true); // A relação continua sobre a mesa após a consulta.
         if (!papelEmConsulta) canhotoApresentadoConsulta.SetActive(false);
-        testemunhaConsulta.SetActive(false);
-        trabalhadorRetorno.SetActive(etapa != 1);
+        testemunhaConsulta.SetActive(true);
+        trabalhadorRetorno.SetActive(true);
         lacoRemendadoCenario.SetActive(false);
         Posicionar(areaRaimundo.transform, Dados.curraisEscolhaPosto == 1 ? raimundoConsultaPerto : raimundoConsultaLonge);
         Posicionar(portaoConsulta, etapa >= 3 ? portaoConsultaFechado : portaoConsultaAberto);
@@ -164,14 +164,14 @@ public partial class EntradaCurrais
             else if (area == areaRaimundo) MenuRaimundoManha();
             else if (area == areaAmanhecer) Iniciar(AmanhecerNoCampo());
             else if (area == areaUltimaConsulta) MenuUltimaConsulta();
-            else if (area == areaLuzia) Iniciar(Dizer(Dados.curraisEtapaConsulta <= 2 ? luziaConsultaFinal : luziaRetornoFinal));
+            else if (area == areaLuzia) MenuAssuntoNPC("Luzia", "Pode falar.", "O que a senhora acha?", () => Dizer(Dados.curraisEtapaConsulta <= 2 ? luziaConsultaFinal : luziaRetornoFinal));
             else if (area == areaMae || area == areaPaiAbrigo)
             {
-                if (Dados.curraisEtapaConsulta == 3) Iniciar(Dizer(retornoAbrigoOrientacao));
+                if (Dados.curraisEtapaConsulta == 3) MenuAssuntoNPC("Família", "Estamos aqui.", "Sobre a volta ao abrigo", () => Dizer(retornoAbrigoOrientacao));
                 else MenuFamiliaConsulta();
             }
             else if (area == areaSaidaConsulta) Iniciar(PedirSaida());
-            else if (Dados.curraisEtapaConsulta == 3) Iniciar(ConcluirRetorno());
+            else if (Dados.curraisEtapaConsulta == 3) MenuAssuntoNPC("Mãe", "Venha pra perto, Josefa.", "Contar o que descobrimos", ConcluirRetorno);
             else MostrarOpcoes("Família", InformacoesConsulta(), opcoesRetornoConsulta, new Action[] {
                 () => Iniciar(RelatarInformacoes()), FecharMenu });
             return true;
@@ -197,7 +197,7 @@ public partial class EntradaCurrais
     private void MenuUltimaConsulta()
     {
         if (Dados.curraisEscolhaConsulta != 0)
-        { Iniciar(Dizer(consultaConcluida)); return; }
+        { MenuAssuntoNPC("Escrivão", "Diga.", "Sobre o que ficou confirmado", () => Dizer(consultaConcluida)); return; }
         MostrarOpcoes("Escrivão", "Ainda posso conferir uma coisa antes de levarem a relação.",
             new[] { "Perguntar por Mariquinha", "Mostrar o canhoto", "Sair" },
             new Action[] { () => Iniciar(FazerUltimaConsulta()), () => Iniciar(ApresentarCanhotoConsulta()), FecharMenu });
@@ -232,7 +232,7 @@ public partial class EntradaCurrais
     {
         papelEmConsulta = false;
         if (canhotoApresentadoConsulta != null) canhotoApresentadoConsulta.SetActive(false);
-        if (testemunhaConsulta != null) testemunhaConsulta.SetActive(false);
+        if (testemunhaConsulta != null) testemunhaConsulta.SetActive(true);
         RestaurarDesenhoSaida();
     }
 

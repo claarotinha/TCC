@@ -140,9 +140,9 @@ public partial class EntradaCurrais
     {
         MostrarOpcoes("Raimundo", Dados.curraisBaldeApoiado ? "Obrigado pela ajuda, Josefa. Vamos guardar o nome com cuidado."
             : "A alça do balde continua cortando minha mão.",
-            new[] { "O que descobriu da mulher?", "Posso proteger a alça?", "Devolver o balde protegido", "Sair" },
+            new[] { "O que descobriu da mulher?", "Posso proteger a alça?", "Sair" },
             new Action[] { () => Iniciar(ConversarRaimundoManha()), () => Iniciar(PedirBaldeRaimundo()),
-                () => Iniciar(DevolverBaldeRaimundo()), FecharMenu });
+                FecharMenu });
     }
 
     private IEnumerator ConversarRaimundoManha()

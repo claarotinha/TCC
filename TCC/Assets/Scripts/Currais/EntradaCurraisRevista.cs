@@ -55,18 +55,9 @@ public partial class EntradaCurrais
                 new Action[] { () => Iniciar(Dizer(cadernoAutorizado)), FecharMenu });
             return;
         }
-        ItemData selecionado = InventoryManager.Instance != null ? InventoryManager.Instance.SelectedItem : null;
-        bool entregar = selecionado != null && TemItem(selecionado);
-        string texto = InventoryManager.Instance.Items.Count > 0
-            ? "Os pertences ficam juntos na mesa. O caderno eu confiro depois."
-            : "Os pertences estão aqui. Falta conferir o caderno da menina.";
-        if (entregar)
-            MostrarOpcoes("Fiscal", texto, new[] { "Entregar este pertence", "Conferir a revista", "Sair" },
-                new Action[] { () => Iniciar(EntregarFerramenta(selecionado)),
-                    () => Iniciar(ConcluirRevista()), FecharMenu });
-        else
-            MostrarOpcoes("Fiscal", texto, new[] { "Conferir a revista", "Sair" },
-                new Action[] { () => Iniciar(ConcluirRevista()), FecharMenu });
+        MostrarOpcoes("Fiscal", "Os pertences ficam juntos na mesa. Depois confiro o caderno.",
+            new[] { "O que acontece com nossas coisas?", "Já terminou a conferência?", "Sair" },
+            new Action[] { () => Iniciar(Dizer(revistaPendente)), () => Iniciar(ConcluirRevista()), FecharMenu });
     }
 
     private IEnumerator EntregarPertenceRevista(ItemData item)
