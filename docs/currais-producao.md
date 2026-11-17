@@ -250,3 +250,22 @@ Verificação no Unity ainda necessária: entrega por diálogo/arraste; item err
 
 Pendências de arte: pose de Bento caído/em atendimento e gesto específico do pai com carga, caso a autora deseje essas representações. Os ciclos em pé existentes foram preservados.
 Pendente no Unity: compilar; conferir encaixes/áreas; água e pano nas duas ordens; diálogo/arraste/item errado; voltar ao pai; pausa na transição/cobertura; atendimento nas duas ordens; Continue após cada entrega e antes da notícia; cancelamento de coleta; ambos os últimos itens da despedida em ordens diferentes; entrada no sepultamento. Nenhum teste em Play Mode foi executado neste ambiente.
+
+
+## Etapa 9 — sepultamento, posto e quarto
+
+- O sepultamento exige a morte registrada, o pano dos pertences entregue e a cabaça recolhida. Reentradas simultâneas não repetem a sequência.
+- O Canvas existente recebe mãe, pai, Zefinha e Luzia usando os sprites de seus próprios personagens. As imagens acompanham os quadros de idle em execução, sem novas texturas nem substituição das animações da autora.
+- Bento coberto é baixado gradualmente e desaparece; uma cruz com seu nome ocupa o plano. As posições, tamanhos e cores estão no Canvas da cena. Poses específicas de luto ainda dependem de arte aprovada.
+- As escolhas de ajudar Raimundo ou copiar o registro continuam exclusivas. Sair adia a escolha. A cópia anima a folha existente e mostra uma anotação com Mari; rever a mesa não concede outra escolha nem outra pista.
+- A ajuda deixa os baldes no chão e mantém Raimundo junto do posto nesta parte. A marca nova evita o salto direto para uma coordenada do abrigo durante a escolha. Seu ciclo original é preservado; um gesto corporal específico sem carga continua pendente.
+- Luzia indica o quarto de atendimento e depois o retorno à família por falas indiretas, sem instruções de teclado.
+- A porta tem dobradiça e folha aberta serializadas na Hierarchy. A abertura gira a madeira existente em torno da lateral, respeita a pausa e fica salva. A cobertura da casa passa ao grupo exterior, sem mudar sua posição mundial, para continuar visível com a porta fechada.
+- Trabalhadora, Cabo e as duas pessoas do atendimento podem ser revisitados. Não se repete a voz da irmã depois de a porta já ter sido aberta. Os desenhos provisórios dos dois doentes foram mantidos como referências editáveis; artes próprias ainda estão pendentes. Nenhuma nova imagem de personagem foi gerada.
+- O empréstimo retira temporariamente uma cabaça vazia do inventário e registra o estado antes dos eventos de inventário. A trabalhadora serve água com o objeto existente, devolve a mesma unidade e registra a ajuda. Sair não empresta; repetir conversa depois não duplica o item.
+- Um checkpoint interrompido durante o empréstimo devolve a cabaça ao continuar e conclui a visita já apresentada. Saves antigos que já passaram do quarto recebem apenas o estado de porta aberta, sem nova obrigação.
+- Campos novos no progresso: curraisQuartoAberto e curraisCabacaEmprestadaQuarto. Os valores padrão false preservam a leitura de saves antigos.
+- Objetos novos no mundo: folha aberta, anotação copiada e cabaça do empréstimo. Marcas: dobradiça, posição da folha em leitura e apoio de Raimundo. No Canvas: quatro imagens de companhia, cruz e nome de Bento. O CSV continua contando SpriteRenderers; os elementos do Canvas estão descritos aqui.
+- Falas longas foram fragmentadas sem retirar palavras. A câmera, seus limites e os arquivos de animação não foram alterados.
+
+Pendente no Unity: compilar e importar; conferir enquadramento do plano; pausa e interrupção durante descida/porta/empréstimo; escolha de cada ramo e Sair; revisitas; Continue antes/depois da abertura e durante o empréstimo; confirmar uma única cabaça devolvida; passagem para a conversa noturna. Poses de luto, Raimundo apoiando a carga e artes próprias dos doentes aguardam aprovação/produção da autora.

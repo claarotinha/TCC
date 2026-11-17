@@ -165,6 +165,7 @@ public partial class EntradaCurrais : MonoBehaviour
         PrepararEtapaLavagem();
         PrepararSocorro();
         PrepararFamiliaAlternativa();
+        PrepararDespedidaEQuarto();
         pronto = true;
         int etapa = Mathf.Clamp(Dados.curraisEtapaEntrada, 0, 4);
         Dados.curraisEtapaEntrada = etapa;
@@ -509,6 +510,7 @@ public partial class EntradaCurrais : MonoBehaviour
                     EncerrarGestoRevista();
                     EncerrarLavagemELembranca();
                     EncerrarPatioDetalhado();
+                    EncerrarDespedidaEQuarto();
                     RestaurarPlanoSepultamento();
                     RestaurarDesenhoSaida();
                     RestaurarApresentacaoMemoria();
@@ -1109,6 +1111,7 @@ public partial class EntradaCurrais : MonoBehaviour
     private void LateUpdate()
     {
         if (!pronto) return;
+        AtualizarCompanhiaSepultamento();
         if (Dados.curraisEtapaEntrada == 2 || Dados.curraisEtapaEntrada == 3) AtualizarVisuaisChegada();
         // Marcas de câmera são aplicadas somente pela inicialização/transições.
         // Uma fala na revista ou no abrigo não reposiciona nem redefine o zoom.
@@ -1220,6 +1223,7 @@ public partial class EntradaCurrais : MonoBehaviour
         EncerrarGestoRevista();
         EncerrarLavagemELembranca();
         EncerrarPatioDetalhado();
+        EncerrarDespedidaEQuarto();
         RestaurarPlanoSepultamento();
         RestaurarDesenhoSaida();
         RestaurarApresentacaoMemoria();
@@ -1237,3 +1241,4 @@ public partial class EntradaCurrais : MonoBehaviour
         if (seguidorPaiConsulta != null) seguidorPaiConsulta.enabled = false;
     }
 }
+

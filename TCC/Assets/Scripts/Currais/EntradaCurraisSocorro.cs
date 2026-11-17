@@ -187,21 +187,23 @@ public partial class EntradaCurrais
 
     private IEnumerator SepultarBento()
     {
-        if (Dados.curraisSepultamentoConcluido) yield break;
-        bool objetivoVisivel = objetivoTexto.gameObject.activeSelf;
+        if (Dados.curraisSepultamentoConcluido || sepultamentoEmCurso) yield break;
+        if (!Dados.curraisBentoMorto || !Dados.curraisPanoSepultamentoEntregue || !Dados.curraisCabacaSocorroRecolhida)
+        { yield return Dizer(EstadoSocorroBento()); yield break; }
+        sepultamentoEmCurso = true;
         try
         {
             yield return Escurecer(1f);
             sepultamentoNaTela = true;
             planoSepultamento.SetActive(true);
             corpoNoPlano.SetActive(true);
+            cruzDeBento.SetActive(false);
+            AtualizarCompanhiaSepultamento();
             objetivoTexto.gameObject.SetActive(false);
             yield return Escurecer(0f);
             yield return Dizer(sepultamentoFalas);
-            yield return Escurecer(1f);
-            corpoNoPlano.SetActive(false);
+            yield return BaixarBentoNoPlano();
             yield return Esperar(tempoPlano);
-            yield return Escurecer(0f);
             yield return Dizer(retornoSepultamento);
             yield return ChapterCard.Show("josefa-09");
             yield return Escurecer(1f);
@@ -212,6 +214,7 @@ public partial class EntradaCurrais
         }
         finally
         {
+            sepultamentoEmCurso = false;
             RestaurarPlanoSepultamento();
             if (objetivoTexto != null) objetivoTexto.gameObject.SetActive(false);
         }
@@ -219,16 +222,26 @@ public partial class EntradaCurrais
 
     private IEnumerator AjudarNoQuarto()
     {
-        if (Dados.curraisAjudouAtendimentoQuarto || !TemItem(cabacaVaziaBusca)) yield break;
-        yield return Escolher("Trabalhadora", "Você pode emprestar esse recipiente? Preciso buscar água para quem tá aqui.",
-            new[] { "Emprestar a cabaça", "Preciso voltar para minha família" });
-        if (escolhaRecebida != 0) yield break;
-        // Empréstimo breve durante a conversa: a mesma cabaça é devolvida, sem consumi-la.
-        yield return Dizer(emprestimoQuarto);
-        yield return Esperar(tempoPlano);
-        yield return Dizer(devolucaoQuarto);
-        Dados.curraisAjudouAtendimentoQuarto = true;
-        Salvar();
+        if (emprestandoNoQuarto) yield break;
+        if (Dados.curraisAjudouAtendimentoQuarto) { yield return Dizer(devolucaoQuarto); yield break; }
+        if (!TemItem(cabacaVaziaBusca)) { yield return Dizer(quartoSemCabaca); yield break; }
+        yield return Escolher("Trabalhadora", "Pode emprestar essa cabaça? Preciso levar água a quem tá aqui.",
+            new[] { "Emprestar a cabaça", "Sobre as pessoas daqui", "Sair" });
+        if (escolhaRecebida == 1) { yield return Dizer(quartoRevisita); yield break; }
+        if (escolhaRecebida != 0 || !TemItem(cabacaVaziaBusca)) yield break;
+        emprestandoNoQuarto = true;
+        try
+        {
+            Dados.curraisCabacaEmprestadaQuarto = true;
+            InventoryManager.Instance.RemoveItem(cabacaVaziaBusca);
+            AtualizarDetalhesPosto(); Salvar();
+            yield return Dizer(emprestimoQuarto);
+            yield return ServirAguaNoQuarto();
+            DevolverCabacaDoQuarto();
+            Salvar();
+            yield return Dizer(devolucaoQuarto);
+        }
+        finally { emprestandoNoQuarto = false; }
     }
 
     private void RestaurarPlanoSepultamento()
@@ -238,3 +251,4 @@ public partial class EntradaCurrais
         sepultamentoNaTela = false;
     }
 }
+

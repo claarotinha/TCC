@@ -45,12 +45,13 @@ public partial class EntradaCurrais
             string.IsNullOrWhiteSpace(perguntaPosto) || string.IsNullOrWhiteSpace(perguntaNoite) ||
             cenarioNoturno == null || cenarioNoturno.Length == 0) valido = false;
         else foreach (SpriteRenderer desenho in cenarioNoturno) valido &= ConferirReferencia(desenho, nameof(cenarioNoturno));
-        return valido;
+        return valido && ReferenciasDespedidaValidas();
     }
 
     private string ObjetivoPosto() => string.Empty;
 
-    private Collider2D[] AlvosPosto() => ConsultaDisponivel ? AlvosConsulta() : new[] { areaPostoEscolha, areaPortaQuarto, areaFamiliaAbrigo, areaEsteiraNoite };
+    private Collider2D[] AlvosPosto() => ComAlvosDetalhadosDoPosto(ConsultaDisponivel ? AlvosConsulta() :
+        new[] { areaPostoEscolha, areaPortaQuarto, areaFamiliaAbrigo, areaEsteiraNoite });
 
     private void AplicarNoite(bool ativa)
     {
@@ -86,9 +87,9 @@ public partial class EntradaCurrais
         portaQuartoFechada.SetActive(etapa < 2);
         panoAlca.SetActive(Dados.curraisBaldeApoiado);
         AtualizarFamiliaAlternativa();
-        curativoRaimundo.SetActive(Dados.curraisEscolhaPosto != 0);
+        curativoRaimundo.SetActive(Dados.curraisEscolhaPosto == 1);
         Posicionar(areaRaimundo.transform, etapa == 0 ? raimundoNoPosto :
-            Dados.curraisEscolhaPosto == 1 ? raimundoSentado : raimundoOutroSetor);
+            Dados.curraisEscolhaPosto == 1 ? (etapa == 1 ? raimundoApoiadoPosto : raimundoSentado) : raimundoOutroSetor);
         areaRaimundo.transform.localRotation = Quaternion.identity;
         if (etapa >= 2 && (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))
         {
@@ -98,11 +99,13 @@ public partial class EntradaCurrais
             Posicionar(mae, (noiteEmCurso || etapa == 4) ? maeNoite : maeAbrigo);
         }
         AtualizarConsulta();
+        AtualizarDetalhesPosto();
         Physics2D.SyncTransforms();
     }
 
     private bool InteragirPosto(Vector2 ponto)
     {
+        if (InteragirDetalhesDoPosto(ponto)) return true;
         if (ConsultaDisponivel) return InteragirConsulta(ponto);
         foreach (Collider2D area in AlvosPosto())
         {
@@ -134,7 +137,7 @@ public partial class EntradaCurrais
         yield return Dizer(postoLuzia);
         yield return Escolher("Zefinha", perguntaPosto, opcoesPosto);
         int opcao = escolhaRecebida;
-        if (opcao == 2) yield break; // Sair adia a decisão sem registrar uma escolha.
+        if (opcao < 0 || opcao >= 2) yield break; // Sair adia a decisão sem registrar uma escolha.
         bool destinoAnterior = Dados.curraisDestinoConfirmado;
         if (opcao == 0)
         {
@@ -142,30 +145,35 @@ public partial class EntradaCurrais
         }
         else
         {
+            yield return LerFolhaDoPosto();
             yield return Dizer(postoCopia);
             if (destinoAnterior) yield return Dizer(postoRepetido);
         }
         // A decisão e a etapa são registradas juntas após o encerramento da conversa.
+        if (opcao == 0) yield return Escurecer(1f);
         Dados.curraisEscolhaPosto = opcao + 1;
         if (opcao == 1) Dados.curraisDestinoConfirmado = true;
         Dados.curraisEtapaPosto = 1;
         if (opcao == 1) GameProgress.Instance.UnlockDiaryPage("currais-copia");
         AtualizarEstadoBusca(); Salvar();
+        if (opcao == 0) yield return Escurecer(0f);
+        yield return Dizer(postoSeguinte);
     }
 
     private IEnumerator InvestigarQuarto()
     {
-        yield return Dizer(quartoVoz);
-        yield return Escurecer(1f);
-        portaQuartoFechada.SetActive(false);
-        quartoInterior.SetActive(true);
-        yield return Escurecer(0f);
-        yield return Esperar(tempoPlano);
+        if (Dados.curraisEtapaPosto >= 2) { yield return Dizer(quartoRevisita); yield break; }
+        if (!Dados.curraisQuartoAberto)
+        {
+            yield return Dizer(quartoVoz);
+            yield return AbrirPortaDoQuarto();
+        }
         yield return Dizer(quartoFalas);
         yield return AjudarNoQuarto();
         Dados.curraisEtapaPosto = 2;
         GameProgress.Instance.UnlockDiaryPage("currais-quarto");
         AtualizarEstadoBusca(); Salvar();
+        yield return Dizer(quartoVoltarFamilia);
     }
 
     private IEnumerator NoticiasDaBusca()
@@ -226,3 +234,4 @@ public partial class EntradaCurrais
         AtualizarEstadoBusca(); Salvar();
     }
 }
+

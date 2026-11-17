@@ -126,6 +126,8 @@ public class GameProgressData
     public bool curraisCabacaSocorroRecolhida;
     public bool curraisSepultamentoConcluido;
     public bool curraisAjudouAtendimentoQuarto;
+    public bool curraisQuartoAberto;
+    public bool curraisCabacaEmprestadaQuarto;
     public int curraisPerguntasFamilia;
     public bool curraisBaldeSolicitado;
     public bool curraisBaldeRecolhido;
@@ -172,6 +174,7 @@ public class GameProgressData
 
     public List<string> unlockedDiaryPages = new List<string>();
 }
+
 
 
 
