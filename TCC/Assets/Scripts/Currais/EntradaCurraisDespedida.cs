@@ -124,7 +124,7 @@ public partial class EntradaCurrais
             areaMesaDocumento, areaCaboQuarto, areaRaimundo, areaLuzia })
         {
             if (!alvo.enabled || !alvo.gameObject.activeInHierarchy || !alvo.OverlapPoint(ponto)) continue;
-            if (alvo == areaRaimundo && ConsultaDisponivel) return false;
+            if ((alvo == areaRaimundo || alvo == areaLuzia) && ConsultaDisponivel) return false;
             if (alvo == areaMesaDocumento || alvo == areaRaimundo)
             {
                 if (Dados.curraisEscolhaPosto == 0) Iniciar(EscolherNoPosto());

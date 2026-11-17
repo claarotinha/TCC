@@ -21,6 +21,9 @@ public partial class EntradaCurrais
     [SerializeField, Min(.1f)] private float duracaoCorteMemoria = 1.5f;
     [SerializeField] private string cenaEpilogo = "epilogo";
     private bool planoMemoriaAtivo, leituraPaginaMemoria, paginaMemoriaPodeAvancar;
+    private bool composicaoMemoriaGuardada;
+    private Vector3 mariAntesDaMemoria, cameraAntesDaMemoria;
+    private float zoomAntesDaMemoria;
     private readonly Dictionary<Animator, bool> animadoresMemoria = new Dictionary<Animator, bool>();
 
     private bool MemoriaDisponivel => ConsultaDisponivel && Dados.curraisEtapaConsulta >= 4;
@@ -47,7 +50,7 @@ public partial class EntradaCurrais
 
     private string ObjetivoMemoria() => string.Empty;
 
-    private Collider2D[] AlvosMemoria() => new[] { areaRetornoConsulta, areaPaginasMemoria };
+    private Collider2D[] AlvosMemoria() => new[] { areaRetornoConsulta, areaPaginasMemoria, areaMae, areaPaiAbrigo, areaLuzia };
 
     private void AtualizarMemoria()
     {
@@ -55,7 +58,7 @@ public partial class EntradaCurrais
         if (!MemoriaDisponivel) return;
         objetivoTexto.text = string.Empty;
         areaPaginasMemoria.enabled = true;
-        lacoMemoria.SetActive(false);
+        lacoMemoria.SetActive(planoMemoriaAtivo && Dados.curraisLacoGuardado);
         documentoMemoria.SetActive(planoMemoriaAtivo && (TemItem(itemCanhoto) || Dados.curraisEscolhaPosto == 2));
     }
 
@@ -70,6 +73,7 @@ public partial class EntradaCurrais
                 if (Dados.ato2Concluido) AbrirMenuFimMemoria();
                 else Iniciar(ExibirPaginasMemoria(false));
             }
+            else if (area == areaLuzia) Iniciar(Dizer(luziaRetornoFinal));
             else MostrarOpcoes("Família", InformacoesConsulta(), opcoesRetornoConsulta, new Action[] {
                 () => Iniciar(RelatarInformacoes()), FecharMenu });
             return true;
@@ -79,6 +83,13 @@ public partial class EntradaCurrais
 
     private void PrepararPlanoMemoria()
     {
+        if (!composicaoMemoriaGuardada)
+        {
+            mariAntesDaMemoria = mari.transform.position;
+            cameraAntesDaMemoria = cameraCena.transform.position;
+            zoomAntesDaMemoria = cameraCena.orthographicSize;
+            composicaoMemoriaGuardada = true;
+        }
         planoMemoriaAtivo = true;
         mari.enabled = false;
         seguirCamera.enabled = false;
@@ -136,6 +147,7 @@ public partial class EntradaCurrais
 
     private IEnumerator ExibirPaginasMemoria(bool rever)
     {
+        if (!MemoriaDisponivel) yield break;
         if (!rever)
         {
             Dados.curraisMemoriaIniciada = true;
@@ -233,6 +245,7 @@ public partial class EntradaCurrais
         }
         if (string.IsNullOrWhiteSpace(cenaEpilogo) || !Application.CanStreamedLevelBeLoaded(cenaEpilogo))
         {
+            CorFade(0f);
             Debug.LogError("Currais: a cena do epílogo não está habilitada na build.", this);
             AbrirMenuFimMemoria();
             yield break;
@@ -274,5 +287,16 @@ public partial class EntradaCurrais
             if (animador.Key != null) animador.Key.enabled = animador.Value;
         animadoresMemoria.Clear();
         if (planoMemoria != null) planoMemoria.SetActive(false);
+        if (composicaoMemoriaGuardada)
+        {
+            if (mari != null) mari.transform.position = mariAntesDaMemoria;
+            if (cameraCena != null)
+            {
+                cameraCena.transform.position = cameraAntesDaMemoria;
+                cameraCena.orthographicSize = zoomAntesDaMemoria;
+            }
+            composicaoMemoriaGuardada = false;
+            Physics2D.SyncTransforms();
+        }
     }
 }

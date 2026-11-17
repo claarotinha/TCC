@@ -4589,6 +4589,7 @@ Transform:
   m_LocalScale: {x: 1.0224217, y: 1.0224217, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 9993000011}
   - {fileID: 9992000001}
   - {fileID: 9991000241}
   - {fileID: 9988000041}
@@ -15096,6 +15097,29 @@ MonoBehaviour:
   - personagem: Luzia
     texto: Vou perguntar na lavagem. Tem muita gente chegando por caminhos diferentes.
   objetivoPano: ""
+  cameraSaidaConsulta: {fileID: 9993000001}
+  canhotoApresentadoConsulta: {fileID: 9993000010}
+  consultaConcluida:
+  - personagem: "Escrivão"
+    texto: "É o que consegui conferir hoje. A relação vai seguir."
+  - personagem: Pai
+    texto: "Então nós guarda o que sabe. Lá no portão ainda precisam ouvir nós."
+  semCanhotoConsulta:
+  - personagem: "Escrivão"
+    texto: "Mesmo sem o papel, eu escuto. Diga o que precisa confirmar."
+  retornoAbrigoOrientacao:
+  - personagem: "Mãe"
+    texto: "Luzia ficou no abrigo. Vamos voltar pra perto dela, sem deixar esses nomes se perder."
+  luziaConsultaFinal:
+  - personagem: Luzia
+    texto: "Eu guardo o lugar de vocês. Teu pai ainda tem pergunta pra fazer naquela mesa."
+  - personagem: Luzia
+    texto: "Depois tem o portão. Num deixa tua mãe atravessar isso sozinha."
+  luziaRetornoFinal:
+  - personagem: Luzia
+    texto: "Sente um pouco. Tua mãe quer ouvir o que vocês conseguiram saber."
+  - personagem: Luzia
+    texto: "O que ainda falta ninguém precisa inventar. Vamos guardar o que tem nome."
   setorConsulta: {fileID: 4500000000}
   papelConsulta: {fileID: 4500000006}
   testemunhaConsulta: {fileID: 4500000014}
@@ -38915,6 +38939,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 9993000001}
   - {fileID: 4500000038}
   - {fileID: 4500000040}
   - {fileID: 4500000042}
@@ -39397,7 +39422,7 @@ MonoBehaviour:
   titulo: "16 - Última consulta"
   acontecimentos: "Pela manhã: confirmar destino ou identidade, com testemunha."
   artesExistentes: "Papel; Escrivão; testemunha com ciclo lavadeira1 a 4."
-  variantesPendentes: "Gestos de consulta, entrada/saída da testemunha e confirmação sem duplicar personagem: etapa 11."
+  variantesPendentes: "Etapa 11: menus com Sair, canhoto visual sem consumo, revisita e confirmação exclusiva preservada. Conferir encaixe da testemunha no Unity."
   camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
   marcasRelacionadas:
   - {fileID: 4500000028}
@@ -39423,7 +39448,7 @@ MonoBehaviour:
   titulo: "17 - Portão e recusa"
   acontecimentos: "Pai pede para procurar a filha; Cabo nega; movimento livre após conversa."
   artesExistentes: "Mesmo portão do campo e marcas do pedido de saída."
-  variantesPendentes: "Gesto de bloqueio, reação do pai e retorno da família: etapa 11."
+  variantesPendentes: "Etapa 11: enquadramento editável, fechamento pausável e retomada sem bloquear o caminho. Gesto próprio do Cabo depende de arte da autora."
   camadas: "Fundo -120 a -80; cercas -40; abrigo -20; esteiras -10; pessoas 17 a 28; Mari 30; objetos em mãos 32 a 36."
   marcasRelacionadas:
   - {fileID: 4500000038}
@@ -46814,5 +46839,128 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
+  m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
+--- !u!1 &9993000000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9993000001}
+  m_Layer: 0
+  m_Name: Saída - enquadramento da família e portão
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9993000001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9993000000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 51.4, y: 3, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9922000321}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9993000010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9993000011}
+  - component: {fileID: 9993000012}
+  m_Layer: 0
+  m_Name: Canhoto apresentado - não consumido na consulta
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &9993000011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9993000010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4, y: 0.25, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1304905425}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &9993000012
+SpriteRenderer:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9993000010}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 36
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 21300000, guid: 3eb6ac21c8f75970917b48c387253a0e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []

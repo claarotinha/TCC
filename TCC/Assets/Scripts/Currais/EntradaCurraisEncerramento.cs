@@ -21,13 +21,26 @@ public partial class EntradaCurrais
 
     private void MenuNomesFinais()
     {
-        MostrarOpcoes("Família", InformacoesConsulta() + "\nO que vamos guardar desta conversa?",
-            new[] { Dados.curraisDestinoConfirmado ? "Contar o lugar: Lagoa do Meio" : "Ainda não sabemos o lugar",
-                Dados.curraisIdentidadeConfirmada ? "Contar o nome: Nair Pereira" : "Ainda não sabemos o nome",
-                "Lembrar Bento", "Guardar os nomes e descansar" },
+        MostrarOpcoes("Família", "Ainda podemos conversar antes de descansar.",
+            new[] { "O lugar e o nome", "Bento e as lembranças", "Sair" },
+            new Action[] { MenuPistasFinais, MenuOutrosAssuntosFinais, FecharMenu });
+    }
+
+    private void MenuPistasFinais()
+    {
+        MostrarOpcoes("Família", "Vamos guardar o que foi confirmado, sem completar o que ainda falta.",
+            new[] { Dados.curraisDestinoConfirmado ? "O lugar: Lagoa do Meio" : "Ainda falta o lugar",
+                Dados.curraisIdentidadeConfirmada ? "O nome: Nair Pereira" : "Ainda falta o nome", "Voltar" },
             new Action[] { () => Iniciar(RelembrarAssuntoFinal(1, Dados.curraisDestinoConfirmado ? lugarEncerramento : faltaLugarEncerramento)),
-                () => Iniciar(RelembrarAssuntoFinal(2, Dados.curraisIdentidadeConfirmada ? nomeEncerramento : faltaNomeEncerramento)),
-                () => Iniciar(RelembrarAssuntoFinal(4, bentoEncerramento)), () => Iniciar(FecharConversaFinal()) });
+                () => Iniciar(RelembrarAssuntoFinal(2, Dados.curraisIdentidadeConfirmada ? nomeEncerramento : faltaNomeEncerramento)), MenuNomesFinais });
+    }
+
+    private void MenuOutrosAssuntosFinais()
+    {
+        MostrarOpcoes("Família", "Bento também tem nome. Num vamos deixar ele se perder no meio disso tudo.",
+            new[] { "Lembrar Bento", "Guardar os nomes e descansar", "Sair" },
+            new Action[] { () => Iniciar(RelembrarAssuntoFinal(4, bentoEncerramento)),
+                () => Iniciar(FecharConversaFinal()), FecharMenu });
     }
 
     private IEnumerator RelembrarAssuntoFinal(int bit, Fala[] falas)
@@ -39,6 +52,7 @@ public partial class EntradaCurrais
 
     private IEnumerator FecharConversaFinal()
     {
+        if (Dados.curraisEtapaConsulta != 3) yield break;
         yield return Dizer(fimFamiliaEncerramento);
         Dados.curraisEtapaConsulta = 4;
         GameProgress.Instance.UnlockDiaryPage("currais-pistas-finais");

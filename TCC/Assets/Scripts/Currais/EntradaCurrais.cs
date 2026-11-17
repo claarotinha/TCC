@@ -512,6 +512,7 @@ public partial class EntradaCurrais : MonoBehaviour
                     EncerrarPatioDetalhado();
                     EncerrarDespedidaEQuarto();
                     EncerrarNoiteFamilia();
+                    EncerrarDetalhesConsulta();
                     RestaurarPlanoSepultamento();
                     RestaurarDesenhoSaida();
                     RestaurarApresentacaoMemoria();
@@ -1226,6 +1227,7 @@ public partial class EntradaCurrais : MonoBehaviour
         EncerrarPatioDetalhado();
         EncerrarDespedidaEQuarto();
         EncerrarNoiteFamilia();
+        EncerrarDetalhesConsulta();
         RestaurarPlanoSepultamento();
         RestaurarDesenhoSaida();
         RestaurarApresentacaoMemoria();
