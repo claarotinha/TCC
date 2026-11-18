@@ -96,7 +96,10 @@ public class ControleJornada : MonoBehaviour
                 limiteX += (aguaTerceiraLiberada || encontroTerceiraLiberado)
                     ? trechoAposAguaTerceira : trechoAguaTerceira;
             if (paradasConcluidas == 3) limiteX += trechoJuazeiro;
-            if (paradasConcluidas == 4) limiteX += trechoAcampamento;
+            // Antes da introdução, espera na árvore: uma fala anterior não permite
+            // atravessar o acampamento inteiro antes de o gatilho poder iniciar.
+            if (paradasConcluidas == 4 && paradaAtiva && paradaAtual == 5)
+                limiteX += trechoAcampamento;
             if (paradasConcluidas >= 5) limiteX = limiteFortaleza != null
                 ? limiteFortaleza.position.x : limiteX + trechoAposAcampamento;
             if (paradasConcluidas == 1 && caminhada != null)

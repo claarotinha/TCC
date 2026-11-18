@@ -756,8 +756,10 @@ public class SegundaParada : MonoBehaviour
     {
         if ((!iniciou && !aguaTerceiraIniciada) || conversando || Time.frameCount <= quadro ||
             PauseHelper.BlockInput() || Time.timeScale == 0f || sequenciaAbrigo) return;
-        if (mari == null || Vector2.Distance(mari.transform.position, Posicao(alvo)) > 5f)
-            return;
+        if (mari == null) return;
+        bool materialAcampamento = alvo.StartsWith("materialAcampamento");
+        if (materialAcampamento ? !MaterialAoAlcance(alvo) :
+            Vector2.Distance(mari.transform.position, Posicao(alvo)) > 5f) return;
         if (alvo == "fogueira") { InteragirAcampamento(); return; }
         if (alvo.StartsWith("materialAcampamento"))
         {
@@ -2065,7 +2067,22 @@ public class SegundaParada : MonoBehaviour
 
     private void MostrarFogueira(Sprite sprite)
     {
+        if (fogueiraCenario == null || sprite == null) return;
+        SpriteRenderer desenho = fogueiraCenario.GetComponent<SpriteRenderer>();
+        if (desenho == null || desenho.sprite == null) return;
+        // Os estados antigos tinham pivô nos pés; os novos têm pivô central.
+        // A montagem troca a arte sem afundar a base da fogueira no chão.
+        float chao = fogueiraCenario.transform.TransformPoint(desenho.sprite.bounds.min).y;
         TrocarVisualCenario(fogueiraCenario, sprite, true);
+        Vector3 posicao = fogueiraCenario.transform.position;
+        posicao.y += chao - fogueiraCenario.transform.TransformPoint(sprite.bounds.min).y;
+        fogueiraCenario.transform.position = posicao;
+        BoxCollider2D area = fogueiraCenario.GetComponent<BoxCollider2D>();
+        if (area != null)
+        {
+            area.offset = sprite.bounds.center;
+            area.size = sprite.bounds.size;
+        }
     }
 
     private void AtualizarPanoramasJornada()
@@ -2155,6 +2172,21 @@ public class SegundaParada : MonoBehaviour
         RestaurarGrupoAbrigo(); RestaurarInventarioAbrigo(); LiberarMovimento();
         sequenciaAbrigo = false; quadro = Time.frameCount;
         SalvarAcampamento();
+    }
+
+    private bool MaterialAoAlcance(string identificador)
+    {
+        if (mari == null) return false;
+        foreach (GameObject material in materiaisCenario)
+        {
+            if (material == null || IdentificadorCenario(material) != identificador) continue;
+            Collider2D area = material.GetComponent<Collider2D>();
+            if (area == null || !area.enabled || !material.activeInHierarchy) return false;
+            // A distância é até a área clicável, não até um pivô fora do desenho.
+            return Vector2.Distance(mari.transform.position,
+                area.ClosestPoint(mari.transform.position)) <= 5f;
+        }
+        return false;
     }
 
     private void ColetarMaterialAcampamento(int indiceMaterial)
