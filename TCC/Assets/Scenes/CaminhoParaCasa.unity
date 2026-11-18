@@ -166,8 +166,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5b9f628564b4b84fb3bedce5ba85780, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialInvestigationTrigger
   isCryingBoy: 0
 --- !u!114 &140007375
@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
@@ -601,7 +601,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -794,7 +794,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 026bbb63fea3b1d43bfba7ca17302684, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallax
   player: {fileID: 451904690}
   parallaxStrength: 0.1
@@ -902,7 +902,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 026bbb63fea3b1d43bfba7ca17302684, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallax
   player: {fileID: 451904690}
   parallaxStrength: 0.1
@@ -949,8 +949,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.9437, y: -2}
-  m_SizeDelta: {x: 393.1362, y: 190.5739}
+  m_AnchoredPosition: {x: 25.9771, y: -8.7507}
+  m_SizeDelta: {x: 384.069, y: 233.671}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &304836081
 MonoBehaviour:
@@ -962,7 +962,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1072,17 +1072,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ba7c5782a0ab5e4fbda0c57a7edacf6, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   walkSpeed: 5
   runSpeed: 8
   movementBounds: {fileID: 148699948}
+  journeyBounds: {fileID: 0}
   movementBackground: []
   groundCheck: {fileID: 148699946}
   groundRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  margemVisualLimites: 0.12
 --- !u!95 &451904692
 Animator:
   serializedVersion: 7
@@ -1100,7 +1102,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -1341,7 +1343,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 026bbb63fea3b1d43bfba7ca17302684, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallax
   player: {fileID: 451904690}
   parallaxStrength: 0.1
@@ -1355,7 +1357,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &481831621
 GameObject:
@@ -1552,7 +1554,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 026bbb63fea3b1d43bfba7ca17302684, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallax
   player: {fileID: 451904690}
   parallaxStrength: 0.1
@@ -1752,7 +1754,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 026bbb63fea3b1d43bfba7ca17302684, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallax
   player: {fileID: 451904690}
   parallaxStrength: 0.1
@@ -1877,8 +1879,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_SendPointerHoverToParent: 1
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
@@ -1908,8 +1910,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
@@ -1957,7 +1959,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
   m_IgnoreReversedGraphics: 1
   m_BlockingObjects: 0
@@ -1974,7 +1976,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
@@ -2114,8 +2116,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -2307,7 +2309,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 026bbb63fea3b1d43bfba7ca17302684, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallax
   player: {fileID: 451904690}
   parallaxStrength: 0.1
@@ -2415,7 +2417,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 026bbb63fea3b1d43bfba7ca17302684, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallax
   player: {fileID: 451904690}
   parallaxStrength: 0.1
@@ -2524,7 +2526,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
@@ -2568,7 +2570,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d046e99bf599544f90f6256fc745a4b, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   target: {fileID: 451904690}
   smoothSpeed: 5
@@ -2577,6 +2579,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  horizontalOffset: 0
+  limitarAltura: 0
 --- !u!1 &926911824
 GameObject:
   m_ObjectHideFlags: 0
@@ -2624,7 +2628,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2760,7 +2764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5871127168250078241, guid: b237002287116cc4c9d42eea24e122b0, type: 3}
       propertyPath: lupaSprite
-      value:
+      value: 
       objectReference: {fileID: 4421436994050687871, guid: d3df5f669130ced458c014e0d5f676eb, type: 3}
     - target: {fileID: 6757574737847219616, guid: b237002287116cc4c9d42eea24e122b0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2854,7 +2858,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2971,8 +2975,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee730129d8c67484085ac8c2aa270715, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   tutorialText: {fileID: 992152391}
   player: {fileID: 451904690}
   requiredDistance: 0.5
@@ -3025,8 +3029,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
@@ -3062,20 +3066,20 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38.0
-  m_fontSizeBase: 38.0
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 1
-  m_fontSizeMin: 24.0
-  m_fontSizeMax: 38.0
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 24
+  m_fontSizeMax: 38
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 1.0
+  m_characterSpacing: 1
   m_characterHorizontalScale: 1
   m_wordSpacing: 0
-  m_lineSpacing: 4.0
+  m_lineSpacing: 4
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -3101,7 +3105,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 8.0, y: 5.0, z: 8.0, w: 5.0}
+  m_margin: {x: 8, y: 5, z: 8, w: 5}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3242,7 +3246,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 026bbb63fea3b1d43bfba7ca17302684, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallax
   player: {fileID: 451904690}
   parallaxStrength: 0.1
@@ -3276,8 +3280,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
   m_BlockingObjects: 0
   m_BlockingMask:
@@ -3293,8 +3297,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
@@ -3402,7 +3406,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
     m_Mode: 3
@@ -3446,7 +3450,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3540,7 +3544,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1530c93bf5d28c84992fab9e5aec225d, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectableExamine
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
@@ -3718,7 +3722,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
     m_Mode: 3
@@ -3762,7 +3766,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3893,7 +3897,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 026bbb63fea3b1d43bfba7ca17302684, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallax
   player: {fileID: 451904690}
   parallaxStrength: 0.1
@@ -4049,7 +4053,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
@@ -4065,7 +4069,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5b9f628564b4b84fb3bedce5ba85780, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialInvestigationTrigger
   isCryingBoy: 0
 --- !u!1 &1512575058
@@ -4295,23 +4299,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6646391211884304847, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000039577
+      value: -0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 6646391211884304847, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0000066757
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6790038479007913444, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7426293966710530804, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -324.678
+      objectReference: {fileID: 0}
+    - target: {fileID: 7426293966710530804, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -63.315
+      objectReference: {fileID: 0}
+    - target: {fileID: 7426293966710530804, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 17.788795
+      value: 8.22998
       objectReference: {fileID: 0}
     - target: {fileID: 7426293966710530804, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -8.29
+      value: -31.657
       objectReference: {fileID: 0}
     - target: {fileID: 8505902488582339186, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
       propertyPath: m_Type
@@ -4319,7 +4331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8505902488582339186, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
       propertyPath: m_Sprite
-      value:
+      value: 
       objectReference: {fileID: 5719425851948068410, guid: 380453ca9cbe0cb48870c18c5bf74f34, type: 3}
     - target: {fileID: 8505902488582339186, guid: 0cce127a96a17c24ca61ad4dbb76d8a7, type: 3}
       propertyPath: m_Color.a
@@ -4406,7 +4418,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5b9f628564b4b84fb3bedce5ba85780, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialInvestigationTrigger
   isCryingBoy: 0
 --- !u!114 &1564865588
@@ -4419,7 +4431,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
@@ -4574,7 +4586,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 026bbb63fea3b1d43bfba7ca17302684, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallax
   player: {fileID: 451904690}
   parallaxStrength: 0.1
@@ -4626,8 +4638,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 0
@@ -4691,6 +4703,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4361957761709307820, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 6.161255
+      objectReference: {fileID: 0}
+    - target: {fileID: 4361957761709307820, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -14.166687
+      objectReference: {fileID: 0}
     - target: {fileID: 4386148939683963835, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -4714,6 +4734,10 @@ PrefabInstance:
     - target: {fileID: 7382483691494415612, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401558642854779435, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 7888760854718667742, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
       propertyPath: m_Pivot.x
@@ -4810,6 +4834,10 @@ PrefabInstance:
     - target: {fileID: 8758403939130173519, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9021445532426982173, guid: 84e7441d42e64cb4ba4621233267f439, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.2498779
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -4922,7 +4950,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 026bbb63fea3b1d43bfba7ca17302684, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallax
   player: {fileID: 451904690}
   parallaxStrength: 0.1
@@ -5030,7 +5058,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 026bbb63fea3b1d43bfba7ca17302684, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallax
   player: {fileID: 451904690}
   parallaxStrength: 0.1
@@ -5137,15 +5165,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 502064131602455424, guid: a5ee1d61772c9714590e34093bb375b4, type: 3}
       propertyPath: buttonNao
-      value:
+      value: 
       objectReference: {fileID: 1304988435}
     - target: {fileID: 502064131602455424, guid: a5ee1d61772c9714590e34093bb375b4, type: 3}
       propertyPath: buttonSim
-      value:
+      value: 
       objectReference: {fileID: 1101021570}
     - target: {fileID: 502064131602455424, guid: a5ee1d61772c9714590e34093bb375b4, type: 3}
       propertyPath: fadeImage
-      value:
+      value: 
       objectReference: {fileID: 1756393116}
     - target: {fileID: 502064131602455424, guid: a5ee1d61772c9714590e34093bb375b4, type: 3}
       propertyPath: m_Enabled
@@ -5153,11 +5181,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 502064131602455424, guid: a5ee1d61772c9714590e34093bb375b4, type: 3}
       propertyPath: confirmText
-      value:
+      value: 
       objectReference: {fileID: 926911826}
     - target: {fileID: 502064131602455424, guid: a5ee1d61772c9714590e34093bb375b4, type: 3}
       propertyPath: confirmPanel
-      value:
+      value: 
       objectReference: {fileID: 304836079}
     - target: {fileID: 7973582278529758504, guid: a5ee1d61772c9714590e34093bb375b4, type: 3}
       propertyPath: m_Name
@@ -5319,7 +5347,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 026bbb63fea3b1d43bfba7ca17302684, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Parallax
   player: {fileID: 451904690}
   parallaxStrength: 0.1
@@ -5368,7 +5396,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5b9f628564b4b84fb3bedce5ba85780, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialInvestigationTrigger
   isCryingBoy: 0
 --- !u!114 &2131980643
@@ -5381,7 +5409,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
   examinePanel: {fileID: 257591534}
   examineText: {fileID: 473169253}
@@ -5447,7 +5475,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &2200000013 stripped
 MonoBehaviour:
@@ -5458,7 +5486,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &2200000014 stripped
 MonoBehaviour:
@@ -5469,7 +5497,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &2200000015 stripped
 GameObject:
@@ -5572,7 +5600,14 @@ SpriteRenderer:
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Modification: {serializedVersion: 3, m_TransformParent: {fileID: 0}, m_Modifications: [], m_RemovedComponents: [], m_RemovedGameObjects: [], m_AddedGameObjects: [], m_AddedComponents: []}
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7099162290273154dbd092dfba6b7b05, type: 3}
 --- !u!1 &5600000100
 GameObject:
@@ -5617,7 +5652,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 932fe28180a3b4c4daa814d1db3d58f0, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UniversalPauseManager
   pausePanel: {fileID: 5600000200}
   pauseWindow: {fileID: 5600000201}
@@ -5640,10 +5675,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ad63d0949ad2a343b78f2909ced260a, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseSoundSettings
   masterVolumeSlider: {fileID: 5600000210}
   volumeValueText: {fileID: 0}
+  musicVolumeSlider: {fileID: 0}
+  effectsVolumeSlider: {fileID: 0}
+  musicValueText: {fileID: 0}
+  effectsValueText: {fileID: 0}
 --- !u!1 &5600000200 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9151483842747643758, guid: 7099162290273154dbd092dfba6b7b05, type: 3}
@@ -5678,7 +5717,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!114 &5600000206 stripped
 MonoBehaviour:
@@ -5689,7 +5728,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!114 &5600000207 stripped
 MonoBehaviour:
@@ -5700,7 +5739,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!114 &5600000208 stripped
 MonoBehaviour:
@@ -5711,7 +5750,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!114 &5600000209 stripped
 MonoBehaviour:
@@ -5722,7 +5761,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!114 &5600000210 stripped
 MonoBehaviour:
@@ -5733,7 +5772,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1001 &1209860337466348895
 PrefabInstance:
@@ -5797,11 +5836,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5982497598829262296, guid: b6c04563513ca8f4386c9efc9f228e13, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 126.77
+      value: 126.76996
       objectReference: {fileID: 0}
     - target: {fileID: 5982497598829262296, guid: b6c04563513ca8f4386c9efc9f228e13, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 6.72
+      value: 6.7199707
       objectReference: {fileID: 0}
     - target: {fileID: 8793866522150346966, guid: b6c04563513ca8f4386c9efc9f228e13, type: 3}
       propertyPath: m_Name
@@ -5866,23 +5905,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3065175605707982594, guid: d59135cd319f0ee438816426c0ac5091, type: 3}
       propertyPath: dialogueUI
-      value:
+      value: 
       objectReference: {fileID: 2200000011}
     - target: {fileID: 3065175605707982594, guid: d59135cd319f0ee438816426c0ac5091, type: 3}
       propertyPath: dialogueText
-      value:
+      value: 
       objectReference: {fileID: 2200000012}
     - target: {fileID: 3065175605707982594, guid: d59135cd319f0ee438816426c0ac5091, type: 3}
       propertyPath: portraitImage
-      value:
+      value: 
       objectReference: {fileID: 2200000014}
     - target: {fileID: 3065175605707982594, guid: d59135cd319f0ee438816426c0ac5091, type: 3}
       propertyPath: choicesContainer
-      value:
+      value: 
       objectReference: {fileID: 2200000015}
     - target: {fileID: 3065175605707982594, guid: d59135cd319f0ee438816426c0ac5091, type: 3}
       propertyPath: characterNameText
-      value:
+      value: 
       objectReference: {fileID: 2200000013}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5943,11 +5982,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8103627826929957768, guid: cea9bc9f71ac15045a333de974c4cd0e, type: 3}
       propertyPath: examineText
-      value:
+      value: 
       objectReference: {fileID: 473169253}
     - target: {fileID: 8103627826929957768, guid: cea9bc9f71ac15045a333de974c4cd0e, type: 3}
       propertyPath: examinePanel
-      value:
+      value: 
       objectReference: {fileID: 257591534}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
