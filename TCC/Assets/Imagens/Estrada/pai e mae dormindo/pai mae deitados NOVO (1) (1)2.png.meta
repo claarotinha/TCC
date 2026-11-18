@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 04d20c8251ad98441967464f09e3d7db
+guid: 001ae1081b9c15f4ba80f9155723c9b8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8167070167207216868
-    second: pai mae deitados_0
-  - first:
-      213: -5131287994182352516
-    second: pai mae deitados_1
+      213: 3792502096473006922
+    second: pai mae deitados NOVO (1) (1)2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -53,15 +50,9 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot:
-    x: 0.5
-    y: 0.5
-  spritePixelsToUnits: 81.04575163398692
-  spriteBorder:
-    x: 0
-    y: 0
-    z: 0
-    w: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -84,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,7 +88,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,79 +100,44 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pai mae deitados_0
+      name: pai mae deitados NOVO (1) (1)2_0
       rect:
         serializedVersion: 2
-        x: 149
-        y: 149
-        width: 152
-        height: 372
-      alignment: 9
-      pivot:
-        x: 0.5
-        y: 0.5
-      border:
         x: 0
         y: 0
-        z: 0
-        w: 0
-      customData: null
+        width: 640
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4e6831ccb03475170800000000000000
-      internalID: 8167070167207216868
+      spriteID: a43a23e209ca1a430800000000000000
+      internalID: 3792502096473006922
       vertices: []
-      indices: null
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pai mae deitados_1
-      rect:
-        serializedVersion: 2
-        x: 309
-        y: 149
-        width: 162
-        height: 362
-      alignment: 9
-      pivot:
-        x: 0.5
-        y: 0.5
-      border:
-        x: 0
-        y: 0
-        z: 0
-        w: 0
-      customData: null
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c71c88a81c00ac8b0800000000000000
-      internalID: -5131287994182352516
-      vertices: []
-      indices: null
+      indices: 
       edges: []
       weights: []
     outline: []
-    customData: null
+    customData: 
     physicsShape: []
     bones: []
-    spriteID: null
+    spriteID: 
     internalID: 0
     vertices: []
-    indices: null
+    indices: 
     edges: []
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pai mae deitados_0: 8167070167207216868
-      pai mae deitados_1: -5131287994182352516
-  mipmapLimitGroupName: null
+      pai mae deitados NOVO (1) (1)2_0: 3792502096473006922
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  userData: null
-  assetBundleName: null
-  assetBundleVariant: null
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

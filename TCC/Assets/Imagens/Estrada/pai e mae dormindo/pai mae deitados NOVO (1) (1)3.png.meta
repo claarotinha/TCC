@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3bc8a84abc9d94843aeff44e6ac9bd77
+guid: 91deb2e7026041d45acac7227af79985
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3487316411906899231
-    second: TODAS AS CENAS DELAS DEITADAS DE CIMA2_0
+      213: 9190046738634138335
+    second: pai mae deitados NOVO (1) (1)3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -50,15 +50,9 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot:
-    x: 0.5
-    y: 0.5
-  spritePixelsToUnits: 78.91891891891892
-  spriteBorder:
-    x: 0
-    y: 0
-    z: 0
-    w: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -81,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -94,7 +88,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -106,50 +100,44 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TODAS AS CENAS DELAS DEITADAS DE CIMA2_0
+      name: pai mae deitados NOVO (1) (1)3_0
       rect:
         serializedVersion: 2
-        x: 169
-        y: 159
-        width: 342
-        height: 292
-      alignment: 9
-      pivot:
-        x: 0.5
-        y: 0.5
-      border:
         x: 0
         y: 0
-        z: 0
-        w: 0
-      customData: null
+        width: 640
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1e246e033309a9fc0800000000000000
-      internalID: -3487316411906899231
+      spriteID: fd2668d51da998f70800000000000000
+      internalID: 9190046738634138335
       vertices: []
-      indices: null
+      indices: 
       edges: []
       weights: []
     outline: []
-    customData: null
+    customData: 
     physicsShape: []
     bones: []
-    spriteID: null
+    spriteID: 
     internalID: 0
     vertices: []
-    indices: null
+    indices: 
     edges: []
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      TODAS AS CENAS DELAS DEITADAS DE CIMA2_0: -3487316411906899231
-  mipmapLimitGroupName: null
+      pai mae deitados NOVO (1) (1)3_0: 9190046738634138335
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  userData: null
-  assetBundleName: null
-  assetBundleVariant: null
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
