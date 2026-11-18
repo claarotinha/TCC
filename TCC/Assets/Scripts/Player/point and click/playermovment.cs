@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private SpriteRenderer visual;
     private Collider2D bodyCollider;
+    [SerializeField, Min(0f)] private float margemVisualLimites = .12f;
+    private bool considerarDesenhoNosLimites;
+    private Bounds limitesVisuaisOriginais;
 
     private float horizontalInput;
     private bool isRunning;
@@ -27,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void LiberarLimites()
     {
+        considerarDesenhoNosLimites = false;
         movementBounds = null;
         journeyBounds = null;
         movementBackground = new SpriteRenderer[0];
@@ -34,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void DefinirLimites(Collider2D limites)
     {
+        considerarDesenhoNosLimites = limites != null;
         movementBounds = limites;
         journeyBounds = null;
         movementBackground = new SpriteRenderer[0];
@@ -45,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.applyRootMotion = false;
         visual = GetComponent<SpriteRenderer>();
+        if (visual != null && visual.sprite != null)
+            limitesVisuaisOriginais = visual.sprite.bounds;
         bodyCollider = GetComponent<Collider2D>();
     }
 
@@ -150,6 +157,21 @@ public class PlayerMovement : MonoBehaviour
         float halfWidth = bodyCollider != null ? bodyCollider.bounds.extents.x : 0f;
         minX = bounds.min.x + halfWidth;
         maxX = bounds.max.x - halfWidth;
+        if (considerarDesenhoNosLimites && visual != null && visual.enabled && visual.sprite != null)
+        {
+            // O pivô pode estar na lateral; os limites visuais não são simétricos.
+            Bounds areaVisual = visual.bounds;
+            float sentido = visual.flipX ? -1f : 1f;
+            float referenciaA = visual.transform.TransformPoint(
+                new Vector3(limitesVisuaisOriginais.min.x * sentido, 0f, 0f)).x;
+            float referenciaB = visual.transform.TransformPoint(
+                new Vector3(limitesVisuaisOriginais.max.x * sentido, 0f, 0f)).x;
+            float esquerda = Mathf.Min(areaVisual.min.x, referenciaA, referenciaB);
+            float direita = Mathf.Max(areaVisual.max.x, referenciaA, referenciaB);
+            // Inclui o repouso para não avançar mais ao trocar para um frame estreito.
+            minX = Mathf.Max(minX, bounds.min.x - (esquerda - transform.position.x) + margemVisualLimites);
+            maxX = Mathf.Min(maxX, bounds.max.x - (direita - transform.position.x) - margemVisualLimites);
+        }
         if (journeyBounds != null) maxX = Mathf.Min(maxX, journeyBounds.LimiteAvancoX);
         if (minX > maxX) minX = maxX = bounds.center.x;
         return true;
