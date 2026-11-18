@@ -36,7 +36,10 @@ public partial class EntradaCurrais
         for (int i = 0; i < refs.Length; i++) ok &= ConferirReferencia(refs[i], nomes[i]);
         foreach (Fala[] falas in new[] { postoSeguinte, registroRevisado, folhaRetirada, quartoRevisita,
             quartoVoltarFamilia, quartoSemCabaca, caboQuartoFalas, doenteUmFalas, doenteDoisFalas }) ok &= FalasValidas(falas);
-        return ok;
+        return ok && ConferirReferencia(exameMesaPosto, nameof(exameMesaPosto)) &&
+            ConferirReferencia(exameRaimundoPosto, nameof(exameRaimundoPosto)) &&
+            ConferirReferencia(areaAnotacaoPosto, nameof(areaAnotacaoPosto)) &&
+            ConferirReferencia(anotacaoPosto, nameof(anotacaoPosto));
     }
 
     private void PrepararDespedidaEQuarto()
@@ -92,7 +95,7 @@ public partial class EntradaCurrais
     private Collider2D[] ComAlvosDetalhadosDoPosto(Collider2D[] alvos)
     {
         Collider2D[] extras = { areaMesaDocumento, areaTrabalhadoraQuarto, areaCaboQuarto,
-            areaDoenteUm, areaDoenteDois, areaRaimundo, areaLuzia, areaPortaQuarto };
+            areaDoenteUm, areaDoenteDois, areaRaimundo, areaLuzia, areaPortaQuarto, areaAnotacaoPosto };
         Collider2D[] resultado = new Collider2D[alvos.Length + extras.Length];
         Array.Copy(alvos, resultado, alvos.Length);
         Array.Copy(extras, 0, resultado, alvos.Length, extras.Length);
@@ -112,24 +115,24 @@ public partial class EntradaCurrais
         areaCaboQuarto.enabled = ativo && Dados.curraisEscolhaPosto != 0;
         areaDoenteUm.enabled = aberto;
         areaDoenteDois.enabled = aberto;
-        registroCopiado.SetActive(ativo && Dados.curraisEscolhaPosto == 2 && Dados.curraisEtapaPosto <= 1);
-        baldesApoiadosPosto.SetActive(ativo && Dados.curraisEscolhaPosto == 1);
+        registroCopiado.SetActive(ativo && PapelAvulsoPostoPendente);
+        baldesApoiadosPosto.SetActive(ativo);
+        AtualizarRecipientePosto();
         cabacaComTrabalhadora.gameObject.SetActive(aberto && Dados.curraisCabacaEmprestadaQuarto);
         if (ativo && !ConsultaDisponivel) areaRaimundo.enabled = true;
     }
 
     private bool InteragirDetalhesDoPosto(Vector2 ponto)
     {
+        if (areaAnotacaoPosto.enabled && areaAnotacaoPosto.gameObject.activeInHierarchy && areaAnotacaoPosto.OverlapPoint(ponto))
+        { Iniciar(RecolherAnotacaoPosto()); return true; }
         foreach (Collider2D alvo in new[] { areaTrabalhadoraQuarto, areaDoenteUm, areaDoenteDois,
             areaMesaDocumento, areaCaboQuarto, areaRaimundo, areaLuzia })
         {
             if (!alvo.enabled || !alvo.gameObject.activeInHierarchy || !alvo.OverlapPoint(ponto)) continue;
             if ((alvo == areaRaimundo || alvo == areaLuzia) && ConsultaDisponivel) return false;
-            if (alvo == areaMesaDocumento || alvo == areaRaimundo)
-            {
-                if (Dados.curraisEscolhaPosto == 0) MenuAssuntoNPC("Raimundo", "Diga, menina.", "O que tá acontecendo?", EscolherNoPosto);
-                else MenuAssuntoNPC("Raimundo", "Diga, menina.", "Sobre a relação", () => Dizer(Dados.curraisEscolhaPosto == 2 ? registroRevisado : folhaRetirada));
-            }
+            if (alvo == areaMesaDocumento) Iniciar(ExaminarMesaPosto());
+            else if (alvo == areaRaimundo) ClicarRaimundoPosto();
             else if (alvo == areaTrabalhadoraQuarto) MenuTrabalhadoraDoQuarto();
             else if (alvo == areaDoenteUm) MenuAssuntoNPC("Mulher", "Você quer falar comigo?", "Como a senhora tá?", () => Dizer(doenteUmFalas));
             else if (alvo == areaDoenteDois) MenuAssuntoNPC("Homem", "Diga.", "O senhor viu uma menina?", () => Dizer(doenteDoisFalas));
@@ -138,8 +141,8 @@ public partial class EntradaCurrais
                 if (!Dados.curraisQuartoAberto && Dados.curraisEtapaPosto == 1) MenuAssuntoNPC("Cabo", "Tá procurando quem?", "Perguntar pelas pessoas do quarto", InvestigarQuarto);
                 else MenuAssuntoNPC("Cabo", "O que foi?", "Perguntar pelo quarto", () => Dizer(caboQuartoFalas));
             }
-            else MenuAssuntoNPC("Luzia", "Tô ouvindo.", "Sobre o posto", () => Dizer(Dados.curraisEscolhaPosto == 0 ? postoLuzia :
-                Dados.curraisEtapaPosto < 2 ? postoSeguinte : quartoVoltarFamilia));
+            else if (Dados.curraisEscolhaPosto != 0 && Dados.curraisEtapaPosto >= 2)
+                MenuAssuntoNPC("Luzia", "Tô ouvindo.", "Sobre o quarto", () => Dizer(quartoVoltarFamilia));
             return true;
         }
         return false;

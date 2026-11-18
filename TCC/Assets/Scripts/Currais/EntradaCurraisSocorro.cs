@@ -204,6 +204,7 @@ public partial class EntradaCurrais
             Dados.curraisSepultamentoConcluido = true;
             AvancarCampo(6);
             yield return Escurecer(0f);
+            yield return RetomarBuscaPosto();
         }
         finally
         {

@@ -100,6 +100,7 @@ public partial class EntradaCurrais
         }
         AtualizarConsulta();
         AtualizarDetalhesPosto();
+        AtualizarCompanhiaPosto();
         Physics2D.SyncTransforms();
     }
 
@@ -111,11 +112,11 @@ public partial class EntradaCurrais
         {
             if (!area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
 
-            if (area == areaPostoEscolha) MenuAssuntoNPC("Raimundo", "Você chegou numa hora apertada, menina.", "O que houve?", EscolherNoPosto);
+            if (area == areaPostoEscolha) ClicarRaimundoPosto();
             else if (area == areaPortaQuarto) Iniciar(InvestigarQuarto());
             else if (area == areaFamiliaAbrigo)
             {
-                if (Dados.curraisEtapaPosto == 2) MenuAssuntoNPC("Família", "Conseguiu saber alguma coisa, minha filha?", "Contar o que aconteceu", ContarAosPais);
+                if (Dados.curraisEtapaPosto == 2) MenuNoticiasPosto();
                 else MenuAbrigo();
             }
             else if (area == areaEsteiraNoite) MenuDescansoFamilia();
@@ -133,35 +134,12 @@ public partial class EntradaCurrais
 
     private IEnumerator EscolherNoPosto()
     {
-        if (Dados.curraisEscolhaPosto != 0) yield break;
-        yield return Dizer(postoLuzia);
-        yield return Escolher("Zefinha", perguntaPosto, opcoesPosto);
-        int opcao = escolhaRecebida;
-        if (opcao < 0 || opcao >= 2) yield break; // Sair adia a decisão sem registrar uma escolha.
-        bool destinoAnterior = Dados.curraisDestinoConfirmado;
-        if (opcao == 0)
-        {
-            yield return Dizer(postoAjuda);
-        }
-        else
-        {
-            yield return LerFolhaDoPosto();
-            yield return Dizer(postoCopia);
-            if (destinoAnterior) yield return Dizer(postoRepetido);
-        }
-        // A decisão e a etapa são registradas juntas após o encerramento da conversa.
-        if (opcao == 0) yield return Escurecer(1f);
-        Dados.curraisEscolhaPosto = opcao + 1;
-        if (opcao == 1) Dados.curraisDestinoConfirmado = true;
-        Dados.curraisEtapaPosto = 1;
-        if (opcao == 1) GameProgress.Instance.UnlockDiaryPage("currais-copia");
-        AtualizarEstadoBusca(); Salvar();
-        if (opcao == 0) yield return Escurecer(0f);
-        yield return Dizer(postoSeguinte);
+        yield return EscolherPostoLinear();
     }
 
     private IEnumerator InvestigarQuarto()
     {
+        yield return IndicarQuartoPosto();
         if (Dados.curraisEtapaPosto >= 2) { yield return Dizer(quartoRevisita); yield break; }
         if (!Dados.curraisQuartoAberto)
         {
@@ -178,11 +156,7 @@ public partial class EntradaCurrais
 
     private IEnumerator NoticiasDaBusca()
     {
-        yield return Dizer(familiaInicio);
-        if (Dados.curraisDestinoConfirmado) yield return Dizer(familiaDestino);
-        if (Dados.curraisIdentidadeConfirmada) yield return Dizer(familiaIdentidade);
-        if (!Dados.curraisDestinoConfirmado && !Dados.curraisIdentidadeConfirmada) yield return Dizer(familiaSemPista);
-        yield return Dizer(familiaFim);
+        yield return NoticiasPostoLinear();
     }
 
     private IEnumerator ContarAosPais()

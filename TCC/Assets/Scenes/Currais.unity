@@ -20852,6 +20852,10 @@ MonoBehaviour:
   quartoInterior: {fileID: 4400000027}
   portaQuartoFechada: {fileID: 4400000061}
   papelPosto: {fileID: 4400000012}
+  exameMesaPosto: {fileID: 9911880001}
+  exameRaimundoPosto: {fileID: 9911880002}
+  areaAnotacaoPosto: {fileID: 9992000003}
+  anotacaoPosto: {fileID: 11400000, guid: 97965bb5d6354031a7359f2637c87ef1, type: 2}
   areaPostoEscolha: {fileID: 4400000026}
   areaPortaQuarto: {fileID: 4400000071}
   areaFamiliaAbrigo: {fileID: 4400000102}
@@ -23135,6 +23139,7 @@ GameObject:
   - component: {fileID: 4300000011}
   - component: {fileID: 9840000003}
   - component: {fileID: 9933000020}
+  - component: {fileID: 9911880002}
   m_Layer: 0
   m_Name: "Raimundo - ciclo funcion\xE1rio currais"
   m_TagString: Untagged
@@ -28575,6 +28580,7 @@ GameObject:
   - component: {fileID: 4400000013}
   - component: {fileID: 4400000014}
   - component: {fileID: 4400000015}
+  - component: {fileID: 9911880001}
   m_Layer: 0
   m_Name: Folha do encaminhamento - Lagoa do Meio
   m_TagString: Untagged
@@ -51052,6 +51058,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9991000241}
   - component: {fileID: 9991000242}
+  - component: {fileID: 9992000003}
   m_Layer: 0
   m_Name: "Registro copiado - anota\xE7\xE3o com Mari"
   m_TagString: Untagged
@@ -52747,3 +52754,85 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+
+--- !u!114 &9911880001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400000012}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Sobre a mesa, uma folha traz os nomes de um grupo encaminhado para fora do campo. Um funcionário começa a juntar os papéis."
+
+
+
+--- !u!114 &9911880002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000008}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Raimundo tenta baixar um recipiente pesado. Ele muda a posição da mão, mas a alça continua apertando o mesmo lugar."
+
+
+--- !u!61 &9992000003
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9991000240}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 3.535}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.59, y: 7.07}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 6.59, y: 7.07}
+  m_EdgeRadius: 0
