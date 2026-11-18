@@ -10557,7 +10557,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.07277281501115258, y: 0}
+  m_Offset: {x: 0.072772816, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -10567,7 +10567,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.1455456300223053, y: 1}
+  m_Size: {x: 1.1455456, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &1750010631
 SpriteRenderer:
@@ -11697,7 +11697,7 @@ RectTransform:
   m_GameObject: {fileID: 1947385861}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1933537901}
@@ -19224,8 +19224,8 @@ Transform:
   m_GameObject: {fileID: 3900000077}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -103.36, y: -1.09, z: 0}
-  m_LocalScale: {x: 0.42780748, y: 0.42780748, z: 0.42780748}
+  m_LocalPosition: {x: -104.91, y: -1.2511, z: 0}
+  m_LocalScale: {x: 0.58877015, y: 0.58877015, z: 0.58877015}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9885000071}
@@ -19325,17 +19325,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 1.315}
+  m_Offset: {x: 0, y: 0.3549903}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 3.74, y: 2.63}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.12, y: 2.62}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.74, y: 2.63}
+  m_Size: {x: 3.74, y: 4.5500197}
   m_EdgeRadius: 0
 --- !u!1 &3900000081
 GameObject:
@@ -21395,159 +21395,63 @@ MonoBehaviour:
   - {fileID: 5209255166025893193, guid: 4b7cf765b3c46ce44a50cd4974bd4479, type: 3}
   - {fileID: 1099646552322126284, guid: 56911385aa68b994983675e3b545f4b7, type: 3}
   corrida:
-  - fileID: 21300004
-    guid: ef662e1f224a56aab97ca8a3dd15fff4
-    type: 3
-  - fileID: 21300005
-    guid: ef662e1f224a56aab97ca8a3dd15fff4
-    type: 3
-  - fileID: 21300006
-    guid: ef662e1f224a56aab97ca8a3dd15fff4
-    type: 3
-  - fileID: 21300007
-    guid: ef662e1f224a56aab97ca8a3dd15fff4
-    type: 3
-  - fileID: 21300008
-    guid: ef662e1f224a56aab97ca8a3dd15fff4
-    type: 3
-  - fileID: 21300009
-    guid: ef662e1f224a56aab97ca8a3dd15fff4
-    type: 3
+  - {fileID: 21300004, guid: ef662e1f224a56aab97ca8a3dd15fff4, type: 3}
+  - {fileID: 21300005, guid: ef662e1f224a56aab97ca8a3dd15fff4, type: 3}
+  - {fileID: 21300006, guid: ef662e1f224a56aab97ca8a3dd15fff4, type: 3}
+  - {fileID: 21300007, guid: ef662e1f224a56aab97ca8a3dd15fff4, type: 3}
+  - {fileID: 21300008, guid: ef662e1f224a56aab97ca8a3dd15fff4, type: 3}
+  - {fileID: 21300009, guid: ef662e1f224a56aab97ca8a3dd15fff4, type: 3}
+  caminhada:
+  - {fileID: 21300004, guid: ef662e1f224a56aab97ca8a3dd15fff4, type: 3}
+  - {fileID: 21300005, guid: ef662e1f224a56aab97ca8a3dd15fff4, type: 3}
+  - {fileID: 21300006, guid: ef662e1f224a56aab97ca8a3dd15fff4, type: 3}
+  - {fileID: 21300007, guid: ef662e1f224a56aab97ca8a3dd15fff4, type: 3}
+  - {fileID: 21300008, guid: ef662e1f224a56aab97ca8a3dd15fff4, type: 3}
+  - {fileID: 21300009, guid: ef662e1f224a56aab97ca8a3dd15fff4, type: 3}
+  repousoSangue:
+  - {fileID: 5073225881691398983, guid: 3acd7fac1a0b4074f8556db0072ad72f, type: 3}
+  - {fileID: 8414150907590870724, guid: c8be725ec8121da4a8dbca58a5d708ea, type: 3}
+  - {fileID: -7101343977209242273, guid: eeabfa6e2f8974444a86d58290aa1d7a, type: 3}
+  - {fileID: 2033353855907849251, guid: a27e52aeba5cb734a931d7b1ec2c1377, type: 3}
+  caminhadaSangue:
+  - {fileID: 613845572587093068, guid: 1d68ff05d48589a419364077d2c1b0df, type: 3}
+  - {fileID: 3432461142006063988, guid: 3ed95490c4ed65e4fb10e072ab9df73a, type: 3}
+  - {fileID: 5995724485588091329, guid: 88cd23681949974439141117a30eaba7, type: 3}
+  - {fileID: -5085055394234140416, guid: 5c5fa50b35fc8fd498c40693b36c587c, type: 3}
+  - {fileID: -1586342180760176781, guid: 6ecc1dc0ebbcf0a418200ff0b2d56b80, type: 3}
+  - {fileID: -8065483335986947937, guid: cc5c531346915824f92fe35af976782f, type: 3}
+  corridaSangue:
+  - {fileID: 2524106896055525380, guid: e0ef32e35d58e9b4d89ce37cced8eb44, type: 3}
+  - {fileID: -2907524592158075881, guid: 276d71fac47142f4ba59d03d506c1e97, type: 3}
+  - {fileID: 7188023375209960450, guid: 2b2e97bdbcca46d4e9d6413d3c63aac3, type: 3}
+  - {fileID: 8705837212459275872, guid: 85b3f01dd5de5884385056a3b177f2d7, type: 3}
+  - {fileID: -301201036915393342, guid: f4d8f26f1c218814ea645127cb6c64c5, type: 3}
+  - {fileID: 4902625866576589158, guid: 7561a09ed9fabe14c9dac73814da0844, type: 3}
+  - {fileID: 192489056912479132, guid: fffaab1a4f135bf4dbd290a4fa5743fa, type: 3}
+  - {fileID: 8096969710845661998, guid: 1cc077c36a645874f97ebf9c3f44e080, type: 3}
+  - {fileID: -6928957480357924816, guid: a5782db97abc6fb428f2733651cd9a21, type: 3}
+  - {fileID: -9090892636367479611, guid: 3324c3a67d1d5194295850e73235b4e5, type: 3}
+  repousoCurativo:
+  - {fileID: 3079930689697535499, guid: 50ccc6c31ce9ade4e97e285c15415f21, type: 3}
+  - {fileID: -5291168754297172916, guid: 0acb3f9da29a74145815e306da8761bc, type: 3}
+  - {fileID: 5523388791772368547, guid: 13935fbef44a52446b3573651e60a008, type: 3}
+  - {fileID: -3542165797155754447, guid: d499febcb8936084d82221c24189d7be, type: 3}
+  caminhadaCurativo:
+  - {fileID: -5876670717709617726, guid: b45f5e18c61c3d44bb7fdd664aca5615, type: 3}
+  - {fileID: 8051684969345713996, guid: a2e91dee3653cc045953ebc708a52d0d, type: 3}
+  - {fileID: -3254384927155211770, guid: 57360df48f3e8aa47b8b129a88cfefc7, type: 3}
+  - {fileID: -8269476193732195236, guid: 97042f03db6e70546b6a71224ab3a4e4, type: 3}
+  - {fileID: 8362046598343261434, guid: e4637ff4069745349be796d44175ba93, type: 3}
+  - {fileID: -4473758967441573256, guid: f390a0d5b27a39a45b27c53a12fc572b, type: 3}
+  corridaCurativo:
+  - {fileID: -5876670717709617726, guid: b45f5e18c61c3d44bb7fdd664aca5615, type: 3}
+  - {fileID: 8051684969345713996, guid: a2e91dee3653cc045953ebc708a52d0d, type: 3}
+  - {fileID: -3254384927155211770, guid: 57360df48f3e8aa47b8b129a88cfefc7, type: 3}
+  - {fileID: -8269476193732195236, guid: 97042f03db6e70546b6a71224ab3a4e4, type: 3}
+  - {fileID: 8362046598343261434, guid: e4637ff4069745349be796d44175ba93, type: 3}
+  - {fileID: -4473758967441573256, guid: f390a0d5b27a39a45b27c53a12fc572b, type: 3}
   intervaloRepouso: 0.25
   intervaloCorrida: 0.13
-  caminhada:
-  - fileID: 21300004
-    guid: ef662e1f224a56aab97ca8a3dd15fff4
-    type: 3
-  - fileID: 21300005
-    guid: ef662e1f224a56aab97ca8a3dd15fff4
-    type: 3
-  - fileID: 21300006
-    guid: ef662e1f224a56aab97ca8a3dd15fff4
-    type: 3
-  - fileID: 21300007
-    guid: ef662e1f224a56aab97ca8a3dd15fff4
-    type: 3
-  - fileID: 21300008
-    guid: ef662e1f224a56aab97ca8a3dd15fff4
-    type: 3
-  - fileID: 21300009
-    guid: ef662e1f224a56aab97ca8a3dd15fff4
-    type: 3
-  repousoSangue:
-  - fileID: 5073225881691398983
-    guid: 3acd7fac1a0b4074f8556db0072ad72f
-    type: 3
-  - fileID: 8414150907590870724
-    guid: c8be725ec8121da4a8dbca58a5d708ea
-    type: 3
-  - fileID: -7101343977209242273
-    guid: eeabfa6e2f8974444a86d58290aa1d7a
-    type: 3
-  - fileID: 2033353855907849251
-    guid: a27e52aeba5cb734a931d7b1ec2c1377
-    type: 3
-  caminhadaSangue:
-  - fileID: 613845572587093068
-    guid: 1d68ff05d48589a419364077d2c1b0df
-    type: 3
-  - fileID: 3432461142006063988
-    guid: 3ed95490c4ed65e4fb10e072ab9df73a
-    type: 3
-  - fileID: 5995724485588091329
-    guid: 88cd23681949974439141117a30eaba7
-    type: 3
-  - fileID: -5085055394234140416
-    guid: 5c5fa50b35fc8fd498c40693b36c587c
-    type: 3
-  - fileID: -1586342180760176781
-    guid: 6ecc1dc0ebbcf0a418200ff0b2d56b80
-    type: 3
-  - fileID: -8065483335986947937
-    guid: cc5c531346915824f92fe35af976782f
-    type: 3
-  corridaSangue:
-  - fileID: 2524106896055525380
-    guid: e0ef32e35d58e9b4d89ce37cced8eb44
-    type: 3
-  - fileID: -2907524592158075881
-    guid: 276d71fac47142f4ba59d03d506c1e97
-    type: 3
-  - fileID: 7188023375209960450
-    guid: 2b2e97bdbcca46d4e9d6413d3c63aac3
-    type: 3
-  - fileID: 8705837212459275872
-    guid: 85b3f01dd5de5884385056a3b177f2d7
-    type: 3
-  - fileID: -301201036915393342
-    guid: f4d8f26f1c218814ea645127cb6c64c5
-    type: 3
-  - fileID: 4902625866576589158
-    guid: 7561a09ed9fabe14c9dac73814da0844
-    type: 3
-  - fileID: 192489056912479132
-    guid: fffaab1a4f135bf4dbd290a4fa5743fa
-    type: 3
-  - fileID: 8096969710845661998
-    guid: 1cc077c36a645874f97ebf9c3f44e080
-    type: 3
-  - fileID: -6928957480357924816
-    guid: a5782db97abc6fb428f2733651cd9a21
-    type: 3
-  - fileID: -9090892636367479611
-    guid: 3324c3a67d1d5194295850e73235b4e5
-    type: 3
-  repousoCurativo:
-  - fileID: 3079930689697535499
-    guid: 50ccc6c31ce9ade4e97e285c15415f21
-    type: 3
-  - fileID: -5291168754297172916
-    guid: 0acb3f9da29a74145815e306da8761bc
-    type: 3
-  - fileID: 5523388791772368547
-    guid: 13935fbef44a52446b3573651e60a008
-    type: 3
-  - fileID: -3542165797155754447
-    guid: d499febcb8936084d82221c24189d7be
-    type: 3
-  caminhadaCurativo:
-  - fileID: -5876670717709617726
-    guid: b45f5e18c61c3d44bb7fdd664aca5615
-    type: 3
-  - fileID: 8051684969345713996
-    guid: a2e91dee3653cc045953ebc708a52d0d
-    type: 3
-  - fileID: -3254384927155211770
-    guid: 57360df48f3e8aa47b8b129a88cfefc7
-    type: 3
-  - fileID: -8269476193732195236
-    guid: 97042f03db6e70546b6a71224ab3a4e4
-    type: 3
-  - fileID: 8362046598343261434
-    guid: e4637ff4069745349be796d44175ba93
-    type: 3
-  - fileID: -4473758967441573256
-    guid: f390a0d5b27a39a45b27c53a12fc572b
-    type: 3
-  corridaCurativo:
-  - fileID: -5876670717709617726
-    guid: b45f5e18c61c3d44bb7fdd664aca5615
-    type: 3
-  - fileID: 8051684969345713996
-    guid: a2e91dee3653cc045953ebc708a52d0d
-    type: 3
-  - fileID: -3254384927155211770
-    guid: 57360df48f3e8aa47b8b129a88cfefc7
-    type: 3
-  - fileID: -8269476193732195236
-    guid: 97042f03db6e70546b6a71224ab3a4e4
-    type: 3
-  - fileID: 8362046598343261434
-    guid: e4637ff4069745349be796d44175ba93
-    type: 3
-  - fileID: -4473758967441573256
-    guid: f390a0d5b27a39a45b27c53a12fc572b
-    type: 3
 --- !u!114 &8800001001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21562,6 +21466,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
   repouso: []
   corrida: []
+  caminhada: []
+  repousoSangue: []
+  caminhadaSangue: []
+  corridaSangue: []
+  repousoCurativo: []
+  caminhadaCurativo: []
+  corridaCurativo: []
   intervaloRepouso: 0.25
   intervaloCorrida: 0.13
 --- !u!114 &8800001002
@@ -21578,6 +21489,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
   repouso: []
   corrida: []
+  caminhada: []
+  repousoSangue: []
+  caminhadaSangue: []
+  corridaSangue: []
+  repousoCurativo: []
+  caminhadaCurativo: []
+  corridaCurativo: []
   intervaloRepouso: 0.25
   intervaloCorrida: 0.13
 --- !u!95 &8800010000
@@ -21616,6 +21534,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimacaoPersonagem
   repouso: []
   corrida: []
+  caminhada: []
+  repousoSangue: []
+  caminhadaSangue: []
+  corridaSangue: []
+  repousoCurativo: []
+  caminhadaCurativo: []
+  corridaCurativo: []
   intervaloRepouso: 0.25
   intervaloCorrida: 0.13
 --- !u!114 &8800020000
