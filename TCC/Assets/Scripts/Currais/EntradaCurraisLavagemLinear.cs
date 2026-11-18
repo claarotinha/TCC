@@ -1,0 +1,142 @@
+using System;
+using System.Collections;
+using UnityEngine;
+
+public partial class EntradaCurrais
+{
+    [Header("Lavagem — Examine, recebimento e variações")]
+    [SerializeField] private ExamineObject exameLavadeiraLinear, examePilhaUso, examePilhaAtendimento;
+    [SerializeField] private Collider2D areaRecebimentoLavagem;
+    [SerializeField] private Fala[] chegadaLavagemMae, chegadaLavagemLuzia, loteLavagemOrientacao;
+    [SerializeField] private Fala[] loteLavagemInicio, loteLavagemMae, loteLavagemLuzia, loteLavagemPista;
+    [SerializeField] private Fala[] conversaLavagemIrma, correcaoPilhaLavagem;
+    [SerializeField] private Fala[] conclusaoLavagem, retalhoPedidoZefinha, retalhoOferecidoLavadeira;
+    [SerializeField] private Fala[] saidaLavagemMae, saidaLavagemLuzia;
+    [SerializeField, Min(.5f)] private float alcanceChegadaLavagem = 5f;
+    private bool RetalhoAutorizado => ViuConversaEntrada("lavagem-retalho-autorizado") ||
+        Dados.curraisTiraPanoRecolhida || Dados.curraisEtapaBusca >= 3;
+
+    private bool ReferenciasLavagemLinearValidas()
+    {
+        bool ok = ConferirReferencia(areaRecebimentoLavagem, nameof(areaRecebimentoLavagem));
+        foreach (ExamineObject exame in new[] { exameLavadeiraLinear, examePilhaUso, examePilhaAtendimento })
+            ok &= ConferirReferencia(exame, "Examine da lavagem") &&
+                ConferirReferencia(exame.examinePanel, "Painel de Examine da lavagem") &&
+                ConferirReferencia(exame.examineText, "Texto de Examine da lavagem");
+        foreach (Fala[] falas in new[] { chegadaLavagemMae, chegadaLavagemLuzia, loteLavagemOrientacao,
+            loteLavagemInicio, loteLavagemMae, loteLavagemLuzia, loteLavagemPista, conversaLavagemIrma,
+            correcaoPilhaLavagem, conclusaoLavagem, retalhoPedidoZefinha, retalhoOferecidoLavadeira,
+            saidaLavagemMae, saidaLavagemLuzia }) ok &= FalasValidas(falas);
+        return ok;
+    }
+
+    private IEnumerator AbrirLavadeiraLinear()
+    {
+        yield return ExamineNomesUmaVez("lavagem-examine-mulher", exameLavadeiraLinear);
+        if (!EncontroRaimundoEncerrado || Dados.curraisEtapaBusca > 3 ||
+            ViuConversaEntrada("lavagem-oportunidade-encerrada")) yield break;
+        if (!Dados.curraisLotePanosEntregue)
+        {
+            AbrirAssuntosEntrada("lavagem-lote", "Lavadeira", string.Empty,
+                new[] { "lavagem-orientacao-lote" }, new[] { "Falar do lote" },
+                new Func<IEnumerator>[] { () => Dizer(loteLavagemOrientacao) });
+            yield break;
+        }
+        if (Dados.curraisEtapaBusca == 1)
+        { yield return ReceberLoteLavagemLinear(); yield break; }
+        if (Dados.curraisPanosSeparados == 3 && !RetalhoAutorizado)
+            yield return ConcluirLavagemLinear();
+        MostrarConversaOpcionalLavagem();
+    }
+
+    private void MostrarConversaOpcionalLavagem()
+    {
+        if (ViuConversaEntrada("lavagem-oportunidade-encerrada")) return;
+        AbrirAssuntosEntrada("lavagem-irma", "Lavadeira", string.Empty,
+            new[] { "lavagem-irma-ouvida" }, new[] { "Perguntar pela menina" },
+            new Func<IEnumerator>[] { () => Dizer(conversaLavagemIrma) });
+    }
+
+    private IEnumerator ReceberLoteLavagemLinear()
+    {
+        if (!EncontroRaimundoEncerrado || Dados.curraisEtapaBusca != 1) yield break;
+        if (!Dados.curraisLotePanosEntregue &&
+            (!TemItem(itemLotePanos) || InventoryManager.Instance.SelectedItem != itemLotePanos)) yield break;
+        yield return ExamineNomesUmaVez("lavagem-examine-mulher", exameLavadeiraLinear);
+        if (!ViuConversaEntrada("lavagem-chegada")) yield return ComentarChegadaLavagem();
+        if (!Dados.curraisLotePanosEntregue)
+        {
+            InventoryManager.Instance.RemoveItem(itemLotePanos);
+            Dados.curraisLotePanosEntregue = true;
+            AtualizarTarefaPanos(); Salvar();
+        }
+        yield return DizerEntradaUmaVez("lavagem-lote-inicio", loteLavagemInicio);
+        yield return DizerEntradaUmaVez("lavagem-lote-acompanhante",
+            Dados.curraisEscolhaAgua == 1 ? loteLavagemMae : loteLavagemLuzia);
+        yield return DizerEntradaUmaVez("lavagem-lote-pista", loteLavagemPista);
+        yield return DizerEntradaUmaVez("lavagem-instrucoes", instrucoesLavagem);
+        Dados.curraisEtapaBusca = 2;
+        GarantirPanosLavagem(); AvancarCampo(2);
+        GameProgress.Instance.UnlockDiaryPage("currais-lavagem"); Salvar();
+    }
+
+    private IEnumerator CorrigirPilhaLavagem(ItemData item)
+    {
+        if (item != panoUsoLavagem && item != panoAtendimentoLavagem) yield break;
+        if (!ViuConversaEntrada("lavagem-correcao-pilha"))
+        { yield return DizerEntradaUmaVez("lavagem-correcao-pilha", correcaoPilhaLavagem); yield break; }
+        SpriteRenderer visual = (item == panoUsoLavagem ? areaPanosUso : areaPanosAtendimento).GetComponent<SpriteRenderer>();
+        if (visual == null) yield break;
+        Color original = visual.color;
+        try
+        {
+            float tempo = 0f;
+            while (tempo < .6f)
+            {
+                if (!PauseHelper.BlockInput() && Time.timeScale > 0f)
+                {
+                    tempo += Time.deltaTime;
+                    visual.color = new Color(original.r, original.g, original.b,
+                        original.a * (.35f + .65f * Mathf.PingPong(tempo * 4f, 1f)));
+                }
+                yield return null;
+            }
+        }
+        finally { visual.color = original; }
+    }
+
+    private IEnumerator ConcluirLavagemLinear()
+    {
+        if (Dados.curraisPanosSeparados != 3 || RetalhoAutorizado) yield break;
+        yield return DizerEntradaUmaVez("lavagem-conclusao", conclusaoLavagem);
+        yield return Dizer((Dados.curraisPerguntasRaimundo & 4) != 0 ? retalhoPedidoZefinha : retalhoOferecidoLavadeira);
+        RegistrarConversaEntrada("lavagem-retalho-autorizado");
+        AtualizarEstadoBusca(); Salvar();
+    }
+
+    private bool AtualizarAproximacaoLavagem(bool livre)
+    {
+        if (!livre || !EncontroRaimundoEncerrado || Dados.curraisEtapaBusca < 1 || Dados.curraisEtapaBusca > 3 ||
+            PainelAuxiliarAberto() || InventarioAbertoMemoria()) return false;
+        if (Dados.curraisTiraPanoRecolhida)
+        {
+            float direcao = Mathf.Sign(areaLembranca.bounds.center.x - areaLavadeira.bounds.center.x);
+            if (direcao != 0f && direcao * (mari.transform.position.x - areaLembranca.bounds.center.x) >= 0f)
+                EncerrarOportunidadeLavadeira();
+        }
+        if (Dados.curraisEtapaBusca == 2 && Dados.curraisPanosSeparados == 3 && !RetalhoAutorizado)
+        { Iniciar(ConcluirLavagemLinear()); return true; }
+        if (ViuConversaEntrada("lavagem-chegada") ||
+            Mathf.Abs(mari.transform.position.x - areaLavadeira.bounds.center.x) > alcanceChegadaLavagem) return false;
+        Iniciar(ComentarChegadaLavagem()); return true;
+    }
+
+    private IEnumerator ComentarChegadaLavagem() => DizerEntradaUmaVez("lavagem-chegada",
+        Dados.curraisEscolhaAgua == 1 ? chegadaLavagemMae : chegadaLavagemLuzia);
+
+    private void EncerrarOportunidadeLavadeira()
+    {
+        if (ViuConversaEntrada("lavagem-oportunidade-encerrada")) return;
+        RegistrarConversaEntrada("lavagem-oportunidade-encerrada"); Salvar();
+    }
+}

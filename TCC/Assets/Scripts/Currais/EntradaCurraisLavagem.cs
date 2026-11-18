@@ -28,11 +28,13 @@ public partial class EntradaCurrais
             nameof(guardaRonda), nameof(rondaInicio), nameof(rondaFim), nameof(retornoRonda), nameof(fimPassagem), nameof(abrigoDosSacos) };
         bool ok = true;
         for (int i = 0; i < refs.Length; i++) ok &= ConferirReferencia(refs[i], nomes[i]);
-        return ok && FalasValidas(instrucoesLavagem) && FalasValidas(tiraPanoAutorizada) && FalasValidas(guardaRepreensao) && FalasValidas(raimundoTrabalho) && ReferenciasEncenacaoLavagemValidas();
+        return ReferenciasLavagemLinearValidas() && ok && FalasValidas(instrucoesLavagem) && FalasValidas(tiraPanoAutorizada) && FalasValidas(guardaRepreensao) && FalasValidas(raimundoTrabalho) && ReferenciasEncenacaoLavagemValidas();
     }
 
     private void PrepararEtapaLavagem()
     {
+        // Saves anteriores já receberam as instruções antes de entrar nesta etapa.
+        if (Dados.curraisEtapaBusca >= 2) RegistrarConversaEntrada("lavagem-instrucoes");
         if (Dados.curraisEtapaBusca >= 3)
         {
             Dados.curraisPanosSeparados = 3;
@@ -80,37 +82,31 @@ public partial class EntradaCurrais
 
     private IEnumerator SepararPanoLavagem(bool atendimento)
     {
+        if (Dados.curraisEtapaBusca != 2 || !ViuConversaEntrada("lavagem-instrucoes")) yield break;
         ItemData esperado = atendimento ? panoAtendimentoLavagem : panoUsoLavagem;
         ItemData selecionado = InventoryManager.Instance.SelectedItem;
         if (selecionado != esperado || !TemItem(esperado))
-        {
-            yield return Dizer(instrucoesLavagem);
-            yield break;
-        }
+        { yield return CorrigirPilhaLavagem(selecionado); yield break; }
         int bit = atendimento ? 2 : 1;
         if ((Dados.curraisPanosSeparados & bit) != 0) yield break;
+        bool primeira = Dados.curraisPanosSeparados == 0;
         yield return LavarPecaLavagem(atendimento);
-        if (!TemItem(esperado) || (Dados.curraisPanosSeparados & bit) != 0) yield break;
+        if (!TemItem(esperado)) yield break;
         Dados.curraisPanosSeparados |= bit;
         InventoryManager.Instance.RemoveItem(esperado);
         AtualizarEstadoBusca(); Salvar();
-
-        yield return Dizer(atendimento ? lavagemAtendimentoRecebido : lavagemUsoRecebido);
-        if (Dados.curraisPanosSeparados == 3) yield return Dizer(lavagemConcluida);
+        if (primeira) yield return Dizer(atendimento ? lavagemAtendimentoRecebido : lavagemUsoRecebido);
+        if (Dados.curraisPanosSeparados == 3) yield return ConcluirLavagemLinear();
     }
 
     private IEnumerator RecolherTiraLavagem()
     {
-        if (Dados.curraisPanosSeparados != 3) { yield return Dizer(EstadoSeparacaoLavagem()); yield break; }
-        if (!Dados.curraisTiraPanoRecolhida)
-        {
-            yield return Dizer(tiraPanoAutorizada);
-            yield return ExaminarOuColetar(tiraPanoLavagem);
-            if (!coletaDoCenarioConfirmada) yield break;
-            Dados.curraisTiraPanoRecolhida = true;
-        }
+        if (!RetalhoAutorizado || Dados.curraisTiraPanoRecolhida) yield break;
+        yield return ExaminarOuColetar(tiraPanoLavagem);
+        if (!coletaDoCenarioConfirmada) yield break;
+        Dados.curraisTiraPanoRecolhida = true;
         AvancarCampo(3);
-        yield return Dizer(luziaNaPassagem);
+        yield return Dizer(Dados.curraisEscolhaAgua == 1 ? saidaLavagemMae : saidaLavagemLuzia);
     }
 
     private void AtualizarPatrulha()

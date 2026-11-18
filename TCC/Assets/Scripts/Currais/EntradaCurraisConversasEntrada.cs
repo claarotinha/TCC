@@ -80,6 +80,7 @@ public partial class EntradaCurrais
 
     private void MenuPresencaSemRepetir(PessoaPresente pessoa)
     {
+        if (pessoa.nome == "Lavadeira") { MenuLavadeiraNaBusca(); return; }
         if (pessoa.personagem == areaRaimundo.gameObject && !NomeRaimundoConhecido)
         { PrimeiroContatoRaimundo(); return; }
         if (pessoa.nome == "Raimundo")

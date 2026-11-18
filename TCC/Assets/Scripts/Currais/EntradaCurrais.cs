@@ -1104,6 +1104,7 @@ public partial class EntradaCurrais : MonoBehaviour
         if (AtualizarCaminhadaFamilia(livre)) return;
         if (AtualizarRetornoAgua(livre)) return;
         if (AtualizarAproximacaoRaimundo(livre)) return;
+        if (AtualizarAproximacaoLavagem(livre)) return;
         if (Dados.curraisEtapaEntrada != 4) return;
         if (planoMemoriaAtivo)
         {

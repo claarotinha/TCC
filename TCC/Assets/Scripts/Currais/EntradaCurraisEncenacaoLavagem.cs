@@ -36,7 +36,7 @@ public partial class EntradaCurrais
     private Collider2D[] AlvosLavagemEPassagem()
     {
         return new[] { areaPanosUso, areaPanosAtendimento, areaPanoLavagem,
-            areaRaimundo, areaLavadeira, areaLuzia, areaGuardaRonda, areaLembranca,
+            areaRaimundo, areaLavadeira, areaRecebimentoLavagem, areaLuzia, areaGuardaRonda, areaLembranca,
             areaAguaPatio, areaPanosPatio, areaSocorroBento, areaCabacaSocorro,
             areaPatio, areaPanoAtendimento };
     }
@@ -50,6 +50,7 @@ public partial class EntradaCurrais
                 Iniciar(ComentarRaimundo());
             return;
         }
+        if (etapa == 1 || etapa == 2 || etapa == 3) return;
         if (etapa == 4 || etapa == 5) { ConversarLuziaNoPatio(); return; }
         Fala[] falas = etapa == 0 ? luziaAntesRaimundo :
             etapa == 1 ? luziaAntesLavagem :
@@ -65,31 +66,12 @@ public partial class EntradaCurrais
             ? lavagemFaltaAtendimento : separados == 2 ? lavagemFaltaUso : instrucoesLavagem;
     }
 
-    private void MenuLavadeiraNaBusca()
-    {
-        OlharParaMari(areaLavadeira.transform);
-        if (Dados.curraisEtapaBusca == 0)
-        { MenuAssuntoNPC("Lavadeira", "Diga, menina. Tô escutando.", "Perguntar pelos panos", () => Dizer(lavadeiraEsperaLote), "Minha irmã passou aqui?", () => Dizer(lavadeiraIrma)); return; }
-        if (Dados.curraisEtapaBusca == 1)
-        {
-            MostrarOpcoes("Lavadeira", lavadeiraEsperaLote[0].texto,
-                new[] { "Sobre os panos", "Sobre minha irmã", "Sair" },
-                new Action[] { () => Iniciar(Dizer(lavadeiraEsperaLote)),
-                    () => Iniciar(Dizer(lavadeiraIrma)), FecharMenu });
-            return;
-        }
-        MostrarOpcoes("Lavadeira", EstadoSeparacaoLavagem()[0].texto,
-            new[] { "Sobre os panos", "O retalho limpo", "Sair" },
-            new Action[] { () => Iniciar(Dizer(EstadoSeparacaoLavagem())),
-                () => Iniciar(Dados.curraisEtapaBusca == 2 && Dados.curraisPanosSeparados == 3
-                    ? RecolherTiraLavagem() : Dizer(Dados.curraisTiraPanoRecolhida
-                        ? tiraPanoAutorizada : EstadoSeparacaoLavagem())), FecharMenu });
-    }
+    private void MenuLavadeiraNaBusca() => Iniciar(AbrirLavadeiraLinear());
 
     private void MenuPilhaLavagem(bool atendimento)
     {
-        MenuAssuntoNPC("Lavadeira", "Cada pilha tem seu lugar.", "Pra quem são esses panos?",
-            () => Dizer(atendimento ? lavagemFaltaAtendimento : lavagemFaltaUso));
+        Iniciar(ExamineNomesUmaVez(atendimento ? "lavagem-examine-atendimento" : "lavagem-examine-uso",
+            atendimento ? examePilhaAtendimento : examePilhaUso));
     }
 
     private void AtualizarDetalhesLavagem()
@@ -101,7 +83,7 @@ public partial class EntradaCurrais
         areaPanosAtendimento.GetComponent<SpriteRenderer>().enabled = !atendimento;
         varalPanosUso.SetActive(Dados.curraisPanelaConcluida && uso);
         areaPanoLavagem.gameObject.SetActive(Dados.curraisPanelaConcluida &&
-            Dados.curraisEtapaBusca == 2 && Dados.curraisPanosSeparados == 3 && !Dados.curraisTiraPanoRecolhida);
+            Dados.curraisEtapaBusca == 2 && RetalhoAutorizado && !Dados.curraisTiraPanoRecolhida);
         areaGuardaRonda.enabled = PrimeiraBuscaEmCurso && Dados.curraisEtapaBusca >= 3;
     }
 

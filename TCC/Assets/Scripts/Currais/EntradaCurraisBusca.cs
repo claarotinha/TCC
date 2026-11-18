@@ -57,7 +57,7 @@ public partial class EntradaCurrais
         objetivoTexto.text = string.Empty;
         areaRaimundo.enabled = PrimeiraBuscaEmCurso;
         areaLavadeira.enabled = PrimeiraBuscaEmCurso;
-        areaPanoLavagem.enabled = etapa == 2 && Dados.curraisPanosSeparados == 3;
+        areaPanoLavagem.enabled = etapa == 2 && RetalhoAutorizado;
         AtualizarVisuaisLavagem();
         areaLembranca.enabled = etapa == 3;
         areaPatio.enabled = etapa == 4;
@@ -98,6 +98,8 @@ public partial class EntradaCurrais
     {
         if (PostoDisponivel) return InteragirPosto(ponto);
         if (InteragirPessoasDoPatio(ponto)) return true;
+        if (areaRecebimentoLavagem.enabled && areaRecebimentoLavagem.gameObject.activeInHierarchy && areaRecebimentoLavagem.OverlapPoint(ponto))
+        { MenuLavadeiraNaBusca(); return true; }
         foreach (Collider2D area in AlvosAtuais())
         {
             if (area == null || !area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
@@ -167,32 +169,11 @@ public partial class EntradaCurrais
         Physics2D.SyncTransforms();
     }
 
-    private IEnumerator ConversarLavadeira()
-    {
-        if (!EncontroRaimundoEncerrado) yield break;
-        if (Dados.curraisTarefaPanosIniciada && !Dados.curraisLotePanosEntregue)
-        {
-            if (!TemItem(itemLotePanos) || InventoryManager.Instance.SelectedItem != itemLotePanos)
-            {
-                yield return Dizer(lavadeiraEsperaLote);
-                yield break;
-            }
-            InventoryManager.Instance.RemoveItem(itemLotePanos);
-            Dados.curraisLotePanosEntregue = true;
-            AtualizarTarefaPanos();
-            Salvar();
-        }
-        yield return Dizer(lavagemFalas);
-        yield return Dizer(instrucoesLavagem);
-        Dados.curraisEtapaBusca = 2;
-        GarantirPanosLavagem();
-        AvancarCampo(2);
-        GameProgress.Instance.UnlockDiaryPage("currais-lavagem");
-        Salvar();
-    }
+    private IEnumerator ConversarLavadeira() { yield return ReceberLoteLavagemLinear(); }
 
     private IEnumerator LembrarLenda()
     {
+        EncerrarOportunidadeLavadeira();
         if (lembrancaEmCurso || Dados.curraisEtapaBusca != 3) yield break;
         lembrancaEmCurso = true;
         try
