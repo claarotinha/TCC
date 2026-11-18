@@ -217,9 +217,9 @@ public partial class EntradaCurrais
         { Iniciar(UsarNoSocorro()); return true; }
         if (Dados.curraisQuartoAberto && alvo == areaTrabalhadoraQuarto && item == cabacaVaziaBusca)
         { Iniciar(AjudarNoQuarto()); return true; }
-        if (ConsultaDisponivel && Dados.curraisEtapaConsulta == 1 && alvo == areaRaimundo && item == baldeProtegidoItem)
+        if (ConsultaDisponivel && Dados.curraisEtapaConsulta == 1 && alvo == areaRaimundo && (item == baldeProtegidoItem || item == baldeRaimundoItem))
         { Iniciar(DevolverBaldeRaimundo()); return true; }
-        if (ConsultaDisponivel && Dados.curraisEtapaConsulta == 1 && alvo == areaUltimaConsulta && item == itemCanhoto)
+        if (ConsultaDisponivel && Dados.curraisEtapaConsulta == 1 && areaUltimaConsulta.enabled && alvo == areaUltimaConsulta && item == itemCanhoto)
         { Iniciar(ApresentarCanhotoConsulta()); return true; }
         return false;
     }

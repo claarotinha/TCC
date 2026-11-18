@@ -77,7 +77,9 @@ public partial class EntradaCurrais
             opcoesRetornoConsulta.Length != 2 || objetivosConsulta == null || objetivosConsulta.Length != 5) valido = false;
         string[] textos = { perguntaConsulta, rotuloLugar, rotuloNome, lugarConsulta, nomeConsulta, naoConfirmado };
         foreach (string texto in textos) valido &= !string.IsNullOrWhiteSpace(texto);
-        return valido;
+        return valido && ConferirReferencia(exameRaimundoManha, nameof(exameRaimundoManha)) &&
+            ConferirReferencia(exameRaimundoManha.examinePanel, "Painel Examine — manhã") &&
+            ConferirReferencia(exameRaimundoManha.examineText, "Texto Examine — manhã");
     }
 
     private string ObjetivoConsulta() => string.Empty;
@@ -86,7 +88,7 @@ public partial class EntradaCurrais
         (Dados.curraisDestinoConfirmado ? lugarConsulta : naoConfirmado) + "\n" + rotuloNome + ": " +
         (Dados.curraisIdentidadeConfirmada ? nomeConsulta : naoConfirmado);
 
-    private Collider2D[] AlvosConsulta() => MemoriaDisponivel ? AlvosMemoria() : new[] { areaBaldeRaimundo, areaRaimundo, areaMae, areaPaiAbrigo, areaLuzia, areaAmanhecer, areaUltimaConsulta, areaSaidaConsulta, areaRetornoConsulta };
+    private Collider2D[] AlvosConsulta() => MemoriaDisponivel ? AlvosMemoria() : new[] { areaBaldeRaimundo, areaPanoLavagem, areaRaimundo, areaMae, areaPaiAbrigo, areaLuzia, areaAmanhecer, areaUltimaConsulta, areaSaidaConsulta, areaRetornoConsulta };
 
     private void AtualizarConsulta()
     {
@@ -98,13 +100,16 @@ public partial class EntradaCurrais
         if (!ativa) { AtualizarMemoria(); return; }
         objetivoTexto.text = string.Empty;
         areaAmanhecer.enabled = etapa == 0;
-        areaUltimaConsulta.enabled = etapa >= 1;
+        areaUltimaConsulta.enabled = etapa >= 1 && (etapa > 1 || Dados.curraisConsultaApresentada ||
+            ViuConversaEntrada("raimundo-manha-encontro") || Dados.curraisIdentidadeConfirmada);
         areaMae.enabled = etapa >= 1;
         areaPaiAbrigo.enabled = etapa >= 1;
         areaLuzia.enabled = etapa >= 1;
         areaSaidaConsulta.enabled = etapa == 2;
         areaRetornoConsulta.enabled = etapa >= 3;
         if (etapa == 0) { AtualizarMemoria(); return; } // A noite permanece até a interação da manhã.
+        areaPanoLavagem.gameObject.SetActive(RetalhoDisponivelManha);
+        areaPanoLavagem.enabled = RetalhoDisponivelManha;
         AplicarNoite(false);
         lacoNaMao.SetActive(false); maoNaRoupa.SetActive(false); cabacaNoite.SetActive(false);
         papelConsulta.SetActive(true); // A relação continua sobre a mesa após a consulta.
@@ -114,12 +119,17 @@ public partial class EntradaCurrais
         lacoRemendadoCenario.SetActive(false);
         Posicionar(areaRaimundo.transform, Dados.curraisEscolhaPosto == 1 ? raimundoConsultaPerto : raimundoConsultaLonge);
         Posicionar(portaoConsulta, etapa >= 3 ? portaoConsultaFechado : portaoConsultaAberto);
-        Posicionar(luzia.transform, luziaRepouso);
+        if (!AntesDaUltimaConsulta || Dados.curraisEscolhaAgua == 1) Posicionar(luzia.transform, luziaRepouso);
+        if (AntesDaUltimaConsulta)
+        {
+            Posicionar(pai, paiAbrigo);
+            if (Dados.curraisEscolhaAgua != 1) Posicionar(mae, maeAbrigo);
+        }
         if (etapa == 4)
         {
             Posicionar(pai, paiAbrigo); Posicionar(mae, maeAbrigo);
         }
-        else if (etapa == 1 && mari.transform.position.x >= maeLimiteConsulta.position.x)
+        else if (etapa == 1 && !AntesDaUltimaConsulta && mari.transform.position.x >= maeLimiteConsulta.position.x)
             Posicionar(mae, maeLimiteConsulta);
         AtualizarMemoria();
         Physics2D.SyncTransforms();
@@ -127,6 +137,7 @@ public partial class EntradaCurrais
 
     private void AtualizarAcompanhamentoConsulta(bool livre)
     {
+        if (AntesDaUltimaConsulta) { AtualizarCompanhiaManha(livre); return; }
         int etapa = Dados.curraisEtapaConsulta;
         bool acompanhar = etapa >= 1 && etapa <= 3;
         seguidorPaiConsulta.enabled = livre && acompanhar;
@@ -140,6 +151,7 @@ public partial class EntradaCurrais
     private void RestaurarFamiliaConsulta()
     {
         if (Dados.curraisEtapaConsulta < 1 || Dados.curraisEtapaConsulta > 3) return;
+        if (AntesDaUltimaConsulta) return;
         Vector3 destinoPai = pai.position;
         destinoPai.x = mari.transform.position.x - seguidorPaiConsulta.DistanciaAtras;
         pai.position = destinoPai;
@@ -156,11 +168,13 @@ public partial class EntradaCurrais
     private bool InteragirConsulta(Vector2 ponto)
     {
         if (MemoriaDisponivel) return InteragirMemoria(ponto);
+        if (InteragirFamiliaNomeNovo(ponto)) return true;
         foreach (Collider2D area in AlvosConsulta())
         {
             if (!area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
 
             if (area == areaBaldeRaimundo) Iniciar(PegarBaldeRaimundo());
+            else if (area == areaPanoLavagem) Iniciar(RecolherRetalhoManha());
             else if (area == areaRaimundo) MenuRaimundoManha();
             else if (area == areaAmanhecer) Iniciar(AmanhecerNoCampo());
             else if (area == areaUltimaConsulta) MenuUltimaConsulta();
@@ -205,6 +219,12 @@ public partial class EntradaCurrais
 
     private void MenuFamiliaConsulta()
     {
+        if (Dados.curraisEtapaConsulta == 1)
+        {
+            if (NomeNovoParaFamilia) MenuAssuntoNPC("Família", string.Empty, "Contar o nome da mulher", ContarNomeFamiliaManha);
+            else FecharMenu();
+            return;
+        }
         MostrarOpcoes("Família", Dados.curraisEtapaConsulta == 1
             ? "Ainda podemos perguntar na mesa. Eu fico contigo."
             : "Vamos falar com o homem do portão. Tua irmã não vai sair do nosso pensamento.",

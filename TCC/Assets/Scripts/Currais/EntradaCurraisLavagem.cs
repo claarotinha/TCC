@@ -38,7 +38,8 @@ public partial class EntradaCurrais
         if (Dados.curraisEtapaBusca >= 3)
         {
             Dados.curraisPanosSeparados = 3;
-            if (!Dados.curraisTiraPanoRecolhida)
+            if (!Dados.curraisTiraPanoRecolhida && !ConsultaDisponivel &&
+                !Dados.curraisBaldeApoiado && !TemItem(baldeProtegidoItem))
             {
                 if (!TemItem(tiraPanoLavagem)) InventoryManager.Instance.AddItem(tiraPanoLavagem);
                 Dados.curraisTiraPanoRecolhida = true;

@@ -105,8 +105,8 @@ public partial class EntradaCurrais
         if (manha) areaRaimundo.enabled = true;
         else if (Dados.curraisEtapaBusca > 0) areaRaimundo.enabled = PrimeiraBuscaEmCurso;
         bool pegar = manha && Dados.curraisBaldeSolicitado && !Dados.curraisBaldeRecolhido && !Dados.curraisBaldeApoiado;
-        baldeRaimundoCenario.SetActive(pegar || (manha && Dados.curraisBaldeApoiado));
-        panoAlca.SetActive(manha && Dados.curraisBaldeApoiado);
+        baldeRaimundoCenario.SetActive(pegar || (ConsultaDisponivel && Dados.curraisBaldeApoiado));
+        panoAlca.SetActive(PostoDisponivel && Dados.curraisBaldeApoiado);
         areaBaldeRaimundo.enabled = pegar;
         diarioNaNoite.SetActive(TemCadernoNaNoite &&
             (noiteEmCurso || (Dados.curraisEtapaPosto == 4 && Dados.curraisEtapaConsulta == 0)));
@@ -127,31 +127,18 @@ public partial class EntradaCurrais
 
     private void MenuRaimundoManha()
     {
-        MostrarOpcoes("Raimundo", Dados.curraisBaldeApoiado ? "Obrigado pela ajuda, Josefa. Vamos guardar o nome com cuidado."
-            : "A alça do balde continua cortando minha mão.",
-            new[] { "O que descobriu da mulher?", "Posso proteger a alça?", "Sair" },
-            new Action[] { () => Iniciar(ConversarRaimundoManha()), () => Iniciar(PedirBaldeRaimundo()),
-                FecharMenu });
+        Iniciar(AbrirRaimundoManha());
     }
 
     private IEnumerator ConversarRaimundoManha()
     {
-        // A informação depende de perguntar, não de uma recompensa moral por ajudar.
-        Dados.curraisIdentidadeConfirmada = true;
-        GameProgress.Instance.UnlockDiaryPage("currais-nair");
-        Salvar();
-        yield return Dizer(nomeRaimundoFalas);
-        MenuRaimundoManha();
+        yield return ConfirmarNomeRaimundo();
+        MenuRaimundoLinear();
     }
 
     private IEnumerator PedirBaldeRaimundo()
     {
-        if (Dados.curraisBaldeApoiado)
-        { yield return Dizer(new[] { new Fala { personagem = "Raimundo", texto = "A alça já tá protegida. Obrigado." } }); yield break; }
-        yield return Dizer(pedidoBaldeFalas);
-        Dados.curraisBaldeSolicitado = true;
-        AtualizarFamiliaAlternativa(); Salvar();
-        objetivoTexto.text = string.Empty;
+        yield return SolicitarBaldeLinear();
     }
 
     private IEnumerator PegarBaldeRaimundo()
@@ -166,20 +153,6 @@ public partial class EntradaCurrais
 
     private IEnumerator DevolverBaldeRaimundo()
     {
-        if (Dados.curraisBaldeApoiado)
-        { yield return Dizer(baldeDevolvidoFalas); yield break; }
-        if (!Dados.curraisBaldeRecolhido || !TemItem(baldeProtegidoItem))
-        {
-            yield return Dizer(baldeAindaSemPano);
-            MenuRaimundoManha();
-            yield break;
-        }
-        Dados.curraisBaldeApoiado = true;
-        InventoryManager.Instance.RemoveItem(baldeProtegidoItem);
-        Dados.curraisIdentidadeConfirmada = true;
-        GameProgress.Instance.UnlockDiaryPage("currais-nair");
-        AtualizarFamiliaAlternativa(); Salvar();
-        yield return Dizer(baldeDevolvidoFalas);
-        yield return Dizer(nomeRaimundoFalas);
+        yield return DevolverBaldeLinear();
     }
 }

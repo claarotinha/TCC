@@ -20612,19 +20612,17 @@ MonoBehaviour:
   - {fileID: 9992000022}
   - {fileID: 9992000032}
   amanhecerFamilia:
-  - personagem: "M\xE3e"
-    texto: "J\xE1 t\xE3o chamando l\xE1 fora. Tu conseguiu descansar um pouquinho?"
-  - personagem: Zefinha
-    texto: Eu pensei que ia ouvir Mariquinha acordando do meu lado.
-  - personagem: "M\xE3e"
-    texto: "Eu tamb\xE9m. O lugar dela continua aqui."
-  - personagem: Pai
-    texto: "Raimundo ficou de ouvir mais alguma coisa. Antes de irem pro servi\xE7o,
-      ainda d\xE1 pra falar com ele."
+  - personagem: "Mãe"
+    texto: "Já tão chamando lá fora. Tu conseguiu descansar um pouquinho?"
+  - personagem: "Zefinha"
+    texto: "Eu pensei que ia ouvir Mariquinha acordando do meu lado."
+  - personagem: "Mãe"
+    texto: "Eu também. O lugar dela continua aqui."
+  - personagem: "Pai"
+    texto: "Raimundo ficou de perguntar pela mulher. Antes de chamarem ele pro serviço, ainda dá pra conversar."
   baldeAindaSemPano:
-  - personagem: Raimundo
-    texto: "A al\xE7a ainda t\xE1 descoberta. Aquele pedacinho de pano limpo j\xE1
-      fazia diferen\xE7a na m\xE3o."
+  - personagem: "Raimundo"
+    texto: "Ainda falta enrolar o pano na alça. Pode ficar com ele enquanto ajeita."
   baldeRaimundoItem: {fileID: 11400000, guid: b11e09ebfa2649e9bcdebf9897576196, type: 2}
   baldeProtegidoItem: {fileID: 11400000, guid: ecc5ce58a0624777a7649e4462b72229, type: 2}
   combinacaoBalde: {fileID: 11400000, guid: 319b55230cb740d0bf923ad305ab076a, type: 2}
@@ -20637,12 +20635,12 @@ MonoBehaviour:
     texto: "Pode. Pegue o balde aqui do lado, vazio. Enrole o pano na parte que pega
       na m\xE3o."
   baldeDevolvidoFalas:
-  - personagem: Raimundo
-    texto: Assim num corta tanto. Obrigado, Josefa.
-  - personagem: Zefinha
-    texto: Agora o senhor consegue deixar um pouco esse peso?
-  - personagem: Raimundo
-    texto: Consigo. Sente aqui um instante.
+  - personagem: "Raimundo"
+    texto: "Assim num corta tanto. Obrigado, Josefa."
+  - personagem: "Zefinha"
+    texto: "Agora o senhor consegue deixar um pouco esse peso?"
+  - personagem: "Raimundo"
+    texto: "Consigo apoiar aqui enquanto nós conversa."
   nomeRaimundoFalas:
   - personagem: Raimundo
     texto: "Falei com outra lavadeira. Nair Pereira. Ela confirmou que era a mulher
@@ -20857,6 +20855,7 @@ MonoBehaviour:
   exameHomemQuarto: {fileID: 9911880013}
   exameMesaPosto: {fileID: 9911880001}
   exameRaimundoPosto: {fileID: 9911880002}
+  exameRaimundoManha: {fileID: 9911880021}
   areaAnotacaoPosto: {fileID: 9992000003}
   anotacaoPosto: {fileID: 11400000, guid: 97965bb5d6354031a7359f2637c87ef1, type: 2}
   areaPostoEscolha: {fileID: 4400000026}
@@ -23141,6 +23140,7 @@ GameObject:
   - component: {fileID: 9840000003}
   - component: {fileID: 9933000020}
   - component: {fileID: 9911880002}
+  - component: {fileID: 9911880021}
   m_Layer: 0
   m_Name: "Raimundo - ciclo funcion\xE1rio currais"
   m_TagString: Untagged
@@ -52894,3 +52894,19 @@ MonoBehaviour:
   examinePanel: {fileID: 3000000053}
   examineText: {fileID: 3000000061}
   message: "Um homem acompanha com os olhos o recipiente nas mãos da trabalhadora. Os lábios estão ressecados."
+
+--- !u!114 &9911880021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000008}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Raimundo está perto dos baldes. Abre e fecha a mão devagar antes de segurar uma das alças."
