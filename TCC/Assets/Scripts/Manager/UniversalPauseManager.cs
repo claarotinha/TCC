@@ -126,7 +126,7 @@ public class UniversalPauseManager : MonoBehaviour
             diaryButton.interactable =
                 diaryPanel != null &&
                 GameProgress.Instance != null &&
-                GameProgress.Instance.Data.diaryCollected;
+                GameProgress.Instance.CanAccessDiary;
         }
 
         if (soundButton != null)
@@ -196,7 +196,7 @@ public class UniversalPauseManager : MonoBehaviour
     private void OpenDiary()
     {
         if (GameProgress.Instance == null ||
-            !GameProgress.Instance.Data.diaryCollected)
+            !GameProgress.Instance.CanAccessDiary)
             return;
 
         OpenSubpanel(diaryPanel);

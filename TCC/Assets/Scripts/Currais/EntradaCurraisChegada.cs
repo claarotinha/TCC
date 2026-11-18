@@ -134,7 +134,7 @@ public partial class EntradaCurrais
 
         if (alvo == AreaCabacaMesa) Iniciar(RecolherCabacaMesa());
         else if (alvo == areaFiscalEntrada || alvo == areaMesaRevista) MenuRevista();
-        else if (alvo == areaDiarioRetido) Iniciar(Dizer(cadernoEmConferencia));
+        else if (alvo == areaDiarioRetido) Iniciar(DizerEntradaUmaVez("caderno-conferencia", cadernoEmConferencia));
         else if (alvo == areaDiarioEntrada) Iniciar(RecuperarDiarioEntrada());
         else if (alvo == areaAgua || alvo == areaDistribuicaoAgua) MenuFuncionarioAgua();
         else if (alvo == areaPanoAbrigo) Iniciar(RecolherPanoAbrigo());
@@ -204,13 +204,16 @@ public partial class EntradaCurrais
 
     private IEnumerator RecuperarDiarioEntrada()
     {
-        if (!Dados.curraisPertencesRetidos || Dados.curraisDiarioRecuperado || revistaEmConferencia) yield break;
+        if (!Dados.curraisPertencesRetidos || Dados.curraisDiarioRecuperado ||
+            Dados.curraisDiarioRecusado || revistaEmConferencia) yield break;
         yield return Escolher("Zefinha", "O Fiscal deixou meu caderno separado.",
-            new[] { "Levar o caderno", "Deixar por enquanto" });
-        if (escolhaRecebida != 0) yield break;
-        yield return Dizer(diarioFalas);
-        Dados.curraisDiarioRecuperado = true;
-        // O diário usa a leitura da pausa; não cria uma segunda cópia do item do presente.
+            new[] { "Pegar o diário", "Não pegar o diário" });
+        if (escolhaRecebida < 0 || escolhaRecebida > 1) yield break;
+        bool pegar = escolhaRecebida == 0;
+        if (pegar) yield return DizerEntradaUmaVez("diario-recolhido", diarioFalas);
+        Dados.curraisDiarioRecuperado = pegar;
+        Dados.curraisDiarioRecusado = !pegar;
+        // As duas escolhas avançam; recusar não é adiar a mesma pergunta.
         Dados.curraisEtapaEntrada = 3;
         AtualizarVisuaisChegada();
         Salvar();
@@ -219,15 +222,24 @@ public partial class EntradaCurrais
 
     private void MenuPrimeiroAbrigo()
     {
-        MostrarOpcoes("Luzia", "Pode perguntar, Josefa. Sua mãe tá aqui com seu pai.",
-            new[] { "Por que chamam aqui de curral?", "Quem pode sair?", "A senhora viu minha irmã?", "Sair" },
-            new Action[] { () => Iniciar(PerguntarAbrigo(1, luziaCurral)),
-                () => Iniciar(PerguntarAbrigo(2, luziaSaida)), () => Iniciar(PerguntarAbrigo(4, luziaIrma)), FecharMenu });
+        var rotulos = new System.Collections.Generic.List<string>();
+        var acoes = new System.Collections.Generic.List<Action>();
+        if ((Dados.curraisPerguntasAbrigo & 1) == 0)
+        { rotulos.Add("Por que chamam aqui de curral?"); acoes.Add(() => Iniciar(PerguntarAbrigo(1, luziaCurral))); }
+        if ((Dados.curraisPerguntasAbrigo & 2) == 0)
+        { rotulos.Add("Quem pode sair?"); acoes.Add(() => Iniciar(PerguntarAbrigo(2, luziaSaida))); }
+        if ((Dados.curraisPerguntasAbrigo & 4) == 0 && !ViuConversaEntrada("luzia-irma"))
+        { rotulos.Add("A senhora viu minha irmã?"); acoes.Add(() => Iniciar(PerguntarAbrigo(4, luziaIrma))); }
+        rotulos.Add("Sair"); acoes.Add(FecharMenu);
+        MostrarMenuEntrada("luzia-primeiras-perguntas", "Luzia", "Pode perguntar, Josefa. Sua mãe tá aqui com seu pai.",
+            rotulos.ToArray(), acoes.ToArray());
     }
 
     private IEnumerator PerguntarAbrigo(int bit, Fala[] falas)
     {
+        if ((Dados.curraisPerguntasAbrigo & bit) != 0) yield break;
         yield return Dizer(falas);
+        if (bit == 4) RegistrarConversaEntrada("luzia-irma");
         Dados.curraisPerguntasAbrigo |= bit;
         Salvar();
         MenuPrimeiroAbrigo();
@@ -268,8 +280,9 @@ public partial class EntradaCurrais
     {
         bool revistaAtiva = Dados.curraisEtapaEntrada == 2;
         areaFiscalEntrada.enabled = revistaAtiva;
-        diarioEntrada.SetActive(revistaAtiva && Dados.curraisPertencesRetidos && !Dados.curraisDiarioRecuperado && !revistaEmConferencia);
-        areaDiarioEntrada.enabled = diarioEntrada.activeSelf;
+        diarioEntrada.SetActive(Dados.curraisPertencesRetidos && !Dados.curraisDiarioRecuperado &&
+            !revistaEmConferencia && (revistaAtiva || Dados.curraisDiarioRecusado));
+        areaDiarioEntrada.enabled = revistaAtiva && diarioEntrada.activeSelf && !Dados.curraisDiarioRecusado;
         panoAbrigo.SetActive(Dados.curraisFamiliaParou && !Dados.curraisPanoAbrigoRecolhido && !Dados.curraisPaiAcomodado);
         areaPanoAbrigo.enabled = panoAbrigo.activeSelf;
         panoNoPai.SetActive(Dados.curraisPaiAcomodado && (Dados.curraisEtapaBusca < 1 || Dados.curraisEtapaBusca == 4 || Dados.curraisEtapaBusca == 5));

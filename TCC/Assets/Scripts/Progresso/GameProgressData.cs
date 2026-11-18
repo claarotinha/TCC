@@ -81,6 +81,8 @@ public class GameProgressData
     // Chegada alternativa: independentes dos estados do roteiro anterior.
     public bool curraisRevistaApresentada;
     public bool curraisDiarioRecuperado;
+    public bool curraisDiarioRecusado;
+    public List<string> curraisConversasEntradaVistas = new List<string>();
     public bool curraisAbrigoApresentado;
     public bool curraisLuziaApresentada;
     public bool curraisPanoAbrigoRecolhido;

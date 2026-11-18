@@ -37,14 +37,12 @@ public partial class EntradaCurrais
 
     private void MenuMaePrimeiroAbrigo()
     {
-        if (!Dados.curraisFamiliaParou)
-        {
-            MenuFamiliaCaminhando("Mãe");
-            return;
-        }
-        MenuAssuntoNPC("Mãe", "Diga, minha filha. Tô te ouvindo.", "Como painho tá?",
-            () => Dizer(!Dados.curraisPaiAcomodado ? maePrecisaPano : familiaDepoisAgua),
-            "Falar de Mariquinha", () => Dizer(familiaBuscaIrma));
+        if (!Dados.curraisFamiliaParou) { MenuFamiliaCaminhando("Mãe"); return; }
+        AbrirAssuntosEntrada("mae-primeiro-abrigo", "Mãe", "Diga, minha filha. Tô te ouvindo.",
+            new[] { !Dados.curraisPaiAcomodado ? "mae-pano" : "familia-depois-agua", "familia-irma" },
+            new[] { "Como painho tá?", "Falar de Mariquinha" },
+            new Func<IEnumerator>[] { () => Dizer(!Dados.curraisPaiAcomodado ? maePrecisaPano : familiaDepoisAgua),
+                () => Dizer(familiaBuscaIrma) });
     }
 
     private IEnumerator ConversarPaiPrimeiroAbrigo()
@@ -128,25 +126,30 @@ public partial class EntradaCurrais
     private void MenuPaiPrimeiroAbrigo()
     {
         if (!Dados.curraisFamiliaParou) { MenuFamiliaCaminhando("Pai"); return; }
-        MenuAssuntoNPC("Pai", "O que foi, Josefa?", "Como o senhor tá?", ConversarPaiPrimeiroAbrigo,
-            "E Mariquinha?", () => Dizer(familiaBuscaIrma));
+        AbrirAssuntosEntrada("pai-primeiro-abrigo", "Pai", "O que foi, Josefa?",
+            new[] { Dados.curraisEscolhaAgua == 0 ? "pai-repouso" : "pai-depois-agua", "familia-irma" },
+            new[] { "Como o senhor tá?", "E Mariquinha?" },
+            new Func<IEnumerator>[] { ConversarPaiPrimeiroAbrigo, () => Dizer(familiaBuscaIrma) });
     }
 
     private void MenuFamiliaCaminhando(string pessoa)
     {
-        MenuAssuntoNPC(pessoa, "Tô aqui perto. Pode falar.", "Vamos parar um pouco?", PararFamilia,
-            "Tô pensando em Mariquinha", () => Dizer(familiaBuscaIrma));
+        bool perto = Mathf.Abs(mari.transform.position.x - pontoParadaFamilia.position.x) <= proximidadeParada;
+        AbrirAssuntosEntrada("familia-caminhando:" + pessoa, pessoa, "Tô aqui perto. Pode falar.",
+            new[] { perto ? "familia-parar" : "familia-caminhar", "familia-irma" },
+            new[] { "Vamos parar um pouco?", "Tô pensando em Mariquinha" },
+            new Func<IEnumerator>[] { PararFamilia, () => Dizer(familiaBuscaIrma) });
     }
 
     private bool AtualizarCaminhadaFamilia(bool livre)
     {
-        bool caminhando = Dados.curraisEtapaEntrada == 3 && !Dados.curraisFamiliaParou;
+        bool caminhando = (Dados.curraisEtapaEntrada == 2 || Dados.curraisEtapaEntrada == 3) && !Dados.curraisFamiliaParou;
         if (!ConsultaDisponivel) seguidorPaiConsulta.enabled = livre && caminhando;
         seguidoraBaleiaCurrais.enabled = livre && caminhando;
         if (!caminhando) return false;
         seguidoraMae.enabled = livre;
         seguidoraLuzia.enabled = false;
-        if (livre && !paradaSugerida && Mathf.Abs(mari.transform.position.x - pontoParadaFamilia.position.x) <= proximidadeParada)
+        if (Dados.curraisEtapaEntrada == 3 && livre && !paradaSugerida && Mathf.Abs(mari.transform.position.x - pontoParadaFamilia.position.x) <= proximidadeParada)
         {
             paradaSugerida = true;
             MenuFamiliaCaminhando("Mãe");
@@ -300,7 +303,7 @@ public partial class EntradaCurrais
     {
         PessoaPresente pessoa = PessoaNoPonto(ponto);
         if (pessoa == null) return false;
-        MenuAssuntoNPC(pessoa.nome, "Diga.", "Como estão as coisas por aqui?", () => Dizer(pessoa.conversa));
+        MenuPresencaSemRepetir(pessoa);
         return true;
     }
 
@@ -315,6 +318,6 @@ public partial class EntradaCurrais
             float d = Mathf.Abs(mari.transform.position.x - pessoa.desenho.bounds.center.x);
             if (d < distancia) { distancia = d; perto = pessoa; }
         }
-        if (perto != null) MenuAssuntoNPC(perto.nome, "Diga.", "Como estão as coisas por aqui?", () => Dizer(perto.conversa));
+        if (perto != null) MenuPresencaSemRepetir(perto);
     }
 }

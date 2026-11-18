@@ -9,6 +9,8 @@ public class GameProgress : MonoBehaviour
     private GameProgressData data = new GameProgressData();
 
     public GameProgressData Data => data;
+    public bool CanAccessDiary => data != null && !data.curraisDiarioRecusado &&
+        (data.diaryCollected || data.curraisDiarioRecuperado);
 
     public event Action ProgressChanged;
 
@@ -49,6 +51,9 @@ public class GameProgress : MonoBehaviour
         // Arquivos antigos continuam a partir da pesquisa normalmente.
         if (data.epilogoFinalVisto == 0) data.epilogoConcluido = false;
         if (data.epilogoConcluido) data.epilogoEtapa = 2;
+        if (data.curraisConversasEntradaVistas == null) data.curraisConversasEntradaVistas = new System.Collections.Generic.List<string>();
+        if ((data.curraisPerguntasAbrigo & 4) != 0 && !data.curraisConversasEntradaVistas.Contains("luzia-irma"))
+            data.curraisConversasEntradaVistas.Add("luzia-irma");
         if (data.curraisItensRetidos == null) data.curraisItensRetidos = new System.Collections.Generic.List<string>();
         if (data.foundPhotos == null) data.foundPhotos = new System.Collections.Generic.List<int>();
         if (data.readPhotos == null) data.readPhotos = new System.Collections.Generic.List<int>();
@@ -218,7 +223,7 @@ public class GameProgress : MonoBehaviour
     // Cada ID representa uma abertura completa (dois lados do livro).
     public void SyncDiaryPages()
     {
-        if (data == null || !data.diaryCollected) return;
+        if (!CanAccessDiary) return;
         if (data.unlockedDiaryPages == null)
             data.unlockedDiaryPages = new System.Collections.Generic.List<string>();
         int ultima = 1;

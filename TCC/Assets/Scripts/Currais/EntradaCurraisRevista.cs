@@ -41,23 +41,38 @@ public partial class EntradaCurrais
         bool revista = Dados.curraisEtapaEntrada == 2;
         bool retido = revista && (!Dados.curraisPertencesRetidos || revistaEmConferencia);
         diarioRetido.SetActive(retido);
-        areaDiarioRetido.enabled = retido;
+        areaDiarioRetido.enabled = retido && !ViuConversaEntrada("caderno-conferencia");
         areaMesaRevista.enabled = revista;
         mesaPertences.Atualizar(Dados.curraisItensRetidos);
     }
 
     private void MenuConferenciaRevista()
     {
+        if (Dados.curraisDiarioRecuperado || Dados.curraisDiarioRecusado) { FecharMenu(); return; }
         if (Dados.curraisPertencesRetidos)
         {
-            MostrarOpcoes("Fiscal", "O caderno ficou separado. Esse a menina pode levar.",
-                new[] { "Meu caderno", "Sair" },
-                new Action[] { () => Iniciar(Dizer(cadernoAutorizado)), FecharMenu });
+            MostrarMenuEntrada("revista-diario-autorizado", "Fiscal", string.Empty,
+                new[] { "Diário", "Sair" },
+                new Action[] { () => Iniciar(RecuperarDiarioEntrada()), FecharMenu });
             return;
         }
-        MostrarOpcoes("Fiscal", "Os pertences ficam juntos na mesa. Depois confiro o caderno.",
-            new[] { "O que acontece com nossas coisas?", "Já terminou a conferência?", "Sair" },
-            new Action[] { () => Iniciar(Dizer(revistaPendente)), () => Iniciar(ConcluirRevista()), FecharMenu });
+        var rotulos = new System.Collections.Generic.List<string>();
+        var acoes = new System.Collections.Generic.List<Action>();
+        if (!ViuConversaEntrada("revista-pendente"))
+        {
+            rotulos.Add("As coisas");
+            acoes.Add(() => Iniciar(DizerEntradaUmaVez("revista-pendente", revistaPendente)));
+        }
+        // A resposta de pendência é dita uma vez; a conferência volta quando todos entregaram os itens.
+        rotulos.Add("Terminou a conferência?"); acoes.Add(() => Iniciar(ConcluirRevista()));
+        rotulos.Add("Sair"); acoes.Add(FecharMenu);
+        MostrarMenuEntrada("revista-pertences", "Fiscal", "Os pertences ficam juntos na mesa. Depois confiro o caderno.",
+            rotulos.ToArray(), acoes.ToArray());
+        if (ViuConversaEntrada("revista-pendente") && InventoryManager.Instance.Items.Count > 0)
+        {
+            int indice = rotulos.IndexOf("Terminou a conferência?");
+            if (indice >= 0 && indice < botoesEtapa2.Length) botoesEtapa2[indice].interactable = false;
+        }
     }
 
     private IEnumerator EntregarPertenceRevista(ItemData item)
@@ -79,10 +94,8 @@ public partial class EntradaCurrais
             InventoryManager.Instance.RemoveItem(item);
             AtualizarVisuaisChegada();
             Salvar();
-            yield return Dizer(new[] { new Fala { personagem = "Fiscal",
-                texto = item.itemName + ": deixe junto dos outros." } });
             if (InventoryManager.Instance.Items.Count == 0)
-                yield return Dizer(new[] { new Fala { personagem = "Fiscal",
+                yield return DizerEntradaUmaVez("revista-itens-entregues", new[] { new Fala { personagem = "Fiscal",
                     texto = "Está tudo aqui. Agora falta conferir o caderno." } });
         }
         finally { EncerrarGestoRevista(); }
@@ -91,10 +104,10 @@ public partial class EntradaCurrais
     private IEnumerator ConferirTodosOsPertences()
     {
         if (Dados.curraisPertencesRetidos)
-        { yield return Dizer(cadernoAutorizado); yield break; }
+        { yield break; }
         if (InventoryManager.Instance == null) yield break;
         if (InventoryManager.Instance.Items.Count > 0)
-        { yield return Dizer(revistaPendente); yield break; }
+        { yield return DizerEntradaUmaVez("revista-pendente", revistaPendente); yield break; }
         try
         {
             revistaEmConferencia = true;
@@ -102,7 +115,7 @@ public partial class EntradaCurrais
             yield return Esperar(.5f);
             // Confere novamente após a conferência; nenhuma lista fixa de ferramentas é usada.
             if (!ReterPertences())
-            { yield return Dizer(revistaPendente); yield break; }
+            { yield return DizerEntradaUmaVez("revista-pendente", revistaPendente); yield break; }
             AtualizarVisuaisChegada();
             yield return Dizer(revista);
         }

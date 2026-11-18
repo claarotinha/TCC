@@ -146,7 +146,7 @@ public class DiaryUI : MonoBehaviour
         progress?.SyncDiaryPages();
 
         if (progress != null &&
-            progress.Data.diaryCollected &&
+            progress.CanAccessDiary &&
             entries != null)
         {
             foreach (DiaryEntry entry in entries)
@@ -184,7 +184,8 @@ public class DiaryUI : MonoBehaviour
         if (availableEntries.Count == 0)
         {
             titleText.text = "Diário de Maria Josefa";
-            leftPageText.text = "Encontre o diário para ler suas páginas.";
+            leftPageText.text = GameProgress.Instance != null && GameProgress.Instance.Data.curraisDiarioRecusado
+                ? "O diário ficou na mesa da revista." : "Encontre o diário para ler suas páginas.";
             rightPageText.text = "";
             pageNumberText.text = "";
 

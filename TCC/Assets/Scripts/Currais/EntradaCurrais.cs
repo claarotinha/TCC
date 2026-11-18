@@ -174,6 +174,7 @@ public partial class EntradaCurrais : MonoBehaviour
         {
             MostrarEntrada();
             RetomarExploracao(posicaoRestaurada, restaurandoPartida, restaurandoPosicao);
+            if (restaurandoPartida) RestaurarFamiliaNaCaminhada();
         }
         else if (etapa == 1 || etapa == 2) Iniciar(Entrar());
         else if (etapa == 3)
@@ -552,9 +553,11 @@ public partial class EntradaCurrais : MonoBehaviour
         guardaRetaguarda.gameObject.SetActive(true);
         luzia.SetActive(true); lacoChao.SetActive(false); lacoPanela.SetActive(false);
         cameraCena.transform.position = cameraRua.position;
+        FormarFilaDaFamilia(true);
         CorFade(1f);
         yield return Esperar(tempoPlano);
         yield return Escurecer(0f);
+        yield return DizerEntradaUmaVez("aviso-pertences", new[] { entrada[0] });
         yield return Dizer(chegadaFamilia);
         yield return Dizer(antesSeparacao);
         yield return MarcharEscolta();
@@ -621,7 +624,11 @@ public partial class EntradaCurrais : MonoBehaviour
         yield return Escurecer(0f);
         if (!Dados.curraisRevistaApresentada)
         {
-            yield return Dizer(entrada);
+            int inicio = ViuConversaEntrada("aviso-pertences") ? 1 : 0;
+            Fala[] chegadaRevista = new Fala[entrada.Length - inicio];
+            Array.Copy(entrada, inicio, chegadaRevista, 0, chegadaRevista.Length);
+            if (chegadaRevista.Length > 0) yield return Dizer(chegadaRevista);
+            RegistrarConversaEntrada("aviso-pertences");
             Dados.curraisRevistaApresentada = true;
         }
         Dados.curraisEtapaEntrada = 2;
@@ -641,6 +648,7 @@ public partial class EntradaCurrais : MonoBehaviour
         lacoPanela.SetActive(false);
         Posicionar(mari.transform, mariEntrada); Posicionar(pai, paiEntrada);
         Posicionar(mae, maeEntrada); Posicionar(baleia, baleiaEntrada);
+        FormarFilaDaFamilia(false);
         Transform enquadramento = Dados.curraisEtapaEntrada == 2 && cameraRevista != null ? cameraRevista : cameraCampo;
         cameraCena.transform.position = enquadramento.position;
     }
@@ -885,21 +893,18 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (Dados.curraisAguaRecebida && Dados.curraisEscolhaAgua == 0)
         {
-            MenuAssuntoNPC("Luzia", "Você conseguiu água?", "Como a senhora tá?", () => Dizer(maeEsperaAgua),
-                "Perguntar por Mariquinha", () => Dizer(luziaIrma));
+            AbrirAssuntosEntrada("luzia-agua-recebida", "Luzia", "Você conseguiu água?",
+                new[] { "familia-espera-agua", "luzia-irma" },
+                new[] { "Como a senhora tá?", "Perguntar por Mariquinha" },
+                new Func<IEnumerator>[] { () => Dizer(maeEsperaAgua), () => Dizer(luziaIrma) });
             return;
         }
-        if (!Dados.curraisDistribuicaoIniciada)
-        {
-            MostrarOpcoes("Luzia", luziaBuscarAgua[0].texto, opcoesLuziaInicio, new Action[] {
-                () => Iniciar(IniciarBuscaAguaAbrigo()),
-                () => Iniciar(Dizer(abrigo)), FecharMenu });
-        }
-        else
-            MostrarOpcoes("Luzia", Dados.curraisEscolhaAgua == 0 ? luziaBuscarAgua[0].texto : familiaDepoisAgua[0].texto,
-                new[] { "Sobre a água", "Minha irmã", "Sair" },
-                new Action[] { () => Iniciar(Dizer(Dados.curraisEscolhaAgua == 0 ? luziaBuscarAgua : familiaDepoisAgua)),
-                    () => Iniciar(Dizer(luziaIrma)), FecharMenu });
+        AbrirAssuntosEntrada("luzia-primeiro-abrigo", "Luzia", "Pode falar, Josefa.",
+            new[] { Dados.curraisEscolhaAgua == 0 ? "luzia-buscar-agua" : "familia-depois-agua", "luzia-irma" },
+            new[] { "Sobre a água", "Minha irmã" },
+            new Func<IEnumerator>[] {
+                () => Dados.curraisEscolhaAgua == 0 ? IniciarBuscaAguaAbrigo() : Dizer(familiaDepoisAgua),
+                () => Dizer(luziaIrma) });
     }
 
     private Collider2D areaCabacaMesaCache;
