@@ -1094,6 +1094,7 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (!pronto) return;
         AtualizarCompanhiaSepultamento();
+        if (sepultamentoNaTela) AjustarCompanhiaBentoNoPlano();
         ManterPessoasPresentes();
         meninoBusca.gameObject.SetActive(true);
         if (campo.activeInHierarchy) areaMenino.enabled = true;
@@ -1106,6 +1107,7 @@ public partial class EntradaCurrais : MonoBehaviour
         if (AtualizarAproximacaoRaimundo(livre)) return;
         if (AtualizarAproximacaoLavagem(livre)) return;
         if (AtualizarAproximacaoPatio(livre)) return;
+        if (AtualizarFluxoBento(livre)) return;
         if (Dados.curraisEtapaEntrada != 4) return;
         if (planoMemoriaAtivo)
         {

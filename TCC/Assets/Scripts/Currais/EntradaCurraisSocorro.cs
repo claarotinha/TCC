@@ -53,6 +53,7 @@ public partial class EntradaCurrais
         // Recupera somente o pano da tarefa interrompida; nunca altera a tira de Raimundo.
         if (Dados.curraisEtapaBusca == 4 && Dados.curraisTrabalhoPatioIniciado &&
             !Dados.curraisPanosPatioEntregues && !TemItem(panoAuxilio)) InventoryManager.Instance.AddItem(panoAuxilio);
+        PrepararAtendimentoLinear();
         AtualizarSocorro();
     }
 
@@ -72,8 +73,9 @@ public partial class EntradaCurrais
         panosEntreguesPatio.SetActive(panoDisponivel);
         areaPanoLimpoApoio.enabled = PanoDoApoioDisponivel;
         if ((patio || socorro) && Dados.curraisEscolhaAgua == 1) areaMae.enabled = true;
-        areaPanoAtendimento.gameObject.SetActive(socorro && Dados.curraisBentoMorto && PrecisaRecolherPanoSocorro);
+        areaPanoAtendimento.gameObject.SetActive(false);
         AtualizarDetalhesPatio();
+        AtualizarVisuaisBentoLinear();
     }
 
     private IEnumerator PrepararAguaPatio()
@@ -99,105 +101,103 @@ public partial class EntradaCurrais
 
     private IEnumerator UsarNoSocorro()
     {
+        if (Dados.curraisEtapaBusca != 5 || Dados.curraisBentoMorto) yield break;
         ItemData selecionado = InventoryManager.Instance.SelectedItem;
-        if (!Dados.curraisBentoMorto)
-        {
-            if (Dados.curraisItensAtendimentoBento == 3)
-            { yield return ConcluirAtendimentoBento(); yield break; }
-            if (selecionado == panoAuxilio && TemItem(panoAuxilio) && (Dados.curraisItensAtendimentoBento & 1) == 0)
-            {
-                Dados.curraisItensAtendimentoBento |= 1;
-                InventoryManager.Instance.RemoveItem(panoAuxilio);
-                AtualizarEstadoBusca(); Salvar();
-                yield return Dizer(new[] { new Fala { personagem = NomeAcompanhantePatio, texto = "Segure o pano aqui. Isso. Deixe os homens atenderem ele." } });
-            }
-            else if (selecionado == cabacaCheiaBusca && TemItem(cabacaCheiaBusca) && (Dados.curraisItensAtendimentoBento & 2) == 0)
-            {
-                Dados.curraisItensAtendimentoBento |= 2;
-                InventoryManager.Instance.RemoveItem(cabacaCheiaBusca);
-                AtualizarEstadoBusca(); Salvar();
-                yield return Dizer(new[] { new Fala { personagem = NomeAcompanhantePatio, texto = "Deixe a água com nós, Josefa. Obrigada." } });
-            }
-            else
-            {
-                yield return Dizer(EstadoSocorroBento());
-                yield break;
-            }
-            if (Dados.curraisItensAtendimentoBento != 3) yield break;
-            yield return ConcluirAtendimentoBento();
-            yield break;
-        }
-        if (!Dados.curraisPanoSepultamentoEntregue)
-        {
-            if (selecionado != panoAuxilio || !TemItem(panoAuxilio))
-            {
-                yield return Dizer(pertencesSemPano);
-                yield break;
-            }
-            Dados.curraisPanoSepultamentoEntregue = true;
-            InventoryManager.Instance.RemoveItem(panoAuxilio);
-            AtualizarEstadoBusca(); Salvar();
-            yield return Dizer(despedidaPatio);
-        }
-        if (Dados.curraisCabacaSocorroRecolhida) yield return Dizer(despedidaPronta);
+        bool pano = selecionado == panoAuxilio && TemItem(panoAuxilio) && (Dados.curraisItensAtendimentoBento & 1) == 0;
+        bool agua = selecionado == cabacaCheiaBusca && TemItem(cabacaCheiaBusca) && (Dados.curraisItensAtendimentoBento & 2) == 0;
+        if (!pano && !agua) yield break;
+        yield return ExamineNomesUmaVez("bento-exame-atendimento", exameAtendimentoBento);
+        if (!TemItem(selecionado)) yield break;
+        Dados.curraisItensAtendimentoBento |= pano ? 1 : 2;
+        InventoryManager.Instance.RemoveItem(selecionado);
+        AtualizarEstadoBusca(); Salvar();
+        yield return Dizer(pano ? bentoReceberPano : bentoReceberAgua);
+        if ((Dados.curraisItensAtendimentoBento & 3) == 3) yield return ConcluirAtendimentoBento();
     }
 
     private IEnumerator ConcluirAtendimentoBento()
     {
-        if (atendimentoBentoEmCurso || Dados.curraisBentoMorto || (Dados.curraisItensAtendimentoBento & 3) != 3)
-            yield break;
+        if (atendimentoBentoEmCurso || Dados.curraisBentoMorto ||
+            Dados.curraisEtapaBusca != 5 || (Dados.curraisItensAtendimentoBento & 3) != 3) yield break;
         atendimentoBentoEmCurso = true;
+        if (PaiBuscandoFamiliaBento && !familiarBentoEmMovimento)
+        {
+            pai.position = origemFamiliarBento.position;
+            Physics2D.SyncTransforms();
+        }
         SpriteRenderer cobertura = corpoCoberto.GetComponent<SpriteRenderer>();
         Color corCobertura = cobertura.color;
         try
         {
-            yield return Dizer(atendimentoFalas);
+            yield return DizerEntradaUmaVez("bento-pai-vai-chamar", bentoPaiBuscarFamilia);
+            if (!ViuConversaEntrada("bento-pai-foi-buscar"))
+            {
+                yield return Mover(pai, origemFamiliarBento.position, tempoCaminhadaBento);
+                RegistrarConversaEntrada("bento-pai-foi-buscar"); Salvar();
+            }
+            yield return Esperar(pausaAtendimentoBento);
+            yield return DizerEntradaUmaVez("bento-atendimento-parou", bentoAtendimentoParou);
+            yield return DizerEntradaUmaVez("bento-pergunta-levantar",
+                Dados.curraisEscolhaAgua == 1 ? bentoPerguntaMae : bentoPerguntaLuzia);
+            if (!ViuConversaEntrada("bento-pai-voltou"))
+            {
+                yield return TrazerFamiliarBento();
+                RegistrarConversaEntrada("bento-pai-voltou"); Salvar();
+            }
+            yield return DizerEntradaUmaVez("bento-noticia", bentoNoticiaLinear);
             yield return Escurecer(1f);
             Dados.curraisBentoMorto = true;
             GameProgress.Instance.UnlockDiaryPage("currais-bento");
             AtualizarEstadoBusca(); Salvar();
             cobertura.color = new Color(corCobertura.r, corCobertura.g, corCobertura.b, 0f);
-            yield return Esperar(tempoPlano);
+            yield return Esperar(.5f);
             yield return Escurecer(0f);
             yield return MostrarCoberturaBento(corCobertura);
-            yield return Dizer(noticiaBento);
-            yield return Dizer(pertencesSemPano);
+            MostrarReacaoBento();
         }
-        finally { cobertura.color = corCobertura; atendimentoBentoEmCurso = false; }
+        finally
+        {
+            cobertura.color = corCobertura;
+            atendimentoBentoEmCurso = false;
+            familiarBentoEmMovimento = false;
+        }
     }
 
     private IEnumerator RecolherCabacaSocorro()
     {
-        if (!Dados.curraisBentoMorto) { yield return Dizer(socorroFaltaPano); yield break; }
-        if (Dados.curraisCabacaSocorroRecolhida) { yield return Dizer(cabacaGuardada); yield break; }
+        if (Dados.curraisEtapaBusca != 5 || !Dados.curraisBentoMorto || Dados.curraisCabacaSocorroRecolhida) yield break;
         yield return ExaminarOuColetar(cabacaVaziaBusca);
         if (!coletaDoCenarioConfirmada) yield break;
         Dados.curraisCabacaSocorroRecolhida = true;
         AtualizarEstadoBusca(); Salvar();
-        yield return Dizer(cabacaGuardada);
-        if (Dados.curraisPanoSepultamentoEntregue) yield return Dizer(despedidaPronta);
+        yield return Dizer(ComAcompanhante(bentoCabacaRecuperada));
     }
 
     private IEnumerator SepultarBento()
     {
-        if (Dados.curraisSepultamentoConcluido || sepultamentoEmCurso) yield break;
-        if (!Dados.curraisBentoMorto || !Dados.curraisPanoSepultamentoEntregue || !Dados.curraisCabacaSocorroRecolhida)
-        { yield return Dizer(EstadoSocorroBento()); yield break; }
+        if (Dados.curraisSepultamentoConcluido || sepultamentoEmCurso || !DespedidaBentoPronta) yield break;
         sepultamentoEmCurso = true;
         try
         {
+            RegistrarConversaEntrada("bento-despedida-iniciada"); Salvar();
+            yield return DizerEntradaUmaVez("bento-permissao", bentoPermissaoSepultamento);
+            yield return DizerEntradaUmaVez("bento-grupo-reunido", bentoReunirGrupo);
+            // A transição mostra a reunião do grupo; a acompanhante continua ao lado de Josefa.
             yield return Escurecer(1f);
             sepultamentoNaTela = true;
             planoSepultamento.SetActive(true);
             corpoNoPlano.SetActive(true);
             cruzDeBento.SetActive(false);
             AtualizarCompanhiaSepultamento();
+            AjustarCompanhiaBentoNoPlano();
             objetivoTexto.gameObject.SetActive(false);
             yield return Escurecer(0f);
-            yield return Dizer(sepultamentoFalas);
+            yield return Dizer(ComAcompanhante(bentoSepultamentoInicio));
             yield return BaixarBentoNoPlano();
+            yield return Dizer(bentoNomeSepultamento);
             yield return Esperar(tempoPlano);
-            yield return Dizer(retornoSepultamento);
+            yield return Dizer(bentoSepultamentoFamilia);
+            yield return Dizer(bentoRetornoCruzes);
             yield return ChapterCard.Show("josefa-09");
             yield return Escurecer(1f);
             RestaurarPlanoSepultamento();

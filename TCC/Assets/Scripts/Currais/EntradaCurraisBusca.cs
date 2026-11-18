@@ -61,7 +61,7 @@ public partial class EntradaCurrais
         AtualizarVisuaisLavagem();
         areaLembranca.enabled = etapa == 3;
         areaPatio.enabled = etapa == 4;
-        areaPanoAtendimento.enabled = etapa == 5 && PrecisaRecolherPanoSocorro;
+        areaPanoAtendimento.enabled = false;
         panoCarregado.SetActive((etapa == 3 && Dados.curraisEscolhaAgua == 1) ||
             (etapa == 4 && TemItem(panoAuxilio)));
         manchaRoda.SetActive(etapa >= 5);
@@ -80,7 +80,8 @@ public partial class EntradaCurrais
             if (Dados.curraisEscolhaAgua != 1 || Dados.curraisEtapaBusca > 5)
                 Posicionar(mae, maeAbrigo);
             luzia.transform.localRotation = Quaternion.identity;
-            if (etapa >= 4) Posicionar(pai, paiTrabalhoMarca);
+            if (etapa >= 4 && !PaiBuscandoFamiliaBento)
+                Posicionar(pai, etapa == 5 && ViuConversaEntrada("bento-pai-voltou") ? paiRetornoBento : paiTrabalhoMarca);
             if (etapa >= 6) Posicionar(pai, paiAbrigo);
         }
         AtualizarSocorro();
@@ -275,7 +276,7 @@ public partial class EntradaCurrais
 
     private IEnumerator AjudarBento()
     {
-        if (!PrecisaRecolherPanoSocorro || Dados.curraisEtapaBusca != 5) yield break;
+        if (!PrecisaRecolherPanoSocorro || Dados.curraisEtapaBusca != 5 || Dados.curraisBentoMorto) yield break;
         if (!Dados.curraisBentoMorto && !PanoDoApoioDisponivel) yield break;
         yield return ExaminarOuColetar(panoAuxilio);
         if (!coletaDoCenarioConfirmada) yield break;

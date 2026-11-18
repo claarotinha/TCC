@@ -209,7 +209,10 @@ public partial class EntradaCurrais
         { Iniciar(PrepararAguaPatio()); return true; }
         if (Dados.curraisEtapaBusca == 4 && ApoioPatioAutorizado && !Dados.curraisPanosPatioEntregues && alvo == areaPanosPatio && item == panoAuxilio)
         { Iniciar(EntregarPanosPatio()); return true; }
-        if (Dados.curraisEtapaBusca == 5 && (alvo == areaSocorroBento || alvo == areaBentoPatio || alvo == areaPaiPatio) &&
+        if (Dados.curraisEtapaBusca == 5 && Dados.curraisBentoMorto &&
+            alvo == areaFamiliarBento && item == itemEmbrulhoBento && !PertencesBentoResolvidos)
+        { Iniciar(EntregarEmbrulhoBento()); return true; }
+        if (Dados.curraisEtapaBusca == 5 && !Dados.curraisBentoMorto && (alvo == areaSocorroBento || alvo == areaBentoPatio || alvo == areaPaiPatio) &&
             (item == panoAuxilio || item == cabacaCheiaBusca))
         { Iniciar(UsarNoSocorro()); return true; }
         if (Dados.curraisQuartoAberto && alvo == areaTrabalhadoraQuarto && item == cabacaVaziaBusca)

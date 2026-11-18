@@ -25,24 +25,27 @@ public partial class EntradaCurrais
             luziaInicioPatio, luziaTarefasPatio, luziaAguaPatio, luziaPanoPatio,
             patioFaltaAgua, patioFaltaPano, socorroFaltaAgua, socorroFaltaPano,
             socorroFaltamAmbos, pertencesSemPano, despedidaPronta, cabacaGuardada, socorroGuardarCabaca }) ok &= FalasValidas(falas);
-        return ReferenciasPatioLinearValidas() & ok;
+        return ReferenciasAtendimentoBentoValidas() & ReferenciasPatioLinearValidas() & ok;
     }
 
     private Collider2D[] ComAlvosDoPatio(Collider2D[] alvos)
     {
-        Collider2D[] resultado = new Collider2D[alvos.Length + 5];
+        Collider2D[] resultado = new Collider2D[alvos.Length + 7];
         Array.Copy(alvos, resultado, alvos.Length);
         resultado[alvos.Length] = areaPaiPatio;
         resultado[alvos.Length + 1] = areaBentoPatio;
         resultado[alvos.Length + 2] = areaFiscalPatio;
         resultado[alvos.Length + 3] = areaPanoLimpoApoio;
         resultado[alvos.Length + 4] = areaMae;
+        resultado[alvos.Length + 5] = areaEmbrulhoBento;
+        resultado[alvos.Length + 6] = areaFamiliarBento;
         return resultado;
     }
 
     private bool InteragirPessoasDoPatio(Vector2 ponto)
     {
         if (!Dados.curraisPanelaConcluida || Dados.curraisEtapaBusca > 5) return false;
+        if (InteragirPertencesBento(ponto)) return true;
         if (areaPanoLimpoApoio.enabled && areaPanoLimpoApoio.gameObject.activeInHierarchy &&
             areaPanoLimpoApoio.OverlapPoint(ponto))
         { Iniciar(AjudarBento()); return true; }
@@ -79,20 +82,7 @@ public partial class EntradaCurrais
         return entregues == 1 ? socorroFaltaAgua : entregues == 2 ? socorroFaltaPano : socorroFaltamAmbos;
     }
 
-    private void MenuSocorroBento()
-    {
-        if (!Dados.curraisBentoMorto && (Dados.curraisItensAtendimentoBento & 3) == 3)
-        {
-            MenuAssuntoNPC(NomeAcompanhantePatio, "Josefa, venha cá.", "O que aconteceu?", ConcluirAtendimentoBento);
-            return;
-        }
-        if (Dados.curraisBentoMorto && Dados.curraisPanoSepultamentoEntregue && Dados.curraisCabacaSocorroRecolhida)
-        {
-            MenuAssuntoNPC(NomeAcompanhantePatio, "A família dele tá esperando.", "Posso ir com vocês?", SepultarBento);
-            return;
-        }
-        MenuAssuntoNPC(NomeAcompanhantePatio, "Diga, Josefa.", "Como posso ajudar?", () => Dizer(EstadoSocorroBento()));
-    }
+    private void MenuSocorroBento() => Iniciar(AbrirAtendimentoBentoLinear());
 
     private void MenuAguaDoPatio() => Iniciar(AbrirApoioPatioLinear());
 
