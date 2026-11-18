@@ -29,6 +29,8 @@ public class ControleJornada : MonoBehaviour
 
     [SerializeField] private Transform limiteFortaleza;
 
+    private bool aguardandoNarrativa;
+    private float limiteDuranteTransicao;
     private bool paradaAtiva;
     private int paradaAtual = -1;
 
@@ -99,7 +101,7 @@ public class ControleJornada : MonoBehaviour
                 ? limiteFortaleza.position.x : limiteX + trechoAposAcampamento;
             if (paradasConcluidas == 1 && caminhada != null)
                 limiteX = Mathf.Min(limiteX, caminhada.LimiteCaminhadaAntesDaBusca);
-            return limiteX;
+            return aguardandoNarrativa ? Mathf.Min(limiteX, limiteDuranteTransicao) : limiteX;
         }
     }
 
@@ -168,6 +170,8 @@ public class ControleJornada : MonoBehaviour
     private void LateUpdate()
     {
         if (mari == null) return;
+        if (aguardandoNarrativa && (caminhada == null || !caminhada.NarrativaOcupada))
+            aguardandoNarrativa = false;
         float limiteX = LimiteAvancoX;
         // Bloqueia somente o avanço para a direita.
         if (mari.position.x > limiteX)
@@ -201,7 +205,8 @@ public class ControleJornada : MonoBehaviour
 
     public bool IniciarParada(int numero)
     {
-        if (paradaAtiva || numero != paradasConcluidas + 1)
+        if (paradaAtiva || aguardandoNarrativa || (caminhada != null && caminhada.NarrativaOcupada) ||
+            InvestigationGuard.Blocked || numero != paradasConcluidas + 1)
             return false;
 
         paradaAtiva = true;
@@ -221,6 +226,9 @@ public class ControleJornada : MonoBehaviour
             return;
         }
 
+        // Não libera o próximo trecho enquanto a fala/cutscene anterior termina.
+        limiteDuranteTransicao = Mathf.Max(LimiteAvancoX, mari != null ? mari.position.x : float.NegativeInfinity);
+        aguardandoNarrativa = caminhada != null && caminhada.NarrativaOcupada;
         paradasConcluidas = numero;
         if (GameProgress.Instance != null)
             GameProgress.Instance.Data.estradaParadasConcluidas = numero;

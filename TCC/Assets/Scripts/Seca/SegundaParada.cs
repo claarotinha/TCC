@@ -24,6 +24,9 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private SeguidorFamilia pai;
     [SerializeField] private Sprite[] corridaBaleia;
     [SerializeField] private Sprite baleiaComPrea;
+    [SerializeField] private Sprite[] quadrosBaleiaComPrea;
+    private bool baleiaSeguraPrea;
+    private float tempoBaleiaComPrea;
     [SerializeField, Min(0.1f)] private float velocidadeFuga = 6.5f;
     [SerializeField, Min(0.02f)] private float intervaloCorrida = 0.13f;
     [SerializeField, Min(8f)] private float alcanceBuscaBaleia = 18f;
@@ -87,6 +90,14 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private SpriteRenderer[] panoramasJornada;
     [SerializeField] private SpriteRenderer[] panoramasAcampamento;
     [SerializeField] private GameObject descansoTelaCheia;
+    [Header("Noite em tela cheia - imagens editáveis no Canvas")]
+    [SerializeField] private GameObject noiteTelaCheia;
+    [SerializeField] private Image imagemNoite;
+    [SerializeField] private Sprite[] quadrosIrmasAcordadas, quadrosIrmasPromessa;
+    [SerializeField] private Sprite[] quadrosIrmasSilencio, quadrosIrmasDormindo;
+    [SerializeField] private Sprite paisDeitados;
+    private Sprite[] quadrosNoiteAtuais;
+    private float tempoImagemNoite;
     private SpriteRenderer[] cenarioHorario;
     private Color[] coresHorario;
     private bool acampamentoIniciado, introAcampamentoConcluida, fogueiraPreparada, pedidoAlecrimConcluido;
@@ -200,6 +211,8 @@ public class SegundaParada : MonoBehaviour
         PrepararFortaleza();
         PrepararAcampamento();
         AplicarFerimento();
+        if (casa != null) TrocarCasa(GameProgress.Instance != null && GameProgress.Instance.Data.estradaAbrigoConcluido
+            ? (JanelaQuebrada ? casaJanelaQuebrada : casaPortaAberta) : casaFechada);
         if (GameProgress.Instance != null && GameProgress.Instance.Data.estradaAbrigoConcluido)
         {
             iniciou = true;
@@ -209,7 +222,6 @@ public class SegundaParada : MonoBehaviour
             StartCoroutine(RestaurarAbrigoCarregado());
             return;
         }
-        if (casa != null) TrocarCasa(casaFechada);
     }
 
     private IEnumerator RegistrarCombinacaoFogueira()
@@ -225,6 +237,8 @@ public class SegundaParada : MonoBehaviour
 
     private void Update()
     {
+        AtualizarImagemNoite();
+        AtualizarBaleiaComPrea();
         AtualizarPanoramasJornada();
         if (carregandoCurrais || PauseHelper.BlockInput() || Time.timeScale == 0f || sequenciaAbrigo) return;
         ControleJornada j = ControleJornada.Instance;
@@ -290,6 +304,10 @@ public class SegundaParada : MonoBehaviour
         }
         return false;
     }
+
+    public bool NarrativaOcupada => conversando || preparandoBusca || sequenciaAbrigo ||
+        noiteEmAndamento || recolhendoAgua || encerramentoMostrado ||
+        (dialogueUI != null && dialogueUI.activeInHierarchy);
 
     public bool BloqueiaCursor => carregandoCurrais || conversando || preparandoBusca ||
         sequenciaAbrigo || encerramentoMostrado || (dialogueUI != null && dialogueUI.activeInHierarchy);
@@ -413,6 +431,7 @@ public class SegundaParada : MonoBehaviour
         conversando = true; esperandoEscolha = false;
         if (duranteCaminhada) LiberarMovimento();
         else BloquearMovimento();
+        dialogueUI.transform.SetAsLastSibling();
         dialogueUI.SetActive(true); dialoguePanel.SetActive(true);
         Grupo(dialogueUI); Grupo(dialoguePanel);
         if (choicesContainer != null) choicesContainer.SetActive(false);
@@ -437,6 +456,7 @@ public class SegundaParada : MonoBehaviour
     private void Fechar()
     {
         conversando = false;
+        quadro = Time.frameCount;
         dialogueUI.SetActive(false);
         LiberarMovimento();
         Action acao = depois; depois = null;
@@ -626,6 +646,8 @@ public class SegundaParada : MonoBehaviour
             yield return null;
         }
         MostrarBaleia(baleiaComPrea);
+        baleiaSeguraPrea = true;
+        tempoBaleiaComPrea = 0f;
         fugindo = false;
     }
 
@@ -634,24 +656,48 @@ public class SegundaParada : MonoBehaviour
         if (desenhoBaleia == null || sprite == null) return;
         BaleiaAnimacao animacaoBaleia = desenhoBaleia.GetComponent<BaleiaAnimacao>();
         if (animacaoBaleia != null) animacaoBaleia.DefinirPoseExterna(sprite != spriteBaleia || fugindo);
+        float pe = baleia.TransformPoint(LimitesVisiveis(desenhoBaleia.sprite).min).y;
         desenhoBaleia.sprite = sprite;
         // Os quadros mantem os pes na mesma altura, sem saltos de escala.
-        float proporcao = spriteBaleia != null && sprite.bounds.size.y > 0f
-            ? spriteBaleia.bounds.size.y / sprite.bounds.size.y : 1f;
+        Bounds anterior = LimitesVisiveis(spriteBaleia);
+        Bounds atual = LimitesVisiveis(sprite);
+        float proporcao = anterior.size.y / Mathf.Max(0.01f, atual.size.y);
         baleia.localScale = escalaBaleia * proporcao;
+        Vector3 posicao = baleia.position;
+        posicao.y += pe - baleia.TransformPoint(atual.min).y;
+        baleia.position = posicao;
+    }
+
+    private static Bounds LimitesVisiveis(Sprite sprite)
+    {
+        if (sprite == null) return new Bounds(Vector3.zero, Vector3.one);
+        Vector2[] vertices = sprite.vertices;
+        if (vertices == null || vertices.Length == 0) return sprite.bounds;
+        Bounds area = new Bounds(vertices[0], Vector3.zero);
+        foreach (Vector2 vertice in vertices) area.Encapsulate(vertice);
+        return area;
+    }
+
+    private void AtualizarBaleiaComPrea()
+    {
+        if (!baleiaSeguraPrea || fugindo || PauseHelper.BlockInput() || Time.timeScale == 0f ||
+            quadrosBaleiaComPrea == null || quadrosBaleiaComPrea.Length == 0) return;
+        tempoBaleiaComPrea += Time.deltaTime;
+        MostrarBaleia(quadrosBaleiaComPrea[Mathf.FloorToInt(tempoBaleiaComPrea / .22f) % quadrosBaleiaComPrea.Length]);
     }
 
     private void IniciarBusca()
     {
         if (preparandoBusca || etapa != 1) return;
         preparandoBusca = true;
+        BloquearMovimento();
         StartCoroutine(PrepararBusca());
     }
 
     private IEnumerator PrepararBusca()
     {
-        // A corrida segue em paralelo: a distância da cachorra não bloqueia Mari.
-        yield return null;
+        // A busca só abre depois da fala dos pais e da chegada de Baleia.
+        while (fugindo) yield return null;
         GameProgress.Instance?.UnlockDiaryPage("josefa-04");
         etapa = 2;
         foreach (GameObject pista in pistasBusca) pista.SetActive(true);
@@ -745,6 +791,7 @@ public class SegundaParada : MonoBehaviour
         {
             if (prea == null || InventoryManager.Instance == null) return;
             InventoryManager.Instance.AddItem(prea);
+            baleiaSeguraPrea = false;
             MostrarBaleia(spriteBaleia);
             if (seguidorBaleia != null) seguidorBaleia.enabled = baleiaSeguia;
             foreach (GameObject pista in pistasBusca) pista.SetActive(false);
@@ -1085,6 +1132,8 @@ public class SegundaParada : MonoBehaviour
 
     private void PrepararFade()
     {
+        if (fadePreparado) return;
+        dialogueUI.transform.SetAsLastSibling();
         imagemFade = dialoguePanel.GetComponent<Image>();
         retanguloFade = dialoguePanel.GetComponent<RectTransform>();
         spriteFadeOriginal = imagemFade.sprite;
@@ -1112,9 +1161,20 @@ public class SegundaParada : MonoBehaviour
 
     private IEnumerator Escurecer(float alpha)
     {
-        // A Estrada mantém a iluminação da arte; mudanças de enquadramento são imediatas.
-        if (imagemFade != null) imagemFade.color = new Color(0f, 0f, 0f, 0f);
-        yield break;
+        if (imagemFade == null) yield break;
+        float inicio = imagemFade.color.a;
+        float tempo = 0f;
+        while (tempo < duracaoTransicao)
+        {
+            if (!PauseHelper.BlockInput() && Time.timeScale > 0f)
+            {
+                tempo += Time.deltaTime;
+                imagemFade.color = new Color(0f, 0f, 0f,
+                    Mathf.Lerp(inicio, alpha, Mathf.Clamp01(tempo / Mathf.Max(.1f, duracaoTransicao))));
+            }
+            yield return null;
+        }
+        imagemFade.color = new Color(0f, 0f, 0f, alpha);
     }
 
     private void RestaurarFade()
@@ -1992,7 +2052,10 @@ public class SegundaParada : MonoBehaviour
                     (materiaisAcampamento & (1 << i)) == 0);
         if (fogueiraCenario != null)
         {
+            // A área continua clicável, mas não há lenha antes da montagem.
             fogueiraCenario.SetActive(true);
+            SpriteRenderer desenho = fogueiraCenario.GetComponent<SpriteRenderer>();
+            if (desenho != null) desenho.enabled = fogueiraPreparada || acampamentoConcluido;
             Sprite sprite = acampamentoConcluido || conversaFogueiraConcluida ? fogueiraBrasas :
                 refeicaoPreparada && !conversaFogueiraConcluida ? fogueiraAssando :
                 fogueiraPreparada ? fogueiraAcesa : fogueiraMontada;
@@ -2059,7 +2122,7 @@ public class SegundaParada : MonoBehaviour
             }
             return;
         }
-        if (conversando || dialogueUI == null || dialogueUI.activeInHierarchy || InvestigationGuard.Blocked) return;
+        if (conversando || Time.frameCount <= quadro || dialogueUI == null || dialogueUI.activeInHierarchy || InvestigationGuard.Blocked) return;
         if (!retomouAcampamento)
         {
             retomouAcampamento = true;
@@ -2250,6 +2313,44 @@ public class SegundaParada : MonoBehaviour
         alvo.SetActive(true);
     }
 
+    private void PosicionarGrupoFogueira()
+    {
+        // Os quatro desenhos sentados permanecem juntos durante a conversa da família.
+        Vector3 centro = fogueiraCenario.transform.position;
+        Vector3 lugar = paisCenario.transform.position;
+        lugar.x = centro.x - 3f;
+        paisCenario.transform.position = lugar;
+        lugar = irmasCenario.transform.position;
+        lugar.x = centro.x + 1.6f;
+        irmasCenario.transform.position = lugar;
+    }
+
+    private void MostrarImagemNoite(Sprite[] quadros)
+    {
+        if (noiteTelaCheia == null || imagemNoite == null || quadros == null || quadros.Length == 0) return;
+        quadrosNoiteAtuais = quadros;
+        tempoImagemNoite = 0f;
+        imagemNoite.sprite = quadros[0];
+        imagemNoite.preserveAspect = true;
+        noiteTelaCheia.SetActive(true);
+        noiteTelaCheia.transform.SetAsLastSibling();
+        dialogueUI.transform.SetAsLastSibling();
+    }
+
+    private void MostrarImagemPais()
+    {
+        if (paisDeitados == null) return;
+        MostrarImagemNoite(new[] { paisDeitados });
+    }
+
+    private void AtualizarImagemNoite()
+    {
+        if (noiteTelaCheia == null || !noiteTelaCheia.activeInHierarchy || imagemNoite == null ||
+            quadrosNoiteAtuais == null || quadrosNoiteAtuais.Length == 0 || PauseHelper.BlockInput()) return;
+        tempoImagemNoite += Time.deltaTime;
+        imagemNoite.sprite = quadrosNoiteAtuais[Mathf.FloorToInt(tempoImagemNoite / .24f) % quadrosNoiteAtuais.Length];
+    }
+
     private void IniciarNoiteAcampamento()
     {
         if (noiteEmAndamento || !refeicaoPreparada || acampamentoConcluido) return;
@@ -2271,6 +2372,7 @@ public class SegundaParada : MonoBehaviour
         MostrarPoseNoite(paisCenario, paisAcordados);
         MostrarPoseNoite(irmasCenario, JanelaQuebrada ? irmasAcordadasCurativo : irmasAcordadas);
         MostrarFogueira(fogueiraAssando);
+        PosicionarGrupoFogueira();
         focoNoite = 0;
         if (conversaFogueiraConcluida)
         {
@@ -2308,8 +2410,8 @@ public class SegundaParada : MonoBehaviour
         {
             sequenciaAbrigo = false;
             if (conversaPaisConcluida) IniciarFimNoite();
-            else if (conversaIrmasConcluida) ConversarPaisNoite();
-            else RetomarConversaIrmas();
+            else if (conversaIrmasConcluida) IniciarCenaPais();
+            else IniciarCenaIrmas();
         }
     }
 
@@ -2326,6 +2428,7 @@ public class SegundaParada : MonoBehaviour
         MostrarPoseNoite(irmasCenario, JanelaQuebrada ? irmasAcordadasCurativo : irmasAcordadas);
         MostrarPoseNoite(paisCenario, paisAcordados);
         focoNoite = 1; EnquadrarNoite();
+        MostrarImagemNoite(quadrosIrmasAcordadas);
         yield return Escurecer(0f); RestaurarFade(); sequenciaAbrigo = false;
         RetomarConversaIrmas();
     }
@@ -2339,6 +2442,7 @@ public class SegundaParada : MonoBehaviour
 
     private void MostrarEscolhaNoturna(bool segunda)
     {
+        dialogueUI.transform.SetAsLastSibling();
         LimparEscolhas();
         foreach (Transform filho in choicesContainer.transform)
         {
@@ -2414,6 +2518,8 @@ public class SegundaParada : MonoBehaviour
 
     private void ContinuarSegundaEscolhaNoturna()
     {
+        MostrarImagemNoite(segundaEscolhaNoturna == 1 ? quadrosIrmasPromessa :
+            segundaEscolhaNoturna == 3 ? quadrosIrmasSilencio : quadrosIrmasAcordadas);
         if (segundaEscolhaNoturna == 1)
             Falar(new[] { "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha", "Mariquinha", "Zefinha" }, new[] {
                 "Eu prometo.",
@@ -2453,8 +2559,11 @@ public class SegundaParada : MonoBehaviour
         sequenciaAbrigo = true; BloquearMovimento();
         if (segundaEscolhaNoturna == 3) yield return new WaitForSeconds(1.8f);
         // Somente a promessa sem ferimento mostra as maos entrelacadas.
+        PrepararFade(); yield return Escurecer(1f);
         MostrarPoseNoite(irmasCenario, SpriteIrmasDormindo());
-        yield return new WaitForSeconds(2f);
+        MostrarImagemNoite(quadrosIrmasDormindo);
+        yield return Escurecer(0f); RestaurarFade();
+        yield return new WaitForSeconds(3f);
         conversaIrmasConcluida = true; SalvarAcampamento();
         sequenciaAbrigo = false; IniciarCenaPais();
     }
@@ -2478,6 +2587,7 @@ public class SegundaParada : MonoBehaviour
         MostrarPoseNoite(paisCenario, paisAcordados);
         MostrarPoseNoite(irmasCenario, SpriteIrmasDormindo());
         focoNoite = 2; EnquadrarNoite();
+        MostrarImagemPais();
         yield return Escurecer(0f); RestaurarFade(); sequenciaAbrigo = false;
         ConversarPaisNoite();
     }
@@ -2500,7 +2610,8 @@ public class SegundaParada : MonoBehaviour
 
     private IEnumerator AmanhecerAcampamento()
     {
-        if (fotoFamiliaDormindo != null) fotoFamiliaDormindo.SetActive(true);
+        // A fotografia da casa pertence apenas ao abrigo da segunda parada.
+        MostrarImagemPais();
         familiaAcampamento.SetActive(false);
         MostrarPoseNoite(paisCenario, paisAcordados);
         focoNoite = 2; EnquadrarNoite();
@@ -2508,7 +2619,8 @@ public class SegundaParada : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         PrepararFade(); yield return Escurecer(1f);
         yield return new WaitForSeconds(1.4f);
-        if (fotoFamiliaDormindo != null) fotoFamiliaDormindo.SetActive(false);
+        if (noiteTelaCheia != null) noiteTelaCheia.SetActive(false);
+        quadrosNoiteAtuais = null;
         irmasCenario.SetActive(false); paisCenario.SetActive(false);
         RestaurarCoresAcampamento(); MostrarFogueira(fogueiraBrasas);
         Vector3 lugar = mari.transform.position; lugar.x = quintaParada.position.x + 2.8f; Posicionar(mari.transform, lugar);
@@ -2820,6 +2932,9 @@ public class SegundaParada : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
+        if (noiteTelaCheia != null) noiteTelaCheia.SetActive(false);
+        quadrosNoiteAtuais = null;
+        baleiaSeguraPrea = false;
         // A limpeza já ocorreu antes da carga; não altera sistemas persistentes na cena nova.
         if (transicaoCurraisPreparada) return;
         RestaurarFundoFim();
