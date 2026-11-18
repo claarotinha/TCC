@@ -341,6 +341,7 @@ public partial class EntradaCurrais : MonoBehaviour
     private void Update()
     {
         if (!pronto || PauseHelper.BlockInput() || Time.timeScale <= 0f) return;
+        if (AtualizarExamineLuzia()) return;
         AtualizarPatrulha();
         if (dialogando)
         {
@@ -411,6 +412,7 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private static bool PainelAuxiliarAberto()
     {
+        if (ExamineObject.IsShowing()) return true;
         InventoryTabController inventario = InventoryTabController.Instance;
         if (inventario == null) return false;
         CollectPrompt coleta = inventario.GetComponent<CollectPrompt>();
@@ -712,7 +714,7 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void LiberarMari()
     {
-        bool livre = !encerrando && !ocupado && !menuAberto && !dialogando && !planoMemoriaAtivo;
+        bool livre = !encerrando && !ocupado && !menuAberto && !dialogando && !ExamineObject.IsShowing() && !planoMemoriaAtivo;
         if (mari != null) mari.enabled = livre;
         if (seguirCamera != null)
         {
@@ -803,11 +805,11 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (personagem == "Luzia" && !Dados.curraisLuziaApresentada)
         {
-            MostrarOpcoes("Mulher", "A mulher faz um pouco de espaço debaixo da lona.",
-                new[] { "Com licença...", "Sair" },
-                new Action[] { () => Iniciar(ApresentarLuzia(() => MostrarOpcoes(personagem, texto, rotulos, acoes))), FecharMenu });
+            SolicitarContatoLuzia(() => MostrarOpcoes(personagem, texto, rotulos, acoes));
             return;
         }
+        if (rotulos.Length > 3)
+        { MostrarPaginaAssuntos(personagem, texto, rotulos, acoes, 0); return; }
         if (InventoryTabController.Instance != null) InventoryTabController.Instance.Close();
         PausarExploracao();
         InvestigationGuard.BlockCurrentClick();
@@ -891,6 +893,8 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void AbrirMenuLuzia()
     {
+        if (!Dados.curraisPanelaConcluida && !ConviteAguaConhecido)
+        { MenuLuziaAbrigoLinear(); return; }
         if (Dados.curraisAguaRecebida && Dados.curraisEscolhaAgua == 0)
         {
             AbrirAssuntosEntrada("luzia-agua-recebida", "Luzia", "Você conseguiu água?",
@@ -956,6 +960,7 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private IEnumerator ReceberAgua()
     {
+        if (!ConviteAguaConhecido) yield break;
         if (Dados.curraisEtapaEntrada != 4)
         {
             yield return Dizer(aguaAguardar);
@@ -1147,7 +1152,7 @@ public partial class EntradaCurrais : MonoBehaviour
         if (Dados.curraisEtapaEntrada == 2 || Dados.curraisEtapaEntrada == 3) AtualizarVisuaisChegada();
         // Marcas de câmera são aplicadas somente pela inicialização/transições.
         // Uma fala na revista ou no abrigo não reposiciona nem redefine o zoom.
-        bool livre = !ocupado && !menuAberto && !dialogando && !PauseHelper.BlockInput();
+        bool livre = !ocupado && !menuAberto && !dialogando && !ExamineObject.IsShowing() && !PauseHelper.BlockInput();
         if (AtualizarCaminhadaFamilia(livre)) return;
         if (Dados.curraisEtapaEntrada != 4) return;
         if (planoMemoriaAtivo)
@@ -1262,6 +1267,9 @@ public partial class EntradaCurrais : MonoBehaviour
     private void OnDisable()
     {
         encerrando = true;
+        if (examePrimeiroCliqueLuzia != null && examePrimeiroCliqueLuzia.PanelIsOpen)
+            examePrimeiroCliqueLuzia.HidePanel();
+        exameLuziaEmCurso = false;
         StopAllCoroutines();
         EncerrarGestoRevista();
         EncerrarLavagemELembranca();

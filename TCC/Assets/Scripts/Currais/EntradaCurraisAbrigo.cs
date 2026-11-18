@@ -19,7 +19,7 @@ public partial class EntradaCurrais
         if (pontoParadaFamilia == null) pontoParadaFamilia = mariAbrigo;
         if (seguidoraBaleiaCurrais == null && baleia != null)
             seguidoraBaleiaCurrais = baleia.GetComponent<SeguidorFamilia>();
-        return ConferirReferencia(areaPaiAbrigo, nameof(areaPaiAbrigo)) &
+        return ReferenciasAbrigoLinearValidas() & ConferirReferencia(areaPaiAbrigo, nameof(areaPaiAbrigo)) &
             ConferirReferencia(maeCuidadoAbrigo, nameof(maeCuidadoAbrigo)) &
             ConferirReferencia(cabacaComMari, nameof(cabacaComMari)) &
             ConferirReferencia(cabacaComMae, nameof(cabacaComMae)) &
@@ -35,20 +35,7 @@ public partial class EntradaCurrais
             PresencasValidas();
     }
 
-    private void MenuMaePrimeiroAbrigo()
-    {
-        if (!Dados.curraisFamiliaParou) { MenuFamiliaCaminhando("Mãe"); return; }
-        AbrirAssuntosEntrada("mae-primeiro-abrigo", "Mãe", "Diga, minha filha. Tô te ouvindo.",
-            new[] { !Dados.curraisPaiAcomodado ? "mae-pano" : "familia-depois-agua", "familia-irma" },
-            new[] { "Como painho tá?", "Falar de Mariquinha" },
-            new Func<IEnumerator>[] { () => Dizer(!Dados.curraisPaiAcomodado ? maePrecisaPano : familiaDepoisAgua),
-                () => Dizer(familiaBuscaIrma) });
-    }
-
-    private IEnumerator ConversarPaiPrimeiroAbrigo()
-    {
-        yield return Dizer(Dados.curraisEscolhaAgua == 0 ? paiRepouso : paiDepoisAgua);
-    }
+    private void MenuMaePrimeiroAbrigo() => MenuParenteAbrigo(false);
 
     private IEnumerator IniciarBuscaAguaAbrigo()
     {
@@ -110,7 +97,6 @@ public partial class EntradaCurrais
     [SerializeField] private SeguidorFamilia seguidoraBaleiaCurrais;
     [SerializeField] private Fala[] familiaDecideParar, familiaSegueCaminho, familiaBuscaIrma;
     [SerializeField, Min(.5f)] private float proximidadeParada = 3f;
-    private bool paradaSugerida;
 
     private void MenuAssuntoNPC(string pessoa, string abertura, string assunto, Func<IEnumerator> fala,
         string outroAssunto = null, Func<IEnumerator> outraFala = null)
@@ -123,23 +109,7 @@ public partial class EntradaCurrais
                 new Action[] { () => Iniciar(fala()), () => Iniciar(outraFala()), FecharMenu });
     }
 
-    private void MenuPaiPrimeiroAbrigo()
-    {
-        if (!Dados.curraisFamiliaParou) { MenuFamiliaCaminhando("Pai"); return; }
-        AbrirAssuntosEntrada("pai-primeiro-abrigo", "Pai", "O que foi, Josefa?",
-            new[] { Dados.curraisEscolhaAgua == 0 ? "pai-repouso" : "pai-depois-agua", "familia-irma" },
-            new[] { "Como o senhor tá?", "E Mariquinha?" },
-            new Func<IEnumerator>[] { ConversarPaiPrimeiroAbrigo, () => Dizer(familiaBuscaIrma) });
-    }
-
-    private void MenuFamiliaCaminhando(string pessoa)
-    {
-        bool perto = Mathf.Abs(mari.transform.position.x - pontoParadaFamilia.position.x) <= proximidadeParada;
-        AbrirAssuntosEntrada("familia-caminhando:" + pessoa, pessoa, "Tô aqui perto. Pode falar.",
-            new[] { perto ? "familia-parar" : "familia-caminhar", "familia-irma" },
-            new[] { "Vamos parar um pouco?", "Tô pensando em Mariquinha" },
-            new Func<IEnumerator>[] { PararFamilia, () => Dizer(familiaBuscaIrma) });
-    }
+    private void MenuPaiPrimeiroAbrigo() => MenuParenteAbrigo(true);
 
     private bool AtualizarCaminhadaFamilia(bool livre)
     {
@@ -149,10 +119,9 @@ public partial class EntradaCurrais
         if (!caminhando) return false;
         seguidoraMae.enabled = livre;
         seguidoraLuzia.enabled = false;
-        if (Dados.curraisEtapaEntrada == 3 && livre && !paradaSugerida && Mathf.Abs(mari.transform.position.x - pontoParadaFamilia.position.x) <= proximidadeParada)
+        if (Dados.curraisEtapaEntrada == 3 && livre && Mathf.Abs(mari.transform.position.x - pontoParadaFamilia.position.x) <= proximidadeParada)
         {
-            paradaSugerida = true;
-            MenuFamiliaCaminhando("Mãe");
+            Iniciar(PararFamilia());
         }
         return true;
     }
@@ -224,12 +193,12 @@ public partial class EntradaCurrais
     private bool UsarItemArrastado(Collider2D alvo, ItemData item)
     {
         bool antesBusca = !Dados.curraisPanelaConcluida;
-        if (Dados.curraisFamiliaParou && (alvo == areaMae || alvo == areaPaiAbrigo) &&
+        if (Dados.curraisFamiliaParou && PedidoPanoConhecido && alvo == areaMae &&
             item == itemPanoAbrigo && !Dados.curraisPaiAcomodado)
         { Iniciar(AcomodarPai()); return true; }
         // O recipiente pode ser apresentado na mesa ou à funcionária, sem uma opção de conversa obrigatória.
         if (antesBusca && (alvo == areaAgua || (areaDistribuicaoAgua != null && alvo == areaDistribuicaoAgua)) &&
-            item == cabacaVaziaBusca && Dados.curraisEtapaEntrada >= 3 && Dados.curraisEtapaEntrada <= 4)
+            item == cabacaVaziaBusca && ConviteAguaConhecido && Dados.curraisEtapaEntrada >= 3 && Dados.curraisEtapaEntrada <= 4)
         { Iniciar(ReceberAgua()); return true; }
         if (Dados.curraisEtapaEntrada != 4) return false;
         if (antesBusca && (alvo == areaMae || alvo == areaLuzia) && item == cabacaCheiaBusca && Dados.curraisEscolhaAgua == 0)

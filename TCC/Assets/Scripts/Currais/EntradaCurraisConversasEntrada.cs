@@ -26,9 +26,7 @@ public partial class EntradaCurrais
         if (rotulos.Length <= 1) { FecharMenu(); return; }
         if (pessoa == "Luzia" && !Dados.curraisLuziaApresentada)
         {
-            MostrarMenuEntrada("luzia-sem-nome", "Mulher", "A mulher faz um pouco de espaço debaixo da lona.",
-                new[] { "Com licença...", "Sair" },
-                new Action[] { () => Iniciar(ApresentarLuzia(() => MostrarMenuEntrada(id, pessoa, abertura, rotulos, acoes))), FecharMenu });
+            SolicitarContatoLuzia(() => MostrarMenuEntrada(id, pessoa, abertura, rotulos, acoes));
             return;
         }
         string chave = "abertura:" + id;
@@ -82,6 +80,8 @@ public partial class EntradaCurrais
 
     private void MenuPresencaSemRepetir(PessoaPresente pessoa)
     {
+        if (pessoa.personagem == luzia && !Dados.curraisPanelaConcluida)
+        { MenuLuziaAbrigoLinear(); return; }
         string id = "presenca:" + GameProgress.ObjectId(pessoa.personagem);
         AbrirAssuntosEntrada(id, pessoa.nome, "Diga.", new[] { id },
             new[] { "Como estão as coisas por aqui?" }, new Func<IEnumerator>[] { () => Dizer(pessoa.conversa) });

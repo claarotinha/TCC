@@ -17596,6 +17596,7 @@ GameObject:
   - component: {fileID: 4200000049}
   - component: {fileID: 8800000016}
   - component: {fileID: 8800001006}
+  - component: {fileID: 9933000000}
   m_Layer: 0
   m_Name: Luzia
   m_TagString: Untagged
@@ -19037,10 +19038,8 @@ MonoBehaviour:
   cabacaComMae: {fileID: 9955000032}
   cabacaComLuzia: {fileID: 9955000042}
   maePrecisaPano:
-  - personagem: "M\xE3e"
-    texto: O pano que Luzia deixou serve de apoio.
-  - personagem: "M\xE3e"
-    texto: Sem ele, o ombro do seu pai fica pesando.
+  - personagem: "Mãe"
+    texto: "Preciso apoiar o braço dele. Aquele pano de Luzia deve servir."
   paiRepouso:
   - personagem: Pai
     texto: "Eu t\xF4 aqui, Josefa. O bra\xE7o d\xF3i, mas eu t\xF4 aqui."
@@ -19416,14 +19415,14 @@ MonoBehaviour:
   - personagem: Zefinha
     texto: Obrigada, dona Luzia.
   paiAcomodado:
-  - personagem: "M\xE3e"
-    texto: Isso. Obrigada, minha filha. Deixe eu ajeitar, devagar.
-  - personagem: Pai
-    texto: "O golpe pegou bem aqui\u2026"
-  - personagem: "M\xE3e"
-    texto: Encoste um pouco. Eu fico com tu.
-  - personagem: Luzia
-    texto: "Quando puder, venha falar comigo, Josefa. N\xF3s precisa buscar \xE1gua."
+  - personagem: "Mãe"
+    texto: "Isso. Segure aqui um instante."
+  - personagem: "Pai"
+    texto: "Devagar…"
+  - personagem: "Mãe"
+    texto: "Assim fica melhor?"
+  - personagem: "Pai"
+    texto: "Fica. Obrigado, minha filha."
   luziaCurral:
   - personagem: Zefinha
     texto: Por que chamam aqui de curral?
@@ -19434,14 +19433,14 @@ MonoBehaviour:
   - personagem: Luzia
     texto: Era o que muita gente pensava quando chegou.
   luziaSaida:
-  - personagem: Zefinha
-    texto: Quem pode sair?
-  - personagem: Luzia
-    texto: "Quem recebe ordem. Tem homem que sai pro servi\xE7o e volta escoltado."
-  - personagem: Zefinha
-    texto: "Nem pra procurar algu\xE9m?"
-  - personagem: Luzia
-    texto: Seu pai perguntou na entrada. Tu ouviu a resposta.
+  - personagem: "Zefinha"
+    texto: "Nós pode sair para procurar ela?"
+  - personagem: "Luzia"
+    texto: "Só deixam passar quem tem ordem."
+  - personagem: "Zefinha"
+    texto: "Mas ela tá sozinha."
+  - personagem: "Luzia"
+    texto: "Eu sei, minha filha. Nós vai perguntar por dentro primeiro. Na lavagem, nas filas… alguém pode ter visto."
   luziaIrma:
   - personagem: Zefinha
     texto: "A senhora viu minha irm\xE3? \xC9 parecida comigo."
@@ -19452,16 +19451,61 @@ MonoBehaviour:
   - personagem: Luzia
     texto: Vou perguntar na lavagem. Tem muita gente chegando por caminhos diferentes.
   objetivoPano: 
+  examePrimeiroCliqueLuzia: {fileID: 9933000000}
+  conversaIntimaPaiAbrigo:
+  - personagem: "Zefinha"
+    texto: "Tá doendo muito?"
+  - personagem: "Pai"
+    texto: "Dói. Mas agora tá mais firme."
+  - personagem: "Zefinha"
+    texto: "Eu fiquei com medo quando ele bateu no senhor."
+  - personagem: "Pai"
+    texto: "Eu também tive medo, minha filha."
+  - personagem: "Zefinha"
+    texto: "O senhor teve?"
+  - personagem: "Pai"
+    texto: "Tive. Num queria ver nenhuma de vocês longe de nós."
+  conversaIntimaMaeAbrigo:
+  - personagem: "Zefinha"
+    texto: "E se Mariquinha voltar e num encontrar nós?"
+  - personagem: "Mãe"
+    texto: "Nós vai deixar alguém sabendo onde ficou."
+  - personagem: "Zefinha"
+    texto: "Ela num sabe o nome de ninguém aqui."
+  - personagem: "Mãe"
+    texto: "Então nós começa dizendo o dela. Pra quem puder escutar."
+  noticiaIrmaAbrigo:
+  - personagem: "Luzia"
+    texto: "Teu pai ficou mais acomodado?"
+  - personagem: "Zefinha"
+    texto: "Ficou. Mas separaram minha irmã de nós na entrada."
+  - personagem: "Luzia"
+    texto: "Como ela se chama?"
+  - personagem: "Zefinha"
+    texto: "Maria Severina. Nós chama Mariquinha."
+  - personagem: "Luzia"
+    texto: "Vou perguntar na lavagem. Passa muita gente por lá."
+  conviteAguaAbrigo:
+  - personagem: "Luzia"
+    texto: "Antes de seguir, vamos buscar uma pouca d’água. Teu pai precisa beber."
+  - personagem: "Zefinha"
+    texto: "Ficaram com nossa cabaça."
+  - personagem: "Luzia"
+    texto: "A mulher da distribuição separa os recipientes naquela mesa. Eu vou contigo."
   apresentacaoLuziaInicio:
-  - personagem: "M\xE3e"
-    texto: "Com licen\xE7a\u2026 tem algum canto onde a gente possa ficar?"
-  - personagem: Mulher
-    texto: "Ali debaixo da lona tem sombra. Eu sou Luzia. Voc\xEAs chegaram agora?"
+  - personagem: "Mãe"
+    texto: "Com licença… tem algum canto onde a gente possa ficar?"
+  - personagem: "Mulher"
+    texto: "Tem um espaço aqui. Encoste ele desse lado."
+  - personagem: "Mãe"
+    texto: "Obrigada. Eu sou Zulema. Essa é Josefa."
+  - personagem: "Mulher"
+    texto: "Eu sou Luzia."
   apresentacaoLuziaDepoisDoNome:
-  - personagem: "M\xE3e"
-    texto: Foi. E separaram uma das minhas meninas na entrada.
-  - personagem: Luzia
-    texto: "\xD4, minha filha\u2026 venham sentar um pouco. Me contem como foi."
+  - personagem: "Luzia"
+    texto: "Tenho um pano limpo ali. Pode servir de apoio."
+  - personagem: "Mãe"
+    texto: "Josefa, traga pra mim."
   apresentacaoLuziaTardia:
   - personagem: "M\xE3e"
     texto: "A senhora j\xE1 ajudou tanto\u2026 e eu nem perguntei seu nome."
@@ -51159,3 +51203,19 @@ SceneRoots:
   - {fileID: 9806000000}
   - {fileID: 9806000010}
   - {fileID: 9910000001}
+
+--- !u!114 &9933000000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100000094}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "A mulher afasta os próprios pertences, abrindo espaço debaixo da lona."

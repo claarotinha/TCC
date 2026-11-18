@@ -220,53 +220,28 @@ public partial class EntradaCurrais
         yield return ChegarAbrigo();
     }
 
-    private void MenuPrimeiroAbrigo()
-    {
-        var rotulos = new System.Collections.Generic.List<string>();
-        var acoes = new System.Collections.Generic.List<Action>();
-        if ((Dados.curraisPerguntasAbrigo & 1) == 0)
-        { rotulos.Add("Por que chamam aqui de curral?"); acoes.Add(() => Iniciar(PerguntarAbrigo(1, luziaCurral))); }
-        if ((Dados.curraisPerguntasAbrigo & 2) == 0)
-        { rotulos.Add("Quem pode sair?"); acoes.Add(() => Iniciar(PerguntarAbrigo(2, luziaSaida))); }
-        if ((Dados.curraisPerguntasAbrigo & 4) == 0 && !ViuConversaEntrada("luzia-irma"))
-        { rotulos.Add("A senhora viu minha irmã?"); acoes.Add(() => Iniciar(PerguntarAbrigo(4, luziaIrma))); }
-        rotulos.Add("Sair"); acoes.Add(FecharMenu);
-        MostrarMenuEntrada("luzia-primeiras-perguntas", "Luzia", "Pode perguntar, Josefa. Sua mãe tá aqui com seu pai.",
-            rotulos.ToArray(), acoes.ToArray());
-    }
-
-    private IEnumerator PerguntarAbrigo(int bit, Fala[] falas)
-    {
-        if ((Dados.curraisPerguntasAbrigo & bit) != 0) yield break;
-        yield return Dizer(falas);
-        if (bit == 4) RegistrarConversaEntrada("luzia-irma");
-        Dados.curraisPerguntasAbrigo |= bit;
-        Salvar();
-        MenuPrimeiroAbrigo();
-    }
+    private void MenuPrimeiroAbrigo() => MenuLuziaAbrigoLinear();
 
     private IEnumerator RecolherPanoAbrigo()
     {
-        if (Dados.curraisPanoAbrigoRecolhido || Dados.curraisPaiAcomodado) yield break;
+        if (!PedidoPanoConhecido || Dados.curraisPanoAbrigoRecolhido || Dados.curraisPaiAcomodado) yield break;
         yield return ExaminarOuColetar(itemPanoAbrigo);
         if (!coletaDoCenarioConfirmada) yield break;
         Dados.curraisPanoAbrigoRecolhido = true;
         AtualizarVisuaisChegada();
         Salvar();
-        yield return Dizer(panoDisponivel);
         objetivoTexto.text = string.Empty;
     }
 
     private IEnumerator AcomodarPai()
     {
-        if (Dados.curraisPaiAcomodado) { yield return Dizer(paiAcomodado); yield break; }
+        if (!PedidoPanoConhecido || Dados.curraisPaiAcomodado) yield break;
         if (!TemItem(itemPanoAbrigo))
         {
             yield return Dizer(maePrecisaPano);
             yield break;
         }
         // O arraste não teleporta a mãe nem muda o enquadramento.
-        if (!TemItem(itemPanoAbrigo)) { yield return Dizer(maePrecisaPano); yield break; }
         Dados.curraisPaiAcomodado = true;
         Dados.curraisEtapaEntrada = 4;
         InventoryManager.Instance.RemoveItem(itemPanoAbrigo);
@@ -283,7 +258,7 @@ public partial class EntradaCurrais
         diarioEntrada.SetActive(Dados.curraisPertencesRetidos && !Dados.curraisDiarioRecuperado &&
             !revistaEmConferencia && (revistaAtiva || Dados.curraisDiarioRecusado));
         areaDiarioEntrada.enabled = revistaAtiva && diarioEntrada.activeSelf && !Dados.curraisDiarioRecusado;
-        panoAbrigo.SetActive(Dados.curraisFamiliaParou && !Dados.curraisPanoAbrigoRecolhido && !Dados.curraisPaiAcomodado);
+        panoAbrigo.SetActive(Dados.curraisFamiliaParou && PedidoPanoConhecido && !Dados.curraisPanoAbrigoRecolhido && !Dados.curraisPaiAcomodado);
         areaPanoAbrigo.enabled = panoAbrigo.activeSelf;
         panoNoPai.SetActive(Dados.curraisPaiAcomodado && (Dados.curraisEtapaBusca < 1 || Dados.curraisEtapaBusca == 4 || Dados.curraisEtapaBusca == 5));
         AtualizarMesaRevista();
@@ -300,20 +275,15 @@ public partial class EntradaCurrais
     {
         if (!Dados.curraisLuziaApresentada)
         {
-            bool jaConversaram = Dados.curraisDistribuicaoIniciada || Dados.curraisPanelaConcluida ||
-                Dados.curraisPerguntasAbrigo != 0;
-            Fala[] inicio = jaConversaram ? apresentacaoLuziaTardia : apresentacaoLuziaInicio;
-            if (!FalasValidas(inicio))
-                inicio = new[] {
-                    new Fala { personagem = "Mãe", texto = "Com licença… como a senhora se chama?" },
-                    new Fala { personagem = "Mulher", texto = "Eu sou Luzia. Pode falar." }
-                };
-            yield return Dizer(inicio);
-            // O nome só é revelado depois que ela mesma o diz. Continue preserva isso.
+            yield return Dizer(ConviteAguaConhecido ? apresentacaoLuziaTardia : apresentacaoLuziaInicio);
             Dados.curraisLuziaApresentada = true;
             Salvar();
-            if (!jaConversaram && FalasValidas(apresentacaoLuziaDepoisDoNome))
-                yield return Dizer(apresentacaoLuziaDepoisDoNome);
+        }
+        if (!PedidoPanoConhecido && !ConviteAguaConhecido)
+        {
+            yield return Dizer(apresentacaoLuziaDepoisDoNome);
+            RegistrarConversaEntrada("abrigo-pedido-pano");
+            AtualizarVisuaisChegada(); Salvar();
         }
         continuar?.Invoke();
     }
