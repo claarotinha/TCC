@@ -44,6 +44,12 @@ public partial class EntradaCurrais
     private void ConversarLuziaNaBusca()
     {
         int etapa = Dados.curraisEtapaBusca;
+        if (etapa == 0)
+        {
+            if (PodeConversarRaimundo && !ViuConversaEntrada("raimundo-aproximacao"))
+                Iniciar(ComentarRaimundo());
+            return;
+        }
         if (etapa == 4 || etapa == 5) { ConversarLuziaNoPatio(); return; }
         Fala[] falas = etapa == 0 ? luziaAntesRaimundo :
             etapa == 1 ? luziaAntesLavagem :

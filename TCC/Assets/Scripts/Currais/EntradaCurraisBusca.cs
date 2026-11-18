@@ -35,7 +35,7 @@ public partial class EntradaCurrais
             lembrancaCorpo, lembrancaComadre, lembrancaAgua, lembrancaRetorno, patioInicio, patioAgressao,
             patioRetirada, corpoDistante, atendimentoFalas, noticiaBento };
         foreach (Fala[] sequencia in sequencias) valido &= FalasValidas(sequencia);
-        return valido;
+        return ReferenciasRaimundoLinearValidas() & valido;
     }
 
     private Collider2D[] AlvosAtuais()
@@ -111,8 +111,7 @@ public partial class EntradaCurrais
             else if (area == areaPanosAtendimento && etapa == 2) MenuPilhaLavagem(true);
             else if (area == areaRaimundo && PrimeiraBuscaEmCurso)
             {
-                if (!Dados.curraisRaimundoConhecido) MenuAssuntoNPC("Raimundo", "Diga, menina.", "O senhor viu minha irmã?", ConhecerRaimundo);
-                else MenuRaimundo();
+                PrimeiroContatoRaimundo();
             }
             else if (area == areaLavadeira && PrimeiraBuscaEmCurso) MenuLavadeiraNaBusca();
             else if (area == areaLuzia && PrimeiraBuscaEmCurso) ConversarLuziaNaBusca();
@@ -137,40 +136,26 @@ public partial class EntradaCurrais
         Salvar();
     }
 
-    private IEnumerator ConhecerRaimundo()
-    {
-        yield return Dizer(raimundoInicio);
-        Dados.curraisRaimundoConhecido = true;
-        GameProgress.Instance.UnlockDiaryPage("currais-raimundo");
-        Salvar();
-        MenuRaimundo();
-    }
+    private IEnumerator ConhecerRaimundo() { yield return ConversaInicialRaimundo(); }
 
-    private void MenuRaimundo()
-    {
-        OlharParaMari(areaRaimundo.transform);
-        MostrarOpcoes("Raimundo", raimundoRetorno[0].texto, opcoesRaimundo, new Action[] {
-            () => Iniciar(PerguntarRaimundo(1, raimundoBando)),
-            () => Iniciar(PerguntarRaimundo(2, raimundoMulher)),
-            () => Iniciar(PerguntarRaimundo(4, raimundoTrabalho)),
-            () => Iniciar(DeixarRaimundo()) });
-    }
+    private void MenuRaimundo() => PrimeiroContatoRaimundo();
 
     private IEnumerator PerguntarRaimundo(int pergunta, Fala[] falas)
     {
+        if (EncontroRaimundoEncerrado) yield break;
         yield return Dizer(falas);
         Dados.curraisPerguntasRaimundo |= pergunta;
-        Salvar(); MenuRaimundo();
+        RegistrarConversaEntrada("raimundo-assunto-respondido"); Salvar();
+        yield return DeixarRaimundo();
     }
 
     private IEnumerator DeixarRaimundo()
     {
+        if (EncontroRaimundoEncerrado) yield break;
         yield return Dizer(raimundoSaida);
-        if (Dados.curraisEtapaBusca == 0)
-        {
-            AvancarCampo(1);
-            RestaurarLuziaNaBusca();
-        }
+        RegistrarConversaEntrada("raimundo-encontro-encerrado");
+        if (Dados.curraisEtapaBusca == 0) AvancarCampo(1);
+        else Salvar();
     }
 
     private void RestaurarLuziaNaBusca()
@@ -184,6 +169,7 @@ public partial class EntradaCurrais
 
     private IEnumerator ConversarLavadeira()
     {
+        if (!EncontroRaimundoEncerrado) yield break;
         if (Dados.curraisTarefaPanosIniciada && !Dados.curraisLotePanosEntregue)
         {
             if (!TemItem(itemLotePanos) || InventoryManager.Instance.SelectedItem != itemLotePanos)

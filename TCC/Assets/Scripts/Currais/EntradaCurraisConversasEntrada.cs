@@ -80,6 +80,10 @@ public partial class EntradaCurrais
 
     private void MenuPresencaSemRepetir(PessoaPresente pessoa)
     {
+        if (pessoa.personagem == areaRaimundo.gameObject && !NomeRaimundoConhecido)
+        { PrimeiroContatoRaimundo(); return; }
+        if (pessoa.nome == "Raimundo")
+        { PrimeiroContatoRaimundo(); return; }
         if (pessoa.personagem == meninoBusca.gameObject) { MenuCriancaNomes(); return; }
         if (pessoa.personagem == luzia && !Dados.curraisPanelaConcluida)
         { MenuLuziaAbrigoLinear(); return; }

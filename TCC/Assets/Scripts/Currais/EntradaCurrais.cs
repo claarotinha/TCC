@@ -1103,6 +1103,7 @@ public partial class EntradaCurrais : MonoBehaviour
         bool livre = !ocupado && !menuAberto && !dialogando && !ExamineObject.IsShowing() && !PauseHelper.BlockInput();
         if (AtualizarCaminhadaFamilia(livre)) return;
         if (AtualizarRetornoAgua(livre)) return;
+        if (AtualizarAproximacaoRaimundo(livre)) return;
         if (Dados.curraisEtapaEntrada != 4) return;
         if (planoMemoriaAtivo)
         {

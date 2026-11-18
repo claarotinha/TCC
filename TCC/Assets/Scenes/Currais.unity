@@ -19237,61 +19237,49 @@ MonoBehaviour:
   reflexoZefinha: {fileID: 4300000048}
   sinalGuarda: {fileID: 4300000052}
   raimundoInicio:
-  - personagem: Raimundo
-    texto: "O que tu t\xE1 procurando nesse lugar?"
-  - personagem: Zefinha
-    texto: "Minha irm\xE3. Ela foi naquele carro antes de n\xF3s entrar."
-  - personagem: Raimundo
-    texto: Uma menina parecida contigo?
-  - personagem: Zefinha
-    texto: O senhor viu?
-  - personagem: Raimundo
-    texto: Vi ela passando com uma mulher. Viva, andando. Foi antes de trazerem esses
-      baldes.
-  - personagem: Zefinha
-    texto: Pra onde?
-  - personagem: Raimundo
-    texto: "Eu n\xE3o vi o fim do caminho. N\xE3o vou te dizer que vi."
-  - personagem: Zefinha
-    texto: Como o senhor se chama?
-  - personagem: Raimundo
-    texto: Me chamam de Raimundo.
-  - personagem: Raimundo
-    texto: "Nome de quando eu andava com uns homens no sert\xE3o."
-  - personagem: Zefinha
-    texto: Que homens?
-  - personagem: Raimundo
-    texto: "Bando de canga\xE7o."
-  - personagem: Zefinha
-    texto: O senhor era cangaceiro?
-  - personagem: Raimundo
-    texto: Era.
-  - personagem: Zefinha
-    texto: E num pode fazer nada com esses guardas?
-  - personagem: Raimundo
-    texto: "Eu fa\xE7o uma besteira, eles me matam ou me prendem."
-  - personagem: Raimundo
-    texto: "Tua irm\xE3 continua longe e tua m\xE3e perde outra pessoa pra perguntar."
+  - personagem: "Zefinha"
+    texto: "O senhor viu uma menina parecida comigo? Levaram ela naquele carro."
+  - personagem: "Homem"
+    texto: "Uma que vinha com uma mulher?"
+  - personagem: "Zefinha"
+    texto: "Eu num vi mulher nenhuma. Separaram nós antes."
+  - personagem: "Homem"
+    texto: "Vi uma menina como tu passando com uma. Tava viva, andando."
+  - personagem: "Zefinha"
+    texto: "Era ela?"
+  - personagem: "Homem"
+    texto: "Num sei te garantir. Vi de longe."
+  - personagem: "Zefinha"
+    texto: "E pra onde foram?"
+  - personagem: "Homem"
+    texto: "Num vi depois da passagem."
   raimundoBando:
-  - personagem: Raimundo
-    texto: "Naquele tempo achei que andar armado era jeito de num baixar a cabe\xE7a."
-  - personagem: Zefinha
-    texto: E foi?
-  - personagem: Raimundo
-    texto: Pra muita gente eu virei outro homem mandando baixar.
-  - personagem: Raimundo
-    texto: "Num vou te contar s\xF3 a parte que me deixa bonito."
+  - personagem: "Zefinha"
+    texto: "Por que entrou no bando?"
+  - personagem: "Raimundo"
+    texto: "Achei que com uma arma ninguém mandava mais em mim."
+  - personagem: "Zefinha"
+    texto: "E ninguém mandava?"
+  - personagem: "Raimundo"
+    texto: "Mandava. E eu também mandei em quem num podia se defender."
+  - personagem: "Zefinha"
+    texto: "O senhor fez mal a essas pessoas?"
+  - personagem: "Raimundo"
+    texto: "Fiz. Num vou dizer que foi só coragem."
   raimundoMulher:
   - personagem: Raimundo
     texto: A voz eu conheci. O rosto foi de longe.
   - personagem: Raimundo
     texto: Quero falar com as lavadeiras antes de te dar um nome errado.
   raimundoSaida:
-  - personagem: Zefinha
-    texto: "Se o senhor lembrar, procure mainha. Ela t\xE1 com Baleia, perto das
-      esteiras."
-  - personagem: Raimundo
-    texto: "Eu sei onde \xE9. Vou perguntar."
+  - personagem: "Zefinha"
+    texto: "Eu vou levar os panos. Se souber da menina, procure nós perto das esteiras."
+  - personagem: "Raimundo"
+    texto: "Vá pela passagem ao lado do tanque. Eu pergunto às mulheres da lavagem."
+  - personagem: "Zefinha"
+    texto: "Num esqueça. Maria Severina."
+  - personagem: "Raimundo"
+    texto: "Num esqueci."
   lavagemFalas:
   - personagem: Lavadeira
     texto: Trouxe o lote da mesa? Deixe aqui. Vou precisar que me ajude a separar.
@@ -19522,6 +19510,92 @@ MonoBehaviour:
     texto: "Lagoa do Meio…"
   - personagem: "Luzia"
     texto: "Guarde. Esse papel pode ajudar quando nós perguntar."
+  examePrimeiroRaimundo: {fileID: 9933000020}
+  alcanceComentarioRaimundo: 6
+  aproximacaoRaimundoMae:
+  - personagem: "Mãe"
+    texto: "Aquele homem tava perto da entrada."
+  - personagem: "Zefinha"
+    texto: "Vou perguntar se viu ela."
+  - personagem: "Mãe"
+    texto: "Diga o nome da tua irmã."
+  aproximacaoRaimundoLuzia:
+  - personagem: "Luzia"
+    texto: "Aquele homem tava aqui quando o carro passou."
+  - personagem: "Zefinha"
+    texto: "Será que viu Mariquinha?"
+  - personagem: "Luzia"
+    texto: "Pergunte. Eu espero contigo."
+  raimundoPrecisao:
+  - personagem: "Zefinha"
+    texto: "O que o senhor lembra da menina?"
+  - personagem: "Homem"
+    texto: "Do cabelo, do tamanho… Por isso olhei quando tu chegou."
+  - personagem: "Zefinha"
+    texto: "Mariquinha tem uma trança."
+  - personagem: "Homem"
+    texto: "Pode ser ela. Mas num quero que tu tome minha lembrança por certeza."
+  - personagem: "Zefinha"
+    texto: "Eu só queria saber se ela tá bem."
+  - personagem: "Homem"
+    texto: "Eu sei, menina."
+  raimundoAjuda:
+  - personagem: "Zefinha"
+    texto: "Me ajuda a encontrar essa mulher?"
+  - personagem: "Homem"
+    texto: "Posso perguntar na lavagem. Acho que conheço a voz dela."
+  - personagem: "Zefinha"
+    texto: "O senhor sabe o nome?"
+  - personagem: "Homem"
+    texto: "Primeiro preciso ter certeza."
+  - personagem: "Zefinha"
+    texto: "Então pergunte. Por favor."
+  - personagem: "Homem"
+    texto: "Vou perguntar."
+  raimundoApresentacao:
+  - personagem: "Zefinha"
+    texto: "Como o senhor se chama?"
+  - personagem: "Homem"
+    texto: "Raimundo. E tu?"
+  - personagem: "Zefinha"
+    texto: "Josefa. Minha irmã é Maria Severina. Nós chama Mariquinha."
+  - personagem: "Homem"
+    texto: "Vou guardar os dois nomes."
+  raimundoApresentacaoBreve:
+  - personagem: "Zefinha"
+    texto: "Se lembrar de alguma coisa, como eu encontro o senhor?"
+  - personagem: "Homem"
+    texto: "Pergunte por Raimundo."
+  - personagem: "Zefinha"
+    texto: "Eu sou Josefa. Minha irmã é Maria Severina."
+  - personagem: "Homem"
+    texto: "Vou perguntar por ela."
+  raimundoPassado:
+  - personagem: "Zefinha"
+    texto: "O senhor já conhecia esse lugar?"
+  - personagem: "Raimundo"
+    texto: "Conhecia o sertão do lado de fora. Aqui dentro é outra coisa."
+  - personagem: "Zefinha"
+    texto: "Andava por onde?"
+  - personagem: "Raimundo"
+    texto: "Andei com um bando de cangaço."
+  - personagem: "Zefinha"
+    texto: "O senhor era cangaceiro?"
+  - personagem: "Raimundo"
+    texto: "Era."
+  raimundoGuardas:
+  - personagem: "Zefinha"
+    texto: "E num pode enfrentar esses guardas?"
+  - personagem: "Raimundo"
+    texto: "Tu acha que eu saio daqui depois?"
+  - personagem: "Zefinha"
+    texto: "Num sei. Eles bateram em painho."
+  - personagem: "Raimundo"
+    texto: "Eu vi. Se eu puxo briga, quem fica pra ajudar ele?"
+  - personagem: "Zefinha"
+    texto: "Então nós fica sem fazer nada?"
+  - personagem: "Raimundo"
+    texto: "Perguntar por tua irmã num é fazer nada."
   exameMeninoNomes: {fileID: 9933000010}
   exameLataNomes: {fileID: 9933000011}
   exameFolhasNomes: {fileID: 9933000012}
@@ -20149,17 +20223,26 @@ MonoBehaviour:
   - personagem: Luzia
     texto: "N\xF3s s\xF3 t\xE1 passando."
   raimundoTrabalho:
-  - personagem: Zefinha
-    texto: "Disseram que aqui tinha servi\xE7o. Por que ningu\xE9m pode ir embora?"
-  - personagem: Raimundo
-    texto: "Servi\xE7o tem. Escolher a hora de parar, o que fazer, quando sair\u2026
-      isso j\xE1 num deixam."
-  - personagem: Zefinha
-    texto: "Painho t\xE1 com o bra\xE7o machucado."
-  - personagem: Raimundo
-    texto: Eu vi. Vou ficar perto dele no carregamento.
-  - personagem: Raimundo
-    texto: "A m\xE3o j\xE1 num aguenta essa al\xE7a do balde."
+  - personagem: "Zefinha"
+    texto: "Essa mão tá machucada?"
+  - personagem: "Raimundo"
+    texto: "A alça abriu de novo."
+  - personagem: "Zefinha"
+    texto: "Num pode parar?"
+  - personagem: "Raimundo"
+    texto: "Posso largar o balde. Depois vêm perguntar por que larguei."
+  - personagem: "Zefinha"
+    texto: "Disseram que aqui tinha trabalho."
+  - personagem: "Raimundo"
+    texto: "Disseram se nós podia escolher?"
+  - personagem: "Zefinha"
+    texto: "Painho mal consegue levantar o braço."
+  - personagem: "Raimundo"
+    texto: "Eu vi ele. Se mandarem pro carregamento, fico por perto."
+  - personagem: "Zefinha"
+    texto: "Num deixa ele sozinho."
+  - personagem: "Raimundo"
+    texto: "Vou fazer o que puder."
   guardaRonda: {fileID: 9807000201}
   rondaInicio: {fileID: 9807000301}
   rondaFim: {fileID: 9807000311}
@@ -22582,6 +22665,7 @@ GameObject:
   - component: {fileID: 4300000010}
   - component: {fileID: 4300000011}
   - component: {fileID: 9840000003}
+  - component: {fileID: 9933000020}
   m_Layer: 0
   m_Name: "Raimundo - ciclo funcion\xE1rio currais"
   m_TagString: Untagged
@@ -51450,3 +51534,19 @@ MonoBehaviour:
   examinePanel: {fileID: 3000000053}
   examineText: {fileID: 3000000061}
   message: "Um canhoto ficou à mostra debaixo dos panos. Há uma marca parecida com a do carro que levou Mariquinha."
+
+--- !u!114 &9933000020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000008}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Um homem trabalha junto dos baldes. A alça parece ferir a mão, mas ele continua carregando."
