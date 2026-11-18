@@ -18,6 +18,7 @@ public partial class EntradaCurrais
         if (painelAjudaTemporaria != null) painelAjudaTemporaria.SetActive(mostrarAjudaTemporaria);
         if (objetivoTexto == null) return;
         objetivoTexto.gameObject.SetActive(mostrarAjudaTemporaria);
+        objetivoTexto.enabled = mostrarAjudaTemporaria;
         if (!mostrarAjudaTemporaria) return;
         if (GameProgress.Instance == null || !pronto)
         { objetivoTexto.text = "TESTE CURRAIS | Inicializando a cena.\nSe esta mensagem permanecer, confira os erros no Console.\nF2: ocultar ajuda"; return; }
