@@ -8,11 +8,11 @@ public class ControleVolume : MonoBehaviour
 
     void Start()
     {
-        sliderVolume.value = musicaMenu.volume;
+        sliderVolume.SetValueWithoutNotify(AudioVolumeChannel.MusicVolume);
     }
 
     public void AlterarVolume()
     {
-        musicaMenu.volume = sliderVolume.value;
+        AudioVolumeChannel.SetMusicVolume(sliderVolume.value);
     }
 }
