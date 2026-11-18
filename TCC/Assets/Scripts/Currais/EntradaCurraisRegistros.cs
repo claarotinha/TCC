@@ -14,7 +14,7 @@ public partial class EntradaCurrais
 
     private bool ReferenciasRegistrosValidas()
     {
-        return ConferirReferencia(areaLataMenino, nameof(areaLataMenino)) &
+        return ReferenciasNomesValidas() & ConferirReferencia(areaLataMenino, nameof(areaLataMenino)) &
             ConferirReferencia(areaCanhotoMesa, nameof(areaCanhotoMesa)) &
             ConferirReferencia(areaFolhasRegistro, nameof(areaFolhasRegistro)) &
             ConferirReferencia(folhasAntesRegistro, nameof(folhasAntesRegistro)) &
@@ -46,21 +46,15 @@ public partial class EntradaCurrais
             visual.flipX = (mari.transform.position.x - pessoa.position.x) * pessoa.lossyScale.x < 0f;
     }
 
-    private IEnumerator ReencontrarMenino()
-    {
-        OlharParaMari(meninoBusca);
-        yield return Dizer(Dados.curraisRegistroConcluido ? meninoDepoisRegistro :
-            (Dados.curraisPerguntasMenino & 2) != 0 ? meninoNomeLembrado : meninoReencontro);
-        if (!Dados.curraisPanelaConcluida) AbrirMenuMenino();
-    }
+    private IEnumerator ReencontrarMenino() { yield return ReencontroNomes(); }
 
     private IEnumerator ExaminarLataMenino()
     {
-        OlharParaMari(meninoBusca);
-        yield return Dizer(lataMeninoFalas);
-        Dados.curraisPerguntasMenino |= 1;
-        GameProgress.Instance.UnlockDiaryPage("currais-menino-espera");
-        Salvar();
+        if (!Dados.curraisMeninoVisitado || Dados.curraisEscolhaAgua == 0) yield break;
+        yield return ExamineNomesUmaVez("nomes-examine-lata", exameLataNomes);
+        if (!ViuConversaEntrada("nomes-conversa-lata"))
+            MostrarOpcoes("Criança", string.Empty, new[] { "Perguntar pela lata", "Deixar como está" },
+                new Action[] { () => Iniciar(ConversarLataNomes()), FecharMenu });
     }
 
     private bool InteragirCriancaERegistros(Vector2 ponto)
@@ -69,16 +63,15 @@ public partial class EntradaCurrais
         { Iniciar(ExaminarLataMenino()); return true; }
         if (areaMenino.enabled && areaMenino.gameObject.activeInHierarchy && areaMenino.OverlapPoint(ponto))
         {
-            // Mesmo se o primeiro encontro foi pulado, não reabre a apresentação antiga após a lavagem.
-            MenuAssuntoNPC("Criança", "Oi. Você também tá esperando alguém?", "Perguntar quem ele espera",
-                () => Dados.curraisMeninoVisitado || Dados.curraisPanelaConcluida ? ReencontrarMenino() : ConhecerMenino());
+            MenuCriancaNomes();
             return true;
         }
         if (areaCanhotoMesa.enabled && areaCanhotoMesa.gameObject.activeInHierarchy && areaCanhotoMesa.OverlapPoint(ponto))
         { Iniciar(EscolherPertence()); return true; }
         if (areaFolhasRegistro.enabled && areaFolhasRegistro.gameObject.activeInHierarchy && areaFolhasRegistro.OverlapPoint(ponto))
         {
-            Iniciar(Dizer(ComAcompanhante(Dados.curraisEscolhaAgua == 0 ? mesaAntesAgua : folhasRegistroFalas)));
+            if (!Dados.curraisRegistroConcluido)
+                Iniciar(ExamineNomesUmaVez("nomes-examine-folhas", exameFolhasNomes));
             return true;
         }
         return false;
@@ -90,10 +83,10 @@ public partial class EntradaCurrais
         folhasAntesRegistro.SetActive(presente && !Dados.curraisRegistroConcluido);
         folhasDepoisRegistro.SetActive(presente && Dados.curraisRegistroConcluido);
         areaFolhasRegistro.enabled = presente && !Dados.curraisPanelaConcluida;
-        areaCanhotoMesa.enabled = presente && Dados.curraisLotePanosRecolhido && !Dados.curraisPanelaConcluida;
+        areaCanhotoMesa.enabled = presente && Dados.curraisLotePanosRecolhido && (!Dados.curraisPanelaConcluida || CanhotoPendenteDeColeta);
         lotePanosComMari.SetActive(presente && Dados.curraisLotePanosRecolhido &&
             !Dados.curraisLotePanosEntregue && TemItem(itemLotePanos));
-        areaLataMenino.enabled = presente && Dados.curraisEscolhaAgua != 0;
+        areaLataMenino.enabled = presente && Dados.curraisEscolhaAgua != 0 && Dados.curraisMeninoVisitado;
     }
 
     private IEnumerator ConsultarFolhaNaMesa()

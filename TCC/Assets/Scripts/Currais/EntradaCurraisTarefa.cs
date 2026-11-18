@@ -56,17 +56,20 @@ public partial class EntradaCurrais
 
     private void MenuTarefaPanos()
     {
-        MostrarOpcoes("Escrivão", Dados.curraisLotePanosRecolhido
-                ? "O lote já está com vocês. A mulher da lavagem espera por ele."
-                : "Leve os panos até a lavagem. Depois eu vejo a relação.",
-            new[] { "Qual lote eu devo levar?", "A quem devo entregar?", "E a minha irmã?", "Sair" },
-            new Action[] { () => Iniciar(PerguntarTarefaPanos(1, qualLotePanos)),
-                () => Iniciar(PerguntarTarefaPanos(2, destinatariaPanos)),
-                () => Iniciar(PerguntarIrmaNaMesa()), FecharMenu });
+        if (!Dados.curraisRegistroConcluido || Dados.curraisLotePanosRecolhido) return;
+        var rotulos = new System.Collections.Generic.List<string>();
+        var acoes = new System.Collections.Generic.List<Action>();
+        if ((Dados.curraisPerguntasTarefaPanos & 1) == 0)
+        { rotulos.Add("Quais panos?"); acoes.Add(() => Iniciar(PerguntarTarefaPanos(1, qualLotePanos))); }
+        if ((Dados.curraisPerguntasTarefaPanos & 2) == 0)
+        { rotulos.Add("Onde fica a lavagem?"); acoes.Add(() => Iniciar(PerguntarTarefaPanos(2, destinatariaPanos))); }
+        rotulos.Add("Sair"); acoes.Add(FecharMenu);
+        MostrarMenuEntrada("nomes-servico", "Escrivão", string.Empty, rotulos.ToArray(), acoes.ToArray());
     }
 
     private IEnumerator PerguntarTarefaPanos(int bit, Fala[] falas)
     {
+        if ((Dados.curraisPerguntasTarefaPanos & bit) != 0) yield break;
         yield return Dizer(falas);
         Dados.curraisPerguntasTarefaPanos |= bit;
         AtualizarEstadoBusca(); Salvar();

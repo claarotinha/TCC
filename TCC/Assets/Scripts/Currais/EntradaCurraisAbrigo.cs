@@ -176,10 +176,12 @@ public partial class EntradaCurrais
 
     private void MenuPrimeiroRegistro()
     {
+        if (Dados.curraisEscolhaAgua == 0)
+        { Iniciar(ExamineNomesUmaVez("nomes-examine-folhas", exameFolhasNomes)); return; }
         if (Dados.curraisRegistroConcluido) { MenuTarefaPanos(); return; }
-        MenuAssuntoNPC("Escrivão", "Quem vocês estão procurando?", "Perguntar por Mariquinha",
-            () => Dados.curraisEscolhaAgua == 0 ? Dizer(mesaAntesAgua) : ConsultarRegistro(),
-            "O que tem nessa relação?", () => Dizer(folhasRegistroFalas));
+        MostrarMenuEntrada("nomes-escrivao-abertura", "Escrivão", "O nome de quem?",
+            new[] { "Perguntar por Mariquinha", "Sair" },
+            new Action[] { () => Iniciar(ConsultarRegistro()), FecharMenu });
     }
 }
 

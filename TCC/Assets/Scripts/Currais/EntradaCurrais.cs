@@ -341,6 +341,7 @@ public partial class EntradaCurrais : MonoBehaviour
     private void Update()
     {
         if (!pronto || PauseHelper.BlockInput() || Time.timeScale <= 0f) return;
+        if (AtualizarExamineNomes()) return;
         if (AtualizarExamineDistribuicao() || AtualizarExamineLuzia()) return;
         AtualizarPatrulha();
         if (dialogando)
@@ -871,12 +872,7 @@ public partial class EntradaCurrais : MonoBehaviour
                 MenuMaePrimeiroAbrigo();
             }
             else if (area == areaPaiAbrigo) MenuPaiPrimeiroAbrigo();
-            else if (area == areaMenino)
-            {
-                if (Dados.curraisEscolhaAgua == 0) objetivoTexto.text = string.Empty;
-                else if (!Dados.curraisMeninoVisitado) Iniciar(ConhecerMenino());
-                else Iniciar(ReencontrarMenino());
-            }
+            else if (area == areaMenino) MenuCriancaNomes();
             else if (area == areaRegistro)
             {
                 MenuPrimeiroRegistro();
@@ -1000,20 +996,11 @@ public partial class EntradaCurrais : MonoBehaviour
         AbrirMenuMenino();
     }
 
-    private void AbrirMenuMenino()
-    {
-        OlharParaMari(meninoBusca);
-        MostrarOpcoes("Criança", (Dados.curraisPerguntasMenino & 2) != 0
-                ? meninoNomeLembrado[meninoNomeLembrado.Length - 1].texto
-                : meninoApresentacao[meninoApresentacao.Length - 1].texto,
-            opcoesMenino, new Action[] {
-                () => Iniciar(ResponderMenino(1, meninoEspera)),
-                () => Iniciar(ResponderMenino(2, meninoNome)),
-                () => Iniciar(Dizer(meninoSaida)) });
-    }
+    private void AbrirMenuMenino() => MostrarAssuntosMenino();
 
     private IEnumerator ResponderMenino(int bit, Fala[] falas)
     {
+        if ((Dados.curraisPerguntasMenino & bit) != 0) yield break;
         yield return Dizer(falas);
         Dados.curraisPerguntasMenino |= bit;
         GameProgress.Instance.UnlockDiaryPage(bit == 1 ? "currais-menino-espera" : "currais-menino-nome");
@@ -1034,14 +1021,17 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private IEnumerator ConsultarRegistro()
     {
-        if (Dados.curraisEscolhaAgua == 0) yield break;
+        if (Dados.curraisEscolhaAgua == 0 || Dados.curraisRegistroConcluido) yield break;
+        yield return Dizer(pedidoNomeInicio);
+        yield return Dizer(Dados.curraisEscolhaAgua == 1 ? pedidoNomeMae : pedidoNomeLuzia);
         yield return ConsultarFolhaNaMesa();
-        yield return Dizer(ComAcompanhante(pedidoPanos));
+        yield return Dizer(pedidoNomeServico);
+        yield return Dizer(Dados.curraisEscolhaAgua == 1 ? pedidoNomeProtestoMae : pedidoNomeProtestoLuzia);
+        yield return Dizer(pedidoNomeFinal);
         Dados.curraisTarefaPanosIniciada = true;
         Dados.curraisRegistroConcluido = true;
         GameProgress.Instance.UnlockDiaryPage("currais-registro");
-        AtualizarEstadoBusca(); Salvar();
-        MenuTarefaPanos();
+        AtualizarEstadoBusca(); Salvar(); MenuTarefaPanos();
     }
 
     private IEnumerator RelembrarRegistro()
@@ -1051,28 +1041,7 @@ public partial class EntradaCurrais : MonoBehaviour
         yield return ConsultarFolhaNaMesa();
     }
 
-    private IEnumerator EscolherPertence()
-    {
-        if (Dados.curraisPanelaConcluida || !Dados.curraisLotePanosRecolhido) yield break;
-        yield return Dizer(panelaInicio);
-        yield return Escolher("Zefinha", perguntaPanela, opcoesPanela);
-        if (escolhaRecebida < 0 || escolhaRecebida > 1) yield break;
-        bool perguntar = escolhaRecebida == 0;
-        if (perguntar)
-        {
-            yield return ExaminarOuColetar(itemCanhoto);
-            if (!coletaDoCenarioConfirmada) yield break;
-            Dados.curraisDestinoConfirmado = true;
-        }
-        // O laço foi retirado da chegada. Mantém-se apenas o estado de compatibilidade.
-        Dados.curraisEscolhaPertence = perguntar ? 2 : 0;
-        Dados.curraisLacoGuardado = false;
-        Dados.curraisLacoNaPanela = false;
-        Dados.curraisPanelaConcluida = true;
-        if (perguntar) GameProgress.Instance.UnlockDiaryPage("currais-canhoto");
-        AtualizarEstadoBusca(); Salvar();
-        yield return Dizer(perguntar ? panelaCanhoto : seguirPanos);
-    }
+    private IEnumerator EscolherPertence() { yield return DecidirCanhotoNomes(); }
 
     private string ObjetivoAtual() => string.Empty;
 
@@ -1089,7 +1058,7 @@ public partial class EntradaCurrais : MonoBehaviour
             lacoPanela.transform.position = lacoNoChao.position;
         }
         else if (Dados.curraisPanelaConcluida) panelaBusca.position = panelaRecolhida.position;
-        canhotoCenario.SetActive(panelaAcessivel);
+        canhotoCenario.SetActive(panelaAcessivel || CanhotoPendenteDeColeta);
         AtualizarCabacaMesa();
         lacoPanela.SetActive(false);
         areaPanela.enabled = panelaAcessivel;
@@ -1126,6 +1095,8 @@ public partial class EntradaCurrais : MonoBehaviour
         if (!pronto) return;
         AtualizarCompanhiaSepultamento();
         ManterPessoasPresentes();
+        meninoBusca.gameObject.SetActive(true);
+        if (campo.activeInHierarchy) areaMenino.enabled = true;
         if (Dados.curraisEtapaEntrada == 2 || Dados.curraisEtapaEntrada == 3) AtualizarVisuaisChegada();
         // Marcas de câmera são aplicadas somente pela inicialização/transições.
         // Uma fala na revista ou no abrigo não reposiciona nem redefine o zoom.
@@ -1245,6 +1216,8 @@ public partial class EntradaCurrais : MonoBehaviour
     private void OnDisable()
     {
         encerrando = true;
+        if (examineNomesAtual != null && examineNomesAtual.PanelIsOpen) examineNomesAtual.HidePanel();
+        examineNomesAtual = null;
         if (examePrimeiroCliqueLuzia != null && examePrimeiroCliqueLuzia.PanelIsOpen)
             examePrimeiroCliqueLuzia.HidePanel();
         exameLuziaEmCurso = false;

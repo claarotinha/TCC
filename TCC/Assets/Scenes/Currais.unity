@@ -18940,29 +18940,32 @@ MonoBehaviour:
   - personagem: Zefinha
     texto: Eu digo a ela. Tome.
   meninoApresentacao:
-  - personagem: Zefinha
-    texto: "Desculpa. De longe, pensei que fosse minha irm\xE3."
-  - personagem: "Crian\xE7a"
-    texto: "T\xE1 procurando algu\xE9m?"
-  - personagem: Zefinha
-    texto: "Minha irm\xE3. E tu?"
-  - personagem: "Crian\xE7a"
-    texto: Meu tio. Mainha disse que ele vinha com as ferramentas.
+  - personagem: "Zefinha"
+    texto: "Desculpa. De longe, pensei que fosse minha irmã."
+  - personagem: "Criança"
+    texto: "Ela se parece contigo?"
+  - personagem: "Zefinha"
+    texto: "Parece. Separaram nós na entrada. Tu também tá esperando alguém?"
+  - personagem: "Criança"
+    texto: "Meu tio. Mainha disse que ele vinha com as ferramentas."
   meninoEspera:
-  - personagem: Zefinha
-    texto: Tu fica esperando aqui o dia todo?
-  - personagem: "Crian\xE7a"
-    texto: A gente espera muita coisa aqui.
-  - personagem: Zefinha
-    texto: E essa lata?
-  - personagem: "Crian\xE7a"
-    texto: "\xC9 da comida. Mainha disse pra num perder. Se chamarem, eu preciso
-      t\xE1 com ela."
+  - personagem: "Zefinha"
+    texto: "Tu espera aqui faz tempo?"
+  - personagem: "Criança"
+    texto: "Desde que o sol tava daquele lado."
+  - personagem: "Zefinha"
+    texto: "E tua mãe?"
+  - personagem: "Criança"
+    texto: "Tá na fila. Disse pra eu ficar onde meu tio pudesse me achar."
   meninoNome:
-  - personagem: Zefinha
-    texto: "Maria Severina. Se tu escutar algu\xE9m chamar, me avisa."
-  - personagem: "Crian\xE7a"
-    texto: Eu aviso. Mas tem muita Maria aqui.
+  - personagem: "Zefinha"
+    texto: "Minha irmã se chama Maria Severina. Nós chama Mariquinha."
+  - personagem: "Criança"
+    texto: "Maria Severina…"
+  - personagem: "Zefinha"
+    texto: "Se tu ouvir chamarem, me avisa?"
+  - personagem: "Criança"
+    texto: "Aviso. Mas tem muita Maria aqui."
   meninoSaida:
   - personagem: Zefinha
     texto: Eu preciso ir. Tomara que teu tio chegue.
@@ -19452,6 +19455,77 @@ MonoBehaviour:
   - personagem: Luzia
     texto: Vou perguntar na lavagem. Tem muita gente chegando por caminhos diferentes.
   objetivoPano: 
+  pedidoNomeInicio:
+  - personagem: "Zefinha"
+    texto: "Maria Severina. Minha irmã. Levaram ela com outro grupo antes de nós entrar."
+  - personagem: "Escrivão"
+    texto: "Sabe em qual carro?"
+  - personagem: "Zefinha"
+    texto: "Num sei. Eu vi ela indo embora."
+  pedidoNomeMae:
+  - personagem: "Mãe"
+    texto: "Nós chegou junto. Separaram minha menina de nós."
+  pedidoNomeLuzia:
+  - personagem: "Luzia"
+    texto: "A família acabou de chegar. A menina ficou no outro grupo."
+  pedidoNomeServico:
+  - personagem: "Escrivão"
+    texto: "Tenho os nomes dos grupos nestas folhas. Preciso terminar de conferir."
+  - personagem: "Zefinha"
+    texto: "O senhor pode procurar o dela?"
+  - personagem: "Escrivão"
+    texto: "Leve aquele lote de panos pra lavagem. Quando voltar, pergunte."
+  pedidoNomeProtestoMae:
+  - personagem: "Mãe"
+    texto: "Minha filha veio atrás da irmã."
+  pedidoNomeProtestoLuzia:
+  - personagem: "Luzia"
+    texto: "Ao menos anote o nome dela."
+  pedidoNomeFinal:
+  - personagem: "Escrivão"
+    texto: "Eu ouvi. Maria Severina. Agora leve os panos."
+  reencontroComDestino:
+  - personagem: "Zefinha"
+    texto: "Disseram que o carro foi pra Lagoa do Meio. Ainda preciso saber se ela chegou lá."
+  - personagem: "Criança"
+    texto: "Meu tio também vinha de longe. Mainha disse que viagem demora."
+  reencontroSemDestino:
+  - personagem: "Zefinha"
+    texto: "Fui perguntar na mesa. Mandaram eu levar os panos primeiro."
+  - personagem: "Criança"
+    texto: "E agora vão procurar?"
+  - personagem: "Zefinha"
+    texto: "Vou perguntar de novo."
+  canhotoIntervencao:
+  - personagem: "Fiscal"
+    texto: "Os papéis ficam. Já pegou os panos?"
+  canhotoDestino:
+  - personagem: "Zefinha"
+    texto: "Essa marca é do carro que levou o outro grupo?"
+  - personagem: "Fiscal"
+    texto: "É do encaminhamento."
+  - personagem: "Zefinha"
+    texto: "Pra onde levaram eles?"
+  - personagem: "Fiscal"
+    texto: "Lagoa do Meio. Está escrito aí."
+  - personagem: "Zefinha"
+    texto: "Minha irmã foi junto."
+  - personagem: "Fiscal"
+    texto: "Então leve o canhoto e pergunte lá. Agora siga."
+  canhotoGuardadoMae:
+  - personagem: "Zefinha"
+    texto: "Lagoa do Meio…"
+  - personagem: "Mãe"
+    texto: "Guarde esse papel, minha filha. Nós vai perguntar por ela."
+  canhotoGuardadoLuzia:
+  - personagem: "Zefinha"
+    texto: "Lagoa do Meio…"
+  - personagem: "Luzia"
+    texto: "Guarde. Esse papel pode ajudar quando nós perguntar."
+  exameMeninoNomes: {fileID: 9933000010}
+  exameLataNomes: {fileID: 9933000011}
+  exameFolhasNomes: {fileID: 9933000012}
+  exameCanhotoNomes: {fileID: 9933000013}
   exameDistribuicao: {fileID: 9933000001}
   esperaChamadaAgua: 2
   alcanceRetornoAgua: 4
@@ -20421,17 +20495,21 @@ MonoBehaviour:
   folhaEmConsulta: {fileID: 9966000021}
   folhaConsultaFim: {fileID: 9966000051}
   meninoReencontro:
-  - personagem: "Crian\xE7a"
-    texto: "Tu voltou. Teve not\xEDcia?"
-  - personagem: Zefinha
-    texto: "Ainda t\xF4 procurando. E teu tio?"
-  - personagem: "Crian\xE7a"
-    texto: Ainda num chegou. Eu fico aqui.
+  - personagem: "Criança"
+    texto: "Tu voltou. Achou tua irmã?"
+  - personagem: "Zefinha"
+    texto: "Ainda não. E teu tio?"
+  - personagem: "Criança"
+    texto: "Num chegou. Eu fiquei aqui."
   meninoNomeLembrado:
-  - personagem: "Crian\xE7a"
-    texto: Maria Severina. Eu num esqueci.
-  - personagem: "Crian\xE7a"
-    texto: Se eu ouvir o nome dela, eu te aviso.
+  - personagem: "Criança"
+    texto: "Maria Severina, né?"
+  - personagem: "Zefinha"
+    texto: "Tu lembrou."
+  - personagem: "Criança"
+    texto: "Lembrei. Se chamarem, eu te aviso."
+  - personagem: "Zefinha"
+    texto: "Obrigada."
   meninoDepoisRegistro:
   - personagem: "Crian\xE7a"
     texto: Na mesa, disseram alguma coisa?
@@ -20440,12 +20518,14 @@ MonoBehaviour:
   - personagem: "Crian\xE7a"
     texto: "Meu tio tamb\xE9m era pra vir de outro lugar."
   lataMeninoFalas:
-  - personagem: Zefinha
-    texto: Tu guarda essa lata bem junto de tu.
-  - personagem: "Crian\xE7a"
-    texto: "\xC9 da comida. Mainha disse pra num perder."
-  - personagem: "Crian\xE7a"
-    texto: "Se chamarem, eu preciso t\xE1 com ela."
+  - personagem: "Zefinha"
+    texto: "Tu num larga essa lata?"
+  - personagem: "Criança"
+    texto: "Mainha disse pra guardar."
+  - personagem: "Zefinha"
+    texto: "É pra buscar comida?"
+  - personagem: "Criança"
+    texto: "É. Se chamarem e eu tiver sem ela, como é que eu levo?"
   mesaAntesAgua:
   - personagem: "Escriv\xE3o"
     texto: "A rela\xE7\xE3o fica aqui. Agora \xE9 a vez dessa fam\xEDlia."
@@ -20572,21 +20652,18 @@ MonoBehaviour:
   - personagem: "Escriv\xE3o"
     texto: Eu disse que depois vejo.
   qualLotePanos:
-  - personagem: Zefinha
-    texto: Qual lote eu devo levar?
-  - personagem: "Escriv\xE3o"
-    texto: "O lote dobrado ao lado desta mesa. Deixe os pap\xE9is e os outros pertences
-      onde est\xE3o."
+  - personagem: "Zefinha"
+    texto: "Quais panos eu levo?"
+  - personagem: "Escrivão"
+    texto: "O lote dobrado ao lado da mesa. Os papéis ficam aqui."
   destinatariaPanos:
-  - personagem: Zefinha
-    texto: A quem eu entrego?
-  - personagem: "Escriv\xE3o"
-    texto: "\xC0 lavadeira junto do tanque. Fale com Raimundo no caminho; ele mostra
-      a passagem."
+  - personagem: "Zefinha"
+    texto: "Onde eu encontro a mulher?"
+  - personagem: "Escrivão"
+    texto: "Junto do tanque, depois da passagem. Raimundo trabalha ali perto. Pergunte a ele se num achar."
   seguirPanos:
-  - personagem: Zefinha
-    texto: "Vou levar o lote \xE0 lavadeira. Ainda posso perguntar pelo encaminhamento
-      no posto."
+  - personagem: "Zefinha"
+    texto: "Vou levar os panos. Depois procuro quem sabe daquele carro."
   objetivoLotePanos: 
   areaDistribuicaoAgua: {fileID: 9931000000}
 --- !u!1 &4200000000
@@ -21719,13 +21796,14 @@ GameObject:
   - component: {fileID: 9966000002}
   - component: {fileID: 4200000038}
   - component: {fileID: 4200000039}
+  - component: {fileID: 9933000010}
   m_Layer: 0
   m_Name: "Crian\xE7a esperando o tio - arte original"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4200000037
 Transform:
   m_ObjectHideFlags: 0
@@ -21859,6 +21937,7 @@ GameObject:
   - component: {fileID: 4200000041}
   - component: {fileID: 9966000003}
   - component: {fileID: 4200000042}
+  - component: {fileID: 9933000011}
   m_Layer: 0
   m_Name: Lata do menino - recipiente reutilizado
   m_TagString: Untagged
@@ -21952,6 +22031,7 @@ GameObject:
   - component: {fileID: 4200000044}
   - component: {fileID: 4200000045}
   - component: {fileID: 4200000046}
+  - component: {fileID: 9933000013}
   m_Layer: 0
   m_Name: Canhoto na panela - pista
   m_TagString: Untagged
@@ -48511,6 +48591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9966000011}
   - component: {fileID: 9966000012}
+  - component: {fileID: 9933000012}
   m_Layer: 0
   m_Name: "Rela\xE7\xE3o de nomes - folhas e \xE1rea de exame"
   m_TagString: Untagged
@@ -51302,3 +51383,70 @@ MonoBehaviour:
   examinePanel: {fileID: 3000000053}
   examineText: {fileID: 3000000061}
   message: "A mulher mantém os recipientes separados junto ao reservatório. A cabaça da família está entre eles."
+
+--- !u!114 &9933000010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4200000036}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Um menino espera sozinho, segurando uma lata junto ao corpo. Talvez eu consiga conversar com ele depois de levar a água."
+
+
+--- !u!114 &9933000011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4200000040}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "A lata está amassada. Mesmo vazia, o menino não a deixa longe das mãos."
+
+
+--- !u!114 &9933000012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9966000010}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Folhas cobertas de nomes se acumulam sobre a mesa. O homem confere uma delas enquanto uma família espera."
+
+
+--- !u!114 &9933000013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4200000043}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Um canhoto ficou à mostra debaixo dos panos. Há uma marca parecida com a do carro que levou Mariquinha."

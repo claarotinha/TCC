@@ -93,8 +93,8 @@ public partial class EntradaCurrais
     }
 
     private Collider2D[] AlvosChegada() => Dados.curraisEtapaEntrada == 2
-        ? new[] { AreaCabacaMesa, areaDiarioEntrada, areaDiarioRetido, areaFiscalEntrada, areaMesaRevista }
-        : new[] { AreaCabacaMesa, areaDistribuicaoAgua, areaAgua, areaPanoAbrigo, areaLuzia, areaMae, areaPaiAbrigo };
+        ? new[] { AreaCabacaMesa, areaDiarioEntrada, areaDiarioRetido, areaFiscalEntrada, areaMesaRevista, areaMenino, areaFolhasRegistro }
+        : new[] { AreaCabacaMesa, areaDistribuicaoAgua, areaAgua, areaPanoAbrigo, areaLuzia, areaMae, areaPaiAbrigo, areaMenino, areaFolhasRegistro };
 
     private bool PonteiroSobreChegada(Vector2 ponto)
     {
@@ -141,6 +141,8 @@ public partial class EntradaCurrais
         else if (alvo == areaLuzia) MenuPrimeiroAbrigo();
         else if (alvo == areaMae) MenuMaePrimeiroAbrigo();
         else if (alvo == areaPaiAbrigo) MenuPaiPrimeiroAbrigo();
+        else if (alvo == areaMenino) MenuCriancaNomes();
+        else if (alvo == areaFolhasRegistro) Iniciar(ExamineNomesUmaVez("nomes-examine-folhas", exameFolhasNomes));
     }
 
     private void MenuRevista() => MenuConferenciaRevista();
