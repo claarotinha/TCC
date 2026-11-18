@@ -363,6 +363,7 @@ public partial class EntradaCurrais : MonoBehaviour
             return;
         }
         if (Dados.curraisEtapaEntrada == 4 && AtualizarVozQuarto()) return;
+        if (Dados.curraisEtapaEntrada == 4 && AtualizarChegadaAbrigoFinal()) return;
         if (!ocupado && !menuAberto && Dados.curraisEtapaEntrada == 4 && !InventarioAbertoMemoria() && Input.GetKeyDown(KeyCode.E))
         {
             Collider2D[] alvos = AlvosAtuais();

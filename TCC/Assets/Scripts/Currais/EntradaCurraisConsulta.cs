@@ -77,7 +77,7 @@ public partial class EntradaCurrais
             opcoesRetornoConsulta.Length != 2 || objetivosConsulta == null || objetivosConsulta.Length != 5) valido = false;
         string[] textos = { perguntaConsulta, rotuloLugar, rotuloNome, lugarConsulta, nomeConsulta, naoConfirmado };
         foreach (string texto in textos) valido &= !string.IsNullOrWhiteSpace(texto);
-        return valido && ConferirReferencia(exameRaimundoManha, nameof(exameRaimundoManha)) &&
+        return valido && ConferirReferencia(exameMesaUltimaConsulta, nameof(exameMesaUltimaConsulta)) && ConferirReferencia(exameRaimundoManha, nameof(exameRaimundoManha)) &&
             ConferirReferencia(exameRaimundoManha.examinePanel, "Painel Examine — manhã") &&
             ConferirReferencia(exameRaimundoManha.examineText, "Texto Examine — manhã");
     }
@@ -112,15 +112,15 @@ public partial class EntradaCurrais
         areaPanoLavagem.enabled = RetalhoDisponivelManha;
         AplicarNoite(false);
         lacoNaMao.SetActive(false); maoNaRoupa.SetActive(false); cabacaNoite.SetActive(false);
-        papelConsulta.SetActive(true); // A relação continua sobre a mesa após a consulta.
+        papelConsulta.SetActive(Dados.curraisEscolhaConsulta == 0);
         if (!papelEmConsulta) canhotoApresentadoConsulta.SetActive(false);
-        testemunhaConsulta.SetActive(true);
+        testemunhaConsulta.SetActive(Dados.curraisEscolhaConsulta == 0);
         trabalhadorRetorno.SetActive(true);
         lacoRemendadoCenario.SetActive(false);
         Posicionar(areaRaimundo.transform, Dados.curraisEscolhaPosto == 1 ? raimundoConsultaPerto : raimundoConsultaLonge);
         Posicionar(portaoConsulta, etapa >= 3 ? portaoConsultaFechado : portaoConsultaAberto);
-        if (!AntesDaUltimaConsulta || Dados.curraisEscolhaAgua == 1) Posicionar(luzia.transform, luziaRepouso);
-        if (AntesDaUltimaConsulta)
+        if (FamiliaNaConsulta || !AntesDaUltimaConsulta || Dados.curraisEscolhaAgua == 1) Posicionar(luzia.transform, luziaRepouso);
+        if (AntesDaUltimaConsulta && !FamiliaNaConsulta)
         {
             Posicionar(pai, paiAbrigo);
             if (Dados.curraisEscolhaAgua != 1) Posicionar(mae, maeAbrigo);
@@ -129,39 +129,37 @@ public partial class EntradaCurrais
         {
             Posicionar(pai, paiAbrigo); Posicionar(mae, maeAbrigo);
         }
-        else if (etapa == 1 && !AntesDaUltimaConsulta && mari.transform.position.x >= maeLimiteConsulta.position.x)
-            Posicionar(mae, maeLimiteConsulta);
+        else if (etapa <= 2 && FamiliaNaConsulta && !MaeNaConsulta) Posicionar(mae, maeAbrigo);
         AtualizarMemoria();
         Physics2D.SyncTransforms();
     }
 
     private void AtualizarAcompanhamentoConsulta(bool livre)
     {
-        if (AntesDaUltimaConsulta) { AtualizarCompanhiaManha(livre); return; }
+        if (AntesDaUltimaConsulta && !FamiliaNaConsulta) { AtualizarCompanhiaManha(livre); return; }
         int etapa = Dados.curraisEtapaConsulta;
         bool acompanhar = etapa >= 1 && etapa <= 3;
         seguidorPaiConsulta.enabled = livre && acompanhar;
         seguidoraLuzia.enabled = false;
-        bool maeAcompanha = acompanhar && (etapa == 3 ||
-            (etapa == 1 && mari.transform.position.x < maeLimiteConsulta.position.x));
+        bool maeAcompanha = acompanhar && (etapa == 3 || MaeNaConsulta);
         seguidoraMae.enabled = livre && maeAcompanha;
-        if (etapa == 1 && !maeAcompanha) Posicionar(mae, maeLimiteConsulta);
+        if (etapa <= 2 && !maeAcompanha) Posicionar(mae, maeAbrigo);
     }
 
     private void RestaurarFamiliaConsulta()
     {
         if (Dados.curraisEtapaConsulta < 1 || Dados.curraisEtapaConsulta > 3) return;
-        if (AntesDaUltimaConsulta) return;
+        if (AntesDaUltimaConsulta && !FamiliaNaConsulta) return;
         Vector3 destinoPai = pai.position;
         destinoPai.x = mari.transform.position.x - seguidorPaiConsulta.DistanciaAtras;
         pai.position = destinoPai;
-        if (Dados.curraisEtapaConsulta == 3 || mari.transform.position.x < maeLimiteConsulta.position.x)
+        if (Dados.curraisEtapaConsulta == 3 || MaeNaConsulta)
         {
             Vector3 destinoMae = mae.position;
             destinoMae.x = mari.transform.position.x - seguidoraMae.DistanciaAtras - 1f;
             mae.position = destinoMae;
         }
-        else Posicionar(mae, maeLimiteConsulta);
+        else Posicionar(mae, maeAbrigo);
         Physics2D.SyncTransforms();
     }
 
@@ -178,16 +176,9 @@ public partial class EntradaCurrais
             else if (area == areaRaimundo) MenuRaimundoManha();
             else if (area == areaAmanhecer) Iniciar(AmanhecerNoCampo());
             else if (area == areaUltimaConsulta) MenuUltimaConsulta();
-            else if (area == areaLuzia) MenuAssuntoNPC("Luzia", "Pode falar.", "O que a senhora acha?", () => Dizer(Dados.curraisEtapaConsulta <= 2 ? luziaConsultaFinal : luziaRetornoFinal));
-            else if (area == areaMae || area == areaPaiAbrigo)
-            {
-                if (Dados.curraisEtapaConsulta == 3) MenuAssuntoNPC("Família", "Estamos aqui.", "Sobre a volta ao abrigo", () => Dizer(retornoAbrigoOrientacao));
-                else MenuFamiliaConsulta();
-            }
             else if (area == areaSaidaConsulta) Iniciar(PedirSaida());
-            else if (Dados.curraisEtapaConsulta == 3) MenuAssuntoNPC("Mãe", "Venha pra perto, Josefa.", "Contar o que descobrimos", ConcluirRetorno);
-            else MostrarOpcoes("Família", InformacoesConsulta(), opcoesRetornoConsulta, new Action[] {
-                () => Iniciar(RelatarInformacoes()), FecharMenu });
+            else if (Dados.curraisEtapaConsulta == 3) Iniciar(ChegarAbrigoFinal());
+            else if (area == areaMae || area == areaPaiAbrigo) MenuFamiliaConsulta();
             return true;
         }
         return false;
@@ -210,97 +201,38 @@ public partial class EntradaCurrais
 
     private void MenuUltimaConsulta()
     {
-        if (Dados.curraisEscolhaConsulta != 0)
-        { MenuAssuntoNPC("Escrivão", "Diga.", "Sobre o que ficou confirmado", () => Dizer(consultaConcluida)); return; }
-        MostrarOpcoes("Escrivão", "Ainda posso conferir uma coisa antes de levarem a relação.",
-            new[] { "Perguntar por Mariquinha", "Mostrar o canhoto", "Sair" },
-            new Action[] { () => Iniciar(FazerUltimaConsulta()), () => Iniciar(ApresentarCanhotoConsulta()), FecharMenu });
+        Iniciar(ClicarMesaUltimaConsulta());
     }
 
     private void MenuFamiliaConsulta()
     {
-        if (Dados.curraisEtapaConsulta == 1)
-        {
-            if (NomeNovoParaFamilia) MenuAssuntoNPC("Família", string.Empty, "Contar o nome da mulher", ContarNomeFamiliaManha);
-            else FecharMenu();
-            return;
-        }
-        MostrarOpcoes("Família", Dados.curraisEtapaConsulta == 1
-            ? "Ainda podemos perguntar na mesa. Eu fico contigo."
-            : "Vamos falar com o homem do portão. Tua irmã não vai sair do nosso pensamento.",
-            new[] { "O que sabemos", "Ficar um pouco juntos", "Sair" },
-            new Action[] { () => Iniciar(RelatarInformacoes()), () => Iniciar(Dizer(familiaCaderno)), FecharMenu });
+        if (Dados.curraisEtapaConsulta == 1 && !FamiliaNaConsulta && NomeNovoParaFamilia)
+            MenuAssuntoNPC("Família", string.Empty, "Contar o nome da mulher", ContarNomeFamiliaManha);
+        else FecharMenu();
     }
 
     private IEnumerator ApresentarCanhotoConsulta()
     {
-        if (Dados.curraisEtapaConsulta != 1 || Dados.curraisEscolhaConsulta != 0) yield break;
-        if (!TemItem(itemCanhoto))
-        {
-            yield return Dizer(semCanhotoConsulta);
-            MenuUltimaConsulta();
-            yield break;
-        }
-        papelEmConsulta = true;
-        canhotoApresentadoConsulta.SetActive(true);
-        try { yield return Dizer(papelApresentado); }
-        finally { EncerrarDetalhesConsulta(); }
-        MenuUltimaConsulta();
+        yield return MostrarCanhotoLinear();
     }
 
     private void EncerrarDetalhesConsulta()
     {
         papelEmConsulta = false;
         if (canhotoApresentadoConsulta != null) canhotoApresentadoConsulta.SetActive(false);
-        if (testemunhaConsulta != null) testemunhaConsulta.SetActive(true);
+        if (testemunhaConsulta != null) testemunhaConsulta.SetActive(Dados.curraisEscolhaConsulta == 0);
         RestaurarDesenhoSaida();
     }
 
     private IEnumerator FazerUltimaConsulta()
     {
-        if (Dados.curraisEtapaConsulta != 1 || Dados.curraisEscolhaConsulta != 0) yield break;
-        // Conversar na mesa preserva posição dos personagens e câmera.
-        if (!Dados.curraisConsultaApresentada)
-        {
-            if (Dados.curraisEscolhaPosto == 1) yield return Dizer(memoriaRaimundo);
-            yield return Dizer(manhaOrdens);
-            yield return Dizer(consultaEscrivao);
-            Dados.curraisConsultaApresentada = true;
-            Salvar();
-        }
-        if (TemItem(itemCanhoto) && InventoryManager.Instance.SelectedItem == itemCanhoto)
-        {
-            papelEmConsulta = true;
-            canhotoApresentadoConsulta.SetActive(true);
-            try { yield return Dizer(papelApresentado); }
-            finally { EncerrarDetalhesConsulta(); }
-        }
-        string[] rotulos = (string[])opcoesConsulta.Clone();
-        if (Dados.curraisDestinoConfirmado) rotulos[0] += " (já confirmado)";
-        if (Dados.curraisIdentidadeConfirmada) rotulos[1] += " (já confirmado)";
-        yield return Escolher("Escrivão", InformacoesConsulta() + "\n" + perguntaConsulta, rotulos);
-        int opcao = escolhaRecebida;
-        if (opcao == 2) yield break;
-        bool repetida = opcao == 0 ? Dados.curraisDestinoConfirmado : Dados.curraisIdentidadeConfirmada;
-        if (opcao == 1) testemunhaConsulta.SetActive(true);
-        try
-        {
-            yield return Dizer(opcao == 0 ? consultaDestino : consultaNome);
-            if (repetida) yield return Dizer(opcao == 0 ? memoriaDestinoRepetido : memoriaNomeRepetido);
-        }
-        finally { EncerrarDetalhesConsulta(); }
-        Dados.curraisEscolhaConsulta = opcao + 1;
-        if (opcao == 0) Dados.curraisDestinoConfirmado = true;
-        else Dados.curraisIdentidadeConfirmada = true;
-        Dados.curraisEtapaConsulta = 2;
-        GameProgress.Instance.UnlockDiaryPage(opcao == 0 ? "currais-ultima-destino" : "currais-ultima-nome");
-        AtualizarEstadoBusca(); Salvar();
-        yield return Dizer(new[] { new Fala { personagem = "Memória", texto = InformacoesConsulta() } });
+        yield return ConsultaFinalLinear();
     }
 
     private IEnumerator PedirSaida()
     {
         if (!ConsultaDisponivel || Dados.curraisEtapaConsulta != 2) yield break;
+        yield return ReunirFamiliaPortao();
         Vector3 antesMari = mari.transform.position, antesPai = pai.position, antesMae = mae.position;
         Vector3 antesCamera = cameraCena.transform.position;
         try
@@ -335,16 +267,11 @@ public partial class EntradaCurrais
 
     private IEnumerator RelatarInformacoes()
     {
-        if (Dados.curraisDestinoConfirmado && Dados.curraisIdentidadeConfirmada) yield return Dizer(retornoDuasPistas);
-        else if (Dados.curraisDestinoConfirmado) yield return Dizer(retornoDestino);
-        else if (Dados.curraisIdentidadeConfirmada) yield return Dizer(retornoNome);
-        yield return Dizer(Dados.curraisLacoGuardado ? retornoLaco : retornoSemLaco);
+        yield return RelatoFinalLinear();
     }
 
     private IEnumerator ConcluirRetorno()
     {
-        if (Dados.curraisEtapaConsulta != 3) yield break;
-        yield return Dizer(aberturaEncerramento);
-        MenuNomesFinais();
+        yield return RelatoFinalLinear();
     }
 }

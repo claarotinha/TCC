@@ -20209,23 +20209,25 @@ MonoBehaviour:
   paiSaidaConsulta: {fileID: 4500000044}
   maeSaidaConsulta: {fileID: 4500000046}
   manhaOrdens:
-  - personagem: Fiscal
-    texto: "Essa rela\xE7\xE3o j\xE1 tinha que ter seguido ontem."
-  - personagem: Cabo
-    texto: "Ent\xE3o fa\xE7a seguir."
-  - personagem: Pai
-    texto: Vim perguntar pela minha filha.
-  - personagem: Fiscal
-    texto: "Pergunte no lugar de perguntar. Aqui eu t\xF4 fechando carga."
-  - personagem: Pai
-    texto: Foi de um lugar pro outro que ela sumiu.
-  - personagem: Zefinha (em pensamentos)
-    texto: "Num \xE9 a sombra que fecha o port\xE3o. \xC9 a m\xE3o dele."
+  - personagem: "Fiscal"
+    texto: "Essa relação já tinha que ter seguido ontem."
+  - personagem: "Cabo"
+    texto: "Então faça seguir."
+  - personagem: "Pai"
+    texto: "Vim perguntar pela minha filha."
+  - personagem: "Fiscal"
+    texto: "Pergunte na mesa. Aqui eu tô fechando carga."
+  - personagem: "Pai"
+    texto: "Foi de um lugar pro outro que ela sumiu."
+  - personagem: "Zefinha (em pensamento)"
+    texto: "Num é a sombra que fecha o portão. É a mão dele."
   consultaEscrivao:
-  - personagem: "Escriv\xE3o"
-    texto: "Eu posso conferir esse lugar na rela\xE7\xE3o. Ou chamar a lavadeira
-      que disse conhecer a mulher. Os dois agora eu num consigo. O carro t\xE1 saindo
-      e ela vai com o servi\xE7o."
+  - personagem: "Escrivão"
+    texto: "Posso conferir o destino daquele grupo na relação. Ou chamar a trabalhadora que conhece a mulher."
+  - personagem: "Zefinha"
+    texto: "Num pode fazer os dois?"
+  - personagem: "Escrivão"
+    texto: "A relação vai seguir agora. A trabalhadora também tá sendo chamada. Consigo tentar uma dessas coisas antes."
   consultaDestino:
   - personagem: Zefinha
     texto: Eu preciso ter certeza pra onde mandaram aquele grupo.
@@ -20239,18 +20241,16 @@ MonoBehaviour:
   - personagem: Pai
     texto: "Deixe eu olhar tamb\xE9m."
   consultaNome:
-  - personagem: Zefinha
-    texto: "Chame a mulher. Eu preciso saber com quem minha irm\xE3 ficou."
-  - personagem: Lavadeira
-    texto: Nair Pereira. Eu trabalhei com ela antes dessa seca. Vi a menina com ela,
-      sim. A pequena perguntava pelos pais o tempo todo.
-  - personagem: Zefinha
-    texto: A senhora tem certeza do sobrenome?
-  - personagem: Lavadeira
-    texto: "Pereira. Isso eu tenho. Pra onde chegaram depois eu n\xE3o vou saber
-      jurar."
-  - personagem: Pai
-    texto: Obrigado. Por dizer o que viu.
+  - personagem: "Zefinha"
+    texto: "A senhora conhece a mulher que tava com minha irmã?"
+  - personagem: "Trabalhadora"
+    texto: "Nair Pereira. Eu trabalhei com ela antes dessa seca. Vi a menina com ela, sim. A pequena perguntava pelos pais o tempo todo."
+  - personagem: "Zefinha"
+    texto: "A senhora tem certeza do sobrenome?"
+  - personagem: "Trabalhadora"
+    texto: "Pereira. Isso eu tenho. Pra onde chegaram depois eu num vou saber jurar."
+  - personagem: "Pai"
+    texto: "Obrigado. Por dizer o que viu."
   saidaRecusada:
   - personagem: Pai
     texto: Eu trabalhei. Fiz o que mandaram. Agora deixe eu procurar minha menina.
@@ -20267,22 +20267,28 @@ MonoBehaviour:
   - personagem: "M\xE3e"
     texto: "N\xF3s vai continuar perguntando. Mas venha pra perto de n\xF3s agora."
   retornoDuasPistas:
-  - personagem: Zefinha
-    texto: Lagoa do Meio. Nair Pereira. Ela tava viva quando passou com essa mulher.
-  - personagem: "M\xE3e"
-    texto: "Eu vou guardar esses nomes tamb\xE9m."
-  - personagem: Pai
-    texto: "Quando deixar n\xF3s sair, n\xF3s come\xE7a por a\xED."
+  - personagem: "Zefinha"
+    texto: "Lagoa do Meio é o lugar indicado. Nair Pereira foi a mulher vista com Mariquinha."
+  - personagem: "Luzia"
+    texto: "E disseram se chegaram lá?"
+  - personagem: "Zefinha"
+    texto: "Num conseguiram confirmar. Só que ela tava viva quando passou com essa mulher."
+  - personagem: "Pai"
+    texto: "Quando deixarem nós sair, nós começa por aí."
   retornoDestino:
-  - personagem: Zefinha
-    texto: Lagoa do Meio. O nome da mulher eu num consegui confirmar.
-  - personagem: "M\xE3e"
-    texto: "N\xF3s pergunta por quem veio de l\xE1. Um lugar tamb\xE9m \xE9 come\xE7o."
+  - personagem: "Zefinha"
+    texto: "Lagoa do Meio. Foi o lugar indicado pro grupo. O nome da mulher eu num consegui confirmar."
+  - personagem: "Luzia"
+    texto: "Nós pode perguntar por quem veio de lá."
+  - personagem: "Mãe"
+    texto: "Um lugar também é começo."
   retornoNome:
-  - personagem: Zefinha
-    texto: Nair Pereira. Foi quem tava com ela. Eu num sei pra onde chegaram.
-  - personagem: Pai
-    texto: "N\xF3s procura esse nome. Algu\xE9m h\xE1 de conhecer."
+  - personagem: "Zefinha"
+    texto: "Nair Pereira. Foi quem tava com ela. Eu num sei pra onde chegaram."
+  - personagem: "Luzia"
+    texto: "Esse nome eu guardo também."
+  - personagem: "Pai"
+    texto: "Alguém há de conhecer."
   retornoLaco:
   - personagem: Zefinha
     texto: "Meu caderno t\xE1 comigo. Vou guardar o que conseguimos saber."
@@ -20336,9 +20342,8 @@ MonoBehaviour:
   - personagem: "Escriv\xE3o"
     texto: Mesmo sem o papel, eu escuto. Diga o que precisa confirmar.
   retornoAbrigoOrientacao:
-  - personagem: "M\xE3e"
-    texto: Luzia ficou no abrigo. Vamos voltar pra perto dela, sem deixar esses nomes
-      se perder.
+  - personagem: "Mãe"
+    texto: "Luzia ficou no abrigo. Vamos voltar pra perto dela."
   luziaConsultaFinal:
   - personagem: Luzia
     texto: "Eu guardo o lugar de voc\xEAs. Teu pai ainda tem pergunta pra fazer naquela
@@ -20856,6 +20861,7 @@ MonoBehaviour:
   exameMesaPosto: {fileID: 9911880001}
   exameRaimundoPosto: {fileID: 9911880002}
   exameRaimundoManha: {fileID: 9911880021}
+  exameMesaUltimaConsulta: {fileID: 9911880031}
   areaAnotacaoPosto: {fileID: 9992000003}
   anotacaoPosto: {fileID: 11400000, guid: 97965bb5d6354031a7359f2637c87ef1, type: 2}
   areaPostoEscolha: {fileID: 4400000026}
@@ -28998,6 +29004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4400000025}
   - component: {fileID: 4400000026}
+  - component: {fileID: 9911880031}
   m_Layer: 0
   m_Name: Interagir - posto e Raimundo
   m_TagString: Untagged
@@ -52910,3 +52917,19 @@ MonoBehaviour:
   examinePanel: {fileID: 3000000053}
   examineText: {fileID: 3000000061}
   message: "Raimundo está perto dos baldes. Abre e fecha a mão devagar antes de segurar uma das alças."
+
+--- !u!114 &9911880031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400000024}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "O escrivão confere uma relação enquanto o fiscal reúne os papéis para levá-los. Perto da passagem, uma trabalhadora espera a chamada para o serviço."

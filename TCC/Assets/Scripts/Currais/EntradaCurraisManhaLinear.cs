@@ -123,7 +123,7 @@ public partial class EntradaCurrais
 
     private bool InteragirFamiliaNomeNovo(Vector2 ponto)
     {
-        if (!AntesDaUltimaConsulta || !NomeNovoParaFamilia) return false;
+        if (!AntesDaUltimaConsulta || FamiliaNaConsulta || !NomeNovoParaFamilia) return false;
         Collider2D alvo = Dados.curraisEscolhaAgua == 1 ? areaPaiAbrigo : areaMae;
         if (!alvo.enabled || !alvo.gameObject.activeInHierarchy || !alvo.OverlapPoint(ponto)) return false;
         MenuAssuntoNPC("Família", string.Empty, "Contar o nome da mulher", ContarNomeFamiliaManha);
