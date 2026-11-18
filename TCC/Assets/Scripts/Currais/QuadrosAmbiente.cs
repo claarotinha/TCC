@@ -11,15 +11,23 @@ public class QuadrosAmbiente : MonoBehaviour
     [SerializeField] private float larguraReferencia = 1f;
     [SerializeField] private Vector2 pivoReferencia = new Vector2(0.5f, 0f);
     [SerializeField] private bool preservarLargura;
+    [Header("Geometria editada na cena")]
+    [SerializeField] private bool preservarGeometriaDaCena;
     [SerializeField] private bool aposEntregaBola;
     [SerializeField] private bool pararQuandoBentoCair;
 
     private SpriteRenderer desenho;
     private Sprite[] preparados;
+    private Sprite referenciaDaCena;
+    private bool quadrosGerados;
     private float tempo;
     private bool iniciou;
 
-    private void Awake() => desenho = GetComponent<SpriteRenderer>();
+    private void Awake()
+    {
+        desenho = GetComponent<SpriteRenderer>();
+        referenciaDaCena = desenho.sprite;
+    }
 
     private bool Liberado => !aposEntregaBola ||
         (TutorialManager.Instance != null && TutorialManager.Instance.IsCompleted);
@@ -46,6 +54,30 @@ public class QuadrosAmbiente : MonoBehaviour
     {
         Sprite primeiro = quadros[0];
         if (primeiro == null) return;
+        if (preservarGeometriaDaCena && referenciaDaCena != null)
+        {
+            // Fundos estáticos mantêm o próprio asset, sem recriar tamanho ou pivô.
+            if (quadros.Length == 1 && primeiro == referenciaDaCena)
+            {
+                preparados = new[] { referenciaDaCena };
+                return;
+            }
+            Vector2 pivo = new Vector2(referenciaDaCena.pivot.x / referenciaDaCena.rect.width,
+                referenciaDaCena.pivot.y / referenciaDaCena.rect.height);
+            preparados = new Sprite[quadros.Length];
+            quadrosGerados = true;
+            for (int i = 0; i < quadros.Length; i++)
+            {
+                Sprite origem = quadros[i] != null ? quadros[i] : primeiro;
+                float unidades = preservarLargura ? referenciaDaCena.bounds.size.x : referenciaDaCena.bounds.size.y;
+                float pixels = preservarLargura ? origem.rect.width : origem.rect.height;
+                preparados[i] = Sprite.Create(origem.texture, origem.rect, pivo,
+                    pixels / Mathf.Max(.001f, unidades), 0, SpriteMeshType.FullRect);
+                preparados[i].name = origem.name + " - geometria da cena";
+            }
+            return;
+        }
+        quadrosGerados = true;
         float ppu = preservarLargura
             ? primeiro.rect.width / Mathf.Max(0.001f, larguraReferencia)
             : primeiro.rect.height / Mathf.Max(0.001f, alturaReferencia);
@@ -61,7 +93,7 @@ public class QuadrosAmbiente : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (preparados == null) return;
+        if (!quadrosGerados || preparados == null) return;
         foreach (Sprite quadro in preparados) if (quadro != null) Destroy(quadro);
     }
 }

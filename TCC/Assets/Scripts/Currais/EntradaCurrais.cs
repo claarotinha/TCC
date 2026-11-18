@@ -39,6 +39,8 @@ public partial class EntradaCurrais : MonoBehaviour
 
     [Header("Cenários separados na Hierarchy")]
     [SerializeField] private GameObject rua, campo;
+    [Header("Limites externos - editáveis na Hierarchy")]
+    [SerializeField] private Collider2D limitesExternosRua, limitesExternosCampo;
     [SerializeField] private GameObject lacoChao, lacoPanela, outraFila;
     [SerializeField] private Collider2D areaLaco, areaLuzia;
     [SerializeField] private Transform pai, mae, baleia, irma, cabo, carroca;
@@ -95,10 +97,19 @@ public partial class EntradaCurrais : MonoBehaviour
     private float zoomInicial;
     private Vector3 inicioMariNaRua;
 
+    private void ConfigurarLimitesExternos()
+    {
+        Collider2D limites = campo != null && campo.activeInHierarchy
+            ? limitesExternosCampo : limitesExternosRua;
+        if (limites == null) return;
+        // São bordas do cenário completo; o progresso não fecha setores internos.
+        if (mari != null) mari.DefinirLimites(limites);
+        if (seguirCamera != null) seguirCamera.DefinirLimites(limites, true);
+    }
+
     private void Awake()
     {
-        if (mari != null) mari.LiberarLimites();
-        if (seguirCamera != null) seguirCamera.LiberarLimites();
+        ConfigurarLimitesExternos();
         if (objetivoTexto != null) objetivoTexto.gameObject.SetActive(false);
         if (mari != null) inicioMariNaRua = mari.transform.position;
         if (cameraCena != null) zoomInicial = cameraCena.orthographicSize;
@@ -558,6 +569,7 @@ public partial class EntradaCurrais : MonoBehaviour
         }
         Physics2D.SyncTransforms();
         rua.SetActive(true); campo.SetActive(false);
+        ConfigurarLimitesExternos();
         irma.gameObject.SetActive(true);
         carroca.gameObject.SetActive(true);
         outraFila.SetActive(true);
@@ -651,6 +663,7 @@ public partial class EntradaCurrais : MonoBehaviour
     private void MostrarEntrada()
     {
         rua.SetActive(false); campo.SetActive(true);
+        ConfigurarLimitesExternos();
         Dados.curraisPaiFerido = true;
         carroca.gameObject.SetActive(false);
         guardaRetaguarda.gameObject.SetActive(false);

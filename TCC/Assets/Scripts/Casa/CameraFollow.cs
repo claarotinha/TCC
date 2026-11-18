@@ -15,12 +15,33 @@ public class CameraFollow : MonoBehaviour
     private Bounds cameraBounds;
     private bool hasBounds;
     private bool preparada;
+    [SerializeField] private bool limitarAltura;
+    private float zoomDosLimites;
 
     public void LiberarLimites()
     {
         levelBounds = null;
         backgroundPieces = new SpriteRenderer[0];
         hasBounds = false;
+    }
+
+    public void DefinirLimites(Collider2D limites, bool restringirAltura = false)
+    {
+        if (sceneCamera == null) sceneCamera = GetComponent<Camera>();
+        if (zoomDosLimites <= 0f && sceneCamera != null) zoomDosLimites = sceneCamera.orthographicSize;
+        levelBounds = limites;
+        backgroundPieces = new SpriteRenderer[0];
+        hasBounds = limites != null;
+        if (hasBounds) cameraBounds = limites.bounds;
+        limitarAltura = restringirAltura;
+    }
+
+    private float ClampY(float y)
+    {
+        if (!limitarAltura || !hasBounds || sceneCamera == null || !sceneCamera.orthographic) return y;
+        float metade = sceneCamera.orthographicSize;
+        float minimo = cameraBounds.min.y + metade, maximo = cameraBounds.max.y - metade;
+        return minimo <= maximo ? Mathf.Clamp(y, minimo, maximo) : cameraBounds.center.y;
     }
 
     void Start()
@@ -103,6 +124,12 @@ public class CameraFollow : MonoBehaviour
         if (target == null)
             return;
 
+        if (limitarAltura && hasBounds && sceneCamera != null && zoomDosLimites > 0f)
+        {
+            // Em telas largas, a rua curta precisa caber sem expor as bordas vazias.
+            sceneCamera.orthographicSize = Mathf.Min(zoomDosLimites, cameraBounds.extents.y,
+                cameraBounds.extents.x / Mathf.Max(.01f, sceneCamera.aspect));
+        }
         float desiredX = ClampX(target.position.x + horizontalOffset);
 
         Vector3 desiredPosition = new Vector3(
@@ -120,6 +147,7 @@ public class CameraFollow : MonoBehaviour
         // A interpolação não pode deixar a câmera parcialmente fora do cenário.
         Vector3 position = transform.position;
         position.x = ClampX(position.x);
+        position.y = ClampY(position.y);
         transform.position = position;
     }
 }

@@ -32,6 +32,13 @@ public class PlayerMovement : MonoBehaviour
         movementBackground = new SpriteRenderer[0];
     }
 
+    public void DefinirLimites(Collider2D limites)
+    {
+        movementBounds = limites;
+        journeyBounds = null;
+        movementBackground = new SpriteRenderer[0];
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
