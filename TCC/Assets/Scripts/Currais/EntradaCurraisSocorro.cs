@@ -216,9 +216,8 @@ public partial class EntradaCurrais
 
     private IEnumerator AjudarNoQuarto()
     {
-        if (emprestandoNoQuarto) yield break;
-        if (Dados.curraisAjudouAtendimentoQuarto) { yield return Dizer(devolucaoQuarto); yield break; }
-        if (!TemItem(cabacaVaziaBusca)) { yield return Dizer(quartoSemCabaca); yield break; }
+        if (emprestandoNoQuarto || !InvestigouQuarto || Dados.curraisAjudouAtendimentoQuarto ||
+            !TemItem(cabacaVaziaBusca)) yield break;
         emprestandoNoQuarto = true;
         try
         {

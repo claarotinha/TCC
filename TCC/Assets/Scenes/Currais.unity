@@ -20399,10 +20399,10 @@ MonoBehaviour:
   - personagem: Luzia
     texto: "Vamos contar o que n\xF3s viu, Josefa."
   quartoSemCabaca:
-  - personagem: Trabalhadora
-    texto: "Preciso de um recipiente vazio para buscar \xE1gua."
-  - personagem: Trabalhadora
-    texto: Se tu puder emprestar depois, eu devolvo.
+  - personagem: "Trabalhadora"
+    texto: "Preciso de um recipiente vazio para buscar água."
+  - personagem: "Trabalhadora"
+    texto: "Se tu puder emprestar, eu devolvo."
   caboQuartoFalas:
   - personagem: Cabo
     texto: "J\xE1 viu quem t\xE1 aqui. Deixe o atendimento seguir."
@@ -20852,6 +20852,9 @@ MonoBehaviour:
   quartoInterior: {fileID: 4400000027}
   portaQuartoFechada: {fileID: 4400000061}
   papelPosto: {fileID: 4400000012}
+  examePassagemQuarto: {fileID: 9911880011}
+  exameMulherQuarto: {fileID: 9911880012}
+  exameHomemQuarto: {fileID: 9911880013}
   exameMesaPosto: {fileID: 9911880001}
   exameRaimundoPosto: {fileID: 9911880002}
   areaAnotacaoPosto: {fileID: 9992000003}
@@ -21170,12 +21173,10 @@ MonoBehaviour:
   - personagem: Trabalhadora
     texto: "Obrigada. Fique desse lado, longe de quem t\xE1 deitado."
   devolucaoQuarto:
-  - personagem: Trabalhadora
-    texto: "J\xE1 deixei a \xE1gua com eles. Aqui est\xE1 sua caba\xE7a."
-  - personagem: Zefinha
-    texto: "Se chegar uma menina chamada Maria Severina, pode avisar \xE0 dona Luzia?"
-  - personagem: Trabalhadora
-    texto: Eu pergunto por ela. Pode deixar.
+  - personagem: "Trabalhadora"
+    texto: "Já deixei a água com eles. Aqui está sua cabaça."
+  - personagem: "Zefinha"
+    texto: "Obrigada."
   planoSepultamento: {fileID: 9808000500}
   corpoNoPlano: {fileID: 9808000600}
   orientacaoAgua:
@@ -29252,6 +29253,7 @@ GameObject:
   - component: {fileID: 4400000038}
   - component: {fileID: 4400000039}
   - component: {fileID: 4400000040}
+  - component: {fileID: 9911880012}
   m_Layer: 0
   m_Name: Adulto em repouso 84.8
   m_TagString: Untagged
@@ -29530,6 +29532,7 @@ GameObject:
   - component: {fileID: 4400000046}
   - component: {fileID: 4400000047}
   - component: {fileID: 4400000048}
+  - component: {fileID: 9911880013}
   m_Layer: 0
   m_Name: Adulto em repouso 87.2
   m_TagString: Untagged
@@ -30229,6 +30232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4400000070}
   - component: {fileID: 4400000071}
+  - component: {fileID: 9911880011}
   m_Layer: 0
   m_Name: Interagir - porta do quarto
   m_TagString: Untagged
@@ -52836,3 +52840,57 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 6.59, y: 7.07}
   m_EdgeRadius: 0
+
+--- !u!114 &9911880011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400000069}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Pela abertura, Zefinha vê pessoas deitadas e uma trabalhadora passando entre elas. Não consegue ver quem está no canto do quarto."
+
+
+
+
+--- !u!114 &9911880012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400000037}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Uma mulher repousa de lado. Ao perceber Zefinha, tenta levantar um pouco a cabeça."
+
+
+
+
+--- !u!114 &9911880013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400000045}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Um homem acompanha com os olhos o recipiente nas mãos da trabalhadora. Os lábios estão ressecados."

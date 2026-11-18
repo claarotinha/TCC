@@ -91,7 +91,7 @@ public partial class EntradaCurrais
         Posicionar(areaRaimundo.transform, etapa == 0 ? raimundoNoPosto :
             Dados.curraisEscolhaPosto == 1 ? (etapa == 1 ? raimundoApoiadoPosto : raimundoSentado) : raimundoOutroSetor);
         areaRaimundo.transform.localRotation = Quaternion.identity;
-        if (etapa >= 2 && (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))
+        if (etapa >= 2 && VoltouDoQuarto && (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))
         {
             bool duranteNoite = noiteEmCurso || etapa == 4;
             Posicionar(luzia.transform, duranteNoite ? luziaNoite : luziaRepouso);
@@ -113,7 +113,7 @@ public partial class EntradaCurrais
             if (!area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
 
             if (area == areaPostoEscolha) ClicarRaimundoPosto();
-            else if (area == areaPortaQuarto) Iniciar(InvestigarQuarto());
+            else if (area == areaPortaQuarto) Iniciar(ClicarPassagemQuarto());
             else if (area == areaFamiliaAbrigo)
             {
                 if (Dados.curraisEtapaPosto == 2) MenuNoticiasPosto();
@@ -139,19 +139,7 @@ public partial class EntradaCurrais
 
     private IEnumerator InvestigarQuarto()
     {
-        yield return IndicarQuartoPosto();
-        if (Dados.curraisEtapaPosto >= 2) { yield return Dizer(quartoRevisita); yield break; }
-        if (!Dados.curraisQuartoAberto)
-        {
-            yield return Dizer(quartoVoz);
-            yield return AbrirPortaDoQuarto();
-        }
-        yield return Dizer(quartoFalas);
-        yield return AjudarNoQuarto();
-        Dados.curraisEtapaPosto = 2;
-        GameProgress.Instance.UnlockDiaryPage("currais-quarto");
-        AtualizarEstadoBusca(); Salvar();
-        yield return Dizer(quartoVoltarFamilia);
+        yield return InvestigarQuartoLinear();
     }
 
     private IEnumerator NoticiasDaBusca()
@@ -161,7 +149,7 @@ public partial class EntradaCurrais
 
     private IEnumerator ContarAosPais()
     {
-        yield return NoticiasDaBusca();
+        yield return RelatarQuartoFamilia();
         Dados.curraisEtapaPosto = 3;
         GameProgress.Instance.UnlockDiaryPage("currais-pais");
         AtualizarEstadoBusca(); Salvar();

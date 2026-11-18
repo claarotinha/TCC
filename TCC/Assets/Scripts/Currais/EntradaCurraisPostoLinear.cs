@@ -82,9 +82,10 @@ public partial class EntradaCurrais
 
     private void AtualizarCompanhiaPosto()
     {
-        if (!PostoDisponivel || ConsultaDisponivel || Dados.curraisEtapaPosto > 1) return;
+        if (!PostoDisponivel || ConsultaDisponivel || Dados.curraisEtapaPosto > 2 || VoltouDoQuarto) return;
         Transform acompanhante = Dados.curraisEscolhaAgua == 1 ? mae : luzia.transform;
-        Vector3 perto = areaRaimundo.transform.position + Vector3.left * 1.3f;
+        Vector3 perto = (InvestigouQuarto ? areaTrabalhadoraQuarto.transform.position : areaRaimundo.transform.position) + Vector3.left * 1.3f;
+        if (InvestigouQuarto) (Dados.curraisEscolhaAgua == 1 ? areaMae : areaLuzia).enabled = true;
         perto.y = acompanhante.position.y;
         acompanhante.position = perto;
         Posicionar(pai, paiAbrigo);
@@ -207,7 +208,7 @@ public partial class EntradaCurrais
 
     private void MenuNoticiasPosto()
     {
-        if (ViuConversaEntrada("posto-noticia-destino-" + Dados.curraisDestinoConfirmado)) { MenuAbrigo(); return; }
+        if (ViuConversaEntrada("quarto-noticia-contada")) { MenuAbrigo(); return; }
         MenuAssuntoNPC("Pai", string.Empty, "Contar o que descobriu", ContarAosPais);
     }
 
