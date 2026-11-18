@@ -7,6 +7,7 @@ public class SecaPreparationItem : MonoBehaviour
     [Header("Pedido da mãe")]
     [SerializeField] private SecaPreparationRequest preparationRequest;
     [SerializeField] private bool mostrarSprite = true;
+    [SerializeField] private int ordemVisualMinima;
 
     private static readonly HashSet<SecaPreparationItem> activeItems = new HashSet<SecaPreparationItem>();
     private void OnEnable() => activeItems.Add(this);
@@ -75,7 +76,11 @@ public class SecaPreparationItem : MonoBehaviour
         discovery.EnableDirectConfirmation();
         discovery.enabled = true;
         if (itemCollider != null) itemCollider.enabled = true;
-        if (itemRenderer != null) itemRenderer.enabled = mostrarSprite;
+        if (itemRenderer != null)
+        {
+            itemRenderer.enabled = mostrarSprite;
+            itemRenderer.sortingOrder = Mathf.Max(itemRenderer.sortingOrder, ordemVisualMinima);
+        }
         BoxCollider2D caixa = itemCollider as BoxCollider2D;
         if (mostrarSprite && caixa != null && itemRenderer != null && itemRenderer.sprite != null)
         {

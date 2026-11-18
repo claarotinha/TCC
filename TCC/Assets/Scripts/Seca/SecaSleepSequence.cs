@@ -43,6 +43,38 @@ public class SecaSleepSequence : MonoBehaviour
         if (locationCard != null) locationCard.SetActive(false);
     }
 
+    public IEnumerator ShowArrivalCard()
+    {
+        fadeImage.gameObject.SetActive(true);
+        fadeImage.raycastTarget = true;
+        SetFade(1f);
+        if (locationCard != null)
+        {
+            string mensagem = locationText != null ? locationText.text : string.Empty;
+            if (locationText != null)
+            {
+                locationText.text = string.Empty;
+                locationText.maxVisibleCharacters = int.MaxValue;
+            }
+            locationCard.SetActive(true);
+            if (locationText != null)
+            {
+                // Usa a mensagem editada na Hierarchy, sem depender do mesh estar pronto.
+                for (int i = 1; i <= mensagem.Length; i++)
+                {
+                    yield return WaitUnpaused(typingInterval);
+                    locationText.text = mensagem.Substring(0, i);
+                }
+            }
+            yield return WaitUnpaused(locationCardDuration);
+            locationCard.SetActive(false);
+            if (locationText != null) locationText.text = mensagem;
+        }
+        else yield return WaitUnpaused(darkDuration);
+        yield return FadeTo(0f);
+        fadeImage.raycastTarget = false;
+    }
+
     public void TrySleep()
     {
         if (running || Finished ||
@@ -90,29 +122,8 @@ public class SecaSleepSequence : MonoBehaviour
         fadeImage.raycastTarget = true;
 
         yield return FadeTo(1f);
-        if (locationCard != null)
-        {
-            string mensagem = locationText != null ? locationText.text : string.Empty;
-            if (locationText != null)
-            {
-                locationText.text = string.Empty;
-                locationText.maxVisibleCharacters = int.MaxValue;
-            }
-            locationCard.SetActive(true);
-            if (locationText != null)
-            {
-                // Usa a mensagem editada na Hierarchy, sem depender do mesh estar pronto.
-                for (int i = 1; i <= mensagem.Length; i++)
-                {
-                    yield return WaitUnpaused(typingInterval);
-                    locationText.text = mensagem.Substring(0, i);
-                }
-            }
-            yield return WaitUnpaused(locationCardDuration);
-            locationCard.SetActive(false);
-            if (locationText != null) locationText.text = mensagem;
-        }
-        else yield return new WaitForSeconds(darkDuration);
+        openingDialogue.HideMariquinhaForSecondWake();
+        yield return WaitUnpaused(darkDuration);
         yield return FadeTo(0f);
 
         fadeImage.raycastTarget = false;

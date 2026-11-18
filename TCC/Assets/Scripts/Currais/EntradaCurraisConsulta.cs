@@ -190,7 +190,6 @@ public partial class EntradaCurrais
     {
         if (!ConsultaDisponivel || Dados.curraisEtapaConsulta != 0) yield break;
         yield return Escurecer(1f);
-        yield return ChapterCard.Show("josefa-10");
         Dados.curraisEtapaConsulta = 1;
         AtualizarEstadoBusca();
         Posicionar(pai, paiAbrigo); Posicionar(mae, maeAbrigo);

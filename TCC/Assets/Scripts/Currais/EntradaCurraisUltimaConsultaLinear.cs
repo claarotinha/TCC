@@ -14,6 +14,7 @@ public partial class EntradaCurrais
     private IEnumerator PrepararMesaConsulta()
     {
         if (ViuConversaEntrada("consulta-familia-reunida") || Dados.curraisEscolhaConsulta != 0) yield break;
+        yield return ChapterCard.Show("josefa-10");
         yield return FalarPosto("Pai", "Vou perguntar contigo agora.", "Zefinha", "Vamos, painho.");
         if (Dados.curraisEscolhaAgua == 1)
             yield return FalarPosto("Mãe", "Eu vou com vocês.", "Luzia", "Eu guardo o lugar aqui.");

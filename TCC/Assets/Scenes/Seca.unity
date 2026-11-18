@@ -7199,6 +7199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SecaPreparationItem
   preparationRequest: {fileID: 1340838776}
   mostrarSprite: 1
+  ordemVisualMinima: 4
 --- !u!1 &920001030
 GameObject:
   m_ObjectHideFlags: 0
@@ -10079,6 +10080,7 @@ MonoBehaviour:
   portraitImage: {fileID: 0}
   playerMovement: {fileID: 331809455}
   mariquinha: {fileID: 910000001}
+  sleepSequence: {fileID: 1658920426}
   saidaMariquinha: {fileID: 1062988206}
   mariquinhaPortrait: {fileID: 0}
   mariPortrait: {fileID: 0}
@@ -14423,7 +14425,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 910000001}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 22100000, guid: a9b79948917c57128957fc999a5b19c8, type: 2}
   m_CullingMode: 0
@@ -16286,7 +16288,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_MaskInteraction: 0
   m_Sprite: {fileID: -7357890130657957232, guid: b55c391ab2def5b4e95d7d738446319c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -16935,6 +16937,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MirrorNotice
   mirror: {fileID: 1340118802}
   notice: {fileID: 9902000002}
+  allNotices:
+  - {fileID: 345507359}
+  - {fileID: 398691019}
+  - {fileID: 1445113071}
+  - {fileID: 9902000000}
   frames:
   - {fileID: 4549614853360203207, guid: bd0c1c85a5bb24d4b80533f7d7cce536, type: 3}
   - {fileID: 5256501292177914085, guid: 451ced98d99aab24d9493ef57ee27f94, type: 3}

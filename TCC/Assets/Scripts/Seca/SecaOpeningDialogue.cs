@@ -17,6 +17,7 @@ public class SecaOpeningDialogue : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private GameObject mariquinha;
     [SerializeField] private Transform saidaMariquinha;
+    [SerializeField] private SecaSleepSequence sleepSequence;
     [SerializeField] private Sprite mariquinhaPortrait;
     [SerializeField] private Sprite mariPortrait;
 
@@ -41,7 +42,7 @@ public class SecaOpeningDialogue : MonoBehaviour
     {
         "Ainda bem que você acordou, Zefinha! Painho tá uma fera! " +
         "Mainha já tá juntando as trouxas, hoje nós pega estrada. " +
-        "Eu vou ajudar eles lá fora, trata de levantar logo!",
+        "Trata de levantar logo!",
 
         "Quem é essa menina? Onde eu estou? Isso é um sonho?",
 
@@ -52,7 +53,7 @@ public class SecaOpeningDialogue : MonoBehaviour
         "É isso, vou dormir!"
     };
 
-    private void Start()
+    private IEnumerator Start()
     {
         if (dialogueUI == null || dialoguePanel == null ||
             characterNameText == null || dialogueText == null ||
@@ -64,7 +65,7 @@ public class SecaOpeningDialogue : MonoBehaviour
             );
 
             enabled = false;
-            return;
+            yield break;
         }
 
         playerBody = playerMovement.GetComponent<Rigidbody2D>();
@@ -82,7 +83,19 @@ public class SecaOpeningDialogue : MonoBehaviour
         }
 
         if (mariquinha != null)
+        {
+            foreach (Animator a in mariquinha.GetComponentsInChildren<Animator>(true)) a.enabled = false;
+            SpriteRenderer irma = mariquinha.GetComponent<SpriteRenderer>();
+            SpriteRenderer prota = playerMovement.GetComponent<SpriteRenderer>();
+            if (irma != null && prota != null && irma.bounds.size.y > .001f)
+            {
+                float pes = irma.bounds.min.y;
+                mariquinha.transform.localScale *= prota.bounds.size.y / irma.bounds.size.y;
+                mariquinha.transform.position += Vector3.up * (pes - irma.bounds.min.y);
+            }
             mariquinha.SetActive(true);
+        }
+        if (sleepSequence != null) yield return sleepSequence.ShowArrivalCard();
 
         dialogueUI.SetActive(true);
         dialoguePanel.SetActive(true);
@@ -121,14 +134,6 @@ public class SecaOpeningDialogue : MonoBehaviour
     {
         currentLine++;
 
-        // A irmã sai antes dos pensamentos de Mari.
-        if (currentLine == 1 && mariquinha != null)
-        {
-            dialogueRunning = false;
-            StartCoroutine(SairDoQuarto());
-            return;
-        }
-
         if (currentLine >= lines.Length)
         {
             FinishDialogue();
@@ -138,26 +143,9 @@ public class SecaOpeningDialogue : MonoBehaviour
         ShowLine();
     }
 
-    private IEnumerator SairDoQuarto()
+    public void HideMariquinhaForSecondWake()
     {
-        Transform irma = mariquinha.transform;
-        Vector3 destino = saidaMariquinha != null ? saidaMariquinha.position : irma.position + Vector3.right * 3f;
-        destino.y = irma.position.y;
-        destino.z = irma.position.z;
-        Animator animador = mariquinha.GetComponent<Animator>();
-        SpriteRenderer visual = mariquinha.GetComponent<SpriteRenderer>();
-        if (visual != null) visual.flipX = (destino.x - irma.position.x) * irma.lossyScale.x < 0f;
-        while (Vector3.Distance(irma.position, destino) > .02f)
-        {
-            bool andando = !PauseHelper.BlockInput() && Time.timeScale > 0f;
-            if (animador != null) animador.SetBool("IsWalking", andando);
-            if (andando) irma.position = Vector3.MoveTowards(irma.position, destino, 1.1f * Time.deltaTime);
-            yield return null;
-        }
-        if (animador != null) animador.SetBool("IsWalking", false);
-        mariquinha.SetActive(false);
-        dialogueRunning = true;
-        ShowLine();
+        if (mariquinha != null) mariquinha.SetActive(false);
     }
 
     private void ShowLine()
