@@ -20512,35 +20512,10 @@ MonoBehaviour:
   - personagem: Luzia
     texto: Vem. Eu fico perto de tu.
   aberturaEncerramento:
-  - personagem: "M\xE3e"
-    texto: "Sente aqui, Josefa. Vamos repetir o que sabemos, pra ningu\xE9m esquecer."
-  lugarEncerramento:
-  - personagem: Zefinha
-    texto: Lagoa do Meio. Foi o destino escrito no encaminhamento.
-  - personagem: Pai
-    texto: "Indica pra onde mandaram. Num prova que chegaram. Mas \xE9 um lugar por
-      onde come\xE7ar."
-  - personagem: "M\xE3e"
-    texto: "Eu vou guardar tamb\xE9m."
-  nomeEncerramento:
-  - personagem: Zefinha
-    texto: Nair Pereira. Confirmaram que era a mulher junto de Mariquinha.
-  - personagem: "M\xE3e"
-    texto: Nair Pereira. Eu num vou esquecer.
-  - personagem: Pai
-    texto: "Viram as duas andando. \xC9 isso que n\xF3s sabe desse momento."
-  faltaLugarEncerramento:
-  - personagem: Zefinha
-    texto: Eu num consegui confirmar pra onde o grupo foi.
-  - personagem: Pai
-    texto: "Ent\xE3o n\xF3s num inventa um lugar. Vamos perguntar de novo quando
-      puder."
-  faltaNomeEncerramento:
-  - personagem: Zefinha
-    texto: Eu num consegui confirmar o nome da mulher.
-  - personagem: "M\xE3e"
-    texto: "Ainda assim n\xF3s sabe que ela estava acompanhada naquele momento. Vamos
-      continuar perguntando."
+  - personagem: "Mãe"
+    texto: "Sente aqui, Josefa. Tu num precisa guardar tudo sozinha."
+  - personagem: "Zefinha"
+    texto: "Eu num quero esquecer ninguém."
   bentoEncerramento:
   - personagem: Zefinha
     texto: Eu num quero esquecer o nome dele. Bento.
@@ -20733,14 +20708,12 @@ MonoBehaviour:
   mariPlanoMemoria: {fileID: 4600000031}
   cameraPlanoMemoria: {fileID: 4600000033}
   paginasMemoria:
-  - personagem: "Mem\xF3ria de Zefinha"
-    texto: "Dias depois. Perguntamos aos que chegavam. Ningu\xE9m trouxe Severina."
-  - personagem: "Mem\xF3ria de Zefinha"
-    texto: "Meses depois. Sa\xEDmos de l\xE1. Painho guardava as perguntas. Mainha
-      guardava os nomes."
-  - personagem: "Mem\xF3ria de Zefinha"
-    texto: Mais tarde. Toda menina vista de longe fazia eu olhar outra vez. Nunca
-      era ela.
+  - personagem: "Memória de Zefinha"
+    texto: "Perguntamos aos que chegavam. Ninguém trouxe notícia de Severina."
+  - personagem: "Memória de Zefinha"
+    texto: "Saímos de lá. Painho guardava as perguntas. Mainha guardava os nomes."
+  - personagem: "Memória de Zefinha"
+    texto: "Toda menina vista de longe fazia eu olhar outra vez. O tempo passou, mas nós continuou procurando."
   pensamentoMemoria:
     personagem: Mari (pensamento)
     texto: A bisa viveu tudo isso. E continuou procurando. Eu preciso lembrar das
@@ -20752,14 +20725,7 @@ MonoBehaviour:
   - currais-dias-depois
   - currais-meses-depois
   - currais-mais-tarde
-  opcoesFimMemoria:
-  - "Rever as p\xE1ginas"
-  - Revisar as pistas
-  - Voltar ao abrigo
-  - Voltar ao menu
   objetivoPaginasMemoria: 
-  objetivoFimMemoria: 
-  tituloFimMemoria: Fim do Ato 2
   duracaoPaginaMemoria: 6
   leituraMinimaMemoria: 1.5
   duracaoCorteMemoria: 1.5
@@ -41657,7 +41623,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Toda vez que algu\xE9m chegava"
+  m_text: "Dias depois"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -42021,7 +41987,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Sa\xEDmos sem ela"
+  m_text: "Meses depois"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -42385,7 +42351,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ainda olho outra vez
+  m_text: "Mais tarde"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}

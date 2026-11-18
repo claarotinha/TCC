@@ -1,62 +1,56 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-// Cenas 19–21. Relembrar um assunto nunca inventa uma pista ou altera o destino da irmã.
 public partial class EntradaCurrais
 {
-    [Header("Encerramento — assuntos da família")]
-    [SerializeField] private Fala[] aberturaEncerramento, lugarEncerramento, nomeEncerramento;
-    [SerializeField] private Fala[] faltaLugarEncerramento, faltaNomeEncerramento, bentoEncerramento, fimFamiliaEncerramento;
+    [Header("Encerramento — família e nomes guardados")]
+    [SerializeField] private Fala[] aberturaEncerramento, bentoEncerramento, fimFamiliaEncerramento;
     [Header("Passagens do tempo — imagens existentes")]
     [SerializeField] private GameObject[] imagensPassagem;
 
-    private bool ReferenciasEncerramentoValidas()
-    {
-        foreach (Fala[] falas in new[] { aberturaEncerramento, lugarEncerramento, nomeEncerramento,
-            faltaLugarEncerramento, faltaNomeEncerramento, bentoEncerramento, fimFamiliaEncerramento })
-            if (!FalasValidas(falas)) return false;
-        return true;
-    }
+    private bool ReferenciasEncerramentoValidas() => FalasValidas(aberturaEncerramento) &&
+        FalasValidas(bentoEncerramento) && FalasValidas(fimFamiliaEncerramento);
 
-    private void MenuNomesFinais()
-    {
-        MostrarOpcoes("Família", "Ainda podemos conversar antes de descansar.",
-            new[] { "O lugar e o nome", "Bento e as lembranças", "Sair" },
-            new Action[] { MenuPistasFinais, MenuOutrosAssuntosFinais, FecharMenu });
-    }
+    private void MenuNomesFinais() => MostrarAssuntosFamiliaFinal();
 
-    private void MenuPistasFinais()
+    private void MostrarAssuntosFamiliaFinal()
     {
-        MostrarOpcoes("Família", "Vamos guardar o que foi confirmado, sem completar o que ainda falta.",
-            new[] { Dados.curraisDestinoConfirmado ? "O lugar: Lagoa do Meio" : "Ainda falta o lugar",
-                Dados.curraisIdentidadeConfirmada ? "O nome: Nair Pereira" : "Ainda falta o nome", "Voltar" },
-            new Action[] { () => Iniciar(RelembrarAssuntoFinal(1, Dados.curraisDestinoConfirmado ? lugarEncerramento : faltaLugarEncerramento)),
-                () => Iniciar(RelembrarAssuntoFinal(2, Dados.curraisIdentidadeConfirmada ? nomeEncerramento : faltaNomeEncerramento)), MenuNomesFinais });
-    }
-
-    private void MenuOutrosAssuntosFinais()
-    {
-        MostrarOpcoes("Família", "Bento também tem nome. Num vamos deixar ele se perder no meio disso tudo.",
-            new[] { "Lembrar Bento", "Guardar os nomes e descansar", "Sair" },
-            new Action[] { () => Iniciar(RelembrarAssuntoFinal(4, bentoEncerramento)),
-                () => Iniciar(FecharConversaFinal()), FecharMenu });
+        var rotulos = new List<string>(); var acoes = new List<Action>();
+        if ((Dados.curraisAssuntosEncerramento & 4) == 0)
+        { rotulos.Add("Lembrar Bento"); acoes.Add(() => Iniciar(RelembrarAssuntoFinal(4, bentoEncerramento))); }
+        if ((Dados.curraisAssuntosEncerramento & 8) == 0)
+        { rotulos.Add("Ficar junto da família"); acoes.Add(() => Iniciar(RelembrarAssuntoFinal(8, fimFamiliaEncerramento))); }
+        rotulos.Add("Sair"); acoes.Add(FecharMenu);
+        MostrarOpcoes("Família", string.Empty, rotulos.ToArray(), acoes.ToArray());
     }
 
     private IEnumerator RelembrarAssuntoFinal(int bit, Fala[] falas)
     {
+        if ((Dados.curraisAssuntosEncerramento & bit) != 0) yield break;
         yield return Dizer(falas);
         Dados.curraisAssuntosEncerramento |= bit;
-        Salvar(); MenuNomesFinais();
+        Salvar(); MostrarAssuntosFamiliaFinal();
+    }
+
+    private void MenuEsteiraFinal()
+    {
+        MostrarOpcoes("Mãe", string.Empty,
+            new[] { "Tentar descansar", "Conversar com a família", "Sair" },
+            new Action[] { () => Iniciar(FecharConversaFinal()), MenuNomesFinais, FecharMenu });
     }
 
     private IEnumerator FecharConversaFinal()
     {
-        if (Dados.curraisEtapaConsulta != 3) yield break;
-        yield return Dizer(fimFamiliaEncerramento);
+        if (Dados.curraisEtapaConsulta < 3 || !ViuConversaEntrada("consulta-relato-final")) yield break;
+        // Descansar não exige esgotar os assuntos opcionais.
+        yield return Escurecer(1f);
+        Posicionar(mari.transform, mariNoite); Posicionar(mae, maeNoite);
         Dados.curraisEtapaConsulta = 4;
         GameProgress.Instance.UnlockDiaryPage("currais-pistas-finais");
         AtualizarEstadoBusca(); Salvar();
+        yield return ExibirPaginasMemoria();
     }
 
     private void MostrarPassagemMemoria(int indice)

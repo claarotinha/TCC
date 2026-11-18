@@ -88,7 +88,7 @@ public partial class EntradaCurrais
         (Dados.curraisDestinoConfirmado ? lugarConsulta : naoConfirmado) + "\n" + rotuloNome + ": " +
         (Dados.curraisIdentidadeConfirmada ? nomeConsulta : naoConfirmado);
 
-    private Collider2D[] AlvosConsulta() => MemoriaDisponivel ? AlvosMemoria() : new[] { areaBaldeRaimundo, areaPanoLavagem, areaRaimundo, areaMae, areaPaiAbrigo, areaLuzia, areaAmanhecer, areaUltimaConsulta, areaSaidaConsulta, areaRetornoConsulta };
+    private Collider2D[] AlvosConsulta() => MemoriaDisponivel ? AlvosMemoria() : new[] { areaBaldeRaimundo, areaPanoLavagem, areaRaimundo, areaMae, areaPaiAbrigo, areaLuzia, areaAmanhecer, areaEsteiraNoite, areaUltimaConsulta, areaSaidaConsulta, areaRetornoConsulta };
 
     private void AtualizarConsulta()
     {
@@ -107,6 +107,7 @@ public partial class EntradaCurrais
         areaLuzia.enabled = etapa >= 1;
         areaSaidaConsulta.enabled = etapa == 2;
         areaRetornoConsulta.enabled = etapa >= 3;
+        areaEsteiraNoite.enabled = etapa == 0 || (etapa == 3 && ViuConversaEntrada("consulta-relato-final"));
         if (etapa == 0) { AtualizarMemoria(); return; } // A noite permanece até a interação da manhã.
         areaPanoLavagem.gameObject.SetActive(RetalhoDisponivelManha);
         areaPanoLavagem.enabled = RetalhoDisponivelManha;
@@ -174,7 +175,8 @@ public partial class EntradaCurrais
             if (area == areaBaldeRaimundo) Iniciar(PegarBaldeRaimundo());
             else if (area == areaPanoLavagem) Iniciar(RecolherRetalhoManha());
             else if (area == areaRaimundo) MenuRaimundoManha();
-            else if (area == areaAmanhecer) Iniciar(AmanhecerNoCampo());
+            else if (area == areaAmanhecer && Dados.curraisEtapaConsulta == 0) Iniciar(AmanhecerNoCampo());
+            else if (area == areaEsteiraNoite && Dados.curraisEtapaConsulta == 3) MenuEsteiraFinal();
             else if (area == areaUltimaConsulta) MenuUltimaConsulta();
             else if (area == areaSaidaConsulta) Iniciar(PedirSaida());
             else if (Dados.curraisEtapaConsulta == 3) Iniciar(ChegarAbrigoFinal());

@@ -14,8 +14,8 @@ public partial class EntradaCurrais
     [SerializeField] private Transform mariPlanoMemoria, cameraPlanoMemoria;
     [SerializeField] private Fala[] paginasMemoria;
     [SerializeField] private Fala pensamentoMemoria, chamadoPresente;
-    [SerializeField] private string[] idsPaginasMemoria, opcoesFimMemoria;
-    [SerializeField] private string objetivoPaginasMemoria, objetivoFimMemoria, tituloFimMemoria;
+    [SerializeField] private string[] idsPaginasMemoria;
+    [SerializeField] private string objetivoPaginasMemoria;
     [SerializeField, Min(1f)] private float duracaoPaginaMemoria = 8f;
     [SerializeField, Min(.1f)] private float leituraMinimaMemoria = 2.5f;
     [SerializeField, Min(.1f)] private float duracaoCorteMemoria = 1.5f;
@@ -40,9 +40,7 @@ public partial class EntradaCurrais
         valido &= FalasValidas(paginasMemoria) && paginasMemoria.Length == 3 &&
             FalaValida(pensamentoMemoria) && FalaValida(chamadoPresente);
         valido &= idsPaginasMemoria != null && idsPaginasMemoria.Length == 3 &&
-            opcoesFimMemoria != null && opcoesFimMemoria.Length == 4 &&
             imagensPassagem != null && imagensPassagem.Length == 3;
-        valido &= !string.IsNullOrWhiteSpace(tituloFimMemoria);
         if (imagensPassagem != null)
             foreach (GameObject imagem in imagensPassagem) valido &= ConferirReferencia(imagem, nameof(imagensPassagem));
         return valido;
@@ -59,7 +57,7 @@ public partial class EntradaCurrais
         objetivoTexto.text = string.Empty;
         areaPaginasMemoria.enabled = true;
         lacoMemoria.SetActive(planoMemoriaAtivo && Dados.curraisLacoGuardado);
-        documentoMemoria.SetActive(planoMemoriaAtivo && (TemItem(itemCanhoto) || Dados.curraisEscolhaPosto == 2));
+        documentoMemoria.SetActive(planoMemoriaAtivo && (TemItem(itemCanhoto) || TemItem(anotacaoPosto)));
     }
 
     private bool InteragirMemoria(Vector2 ponto)
@@ -67,15 +65,9 @@ public partial class EntradaCurrais
         foreach (Collider2D area in AlvosMemoria())
         {
             if (!area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
-
-            if (area == areaPaginasMemoria)
-            {
-                if (Dados.ato2Concluido) AbrirMenuFimMemoria();
-                else Iniciar(ExibirPaginasMemoria(false));
-            }
-            else if (area == areaLuzia) MenuAssuntoNPC("Luzia", "Tô aqui.", "Conversar sobre a família", () => Dizer(luziaRetornoFinal));
-            else MostrarOpcoes("Família", InformacoesConsulta(), opcoesRetornoConsulta, new Action[] {
-                () => Iniciar(RelatarInformacoes()), FecharMenu });
+            if (Dados.ato2Concluido) Iniciar(IrParaEpilogo());
+            else if (area == areaPaginasMemoria) MenuEsteiraFinal();
+            else MenuNomesFinais();
             return true;
         }
         return false;
@@ -145,42 +137,32 @@ public partial class EntradaCurrais
         }
     }
 
-    private IEnumerator ExibirPaginasMemoria(bool rever)
+    private IEnumerator ExibirPaginasMemoria()
     {
         if (!MemoriaDisponivel) yield break;
-        if (!rever)
-        {
-            Dados.curraisMemoriaIniciada = true;
-            Salvar();
-        }
+        Dados.curraisMemoriaIniciada = true;
+        Salvar();
         yield return Escurecer(1f);
         PrepararPlanoMemoria();
         yield return Escurecer(0f);
-        int inicio = rever ? 0 : Mathf.Clamp(Dados.curraisPaginaMemoria, 0, 3);
+        int inicio = Mathf.Clamp(Dados.curraisPaginaMemoria, 0, 3);
         for (int i = inicio; i < paginasMemoria.Length; i++)
         {
-            yield return ChapterCard.Show("josefa-" + (12 + i).ToString("00"), rever);
+            yield return ChapterCard.Show("josefa-" + (12 + i).ToString("00"));
             MostrarPassagemMemoria(i);
             yield return LerPaginaMemoria(paginasMemoria[i]);
-            if (!rever)
-            {
-                Dados.curraisPaginaMemoria = i + 1;
-                GameProgress.Instance.UnlockDiaryPage(idsPaginasMemoria[i]);
-                Salvar();
-            }
+            Dados.curraisPaginaMemoria = i + 1;
+            GameProgress.Instance.UnlockDiaryPage(idsPaginasMemoria[i]);
+            Salvar();
         }
         MostrarPassagemMemoria(-1);
         maoMemoria.SetActive(true);
         yield return LerPaginaMemoria(pensamentoMemoria);
         yield return CorteParaPresente();
-        if (!rever)
-        {
-            Dados.ato2Concluido = true;
-            GameProgress.Instance.UnlockDiaryPage("currais-memoria-encerrada");
-            Salvar(); // Mantém um checkpoint recuperável se a transição falhar.
-        }
-        if (!rever) yield return IrParaEpilogo();
-        else AbrirMenuFimMemoria();
+        Dados.ato2Concluido = true;
+        GameProgress.Instance.UnlockDiaryPage("currais-memoria-encerrada");
+        Salvar();
+        yield return IrParaEpilogo();
     }
 
     private IEnumerator CorteParaPresente()
@@ -216,24 +198,7 @@ public partial class EntradaCurrais
             yield return IrParaEpilogo();
             yield break;
         }
-        yield return ExibirPaginasMemoria(false);
-    }
-
-    private void AbrirMenuFimMemoria()
-    {
-        string[] opcoes = (string[])opcoesFimMemoria.Clone();
-        opcoes[2] = "Voltar ao presente";
-        MostrarOpcoes(tituloFimMemoria, InformacoesConsulta(), opcoes, new Action[] {
-            () => Iniciar(ExibirPaginasMemoria(true)),
-            () => Iniciar(RevisarPistasMemoria()),
-            () => Iniciar(IrParaEpilogo()),
-            VoltarAoMenuMemoria });
-    }
-
-    private IEnumerator RevisarPistasMemoria()
-    {
-        yield return Dizer(new[] { new Fala { personagem = "Memória", texto = InformacoesConsulta() } });
-        AbrirMenuFimMemoria();
+        yield return ExibirPaginasMemoria();
     }
 
     private IEnumerator IrParaEpilogo()
@@ -247,7 +212,6 @@ public partial class EntradaCurrais
         {
             CorFade(0f);
             Debug.LogError("Currais: a cena do epílogo não está habilitada na build.", this);
-            AbrirMenuFimMemoria();
             yield break;
         }
         yield return Escurecer(1f);
@@ -256,26 +220,6 @@ public partial class EntradaCurrais
         if (sistema != null && Dados.CanSave && !GameSaveSystem.IsRestoring)
             sistema.TrySaveCheckpoint(cenaEpilogo);
         SceneManager.LoadScene(cenaEpilogo);
-    }
-
-    private void VoltarAoAbrigoMemoria()
-    {
-        RestaurarApresentacaoMemoria();
-        FecharDialogo();
-        AtualizarEstadoBusca();
-        LiberarMari();
-    }
-
-    private void VoltarAoMenuMemoria()
-    {
-        Salvar();
-        UniversalPauseManager pausa = UniversalPauseManager.Instance;
-        if (pausa != null) pausa.GoToMainMenu();
-        else
-        {
-            Debug.LogError("Currais: o sistema de pausa existente não está disponível para voltar ao menu.", this);
-            VoltarAoAbrigoMemoria();
-        }
     }
 
     private void RestaurarApresentacaoMemoria()

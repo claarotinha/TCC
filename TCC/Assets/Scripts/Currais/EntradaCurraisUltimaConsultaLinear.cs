@@ -153,6 +153,8 @@ public partial class EntradaCurrais
                 "Pai", "Ouviram nós no portão. Sair, num deixaram.");
             RegistrarConversaEntrada("consulta-retorno-chegada"); Salvar();
         }
+        if (ViuConversaEntrada("consulta-relato-final"))
+            yield return DizerEntradaUmaVez("encerramento-abertura", aberturaEncerramento);
         MenuRelatoFinal();
     }
 
@@ -174,6 +176,8 @@ public partial class EntradaCurrais
         else if (TemItem(anotacaoPosto))
             yield return FalarPosto("Zefinha", "O papel tá comigo. O resto eu vou lembrando.", "Mãe", "Me conte também. Nós guarda junto.");
         else yield return FalarPosto("Zefinha", "Eu num quero esquecer o que disseram.", "Mãe", "Conte pra nós. Tu num precisa lembrar sozinha.");
-        RegistrarConversaEntrada("consulta-relato-final"); Salvar();
+        RegistrarConversaEntrada("consulta-relato-final");
+        AtualizarEstadoBusca(); Salvar();
+        yield return DizerEntradaUmaVez("encerramento-abertura", aberturaEncerramento);
     }
 }
