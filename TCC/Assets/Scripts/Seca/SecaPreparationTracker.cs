@@ -33,44 +33,86 @@ public class SecaPreparationTracker : MonoBehaviour
 
     private void Start()
     {
-        configured =
-            preparationRequest != null &&
-            requiredItems != null &&
-            requiredItems.Length > 0;
+        // O pedido e o contador pertencem ao mesmo objeto na Seca.
+        // Também aceita o pedido em outro objeto da mesma cena.
+        if (preparationRequest == null)
+            preparationRequest = GetComponent<SecaPreparationRequest>();
 
-        if (configured)
+        if (preparationRequest == null)
         {
-            for (int i = 0; i < requiredItems.Length; i++)
+            foreach (GameObject root in gameObject.scene.GetRootGameObjects())
             {
-                if (requiredItems[i] == null)
+                SecaPreparationRequest[] requests =
+                    root.GetComponentsInChildren<SecaPreparationRequest>(true);
+                foreach (SecaPreparationRequest request in requests)
                 {
-                    configured = false;
-                    break;
-                }
-
-                for (int j = 0; j < i; j++)
-                {
-                    if (requiredItems[i] == requiredItems[j])
-                        configured = false;
+                    if (preparationRequest != null)
+                    {
+                        ReportConfigurationError("há mais de um pedido na cena; selecione o correto no Inspector.");
+                        return;
+                    }
+                    preparationRequest = request;
                 }
             }
         }
 
-        if (!configured)
+        if (preparationRequest == null)
         {
-            if (objectiveText != null)
-                objectiveText.gameObject.SetActive(false);
-
-            Debug.LogError(
-                "SecaPreparationTracker: configure o pedido " +
-                "e os ItemData distintos.",
-                this
-            );
-
+            ReportConfigurationError("o pedido da mãe não foi encontrado nesta cena.");
             return;
         }
 
+        if (!ItemsAreValid())
+            RestorePreparationItems();
+
+        if (!ItemsAreValid())
+        {
+            ReportConfigurationError("faltam a cabaça vazia, o facão ou o pano no catálogo de itens.");
+            return;
+        }
+
+        configured = true;
         Refresh();
+    }
+
+    private bool ItemsAreValid()
+    {
+        if (requiredItems == null || requiredItems.Length != 3)
+            return false;
+
+        for (int i = 0; i < requiredItems.Length; i++)
+        {
+            if (requiredItems[i] == null)
+                return false;
+            for (int j = 0; j < i; j++)
+                if (requiredItems[i] == requiredItems[j])
+                    return false;
+        }
+        return true;
+    }
+
+    private void RestorePreparationItems()
+    {
+        InventorySaveCatalog catalog =
+            Resources.Load<InventorySaveCatalog>("InventorySaveCatalog");
+        if (catalog == null)
+            return;
+
+        // Identificadores estáveis dos mesmos assets usados pelos coletáveis.
+        // Não cria cópias de ItemData, pois o inventário compara suas referências.
+        if (catalog.TryGetItem("f0c6e92250400ab42871c53f7ebf8161", out ItemData cabaca) &&
+            catalog.TryGetItem("479344094161c0740a7c1d933ed41f9b", out ItemData facao) &&
+            catalog.TryGetItem("290faf3e464dc4c4f97c0f50675e5395", out ItemData pano))
+        {
+            requiredItems = new[] { cabaca, facao, pano };
+        }
+    }
+
+    private void ReportConfigurationError(string detail)
+    {
+        configured = false;
+        HideObjective();
+        Debug.LogError("SecaPreparationTracker: " + detail, this);
     }
 
     private void Update()

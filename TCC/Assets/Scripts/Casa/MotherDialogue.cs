@@ -64,23 +64,17 @@ public class MotherDialogue : MonoBehaviour
         }
     }
 
-    // A mesma fonte é usada antes e depois de encontrar o diário.
+    // Tamanho, fonte e margens vêm do Canvas, como nos diálogos da Seca.
     public void ConfigureDialogueText()
     {
         if (dialogueText != null)
         {
-            dialogueText.enableAutoSizing = false;
-            dialogueText.fontSize = 16f;
             dialogueText.alignment = TextAlignmentOptions.TopLeft;
-            dialogueText.margin = Vector4.zero;
         }
 
         if (characterNameText != null)
         {
-            characterNameText.enableAutoSizing = false;
-            characterNameText.fontSize = 15f;
             characterNameText.alignment = TextAlignmentOptions.TopLeft;
-            characterNameText.margin = Vector4.zero;
         }
     }
 
