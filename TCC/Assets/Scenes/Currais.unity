@@ -11875,7 +11875,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.249873, y: 0.0}
+  m_AnchoredPosition: {x: -1.249873, y: 0}
   m_SizeDelta: {x: -2.499833, y: -1.666667}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3000000007
@@ -11972,7 +11972,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.0, y: 0.0, z: 0.0, w: 0.0}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -12186,7 +12186,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -5.0, y: -1.666667}
+  m_SizeDelta: {x: -5, y: -1.666667}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3000000017
 CanvasRenderer:
@@ -12282,7 +12282,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.0, y: 0.0, z: 0.0, w: 0.0}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -12503,7 +12503,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 14.954167, y: 6.666667}
-  m_SizeDelta: {x: -60.516667, y: 23.048333}
+  m_SizeDelta: {x: -60.516666, y: 23.048332}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3000000030
 CanvasRenderer:
@@ -12621,8 +12621,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0, y: 0.0}
-  m_SizeDelta: {x: 0.0, y: 0.0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3000000035
 CanvasRenderer:
@@ -12696,8 +12696,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0.44, y: 1}
-  m_AnchoredPosition: {x: 17.083333, y: -4.166667}
-  m_SizeDelta: {x: -10.0, y: 9.583333}
+  m_AnchoredPosition: {x: 17.083332, y: -4.166667}
+  m_SizeDelta: {x: -10, y: 9.583333}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &3000000039
 CanvasRenderer:
@@ -12754,11 +12754,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.666667
-  m_fontSizeBase: 16.666667
+  m_fontSize: 16.666668
+  m_fontSizeBase: 16.666668
   m_fontWeight: 400
   m_enableAutoSizing: 0
-  m_fontSizeMin: 5.0
+  m_fontSizeMin: 5
   m_fontSizeMax: 6.666667
   m_fontStyle: 0
   m_HorizontalAlignment: 1
@@ -12834,7 +12834,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -5.0, y: -1.666667}
+  m_SizeDelta: {x: -5, y: -1.666667}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3000000043
 CanvasRenderer:
@@ -12930,7 +12930,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.0, y: 0.0, z: 0.0, w: 0.0}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -12972,8 +12972,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 15.1625, y: -20.833333}
-  m_SizeDelta: {x: -60.1, y: 23.364167}
+  m_AnchoredPosition: {x: 15.1625, y: -20.833332}
+  m_SizeDelta: {x: -60.1, y: 23.364166}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3000000047
 CanvasRenderer:
@@ -13289,12 +13289,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.0
-  m_fontSizeBase: 20.0
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
-  m_fontSizeMax: 24.0
+  m_fontSizeMax: 24
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -13328,7 +13328,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.0, y: 0.0, z: 0.0, w: 0.0}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -13466,7 +13466,7 @@ GameObject:
   - component: {fileID: 3000000069}
   - component: {fileID: 3000000070}
   m_Layer: 5
-  m_Name: Ajuda temporária - texto (F2)
+  m_Name: "Ajuda tempor\xE1ria - texto (F2)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13519,7 +13519,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "AJUDA TEMPORÁRIA — CURRAIS\nA próxima ação e os comandos aparecem aqui durante o jogo.\nF2: ocultar/mostrar ajuda."
+  m_text: "AJUDA TEMPOR\xC1RIA \u2014 CURRAIS\nA pr\xF3xima a\xE7\xE3o e os comandos
+    aparecem aqui durante o jogo.\nF2: ocultar/mostrar ajuda."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -13528,7 +13529,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4291949311
   m_fontColor: {r: 1, g: 0.95, b: 0.82, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -13546,7 +13547,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11
+  m_fontSize: 12
   m_fontSizeBase: 11
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13762,7 +13763,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -106.834208, y: -70.58875}
+  m_AnchoredPosition: {x: -106.834206, y: -70.58875}
   m_SizeDelta: {x: 33.515667, y: 38.525417}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3000000077
@@ -13839,8 +13840,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 15.162083, y: -48.333333}
-  m_SizeDelta: {x: -60.101667, y: 21.69375}
+  m_AnchoredPosition: {x: 15.162083, y: -48.333332}
+  m_SizeDelta: {x: -60.101665, y: 21.69375}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3000000081
 CanvasRenderer:
@@ -14174,8 +14175,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.72, y: 0}
   m_AnchorMax: {x: 0.99, y: 1}
-  m_AnchoredPosition: {x: -5.1e-05, y: -9.071662}
-  m_SizeDelta: {x: 4.2e-05, y: -53.102167}
+  m_AnchoredPosition: {x: -0.000045776367, y: -9.071663}
+  m_SizeDelta: {x: 0.000042, y: -53.102165}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3000000095
 GameObject:
@@ -14211,7 +14212,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.7, y: 1}
-  m_AnchoredPosition: {x: 2.5, y: -24.166667}
+  m_AnchoredPosition: {x: 2.5, y: -24.166668}
   m_SizeDelta: {x: -13.333333, y: -14.166667}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3000000097
@@ -14308,7 +14309,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.0, y: 0.0, z: -43.644029, w: 40.538229}
+  m_margin: {x: 0, y: 0, z: -43.644028, w: 40.53823}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -14354,7 +14355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.05, y: 0}
   m_AnchorMax: {x: 0.95, y: 0}
-  m_AnchoredPosition: {x: 6.161245, y: -14.166667}
+  m_AnchoredPosition: {x: 6.161255, y: -14.166672}
   m_SizeDelta: {x: -175.51125, y: 126.05375}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &3000000101
@@ -18765,8 +18766,6 @@ MonoBehaviour:
   nomeTexto: {fileID: 3000000040}
   falaTexto: {fileID: 3000000098}
   objetivoTexto: {fileID: 3000000070}
-  mostrarAjudaTemporaria: 1
-  painelAjudaTemporaria: {fileID: 9911880100}
   retrato: {fileID: 3000000078}
   fade: {fileID: 3000000092}
   conversarBotao: {fileID: 3000000032}
@@ -18943,32 +18942,32 @@ MonoBehaviour:
   - personagem: Zefinha
     texto: Eu digo a ela. Tome.
   meninoApresentacao:
-  - personagem: "Zefinha"
-    texto: "Desculpa. De longe, pensei que fosse minha irmã."
-  - personagem: "Criança"
-    texto: "Ela se parece contigo?"
-  - personagem: "Zefinha"
-    texto: "Parece. Separaram nós na entrada. Tu também tá esperando alguém?"
-  - personagem: "Criança"
-    texto: "Meu tio. Mainha disse que ele vinha com as ferramentas."
+  - personagem: Zefinha
+    texto: "Desculpa. De longe, pensei que fosse minha irm\xE3."
+  - personagem: "Crian\xE7a"
+    texto: Ela se parece contigo?
+  - personagem: Zefinha
+    texto: "Parece. Separaram n\xF3s na entrada. Tu tamb\xE9m t\xE1 esperando algu\xE9m?"
+  - personagem: "Crian\xE7a"
+    texto: Meu tio. Mainha disse que ele vinha com as ferramentas.
   meninoEspera:
-  - personagem: "Zefinha"
-    texto: "Tu espera aqui faz tempo?"
-  - personagem: "Criança"
-    texto: "Desde que o sol tava daquele lado."
-  - personagem: "Zefinha"
-    texto: "E tua mãe?"
-  - personagem: "Criança"
-    texto: "Tá na fila. Disse pra eu ficar onde meu tio pudesse me achar."
+  - personagem: Zefinha
+    texto: Tu espera aqui faz tempo?
+  - personagem: "Crian\xE7a"
+    texto: Desde que o sol tava daquele lado.
+  - personagem: Zefinha
+    texto: "E tua m\xE3e?"
+  - personagem: "Crian\xE7a"
+    texto: "T\xE1 na fila. Disse pra eu ficar onde meu tio pudesse me achar."
   meninoNome:
-  - personagem: "Zefinha"
-    texto: "Minha irmã se chama Maria Severina. Nós chama Mariquinha."
-  - personagem: "Criança"
-    texto: "Maria Severina…"
-  - personagem: "Zefinha"
-    texto: "Se tu ouvir chamarem, me avisa?"
-  - personagem: "Criança"
-    texto: "Aviso. Mas tem muita Maria aqui."
+  - personagem: Zefinha
+    texto: "Minha irm\xE3 se chama Maria Severina. N\xF3s chama Mariquinha."
+  - personagem: "Crian\xE7a"
+    texto: "Maria Severina\u2026"
+  - personagem: Zefinha
+    texto: Se tu ouvir chamarem, me avisa?
+  - personagem: "Crian\xE7a"
+    texto: Aviso. Mas tem muita Maria aqui.
   meninoSaida:
   - personagem: Zefinha
     texto: Eu preciso ir. Tomara que teu tio chegue.
@@ -19045,8 +19044,8 @@ MonoBehaviour:
   cabacaComMae: {fileID: 9955000032}
   cabacaComLuzia: {fileID: 9955000042}
   maePrecisaPano:
-  - personagem: "Mãe"
-    texto: "Preciso apoiar o braço dele. Aquele pano de Luzia deve servir."
+  - personagem: "M\xE3e"
+    texto: "Preciso apoiar o bra\xE7o dele. Aquele pano de Luzia deve servir."
   paiRepouso:
   - personagem: Pai
     texto: "Eu t\xF4 aqui, Josefa. O bra\xE7o d\xF3i, mas eu t\xF4 aqui."
@@ -19120,6 +19119,7 @@ MonoBehaviour:
   cabacaSeparadaMesa:
   - personagem: "Funcion\xE1ria"
     texto: "Separei a caba\xE7a de voc\xEAs. T\xE1 aqui na mesa, pode levar."
+  areaDistribuicaoAgua: {fileID: 9931000000}
   pessoasPresentes:
   - personagem: {fileID: 4100000094}
     desenho: {fileID: 4100000096}
@@ -19218,6 +19218,282 @@ MonoBehaviour:
     conversa:
     - personagem: "Escriv\xE3o do posto"
       texto: "Eu preciso terminar de conferir a rela\xE7\xE3o antes de ela seguir."
+  examePrimeiroCliqueLuzia: {fileID: 9933000000}
+  conversaIntimaPaiAbrigo:
+  - personagem: Zefinha
+    texto: "T\xE1 doendo muito?"
+  - personagem: Pai
+    texto: "D\xF3i. Mas agora t\xE1 mais firme."
+  - personagem: Zefinha
+    texto: Eu fiquei com medo quando ele bateu no senhor.
+  - personagem: Pai
+    texto: "Eu tamb\xE9m tive medo, minha filha."
+  - personagem: Zefinha
+    texto: O senhor teve?
+  - personagem: Pai
+    texto: "Tive. Num queria ver nenhuma de voc\xEAs longe de n\xF3s."
+  conversaIntimaMaeAbrigo:
+  - personagem: Zefinha
+    texto: "E se Mariquinha voltar e num encontrar n\xF3s?"
+  - personagem: "M\xE3e"
+    texto: "N\xF3s vai deixar algu\xE9m sabendo onde ficou."
+  - personagem: Zefinha
+    texto: "Ela num sabe o nome de ningu\xE9m aqui."
+  - personagem: "M\xE3e"
+    texto: "Ent\xE3o n\xF3s come\xE7a dizendo o dela. Pra quem puder escutar."
+  noticiaIrmaAbrigo:
+  - personagem: Luzia
+    texto: Teu pai ficou mais acomodado?
+  - personagem: Zefinha
+    texto: "Ficou. Mas separaram minha irm\xE3 de n\xF3s na entrada."
+  - personagem: Luzia
+    texto: Como ela se chama?
+  - personagem: Zefinha
+    texto: "Maria Severina. N\xF3s chama Mariquinha."
+  - personagem: Luzia
+    texto: "Vou perguntar na lavagem. Passa muita gente por l\xE1."
+  conviteAguaAbrigo:
+  - personagem: Luzia
+    texto: "Antes de seguir, vamos buscar uma pouca d\u2019\xE1gua. Teu pai precisa
+      beber."
+  - personagem: Zefinha
+    texto: "Ficaram com nossa caba\xE7a."
+  - personagem: Luzia
+    texto: "Separaram os recipientes na distribui\xE7\xE3o. Venha, eu vou contigo."
+  exameDistribuicao: {fileID: 9933000001}
+  autorizarCabacaAgua:
+  - personagem: Zefinha
+    texto: "Aquela caba\xE7a \xE9 nossa. Ficou na revista."
+  - personagem: "Funcion\xE1ria"
+    texto: Foi deixada aqui com as outras. Pode pegar.
+  - personagem: Zefinha
+    texto: "Meu pai t\xE1 ferido. N\xF3s veio buscar \xE1gua."
+  - personagem: "Funcion\xE1ria"
+    texto: "Espere sua vez. Quando eu chamar, traga ela pra c\xE1."
+  chamadaDistribuicaoAgua:
+  - personagem: "Funcion\xE1ria"
+    texto: "Menina da caba\xE7a. Pode chegar."
+  apresentacaoPorcaoAgua:
+  - personagem: "Funcion\xE1ria"
+    texto: "Segure por fora. Num encoste a boca dela no reservat\xF3rio."
+  - personagem: Retirante
+    texto: Ontem veio com gosto ruim.
+  - personagem: "Funcion\xE1ria"
+    texto: "Foi a \xE1gua que mandaram. N\xF3s tamb\xE9m bebe dela."
+  porcaoRecebidaAgua:
+  - personagem: Zefinha
+    texto: "S\xF3 isso?"
+  - personagem: "Funcion\xE1ria"
+    texto: Tem mais gente esperando, minha filha.
+  retornoAbrigoAgua:
+  - personagem: "M\xE3e"
+    texto: Conseguiram?
+  - personagem: Zefinha
+    texto: Uma pouca.
+  - personagem: Pai
+    texto: "Molhe s\xF3 minha boca, Zulema."
+  necessidadeAguaAbrigo:
+  - personagem: "M\xE3e"
+    texto: Agora sente um instante, Luzia. A senhora veio se escorando pelo caminho.
+  - personagem: Luzia
+    texto: "\xC9 s\xF3 uma fraqueza. J\xE1 passa."
+  ofertaAguaMae:
+  - personagem: Zefinha
+    texto: "Beba tamb\xE9m, mainha."
+  - personagem: "M\xE3e"
+    texto: Deixe pra tu, minha filha.
+  - personagem: Zefinha
+    texto: "A senhora t\xE1 tremendo."
+  ofertaAguaLuzia:
+  - personagem: Zefinha
+    texto: Tome, dona Luzia.
+  - personagem: Luzia
+    texto: "E tua m\xE3e?"
+  - personagem: "M\xE3e"
+    texto: Pode beber. Eu fico aqui com meu marido.
+  depoisAguaMae:
+  - personagem: "M\xE3e"
+    texto: "Obrigada. Agora n\xF3s vai perguntar pela tua irm\xE3."
+  - personagem: Luzia
+    texto: "Eu fico aqui com ele. Se algu\xE9m trouxer not\xEDcia, digo onde voc\xEAs
+      foram."
+  depoisAguaLuzia:
+  - personagem: Luzia
+    texto: "Obrigada, Josefa. Venha. Vamos perguntar pela tua irm\xE3."
+  - personagem: "M\xE3e"
+    texto: "Eu espero voc\xEAs aqui."
+  guardarCabacaAgua:
+  - personagem: Pai
+    texto: "Guarde a caba\xE7a, minha filha. N\xF3s ainda vai precisar dela."
+  esperaChamadaAgua: 2
+  alcanceRetornoAgua: 4
+  mostrarAjudaTemporaria: 1
+  painelAjudaTemporaria: {fileID: 9911880100}
+  exameAtendimentoBento: {fileID: 9934000060}
+  examePertencesBento: {fileID: 9934000061}
+  exameFamiliarBento: {fileID: 9934000063}
+  itemEmbrulhoBento: {fileID: 11400000, guid: 9b50d4ab62e94d4aa7e3c132f8c6100e, type: 2}
+  areaEmbrulhoBento: {fileID: 9934000062}
+  areaFamiliarBento: {fileID: 9934000103}
+  familiarBento: {fileID: 9934000101}
+  origemFamiliarBento: {fileID: 9934000111}
+  chegadaFamiliarBento: {fileID: 9934000121}
+  paiRetornoBento: {fileID: 9934000131}
+  arteFamiliarBento: {fileID: 9934000102}
+  marcadorFamiliarBento: {fileID: 9934000106}
+  familiarNoSepultamento: {fileID: 9934000203}
+  pausaAtendimentoBento: 2
+  tempoCaminhadaBento: 2.5
+  bentoReceberPano:
+  - personagem: Zefinha
+    texto: "Esse ainda t\xE1 limpo."
+  - personagem: Trabalhador
+    texto: Obrigado. Deixe comigo.
+  bentoReceberAgua:
+  - personagem: Zefinha
+    texto: Trouxe pra ele beber.
+  - personagem: Trabalhador
+    texto: "Deixe aqui, menina. Primeiro preciso ver como ele t\xE1."
+  bentoOuvirMae:
+  - personagem: Zefinha
+    texto: "Ele t\xE1 ouvindo n\xF3s, mainha?"
+  - personagem: "M\xE3e"
+    texto: Num sei, minha filha.
+  - personagem: Zefinha
+    texto: "Eu trouxe a \xE1gua."
+  - personagem: "M\xE3e"
+    texto: "Deixe com quem t\xE1 ajudando ele."
+  bentoOuvirLuzia:
+  - personagem: Zefinha
+    texto: "Ele t\xE1 ouvindo n\xF3s?"
+  - personagem: Luzia
+    texto: Num sei, Josefa. Vamos deixar o homem atender.
+  - personagem: Zefinha
+    texto: "Eu trouxe a \xE1gua."
+  - personagem: Luzia
+    texto: Deixe junto dele.
+  bentoPaiBuscarFamilia:
+  - personagem: Zefinha
+    texto: "Painho, a fam\xEDlia de Bento sabe que ele caiu?"
+  - personagem: Pai
+    texto: Vou chamar quem veio com ele.
+  - personagem: Zefinha
+    texto: "Diga onde n\xF3s t\xE1."
+  - personagem: Pai
+    texto: Eu digo.
+  bentoAtendimentoParou:
+  - personagem: Zefinha
+    texto: Por que o senhor parou?
+  bentoPerguntaMae:
+  - personagem: "M\xE3e"
+    texto: "Minha filha\u2026"
+  - personagem: Zefinha
+    texto: Ele num vai levantar?
+  bentoPerguntaLuzia:
+  - personagem: Luzia
+    texto: "Josefa\u2026"
+  - personagem: Zefinha
+    texto: Ele num vai levantar?
+  bentoNoticiaLinear:
+  - personagem: Pai
+    texto: Bento morreu, Josefa.
+  - personagem: Zefinha
+    texto: "Mas eu trouxe\u2026"
+  - personagem: Pai
+    texto: Eu sei, minha filha. Tu tentou ajudar.
+  - personagem: Zefinha
+    texto: "O servi\xE7o num parou."
+  - personagem: Pai
+    texto: Mandaram continuar.
+  bentoFicar:
+  - personagem: Zefinha
+    texto: Posso ficar aqui?
+  - personagem: ACOMPANHANTE
+    texto: Pode. Eu fico contigo.
+  bentoPerguntarFamilia:
+  - personagem: Zefinha
+    texto: Quem veio com ele?
+  - personagem: Pai
+    texto: "A fam\xEDlia t\xE1 ali, minha filha."
+  - personagem: Zefinha
+    texto: Eu num sei o que dizer.
+  - personagem: Pai
+    texto: Num precisa achar palavra agora.
+  bentoPertencesPedido:
+  - personagem: Trabalhador
+    texto: Isso aqui era de Bento.
+  - personagem: Zefinha
+    texto: Vai ficar com quem?
+  - personagem: Trabalhador
+    texto: "Com a fam\xEDlia. Pode levar at\xE9 eles?"
+  bentoPertencesRecusados:
+  - personagem: Zefinha
+    texto: Eu prefiro ficar aqui.
+  - personagem: Trabalhador
+    texto: "T\xE1 certo. Eu levo."
+  bentoPertencesEntregues:
+  - personagem: Zefinha
+    texto: Disseram que era dele.
+  - personagem: Familiar
+    texto: Era. Obrigada, menina.
+  bentoCabacaRecuperada:
+  - personagem: Zefinha
+    texto: "Nossa caba\xE7a\u2026"
+  - personagem: ACOMPANHANTE
+    texto: Pode guardar, minha filha.
+  bentoLembrarCabaca:
+  - personagem: ACOMPANHANTE
+    texto: "Josefa, nossa caba\xE7a ficou ali."
+  bentoAnuncioSaida:
+  - personagem: Pai
+    texto: "V\xE3o levar Bento agora."
+  bentoEsperar:
+  - personagem: Zefinha
+    texto: Espere um pouco.
+  - personagem: ACOMPANHANTE
+    texto: "N\xF3s espera."
+  bentoPermissaoSepultamento:
+  - personagem: Zefinha
+    texto: "Eu quero ir tamb\xE9m."
+  - personagem: Pai
+    texto: "N\xF3s vai acompanhar a fam\xEDlia."
+  - personagem: Fiscal
+    texto: "V\xE3o pelo caminho de fora. Depois voltem."
+  bentoReunirGrupo:
+  - personagem: Pai
+    texto: "Vamos juntos, Zulema. Luzia, venha com n\xF3s."
+  - personagem: "M\xE3e"
+    texto: Eu vou, minha filha.
+  - personagem: Luzia
+    texto: "Eu tamb\xE9m vou."
+  bentoSepultamentoInicio:
+  - personagem: ACOMPANHANTE
+    texto: Fique aqui comigo, Josefa.
+  bentoNomeSepultamento:
+  - personagem: Pai
+    texto: "Bento. N\xF3s num esquece teu nome."
+  bentoSepultamentoFamilia:
+  - personagem: Zefinha
+    texto: "Nem todo mundo p\xF4de vir?"
+  - personagem: Pai
+    texto: "Alguns ficaram no servi\xE7o."
+  bentoRetornoCruzes:
+  - personagem: Zefinha
+    texto: "Essas cruzes\u2026 tamb\xE9m s\xE3o de quem tava aqui?"
+  - personagem: "M\xE3e"
+    texto: "S\xE3o, minha filha."
+  - personagem: Zefinha
+    texto: Tem umas sem nome.
+  - personagem: Luzia
+    texto: "\xC0s vezes a fam\xEDlia nem chega a saber onde ficou."
+  - personagem: "M\xE3e"
+    texto: "Disseram que aqui n\xF3s ia encontrar socorro."
+  - personagem: Zefinha
+    texto: "E Mariquinha t\xE1 em algum lugar desses?"
+  - personagem: "M\xE3e"
+    texto: "N\xF3s ainda t\xE1 procurando tua irm\xE3."
+  - personagem: Pai
+    texto: Vamos voltar juntos.
   setorBusca: {fileID: 4300000000}
   areaRaimundo: {fileID: 4300000011}
   areaLavadeira: {fileID: 4300000023}
@@ -19240,49 +19516,51 @@ MonoBehaviour:
   reflexoZefinha: {fileID: 4300000048}
   sinalGuarda: {fileID: 4300000052}
   raimundoInicio:
-  - personagem: "Zefinha"
-    texto: "O senhor viu uma menina parecida comigo? Levaram ela naquele carro."
-  - personagem: "Homem"
-    texto: "Uma que vinha com uma mulher?"
-  - personagem: "Zefinha"
-    texto: "Eu num vi mulher nenhuma. Separaram nós antes."
-  - personagem: "Homem"
-    texto: "Vi uma menina como tu passando com uma. Tava viva, andando."
-  - personagem: "Zefinha"
-    texto: "Era ela?"
-  - personagem: "Homem"
-    texto: "Num sei te garantir. Vi de longe."
-  - personagem: "Zefinha"
-    texto: "E pra onde foram?"
-  - personagem: "Homem"
-    texto: "Num vi depois da passagem."
+  - personagem: Zefinha
+    texto: O senhor viu uma menina parecida comigo? Levaram ela naquele carro.
+  - personagem: Homem
+    texto: Uma que vinha com uma mulher?
+  - personagem: Zefinha
+    texto: "Eu num vi mulher nenhuma. Separaram n\xF3s antes."
+  - personagem: Homem
+    texto: Vi uma menina como tu passando com uma. Tava viva, andando.
+  - personagem: Zefinha
+    texto: Era ela?
+  - personagem: Homem
+    texto: Num sei te garantir. Vi de longe.
+  - personagem: Zefinha
+    texto: E pra onde foram?
+  - personagem: Homem
+    texto: Num vi depois da passagem.
   raimundoBando:
-  - personagem: "Zefinha"
-    texto: "Por que entrou no bando?"
-  - personagem: "Raimundo"
-    texto: "Achei que com uma arma ninguém mandava mais em mim."
-  - personagem: "Zefinha"
-    texto: "E ninguém mandava?"
-  - personagem: "Raimundo"
-    texto: "Mandava. E eu também mandei em quem num podia se defender."
-  - personagem: "Zefinha"
-    texto: "O senhor fez mal a essas pessoas?"
-  - personagem: "Raimundo"
-    texto: "Fiz. Num vou dizer que foi só coragem."
+  - personagem: Zefinha
+    texto: Por que entrou no bando?
+  - personagem: Raimundo
+    texto: "Achei que com uma arma ningu\xE9m mandava mais em mim."
+  - personagem: Zefinha
+    texto: "E ningu\xE9m mandava?"
+  - personagem: Raimundo
+    texto: "Mandava. E eu tamb\xE9m mandei em quem num podia se defender."
+  - personagem: Zefinha
+    texto: O senhor fez mal a essas pessoas?
+  - personagem: Raimundo
+    texto: "Fiz. Num vou dizer que foi s\xF3 coragem."
   raimundoMulher:
   - personagem: Raimundo
     texto: A voz eu conheci. O rosto foi de longe.
   - personagem: Raimundo
     texto: Quero falar com as lavadeiras antes de te dar um nome errado.
   raimundoSaida:
-  - personagem: "Zefinha"
-    texto: "Eu vou levar os panos. Se souber da menina, procure nós perto das esteiras."
-  - personagem: "Raimundo"
-    texto: "Vá pela passagem ao lado do tanque. Eu pergunto às mulheres da lavagem."
-  - personagem: "Zefinha"
-    texto: "Num esqueça. Maria Severina."
-  - personagem: "Raimundo"
-    texto: "Num esqueci."
+  - personagem: Zefinha
+    texto: "Eu vou levar os panos. Se souber da menina, procure n\xF3s perto das
+      esteiras."
+  - personagem: Raimundo
+    texto: "V\xE1 pela passagem ao lado do tanque. Eu pergunto \xE0s mulheres da
+      lavagem."
+  - personagem: Zefinha
+    texto: "Num esque\xE7a. Maria Severina."
+  - personagem: Raimundo
+    texto: Num esqueci.
   lavagemFalas:
   - personagem: Lavadeira
     texto: Trouxe o lote da mesa? Deixe aqui. Vou precisar que me ajude a separar.
@@ -19295,13 +19573,13 @@ MonoBehaviour:
   - personagem: Luzia
     texto: "N\xF3s pergunta mais quando terminar de ajudar."
   lembrancaCorpo:
-  - personagem: "Pai — lembrança"
+  - personagem: "Pai \u2014 lembran\xE7a"
     texto: "A terra tamb\xE9m num quis guardar o corpo dele."
   lembrancaComadre:
-  - personagem: "Pai — lembrança"
+  - personagem: "Pai \u2014 lembran\xE7a"
     texto: Se tu ouvir um assobio fininho no meio da mata...
   lembrancaAgua:
-  - personagem: "Pai — lembrança"
+  - personagem: "Pai \u2014 lembran\xE7a"
     texto: "Faz o cabra esquecer at\xE9 o pr\xF3prio nome."
   lembrancaRetorno:
   - personagem: Luzia
@@ -19410,14 +19688,14 @@ MonoBehaviour:
   - personagem: Zefinha
     texto: Obrigada, dona Luzia.
   paiAcomodado:
-  - personagem: "Mãe"
-    texto: "Isso. Segure aqui um instante."
-  - personagem: "Pai"
-    texto: "Devagar…"
-  - personagem: "Mãe"
-    texto: "Assim fica melhor?"
-  - personagem: "Pai"
-    texto: "Fica. Obrigado, minha filha."
+  - personagem: "M\xE3e"
+    texto: Isso. Segure aqui um instante.
+  - personagem: Pai
+    texto: "Devagar\u2026"
+  - personagem: "M\xE3e"
+    texto: Assim fica melhor?
+  - personagem: Pai
+    texto: Fica. Obrigado, minha filha.
   luziaCurral:
   - personagem: Zefinha
     texto: Por que chamam aqui de curral?
@@ -19428,14 +19706,15 @@ MonoBehaviour:
   - personagem: Luzia
     texto: Era o que muita gente pensava quando chegou.
   luziaSaida:
-  - personagem: "Zefinha"
-    texto: "Nós pode sair para procurar ela?"
-  - personagem: "Luzia"
-    texto: "Só deixam passar quem tem ordem."
-  - personagem: "Zefinha"
-    texto: "Mas ela tá sozinha."
-  - personagem: "Luzia"
-    texto: "Eu sei, minha filha. Nós vai perguntar por dentro primeiro. Na lavagem, nas filas… alguém pode ter visto."
+  - personagem: Zefinha
+    texto: "N\xF3s pode sair para procurar ela?"
+  - personagem: Luzia
+    texto: "S\xF3 deixam passar quem tem ordem."
+  - personagem: Zefinha
+    texto: "Mas ela t\xE1 sozinha."
+  - personagem: Luzia
+    texto: "Eu sei, minha filha. N\xF3s vai perguntar por dentro primeiro. Na lavagem,
+      nas filas\u2026 algu\xE9m pode ter visto."
   luziaIrma:
   - personagem: Zefinha
     texto: "A senhora viu minha irm\xE3? \xC9 parecida comigo."
@@ -19446,744 +19725,20 @@ MonoBehaviour:
   - personagem: Luzia
     texto: Vou perguntar na lavagem. Tem muita gente chegando por caminhos diferentes.
   objetivoPano: 
-  pedidoNomeInicio:
-  - personagem: "Zefinha"
-    texto: "Maria Severina. Minha irmã. Levaram ela com outro grupo antes de nós entrar."
-  - personagem: "Escrivão"
-    texto: "Sabe em qual carro?"
-  - personagem: "Zefinha"
-    texto: "Num sei. Eu vi ela indo embora."
-  pedidoNomeMae:
-  - personagem: "Mãe"
-    texto: "Nós chegou junto. Separaram minha menina de nós."
-  pedidoNomeLuzia:
-  - personagem: "Luzia"
-    texto: "A família acabou de chegar. A menina ficou no outro grupo."
-  pedidoNomeServico:
-  - personagem: "Escrivão"
-    texto: "Tenho os nomes dos grupos nestas folhas. Preciso terminar de conferir."
-  - personagem: "Zefinha"
-    texto: "O senhor pode procurar o dela?"
-  - personagem: "Escrivão"
-    texto: "Leve aquele lote de panos pra lavagem. Quando voltar, pergunte."
-  pedidoNomeProtestoMae:
-  - personagem: "Mãe"
-    texto: "Minha filha veio atrás da irmã."
-  pedidoNomeProtestoLuzia:
-  - personagem: "Luzia"
-    texto: "Ao menos anote o nome dela."
-  pedidoNomeFinal:
-  - personagem: "Escrivão"
-    texto: "Eu ouvi. Maria Severina. Agora leve os panos."
-  reencontroComDestino:
-  - personagem: "Zefinha"
-    texto: "Disseram que o carro foi pra Lagoa do Meio. Ainda preciso saber se ela chegou lá."
-  - personagem: "Criança"
-    texto: "Meu tio também vinha de longe. Mainha disse que viagem demora."
-  reencontroSemDestino:
-  - personagem: "Zefinha"
-    texto: "Fui perguntar na mesa. Mandaram eu levar os panos primeiro."
-  - personagem: "Criança"
-    texto: "E agora vão procurar?"
-  - personagem: "Zefinha"
-    texto: "Vou perguntar de novo."
-  canhotoIntervencao:
-  - personagem: "Fiscal"
-    texto: "Os papéis ficam. Já pegou os panos?"
-  canhotoDestino:
-  - personagem: "Zefinha"
-    texto: "Essa marca é do carro que levou o outro grupo?"
-  - personagem: "Fiscal"
-    texto: "É do encaminhamento."
-  - personagem: "Zefinha"
-    texto: "Pra onde levaram eles?"
-  - personagem: "Fiscal"
-    texto: "Lagoa do Meio. Está escrito aí."
-  - personagem: "Zefinha"
-    texto: "Minha irmã foi junto."
-  - personagem: "Fiscal"
-    texto: "Então leve o canhoto e pergunte lá. Agora siga."
-  canhotoGuardadoMae:
-  - personagem: "Zefinha"
-    texto: "Lagoa do Meio…"
-  - personagem: "Mãe"
-    texto: "Guarde esse papel, minha filha. Nós vai perguntar por ela."
-  canhotoGuardadoLuzia:
-  - personagem: "Zefinha"
-    texto: "Lagoa do Meio…"
-  - personagem: "Luzia"
-    texto: "Guarde. Esse papel pode ajudar quando nós perguntar."
-  areaRecebimentoLavagem: {fileID: 9933000033}
-  alcanceChegadaLavagem: 5
-  chegadaLavagemMae:
-  - personagem: "Mãe"
-    texto: "Deve ser aqui. Ela tá separando os lotes."
-  - personagem: "Zefinha"
-    texto: "Eu pergunto, mainha."
-  - personagem: "Mãe"
-    texto: "Eu fico contigo."
-  chegadaLavagemLuzia:
-  - personagem: "Luzia"
-    texto: "É aqui que ficam os panos."
-  - personagem: "Zefinha"
-    texto: "Será que foi ela quem viu a menina?"
-  - personagem: "Luzia"
-    texto: "Vamos perguntar."
-  loteLavagemOrientacao:
-  - personagem: "Zefinha"
-    texto: "O homem da mesa mandou trazer uns panos."
-  - personagem: "Lavadeira"
-    texto: "Pode deixar aqui, junto do tanque."
-  loteLavagemInicio:
-  - personagem: "Lavadeira"
-    texto: "Foi ele quem mandou tu trazer?"
-  - personagem: "Zefinha"
-    texto: "Disse que procurava minha irmã quando eu voltasse."
-  - personagem: "Lavadeira"
-    texto: "Sempre arranja mais uma coisa antes."
-  loteLavagemMae:
-  - personagem: "Mãe"
-    texto: "Separaram minha menina na entrada. Nós num sabe onde procurar."
-  loteLavagemLuzia:
-  - personagem: "Luzia"
-    texto: "Raimundo viu uma menina parecida com ela. Tava com uma mulher."
-  loteLavagemPista:
-  - personagem: "Lavadeira"
-    texto: "Passou uma aqui perguntando pelo carro de trás."
-  - personagem: "Zefinha"
-    texto: "O que ela perguntou?"
-  - personagem: "Lavadeira"
-    texto: "Se a mãe vinha nele."
-  - personagem: "Zefinha"
-    texto: "Mariquinha pode ter pensado que nós vinha atrás…"
-  - personagem: "Lavadeira"
-    texto: "Me ajude com estas enquanto nós conversa."
-  conversaLavagemIrma:
-  - personagem: "Zefinha"
-    texto: "A menina que passou aqui… tava chorando?"
-  - personagem: "Lavadeira"
-    texto: "Tava procurando a mãe no meio de quem chegava."
-  - personagem: "Zefinha"
-    texto: "E a mulher que tava com ela?"
-  - personagem: "Lavadeira"
-    texto: "Segurava a mão dela. Num ouvi o nome."
-  - personagem: "Zefinha"
-    texto: "Raimundo acha que conhece essa mulher."
-  - personagem: "Lavadeira"
-    texto: "Então deixe ele perguntar. Eu num sei te dizer quem era."
-  correcaoPilhaLavagem:
-  - personagem: "Lavadeira"
-    texto: "Esses são da outra pilha, minha filha."
-  conclusaoLavagem:
-  - personagem: "Lavadeira"
-    texto: "Pronto. Agora posso cuidar de cada lote."
-  - personagem: "Zefinha"
-    texto: "A senhora faz isso todo dia?"
-  - personagem: "Lavadeira"
-    texto: "Todo dia chega mais."
-  retalhoPedidoZefinha:
-  - personagem: "Zefinha"
-    texto: "Tem um pedacinho limpo que sobre? A alça abriu a mão de Raimundo."
-  - personagem: "Lavadeira"
-    texto: "Separei este. Pode levar pra ele."
-  retalhoOferecidoLavadeira:
-  - personagem: "Lavadeira"
-    texto: "Leve este retalho pra Raimundo. A alça do balde tá ferindo a mão dele."
-  - personagem: "Zefinha"
-    texto: "Ele continua carregando assim?"
-  - personagem: "Lavadeira"
-    texto: "Continua. Talvez isso ajude um pouco."
-  saidaLavagemMae:
-  - personagem: "Zefinha"
-    texto: "Vou guardar pra dar a Raimundo."
-  - personagem: "Mãe"
-    texto: "Guarde num canto limpo. Vamos juntas."
-  saidaLavagemLuzia:
-  - personagem: "Zefinha"
-    texto: "Vou guardar pra dar a Raimundo."
-  - personagem: "Luzia"
-    texto: "Venha. A passagem pro pátio é por aqui."
-  areaPanoLimpoApoio: {fileID: 9933000054}
-  alcanceLevarAguaPatio: 5
-  alcanceChegadaPatio: 7
-  patioChegadaMae:
-  - personagem: "Zefinha"
-    texto: "Botaram painho pra carregar?"
-  - personagem: "Mãe"
-    texto: "Eu vou falar com ele."
-  patioChegadaLuzia:
-  - personagem: "Zefinha"
-    texto: "É painho ali na carroça?"
-  - personagem: "Luzia"
-    texto: "É. Vamos chegar perto."
-  patioPaiAbertura:
-  - personagem: "Zefinha"
-    texto: "Painho, o senhor num devia tá levantando isso."
-  - personagem: "Pai"
-    texto: "Eu tô usando o outro braço."
-  - personagem: "Zefinha"
-    texto: "Mas tá doendo. Eu tô vendo."
-  patioProtestoMae:
-  - personagem: "Mãe"
-    texto: "Ele foi ferido na entrada. Precisa descansar."
-  patioProtestoLuzia:
-  - personagem: "Luzia"
-    texto: "Ele já avisou que num consegue carregar."
-  patioFiscalReplica:
-  - personagem: "Fiscal"
-    texto: "Tem carga esperando."
-  patioApresentarBento:
-  - personagem: "Zefinha"
-    texto: "E se ele num conseguir?"
-  - personagem: "Pai"
-    texto: "Josefa, fique perto. Num entre no meio dos carros."
-  - personagem: "Zefinha"
-    texto: "Aquele homem também tá passando mal."
-  - personagem: "Pai"
-    texto: "É Bento. Tá assim desde cedo."
-  patioPaiEntregaPano:
-  - personagem: "Pai"
-    texto: "Veja naquele apoio se tem alguma coisa pra nós beber."
-  - personagem: "Pai"
-    texto: "Leve esse pano também. Pergunte se serve lá."
-  - personagem: "Zefinha"
-    texto: "O senhor num vai precisar?"
-  - personagem: "Pai"
-    texto: "Aqui na minha mão ele num ajuda ninguém."
-  patioBentoAjuda:
-  - personagem: "Zefinha"
-    texto: "O senhor precisa de ajuda?"
-  - personagem: "Bento"
-    texto: "Só queria tomar um ar."
-  - personagem: "Zefinha"
-    texto: "Num pode sentar um pouco?"
-  - personagem: "Bento"
-    texto: "Quando eu paro, a carga fica."
-  - personagem: "Zefinha"
-    texto: "Eu posso chamar alguém."
-  - personagem: "Bento"
-    texto: "Veja se tem água, menina."
-  patioFiscalPedido:
-  - personagem: "Zefinha"
-    texto: "Deixe painho parar um pouco."
-  - personagem: "Fiscal"
-    texto: "Vá ficar com sua família."
-  - personagem: "Zefinha"
-    texto: "Eu tô falando dele."
-  - personagem: "Fiscal"
-    texto: "Eu ouvi."
-  patioApoioPedido:
-  - personagem: "Zefinha"
-    texto: "Tem água pros homens da carroça?"
-  - personagem: "Trabalhador"
-    texto: "Tem uma porção separada. Tu tem recipiente?"
-  - personagem: "Zefinha"
-    texto: "Tenho nossa cabaça."
-  - personagem: "Trabalhador"
-    texto: "Traga aqui."
-  - personagem: "Trabalhador"
-    texto: "E esse pano limpo? Pode deixar no apoio? Nós tá sem nenhum."
-  - personagem: "Zefinha"
-    texto: "Se alguém precisar, vai ter aqui?"
-  - personagem: "Trabalhador"
-    texto: "É pra isso."
-  patioAguaRecebida:
-  - personagem: "Trabalhador"
-    texto: "Segure firme. É pouca, mas dá pra levar."
-  - personagem: "Zefinha"
-    texto: "Vou levar pra eles."
-  patioPanoEntregue:
-  - personagem: "Zefinha"
-    texto: "Vou deixar dobrado aqui."
-  - personagem: "Trabalhador"
-    texto: "Obrigado, menina."
-  patioInseguranca:
-  - personagem: "Zefinha"
-    texto: "Eu num sei se isso vai ajudar."
-  - personagem: "ACOMPANHANTE"
-    texto: "Leve o que conseguiu. Nós fica perto deles."
-  patioLevarAgua:
-  - personagem: "Zefinha"
-    texto: "Painho, consegui água."
-  - personagem: "Pai"
-    texto: "Dê primeiro a Bento."
-  - personagem: "Zefinha"
-    texto: "Seu Bento?"
-  patioAntesQueda:
-  - personagem: "Fiscal"
-    texto: "Deixe de demora. Tem mais carro esperando."
-  - personagem: "Bento"
-    texto: "Eu num tô conseguindo…"
-  - personagem: "Zefinha"
-    texto: "Ele precisa parar."
-  - personagem: "Pai"
-    texto: "Bento, solte isso!"
-  patioDepoisQueda:
-  - personagem: "Pai"
-    texto: "O homem caiu!"
-  - personagem: "Fiscal"
-    texto: "Cada um no seu serviço."
-  - personagem: "Zefinha"
-    texto: "Mas ele tá no chão!"
-  patioPensamentoMari:
-  - personagem: "Mari — pensamento"
-    texto: "Eu tô aqui…"
-  - personagem: "Mari — pensamento"
-    texto: "Essa mão… é da bisa."
-  - personagem: "Mari — pensamento"
-    texto: "Mas eu tô sentindo."
-  patioReacaoMae:
-  - personagem: "Mãe"
-    texto: "Josefa, fique comigo."
-  - personagem: "Zefinha"
-    texto: "Mainha, nós pode ajudar?"
-  - personagem: "Mãe"
-    texto: "Vamos tentar. Traga a água."
-  patioReacaoLuzia:
-  - personagem: "Luzia"
-    texto: "Josefa. Olhe pra mim."
-  - personagem: "Zefinha"
-    texto: "Ele ainda pode ouvir nós?"
-  - personagem: "Luzia"
-    texto: "Vamos chegar perto. Traga a água."
-  patioAutorizarPano:
-  - personagem: "Trabalhador"
-    texto: "Menina, pegue o pano que tu deixou. Ainda tá limpo."
-  itemEmbrulhoBento: {fileID: 11400000, guid: 9b50d4ab62e94d4aa7e3c132f8c6100e, type: 2}
-  pausaAtendimentoBento: 2
-  tempoCaminhadaBento: 2.5
-  exameAtendimentoBento: {fileID: 9934000060}
-  examePertencesBento: {fileID: 9934000061}
-  exameFamiliarBento: {fileID: 9934000063}
-  areaEmbrulhoBento: {fileID: 9934000062}
-  areaFamiliarBento: {fileID: 9934000103}
-  familiarBento: {fileID: 9934000101}
-  origemFamiliarBento: {fileID: 9934000111}
-  chegadaFamiliarBento: {fileID: 9934000121}
-  paiRetornoBento: {fileID: 9934000131}
-  arteFamiliarBento: {fileID: 9934000102}
-  marcadorFamiliarBento: {fileID: 9934000106}
-  familiarNoSepultamento: {fileID: 9934000203}
-  bentoReceberPano:
-  - personagem: "Zefinha"
-    texto: "Esse ainda tá limpo."
-  - personagem: "Trabalhador"
-    texto: "Obrigado. Deixe comigo."
-  bentoReceberAgua:
-  - personagem: "Zefinha"
-    texto: "Trouxe pra ele beber."
-  - personagem: "Trabalhador"
-    texto: "Deixe aqui, menina. Primeiro preciso ver como ele tá."
-  bentoOuvirMae:
-  - personagem: "Zefinha"
-    texto: "Ele tá ouvindo nós, mainha?"
-  - personagem: "Mãe"
-    texto: "Num sei, minha filha."
-  - personagem: "Zefinha"
-    texto: "Eu trouxe a água."
-  - personagem: "Mãe"
-    texto: "Deixe com quem tá ajudando ele."
-  bentoOuvirLuzia:
-  - personagem: "Zefinha"
-    texto: "Ele tá ouvindo nós?"
-  - personagem: "Luzia"
-    texto: "Num sei, Josefa. Vamos deixar o homem atender."
-  - personagem: "Zefinha"
-    texto: "Eu trouxe a água."
-  - personagem: "Luzia"
-    texto: "Deixe junto dele."
-  bentoPaiBuscarFamilia:
-  - personagem: "Zefinha"
-    texto: "Painho, a família de Bento sabe que ele caiu?"
-  - personagem: "Pai"
-    texto: "Vou chamar quem veio com ele."
-  - personagem: "Zefinha"
-    texto: "Diga onde nós tá."
-  - personagem: "Pai"
-    texto: "Eu digo."
-  bentoAtendimentoParou:
-  - personagem: "Zefinha"
-    texto: "Por que o senhor parou?"
-  bentoPerguntaMae:
-  - personagem: "Mãe"
-    texto: "Minha filha…"
-  - personagem: "Zefinha"
-    texto: "Ele num vai levantar?"
-  bentoPerguntaLuzia:
-  - personagem: "Luzia"
-    texto: "Josefa…"
-  - personagem: "Zefinha"
-    texto: "Ele num vai levantar?"
-  bentoNoticiaLinear:
-  - personagem: "Pai"
-    texto: "Bento morreu, Josefa."
-  - personagem: "Zefinha"
-    texto: "Mas eu trouxe…"
-  - personagem: "Pai"
-    texto: "Eu sei, minha filha. Tu tentou ajudar."
-  - personagem: "Zefinha"
-    texto: "O serviço num parou."
-  - personagem: "Pai"
-    texto: "Mandaram continuar."
-  bentoFicar:
-  - personagem: "Zefinha"
-    texto: "Posso ficar aqui?"
-  - personagem: "ACOMPANHANTE"
-    texto: "Pode. Eu fico contigo."
-  bentoPerguntarFamilia:
-  - personagem: "Zefinha"
-    texto: "Quem veio com ele?"
-  - personagem: "Pai"
-    texto: "A família tá ali, minha filha."
-  - personagem: "Zefinha"
-    texto: "Eu num sei o que dizer."
-  - personagem: "Pai"
-    texto: "Num precisa achar palavra agora."
-  bentoPertencesPedido:
-  - personagem: "Trabalhador"
-    texto: "Isso aqui era de Bento."
-  - personagem: "Zefinha"
-    texto: "Vai ficar com quem?"
-  - personagem: "Trabalhador"
-    texto: "Com a família. Pode levar até eles?"
-  bentoPertencesRecusados:
-  - personagem: "Zefinha"
-    texto: "Eu prefiro ficar aqui."
-  - personagem: "Trabalhador"
-    texto: "Tá certo. Eu levo."
-  bentoPertencesEntregues:
-  - personagem: "Zefinha"
-    texto: "Disseram que era dele."
-  - personagem: "Familiar"
-    texto: "Era. Obrigada, menina."
-  bentoCabacaRecuperada:
-  - personagem: "Zefinha"
-    texto: "Nossa cabaça…"
-  - personagem: "ACOMPANHANTE"
-    texto: "Pode guardar, minha filha."
-  bentoLembrarCabaca:
-  - personagem: "ACOMPANHANTE"
-    texto: "Josefa, nossa cabaça ficou ali."
-  bentoAnuncioSaida:
-  - personagem: "Pai"
-    texto: "Vão levar Bento agora."
-  bentoEsperar:
-  - personagem: "Zefinha"
-    texto: "Espere um pouco."
-  - personagem: "ACOMPANHANTE"
-    texto: "Nós espera."
-  bentoPermissaoSepultamento:
-  - personagem: "Zefinha"
-    texto: "Eu quero ir também."
-  - personagem: "Pai"
-    texto: "Nós vai acompanhar a família."
-  - personagem: "Fiscal"
-    texto: "Vão pelo caminho de fora. Depois voltem."
-  bentoReunirGrupo:
-  - personagem: "Pai"
-    texto: "Vamos juntos, Zulema. Luzia, venha com nós."
-  - personagem: "Mãe"
-    texto: "Eu vou, minha filha."
-  - personagem: "Luzia"
-    texto: "Eu também vou."
-  bentoSepultamentoInicio:
-  - personagem: "ACOMPANHANTE"
-    texto: "Fique aqui comigo, Josefa."
-  bentoNomeSepultamento:
-  - personagem: "Pai"
-    texto: "Bento. Nós num esquece teu nome."
-  bentoSepultamentoFamilia:
-  - personagem: "Zefinha"
-    texto: "Nem todo mundo pôde vir?"
-  - personagem: "Pai"
-    texto: "Alguns ficaram no serviço."
-  bentoRetornoCruzes:
-  - personagem: "Zefinha"
-    texto: "Essas cruzes… também são de quem tava aqui?"
-  - personagem: "Mãe"
-    texto: "São, minha filha."
-  - personagem: "Zefinha"
-    texto: "Tem umas sem nome."
-  - personagem: "Luzia"
-    texto: "Às vezes a família nem chega a saber onde ficou."
-  - personagem: "Mãe"
-    texto: "Disseram que aqui nós ia encontrar socorro."
-  - personagem: "Zefinha"
-    texto: "E Mariquinha tá em algum lugar desses?"
-  - personagem: "Mãe"
-    texto: "Nós ainda tá procurando tua irmã."
-  - personagem: "Pai"
-    texto: "Vamos voltar juntos."
-  examePaiTrabalho: {fileID: 9933000050}
-  exameBentoTrabalho: {fileID: 9933000051}
-  exameFiscalTrabalho: {fileID: 9933000052}
-  exameApoioTrabalho: {fileID: 9933000053}
-  exameGuardaPassagem: {fileID: 9933000040}
-  guardaPassagemPergunta:
-  - personagem: "Zefinha"
-    texto: "É por aqui que chega no carregamento?"
-  - personagem: "Guarda"
-    texto: "É. Nada de mexer nos sacos."
-  guardaPassagemMae:
-  - personagem: "Mãe"
-    texto: "Nós vai encontrar meu marido."
-  guardaPassagemLuzia:
-  - personagem: "Luzia"
-    texto: "Nós só tá passando."
-  chamadaPassagemMae:
-  - personagem: "Mãe"
-    texto: "Josefa. Olhe pra mainha. Eu tô aqui contigo."
-  chamadaPassagemLuzia:
-  - personagem: "Luzia"
-    texto: "Josefa. Olhe pra mim. Nós ainda tá aqui."
-  reacaoCorpoPassagem:
-  - personagem: "Zefinha"
-    texto: "Tinha alguém ali na cerca."
-  - personagem: "ACOMPANHANTE"
-    texto: "Olhe de novo, Josefa. É a sombra do galho."
-  reacaoComadrePassagem:
-  - personagem: "Zefinha"
-    texto: "Eu escutei ela."
-  - personagem: "ACOMPANHANTE"
-    texto: "Eu escutei o guarda assobiar. Vem pelo lado de cá."
-  reacaoAguaPassagem:
-  - personagem: "Zefinha"
-    texto: "Eu vi Mariquinha."
-  - personagem: "ACOMPANHANTE"
-    texto: "Onde, minha filha?"
-  - personagem: "Zefinha"
-    texto: "Ali… agora num tá mais."
-  reacaoSemLendaPassagem:
-  - personagem: "Zefinha"
-    texto: "Por um instante eu perdi o caminho."
-  - personagem: "ACOMPANHANTE"
-    texto: "Vem. Eu fico perto de tu."
-  continuarPassagemMae:
-  - personagem: "Mãe"
-    texto: "Vamos encontrar teu pai."
-  - personagem: "Zefinha"
-    texto: "Fique perto de mim, mainha."
-  - personagem: "Mãe"
-    texto: "Eu fico."
-  continuarPassagemLuzia:
-  - personagem: "Luzia"
-    texto: "Teu pai tá no carregamento, logo adiante."
-  - personagem: "Zefinha"
-    texto: "Vamos."
-  exameLavadeiraLinear: {fileID: 9933000030}
-  examePilhaUso: {fileID: 9933000031}
-  examePilhaAtendimento: {fileID: 9933000032}
-  examePrimeiroRaimundo: {fileID: 9933000020}
-  alcanceComentarioRaimundo: 6
-  aproximacaoRaimundoMae:
-  - personagem: "Mãe"
-    texto: "Aquele homem tava perto da entrada."
-  - personagem: "Zefinha"
-    texto: "Vou perguntar se viu ela."
-  - personagem: "Mãe"
-    texto: "Diga o nome da tua irmã."
-  aproximacaoRaimundoLuzia:
-  - personagem: "Luzia"
-    texto: "Aquele homem tava aqui quando o carro passou."
-  - personagem: "Zefinha"
-    texto: "Será que viu Mariquinha?"
-  - personagem: "Luzia"
-    texto: "Pergunte. Eu espero contigo."
-  raimundoPrecisao:
-  - personagem: "Zefinha"
-    texto: "O que o senhor lembra da menina?"
-  - personagem: "Homem"
-    texto: "Do cabelo, do tamanho… Por isso olhei quando tu chegou."
-  - personagem: "Zefinha"
-    texto: "Mariquinha tem uma trança."
-  - personagem: "Homem"
-    texto: "Pode ser ela. Mas num quero que tu tome minha lembrança por certeza."
-  - personagem: "Zefinha"
-    texto: "Eu só queria saber se ela tá bem."
-  - personagem: "Homem"
-    texto: "Eu sei, menina."
-  raimundoAjuda:
-  - personagem: "Zefinha"
-    texto: "Me ajuda a encontrar essa mulher?"
-  - personagem: "Homem"
-    texto: "Posso perguntar na lavagem. Acho que conheço a voz dela."
-  - personagem: "Zefinha"
-    texto: "O senhor sabe o nome?"
-  - personagem: "Homem"
-    texto: "Primeiro preciso ter certeza."
-  - personagem: "Zefinha"
-    texto: "Então pergunte. Por favor."
-  - personagem: "Homem"
-    texto: "Vou perguntar."
-  raimundoApresentacao:
-  - personagem: "Zefinha"
-    texto: "Como o senhor se chama?"
-  - personagem: "Homem"
-    texto: "Raimundo. E tu?"
-  - personagem: "Zefinha"
-    texto: "Josefa. Minha irmã é Maria Severina. Nós chama Mariquinha."
-  - personagem: "Homem"
-    texto: "Vou guardar os dois nomes."
-  raimundoApresentacaoBreve:
-  - personagem: "Zefinha"
-    texto: "Se lembrar de alguma coisa, como eu encontro o senhor?"
-  - personagem: "Homem"
-    texto: "Pergunte por Raimundo."
-  - personagem: "Zefinha"
-    texto: "Eu sou Josefa. Minha irmã é Maria Severina."
-  - personagem: "Homem"
-    texto: "Vou perguntar por ela."
-  raimundoPassado:
-  - personagem: "Zefinha"
-    texto: "O senhor já conhecia esse lugar?"
-  - personagem: "Raimundo"
-    texto: "Conhecia o sertão do lado de fora. Aqui dentro é outra coisa."
-  - personagem: "Zefinha"
-    texto: "Andava por onde?"
-  - personagem: "Raimundo"
-    texto: "Andei com um bando de cangaço."
-  - personagem: "Zefinha"
-    texto: "O senhor era cangaceiro?"
-  - personagem: "Raimundo"
-    texto: "Era."
-  raimundoGuardas:
-  - personagem: "Zefinha"
-    texto: "E num pode enfrentar esses guardas?"
-  - personagem: "Raimundo"
-    texto: "Tu acha que eu saio daqui depois?"
-  - personagem: "Zefinha"
-    texto: "Num sei. Eles bateram em painho."
-  - personagem: "Raimundo"
-    texto: "Eu vi. Se eu puxo briga, quem fica pra ajudar ele?"
-  - personagem: "Zefinha"
-    texto: "Então nós fica sem fazer nada?"
-  - personagem: "Raimundo"
-    texto: "Perguntar por tua irmã num é fazer nada."
-  exameMeninoNomes: {fileID: 9933000010}
-  exameLataNomes: {fileID: 9933000011}
-  exameFolhasNomes: {fileID: 9933000012}
-  exameCanhotoNomes: {fileID: 9933000013}
-  exameDistribuicao: {fileID: 9933000001}
-  esperaChamadaAgua: 2
-  alcanceRetornoAgua: 4
-  autorizarCabacaAgua:
-  - personagem: "Zefinha"
-    texto: "Aquela cabaça é nossa. Ficou na revista."
-  - personagem: "Funcionária"
-    texto: "Foi deixada aqui com as outras. Pode pegar."
-  - personagem: "Zefinha"
-    texto: "Meu pai tá ferido. Nós veio buscar água."
-  - personagem: "Funcionária"
-    texto: "Espere sua vez. Quando eu chamar, traga ela pra cá."
-  chamadaDistribuicaoAgua:
-  - personagem: "Funcionária"
-    texto: "Menina da cabaça. Pode chegar."
-  apresentacaoPorcaoAgua:
-  - personagem: "Funcionária"
-    texto: "Segure por fora. Num encoste a boca dela no reservatório."
-  - personagem: "Retirante"
-    texto: "Ontem veio com gosto ruim."
-  - personagem: "Funcionária"
-    texto: "Foi a água que mandaram. Nós também bebe dela."
-  porcaoRecebidaAgua:
-  - personagem: "Zefinha"
-    texto: "Só isso?"
-  - personagem: "Funcionária"
-    texto: "Tem mais gente esperando, minha filha."
-  retornoAbrigoAgua:
-  - personagem: "Mãe"
-    texto: "Conseguiram?"
-  - personagem: "Zefinha"
-    texto: "Uma pouca."
-  - personagem: "Pai"
-    texto: "Molhe só minha boca, Zulema."
-  necessidadeAguaAbrigo:
-  - personagem: "Mãe"
-    texto: "Agora sente um instante, Luzia. A senhora veio se escorando pelo caminho."
-  - personagem: "Luzia"
-    texto: "É só uma fraqueza. Já passa."
-  ofertaAguaMae:
-  - personagem: "Zefinha"
-    texto: "Beba também, mainha."
-  - personagem: "Mãe"
-    texto: "Deixe pra tu, minha filha."
-  - personagem: "Zefinha"
-    texto: "A senhora tá tremendo."
-  ofertaAguaLuzia:
-  - personagem: "Zefinha"
-    texto: "Tome, dona Luzia."
-  - personagem: "Luzia"
-    texto: "E tua mãe?"
-  - personagem: "Mãe"
-    texto: "Pode beber. Eu fico aqui com meu marido."
-  depoisAguaMae:
-  - personagem: "Mãe"
-    texto: "Obrigada. Agora nós vai perguntar pela tua irmã."
-  - personagem: "Luzia"
-    texto: "Eu fico aqui com ele. Se alguém trouxer notícia, digo onde vocês foram."
-  depoisAguaLuzia:
-  - personagem: "Luzia"
-    texto: "Obrigada, Josefa. Venha. Vamos perguntar pela tua irmã."
-  - personagem: "Mãe"
-    texto: "Eu espero vocês aqui."
-  guardarCabacaAgua:
-  - personagem: "Pai"
-    texto: "Guarde a cabaça, minha filha. Nós ainda vai precisar dela."
-  examePrimeiroCliqueLuzia: {fileID: 9933000000}
-  conversaIntimaPaiAbrigo:
-  - personagem: "Zefinha"
-    texto: "Tá doendo muito?"
-  - personagem: "Pai"
-    texto: "Dói. Mas agora tá mais firme."
-  - personagem: "Zefinha"
-    texto: "Eu fiquei com medo quando ele bateu no senhor."
-  - personagem: "Pai"
-    texto: "Eu também tive medo, minha filha."
-  - personagem: "Zefinha"
-    texto: "O senhor teve?"
-  - personagem: "Pai"
-    texto: "Tive. Num queria ver nenhuma de vocês longe de nós."
-  conversaIntimaMaeAbrigo:
-  - personagem: "Zefinha"
-    texto: "E se Mariquinha voltar e num encontrar nós?"
-  - personagem: "Mãe"
-    texto: "Nós vai deixar alguém sabendo onde ficou."
-  - personagem: "Zefinha"
-    texto: "Ela num sabe o nome de ninguém aqui."
-  - personagem: "Mãe"
-    texto: "Então nós começa dizendo o dela. Pra quem puder escutar."
-  noticiaIrmaAbrigo:
-  - personagem: "Luzia"
-    texto: "Teu pai ficou mais acomodado?"
-  - personagem: "Zefinha"
-    texto: "Ficou. Mas separaram minha irmã de nós na entrada."
-  - personagem: "Luzia"
-    texto: "Como ela se chama?"
-  - personagem: "Zefinha"
-    texto: "Maria Severina. Nós chama Mariquinha."
-  - personagem: "Luzia"
-    texto: "Vou perguntar na lavagem. Passa muita gente por lá."
-  conviteAguaAbrigo:
-  - personagem: Luzia
-    texto: "Antes de seguir, vamos buscar uma pouca d’água. Teu pai precisa beber."
-  - personagem: Zefinha
-    texto: "Ficaram com nossa cabaça."
-  - personagem: Luzia
-    texto: "Separaram os recipientes na distribuição. Venha, eu vou contigo."
   apresentacaoLuziaInicio:
-  - personagem: "Mãe"
-    texto: "Com licença… tem algum canto onde a gente possa ficar?"
-  - personagem: "Mulher"
-    texto: "Tem um espaço aqui. Encoste ele desse lado."
-  - personagem: "Mãe"
-    texto: "Obrigada. Eu sou Zulema. Essa é Josefa."
-  - personagem: "Mulher"
-    texto: "Eu sou Luzia."
+  - personagem: "M\xE3e"
+    texto: "Com licen\xE7a\u2026 tem algum canto onde a gente possa ficar?"
+  - personagem: Mulher
+    texto: "Tem um espa\xE7o aqui. Encoste ele desse lado."
+  - personagem: "M\xE3e"
+    texto: "Obrigada. Eu sou Zulema. Essa \xE9 Josefa."
+  - personagem: Mulher
+    texto: Eu sou Luzia.
   apresentacaoLuziaDepoisDoNome:
-  - personagem: "Luzia"
-    texto: "Tenho um pano limpo ali. Pode servir de apoio."
-  - personagem: "Mãe"
-    texto: "Josefa, traga pra mim."
+  - personagem: Luzia
+    texto: Tenho um pano limpo ali. Pode servir de apoio.
+  - personagem: "M\xE3e"
+    texto: Josefa, traga pra mim.
   apresentacaoLuziaTardia:
   - personagem: "M\xE3e"
     texto: "A senhora j\xE1 ajudou tanto\u2026 e eu nem perguntei seu nome."
@@ -20211,25 +19766,27 @@ MonoBehaviour:
   paiSaidaConsulta: {fileID: 4500000044}
   maeSaidaConsulta: {fileID: 4500000046}
   manhaOrdens:
-  - personagem: "Fiscal"
-    texto: "Essa relação já tinha que ter seguido ontem."
-  - personagem: "Cabo"
-    texto: "Então faça seguir."
-  - personagem: "Pai"
-    texto: "Vim perguntar pela minha filha."
-  - personagem: "Fiscal"
-    texto: "Pergunte na mesa. Aqui eu tô fechando carga."
-  - personagem: "Pai"
-    texto: "Foi de um lugar pro outro que ela sumiu."
-  - personagem: "Zefinha (em pensamento)"
-    texto: "Num é a sombra que fecha o portão. É a mão dele."
+  - personagem: Fiscal
+    texto: "Essa rela\xE7\xE3o j\xE1 tinha que ter seguido ontem."
+  - personagem: Cabo
+    texto: "Ent\xE3o fa\xE7a seguir."
+  - personagem: Pai
+    texto: Vim perguntar pela minha filha.
+  - personagem: Fiscal
+    texto: "Pergunte na mesa. Aqui eu t\xF4 fechando carga."
+  - personagem: Pai
+    texto: Foi de um lugar pro outro que ela sumiu.
+  - personagem: Zefinha (em pensamento)
+    texto: "Num \xE9 a sombra que fecha o port\xE3o. \xC9 a m\xE3o dele."
   consultaEscrivao:
-  - personagem: "Escrivão"
-    texto: "Posso conferir o destino daquele grupo na relação. Ou chamar a trabalhadora que conhece a mulher."
-  - personagem: "Zefinha"
-    texto: "Num pode fazer os dois?"
-  - personagem: "Escrivão"
-    texto: "A relação vai seguir agora. A trabalhadora também tá sendo chamada. Consigo tentar uma dessas coisas antes."
+  - personagem: "Escriv\xE3o"
+    texto: "Posso conferir o destino daquele grupo na rela\xE7\xE3o. Ou chamar a
+      trabalhadora que conhece a mulher."
+  - personagem: Zefinha
+    texto: Num pode fazer os dois?
+  - personagem: "Escriv\xE3o"
+    texto: "A rela\xE7\xE3o vai seguir agora. A trabalhadora tamb\xE9m t\xE1 sendo
+      chamada. Consigo tentar uma dessas coisas antes."
   consultaDestino:
   - personagem: Zefinha
     texto: Eu preciso ter certeza pra onde mandaram aquele grupo.
@@ -20243,16 +19800,17 @@ MonoBehaviour:
   - personagem: Pai
     texto: "Deixe eu olhar tamb\xE9m."
   consultaNome:
-  - personagem: "Zefinha"
-    texto: "A senhora conhece a mulher que tava com minha irmã?"
-  - personagem: "Trabalhadora"
-    texto: "Nair Pereira. Eu trabalhei com ela antes dessa seca. Vi a menina com ela, sim. A pequena perguntava pelos pais o tempo todo."
-  - personagem: "Zefinha"
-    texto: "A senhora tem certeza do sobrenome?"
-  - personagem: "Trabalhadora"
-    texto: "Pereira. Isso eu tenho. Pra onde chegaram depois eu num vou saber jurar."
-  - personagem: "Pai"
-    texto: "Obrigado. Por dizer o que viu."
+  - personagem: Zefinha
+    texto: "A senhora conhece a mulher que tava com minha irm\xE3?"
+  - personagem: Trabalhadora
+    texto: Nair Pereira. Eu trabalhei com ela antes dessa seca. Vi a menina com ela,
+      sim. A pequena perguntava pelos pais o tempo todo.
+  - personagem: Zefinha
+    texto: A senhora tem certeza do sobrenome?
+  - personagem: Trabalhadora
+    texto: Pereira. Isso eu tenho. Pra onde chegaram depois eu num vou saber jurar.
+  - personagem: Pai
+    texto: Obrigado. Por dizer o que viu.
   saidaRecusada:
   - personagem: Pai
     texto: Eu trabalhei. Fiz o que mandaram. Agora deixe eu procurar minha menina.
@@ -20269,28 +19827,31 @@ MonoBehaviour:
   - personagem: "M\xE3e"
     texto: "N\xF3s vai continuar perguntando. Mas venha pra perto de n\xF3s agora."
   retornoDuasPistas:
-  - personagem: "Zefinha"
-    texto: "Lagoa do Meio é o lugar indicado. Nair Pereira foi a mulher vista com Mariquinha."
-  - personagem: "Luzia"
-    texto: "E disseram se chegaram lá?"
-  - personagem: "Zefinha"
-    texto: "Num conseguiram confirmar. Só que ela tava viva quando passou com essa mulher."
-  - personagem: "Pai"
-    texto: "Quando deixarem nós sair, nós começa por aí."
+  - personagem: Zefinha
+    texto: "Lagoa do Meio \xE9 o lugar indicado. Nair Pereira foi a mulher vista
+      com Mariquinha."
+  - personagem: Luzia
+    texto: "E disseram se chegaram l\xE1?"
+  - personagem: Zefinha
+    texto: "Num conseguiram confirmar. S\xF3 que ela tava viva quando passou com
+      essa mulher."
+  - personagem: Pai
+    texto: "Quando deixarem n\xF3s sair, n\xF3s come\xE7a por a\xED."
   retornoDestino:
-  - personagem: "Zefinha"
-    texto: "Lagoa do Meio. Foi o lugar indicado pro grupo. O nome da mulher eu num consegui confirmar."
-  - personagem: "Luzia"
-    texto: "Nós pode perguntar por quem veio de lá."
-  - personagem: "Mãe"
-    texto: "Um lugar também é começo."
+  - personagem: Zefinha
+    texto: Lagoa do Meio. Foi o lugar indicado pro grupo. O nome da mulher eu num
+      consegui confirmar.
+  - personagem: Luzia
+    texto: "N\xF3s pode perguntar por quem veio de l\xE1."
+  - personagem: "M\xE3e"
+    texto: "Um lugar tamb\xE9m \xE9 come\xE7o."
   retornoNome:
-  - personagem: "Zefinha"
-    texto: "Nair Pereira. Foi quem tava com ela. Eu num sei pra onde chegaram."
-  - personagem: "Luzia"
-    texto: "Esse nome eu guardo também."
-  - personagem: "Pai"
-    texto: "Alguém há de conhecer."
+  - personagem: Zefinha
+    texto: Nair Pereira. Foi quem tava com ela. Eu num sei pra onde chegaram.
+  - personagem: Luzia
+    texto: "Esse nome eu guardo tamb\xE9m."
+  - personagem: Pai
+    texto: "Algu\xE9m h\xE1 de conhecer."
   retornoLaco:
   - personagem: Zefinha
     texto: "Meu caderno t\xE1 comigo. Vou guardar o que conseguimos saber."
@@ -20344,8 +19905,8 @@ MonoBehaviour:
   - personagem: "Escriv\xE3o"
     texto: Mesmo sem o papel, eu escuto. Diga o que precisa confirmar.
   retornoAbrigoOrientacao:
-  - personagem: "Mãe"
-    texto: "Luzia ficou no abrigo. Vamos voltar pra perto dela."
+  - personagem: "M\xE3e"
+    texto: Luzia ficou no abrigo. Vamos voltar pra perto dela.
   luziaConsultaFinal:
   - personagem: Luzia
     texto: "Eu guardo o lugar de voc\xEAs. Teu pai ainda tem pergunta pra fazer naquela
@@ -20406,10 +19967,10 @@ MonoBehaviour:
   - personagem: Luzia
     texto: "Vamos contar o que n\xF3s viu, Josefa."
   quartoSemCabaca:
-  - personagem: "Trabalhadora"
-    texto: "Preciso de um recipiente vazio para buscar água."
-  - personagem: "Trabalhadora"
-    texto: "Se tu puder emprestar, eu devolvo."
+  - personagem: Trabalhadora
+    texto: "Preciso de um recipiente vazio para buscar \xE1gua."
+  - personagem: Trabalhadora
+    texto: Se tu puder emprestar, eu devolvo.
   caboQuartoFalas:
   - personagem: Cabo
     texto: "J\xE1 viu quem t\xE1 aqui. Deixe o atendimento seguir."
@@ -20472,15 +20033,15 @@ MonoBehaviour:
   - personagem: Lavadeira
     texto: Separei um retalho limpo ali pra tu.
   lavagemUsoRecebido:
-  - personagem: "Zefinha"
-    texto: "Estes ficam aqui?"
-  - personagem: "Lavadeira"
-    texto: "Isso. Os do atendimento ficam separados, do outro lado."
+  - personagem: Zefinha
+    texto: Estes ficam aqui?
+  - personagem: Lavadeira
+    texto: Isso. Os do atendimento ficam separados, do outro lado.
   lavagemAtendimentoRecebido:
-  - personagem: "Zefinha"
-    texto: "Vou deixar estes longe dos outros."
-  - personagem: "Lavadeira"
-    texto: "Certo. Falta só o lote de uso."
+  - personagem: Zefinha
+    texto: Vou deixar estes longe dos outros.
+  - personagem: Lavadeira
+    texto: "Certo. Falta s\xF3 o lote de uso."
   luziaAntesRaimundo:
   - personagem: Luzia
     texto: Aquele homem tava perto dos baldes quando o carro passou.
@@ -20514,10 +20075,10 @@ MonoBehaviour:
   - personagem: Luzia
     texto: Vem. Eu fico perto de tu.
   aberturaEncerramento:
-  - personagem: "Mãe"
-    texto: "Sente aqui, Josefa. Tu num precisa guardar tudo sozinha."
-  - personagem: "Zefinha"
-    texto: "Eu num quero esquecer ninguém."
+  - personagem: "M\xE3e"
+    texto: Sente aqui, Josefa. Tu num precisa guardar tudo sozinha.
+  - personagem: Zefinha
+    texto: "Eu num quero esquecer ningu\xE9m."
   bentoEncerramento:
   - personagem: Zefinha
     texto: Eu num quero esquecer o nome dele. Bento.
@@ -20594,17 +20155,18 @@ MonoBehaviour:
   - {fileID: 9992000022}
   - {fileID: 9992000032}
   amanhecerFamilia:
-  - personagem: "Mãe"
-    texto: "Já tão chamando lá fora. Tu conseguiu descansar um pouquinho?"
-  - personagem: "Zefinha"
-    texto: "Eu pensei que ia ouvir Mariquinha acordando do meu lado."
-  - personagem: "Mãe"
-    texto: "Eu também. O lugar dela continua aqui."
-  - personagem: "Pai"
-    texto: "Raimundo ficou de perguntar pela mulher. Antes de chamarem ele pro serviço, ainda dá pra conversar."
+  - personagem: "M\xE3e"
+    texto: "J\xE1 t\xE3o chamando l\xE1 fora. Tu conseguiu descansar um pouquinho?"
+  - personagem: Zefinha
+    texto: Eu pensei que ia ouvir Mariquinha acordando do meu lado.
+  - personagem: "M\xE3e"
+    texto: "Eu tamb\xE9m. O lugar dela continua aqui."
+  - personagem: Pai
+    texto: "Raimundo ficou de perguntar pela mulher. Antes de chamarem ele pro servi\xE7o,
+      ainda d\xE1 pra conversar."
   baldeAindaSemPano:
-  - personagem: "Raimundo"
-    texto: "Ainda falta enrolar o pano na alça. Pode ficar com ele enquanto ajeita."
+  - personagem: Raimundo
+    texto: "Ainda falta enrolar o pano na al\xE7a. Pode ficar com ele enquanto ajeita."
   baldeRaimundoItem: {fileID: 11400000, guid: b11e09ebfa2649e9bcdebf9897576196, type: 2}
   baldeProtegidoItem: {fileID: 11400000, guid: ecc5ce58a0624777a7649e4462b72229, type: 2}
   combinacaoBalde: {fileID: 11400000, guid: 319b55230cb740d0bf923ad305ab076a, type: 2}
@@ -20617,12 +20179,12 @@ MonoBehaviour:
     texto: "Pode. Pegue o balde aqui do lado, vazio. Enrole o pano na parte que pega
       na m\xE3o."
   baldeDevolvidoFalas:
-  - personagem: "Raimundo"
-    texto: "Assim num corta tanto. Obrigado, Josefa."
-  - personagem: "Zefinha"
-    texto: "Agora o senhor consegue deixar um pouco esse peso?"
-  - personagem: "Raimundo"
-    texto: "Consigo apoiar aqui enquanto nós conversa."
+  - personagem: Raimundo
+    texto: Assim num corta tanto. Obrigado, Josefa.
+  - personagem: Zefinha
+    texto: Agora o senhor consegue deixar um pouco esse peso?
+  - personagem: Raimundo
+    texto: "Consigo apoiar aqui enquanto n\xF3s conversa."
   nomeRaimundoFalas:
   - personagem: Raimundo
     texto: "Falei com outra lavadeira. Nair Pereira. Ela confirmou que era a mulher
@@ -20650,18 +20212,18 @@ MonoBehaviour:
   panoUsoEntregue: {fileID: 9807000030}
   panoAtendimentoEntregue: {fileID: 9807000130}
   instrucoesLavagem:
-  - personagem: "Zefinha"
-    texto: "Essas aqui têm sangue…"
-  - personagem: "Lavadeira"
-    texto: "Vieram do atendimento. Ficam daquele lado."
-  - personagem: "Zefinha"
-    texto: "E estas?"
-  - personagem: "Lavadeira"
-    texto: "São de uso. Deixe à esquerda, longe das outras."
-  - personagem: "Zefinha"
-    texto: "Num pode lavar tudo junto?"
-  - personagem: "Lavadeira"
-    texto: "Num pode. Com o pouco que nós tem, ainda precisa cuidar disso."
+  - personagem: Zefinha
+    texto: "Essas aqui t\xEAm sangue\u2026"
+  - personagem: Lavadeira
+    texto: Vieram do atendimento. Ficam daquele lado.
+  - personagem: Zefinha
+    texto: E estas?
+  - personagem: Lavadeira
+    texto: "S\xE3o de uso. Deixe \xE0 esquerda, longe das outras."
+  - personagem: Zefinha
+    texto: Num pode lavar tudo junto?
+  - personagem: Lavadeira
+    texto: "Num pode. Com o pouco que n\xF3s tem, ainda precisa cuidar disso."
   tiraPanoAutorizada:
   - personagem: Lavadeira
     texto: "Pode levar esse retalho limpo. Raimundo tava precisando proteger a al\xE7a
@@ -20672,26 +20234,26 @@ MonoBehaviour:
   - personagem: Luzia
     texto: "N\xF3s s\xF3 t\xE1 passando."
   raimundoTrabalho:
-  - personagem: "Zefinha"
-    texto: "Essa mão tá machucada?"
-  - personagem: "Raimundo"
-    texto: "A alça abriu de novo."
-  - personagem: "Zefinha"
-    texto: "Num pode parar?"
-  - personagem: "Raimundo"
-    texto: "Posso largar o balde. Depois vêm perguntar por que larguei."
-  - personagem: "Zefinha"
-    texto: "Disseram que aqui tinha trabalho."
-  - personagem: "Raimundo"
-    texto: "Disseram se nós podia escolher?"
-  - personagem: "Zefinha"
-    texto: "Painho mal consegue levantar o braço."
-  - personagem: "Raimundo"
-    texto: "Eu vi ele. Se mandarem pro carregamento, fico por perto."
-  - personagem: "Zefinha"
-    texto: "Num deixa ele sozinho."
-  - personagem: "Raimundo"
-    texto: "Vou fazer o que puder."
+  - personagem: Zefinha
+    texto: "Essa m\xE3o t\xE1 machucada?"
+  - personagem: Raimundo
+    texto: "A al\xE7a abriu de novo."
+  - personagem: Zefinha
+    texto: Num pode parar?
+  - personagem: Raimundo
+    texto: "Posso largar o balde. Depois v\xEAm perguntar por que larguei."
+  - personagem: Zefinha
+    texto: Disseram que aqui tinha trabalho.
+  - personagem: Raimundo
+    texto: "Disseram se n\xF3s podia escolher?"
+  - personagem: Zefinha
+    texto: "Painho mal consegue levantar o bra\xE7o."
+  - personagem: Raimundo
+    texto: Eu vi ele. Se mandarem pro carregamento, fico por perto.
+  - personagem: Zefinha
+    texto: Num deixa ele sozinho.
+  - personagem: Raimundo
+    texto: Vou fazer o que puder.
   guardaRonda: {fileID: 9807000201}
   rondaInicio: {fileID: 9807000301}
   rondaFim: {fileID: 9807000311}
@@ -20700,6 +20262,101 @@ MonoBehaviour:
   abrigoDosSacos: {fileID: 9807000403}
   velocidadeRonda: 2.2
   alcanceVigia: 3.5
+  exameLavadeiraLinear: {fileID: 9933000030}
+  examePilhaUso: {fileID: 9933000031}
+  examePilhaAtendimento: {fileID: 9933000032}
+  areaRecebimentoLavagem: {fileID: 9933000033}
+  chegadaLavagemMae:
+  - personagem: "M\xE3e"
+    texto: "Deve ser aqui. Ela t\xE1 separando os lotes."
+  - personagem: Zefinha
+    texto: Eu pergunto, mainha.
+  - personagem: "M\xE3e"
+    texto: Eu fico contigo.
+  chegadaLavagemLuzia:
+  - personagem: Luzia
+    texto: "\xC9 aqui que ficam os panos."
+  - personagem: Zefinha
+    texto: "Ser\xE1 que foi ela quem viu a menina?"
+  - personagem: Luzia
+    texto: Vamos perguntar.
+  loteLavagemOrientacao:
+  - personagem: Zefinha
+    texto: O homem da mesa mandou trazer uns panos.
+  - personagem: Lavadeira
+    texto: Pode deixar aqui, junto do tanque.
+  loteLavagemInicio:
+  - personagem: Lavadeira
+    texto: Foi ele quem mandou tu trazer?
+  - personagem: Zefinha
+    texto: "Disse que procurava minha irm\xE3 quando eu voltasse."
+  - personagem: Lavadeira
+    texto: Sempre arranja mais uma coisa antes.
+  loteLavagemMae:
+  - personagem: "M\xE3e"
+    texto: "Separaram minha menina na entrada. N\xF3s num sabe onde procurar."
+  loteLavagemLuzia:
+  - personagem: Luzia
+    texto: Raimundo viu uma menina parecida com ela. Tava com uma mulher.
+  loteLavagemPista:
+  - personagem: Lavadeira
+    texto: "Passou uma aqui perguntando pelo carro de tr\xE1s."
+  - personagem: Zefinha
+    texto: O que ela perguntou?
+  - personagem: Lavadeira
+    texto: "Se a m\xE3e vinha nele."
+  - personagem: Zefinha
+    texto: "Mariquinha pode ter pensado que n\xF3s vinha atr\xE1s\u2026"
+  - personagem: Lavadeira
+    texto: "Me ajude com estas enquanto n\xF3s conversa."
+  conversaLavagemIrma:
+  - personagem: Zefinha
+    texto: "A menina que passou aqui\u2026 tava chorando?"
+  - personagem: Lavadeira
+    texto: "Tava procurando a m\xE3e no meio de quem chegava."
+  - personagem: Zefinha
+    texto: E a mulher que tava com ela?
+  - personagem: Lavadeira
+    texto: "Segurava a m\xE3o dela. Num ouvi o nome."
+  - personagem: Zefinha
+    texto: Raimundo acha que conhece essa mulher.
+  - personagem: Lavadeira
+    texto: "Ent\xE3o deixe ele perguntar. Eu num sei te dizer quem era."
+  correcaoPilhaLavagem:
+  - personagem: Lavadeira
+    texto: "Esses s\xE3o da outra pilha, minha filha."
+  conclusaoLavagem:
+  - personagem: Lavadeira
+    texto: Pronto. Agora posso cuidar de cada lote.
+  - personagem: Zefinha
+    texto: A senhora faz isso todo dia?
+  - personagem: Lavadeira
+    texto: Todo dia chega mais.
+  retalhoPedidoZefinha:
+  - personagem: Zefinha
+    texto: "Tem um pedacinho limpo que sobre? A al\xE7a abriu a m\xE3o de Raimundo."
+  - personagem: Lavadeira
+    texto: Separei este. Pode levar pra ele.
+  retalhoOferecidoLavadeira:
+  - personagem: Lavadeira
+    texto: "Leve este retalho pra Raimundo. A al\xE7a do balde t\xE1 ferindo a m\xE3o
+      dele."
+  - personagem: Zefinha
+    texto: Ele continua carregando assim?
+  - personagem: Lavadeira
+    texto: Continua. Talvez isso ajude um pouco.
+  saidaLavagemMae:
+  - personagem: Zefinha
+    texto: Vou guardar pra dar a Raimundo.
+  - personagem: "M\xE3e"
+    texto: Guarde num canto limpo. Vamos juntas.
+  saidaLavagemLuzia:
+  - personagem: Zefinha
+    texto: Vou guardar pra dar a Raimundo.
+  - personagem: Luzia
+    texto: "Venha. A passagem pro p\xE1tio \xE9 por aqui."
+  alcanceChegadaLavagem: 5
+  exameRaimundoManha: {fileID: 9911880021}
   planoMemoria: {fileID: 4600000000}
   folhaMemoria: {fileID: 4600000006}
   lacoMemoria: {fileID: 4600000010}
@@ -20710,12 +20367,14 @@ MonoBehaviour:
   mariPlanoMemoria: {fileID: 4600000031}
   cameraPlanoMemoria: {fileID: 4600000033}
   paginasMemoria:
-  - personagem: "Memória de Zefinha"
-    texto: "Perguntamos aos que chegavam. Ninguém trouxe notícia de Severina."
-  - personagem: "Memória de Zefinha"
-    texto: "Saímos de lá. Painho guardava as perguntas. Mainha guardava os nomes."
-  - personagem: "Memória de Zefinha"
-    texto: "Toda menina vista de longe fazia eu olhar outra vez. O tempo passou, mas nós continuou procurando."
+  - personagem: "Mem\xF3ria de Zefinha"
+    texto: "Perguntamos aos que chegavam. Ningu\xE9m trouxe not\xEDcia de Severina."
+  - personagem: "Mem\xF3ria de Zefinha"
+    texto: "Sa\xEDmos de l\xE1. Painho guardava as perguntas. Mainha guardava os
+      nomes."
+  - personagem: "Mem\xF3ria de Zefinha"
+    texto: "Toda menina vista de longe fazia eu olhar outra vez. O tempo passou,
+      mas n\xF3s continuou procurando."
   pensamentoMemoria:
     personagem: Mari (pensamento)
     texto: A bisa viveu tudo isso. E continuou procurando. Eu preciso lembrar das
@@ -20732,6 +20391,131 @@ MonoBehaviour:
   leituraMinimaMemoria: 1.5
   duracaoCorteMemoria: 1.5
   cenaEpilogo: epilogo
+  exameMeninoNomes: {fileID: 9933000010}
+  exameLataNomes: {fileID: 9933000011}
+  exameFolhasNomes: {fileID: 9933000012}
+  exameCanhotoNomes: {fileID: 9933000013}
+  pedidoNomeInicio:
+  - personagem: Zefinha
+    texto: "Maria Severina. Minha irm\xE3. Levaram ela com outro grupo antes de n\xF3s
+      entrar."
+  - personagem: "Escriv\xE3o"
+    texto: Sabe em qual carro?
+  - personagem: Zefinha
+    texto: Num sei. Eu vi ela indo embora.
+  pedidoNomeMae:
+  - personagem: "M\xE3e"
+    texto: "N\xF3s chegou junto. Separaram minha menina de n\xF3s."
+  pedidoNomeLuzia:
+  - personagem: Luzia
+    texto: "A fam\xEDlia acabou de chegar. A menina ficou no outro grupo."
+  pedidoNomeServico:
+  - personagem: "Escriv\xE3o"
+    texto: Tenho os nomes dos grupos nestas folhas. Preciso terminar de conferir.
+  - personagem: Zefinha
+    texto: O senhor pode procurar o dela?
+  - personagem: "Escriv\xE3o"
+    texto: Leve aquele lote de panos pra lavagem. Quando voltar, pergunte.
+  pedidoNomeProtestoMae:
+  - personagem: "M\xE3e"
+    texto: "Minha filha veio atr\xE1s da irm\xE3."
+  pedidoNomeProtestoLuzia:
+  - personagem: Luzia
+    texto: Ao menos anote o nome dela.
+  pedidoNomeFinal:
+  - personagem: "Escriv\xE3o"
+    texto: Eu ouvi. Maria Severina. Agora leve os panos.
+  reencontroComDestino:
+  - personagem: Zefinha
+    texto: "Disseram que o carro foi pra Lagoa do Meio. Ainda preciso saber se ela
+      chegou l\xE1."
+  - personagem: "Crian\xE7a"
+    texto: "Meu tio tamb\xE9m vinha de longe. Mainha disse que viagem demora."
+  reencontroSemDestino:
+  - personagem: Zefinha
+    texto: Fui perguntar na mesa. Mandaram eu levar os panos primeiro.
+  - personagem: "Crian\xE7a"
+    texto: "E agora v\xE3o procurar?"
+  - personagem: Zefinha
+    texto: Vou perguntar de novo.
+  canhotoIntervencao:
+  - personagem: Fiscal
+    texto: "Os pap\xE9is ficam. J\xE1 pegou os panos?"
+  canhotoDestino:
+  - personagem: Zefinha
+    texto: "Essa marca \xE9 do carro que levou o outro grupo?"
+  - personagem: Fiscal
+    texto: "\xC9 do encaminhamento."
+  - personagem: Zefinha
+    texto: Pra onde levaram eles?
+  - personagem: Fiscal
+    texto: "Lagoa do Meio. Est\xE1 escrito a\xED."
+  - personagem: Zefinha
+    texto: "Minha irm\xE3 foi junto."
+  - personagem: Fiscal
+    texto: "Ent\xE3o leve o canhoto e pergunte l\xE1. Agora siga."
+  canhotoGuardadoMae:
+  - personagem: Zefinha
+    texto: "Lagoa do Meio\u2026"
+  - personagem: "M\xE3e"
+    texto: "Guarde esse papel, minha filha. N\xF3s vai perguntar por ela."
+  canhotoGuardadoLuzia:
+  - personagem: Zefinha
+    texto: "Lagoa do Meio\u2026"
+  - personagem: Luzia
+    texto: "Guarde. Esse papel pode ajudar quando n\xF3s perguntar."
+  exameGuardaPassagem: {fileID: 9933000040}
+  guardaPassagemPergunta:
+  - personagem: Zefinha
+    texto: "\xC9 por aqui que chega no carregamento?"
+  - personagem: Guarda
+    texto: "\xC9. Nada de mexer nos sacos."
+  guardaPassagemMae:
+  - personagem: "M\xE3e"
+    texto: "N\xF3s vai encontrar meu marido."
+  guardaPassagemLuzia:
+  - personagem: Luzia
+    texto: "N\xF3s s\xF3 t\xE1 passando."
+  chamadaPassagemMae:
+  - personagem: "M\xE3e"
+    texto: "Josefa. Olhe pra mainha. Eu t\xF4 aqui contigo."
+  chamadaPassagemLuzia:
+  - personagem: Luzia
+    texto: "Josefa. Olhe pra mim. N\xF3s ainda t\xE1 aqui."
+  reacaoCorpoPassagem:
+  - personagem: Zefinha
+    texto: "Tinha algu\xE9m ali na cerca."
+  - personagem: ACOMPANHANTE
+    texto: "Olhe de novo, Josefa. \xC9 a sombra do galho."
+  reacaoComadrePassagem:
+  - personagem: Zefinha
+    texto: Eu escutei ela.
+  - personagem: ACOMPANHANTE
+    texto: "Eu escutei o guarda assobiar. Vem pelo lado de c\xE1."
+  reacaoAguaPassagem:
+  - personagem: Zefinha
+    texto: Eu vi Mariquinha.
+  - personagem: ACOMPANHANTE
+    texto: Onde, minha filha?
+  - personagem: Zefinha
+    texto: "Ali\u2026 agora num t\xE1 mais."
+  reacaoSemLendaPassagem:
+  - personagem: Zefinha
+    texto: Por um instante eu perdi o caminho.
+  - personagem: ACOMPANHANTE
+    texto: Vem. Eu fico perto de tu.
+  continuarPassagemMae:
+  - personagem: "M\xE3e"
+    texto: Vamos encontrar teu pai.
+  - personagem: Zefinha
+    texto: Fique perto de mim, mainha.
+  - personagem: "M\xE3e"
+    texto: Eu fico.
+  continuarPassagemLuzia:
+  - personagem: Luzia
+    texto: "Teu pai t\xE1 no carregamento, logo adiante."
+  - personagem: Zefinha
+    texto: Vamos.
   areaPaiPatio: {fileID: 9988000002}
   areaBentoPatio: {fileID: 4300000085}
   areaFiscalPatio: {fileID: 4300000089}
@@ -20819,19 +20603,160 @@ MonoBehaviour:
     texto: "Os pertences j\xE1 t\xE3o guardados."
   - personagem: Luzia
     texto: "A caba\xE7a de voc\xEAs ainda t\xE1 junto do atendimento."
+  examePaiTrabalho: {fileID: 9933000050}
+  exameBentoTrabalho: {fileID: 9933000051}
+  exameFiscalTrabalho: {fileID: 9933000052}
+  exameApoioTrabalho: {fileID: 9933000053}
+  areaPanoLimpoApoio: {fileID: 9933000054}
+  alcanceLevarAguaPatio: 5
+  alcanceChegadaPatio: 7
+  patioChegadaMae:
+  - personagem: Zefinha
+    texto: Botaram painho pra carregar?
+  - personagem: "M\xE3e"
+    texto: Eu vou falar com ele.
+  patioChegadaLuzia:
+  - personagem: Zefinha
+    texto: "\xC9 painho ali na carro\xE7a?"
+  - personagem: Luzia
+    texto: "\xC9. Vamos chegar perto."
+  patioPaiAbertura:
+  - personagem: Zefinha
+    texto: "Painho, o senhor num devia t\xE1 levantando isso."
+  - personagem: Pai
+    texto: "Eu t\xF4 usando o outro bra\xE7o."
+  - personagem: Zefinha
+    texto: "Mas t\xE1 doendo. Eu t\xF4 vendo."
+  patioProtestoMae:
+  - personagem: "M\xE3e"
+    texto: Ele foi ferido na entrada. Precisa descansar.
+  patioProtestoLuzia:
+  - personagem: Luzia
+    texto: "Ele j\xE1 avisou que num consegue carregar."
+  patioFiscalReplica:
+  - personagem: Fiscal
+    texto: Tem carga esperando.
+  patioApresentarBento:
+  - personagem: Zefinha
+    texto: E se ele num conseguir?
+  - personagem: Pai
+    texto: Josefa, fique perto. Num entre no meio dos carros.
+  - personagem: Zefinha
+    texto: "Aquele homem tamb\xE9m t\xE1 passando mal."
+  - personagem: Pai
+    texto: "\xC9 Bento. T\xE1 assim desde cedo."
+  patioPaiEntregaPano:
+  - personagem: Pai
+    texto: "Veja naquele apoio se tem alguma coisa pra n\xF3s beber."
+  - personagem: Pai
+    texto: "Leve esse pano tamb\xE9m. Pergunte se serve l\xE1."
+  - personagem: Zefinha
+    texto: O senhor num vai precisar?
+  - personagem: Pai
+    texto: "Aqui na minha m\xE3o ele num ajuda ningu\xE9m."
+  patioBentoAjuda:
+  - personagem: Zefinha
+    texto: O senhor precisa de ajuda?
+  - personagem: Bento
+    texto: "S\xF3 queria tomar um ar."
+  - personagem: Zefinha
+    texto: Num pode sentar um pouco?
+  - personagem: Bento
+    texto: Quando eu paro, a carga fica.
+  - personagem: Zefinha
+    texto: "Eu posso chamar algu\xE9m."
+  - personagem: Bento
+    texto: "Veja se tem \xE1gua, menina."
+  patioFiscalPedido:
+  - personagem: Zefinha
+    texto: Deixe painho parar um pouco.
+  - personagem: Fiscal
+    texto: "V\xE1 ficar com sua fam\xEDlia."
+  - personagem: Zefinha
+    texto: "Eu t\xF4 falando dele."
+  - personagem: Fiscal
+    texto: Eu ouvi.
+  patioApoioPedido:
+  - personagem: Zefinha
+    texto: "Tem \xE1gua pros homens da carro\xE7a?"
+  - personagem: Trabalhador
+    texto: "Tem uma por\xE7\xE3o separada. Tu tem recipiente?"
+  - personagem: Zefinha
+    texto: "Tenho nossa caba\xE7a."
+  - personagem: Trabalhador
+    texto: Traga aqui.
+  - personagem: Trabalhador
+    texto: "E esse pano limpo? Pode deixar no apoio? N\xF3s t\xE1 sem nenhum."
+  - personagem: Zefinha
+    texto: "Se algu\xE9m precisar, vai ter aqui?"
+  - personagem: Trabalhador
+    texto: "\xC9 pra isso."
+  patioAguaRecebida:
+  - personagem: Trabalhador
+    texto: "Segure firme. \xC9 pouca, mas d\xE1 pra levar."
+  - personagem: Zefinha
+    texto: Vou levar pra eles.
+  patioPanoEntregue:
+  - personagem: Zefinha
+    texto: Vou deixar dobrado aqui.
+  - personagem: Trabalhador
+    texto: Obrigado, menina.
+  patioInseguranca:
+  - personagem: Zefinha
+    texto: Eu num sei se isso vai ajudar.
+  - personagem: ACOMPANHANTE
+    texto: "Leve o que conseguiu. N\xF3s fica perto deles."
+  patioLevarAgua:
+  - personagem: Zefinha
+    texto: "Painho, consegui \xE1gua."
+  - personagem: Pai
+    texto: "D\xEA primeiro a Bento."
+  - personagem: Zefinha
+    texto: Seu Bento?
+  patioAntesQueda:
+  - personagem: Fiscal
+    texto: Deixe de demora. Tem mais carro esperando.
+  - personagem: Bento
+    texto: "Eu num t\xF4 conseguindo\u2026"
+  - personagem: Zefinha
+    texto: Ele precisa parar.
+  - personagem: Pai
+    texto: Bento, solte isso!
+  patioDepoisQueda:
+  - personagem: Pai
+    texto: O homem caiu!
+  - personagem: Fiscal
+    texto: "Cada um no seu servi\xE7o."
+  - personagem: Zefinha
+    texto: "Mas ele t\xE1 no ch\xE3o!"
+  patioPensamentoMari:
+  - personagem: "Mari \u2014 pensamento"
+    texto: "Eu t\xF4 aqui\u2026"
+  - personagem: "Mari \u2014 pensamento"
+    texto: "Essa m\xE3o\u2026 \xE9 da bisa."
+  - personagem: "Mari \u2014 pensamento"
+    texto: "Mas eu t\xF4 sentindo."
+  patioReacaoMae:
+  - personagem: "M\xE3e"
+    texto: Josefa, fique comigo.
+  - personagem: Zefinha
+    texto: "Mainha, n\xF3s pode ajudar?"
+  - personagem: "M\xE3e"
+    texto: "Vamos tentar. Traga a \xE1gua."
+  patioReacaoLuzia:
+  - personagem: Luzia
+    texto: Josefa. Olhe pra mim.
+  - personagem: Zefinha
+    texto: "Ele ainda pode ouvir n\xF3s?"
+  - personagem: Luzia
+    texto: "Vamos chegar perto. Traga a \xE1gua."
+  patioAutorizarPano:
+  - personagem: Trabalhador
+    texto: "Menina, pegue o pano que tu deixou. Ainda t\xE1 limpo."
   setorPosto: {fileID: 4400000000}
   quartoInterior: {fileID: 4400000027}
   portaQuartoFechada: {fileID: 4400000061}
   papelPosto: {fileID: 4400000012}
-  examePassagemQuarto: {fileID: 9911880011}
-  exameMulherQuarto: {fileID: 9911880012}
-  exameHomemQuarto: {fileID: 9911880013}
-  exameMesaPosto: {fileID: 9911880001}
-  exameRaimundoPosto: {fileID: 9911880002}
-  exameRaimundoManha: {fileID: 9911880021}
-  exameMesaUltimaConsulta: {fileID: 9911880031}
-  areaAnotacaoPosto: {fileID: 9992000003}
-  anotacaoPosto: {fileID: 11400000, guid: 97965bb5d6354031a7359f2637c87ef1, type: 2}
   areaPostoEscolha: {fileID: 4400000026}
   areaPortaQuarto: {fileID: 4400000071}
   areaFamiliaAbrigo: {fileID: 4400000102}
@@ -20966,8 +20891,8 @@ MonoBehaviour:
   - personagem: "M\xE3e"
     texto: Ela me contou. Disse que tu percebeu que ela ainda tava com fome.
   noitePromessa:
-  - personagem: "Zefinha (em pensamento)"
-    texto: "Eu disse que nós nunca ia se largar. Agora ela num tá aqui."
+  - personagem: Zefinha (em pensamento)
+    texto: "Eu disse que n\xF3s nunca ia se largar. Agora ela num t\xE1 aqui."
   noiteTranquilizou:
   - personagem: Zefinha (em pensamentos)
     texto: Eu disse que ia dar tudo certo. Nem sabia como era aqui.
@@ -21018,6 +20943,99 @@ MonoBehaviour:
   perguntaPosto: Ajudar Raimundo e ouvir o que descobriu, ou copiar o encaminhamento
     antes que levem a folha?
   perguntaNoite: "O que dizer \xE0 m\xE3e?"
+  exameMesaPosto: {fileID: 9911880001}
+  exameRaimundoPosto: {fileID: 9911880002}
+  areaAnotacaoPosto: {fileID: 9992000003}
+  anotacaoPosto: {fileID: 11400000, guid: 97965bb5d6354031a7359f2637c87ef1, type: 2}
+  examePassagemQuarto: {fileID: 9911880011}
+  exameMulherQuarto: {fileID: 9911880012}
+  exameHomemQuarto: {fileID: 9911880013}
+  examePrimeiroRaimundo: {fileID: 9933000020}
+  aproximacaoRaimundoMae:
+  - personagem: "M\xE3e"
+    texto: Aquele homem tava perto da entrada.
+  - personagem: Zefinha
+    texto: Vou perguntar se viu ela.
+  - personagem: "M\xE3e"
+    texto: "Diga o nome da tua irm\xE3."
+  aproximacaoRaimundoLuzia:
+  - personagem: Luzia
+    texto: Aquele homem tava aqui quando o carro passou.
+  - personagem: Zefinha
+    texto: "Ser\xE1 que viu Mariquinha?"
+  - personagem: Luzia
+    texto: Pergunte. Eu espero contigo.
+  raimundoPrecisao:
+  - personagem: Zefinha
+    texto: O que o senhor lembra da menina?
+  - personagem: Homem
+    texto: "Do cabelo, do tamanho\u2026 Por isso olhei quando tu chegou."
+  - personagem: Zefinha
+    texto: "Mariquinha tem uma tran\xE7a."
+  - personagem: Homem
+    texto: "Pode ser ela. Mas num quero que tu tome minha lembran\xE7a por certeza."
+  - personagem: Zefinha
+    texto: "Eu s\xF3 queria saber se ela t\xE1 bem."
+  - personagem: Homem
+    texto: Eu sei, menina.
+  raimundoAjuda:
+  - personagem: Zefinha
+    texto: Me ajuda a encontrar essa mulher?
+  - personagem: Homem
+    texto: "Posso perguntar na lavagem. Acho que conhe\xE7o a voz dela."
+  - personagem: Zefinha
+    texto: O senhor sabe o nome?
+  - personagem: Homem
+    texto: Primeiro preciso ter certeza.
+  - personagem: Zefinha
+    texto: "Ent\xE3o pergunte. Por favor."
+  - personagem: Homem
+    texto: Vou perguntar.
+  raimundoApresentacao:
+  - personagem: Zefinha
+    texto: Como o senhor se chama?
+  - personagem: Homem
+    texto: Raimundo. E tu?
+  - personagem: Zefinha
+    texto: "Josefa. Minha irm\xE3 \xE9 Maria Severina. N\xF3s chama Mariquinha."
+  - personagem: Homem
+    texto: Vou guardar os dois nomes.
+  raimundoApresentacaoBreve:
+  - personagem: Zefinha
+    texto: Se lembrar de alguma coisa, como eu encontro o senhor?
+  - personagem: Homem
+    texto: Pergunte por Raimundo.
+  - personagem: Zefinha
+    texto: "Eu sou Josefa. Minha irm\xE3 \xE9 Maria Severina."
+  - personagem: Homem
+    texto: Vou perguntar por ela.
+  raimundoPassado:
+  - personagem: Zefinha
+    texto: "O senhor j\xE1 conhecia esse lugar?"
+  - personagem: Raimundo
+    texto: "Conhecia o sert\xE3o do lado de fora. Aqui dentro \xE9 outra coisa."
+  - personagem: Zefinha
+    texto: Andava por onde?
+  - personagem: Raimundo
+    texto: "Andei com um bando de canga\xE7o."
+  - personagem: Zefinha
+    texto: O senhor era cangaceiro?
+  - personagem: Raimundo
+    texto: Era.
+  raimundoGuardas:
+  - personagem: Zefinha
+    texto: E num pode enfrentar esses guardas?
+  - personagem: Raimundo
+    texto: Tu acha que eu saio daqui depois?
+  - personagem: Zefinha
+    texto: Num sei. Eles bateram em painho.
+  - personagem: Raimundo
+    texto: Eu vi. Se eu puxo briga, quem fica pra ajudar ele?
+  - personagem: Zefinha
+    texto: "Ent\xE3o n\xF3s fica sem fazer nada?"
+  - personagem: Raimundo
+    texto: "Perguntar por tua irm\xE3 num \xE9 fazer nada."
+  alcanceComentarioRaimundo: 6
   areaLataMenino: {fileID: 9966000003}
   areaCanhotoMesa: {fileID: 4200000046}
   areaFolhasRegistro: {fileID: 9966000012}
@@ -21027,21 +21045,21 @@ MonoBehaviour:
   folhaEmConsulta: {fileID: 9966000021}
   folhaConsultaFim: {fileID: 9966000051}
   meninoReencontro:
-  - personagem: "Criança"
-    texto: "Tu voltou. Achou tua irmã?"
-  - personagem: "Zefinha"
-    texto: "Ainda não. E teu tio?"
-  - personagem: "Criança"
-    texto: "Num chegou. Eu fiquei aqui."
+  - personagem: "Crian\xE7a"
+    texto: "Tu voltou. Achou tua irm\xE3?"
+  - personagem: Zefinha
+    texto: "Ainda n\xE3o. E teu tio?"
+  - personagem: "Crian\xE7a"
+    texto: Num chegou. Eu fiquei aqui.
   meninoNomeLembrado:
-  - personagem: "Criança"
-    texto: "Maria Severina, né?"
-  - personagem: "Zefinha"
-    texto: "Tu lembrou."
-  - personagem: "Criança"
-    texto: "Lembrei. Se chamarem, eu te aviso."
-  - personagem: "Zefinha"
-    texto: "Obrigada."
+  - personagem: "Crian\xE7a"
+    texto: "Maria Severina, n\xE9?"
+  - personagem: Zefinha
+    texto: Tu lembrou.
+  - personagem: "Crian\xE7a"
+    texto: Lembrei. Se chamarem, eu te aviso.
+  - personagem: Zefinha
+    texto: Obrigada.
   meninoDepoisRegistro:
   - personagem: "Crian\xE7a"
     texto: Na mesa, disseram alguma coisa?
@@ -21050,14 +21068,14 @@ MonoBehaviour:
   - personagem: "Crian\xE7a"
     texto: "Meu tio tamb\xE9m era pra vir de outro lugar."
   lataMeninoFalas:
-  - personagem: "Zefinha"
-    texto: "Tu num larga essa lata?"
-  - personagem: "Criança"
-    texto: "Mainha disse pra guardar."
-  - personagem: "Zefinha"
-    texto: "É pra buscar comida?"
-  - personagem: "Criança"
-    texto: "É. Se chamarem e eu tiver sem ela, como é que eu levo?"
+  - personagem: Zefinha
+    texto: Tu num larga essa lata?
+  - personagem: "Crian\xE7a"
+    texto: Mainha disse pra guardar.
+  - personagem: Zefinha
+    texto: "\xC9 pra buscar comida?"
+  - personagem: "Crian\xE7a"
+    texto: "\xC9. Se chamarem e eu tiver sem ela, como \xE9 que eu levo?"
   mesaAntesAgua:
   - personagem: "Escriv\xE3o"
     texto: "A rela\xE7\xE3o fica aqui. Agora \xE9 a vez dessa fam\xEDlia."
@@ -21146,10 +21164,10 @@ MonoBehaviour:
   - personagem: Trabalhadora
     texto: "Obrigada. Fique desse lado, longe de quem t\xE1 deitado."
   devolucaoQuarto:
-  - personagem: "Trabalhadora"
-    texto: "Já deixei a água com eles. Aqui está sua cabaça."
-  - personagem: "Zefinha"
-    texto: "Obrigada."
+  - personagem: Trabalhadora
+    texto: "J\xE1 deixei a \xE1gua com eles. Aqui est\xE1 sua caba\xE7a."
+  - personagem: Zefinha
+    texto: Obrigada.
   planoSepultamento: {fileID: 9808000500}
   corpoNoPlano: {fileID: 9808000600}
   orientacaoAgua:
@@ -21182,20 +21200,21 @@ MonoBehaviour:
   - personagem: "Escriv\xE3o"
     texto: Eu disse que depois vejo.
   qualLotePanos:
-  - personagem: "Zefinha"
-    texto: "Quais panos eu levo?"
-  - personagem: "Escrivão"
-    texto: "O lote dobrado ao lado da mesa. Os papéis ficam aqui."
+  - personagem: Zefinha
+    texto: Quais panos eu levo?
+  - personagem: "Escriv\xE3o"
+    texto: "O lote dobrado ao lado da mesa. Os pap\xE9is ficam aqui."
   destinatariaPanos:
-  - personagem: "Zefinha"
-    texto: "Onde eu encontro a mulher?"
-  - personagem: "Escrivão"
-    texto: "Junto do tanque, depois da passagem. Raimundo trabalha ali perto. Pergunte a ele se num achar."
+  - personagem: Zefinha
+    texto: Onde eu encontro a mulher?
+  - personagem: "Escriv\xE3o"
+    texto: Junto do tanque, depois da passagem. Raimundo trabalha ali perto. Pergunte
+      a ele se num achar.
   seguirPanos:
-  - personagem: "Zefinha"
-    texto: "Vou levar os panos. Depois procuro quem sabe daquele carro."
+  - personagem: Zefinha
+    texto: Vou levar os panos. Depois procuro quem sabe daquele carro.
   objetivoLotePanos: 
-  areaDistribuicaoAgua: {fileID: 9931000000}
+  exameMesaUltimaConsulta: {fileID: 9911880031}
 --- !u!1 &4200000000
 GameObject:
   m_ObjectHideFlags: 0
@@ -23131,8 +23150,8 @@ Transform:
   m_GameObject: {fileID: 4300000008}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 102.85, y: 1.11, z: 0}
-  m_LocalScale: {x: 0.9643917, y: 0.9643917, z: 1}
+  m_LocalPosition: {x: 102.73, y: 1.4, z: 0}
+  m_LocalScale: {x: 0.8311128, y: 0.8311128, z: 0.8618}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4400000077}
@@ -23233,7 +23252,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 1.685}
+  m_Offset: {x: 0, y: -0.025013685}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -23243,7 +23262,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.63, y: 3.37}
+  m_Size: {x: 1.63, y: 4.2674546}
   m_EdgeRadius: 0
 --- !u!1 &4300000012
 GameObject:
@@ -30056,6 +30075,145 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.35, y: 0.51}
   m_EdgeRadius: 0
+--- !u!1 &4400000061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4400000062}
+  - component: {fileID: 4400000063}
+  - component: {fileID: 4400000064}
+  m_Layer: 0
+  m_Name: Passagem do quarto - referencia invisivel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4400000062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400000061}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 175.175, y: 0, z: 0}
+  m_LocalScale: {x: 1.5328467, y: 1.5328467, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9922000191}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &4400000063
+SpriteRenderer:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400000061}
+  m_Enabled: 0
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 30
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 21300000, guid: 19ccb5d69c5d524091c0931dd5dd5013, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
+--- !u!61 &4400000064
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400000061}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 1.37}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 3, y: 2.74}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 3, y: 2.74}
+  m_EdgeRadius: 0
 --- !u!1 &4400000065
 GameObject:
   m_ObjectHideFlags: 0
@@ -35016,7 +35174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9805000301
 Transform:
   m_ObjectHideFlags: 0
@@ -35026,8 +35184,8 @@ Transform:
   m_GameObject: {fileID: 9805000300}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 77.73, y: -0.34, z: 0}
-  m_LocalScale: {x: 0.27, y: 0.27, z: 1}
+  m_LocalPosition: {x: 81.54, y: -0.33, z: 0}
+  m_LocalScale: {x: 0.45411304, y: 0.45411304, z: 1.6819}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9922000071}
@@ -35081,7 +35239,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 26
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300002, guid: 2a893ab3a14054f8b015a14fb15b731e, type: 3}
+  m_Sprite: {fileID: 6053760280331874244, guid: 0da0f4d825e5d214d8b56c40d7df588f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -35126,17 +35284,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.04593569, y: -0.08215904}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 3.72, y: 2.52}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.22, y: 0.82}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5, y: 4}
+  m_Size: {x: 2.6444564, y: 1.0279611}
   m_EdgeRadius: 0
 --- !u!1 &9805000400
 GameObject:
@@ -41625,7 +41783,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Dias depois"
+  m_text: Dias depois
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -41989,7 +42147,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Meses depois"
+  m_text: Meses depois
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -42353,7 +42511,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Mais tarde"
+  m_text: Mais tarde
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
   m_sharedMaterial: {fileID: -627195820731195928, guid: 08af9b6312641d24d8040870dc8445f9, type: 2}
@@ -42425,6 +42583,195 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &9911880001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400000012}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Sobre a mesa, uma folha traz os nomes de um grupo encaminhado para fora
+    do campo. Um funcion\xE1rio come\xE7a a juntar os pap\xE9is."
+--- !u!114 &9911880002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000008}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Raimundo tenta baixar um recipiente pesado. Ele muda a posi\xE7\xE3o
+    da m\xE3o, mas a al\xE7a continua apertando o mesmo lugar."
+--- !u!114 &9911880011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400000069}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Pela abertura, Zefinha v\xEA pessoas deitadas e uma trabalhadora passando
+    entre elas. N\xE3o consegue ver quem est\xE1 no canto do quarto."
+--- !u!114 &9911880012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400000037}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Uma mulher repousa de lado. Ao perceber Zefinha, tenta levantar um pouco
+    a cabe\xE7a."
+--- !u!114 &9911880013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400000045}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Um homem acompanha com os olhos o recipiente nas m\xE3os da trabalhadora.
+    Os l\xE1bios est\xE3o ressecados."
+--- !u!114 &9911880021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000008}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Raimundo est\xE1 perto dos baldes. Abre e fecha a m\xE3o devagar antes
+    de segurar uma das al\xE7as."
+--- !u!114 &9911880031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400000024}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "O escriv\xE3o confere uma rela\xE7\xE3o enquanto o fiscal re\xFAne os
+    pap\xE9is para lev\xE1-los. Perto da passagem, uma trabalhadora espera a chamada
+    para o servi\xE7o."
+--- !u!1 &9911880100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9911880101}
+  - component: {fileID: 9911880102}
+  - component: {fileID: 9911880103}
+  m_Layer: 5
+  m_Name: "Ajuda tempor\xE1ria de teste - F2 para ocultar"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9911880101
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9911880100}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3000000068}
+  m_Father: {fileID: 3000000001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 10, y: -10}
+  m_SizeDelta: {x: 390, y: 112}
+  m_Pivot: {x: 0, y: 1}
+--- !u!222 &9911880102
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9911880100}
+  m_CullTransparentMesh: 1
+--- !u!114 &9911880103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9911880100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: null
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.08, g: 0.055, b: 0.04, a: 0.88}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &9922000010
 GameObject:
   m_ObjectHideFlags: 0
@@ -44237,6 +44584,383 @@ MonoBehaviour:
     pr\xF3prios."
   marcasRelacionadas: []
   estadosRelacionados: []
+--- !u!61 &9931000000
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682886090}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.4}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.57, y: 1.83}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 3.9, y: 2.8}
+  m_EdgeRadius: 0
+--- !u!114 &9933000000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100000094}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "A mulher afasta os pr\xF3prios pertences, abrindo espa\xE7o debaixo da
+    lona."
+--- !u!114 &9933000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682886090}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "A mulher mant\xE9m os recipientes separados junto ao reservat\xF3rio.
+    A caba\xE7a da fam\xEDlia est\xE1 entre eles."
+--- !u!114 &9933000010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4200000036}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Um menino espera sozinho, segurando uma lata junto ao corpo. Talvez eu
+    consiga conversar com ele depois de levar a \xE1gua."
+--- !u!114 &9933000011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4200000040}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "A lata est\xE1 amassada. Mesmo vazia, o menino n\xE3o a deixa longe das
+    m\xE3os."
+--- !u!114 &9933000012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9966000010}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Folhas cobertas de nomes se acumulam sobre a mesa. O homem confere uma
+    delas enquanto uma fam\xEDlia espera."
+--- !u!114 &9933000013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4200000043}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Um canhoto ficou \xE0 mostra debaixo dos panos. H\xE1 uma marca parecida
+    com a do carro que levou Mariquinha."
+--- !u!114 &9933000020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000008}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Um homem trabalha junto dos baldes. A al\xE7a parece ferir a m\xE3o,
+    mas ele continua carregando."
+--- !u!114 &9933000030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000020}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "A mulher esfrega uma pe\xE7a no tanque. Ao lado dela, panos dobrados
+    ficam afastados dos que ainda est\xE3o manchados."
+--- !u!114 &9933000031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9807000000}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "\xC0 esquerda, ficam os panos de uso, afastados das pe\xE7as do atendimento."
+--- !u!114 &9933000032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9807000100}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "\xC0 direita, as pe\xE7as vindas do atendimento permanecem separadas
+    das outras."
+--- !u!61 &9933000033
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000016}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 3.86, y: 1.78}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 2, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &9933000040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9807000200}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: O guarda percorre a passagem entre os sacos. De tempos em tempos, olha
+    para quem atravessa.
+--- !u!114 &9933000050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156249495}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Ele mant\xE9m o bra\xE7o ferido junto ao corpo. Com a outra m\xE3o, tenta
+    firmar a carga."
+--- !u!114 &9933000051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000082}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "O homem se apoia na carro\xE7a entre um esfor\xE7o e outro. A respira\xE7\xE3o
+    demora a se acalmar."
+--- !u!114 &9933000052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000086}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "O fiscal observa o carregamento. Quando algu\xE9m diminui o passo, ele
+    se aproxima."
+--- !u!114 &9933000053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9808000100}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "H\xE1 um espa\xE7o separado para os feridos. O trabalhador procura alguma
+    coisa entre os poucos materiais."
+--- !u!61 &9933000054
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9808000400}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 2.33, y: 1.04}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &9933000110
 GameObject:
   m_ObjectHideFlags: 0
@@ -44468,6 +45192,501 @@ MonoBehaviour:
   - {fileID: 9933000121}
   - {fileID: 9933000131}
   raioLocal: 0.55
+--- !u!114 &9934000060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9808000200}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Bento est\xE1 deitado \xE0 sombra. Um trabalhador tenta acomod\xE1-lo
+    enquanto algu\xE9m afasta os curiosos."
+--- !u!114 &9934000061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9988000030}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Os pertences de Bento est\xE3o cobertos num embrulho, separados para
+    sua fam\xEDlia."
+--- !u!61 &9934000062
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9988000030}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 1}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 2.33, y: 1.04}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 5, y: 4}
+  m_EdgeRadius: 0
+--- !u!114 &9934000063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9934000100}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: Quem veio com Bento espera perto do atendimento.
+--- !u!1 &9934000100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9934000101}
+  - component: {fileID: 9934000102}
+  - component: {fileID: 9934000103}
+  - component: {fileID: 9934000063}
+  m_Layer: 0
+  m_Name: "Familiar de Bento \u2014 atribuir arte neste SpriteRenderer"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9934000101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9934000100}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 214, y: -0.77, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 9934000105}
+  m_Father: {fileID: 9922000161}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &9934000102
+SpriteRenderer:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9934000100}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 25
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
+--- !u!61 &9934000103
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9934000100}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 1}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 2.33, y: 1.04}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 2, y: 3}
+  m_EdgeRadius: 0
+--- !u!1 &9934000104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9934000105}
+  - component: {fileID: 9934000106}
+  m_Layer: 0
+  m_Name: "Fam\xEDlia de Bento \u2014 marcador de intera\xE7\xE3o (n\xE3o \xE9 a
+    arte do personagem)"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &9934000105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9934000104}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9934000101}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &9934000106
+SpriteRenderer:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9934000104}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 34
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 710000000000000001, guid: bd0c1c85a5bb24d4b80533f7d7cce536, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
+--- !u!1 &9934000110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9934000111}
+  m_Layer: 0
+  m_Name: "Fam\xEDlia de Bento \u2014 ponto de espera / busca do pai"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9934000111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9934000110}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 214, y: -0.77, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9922000161}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9934000120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9934000121}
+  m_Layer: 0
+  m_Name: "Fam\xEDlia de Bento \u2014 chegada ao atendimento"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9934000121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9934000120}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 197.3, y: -0.77, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9922000161}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9934000130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9934000131}
+  m_Layer: 0
+  m_Name: "Pai \u2014 retorno com a fam\xEDlia de Bento"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9934000131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9934000130}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 195.2, y: -0.77, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9922000161}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9934000200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9934000201}
+  - component: {fileID: 9934000202}
+  - component: {fileID: 9934000203}
+  m_Layer: 5
+  m_Name: "Fam\xEDlia de Bento \u2014 arte no sepultamento / marcador provis\xF3rio"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &9934000201
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9934000200}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9808000501}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -610, y: 180}
+  m_SizeDelta: {x: 130, y: 240}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &9934000202
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9934000200}
+  m_CullTransparentMesh: 1
+--- !u!114 &9934000203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9934000200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: null
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 710000000000000001, guid: bd0c1c85a5bb24d4b80533f7d7cce536, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &9944000030
 GameObject:
   m_ObjectHideFlags: 0
@@ -51304,6 +52523,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!61 &9992000003
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9991000240}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 3.535}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.59, y: 7.07}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 6.59, y: 7.07}
+  m_EdgeRadius: 0
 --- !u!1 &9992000010
 GameObject:
   m_ObjectHideFlags: 0
@@ -51703,191 +52968,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!1 &4400000061
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4400000062}
-  - component: {fileID: 4400000063}
-  - component: {fileID: 4400000064}
-  m_Layer: 0
-  m_Name: Passagem do quarto - referencia invisivel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4400000062
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4400000061}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 175.175, y: 0, z: 0}
-  m_LocalScale: {x: 1.5328467, y: 1.5328467, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9922000191}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4400000063
-SpriteRenderer:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4400000061}
-  m_Enabled: 0
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 30
-  m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 19ccb5d69c5d524091c0931dd5dd5013, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_SpriteSortPoint: 0
-  m_BlendShapeWeights: []
---- !u!61 &4400000064
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4400000061}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 1.37}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 3, y: 2.74}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 3, y: 2.74}
-  m_EdgeRadius: 0
---- !u!61 &9931000000
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1682886090}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.4}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 2.12, y: 5.09}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 3.9, y: 2.8}
-  m_EdgeRadius: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -51907,1074 +52987,3 @@ SceneRoots:
   - {fileID: 9806000000}
   - {fileID: 9806000010}
   - {fileID: 9910000001}
-
---- !u!114 &9933000000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4100000094}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "A mulher afasta os próprios pertences, abrindo espaço debaixo da lona."
-
---- !u!114 &9933000001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1682886090}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "A mulher mantém os recipientes separados junto ao reservatório. A cabaça da família está entre eles."
-
---- !u!114 &9933000010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4200000036}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "Um menino espera sozinho, segurando uma lata junto ao corpo. Talvez eu consiga conversar com ele depois de levar a água."
-
-
---- !u!114 &9933000011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4200000040}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "A lata está amassada. Mesmo vazia, o menino não a deixa longe das mãos."
-
-
---- !u!114 &9933000012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9966000010}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "Folhas cobertas de nomes se acumulam sobre a mesa. O homem confere uma delas enquanto uma família espera."
-
-
---- !u!114 &9933000013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4200000043}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "Um canhoto ficou à mostra debaixo dos panos. Há uma marca parecida com a do carro que levou Mariquinha."
-
---- !u!114 &9933000020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4300000008}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "Um homem trabalha junto dos baldes. A alça parece ferir a mão, mas ele continua carregando."
-
---- !u!114 &9933000030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4300000020}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "A mulher esfrega uma peça no tanque. Ao lado dela, panos dobrados ficam afastados dos que ainda estão manchados."
-
-
---- !u!114 &9933000031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9807000000}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "À esquerda, ficam os panos de uso, afastados das peças do atendimento."
-
-
---- !u!114 &9933000032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9807000100}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "À direita, as peças vindas do atendimento permanecem separadas das outras."
-
-
---- !u!61 &9933000033
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4300000016}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.92, y: 3.22}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 2, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &9933000040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9807000200}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "O guarda percorre a passagem entre os sacos. De tempos em tempos, olha para quem atravessa."
---- !u!114 &9933000050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1156249495}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "Ele mantém o braço ferido junto ao corpo. Com a outra mão, tenta firmar a carga."
---- !u!114 &9933000051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4300000082}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "O homem se apoia na carroça entre um esforço e outro. A respiração demora a se acalmar."
---- !u!114 &9933000052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4300000086}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "O fiscal observa o carregamento. Quando alguém diminui o passo, ele se aproxima."
---- !u!114 &9933000053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9808000100}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "Há um espaço separado para os feridos. O trabalhador procura alguma coisa entre os poucos materiais."
---- !u!61 &9933000054
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9808000400}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 2.33, y: 1.04}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!1 &9934000100
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9934000101}
-  - component: {fileID: 9934000102}
-  - component: {fileID: 9934000103}
-  - component: {fileID: 9934000063}
-  m_Layer: 0
-  m_Name: "Familiar de Bento — atribuir arte neste SpriteRenderer"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9934000101
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9934000100}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 214, y: -0.77, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 9934000105}
-  m_Father: {fileID: 9922000161}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &9934000102
-SpriteRenderer:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9934000100}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 25
-  m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_SpriteSortPoint: 0
-  m_BlendShapeWeights: []
---- !u!61 &9934000103
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9934000100}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 1}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 2.33, y: 1.04}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 2, y: 3}
-  m_EdgeRadius: 0
---- !u!1 &9934000104
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9934000105}
-  - component: {fileID: 9934000106}
-  m_Layer: 0
-  m_Name: "Família de Bento — marcador de interação (não é a arte do personagem)"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &9934000105
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9934000104}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9934000101}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &9934000106
-SpriteRenderer:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9934000104}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 34
-  m_MaskInteraction: 0
-  m_Sprite: {fileID: 710000000000000001, guid: bd0c1c85a5bb24d4b80533f7d7cce536, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_SpriteSortPoint: 0
-  m_BlendShapeWeights: []
---- !u!1 &9934000110
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9934000111}
-  m_Layer: 0
-  m_Name: "Família de Bento — ponto de espera / busca do pai"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9934000111
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9934000110}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 214, y: -0.77, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9922000161}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &9934000120
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9934000121}
-  m_Layer: 0
-  m_Name: "Família de Bento — chegada ao atendimento"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9934000121
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9934000120}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 197.3, y: -0.77, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9922000161}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &9934000130
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9934000131}
-  m_Layer: 0
-  m_Name: "Pai — retorno com a família de Bento"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9934000131
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9934000130}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 195.2, y: -0.77, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9922000161}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9934000060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9808000200}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "Bento está deitado à sombra. Um trabalhador tenta acomodá-lo enquanto alguém afasta os curiosos."
---- !u!114 &9934000061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9988000030}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "Os pertences de Bento estão cobertos num embrulho, separados para sua família."
---- !u!114 &9934000063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9934000100}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "Quem veio com Bento espera perto do atendimento."
---- !u!61 &9934000062
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9988000030}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 1}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 2.33, y: 1.04}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 5, y: 4}
-  m_EdgeRadius: 0
---- !u!1 &9934000200
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9934000201}
-  - component: {fileID: 9934000202}
-  - component: {fileID: 9934000203}
-  m_Layer: 5
-  m_Name: "Família de Bento — arte no sepultamento / marcador provisório"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &9934000201
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9934000200}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9808000501}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -610, y: 180}
-  m_SizeDelta: {x: 130, y: 240}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &9934000202
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9934000200}
-  m_CullTransparentMesh: 1
---- !u!114 &9934000203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9934000200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: null
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 710000000000000001, guid: bd0c1c85a5bb24d4b80533f7d7cce536, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
-
---- !u!114 &9911880001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4400000012}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "Sobre a mesa, uma folha traz os nomes de um grupo encaminhado para fora do campo. Um funcionário começa a juntar os papéis."
-
-
-
---- !u!114 &9911880002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4300000008}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "Raimundo tenta baixar um recipiente pesado. Ele muda a posição da mão, mas a alça continua apertando o mesmo lugar."
-
-
---- !u!61 &9992000003
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9991000240}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 3.535}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.59, y: 7.07}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 6.59, y: 7.07}
-  m_EdgeRadius: 0
-
---- !u!114 &9911880011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4400000069}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "Pela abertura, Zefinha vê pessoas deitadas e uma trabalhadora passando entre elas. Não consegue ver quem está no canto do quarto."
-
-
-
-
---- !u!114 &9911880012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4400000037}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "Uma mulher repousa de lado. Ao perceber Zefinha, tenta levantar um pouco a cabeça."
-
-
-
-
---- !u!114 &9911880013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4400000045}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "Um homem acompanha com os olhos o recipiente nas mãos da trabalhadora. Os lábios estão ressecados."
-
---- !u!114 &9911880021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4300000008}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "Raimundo está perto dos baldes. Abre e fecha a mão devagar antes de segurar uma das alças."
-
---- !u!114 &9911880031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4400000024}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
-  examinePanel: {fileID: 3000000053}
-  examineText: {fileID: 3000000061}
-  message: "O escrivão confere uma relação enquanto o fiscal reúne os papéis para levá-los. Perto da passagem, uma trabalhadora espera a chamada para o serviço."
-
---- !u!1 &9911880100
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9911880101}
-  - component: {fileID: 9911880102}
-  - component: {fileID: 9911880103}
-  m_Layer: 5
-  m_Name: Ajuda temporária de teste - F2 para ocultar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &9911880101
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9911880100}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3000000068}
-  m_Father: {fileID: 3000000001}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10, y: -10}
-  m_SizeDelta: {x: 390, y: 112}
-  m_Pivot: {x: 0, y: 1}
---- !u!222 &9911880102
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9911880100}
-  m_CullTransparentMesh: 1
---- !u!114 &9911880103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9911880100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: null
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.08, g: 0.055, b: 0.04, a: 0.88}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
