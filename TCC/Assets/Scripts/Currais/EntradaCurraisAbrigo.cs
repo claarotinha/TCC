@@ -19,7 +19,7 @@ public partial class EntradaCurrais
         if (pontoParadaFamilia == null) pontoParadaFamilia = mariAbrigo;
         if (seguidoraBaleiaCurrais == null && baleia != null)
             seguidoraBaleiaCurrais = baleia.GetComponent<SeguidorFamilia>();
-        return ReferenciasAbrigoLinearValidas() & ConferirReferencia(areaPaiAbrigo, nameof(areaPaiAbrigo)) &
+        return ReferenciasAguaLinearValidas() & ReferenciasAbrigoLinearValidas() & ConferirReferencia(areaPaiAbrigo, nameof(areaPaiAbrigo)) &
             ConferirReferencia(maeCuidadoAbrigo, nameof(maeCuidadoAbrigo)) &
             ConferirReferencia(cabacaComMari, nameof(cabacaComMari)) &
             ConferirReferencia(cabacaComMae, nameof(cabacaComMae)) &
@@ -172,12 +172,7 @@ public partial class EntradaCurrais
         return Dados.curraisAguaRecebida ? aguaJaRecebida : aguaApresentar;
     }
 
-    private void MenuFuncionarioAgua()
-    {
-        MenuAssuntoNPC("Funcionário", "Diga. A fila tá andando.", "Perguntar pela água",
-            () => Dizer(OrientacaoDaDistribuicao()),
-            "Como é a distribuição?", () => Dizer(OrientacaoDaDistribuicao()));
-    }
+    private void MenuFuncionarioAgua() => MenuDistribuicaoLinear();
 
     private void MenuPrimeiroRegistro()
     {
@@ -198,10 +193,10 @@ public partial class EntradaCurrais
         { Iniciar(AcomodarPai()); return true; }
         // O recipiente pode ser apresentado na mesa ou à funcionária, sem uma opção de conversa obrigatória.
         if (antesBusca && (alvo == areaAgua || (areaDistribuicaoAgua != null && alvo == areaDistribuicaoAgua)) &&
-            item == cabacaVaziaBusca && ConviteAguaConhecido && Dados.curraisEtapaEntrada >= 3 && Dados.curraisEtapaEntrada <= 4)
+            item == cabacaVaziaBusca && PodeEncherCabaca && Dados.curraisEtapaEntrada >= 3 && Dados.curraisEtapaEntrada <= 4)
         { Iniciar(ReceberAgua()); return true; }
         if (Dados.curraisEtapaEntrada != 4) return false;
-        if (antesBusca && (alvo == areaMae || alvo == areaLuzia) && item == cabacaCheiaBusca && Dados.curraisEscolhaAgua == 0)
+        if (antesBusca && (alvo == areaMae || alvo == areaLuzia) && item == cabacaCheiaBusca && PodeEscolherAgua)
         { Iniciar(DestinarAgua(alvo == areaMae ? 1 : 2)); return true; }
         if (Dados.curraisEtapaBusca == 1 && alvo == areaLavadeira && item == itemLotePanos && !Dados.curraisLotePanosEntregue)
         { Iniciar(ConversarLavadeira()); return true; }

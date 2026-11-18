@@ -82,7 +82,7 @@ public partial class EntradaCurrais
             else MostrarPerguntasLugarAbrigo();
             return;
         }
-        AbrirMenuLuzia();
+        // Durante a distribuição, Luzia acompanha sem reiniciar assuntos encerrados.
     }
 
     private void MenuParenteAbrigo(bool falarComPai)

@@ -9612,6 +9612,7 @@ GameObject:
   - component: {fileID: 1682886091}
   - component: {fileID: 1682886092}
   - component: {fileID: 9931000000}
+  - component: {fileID: 9933000001}
   m_Layer: 0
   m_Name: Mesa da distribuicao - encher cabaca
   m_TagString: Untagged
@@ -19451,6 +19452,72 @@ MonoBehaviour:
   - personagem: Luzia
     texto: Vou perguntar na lavagem. Tem muita gente chegando por caminhos diferentes.
   objetivoPano: 
+  exameDistribuicao: {fileID: 9933000001}
+  esperaChamadaAgua: 2
+  alcanceRetornoAgua: 4
+  autorizarCabacaAgua:
+  - personagem: "Zefinha"
+    texto: "Aquela cabaça é nossa. Ficou na revista."
+  - personagem: "Funcionária"
+    texto: "Foi deixada aqui com as outras. Pode pegar."
+  - personagem: "Zefinha"
+    texto: "Meu pai tá ferido. Nós veio buscar água."
+  - personagem: "Funcionária"
+    texto: "Espere sua vez. Quando eu chamar, traga ela pra cá."
+  chamadaDistribuicaoAgua:
+  - personagem: "Funcionária"
+    texto: "Menina da cabaça. Pode chegar."
+  apresentacaoPorcaoAgua:
+  - personagem: "Funcionária"
+    texto: "Segure por fora. Num encoste a boca dela no reservatório."
+  - personagem: "Retirante"
+    texto: "Ontem veio com gosto ruim."
+  - personagem: "Funcionária"
+    texto: "Foi a água que mandaram. Nós também bebe dela."
+  porcaoRecebidaAgua:
+  - personagem: "Zefinha"
+    texto: "Só isso?"
+  - personagem: "Funcionária"
+    texto: "Tem mais gente esperando, minha filha."
+  retornoAbrigoAgua:
+  - personagem: "Mãe"
+    texto: "Conseguiram?"
+  - personagem: "Zefinha"
+    texto: "Uma pouca."
+  - personagem: "Pai"
+    texto: "Molhe só minha boca, Zulema."
+  necessidadeAguaAbrigo:
+  - personagem: "Mãe"
+    texto: "Agora sente um instante, Luzia. A senhora veio se escorando pelo caminho."
+  - personagem: "Luzia"
+    texto: "É só uma fraqueza. Já passa."
+  ofertaAguaMae:
+  - personagem: "Zefinha"
+    texto: "Beba também, mainha."
+  - personagem: "Mãe"
+    texto: "Deixe pra tu, minha filha."
+  - personagem: "Zefinha"
+    texto: "A senhora tá tremendo."
+  ofertaAguaLuzia:
+  - personagem: "Zefinha"
+    texto: "Tome, dona Luzia."
+  - personagem: "Luzia"
+    texto: "E tua mãe?"
+  - personagem: "Mãe"
+    texto: "Pode beber. Eu fico aqui com meu marido."
+  depoisAguaMae:
+  - personagem: "Mãe"
+    texto: "Obrigada. Agora nós vai perguntar pela tua irmã."
+  - personagem: "Luzia"
+    texto: "Eu fico aqui com ele. Se alguém trouxer notícia, digo onde vocês foram."
+  depoisAguaLuzia:
+  - personagem: "Luzia"
+    texto: "Obrigada, Josefa. Venha. Vamos perguntar pela tua irmã."
+  - personagem: "Mãe"
+    texto: "Eu espero vocês aqui."
+  guardarCabacaAgua:
+  - personagem: "Pai"
+    texto: "Guarde a cabaça, minha filha. Nós ainda vai precisar dela."
   examePrimeiroCliqueLuzia: {fileID: 9933000000}
   conversaIntimaPaiAbrigo:
   - personagem: "Zefinha"
@@ -19486,12 +19553,12 @@ MonoBehaviour:
   - personagem: "Luzia"
     texto: "Vou perguntar na lavagem. Passa muita gente por lá."
   conviteAguaAbrigo:
-  - personagem: "Luzia"
+  - personagem: Luzia
     texto: "Antes de seguir, vamos buscar uma pouca d’água. Teu pai precisa beber."
-  - personagem: "Zefinha"
+  - personagem: Zefinha
     texto: "Ficaram com nossa cabaça."
-  - personagem: "Luzia"
-    texto: "A mulher da distribuição separa os recipientes naquela mesa. Eu vou contigo."
+  - personagem: Luzia
+    texto: "Separaram os recipientes na distribuição. Venha, eu vou contigo."
   apresentacaoLuziaInicio:
   - personagem: "Mãe"
     texto: "Com licença… tem algum canto onde a gente possa ficar?"
@@ -51219,3 +51286,19 @@ MonoBehaviour:
   examinePanel: {fileID: 3000000053}
   examineText: {fileID: 3000000061}
   message: "A mulher afasta os próprios pertences, abrindo espaço debaixo da lona."
+
+--- !u!114 &9933000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682886090}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "A mulher mantém os recipientes separados junto ao reservatório. A cabaça da família está entre eles."

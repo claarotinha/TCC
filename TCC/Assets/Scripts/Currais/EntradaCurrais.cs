@@ -341,7 +341,7 @@ public partial class EntradaCurrais : MonoBehaviour
     private void Update()
     {
         if (!pronto || PauseHelper.BlockInput() || Time.timeScale <= 0f) return;
-        if (AtualizarExamineLuzia()) return;
+        if (AtualizarExamineDistribuicao() || AtualizarExamineLuzia()) return;
         AtualizarPatrulha();
         if (dialogando)
         {
@@ -895,6 +895,7 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (!Dados.curraisPanelaConcluida && !ConviteAguaConhecido)
         { MenuLuziaAbrigoLinear(); return; }
+        if (!Dados.curraisPanelaConcluida) return;
         if (Dados.curraisAguaRecebida && Dados.curraisEscolhaAgua == 0)
         {
             AbrirAssuntosEntrada("luzia-agua-recebida", "Luzia", "Você conseguiu água?",
@@ -923,7 +924,7 @@ public partial class EntradaCurrais : MonoBehaviour
     }
 
     private bool PodeRecolherCabacaMesa => Dados.curraisPertencesRetidos &&
-        !Dados.curraisCabacaDevolvida && Dados.curraisEtapaEntrada >= 2 &&
+        !Dados.curraisCabacaDevolvida && CabacaAutorizada && Dados.curraisEtapaEntrada == 4 &&
         Dados.curraisEtapaEntrada <= 4 && !Dados.curraisPanelaConcluida;
 
     private void AtualizarCabacaMesa()
@@ -950,6 +951,7 @@ public partial class EntradaCurrais : MonoBehaviour
         if (indice >= 0) Dados.curraisItensRetidos.RemoveAt(indice);
         Dados.curraisCabacaDevolvida = true;
         AtualizarVisuaisChegada(); AtualizarEstadoBusca(); Salvar();
+        yield return ChamarVezDaAgua();
     }
 
     private bool TemItem(ItemData itemBusca)
@@ -960,58 +962,32 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private IEnumerator ReceberAgua()
     {
-        if (!ConviteAguaConhecido) yield break;
-        if (Dados.curraisEtapaEntrada != 4)
-        {
-            yield return Dizer(aguaAguardar);
-            yield break;
-        }
-        if (!Dados.curraisCabacaDevolvida)
-        {
-            yield return Dizer(cabacaSeparadaMesa);
-            yield break;
-        }
-        if (Dados.curraisAguaRecebida) { yield return Dizer(aguaJaRecebida); yield break; }
+        if (!PodeEncherCabaca || !TemItem(cabacaVaziaBusca)) yield break;
+        yield return Dizer(apresentacaoPorcaoAgua);
+        // A pausa permite mostrar o recipiente durante o enchimento.
+        yield return Esperar(.7f);
         if (!TemItem(cabacaVaziaBusca)) yield break;
-        if (!Dados.curraisAguaOrientada)
-        {
-            yield return Dizer(orientacaoAgua);
-            Dados.curraisAguaOrientada = true;
-            AtualizarEstadoBusca(); Salvar();
-        }
-        if (!TemItem(cabacaVaziaBusca))
-        {
-            yield return Dizer(aguaApresentar);
-            yield break;
-        }
         InventoryManager.Instance.RemoveItem(cabacaVaziaBusca);
         InventoryManager.Instance.AddItem(cabacaCheiaBusca);
-        Dados.curraisDistribuicaoIniciada = true;
+        Dados.curraisAguaOrientada = true;
         Dados.curraisAguaRecebida = true;
         AtualizarEstadoBusca(); Salvar();
-        yield return Dizer(aguaFuncionario);
+        yield return Dizer(porcaoRecebidaAgua);
     }
 
     private IEnumerator DestinarAgua(int destinatario = 0)
     {
-        if (Dados.curraisEscolhaAgua != 0) yield break;
-
-        if (!TemItem(cabacaCheiaBusca))
-        {
-            yield return Dizer(maeEsperaAgua);
-            yield break;
-        }
-        int opcao = destinatario - 1;
-        if (destinatario == 0) yield break; // O alvo do arraste define quem recebe.
-        if (opcao < 0 || opcao > 1 || !TemItem(cabacaCheiaBusca)) yield break;
-        yield return BeberAguaAbrigo(opcao + 1);
+        if (!PodeEscolherAgua || destinatario < 1 || destinatario > 2 || !TemItem(cabacaCheiaBusca)) yield break;
+        yield return Dizer(destinatario == 1 ? ofertaAguaMae : ofertaAguaLuzia);
+        yield return BeberAguaAbrigo(destinatario);
         if (!TemItem(cabacaCheiaBusca)) yield break;
         InventoryManager.Instance.RemoveItem(cabacaCheiaBusca);
         InventoryManager.Instance.AddItem(cabacaVaziaBusca);
-        Dados.curraisEscolhaAgua = opcao + 1;
-        GameProgress.Instance.UnlockDiaryPage(opcao == 0 ? "currais-agua-mae" : "currais-agua-luzia");
+        Dados.curraisEscolhaAgua = destinatario;
+        GameProgress.Instance.UnlockDiaryPage(destinatario == 1 ? "currais-agua-mae" : "currais-agua-luzia");
         AtualizarEstadoBusca(); Salvar();
-        yield return Dizer(opcao == 0 ? aguaMae : aguaLuzia);
+        yield return Dizer(destinatario == 1 ? depoisAguaMae : depoisAguaLuzia);
+        yield return Dizer(guardarCabacaAgua);
     }
 
     private IEnumerator ConhecerMenino()
@@ -1058,6 +1034,7 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private IEnumerator ConsultarRegistro()
     {
+        if (Dados.curraisEscolhaAgua == 0) yield break;
         yield return ConsultarFolhaNaMesa();
         yield return Dizer(ComAcompanhante(pedidoPanos));
         Dados.curraisTarefaPanosIniciada = true;
@@ -1154,6 +1131,7 @@ public partial class EntradaCurrais : MonoBehaviour
         // Uma fala na revista ou no abrigo não reposiciona nem redefine o zoom.
         bool livre = !ocupado && !menuAberto && !dialogando && !ExamineObject.IsShowing() && !PauseHelper.BlockInput();
         if (AtualizarCaminhadaFamilia(livre)) return;
+        if (AtualizarRetornoAgua(livre)) return;
         if (Dados.curraisEtapaEntrada != 4) return;
         if (planoMemoriaAtivo)
         {
@@ -1270,6 +1248,8 @@ public partial class EntradaCurrais : MonoBehaviour
         if (examePrimeiroCliqueLuzia != null && examePrimeiroCliqueLuzia.PanelIsOpen)
             examePrimeiroCliqueLuzia.HidePanel();
         exameLuziaEmCurso = false;
+        if (exameDistribuicao != null && exameDistribuicao.PanelIsOpen) exameDistribuicao.HidePanel();
+        exameDistribuicaoEmCurso = false;
         StopAllCoroutines();
         EncerrarGestoRevista();
         EncerrarLavagemELembranca();
