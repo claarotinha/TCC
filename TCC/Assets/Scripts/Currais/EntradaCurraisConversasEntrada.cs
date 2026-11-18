@@ -42,7 +42,7 @@ public partial class EntradaCurrais
         var acoes = new List<Action>();
         for (int i = 0; i < assuntos.Length; i++)
         {
-            if (ViuConversaEntrada(assuntos[i])) continue;
+            if (ViuConversaEntrada(assuntos[i]) && !AssuntoInformativoRepetivel(assuntos[i])) continue;
             int indice = i;
             disponiveis.Add(rotulos[i]);
             acoes.Add(() => Iniciar(ResponderAssuntoEntrada(assuntos[indice], respostas[indice])));
@@ -53,11 +53,16 @@ public partial class EntradaCurrais
 
     private IEnumerator ResponderAssuntoEntrada(string id, Func<IEnumerator> resposta)
     {
-        if (ViuConversaEntrada(id)) yield break;
+        if (ViuConversaEntrada(id) && !AssuntoInformativoRepetivel(id)) yield break;
         yield return resposta();
         RegistrarConversaEntrada(id);
         Salvar();
     }
+
+    private static bool AssuntoInformativoRepetivel(string id) => id.StartsWith("presenca:") ||
+        id == "mae-pano" || id == "lavagem-orientacao-lote" || id == "lavagem-irma-ouvida" ||
+        id == "patio-bento-ajuda" || id == "patio-inseguranca" || id == "familia-espera-agua" ||
+        id == "familia-depois-agua" || id == "bento-ouvir";
 
     private void FormarFilaDaFamilia(bool incluirIrma)
     {

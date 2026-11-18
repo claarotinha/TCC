@@ -56,12 +56,10 @@ public partial class EntradaCurrais
 
     private void MenuTarefaPanos()
     {
-        if (!Dados.curraisRegistroConcluido || Dados.curraisLotePanosRecolhido) return;
+        if (!Dados.curraisRegistroConcluido || Dados.curraisLotePanosEntregue) return;
         var rotulos = new System.Collections.Generic.List<string>();
         var acoes = new System.Collections.Generic.List<Action>();
-        if ((Dados.curraisPerguntasTarefaPanos & 1) == 0)
         { rotulos.Add("Quais panos?"); acoes.Add(() => Iniciar(PerguntarTarefaPanos(1, qualLotePanos))); }
-        if ((Dados.curraisPerguntasTarefaPanos & 2) == 0)
         { rotulos.Add("Onde fica a lavagem?"); acoes.Add(() => Iniciar(PerguntarTarefaPanos(2, destinatariaPanos))); }
         rotulos.Add("Sair"); acoes.Add(FecharMenu);
         MostrarMenuEntrada("nomes-servico", "Escrivão", string.Empty, rotulos.ToArray(), acoes.ToArray());
@@ -69,7 +67,6 @@ public partial class EntradaCurrais
 
     private IEnumerator PerguntarTarefaPanos(int bit, Fala[] falas)
     {
-        if ((Dados.curraisPerguntasTarefaPanos & bit) != 0) yield break;
         yield return Dizer(falas);
         Dados.curraisPerguntasTarefaPanos |= bit;
         AtualizarEstadoBusca(); Salvar();

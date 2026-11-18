@@ -114,7 +114,6 @@ public partial class EntradaCurrais
 
     private IEnumerator ConversarFamilia(int bit, Fala[] falas)
     {
-        if ((Dados.curraisPerguntasFamilia & bit) != 0) yield break;
         yield return Dizer(falas);
         Dados.curraisPerguntasFamilia |= bit;
         Salvar(); MenuCampoFamilia();

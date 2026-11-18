@@ -901,7 +901,7 @@ public partial class EntradaCurrais : MonoBehaviour
         if (RetomarAguaPeloClique()) return;
         if (!Dados.curraisPanelaConcluida && !ConviteAguaConhecido)
         { MenuLuziaAbrigoLinear(); return; }
-        if (!Dados.curraisPanelaConcluida) return;
+        if (!Dados.curraisPanelaConcluida) { MenuLuziaAbrigoLinear(); return; }
         if (Dados.curraisAguaRecebida && Dados.curraisEscolhaAgua == 0)
         {
             AbrirAssuntosEntrada("luzia-agua-recebida", "Luzia", "Você conseguiu água?",
@@ -1108,7 +1108,7 @@ public partial class EntradaCurrais : MonoBehaviour
         Physics2D.SyncTransforms();
     }
 
-    private void LateUpdate()
+    private void AtualizarCenaNoFimDoQuadro()
     {
         if (!pronto) return;
         AtualizarCompanhiaSepultamento();

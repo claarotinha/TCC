@@ -7,10 +7,10 @@ public partial class EntradaCurrais
 {
     private bool TemCadernoNaNoite => !Dados.curraisDiarioRecusado &&
         (Dados.curraisDiarioRecuperado || Dados.diaryCollected);
-    private bool TemLembrancaRefeicao => !Dados.curraisRefeicaoRelembrada &&
+    private bool TemLembrancaRefeicao =>
         Dados.secaFoodChoice >= 1 && Dados.secaFoodChoice <= 3;
-    private bool TemAssuntosCampo => (Dados.curraisPerguntasFamilia & 3) != 3;
-    private bool TemAssuntosCasa => TemLembrancaRefeicao || (Dados.curraisPerguntasFamilia & 4) == 0;
+    private bool TemAssuntosCampo => true;
+    private bool TemAssuntosCasa => true;
 
     private IEnumerator EncerrarRelatoDoQuarto()
     {
@@ -56,9 +56,7 @@ public partial class EntradaCurrais
     private void MenuCampoFamilia()
     {
         var rotulos = new List<string>(); var acoes = new List<Action>();
-        if ((Dados.curraisPerguntasFamilia & 1) == 0)
         { rotulos.Add("O que prometeram?"); acoes.Add(() => Iniciar(ConversarFamilia(1, familiaPromessas))); }
-        if ((Dados.curraisPerguntasFamilia & 2) == 0)
         { rotulos.Add("O trabalho e Bento"); acoes.Add(() => Iniciar(ConversarFamilia(2, familiaTrabalho))); }
         rotulos.Add("Voltar"); acoes.Add(MenuAbrigo);
         MostrarOpcoes("Família", string.Empty, rotulos.ToArray(), acoes.ToArray());
@@ -69,7 +67,6 @@ public partial class EntradaCurrais
         var rotulos = new List<string>(); var acoes = new List<Action>();
         if (TemLembrancaRefeicao)
         { rotulos.Add("Lembrar da refeição"); acoes.Add(() => Iniciar(RelembrarRefeicao())); }
-        if ((Dados.curraisPerguntasFamilia & 4) == 0)
         { rotulos.Add(TemCadernoNaNoite ? "O caderno" : "As coisas de casa"); acoes.Add(() => Iniciar(ConversarCasaFamilia())); }
         rotulos.Add("Voltar"); acoes.Add(MenuAbrigo);
         MostrarOpcoes("Família", string.Empty, rotulos.ToArray(), acoes.ToArray());
@@ -77,7 +74,6 @@ public partial class EntradaCurrais
 
     private IEnumerator ConversarCasaFamilia()
     {
-        if ((Dados.curraisPerguntasFamilia & 4) != 0) yield break;
         if (TemCadernoNaNoite) yield return Dizer(familiaCaderno);
         else yield return FalarPosto("Zefinha", "Eu queria lembrar das coisas de casa. Agora só penso no que vi hoje.",
             "Mãe", "Pode me contar. Num precisa guardar tudo sozinha.", "Zefinha", "E se eu esquecer?",

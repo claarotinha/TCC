@@ -81,7 +81,6 @@ public partial class EntradaCurrais
         if (!InvestigouQuarto) yield break;
         string id = mulher ? "quarto-mulher" : "quarto-homem";
         yield return ExaminarPosto(id + "-examine", mulher ? exameMulherQuarto : exameHomemQuarto);
-        if (ViuConversaEntrada(id + "-conversa")) yield break;
         MenuAssuntoNPC(mulher ? "Mulher" : "Homem", string.Empty,
             mulher ? "Como a senhora tá?" : "O senhor viu uma menina?", () => ConversarDoenteQuarto(mulher));
     }
@@ -89,7 +88,6 @@ public partial class EntradaCurrais
     private IEnumerator ConversarDoenteQuarto(bool mulher)
     {
         string id = mulher ? "quarto-mulher-conversa" : "quarto-homem-conversa";
-        if (ViuConversaEntrada(id)) yield break;
         if (mulher) yield return Dizer(doenteUmFalas);
         else if (Dados.curraisAjudouAtendimentoQuarto)
             yield return FalarPosto("Zefinha", "O senhor viu uma menina parecida comigo?", "Homem", "Num vi, não…");
@@ -107,7 +105,7 @@ public partial class EntradaCurrais
         var rotulos = new List<string>(); var acoes = new List<Action>();
         if (!ViuConversaEntrada("quarto-nome-informado"))
         { rotulos.Add("Deixar o nome de Mariquinha"); acoes.Add(() => Iniciar(InformarNomeQuarto())); }
-        if (!Dados.curraisAjudouAtendimentoQuarto && !ViuConversaEntrada("quarto-pedido-recipiente"))
+        if (!Dados.curraisAjudouAtendimentoQuarto)
         { rotulos.Add("O que tá faltando?"); acoes.Add(() => Iniciar(PedirRecipienteQuarto())); }
         rotulos.Add("Sair"); acoes.Add(FecharMenu);
         if (rotulos.Count > 1) MostrarOpcoes("Trabalhadora", string.Empty, rotulos.ToArray(), acoes.ToArray());
@@ -127,7 +125,7 @@ public partial class EntradaCurrais
 
     private IEnumerator PedirRecipienteQuarto()
     {
-        if (Dados.curraisAjudouAtendimentoQuarto || ViuConversaEntrada("quarto-pedido-recipiente")) yield break;
+        if (Dados.curraisAjudouAtendimentoQuarto) yield break;
         yield return Dizer(quartoSemCabaca);
         RegistrarConversaEntrada("quarto-pedido-recipiente"); Salvar();
     }

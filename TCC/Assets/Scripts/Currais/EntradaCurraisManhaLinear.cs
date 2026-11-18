@@ -41,8 +41,9 @@ public partial class EntradaCurrais
     private void MenuRaimundoLinear()
     {
         var rotulos = new List<string>(); var acoes = new List<Action>();
-        if (!Dados.curraisIdentidadeConfirmada)
-        { rotulos.Add("O que descobriu da mulher?"); acoes.Add(() => Iniciar(ConversarRaimundoManha())); }
+        rotulos.Add(Dados.curraisIdentidadeConfirmada ? "Relembrar o nome da mulher" : "O que descobriu da mulher?");
+        acoes.Add(() => Iniciar(Dados.curraisIdentidadeConfirmada ?
+            FalarPosto("Raimundo", "Nair Pereira. Foi a mulher que eu vi com tua irmã. Pra onde chegaram, eu num vi.") : ConversarRaimundoManha()));
         if (PodeOferecerAlca)
         { rotulos.Add("Posso proteger a alça?"); acoes.Add(() => Iniciar(PedirBaldeRaimundo())); }
         rotulos.Add("Sair"); acoes.Add(FecharMenu);

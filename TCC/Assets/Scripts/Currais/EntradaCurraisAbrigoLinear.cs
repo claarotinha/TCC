@@ -83,7 +83,7 @@ public partial class EntradaCurrais
             else MostrarPerguntasLugarAbrigo();
             return;
         }
-        // Durante a distribuição, Luzia acompanha sem reiniciar assuntos encerrados.
+        MostrarPerguntasLugarAbrigo();
     }
 
     private void MenuParenteAbrigo(bool falarComPai)
@@ -99,7 +99,6 @@ public partial class EntradaCurrais
                     new Func<IEnumerator>[] { () => Dizer(maePrecisaPano) });
             return;
         }
-        if (ConversaIntimaEncerrada) return;
         MostrarMenuEntrada(falarComPai ? "abrigo-intima-pai" : "abrigo-intima-mae",
             falarComPai ? "Pai" : "Mãe", falarComPai ? "O que foi, Josefa?" : "Venha cá, minha filha.",
             new[] { falarComPai ? "Tá doendo muito?" : "E se Mariquinha procurar nós?", "Sair" },
@@ -108,7 +107,6 @@ public partial class EntradaCurrais
 
     private IEnumerator ConversarIntimamenteAbrigo(bool falarComPai)
     {
-        if (ConversaIntimaEncerrada) yield break;
         yield return Dizer(falarComPai ? conversaIntimaPaiAbrigo : conversaIntimaMaeAbrigo);
         RegistrarConversaEntrada(falarComPai ? "abrigo-intima-pai" : "abrigo-intima-mae"); Salvar();
     }
@@ -134,7 +132,6 @@ public partial class EntradaCurrais
 
     private IEnumerator PerguntarLugarAbrigo(int bit)
     {
-        if (PerguntaLugarConhecida) yield break;
         yield return Dizer(bit == 1 ? luziaCurral : luziaSaida);
         Dados.curraisPerguntasAbrigo |= bit; Salvar();
         yield return ConvidarParaAguaAbrigo();
