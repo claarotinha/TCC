@@ -15,7 +15,7 @@ public partial class EntradaCurrais
 
     private void AtualizarRepousoFamilia()
     {
-        bool ativa = PostoDisponivel && Dados.curraisEtapaPosto == 4 && Dados.curraisEtapaConsulta == 0;
+        bool ativa = PostoDisponivel && (noiteEmCurso || Dados.curraisEtapaPosto == 4) && Dados.curraisEtapaConsulta == 0;
         if (repousoAplicado == ativa) return;
         repousoAplicado = ativa;
         if (personagensNoAbrigo == null || posesDeRepouso == null) return;
@@ -108,32 +108,21 @@ public partial class EntradaCurrais
         baldeRaimundoCenario.SetActive(pegar || (manha && Dados.curraisBaldeApoiado));
         panoAlca.SetActive(manha && Dados.curraisBaldeApoiado);
         areaBaldeRaimundo.enabled = pegar;
-        diarioNaNoite.SetActive(noiteEmCurso || (Dados.curraisEtapaPosto == 4 && Dados.curraisEtapaConsulta == 0));
+        diarioNaNoite.SetActive(TemCadernoNaNoite &&
+            (noiteEmCurso || (Dados.curraisEtapaPosto == 4 && Dados.curraisEtapaConsulta == 0)));
     }
 
     private IEnumerator ConversarFamilia(int bit, Fala[] falas)
     {
+        if ((Dados.curraisPerguntasFamilia & bit) != 0) yield break;
         yield return Dizer(falas);
         Dados.curraisPerguntasFamilia |= bit;
-        Salvar(); MenuAbrigo();
+        Salvar(); MenuCampoFamilia();
     }
 
     private void MenuLembrancasFamilia()
     {
-        bool refeicao = Dados.secaFoodChoice >= 1 && Dados.secaFoodChoice <= 3;
-        string[] rotulos = refeicao ? new[] { "Repetir as notícias", "Lembrar da refeição", "O caderno", "Voltar" }
-            : new[] { "Repetir as notícias", "O caderno", "Voltar" };
-        Action noticias = () => Iniciar(ReverNoticiasFamilia());
-        Action caderno = () => Iniciar(ConversarFamilia(4, familiaCaderno));
-        Action[] acoes = refeicao ? new Action[] { noticias, () => Iniciar(RelembrarRefeicao()), caderno, MenuAbrigo }
-            : new Action[] { noticias, caderno, MenuAbrigo };
-        MostrarOpcoes("Família", "O que você quer conversar?", rotulos, acoes);
-    }
-
-    private IEnumerator ReverNoticiasFamilia()
-    {
-        yield return NoticiasDaBusca();
-        MenuLembrancasFamilia();
+        MenuCasaFamilia();
     }
 
     private void MenuRaimundoManha()

@@ -175,7 +175,8 @@ public partial class EntradaCurrais
         if (!ViuConversaEntrada(id))
         {
             if (Dados.curraisDestinoConfirmado)
-                yield return FalarPosto("Zefinha", "O grupo foi encaminhado pra Lagoa do Meio.",
+                yield return FalarPosto("Zefinha", Dados.curraisEscolhaPosto == 2 ? "No encaminhamento tava escrito Lagoa do Meio." :
+                    "Quando perguntei pelo carro, disseram Lagoa do Meio.",
                     "Pai", "E tua irmã?", "Zefinha", "O nome dela num tava no que eu vi. Ainda preciso perguntar.");
             else yield return FalarPosto("Zefinha", "Raimundo viu uma menina parecida com ela, mas ainda num confirmou quem tava junto.");
             RegistrarConversaEntrada(id);

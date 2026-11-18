@@ -20993,9 +20993,8 @@ MonoBehaviour:
   - personagem: "M\xE3e"
     texto: Ela me contou. Disse que tu percebeu que ela ainda tava com fome.
   noitePromessa:
-  - personagem: Zefinha (em pensamentos)
-    texto: "Eu disse que n\xF3s nunca ia se largar. Ela me chamou por causa disso.
-      Eu escutei."
+  - personagem: "Zefinha (em pensamento)"
+    texto: "Eu disse que nós nunca ia se largar. Agora ela num tá aqui."
   noiteTranquilizou:
   - personagem: Zefinha (em pensamentos)
     texto: Eu disse que ia dar tudo certo. Nem sabia como era aqui.
@@ -21036,6 +21035,7 @@ MonoBehaviour:
   opcoesNoite:
   - "Contar a \xFAltima coisa que ouvi"
   - "Pedir que a m\xE3e fique perto"
+  - Sair
   objetivosPosto:
   - 
   - 

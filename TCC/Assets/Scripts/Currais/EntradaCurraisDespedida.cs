@@ -115,7 +115,8 @@ public partial class EntradaCurrais
         areaCaboQuarto.enabled = ativo && Dados.curraisEscolhaPosto != 0;
         areaDoenteUm.enabled = aberto && InvestigouQuarto;
         areaDoenteDois.enabled = aberto && InvestigouQuarto;
-        registroCopiado.SetActive(ativo && PapelAvulsoPostoPendente);
+        registroCopiado.SetActive(ativo && (PapelAvulsoPostoPendente ||
+            ((noiteEmCurso || Dados.curraisEtapaPosto == 4) && TemItem(anotacaoPosto))));
         baldesApoiadosPosto.SetActive(ativo);
         AtualizarRecipientePosto();
         cabacaComTrabalhadora.gameObject.SetActive(aberto && Dados.curraisCabacaEmprestadaQuarto);

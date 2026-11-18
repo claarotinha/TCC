@@ -41,7 +41,7 @@ public partial class EntradaCurrais
             refeicaoBaleia, refeicaoIrma, noitePromessa, noiteTranquilizou, noiteSilencio, noiteInicio, noiteContar, noitePerto };
         foreach (Fala[] falas in sequencias) valido &= FalasValidas(falas);
         if (opcoesPosto == null || opcoesPosto.Length != 3 || opcoesAbrigo == null || opcoesAbrigo.Length != 3 ||
-            opcoesNoite == null || opcoesNoite.Length != 2 || objetivosPosto == null || objetivosPosto.Length != 5 ||
+            opcoesNoite == null || opcoesNoite.Length != 3 || objetivosPosto == null || objetivosPosto.Length != 5 ||
             string.IsNullOrWhiteSpace(perguntaPosto) || string.IsNullOrWhiteSpace(perguntaNoite) ||
             cenarioNoturno == null || cenarioNoturno.Length == 0) valido = false;
         else foreach (SpriteRenderer desenho in cenarioNoturno) valido &= ConferirReferencia(desenho, nameof(cenarioNoturno));
@@ -117,7 +117,7 @@ public partial class EntradaCurrais
             else if (area == areaFamiliaAbrigo)
             {
                 if (Dados.curraisEtapaPosto == 2) MenuNoticiasPosto();
-                else MenuAbrigo();
+                else Iniciar(AbrirConversaFamilia());
             }
             else if (area == areaEsteiraNoite) MenuDescansoFamilia();
             return true;
@@ -150,6 +150,8 @@ public partial class EntradaCurrais
     private IEnumerator ContarAosPais()
     {
         yield return RelatarQuartoFamilia();
+        yield return NoticiasNovasFamilia();
+        yield return EncerrarRelatoDoQuarto();
         Dados.curraisEtapaPosto = 3;
         GameProgress.Instance.UnlockDiaryPage("currais-pais");
         AtualizarEstadoBusca(); Salvar();
@@ -158,59 +160,27 @@ public partial class EntradaCurrais
 
     private void MenuAbrigo()
     {
-        MostrarOpcoes("Família", "Podemos conversar um pouco antes de tentar descansar.",
-            new[] { "O que prometeram?", "O trabalho e Bento", "Nossa família e o caderno", "Sair" },
-            new Action[] { () => Iniciar(ConversarFamilia(1, familiaPromessas)),
-                () => Iniciar(ConversarFamilia(2, familiaTrabalho)), MenuLembrancasFamilia, FecharMenu });
+        MenuFamiliaLinear();
     }
 
     private IEnumerator RelembrarRefeicao()
     {
+        if (!TemLembrancaRefeicao) yield break;
         // A lembrança não teleporta Baleia nem altera o enquadramento.
         yield return Dizer(Dados.secaFoodChoice == 1 ? refeicaoTudo : Dados.secaFoodChoice == 2 ? refeicaoBaleia : refeicaoIrma);
         Dados.curraisRefeicaoRelembrada = true;
-        Salvar(); MenuAbrigo();
+        Salvar(); MenuLembrancasFamilia();
     }
 
     private void MenuDescansoFamilia()
     {
-        MostrarOpcoes("Mãe", "Teu lugar tá aqui, perto de mim. Ainda posso te escutar antes de a gente descansar.",
+        MostrarOpcoes("Mãe", string.Empty,
             new[] { "Ficar perto da mãe", "Conversar mais um pouco", "Sair" },
             new Action[] { () => Iniciar(PassarANoite()), MenuAbrigo, FecharMenu });
     }
 
     private IEnumerator PassarANoite()
     {
-        if (!PostoDisponivel || Dados.curraisEtapaPosto != 3) yield break;
-        yield return ChapterCard.Show("josefa-11");
-        yield return Escurecer(1f);
-        Vector3 posicaoAntesDaNoite = mari.transform.position;
-        try
-        {
-            Posicionar(mari.transform, mariNoite);
-            Posicionar(mae, maeNoite);
-            noiteEmCurso = true;
-            AtualizarPosto();
-            yield return Escurecer(0f);
-            int promessa = Dados.estradaSegundaEscolhaNoturna;
-            if (promessa >= 1 && promessa <= 3)
-                yield return Dizer(promessa == 1 ? noitePromessa : promessa == 2 ? noiteTranquilizou : noiteSilencio);
-            yield return Dizer(noiteCaderno);
-            yield return Dizer(noiteInicio);
-            yield return Escolher("Zefinha", perguntaNoite, opcoesNoite);
-            int opcao = escolhaRecebida;
-            yield return Dizer(opcao == 0 ? noiteContar : noitePerto);
-            Dados.curraisEscolhaNoite = opcao + 1;
-            Dados.curraisEtapaPosto = 4;
-            noiteEmCurso = false;
-            GameProgress.Instance.UnlockDiaryPage("currais-noite");
-            AtualizarEstadoBusca(); Salvar();
-        }
-        finally
-        {
-            noiteEmCurso = false;
-            if (Dados.curraisEtapaPosto < 4) mari.transform.position = posicaoAntesDaNoite;
-            if (!encerrando) AtualizarPosto();
-        }
+        yield return PassarNoiteLinear();
     }
 }
