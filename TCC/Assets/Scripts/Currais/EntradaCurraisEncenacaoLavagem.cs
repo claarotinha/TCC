@@ -146,13 +146,13 @@ public partial class EntradaCurrais
         finally { desenho.color = original; }
     }
 
-    private IEnumerator RetornarLuziaDaLembranca()
+    private IEnumerator OrientarAcompanhanteNaLembranca()
     {
-        Vector3 destino = luziaRetornoLembranca.position;
-        destino.y = luzia.transform.position.y;
-        yield return Mover(luzia.transform, destino, tempoPlano);
-        OlharParaMari(luzia.transform);
-        AnimarEscolta(luzia.transform, false);
+        // A acompanhante já está junto de Josefa. Não busca Luzia em outra parte da cena.
+        Transform acompanhante = Dados.curraisEscolhaAgua == 1 ? mae : luzia.transform;
+        OlharParaMari(acompanhante);
+        AnimarEscolta(acompanhante, false);
+        yield break;
     }
     private void EncerrarLavagemELembranca()
     {

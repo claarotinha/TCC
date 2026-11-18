@@ -28,7 +28,7 @@ public partial class EntradaCurrais
             nameof(guardaRonda), nameof(rondaInicio), nameof(rondaFim), nameof(retornoRonda), nameof(fimPassagem), nameof(abrigoDosSacos) };
         bool ok = true;
         for (int i = 0; i < refs.Length; i++) ok &= ConferirReferencia(refs[i], nomes[i]);
-        return ReferenciasLavagemLinearValidas() && ok && FalasValidas(instrucoesLavagem) && FalasValidas(tiraPanoAutorizada) && FalasValidas(guardaRepreensao) && FalasValidas(raimundoTrabalho) && ReferenciasEncenacaoLavagemValidas();
+        return ReferenciasPassagemLinearValidas() && ReferenciasLavagemLinearValidas() && ok && FalasValidas(instrucoesLavagem) && FalasValidas(tiraPanoAutorizada) && FalasValidas(guardaRepreensao) && FalasValidas(raimundoTrabalho) && ReferenciasEncenacaoLavagemValidas();
     }
 
     private void PrepararEtapaLavagem()
@@ -50,8 +50,10 @@ public partial class EntradaCurrais
             Dados.curraisEtapaBusca = 3;
             Dados.curraisPanosSeparados = 3;
         }
-        // Um save interrompido antes da lembrança deve poder apresentá-la novamente.
-        if (Dados.curraisEtapaBusca == 3) Dados.curraisPassagemVigiadaConcluida = false;
+        // Uma lembrança concluída não deve ser reaberta por um checkpoint antigo.
+        // Se houve interrupção antes do fim, o indicador permanece falso e a sequência retoma.
+        if (Dados.curraisEtapaBusca == 3 && Dados.curraisPassagemVigiadaConcluida)
+            Dados.curraisEtapaBusca = 4;
         if (Dados.curraisEtapaBusca == 2) GarantirPanosLavagem();
         AtualizarVisuaisLavagem();
     }
@@ -113,7 +115,7 @@ public partial class EntradaCurrais
     {
         if (!Dados.curraisPanelaConcluida || Dados.curraisEtapaBusca < 3 || Dados.curraisEtapaBusca > 5 ||
             !guardaRonda.gameObject.activeInHierarchy) return;
-        if (ocupado || menuAberto || dialogando || PauseHelper.BlockInput() || Time.timeScale <= 0f ||
+        if (ocupado || menuAberto || dialogando || PainelAuxiliarAberto() || PauseHelper.BlockInput() || Time.timeScale <= 0f ||
             (InventoryTabController.Instance != null && InventoryTabController.Instance.IsOpen))
         { AnimarEscolta(guardaRonda, false); return; }
         if (pausaRonda > 0f) { pausaRonda -= Time.deltaTime; AnimarEscolta(guardaRonda, false); }
@@ -130,7 +132,7 @@ public partial class EntradaCurrais
             if (Vector3.Distance(guardaRonda.position, destino) < .01f)
             { rondaVaiAoFim = !rondaVaiAoFim; pausaRonda = 1.2f; }
         }
-        if (Dados.curraisEtapaBusca != 3 || Dados.curraisPassagemVigiadaConcluida) return;
+        if (Dados.curraisEtapaBusca != 3 || !Dados.curraisTiraPanoRecolhida || Dados.curraisPassagemVigiadaConcluida) return;
         if (mari.transform.position.x >= inicioLembranca.position.x)
         {
             Iniciar(LembrarLenda());

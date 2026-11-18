@@ -1113,6 +1113,14 @@ public partial class EntradaCurrais : MonoBehaviour
             return;
         }
         if (ConsultaDisponivel) { AtualizarAcompanhamentoConsulta(livre); return; }
+        // A escolha da água continua valendo na lavagem, na passagem e na chegada ao pátio.
+        if (!PostoDisponivel && Dados.curraisPanelaConcluida &&
+            Dados.curraisEtapaBusca >= 1 && Dados.curraisEtapaBusca <= 4)
+        {
+            seguidoraMae.enabled = livre && Dados.curraisEscolhaAgua == 1;
+            seguidoraLuzia.enabled = livre && Dados.curraisEscolhaAgua == 2;
+            return;
+        }
         bool buscaComLuzia = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 1 &&
             (!PostoDisponivel || Dados.curraisEtapaPosto < 2);
         bool luziaAcompanha = buscaComLuzia || (!PostoDisponivel && Dados.curraisDistribuicaoIniciada && Dados.curraisEscolhaAgua != 1);

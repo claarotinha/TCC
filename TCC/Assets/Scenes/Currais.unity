@@ -19292,13 +19292,13 @@ MonoBehaviour:
   - personagem: Luzia
     texto: "N\xF3s pergunta mais quando terminar de ajudar."
   lembrancaCorpo:
-  - personagem: "Pai (lembran\xE7a)"
+  - personagem: "Pai — lembrança"
     texto: "A terra tamb\xE9m num quis guardar o corpo dele."
   lembrancaComadre:
-  - personagem: "Pai (lembran\xE7a)"
+  - personagem: "Pai — lembrança"
     texto: Se tu ouvir um assobio fininho no meio da mata...
   lembrancaAgua:
-  - personagem: "Pai (lembran\xE7a)"
+  - personagem: "Pai — lembrança"
     texto: "Faz o cabra esquecer at\xE9 o pr\xF3prio nome."
   lembrancaRetorno:
   - personagem: Luzia
@@ -19600,6 +19600,58 @@ MonoBehaviour:
     texto: "Vou guardar pra dar a Raimundo."
   - personagem: "Luzia"
     texto: "Venha. A passagem pro pátio é por aqui."
+  exameGuardaPassagem: {fileID: 9933000040}
+  guardaPassagemPergunta:
+  - personagem: "Zefinha"
+    texto: "É por aqui que chega no carregamento?"
+  - personagem: "Guarda"
+    texto: "É. Nada de mexer nos sacos."
+  guardaPassagemMae:
+  - personagem: "Mãe"
+    texto: "Nós vai encontrar meu marido."
+  guardaPassagemLuzia:
+  - personagem: "Luzia"
+    texto: "Nós só tá passando."
+  chamadaPassagemMae:
+  - personagem: "Mãe"
+    texto: "Josefa. Olhe pra mainha. Eu tô aqui contigo."
+  chamadaPassagemLuzia:
+  - personagem: "Luzia"
+    texto: "Josefa. Olhe pra mim. Nós ainda tá aqui."
+  reacaoCorpoPassagem:
+  - personagem: "Zefinha"
+    texto: "Tinha alguém ali na cerca."
+  - personagem: "ACOMPANHANTE"
+    texto: "Olhe de novo, Josefa. É a sombra do galho."
+  reacaoComadrePassagem:
+  - personagem: "Zefinha"
+    texto: "Eu escutei ela."
+  - personagem: "ACOMPANHANTE"
+    texto: "Eu escutei o guarda assobiar. Vem pelo lado de cá."
+  reacaoAguaPassagem:
+  - personagem: "Zefinha"
+    texto: "Eu vi Mariquinha."
+  - personagem: "ACOMPANHANTE"
+    texto: "Onde, minha filha?"
+  - personagem: "Zefinha"
+    texto: "Ali… agora num tá mais."
+  reacaoSemLendaPassagem:
+  - personagem: "Zefinha"
+    texto: "Por um instante eu perdi o caminho."
+  - personagem: "ACOMPANHANTE"
+    texto: "Vem. Eu fico perto de tu."
+  continuarPassagemMae:
+  - personagem: "Mãe"
+    texto: "Vamos encontrar teu pai."
+  - personagem: "Zefinha"
+    texto: "Fique perto de mim, mainha."
+  - personagem: "Mãe"
+    texto: "Eu fico."
+  continuarPassagemLuzia:
+  - personagem: "Luzia"
+    texto: "Teu pai tá no carregamento, logo adiante."
+  - personagem: "Zefinha"
+    texto: "Vamos."
   exameLavadeiraLinear: {fileID: 9933000030}
   examePilhaUso: {fileID: 9933000031}
   examePilhaAtendimento: {fileID: 9933000032}
@@ -35627,6 +35679,7 @@ GameObject:
   - component: {fileID: 9807000203}
   - component: {fileID: 9807000204}
   - component: {fileID: 9807000205}
+  - component: {fileID: 9933000040}
   m_Layer: 0
   m_Name: Guarda em ronda - passagem vigiada
   m_TagString: Untagged
@@ -51753,3 +51806,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &9933000040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9807000200}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "O guarda percorre a passagem entre os sacos. De tempos em tempos, olha para quem atravessa."

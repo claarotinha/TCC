@@ -77,7 +77,8 @@ public partial class EntradaCurrais
         if (etapa >= 1 && (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))
         {
             if (seguidoraMae != null) seguidoraMae.enabled = false;
-            Posicionar(mae, maeAbrigo);
+            if (Dados.curraisEscolhaAgua != 1 || Dados.curraisEtapaBusca > 4)
+                Posicionar(mae, maeAbrigo);
             luzia.transform.localRotation = Quaternion.identity;
             if (etapa >= 4) Posicionar(pai, paiTrabalhoMarca);
             if (etapa >= 6) Posicionar(pai, paiAbrigo);
@@ -117,7 +118,7 @@ public partial class EntradaCurrais
             }
             else if (area == areaLavadeira && PrimeiraBuscaEmCurso) MenuLavadeiraNaBusca();
             else if (area == areaLuzia && PrimeiraBuscaEmCurso) ConversarLuziaNaBusca();
-            else if (area == areaGuardaRonda && PrimeiraBuscaEmCurso) MenuAssuntoNPC("Guarda", "O que você quer?", "Perguntar sobre a passagem", () => Dizer(guardaPassagemFalas));
+            else if (area == areaGuardaRonda && PrimeiraBuscaEmCurso) Iniciar(AbrirGuardaPassagem());
             else if (area == areaPanoLavagem && etapa == 2) Iniciar(RecolherTiraLavagem());
             else if (area == areaLembranca && etapa == 3)
             {
@@ -163,6 +164,16 @@ public partial class EntradaCurrais
     private void RestaurarLuziaNaBusca()
     {
         if (!Dados.curraisPanelaConcluida || Dados.curraisEtapaBusca < 1) return;
+        if (Dados.curraisEscolhaAgua == 1 && Dados.curraisEtapaBusca <= 4)
+        {
+            Vector3 posicaoMae = mae.position;
+            SpriteRenderer visual = mari.GetComponent<SpriteRenderer>();
+            float direcao = visual != null && visual.flipX ? -1f : 1f;
+            posicaoMae.x = mari.transform.position.x - direcao * seguidoraMae.DistanciaAtras;
+            mae.position = posicaoMae;
+            Physics2D.SyncTransforms();
+            return;
+        }
         Vector3 posicao = luzia.transform.position;
         posicao.x = mari.transform.position.x - seguidoraLuzia.DistanciaAtras;
         luzia.transform.position = posicao;
@@ -173,8 +184,9 @@ public partial class EntradaCurrais
 
     private IEnumerator LembrarLenda()
     {
+        if (lembrancaEmCurso || Dados.curraisEtapaBusca != 3 ||
+            !Dados.curraisTiraPanoRecolhida || Dados.curraisPassagemVigiadaConcluida) yield break;
         EncerrarOportunidadeLavadeira();
-        if (lembrancaEmCurso || Dados.curraisEtapaBusca != 3) yield break;
         lembrancaEmCurso = true;
         try
         {
@@ -200,8 +212,16 @@ public partial class EntradaCurrais
                 yield return MostrarPercepcaoGradual(reflexoZefinha);
                 yield return Esperar(tempoPlano);
             }
-            yield return RetornarLuziaDaLembranca();
-            yield return Dizer(historia >= 1 && historia <= 3 ? lembrancaRetorno : lembrancaSemLenda);
+            yield return OrientarAcompanhanteNaLembranca();
+            yield return Dizer(Dados.curraisEscolhaAgua == 1 ? chamadaPassagemMae : chamadaPassagemLuzia);
+            Fala[] reacao = historia == 1 ? reacaoCorpoPassagem :
+                historia == 2 ? reacaoComadrePassagem : historia == 3 ? reacaoAguaPassagem : reacaoSemLendaPassagem;
+            yield return Dizer(new[] { reacao[0] });
+            OcultarPercepcao();
+            Fala[] resposta = new Fala[reacao.Length - 1];
+            Array.Copy(reacao, 1, resposta, 0, resposta.Length);
+            yield return Dizer(ComAcompanhante(resposta));
+            yield return Dizer(Dados.curraisEscolhaAgua == 1 ? continuarPassagemMae : continuarPassagemLuzia);
             Dados.curraisPassagemVigiadaConcluida = true;
             GameProgress.Instance.UnlockDiaryPage("currais-corredor");
             AvancarCampo(4);
