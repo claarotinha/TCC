@@ -6329,6 +6329,7 @@ GameObject:
   - component: {fileID: 1156249498}
   - component: {fileID: 8800000012}
   - component: {fileID: 8800001002}
+  - component: {fileID: 9933000050}
   m_Layer: 0
   m_Name: Painho
   m_TagString: Untagged
@@ -19600,6 +19601,156 @@ MonoBehaviour:
     texto: "Vou guardar pra dar a Raimundo."
   - personagem: "Luzia"
     texto: "Venha. A passagem pro pátio é por aqui."
+  areaPanoLimpoApoio: {fileID: 9933000054}
+  alcanceLevarAguaPatio: 5
+  alcanceChegadaPatio: 7
+  patioChegadaMae:
+  - personagem: "Zefinha"
+    texto: "Botaram painho pra carregar?"
+  - personagem: "Mãe"
+    texto: "Eu vou falar com ele."
+  patioChegadaLuzia:
+  - personagem: "Zefinha"
+    texto: "É painho ali na carroça?"
+  - personagem: "Luzia"
+    texto: "É. Vamos chegar perto."
+  patioPaiAbertura:
+  - personagem: "Zefinha"
+    texto: "Painho, o senhor num devia tá levantando isso."
+  - personagem: "Pai"
+    texto: "Eu tô usando o outro braço."
+  - personagem: "Zefinha"
+    texto: "Mas tá doendo. Eu tô vendo."
+  patioProtestoMae:
+  - personagem: "Mãe"
+    texto: "Ele foi ferido na entrada. Precisa descansar."
+  patioProtestoLuzia:
+  - personagem: "Luzia"
+    texto: "Ele já avisou que num consegue carregar."
+  patioFiscalReplica:
+  - personagem: "Fiscal"
+    texto: "Tem carga esperando."
+  patioApresentarBento:
+  - personagem: "Zefinha"
+    texto: "E se ele num conseguir?"
+  - personagem: "Pai"
+    texto: "Josefa, fique perto. Num entre no meio dos carros."
+  - personagem: "Zefinha"
+    texto: "Aquele homem também tá passando mal."
+  - personagem: "Pai"
+    texto: "É Bento. Tá assim desde cedo."
+  patioPaiEntregaPano:
+  - personagem: "Pai"
+    texto: "Veja naquele apoio se tem alguma coisa pra nós beber."
+  - personagem: "Pai"
+    texto: "Leve esse pano também. Pergunte se serve lá."
+  - personagem: "Zefinha"
+    texto: "O senhor num vai precisar?"
+  - personagem: "Pai"
+    texto: "Aqui na minha mão ele num ajuda ninguém."
+  patioBentoAjuda:
+  - personagem: "Zefinha"
+    texto: "O senhor precisa de ajuda?"
+  - personagem: "Bento"
+    texto: "Só queria tomar um ar."
+  - personagem: "Zefinha"
+    texto: "Num pode sentar um pouco?"
+  - personagem: "Bento"
+    texto: "Quando eu paro, a carga fica."
+  - personagem: "Zefinha"
+    texto: "Eu posso chamar alguém."
+  - personagem: "Bento"
+    texto: "Veja se tem água, menina."
+  patioFiscalPedido:
+  - personagem: "Zefinha"
+    texto: "Deixe painho parar um pouco."
+  - personagem: "Fiscal"
+    texto: "Vá ficar com sua família."
+  - personagem: "Zefinha"
+    texto: "Eu tô falando dele."
+  - personagem: "Fiscal"
+    texto: "Eu ouvi."
+  patioApoioPedido:
+  - personagem: "Zefinha"
+    texto: "Tem água pros homens da carroça?"
+  - personagem: "Trabalhador"
+    texto: "Tem uma porção separada. Tu tem recipiente?"
+  - personagem: "Zefinha"
+    texto: "Tenho nossa cabaça."
+  - personagem: "Trabalhador"
+    texto: "Traga aqui."
+  - personagem: "Trabalhador"
+    texto: "E esse pano limpo? Pode deixar no apoio? Nós tá sem nenhum."
+  - personagem: "Zefinha"
+    texto: "Se alguém precisar, vai ter aqui?"
+  - personagem: "Trabalhador"
+    texto: "É pra isso."
+  patioAguaRecebida:
+  - personagem: "Trabalhador"
+    texto: "Segure firme. É pouca, mas dá pra levar."
+  - personagem: "Zefinha"
+    texto: "Vou levar pra eles."
+  patioPanoEntregue:
+  - personagem: "Zefinha"
+    texto: "Vou deixar dobrado aqui."
+  - personagem: "Trabalhador"
+    texto: "Obrigado, menina."
+  patioInseguranca:
+  - personagem: "Zefinha"
+    texto: "Eu num sei se isso vai ajudar."
+  - personagem: "ACOMPANHANTE"
+    texto: "Leve o que conseguiu. Nós fica perto deles."
+  patioLevarAgua:
+  - personagem: "Zefinha"
+    texto: "Painho, consegui água."
+  - personagem: "Pai"
+    texto: "Dê primeiro a Bento."
+  - personagem: "Zefinha"
+    texto: "Seu Bento?"
+  patioAntesQueda:
+  - personagem: "Fiscal"
+    texto: "Deixe de demora. Tem mais carro esperando."
+  - personagem: "Bento"
+    texto: "Eu num tô conseguindo…"
+  - personagem: "Zefinha"
+    texto: "Ele precisa parar."
+  - personagem: "Pai"
+    texto: "Bento, solte isso!"
+  patioDepoisQueda:
+  - personagem: "Pai"
+    texto: "O homem caiu!"
+  - personagem: "Fiscal"
+    texto: "Cada um no seu serviço."
+  - personagem: "Zefinha"
+    texto: "Mas ele tá no chão!"
+  patioPensamentoMari:
+  - personagem: "Mari — pensamento"
+    texto: "Eu tô aqui…"
+  - personagem: "Mari — pensamento"
+    texto: "Essa mão… é da bisa."
+  - personagem: "Mari — pensamento"
+    texto: "Mas eu tô sentindo."
+  patioReacaoMae:
+  - personagem: "Mãe"
+    texto: "Josefa, fique comigo."
+  - personagem: "Zefinha"
+    texto: "Mainha, nós pode ajudar?"
+  - personagem: "Mãe"
+    texto: "Vamos tentar. Traga a água."
+  patioReacaoLuzia:
+  - personagem: "Luzia"
+    texto: "Josefa. Olhe pra mim."
+  - personagem: "Zefinha"
+    texto: "Ele ainda pode ouvir nós?"
+  - personagem: "Luzia"
+    texto: "Vamos chegar perto. Traga a água."
+  patioAutorizarPano:
+  - personagem: "Trabalhador"
+    texto: "Menina, pegue o pano que tu deixou. Ainda tá limpo."
+  examePaiTrabalho: {fileID: 9933000050}
+  exameBentoTrabalho: {fileID: 9933000051}
+  exameFiscalTrabalho: {fileID: 9933000052}
+  exameApoioTrabalho: {fileID: 9933000053}
   exameGuardaPassagem: {fileID: 9933000040}
   guardaPassagemPergunta:
   - personagem: "Zefinha"
@@ -25352,6 +25503,7 @@ GameObject:
   - component: {fileID: 4300000084}
   - component: {fileID: 4300000085}
   - component: {fileID: 9840000001}
+  - component: {fileID: 9933000051}
   m_Layer: 0
   m_Name: "Bento - ciclo original e posi\xE7\xE3o do socorro"
   m_TagString: Untagged
@@ -25494,6 +25646,7 @@ GameObject:
   - component: {fileID: 4300000089}
   - component: {fileID: 8800000022}
   - component: {fileID: 8800001012}
+  - component: {fileID: 9933000052}
   m_Layer: 0
   m_Name: Fiscal do trabalho
   m_TagString: Untagged
@@ -36260,6 +36413,7 @@ GameObject:
   - component: {fileID: 9808000101}
   - component: {fileID: 9808000102}
   - component: {fileID: 9808000103}
+  - component: {fileID: 9933000053}
   m_Layer: 0
   m_Name: "Apoio do p\xE1tio - entregar pano"
   m_TagString: Untagged
@@ -36677,6 +36831,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9808000401}
   - component: {fileID: 9808000402}
+  - component: {fileID: 9933000054}
   m_Layer: 0
   m_Name: "Pano entregue no apoio do p\xE1tio"
   m_TagString: Untagged
@@ -51821,3 +51976,109 @@ MonoBehaviour:
   examinePanel: {fileID: 3000000053}
   examineText: {fileID: 3000000061}
   message: "O guarda percorre a passagem entre os sacos. De tempos em tempos, olha para quem atravessa."
+--- !u!114 &9933000050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156249495}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Ele mantém o braço ferido junto ao corpo. Com a outra mão, tenta firmar a carga."
+--- !u!114 &9933000051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000082}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "O homem se apoia na carroça entre um esforço e outro. A respiração demora a se acalmar."
+--- !u!114 &9933000052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300000086}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "O fiscal observa o carregamento. Quando alguém diminui o passo, ele se aproxima."
+--- !u!114 &9933000053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9808000100}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "Há um espaço separado para os feridos. O trabalhador procura alguma coisa entre os poucos materiais."
+--- !u!61 &9933000054
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9808000400}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 2.33, y: 1.04}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0

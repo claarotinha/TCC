@@ -205,9 +205,9 @@ public partial class EntradaCurrais
         if (Dados.curraisEtapaBusca == 2 && (alvo == areaPanosUso || alvo == areaPanosAtendimento) &&
             (item == panoUsoLavagem || item == panoAtendimentoLavagem))
         { Iniciar(SepararPanoLavagem(alvo == areaPanosAtendimento)); return true; }
-        if (Dados.curraisEtapaBusca == 4 && alvo == areaAguaPatio && item == cabacaVaziaBusca)
+        if (Dados.curraisEtapaBusca == 4 && ApoioPatioAutorizado && !Dados.curraisAguaPatioPreparada && alvo == areaAguaPatio && item == cabacaVaziaBusca)
         { Iniciar(PrepararAguaPatio()); return true; }
-        if (Dados.curraisEtapaBusca == 4 && alvo == areaPanosPatio && item == panoAuxilio)
+        if (Dados.curraisEtapaBusca == 4 && ApoioPatioAutorizado && !Dados.curraisPanosPatioEntregues && alvo == areaPanosPatio && item == panoAuxilio)
         { Iniciar(EntregarPanosPatio()); return true; }
         if (Dados.curraisEtapaBusca == 5 && (alvo == areaSocorroBento || alvo == areaBentoPatio || alvo == areaPaiPatio) &&
             (item == panoAuxilio || item == cabacaCheiaBusca))

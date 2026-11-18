@@ -1105,6 +1105,7 @@ public partial class EntradaCurrais : MonoBehaviour
         if (AtualizarRetornoAgua(livre)) return;
         if (AtualizarAproximacaoRaimundo(livre)) return;
         if (AtualizarAproximacaoLavagem(livre)) return;
+        if (AtualizarAproximacaoPatio(livre)) return;
         if (Dados.curraisEtapaEntrada != 4) return;
         if (planoMemoriaAtivo)
         {
@@ -1115,7 +1116,7 @@ public partial class EntradaCurrais : MonoBehaviour
         if (ConsultaDisponivel) { AtualizarAcompanhamentoConsulta(livre); return; }
         // A escolha da água continua valendo na lavagem, na passagem e na chegada ao pátio.
         if (!PostoDisponivel && Dados.curraisPanelaConcluida &&
-            Dados.curraisEtapaBusca >= 1 && Dados.curraisEtapaBusca <= 4)
+            Dados.curraisEtapaBusca >= 1 && Dados.curraisEtapaBusca <= 5)
         {
             seguidoraMae.enabled = livre && Dados.curraisEscolhaAgua == 1;
             seguidoraLuzia.enabled = livre && Dados.curraisEscolhaAgua == 2;

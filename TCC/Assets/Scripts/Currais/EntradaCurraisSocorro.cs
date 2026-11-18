@@ -67,40 +67,34 @@ public partial class EntradaCurrais
         areaSocorroBento.enabled = socorro;
         cabacaSocorro.SetActive(socorro && (Dados.curraisItensAtendimentoBento & 2) != 0 && !Dados.curraisCabacaSocorroRecolhida);
         areaCabacaSocorro.enabled = cabacaSocorro.activeSelf && Dados.curraisBentoMorto;
-        panosEntreguesPatio.SetActive(Dados.curraisPanosPatioEntregues);
-        areaPanoAtendimento.gameObject.SetActive(socorro && PrecisaRecolherPanoSocorro);
+        bool panoDisponivel = Dados.curraisPanosPatioEntregues &&
+            !ViuConversaEntrada("patio-pano-retomado") && !(socorro && TemItem(panoAuxilio));
+        panosEntreguesPatio.SetActive(panoDisponivel);
+        areaPanoLimpoApoio.enabled = PanoDoApoioDisponivel;
+        if ((patio || socorro) && Dados.curraisEscolhaAgua == 1) areaMae.enabled = true;
+        areaPanoAtendimento.gameObject.SetActive(socorro && Dados.curraisBentoMorto && PrecisaRecolherPanoSocorro);
         AtualizarDetalhesPatio();
     }
 
     private IEnumerator PrepararAguaPatio()
     {
-        if (Dados.curraisAguaPatioPreparada) { yield return Dizer(patioVoltarPai); yield break; }
-        if (!TemItem(cabacaVaziaBusca) || InventoryManager.Instance.SelectedItem != cabacaVaziaBusca)
-        {
-            yield return Dizer(patioFaltaAgua);
-            yield break;
-        }
+        if (Dados.curraisEtapaBusca != 4 || !ApoioPatioAutorizado || Dados.curraisAguaPatioPreparada ||
+            !TemItem(cabacaVaziaBusca) || InventoryManager.Instance.SelectedItem != cabacaVaziaBusca) yield break;
         InventoryManager.Instance.RemoveItem(cabacaVaziaBusca);
         InventoryManager.Instance.AddItem(cabacaCheiaBusca);
         Dados.curraisAguaPatioPreparada = true;
         AtualizarEstadoBusca(); Salvar();
-        yield return Dizer(aguaPatioFalas);
-        if (Dados.curraisPanosPatioEntregues) yield return Dizer(patioVoltarPai);
+        yield return Dizer(patioAguaRecebida);
     }
 
     private IEnumerator EntregarPanosPatio()
     {
-        if (Dados.curraisPanosPatioEntregues) { yield return Dizer(patioVoltarPai); yield break; }
-        if (!TemItem(panoAuxilio) || InventoryManager.Instance.SelectedItem != panoAuxilio)
-        {
-            yield return Dizer(tarefaPatioFalas);
-            yield break;
-        }
+        if (Dados.curraisEtapaBusca != 4 || !ApoioPatioAutorizado || Dados.curraisPanosPatioEntregues ||
+            !TemItem(panoAuxilio) || InventoryManager.Instance.SelectedItem != panoAuxilio) yield break;
         Dados.curraisPanosPatioEntregues = true;
         InventoryManager.Instance.RemoveItem(panoAuxilio);
         AtualizarEstadoBusca(); Salvar();
-        yield return Dizer(new[] { new Fala { personagem = "Trabalhador", texto = "Deixe o pano aqui. Obrigado, menina." } });
-        if (Dados.curraisAguaPatioPreparada) yield return Dizer(patioVoltarPai);
+        yield return Dizer(patioPanoEntregue);
     }
 
     private IEnumerator UsarNoSocorro()
@@ -115,14 +109,14 @@ public partial class EntradaCurrais
                 Dados.curraisItensAtendimentoBento |= 1;
                 InventoryManager.Instance.RemoveItem(panoAuxilio);
                 AtualizarEstadoBusca(); Salvar();
-                yield return Dizer(new[] { new Fala { personagem = "Luzia", texto = "Segure o pano aqui. Isso. Deixe os homens atenderem ele." } });
+                yield return Dizer(new[] { new Fala { personagem = NomeAcompanhantePatio, texto = "Segure o pano aqui. Isso. Deixe os homens atenderem ele." } });
             }
             else if (selecionado == cabacaCheiaBusca && TemItem(cabacaCheiaBusca) && (Dados.curraisItensAtendimentoBento & 2) == 0)
             {
                 Dados.curraisItensAtendimentoBento |= 2;
                 InventoryManager.Instance.RemoveItem(cabacaCheiaBusca);
                 AtualizarEstadoBusca(); Salvar();
-                yield return Dizer(new[] { new Fala { personagem = "Luzia", texto = "Deixe a água com nós, Josefa. Obrigada." } });
+                yield return Dizer(new[] { new Fala { personagem = NomeAcompanhantePatio, texto = "Deixe a água com nós, Josefa. Obrigada." } });
             }
             else
             {

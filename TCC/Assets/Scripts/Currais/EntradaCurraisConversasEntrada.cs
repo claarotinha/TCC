@@ -80,6 +80,18 @@ public partial class EntradaCurrais
 
     private void MenuPresencaSemRepetir(PessoaPresente pessoa)
     {
+        if (Dados.curraisEtapaBusca <= 4 && pessoa.personagem == bento.gameObject)
+        { Iniciar(AbrirBentoPatioLinear()); return; }
+        if (Dados.curraisEtapaBusca <= 4 && pessoa.personagem == fiscalTrabalho.gameObject)
+        { Iniciar(AbrirFiscalPatioLinear()); return; }
+        if (Dados.curraisEtapaBusca == 4)
+        {
+            if (pessoa.personagem == pai.gameObject) { Iniciar(AbrirPaiPatioLinear()); return; }
+            if (pessoa.personagem == bento.gameObject) { Iniciar(AbrirBentoPatioLinear()); return; }
+            if (pessoa.personagem == fiscalTrabalho.gameObject) { Iniciar(AbrirFiscalPatioLinear()); return; }
+            if (pessoa.personagem == mae.gameObject && Dados.curraisEscolhaAgua == 1)
+            { ConversarAcompanhantePatioLinear(); return; }
+        }
         if (pessoa.personagem == guardaRonda.gameObject)
         { Iniciar(AbrirGuardaPassagem()); return; }
         if (pessoa.nome == "Lavadeira") { MenuLavadeiraNaBusca(); return; }

@@ -271,7 +271,8 @@ public partial class EntradaCurrais
     [Header("Primeiro encontro — apresentação de Luzia")]
     [SerializeField] private Fala[] apresentacaoLuziaInicio, apresentacaoLuziaDepoisDoNome, apresentacaoLuziaTardia;
 
-    private string NomeDaPessoa(string pessoa) => pessoa == "Luzia" && !Dados.curraisLuziaApresentada
+    private string NomeDaPessoa(string pessoa) => pessoa == "Bento" && !BentoApresentadoPatio
+        ? "Trabalhador" : pessoa == "Luzia" && !Dados.curraisLuziaApresentada
         ? "Mulher" : pessoa == "Raimundo" && !NomeRaimundoConhecido ? "Homem" : pessoa;
 
     private IEnumerator ApresentarLuzia(Action continuar)

@@ -77,7 +77,7 @@ public partial class EntradaCurrais
         if (etapa >= 1 && (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))
         {
             if (seguidoraMae != null) seguidoraMae.enabled = false;
-            if (Dados.curraisEscolhaAgua != 1 || Dados.curraisEtapaBusca > 4)
+            if (Dados.curraisEscolhaAgua != 1 || Dados.curraisEtapaBusca > 5)
                 Posicionar(mae, maeAbrigo);
             luzia.transform.localRotation = Quaternion.identity;
             if (etapa >= 4) Posicionar(pai, paiTrabalhoMarca);
@@ -124,7 +124,7 @@ public partial class EntradaCurrais
             {
                 Iniciar(LembrarLenda());
             }
-            else if (area == areaPatio && etapa == 4) Iniciar(TestemunharTrabalho());
+            else if (area == areaPatio && etapa == 4) Iniciar(AbrirPaiPatioLinear());
             else if (area == areaPanoAtendimento && etapa == 5) Iniciar(AjudarBento());
             else objetivoTexto.text = string.Empty;
             return true;
@@ -164,7 +164,7 @@ public partial class EntradaCurrais
     private void RestaurarLuziaNaBusca()
     {
         if (!Dados.curraisPanelaConcluida || Dados.curraisEtapaBusca < 1) return;
-        if (Dados.curraisEscolhaAgua == 1 && Dados.curraisEtapaBusca <= 4)
+        if (Dados.curraisEscolhaAgua == 1 && Dados.curraisEtapaBusca <= 5)
         {
             Vector3 posicaoMae = mae.position;
             SpriteRenderer visual = mari.GetComponent<SpriteRenderer>();
@@ -233,34 +233,20 @@ public partial class EntradaCurrais
         }
     }
 
-    private IEnumerator TestemunharTrabalho()
-    {
-        if (!Dados.curraisTrabalhoPatioIniciado)
-        {
-            Dados.curraisTrabalhoPatioIniciado = true;
-            if (!TemItem(panoAuxilio)) InventoryManager.Instance.AddItem(panoAuxilio);
-            AtualizarEstadoBusca(); Salvar();
-            yield return Dizer(patioInicio);
-            yield return Dizer(tarefaPatioFalas);
-            yield break;
-        }
-        if (!Dados.curraisAguaPatioPreparada || !Dados.curraisPanosPatioEntregues)
-        { yield return Dizer(tarefaPatioFalas); yield break; }
-        if (Mathf.Abs(mari.transform.position.x - pai.position.x) > alcanceInteracao)
-        { yield return Dizer(patioVoltarPai); yield break; }
-        yield return AgressaoNoPatio();
-    }
+    private IEnumerator TestemunharTrabalho() { yield return ConversarPaiPatioLinear(); }
 
     private IEnumerator AgressaoNoPatio()
     {
         if (agressaoPatioEmCurso || Dados.curraisEtapaBusca != 4 ||
-            !Dados.curraisAguaPatioPreparada || !Dados.curraisPanosPatioEntregues) yield break;
+            !Dados.curraisAguaPatioPreparada || !Dados.curraisPanosPatioEntregues ||
+            !TemItem(cabacaCheiaBusca) || !PaiNoAlcancePatio) yield break;
         agressaoPatioEmCurso = true;
         QuadrosAmbiente cicloBento = bento.GetComponent<QuadrosAmbiente>();
         bool cicloAtivo = cicloBento != null && cicloBento.enabled;
         try
         {
-            yield return Dizer(patioAgressao);
+            yield return Dizer(patioLevarAgua);
+            yield return Dizer(patioAntesQueda);
             yield return Escurecer(1f);
             if (cicloBento != null) cicloBento.enabled = false;
             Posicionar(bento, bentoCaido);
@@ -270,9 +256,12 @@ public partial class EntradaCurrais
             AtualizarDetalhesPatio();
             yield return Esperar(.35f);
             yield return Escurecer(0f);
+            yield return Dizer(patioDepoisQueda);
             yield return Dizer(patioRetirada);
             panoCarregado.SetActive(false);
-            yield return Dizer(corpoDistante);
+            yield return Dizer(patioPensamentoMari);
+            yield return Dizer(Dados.curraisEscolhaAgua == 1 ? patioReacaoMae : patioReacaoLuzia);
+            yield return Dizer(patioAutorizarPano);
             AvancarCampo(5);
         }
         finally
@@ -286,10 +275,11 @@ public partial class EntradaCurrais
 
     private IEnumerator AjudarBento()
     {
-        if (!PrecisaRecolherPanoSocorro) yield break;
+        if (!PrecisaRecolherPanoSocorro || Dados.curraisEtapaBusca != 5) yield break;
+        if (!Dados.curraisBentoMorto && !PanoDoApoioDisponivel) yield break;
         yield return ExaminarOuColetar(panoAuxilio);
         if (!coletaDoCenarioConfirmada) yield break;
+        if (!Dados.curraisBentoMorto) RegistrarConversaEntrada("patio-pano-retomado");
         AtualizarEstadoBusca(); Salvar();
-
     }
 }
