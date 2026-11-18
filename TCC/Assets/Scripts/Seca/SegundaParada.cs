@@ -2350,11 +2350,29 @@ public class SegundaParada : MonoBehaviour
 
     private void MostrarPoseNoite(GameObject alvo, Sprite sprite)
     {
-        SpriteRenderer desenho = alvo.GetComponent<SpriteRenderer>();
-        desenho.sprite = sprite;
-        desenho.color = Color.white;
-        desenho.enabled = true;
+        if (alvo == null) return;
         alvo.SetActive(true);
+
+        // Os personagens sentados sao sprites filhos editaveis na Hierarchy.
+        // A sequencia noturna desativa os renderizadores do grupo original;
+        // reativa-los aqui evita que as poses fiquem invisiveis.
+        SpriteRenderer[] filhos = alvo.GetComponentsInChildren<SpriteRenderer>(true);
+        bool possuiPersonagens = false;
+        foreach (SpriteRenderer filho in filhos)
+        {
+            if (filho.gameObject == alvo || filho.sprite == null) continue;
+            filho.gameObject.SetActive(true);
+            filho.enabled = true;
+            filho.color = Color.white;
+            possuiPersonagens = true;
+        }
+
+        SpriteRenderer desenho = alvo.GetComponent<SpriteRenderer>();
+        if (desenho == null) return;
+        // Nao desenhar a imagem agrupada sobre os personagens individuais.
+        desenho.enabled = !possuiPersonagens && sprite != null;
+        if (!possuiPersonagens && sprite != null) desenho.sprite = sprite;
+        desenho.color = Color.white;
     }
 
     private void MostrarImagemNoite(Sprite[] quadros, Image alvo = null)
