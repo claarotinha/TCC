@@ -208,8 +208,11 @@ public partial class EntradaCurrais
 
     private void MenuNoticiasPosto()
     {
-        if (ViuConversaEntrada("quarto-noticia-contada")) { MenuAbrigo(); return; }
-        MenuAssuntoNPC("Pai", string.Empty, "Contar o que descobriu", ContarAosPais);
+        // A notícia pode ter sido salva antes de a conversa avançar para a noite.
+        // Retoma a conclusão sem repetir as falas já registradas.
+        if (Dados.curraisEtapaPosto != 2) { MenuAbrigo(); return; }
+        MenuAssuntoNPC("Pai", string.Empty, ViuConversaEntrada("quarto-noticia-contada") ?
+            "Continuar a conversa" : "Contar o que descobriu", ContarAosPais);
     }
 
     private IEnumerator NoticiasPostoLinear()

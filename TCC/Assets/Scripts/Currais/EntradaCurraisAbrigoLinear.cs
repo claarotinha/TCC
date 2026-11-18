@@ -68,6 +68,7 @@ public partial class EntradaCurrais
 
     private void MenuLuziaAbrigoLinear()
     {
+        if (RetomarAguaPeloClique()) return;
         if (!Dados.curraisFamiliaParou) return;
         if (!Dados.curraisLuziaApresentada)
         { SolicitarContatoLuzia(MenuLuziaAbrigoLinear); return; }
@@ -88,6 +89,8 @@ public partial class EntradaCurrais
     private void MenuParenteAbrigo(bool falarComPai)
     {
         if (!Dados.curraisFamiliaParou) return;
+        // A água tem prioridade sobre os assuntos já encerrados do primeiro abrigo.
+        if (RetomarAguaPeloClique()) return;
         if (!Dados.curraisPaiAcomodado)
         {
             if (!falarComPai && PedidoPanoConhecido)

@@ -53,8 +53,8 @@ public partial class EntradaCurrais
         if (Dados.curraisEtapaEntrada == 3) areaMae.enabled = true;
         bool agua = primeiroAbrigo && Dados.curraisAguaRecebida;
         cabacaComMari.gameObject.SetActive(agua && Dados.curraisEscolhaAgua == 0 && recebendoAguaAbrigo == 0);
-        cabacaComMae.gameObject.SetActive(agua && (recebendoAguaAbrigo == 1 || Dados.curraisEscolhaAgua == 1));
-        cabacaComLuzia.gameObject.SetActive(agua && (recebendoAguaAbrigo == 2 || Dados.curraisEscolhaAgua == 2));
+        cabacaComMae.gameObject.SetActive(agua && recebendoAguaAbrigo == 1);
+        cabacaComLuzia.gameObject.SetActive(agua && recebendoAguaAbrigo == 2);
         cabacaComMari.color = new Color(.65f, .85f, 1f, 1f);
         Color corEntrega = recebendoAguaAbrigo != 0 ? cabacaComMari.color : Color.white;
         cabacaComMae.color = corEntrega;

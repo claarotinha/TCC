@@ -897,6 +897,7 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void AbrirMenuLuzia()
     {
+        if (RetomarAguaPeloClique()) return;
         if (!Dados.curraisPanelaConcluida && !ConviteAguaConhecido)
         { MenuLuziaAbrigoLinear(); return; }
         if (!Dados.curraisPanelaConcluida) return;

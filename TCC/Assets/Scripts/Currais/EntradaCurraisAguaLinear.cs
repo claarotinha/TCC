@@ -21,6 +21,9 @@ public partial class EntradaCurrais
         Dados.curraisAguaRecebida || Dados.curraisEscolhaAgua != 0;
     private bool PodeEncherCabaca => ConviteAguaConhecido && Dados.curraisPaiAcomodado &&
         Dados.curraisEtapaEntrada == 4 && Dados.curraisCabacaDevolvida && VezAguaChamada && !Dados.curraisAguaRecebida;
+    private bool RetornoAguaPendente => !Dados.curraisPanelaConcluida && Dados.curraisEtapaEntrada == 4 &&
+        Dados.curraisAguaRecebida && Dados.curraisEscolhaAgua == 0;
+
     private bool PodeEscolherAgua => Dados.curraisAguaRecebida && Dados.curraisEscolhaAgua == 0 &&
         ViuConversaEntrada("agua-retorno-abrigo");
 
@@ -94,20 +97,41 @@ public partial class EntradaCurrais
         if (livre && !Dados.curraisPanelaConcluida && ConviteAguaConhecido &&
             Dados.curraisCabacaDevolvida && !VezAguaChamada)
         { Iniciar(ChamarVezDaAgua()); return true; }
-        if (!livre || Dados.curraisPanelaConcluida || Dados.curraisEtapaEntrada != 4 ||
-            !Dados.curraisAguaRecebida || Dados.curraisEscolhaAgua != 0 ||
+        if (!livre || !RetornoAguaPendente ||
             ViuConversaEntrada("agua-retorno-abrigo")) return false;
-        if (Mathf.Abs(mari.transform.position.x - mae.position.x) > alcanceRetornoAgua) return false;
+        float distanciaMae = Mathf.Abs(mari.transform.position.x - mae.position.x);
+        float distanciaPai = Mathf.Abs(mari.transform.position.x - pai.position.x);
+        if (Mathf.Min(distanciaMae, distanciaPai) > alcanceRetornoAgua) return false;
         Iniciar(RetornarComAgua());
         return true;
     }
 
     private IEnumerator RetornarComAgua()
     {
+        if (!RetornoAguaPendente) yield break;
+        if (ViuConversaEntrada("agua-retorno-abrigo"))
+        { MostrarEntregaAguaAbrigo(); yield break; }
         yield return Dizer(retornoAbrigoAgua);
         // A porção oferecida ao pai não esvazia o recipiente: resta água para a escolha.
         yield return BeberAguaAbrigo(1);
         yield return Dizer(necessidadeAguaAbrigo);
         RegistrarConversaEntrada("agua-retorno-abrigo"); Salvar();
+        MostrarEntregaAguaAbrigo();
+    }
+
+    private bool RetomarAguaPeloClique()
+    {
+        if (!RetornoAguaPendente) return false;
+        if (!ViuConversaEntrada("agua-retorno-abrigo")) Iniciar(RetornarComAgua());
+        else MostrarEntregaAguaAbrigo();
+        return true;
+    }
+
+    private void MostrarEntregaAguaAbrigo()
+    {
+        if (!PodeEscolherAgua || !TemItem(cabacaCheiaBusca)) return;
+        MostrarOpcoes("Zefinha", "Ainda resta água na cabaça.",
+            new[] { "Oferecer à mãe", "Oferecer a Luzia", "Sair" },
+            new Action[] { () => Iniciar(DestinarAgua(1)), () => Iniciar(DestinarAgua(2)), FecharMenu });
     }
 }
