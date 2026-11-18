@@ -77,11 +77,6 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private ItemCombination combinacaoFogueira;
     [SerializeField] private Sprite fogueiraMontada, fogueiraAcesa, fogueiraAssando, fogueiraBrasas;
     [SerializeField] private Sprite irmasAcordadas, irmasAcordadasCurativo;
-    [SerializeField] private Sprite irmasDormindo;
-    [SerializeField] private Sprite irmasDormindoCurativo;
-    [SerializeField] private Sprite irmasPromessa;
-    [SerializeField] private Sprite irmasSilencio;
-    [SerializeField] private Sprite irmasSilencioCurativo;
     [SerializeField] private Sprite paisAcordados;
     [SerializeField] private GameObject arvoreAcampamento, fogueiraCenario, irmasCenario, paisCenario;
     [SerializeField] private GameObject[] materiaisCenario = new GameObject[3];
@@ -95,7 +90,9 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private Image imagemNoite;
     [SerializeField] private Sprite[] quadrosIrmasAcordadas, quadrosIrmasPromessa;
     [SerializeField] private Sprite[] quadrosIrmasSilencio, quadrosIrmasDormindo;
-    [SerializeField] private Sprite paisDeitados;
+    [SerializeField] private Sprite[] quadrosPaisDeitados;
+    [SerializeField] private Image imagemIrmasDormindo, imagemPaisDormindo;
+    private Image imagemNoiteAtual;
     private Sprite[] quadrosNoiteAtuais;
     private float tempoImagemNoite;
     private SpriteRenderer[] cenarioHorario;
@@ -106,7 +103,6 @@ public class SegundaParada : MonoBehaviour
     private bool segundaEscolhaNoturnaAberta;
     private int materiaisAcampamento, primeiraEscolhaNoturna, segundaEscolhaNoturna;
     private float fracaoPainelNoite;
-    private int focoNoite;
 
     [Header("Fortaleza - fim do ato 1")]
     [SerializeField] private Sprite cenarioFortaleza;
@@ -171,9 +167,7 @@ public class SegundaParada : MonoBehaviour
     [SerializeField] private Transform riacho, casa;
 
     [Header("Posicionamento na Hierarchy")]
-    [SerializeField] private GameObject interiorAbrigo, familiaAcampamento;
-    [Header("Foto da família dormindo - editar no Canvas da cena")]
-    [SerializeField] private GameObject fotoFamiliaDormindo;
+    [SerializeField] private GameObject interiorAbrigo;
     [SerializeField] private GameObject placaJuazeiroCenario, placaEntradaFortaleza;
     [SerializeField] private GameObject[] pistasBusca = new GameObject[3];
     [SerializeField] private GameObject alvoBaleia;
@@ -474,7 +468,7 @@ public class SegundaParada : MonoBehaviour
 
     private void LiberarMovimento()
     {
-        if (!movimentoBloqueado) return;
+        if (!movimentoBloqueado || noiteEmAndamento) return;
         if (mari != null) mari.enabled = movimentoAnterior;
         movimentoBloqueado = false;
     }
@@ -645,8 +639,8 @@ public class SegundaParada : MonoBehaviour
             }
             yield return null;
         }
-        MostrarBaleia(baleiaComPrea);
         baleiaSeguraPrea = true;
+        MostrarBaleia(baleiaComPrea);
         tempoBaleiaComPrea = 0f;
         fugindo = false;
     }
@@ -661,7 +655,9 @@ public class SegundaParada : MonoBehaviour
         // Os quadros mantem os pes na mesma altura, sem saltos de escala.
         Bounds anterior = LimitesVisiveis(spriteBaleia);
         Bounds atual = LimitesVisiveis(sprite);
-        float proporcao = anterior.size.y / Mathf.Max(0.01f, atual.size.y);
+        Sprite referencia = baleiaSeguraPrea && quadrosBaleiaComPrea != null && quadrosBaleiaComPrea.Length > 0
+            ? quadrosBaleiaComPrea[0] : fugindo && corridaBaleia != null && corridaBaleia.Length > 0 ? corridaBaleia[0] : sprite;
+        float proporcao = anterior.size.y / Mathf.Max(0.01f, LimitesVisiveis(referencia).size.y);
         baleia.localScale = escalaBaleia * proporcao;
         Vector3 posicao = baleia.position;
         posicao.y += pe - baleia.TransformPoint(atual.min).y;
@@ -1314,7 +1310,7 @@ public class SegundaParada : MonoBehaviour
         RegistrarAlvo(juazeiroCenario, "juazeiro"); RegistrarAlvo(familiaDescanso, "descansoJuazeiro");
         RegistrarAlvo(arvoreAcampamento, "arvoreAcampamento"); RegistrarAlvo(fogueiraCenario, "fogueira");
         RegistrarAlvo(irmasCenario, "irmasNoite"); RegistrarAlvo(paisCenario, "paisNoite");
-        RegistrarAlvo(familiaAcampamento, "familiaAcampamento"); RegistrarAlvo(interiorAbrigo, "interiorAbrigo");
+        RegistrarAlvo(interiorAbrigo, "interiorAbrigo");
         RegistrarAlvo(cidadeCenario, "cidade"); RegistrarAlvo(familiaFinal, "familiaFinal");
         RegistrarAlvo(alvoBaleia, "baleia");
         for (int i = 0; i < pistasBusca.Length; i++) RegistrarAlvo(pistasBusca[i], "pegada" + i);
@@ -2011,14 +2007,14 @@ public class SegundaParada : MonoBehaviour
             acampamentoConcluido = d.estradaAcampamentoConcluido;
         }
         if (quintaParada == null || arvoreAcampamento == null || fogueiraCenario == null ||
-            irmasCenario == null || paisCenario == null || familiaAcampamento == null || juazeiroSprite == null || familiaDescanso == null ||
+            irmasCenario == null || paisCenario == null || juazeiroSprite == null || familiaDescanso == null ||
             mari == null || mae == null || pai == null || mariquinha == null || baleia == null ||
             galhosSecos == null || folhasSecas == null || galhosAlecrim == null || passaro == null || prea == null ||
             galhosSecos.icon == null || folhasSecas.icon == null || galhosAlecrim.icon == null ||
             fogueiraMontada == null || fogueiraAcesa == null || fogueiraAssando == null || fogueiraBrasas == null ||
-            irmasAcordadas == null || irmasAcordadasCurativo == null || irmasDormindo == null ||
-            irmasDormindoCurativo == null || irmasPromessa == null || irmasSilencio == null ||
-            irmasSilencioCurativo == null || paisAcordados == null)
+            irmasAcordadas == null || irmasAcordadasCurativo == null || paisAcordados == null ||
+            noiteTelaCheia == null || imagemNoite == null || imagemIrmasDormindo == null || imagemPaisDormindo == null ||
+            quadrosIrmasAcordadas.Length == 0 || quadrosIrmasDormindo.Length == 0 || quadrosPaisDeitados.Length == 0)
         {
             Debug.LogError("SegundaParada: faltam referencias dos materiais, fogueira ou poses da ultima noite.", this);
             return;
@@ -2030,7 +2026,7 @@ public class SegundaParada : MonoBehaviour
             if (pessoa == mari.transform || pessoa == mariquinha.transform || pessoa == mae.transform ||
                 pessoa == pai.transform || pessoa == baleia || desenho.gameObject == familiaDescanso ||
                 desenho.gameObject == irmasCenario || desenho.gameObject == paisCenario || desenho.gameObject == fogueiraCenario ||
-                desenho.gameObject == familiaAcampamento || desenho.gameObject == interiorAbrigo) continue;
+                desenho.gameObject == interiorAbrigo) continue;
             desenhos.Add(desenho);
         }
         cenarioHorario = desenhos.ToArray();
@@ -2303,23 +2299,13 @@ public class SegundaParada : MonoBehaviour
         fracaoPainelNoite = Mathf.Clamp(topo / Mathf.Max(1f, Screen.height), 0f, 0.85f);
     }
 
-    private Bounds AreaFocoNoite()
-    {
-        GameObject alvo = focoNoite == 1 ? irmasCenario : focoNoite == 2 ? paisCenario : familiaAcampamento;
-        Bounds area = alvo.GetComponent<SpriteRenderer>().bounds;
-        if (focoNoite == 0)
-        {
-            area.Encapsulate(arvoreAcampamento.GetComponent<SpriteRenderer>().bounds);
-            area.Encapsulate(fogueiraCenario.GetComponent<SpriteRenderer>().bounds);
-        }
-        return area;
-    }
-
     private void EnquadrarNoite()
     {
-        // One stable composition includes everyone, even when the speaker changes.
+        if (noiteTelaCheia != null && noiteTelaCheia.activeInHierarchy) return;
+        // A composição sentada usa as posições editadas na Hierarchy.
         Bounds area = paisCenario.GetComponent<SpriteRenderer>().bounds;
-        area.Encapsulate(irmasCenario.GetComponent<SpriteRenderer>().bounds);
+        foreach (SpriteRenderer parte in paisCenario.GetComponentsInChildren<SpriteRenderer>()) area.Encapsulate(parte.bounds);
+        foreach (SpriteRenderer parte in irmasCenario.GetComponentsInChildren<SpriteRenderer>()) area.Encapsulate(parte.bounds);
         area.Encapsulate(fogueiraCenario.GetComponent<SpriteRenderer>().bounds);
         float espacoUtil = Mathf.Max(.35f, 1f - fracaoPainelNoite);
         float zoom = Mathf.Max(zoomOriginal, (area.size.y + 1.2f) / (2f * espacoUtil),
@@ -2340,30 +2326,25 @@ public class SegundaParada : MonoBehaviour
 
     private void MostrarPoseNoite(GameObject alvo, Sprite sprite)
     {
-        TrocarVisualCenario(alvo, sprite, true);
+        alvo.GetComponent<SpriteRenderer>().sprite = sprite;
         alvo.GetComponent<SpriteRenderer>().color = Color.white;
         alvo.SetActive(true);
     }
 
-    private void PosicionarGrupoFogueira()
+    private void MostrarImagemNoite(Sprite[] quadros, Image alvo = null)
     {
-        // Os quatro desenhos sentados permanecem juntos durante a conversa da família.
-        Vector3 centro = fogueiraCenario.transform.position;
-        Vector3 lugar = paisCenario.transform.position;
-        lugar.x = centro.x - 3f;
-        paisCenario.transform.position = lugar;
-        lugar = irmasCenario.transform.position;
-        lugar.x = centro.x + 1.6f;
-        irmasCenario.transform.position = lugar;
-    }
-
-    private void MostrarImagemNoite(Sprite[] quadros)
-    {
-        if (noiteTelaCheia == null || imagemNoite == null || quadros == null || quadros.Length == 0) return;
+        if (noiteTelaCheia == null || quadros == null || quadros.Length == 0) return;
+        imagemNoiteAtual = alvo != null ? alvo : imagemNoite;
+        if (imagemNoiteAtual == null) return;
+        imagemNoite.gameObject.SetActive(imagemNoite == imagemNoiteAtual);
+        imagemIrmasDormindo.gameObject.SetActive(imagemIrmasDormindo == imagemNoiteAtual);
+        imagemPaisDormindo.gameObject.SetActive(imagemPaisDormindo == imagemNoiteAtual);
         quadrosNoiteAtuais = quadros;
         tempoImagemNoite = 0f;
-        imagemNoite.sprite = quadros[0];
-        imagemNoite.preserveAspect = true;
+        imagemNoiteAtual.sprite = quadros[0];
+        imagemNoiteAtual.preserveAspect = true;
+        irmasCenario.SetActive(false);
+        paisCenario.SetActive(false);
         noiteTelaCheia.SetActive(true);
         noiteTelaCheia.transform.SetAsLastSibling();
         dialogueUI.transform.SetAsLastSibling();
@@ -2371,16 +2352,15 @@ public class SegundaParada : MonoBehaviour
 
     private void MostrarImagemPais()
     {
-        if (paisDeitados == null) return;
-        MostrarImagemNoite(new[] { paisDeitados });
+        MostrarImagemNoite(quadrosPaisDeitados, imagemPaisDormindo);
     }
 
     private void AtualizarImagemNoite()
     {
-        if (noiteTelaCheia == null || !noiteTelaCheia.activeInHierarchy || imagemNoite == null ||
+        if (noiteTelaCheia == null || !noiteTelaCheia.activeInHierarchy || imagemNoiteAtual == null ||
             quadrosNoiteAtuais == null || quadrosNoiteAtuais.Length == 0 || PauseHelper.BlockInput()) return;
         tempoImagemNoite += Time.deltaTime;
-        imagemNoite.sprite = quadrosNoiteAtuais[Mathf.FloorToInt(tempoImagemNoite / .24f) % quadrosNoiteAtuais.Length];
+        imagemNoiteAtual.sprite = quadrosNoiteAtuais[Mathf.FloorToInt(tempoImagemNoite / .24f) % quadrosNoiteAtuais.Length];
     }
 
     private void IniciarNoiteAcampamento()
@@ -2400,20 +2380,16 @@ public class SegundaParada : MonoBehaviour
         Vector3 lugar = mari.transform.position; lugar.x = quintaParada.position.x + 2f; Posicionar(mari.transform, lugar);
         for (int i = 0; i < desenhosAbrigo.Length; i++)
             if (desenhosAbrigo[i] != null) desenhosAbrigo[i].enabled = false;
-        familiaAcampamento.SetActive(false);
+
         MostrarPoseNoite(paisCenario, paisAcordados);
         MostrarPoseNoite(irmasCenario, JanelaQuebrada ? irmasAcordadasCurativo : irmasAcordadas);
         MostrarFogueira(fogueiraAssando);
-        PosicionarGrupoFogueira();
-        focoNoite = 0;
+
         if (conversaFogueiraConcluida)
         {
-            familiaAcampamento.SetActive(false);
             MostrarFogueira(fogueiraBrasas);
-            MostrarPoseNoite(paisCenario, paisAcordados);
-            MostrarPoseNoite(irmasCenario, conversaIrmasConcluida ? SpriteIrmasDormindo() :
-                JanelaQuebrada ? irmasAcordadasCurativo : irmasAcordadas);
-            focoNoite = conversaIrmasConcluida || conversaPaisConcluida ? 2 : 1;
+            if (conversaIrmasConcluida || conversaPaisConcluida) MostrarImagemPais();
+            else MostrarImagemNoite(quadrosIrmasAcordadas);
         }
         EnquadrarNoite();
         yield return Escurecer(0f); RestaurarFade();
@@ -2456,10 +2432,10 @@ public class SegundaParada : MonoBehaviour
     private IEnumerator MostrarCenaIrmas()
     {
         PrepararFade(); yield return Escurecer(1f);
-        familiaAcampamento.SetActive(false); MostrarFogueira(fogueiraBrasas);
+        MostrarFogueira(fogueiraBrasas);
         MostrarPoseNoite(irmasCenario, JanelaQuebrada ? irmasAcordadasCurativo : irmasAcordadas);
         MostrarPoseNoite(paisCenario, paisAcordados);
-        focoNoite = 1; EnquadrarNoite();
+        EnquadrarNoite();
         MostrarImagemNoite(quadrosIrmasAcordadas);
         yield return Escurecer(0f); RestaurarFade(); sequenciaAbrigo = false;
         RetomarConversaIrmas();
@@ -2580,7 +2556,6 @@ public class SegundaParada : MonoBehaviour
 
     private void ConcluirSilencioNoturno()
     {
-        MostrarPoseNoite(irmasCenario, JanelaQuebrada ? irmasSilencioCurativo : irmasSilencio);
         Falar(new[] { "Zefinha (em pensamentos)" }, new[] {
             "Eu queria prometer… Mas nem sei o que vai acontecer amanhã."
         }, () => StartCoroutine(EncerrarConversaIrmas()));
@@ -2590,20 +2565,13 @@ public class SegundaParada : MonoBehaviour
     {
         sequenciaAbrigo = true; BloquearMovimento();
         if (segundaEscolhaNoturna == 3) yield return new WaitForSeconds(1.8f);
-        // Somente a promessa sem ferimento mostra as maos entrelacadas.
+        // A imagem de dormir aparece só depois da última fala das irmãs.
         PrepararFade(); yield return Escurecer(1f);
-        MostrarPoseNoite(irmasCenario, SpriteIrmasDormindo());
-        MostrarImagemNoite(quadrosIrmasDormindo);
+        MostrarImagemNoite(quadrosIrmasDormindo, imagemIrmasDormindo);
         yield return Escurecer(0f); RestaurarFade();
         yield return new WaitForSeconds(3f);
         conversaIrmasConcluida = true; SalvarAcampamento();
         sequenciaAbrigo = false; IniciarCenaPais();
-    }
-
-    private Sprite SpriteIrmasDormindo()
-    {
-        return JanelaQuebrada ? irmasDormindoCurativo :
-            primeiraEscolhaNoturna == 2 && segundaEscolhaNoturna == 1 ? irmasPromessa : irmasDormindo;
     }
 
     private void IniciarCenaPais()
@@ -2615,10 +2583,6 @@ public class SegundaParada : MonoBehaviour
     private IEnumerator MostrarCenaPais()
     {
         PrepararFade(); yield return Escurecer(1f);
-        familiaAcampamento.SetActive(false);
-        MostrarPoseNoite(paisCenario, paisAcordados);
-        MostrarPoseNoite(irmasCenario, SpriteIrmasDormindo());
-        focoNoite = 2; EnquadrarNoite();
         MostrarImagemPais();
         yield return Escurecer(0f); RestaurarFade(); sequenciaAbrigo = false;
         ConversarPaisNoite();
@@ -2644,10 +2608,6 @@ public class SegundaParada : MonoBehaviour
     {
         // A fotografia da casa pertence apenas ao abrigo da segunda parada.
         MostrarImagemPais();
-        familiaAcampamento.SetActive(false);
-        MostrarPoseNoite(paisCenario, paisAcordados);
-        focoNoite = 2; EnquadrarNoite();
-        EnquadrarNoite();
         yield return new WaitForSeconds(2.5f);
         PrepararFade(); yield return Escurecer(1f);
         yield return new WaitForSeconds(1.4f);
@@ -2971,7 +2931,6 @@ public class SegundaParada : MonoBehaviour
         if (transicaoCurraisPreparada) return;
         RestaurarFundoFim();
         if (familiaFinal != null) familiaFinal.SetActive(false);
-        if (familiaAcampamento != null) familiaAcampamento.SetActive(false);
         finalEmAndamento = false; encerramentoMostrado = false;
         if (irmasCenario != null) irmasCenario.SetActive(false);
         if (paisCenario != null) paisCenario.SetActive(false);
