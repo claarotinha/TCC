@@ -35,7 +35,7 @@ public class SleepBed : MonoBehaviour
     [SerializeField] private Button closeReadingButton;
     [SerializeField] private GameObject sleepingImage;
     [SerializeField] private ExamineObject tiredExamine;
-    private Vector2 noAnchorMin, noAnchorMax;
+    private Vector2 noAnchorMin, noAnchorMax, noPosition;
     private bool readBeforeSleeping;
     private bool readingClosed;
     private bool[] previousRendererStates;
@@ -100,7 +100,7 @@ public class SleepBed : MonoBehaviour
             examine.enabled = false;
 
         RectTransform noRect = noButton.GetComponent<RectTransform>();
-        noAnchorMin = noRect.anchorMin; noAnchorMax = noRect.anchorMax;
+        noAnchorMin = noRect.anchorMin; noAnchorMax = noRect.anchorMax; noPosition = noRect.anchoredPosition;
         confirmPanel.SetActive(false);
         sequencePanel.SetActive(false);
 
@@ -135,8 +135,9 @@ public class SleepBed : MonoBehaviour
 
         yesButton.gameObject.SetActive(CanSleep);
         RectTransform noRect = noButton.GetComponent<RectTransform>();
-        noRect.anchorMin = CanSleep ? noAnchorMin : new Vector2(.36f, noAnchorMin.y);
-        noRect.anchorMax = CanSleep ? noAnchorMax : new Vector2(.64f, noAnchorMax.y);
+        noRect.anchorMin = CanSleep ? noAnchorMin : new Vector2(.5f, noAnchorMin.y);
+        noRect.anchorMax = CanSleep ? noAnchorMax : new Vector2(.5f, noAnchorMax.y);
+        noRect.anchoredPosition = CanSleep ? noPosition : new Vector2(0f, noPosition.y);
         TMP_Text yesText = yesButton.GetComponentInChildren<TMP_Text>(true);
         if (yesText != null) yesText.text = "Sim";
 

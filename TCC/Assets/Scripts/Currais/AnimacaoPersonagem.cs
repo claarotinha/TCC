@@ -8,6 +8,13 @@ public class AnimacaoPersonagem : MonoBehaviour
 {
     [SerializeField] private Sprite[] repouso;
     [SerializeField] private Sprite[] corrida;
+    [SerializeField] private Sprite[] caminhada;
+    private Sprite[] caminhadaPreparada;
+    [Header("Mariquinha - estados da mão")]
+    [SerializeField] private Sprite[] repousoSangue, caminhadaSangue, corridaSangue;
+    [SerializeField] private Sprite[] repousoCurativo, caminhadaCurativo, corridaCurativo;
+    private Sprite[][] estadosDaMao;
+    private int estadoDaMao;
     [SerializeField, Min(0.02f)] private float intervaloRepouso = .25f;
     [SerializeField, Min(0.02f)] private float intervaloCorrida = .13f;
     private Sprite[] repousoPreparado, corridaPreparada;
@@ -31,16 +38,33 @@ public class AnimacaoPersonagem : MonoBehaviour
             Vector2 pivo = new Vector2(referencia.pivot.x / referencia.rect.width, referencia.pivot.y / referencia.rect.height);
             repousoPreparado = PrepararQuadros(repouso, referencia.bounds.size.y, pivo);
             corridaPreparada = PrepararQuadros(corrida, referencia.bounds.size.y, pivo);
+            caminhadaPreparada = PrepararQuadros(caminhada, referencia.bounds.size.y, pivo);
+            estadosDaMao = new[] {
+                PrepararQuadros(repousoSangue, referencia.bounds.size.y, pivo),
+                PrepararQuadros(caminhadaSangue, referencia.bounds.size.y, pivo),
+                PrepararQuadros(corridaSangue, referencia.bounds.size.y, pivo),
+                PrepararQuadros(repousoCurativo, referencia.bounds.size.y, pivo),
+                PrepararQuadros(caminhadaCurativo, referencia.bounds.size.y, pivo),
+                PrepararQuadros(corridaCurativo, referencia.bounds.size.y, pivo)
+            };
         }
     }
 
     private void OnEnable() => posicaoAnterior = transform.position;
 
+    public void DefinirFerimento(bool ferida, bool tratada)
+    {
+        int novo = !ferida ? 0 : tratada ? 2 : 1;
+        if (novo != estadoDaMao) { tempo = 0f; estadoAnterior = -1; }
+        estadoDaMao = novo;
+        if (animador != null) animador.enabled = true;
+    }
+
     private void LateUpdate()
     {
         float deslocamento = transform.position.x - posicaoAnterior.x;
         posicaoAnterior = transform.position;
-        // Ferimentos e sequências de memória desativam o Animator de propósito.
+        // As sequências de memória ainda podem desativar a animação.
         if (animador == null || !animador.enabled) return;
 
         bool emFila = seguidor != null && seguidor.isActiveAndEnabled;
@@ -56,10 +80,15 @@ public class AnimacaoPersonagem : MonoBehaviour
         if (estado != estadoAnterior) tempo = 0f;
         else if (!PauseHelper.BlockInput()) tempo += Time.deltaTime;
         estadoAnterior = estado;
-        Sprite[] quadros = estado == 0 ? repousoPreparado : estado == 2 ? corridaPreparada : null;
+        Sprite[] quadros = estado == 0 ? repousoPreparado : estado == 2 ? corridaPreparada : caminhadaPreparada;
+        if (estadoDaMao > 0 && estadosDaMao != null)
+        {
+            Sprite[] ferimento = estadosDaMao[(estadoDaMao - 1) * 3 + estado];
+            if (ferimento != null && ferimento.Length > 0) quadros = ferimento;
+        }
         if (quadros != null && quadros.Length > 0)
         {
-            float intervalo = estado == 0 ? intervaloRepouso : intervaloCorrida;
+            float intervalo = estado == 2 ? intervaloCorrida : intervaloRepouso;
             desenho.sprite = quadros[Mathf.FloorToInt(tempo / Mathf.Max(.02f, intervalo)) % quadros.Length];
         }
     }
@@ -81,5 +110,9 @@ public class AnimacaoPersonagem : MonoBehaviour
     {
         if (repousoPreparado != null) foreach (Sprite quadro in repousoPreparado) if (quadro != null) Destroy(quadro);
         if (corridaPreparada != null) foreach (Sprite quadro in corridaPreparada) if (quadro != null) Destroy(quadro);
+        if (caminhadaPreparada != null) foreach (Sprite quadro in caminhadaPreparada) if (quadro != null) Destroy(quadro);
+        if (estadosDaMao != null)
+            foreach (Sprite[] estado in estadosDaMao)
+                if (estado != null) foreach (Sprite quadro in estado) if (quadro != null) Destroy(quadro);
     }
 }

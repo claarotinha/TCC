@@ -1025,6 +1025,13 @@ public class SegundaParada : MonoBehaviour
     private void AplicarFerimento()
     {
         if (visualMariquinha == null || spriteMariquinhaNormal == null) return;
+        AnimacaoPersonagem animacao = visualMariquinha.GetComponent<AnimacaoPersonagem>();
+        if (animacao != null)
+        {
+            animacao.DefinirFerimento(JanelaQuebrada, curativoAplicado);
+            if (JanelaQuebrada) mariquinha.DistanciaAtras = Mathf.Max(mariquinha.DistanciaAtras, 1.8f);
+            return;
+        }
         float pe = visualMariquinha.bounds.min.y;
         Sprite sprite = spriteMariquinhaNormal;
         if (JanelaQuebrada)
@@ -1990,6 +1997,8 @@ public class SegundaParada : MonoBehaviour
 
     private void PrepararAcampamento()
     {
+        if (irmasCenario != null) irmasCenario.SetActive(false);
+        if (paisCenario != null) paisCenario.SetActive(false);
         if (GameProgress.Instance != null)
         {
             GameProgressData d = GameProgress.Instance.Data;
@@ -2303,16 +2312,31 @@ public class SegundaParada : MonoBehaviour
     {
         if (noiteTelaCheia != null && noiteTelaCheia.activeInHierarchy) return;
         // A composição sentada usa as posições editadas na Hierarchy.
-        Bounds area = paisCenario.GetComponent<SpriteRenderer>().bounds;
-        foreach (SpriteRenderer parte in paisCenario.GetComponentsInChildren<SpriteRenderer>()) area.Encapsulate(parte.bounds);
-        foreach (SpriteRenderer parte in irmasCenario.GetComponentsInChildren<SpriteRenderer>()) area.Encapsulate(parte.bounds);
-        area.Encapsulate(fogueiraCenario.GetComponent<SpriteRenderer>().bounds);
+        // Bounds de renderers desativados podem incluir a origem do mundo.
+        // A geometria local dos sprites funciona também no primeiro quadro da cena.
+        Bounds area = new Bounds(paisCenario.transform.position, Vector3.zero);
+        IncluirDesenhosNoite(ref area, paisCenario);
+        IncluirDesenhosNoite(ref area, irmasCenario);
+        IncluirDesenhosNoite(ref area, fogueiraCenario);
         float espacoUtil = Mathf.Max(.35f, 1f - fracaoPainelNoite);
         float zoom = Mathf.Max(zoomOriginal, (area.size.y + 1.2f) / (2f * espacoUtil),
             (area.size.x + 2f) / (2f * cameraAbrigo.aspect));
         cameraAbrigo.orthographicSize = zoom;
         cameraAbrigo.transform.position = new Vector3(LimitarCameraNoiteX(area.center.x, zoom),
             area.min.y - .6f + zoom * (1f - 2f * fracaoPainelNoite), cameraOriginal.z);
+    }
+
+    private static void IncluirDesenhosNoite(ref Bounds area, GameObject grupo)
+    {
+        foreach (SpriteRenderer desenho in grupo.GetComponentsInChildren<SpriteRenderer>(true))
+        {
+            if (desenho.sprite == null) continue;
+            Bounds local = desenho.sprite.bounds;
+            for (int x = 0; x < 2; x++)
+                for (int y = 0; y < 2; y++)
+                    area.Encapsulate(desenho.transform.TransformPoint(new Vector3(
+                        x == 0 ? local.min.x : local.max.x, y == 0 ? local.min.y : local.max.y, 0f)));
+        }
     }
 
     private float LimitarCameraNoiteX(float x, float zoom)
@@ -2326,8 +2350,10 @@ public class SegundaParada : MonoBehaviour
 
     private void MostrarPoseNoite(GameObject alvo, Sprite sprite)
     {
-        alvo.GetComponent<SpriteRenderer>().sprite = sprite;
-        alvo.GetComponent<SpriteRenderer>().color = Color.white;
+        SpriteRenderer desenho = alvo.GetComponent<SpriteRenderer>();
+        desenho.sprite = sprite;
+        desenho.color = Color.white;
+        desenho.enabled = true;
         alvo.SetActive(true);
     }
 
