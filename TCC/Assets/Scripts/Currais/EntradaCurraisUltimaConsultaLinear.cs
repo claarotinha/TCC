@@ -110,7 +110,7 @@ public partial class EntradaCurrais
         }
         yield return Dizer(consultaConcluida);
         yield return DeslocarFolhaRegistro(papelConsulta.transform, papelConsulta.transform.position + Vector3.right * 2f, .45f);
-        if (opcao == 1) yield return Mover(testemunhaConsulta.transform, testemunhaConsulta.transform.position + Vector3.right * 2f, tempoPlano);
+        yield return Mover(testemunhaConsulta.transform, testemunhaConsulta.transform.position + Vector3.right * 2f, tempoPlano);
         Dados.curraisEscolhaConsulta = opcao + 1;
         if (opcao == 0) Dados.curraisDestinoConfirmado = true;
         else Dados.curraisIdentidadeConfirmada = true;

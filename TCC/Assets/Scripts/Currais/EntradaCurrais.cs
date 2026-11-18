@@ -826,7 +826,8 @@ public partial class EntradaCurrais : MonoBehaviour
         menuAberto = true;
         acoesMenu = acoes;
         AbrirPainelDialogo(); escolhas.SetActive(true);
-        nomeTexto.text = NomeDaPessoa(personagem); falaTexto.text = texto;
+        nomeTexto.text = NomeDaPessoa(personagem);
+        falaTexto.text = string.IsNullOrWhiteSpace(texto) ? "..." : texto;
         if (retrato != null) retrato.enabled = false;
         for (int i = 0; i < botoesEtapa2.Length; i++)
         {

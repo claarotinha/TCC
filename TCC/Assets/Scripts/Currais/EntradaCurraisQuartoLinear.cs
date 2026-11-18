@@ -65,6 +65,12 @@ public partial class EntradaCurrais
         else yield return FalarPosto("Zefinha", "Dona Luzia, era a voz dela.", "Luzia", "Eu num ouvi, menina. Vamos perguntar com calma.");
         yield return FalarPosto("Cabo", "Já olhou. Deixe o atendimento seguir.",
             "Zefinha (em pensamento)", "Ele tá vendo que eu tô procurando. Ele sabe.");
+        if (Dados.curraisEscolhaPosto == 1)
+            yield return Mover(areaRaimundo.transform, raimundoSentado.position, tempoPlano);
+        Transform companhia = Dados.curraisEscolhaAgua == 1 ? mae : luzia.transform;
+        Vector3 pertoDoQuarto = companhia.position;
+        pertoDoQuarto.x = areaTrabalhadoraQuarto.transform.position.x - 1.3f;
+        yield return Mover(companhia, pertoDoQuarto, tempoPlano);
         Dados.curraisEtapaPosto = 2;
         GameProgress.Instance.UnlockDiaryPage("currais-quarto");
         AtualizarEstadoBusca(); Salvar();

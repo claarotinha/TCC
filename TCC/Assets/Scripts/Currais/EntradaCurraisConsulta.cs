@@ -94,7 +94,7 @@ public partial class EntradaCurrais
     {
         bool ativa = ConsultaDisponivel;
         int etapa = Dados.curraisEtapaConsulta;
-        setorConsulta.SetActive(ativa && etapa >= 1);
+        setorConsulta.SetActive(true);
         bloqueioSaida.enabled = false;
         AtualizarFamiliaAlternativa();
         if (!ativa) { AtualizarMemoria(); return; }
@@ -115,7 +115,7 @@ public partial class EntradaCurrais
         lacoNaMao.SetActive(false); maoNaRoupa.SetActive(false); cabacaNoite.SetActive(false);
         papelConsulta.SetActive(Dados.curraisEscolhaConsulta == 0);
         if (!papelEmConsulta) canhotoApresentadoConsulta.SetActive(false);
-        testemunhaConsulta.SetActive(Dados.curraisEscolhaConsulta == 0);
+        testemunhaConsulta.SetActive(true);
         trabalhadorRetorno.SetActive(true);
         lacoRemendadoCenario.SetActive(false);
         Posicionar(areaRaimundo.transform, Dados.curraisEscolhaPosto == 1 ? raimundoConsultaPerto : raimundoConsultaLonge);
@@ -222,7 +222,7 @@ public partial class EntradaCurrais
     {
         papelEmConsulta = false;
         if (canhotoApresentadoConsulta != null) canhotoApresentadoConsulta.SetActive(false);
-        if (testemunhaConsulta != null) testemunhaConsulta.SetActive(Dados.curraisEscolhaConsulta == 0);
+        if (testemunhaConsulta != null) testemunhaConsulta.SetActive(true);
         RestaurarDesenhoSaida();
     }
 

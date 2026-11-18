@@ -69,7 +69,7 @@ public partial class EntradaCurrais
     private void AtualizarPosto()
     {
         bool ativo = PostoDisponivel;
-        setorPosto.SetActive(ativo);
+        setorPosto.SetActive(true);
         curativoPai.SetActive(ativo && Dados.curraisPaiFerido);
         lacoNaMao.SetActive(ativo && (noiteEmCurso || Dados.curraisEtapaPosto == 4) && Dados.curraisLacoGuardado);
         maoNaRoupa.SetActive(ativo && (noiteEmCurso || Dados.curraisEtapaPosto == 4) && !Dados.curraisLacoGuardado);
@@ -83,7 +83,7 @@ public partial class EntradaCurrais
         areaFamiliaAbrigo.enabled = etapa >= 2;
         areaEsteiraNoite.enabled = etapa == 3;
         papelPosto.SetActive(Dados.curraisEscolhaPosto == 0);
-        quartoInterior.SetActive(etapa >= 2);
+        quartoInterior.SetActive(true);
         portaQuartoFechada.SetActive(etapa < 2);
         panoAlca.SetActive(Dados.curraisBaldeApoiado);
         AtualizarFamiliaAlternativa();

@@ -51,7 +51,7 @@ public partial class EntradaCurrais
     private void AtualizarCampo()
     {
         bool ativo = Dados.curraisPanelaConcluida;
-        setorBusca.SetActive(ativo);
+        setorBusca.SetActive(true);
         if (!ativo) { AtualizarPosto(); return; }
         int etapa = Dados.curraisEtapaBusca;
         objetivoTexto.text = string.Empty;

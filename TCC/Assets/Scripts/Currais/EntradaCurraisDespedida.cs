@@ -108,7 +108,7 @@ public partial class EntradaCurrais
         bool aberto = ativo && (Dados.curraisQuartoAberto || Dados.curraisEtapaPosto >= 2 || portaEmMovimento);
         if (!portaEmMovimento) dobradicaPortaQuarto.gameObject.SetActive(aberto);
         portaQuartoFechada.SetActive(ativo && !aberto);
-        quartoInterior.SetActive(aberto);
+        quartoInterior.SetActive(true);
         areaPortaQuarto.enabled = ativo && Dados.curraisEscolhaPosto != 0;
         areaMesaDocumento.enabled = ativo && !ConsultaDisponivel;
         areaTrabalhadoraQuarto.enabled = aberto && InvestigouQuarto;

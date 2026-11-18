@@ -175,6 +175,8 @@ public partial class EntradaCurrais
                 "Raimundo", "Eu sei, menina. Conseguiu ler?", "Zefinha", "Lagoa do Meio.", "Raimundo", "Então guarde esse nome.");
             yield return RecolherFolhaPosto();
         }
+        // A mudança de setor é mostrada antes de registrar a nova posição.
+        yield return Mover(areaRaimundo.transform, (opcao == 0 ? raimundoApoiadoPosto : raimundoOutroSetor).position, tempoPlano);
         Dados.curraisEscolhaPosto = opcao + 1;
         Dados.curraisEtapaPosto = 1;
         if (opcao == 1)
