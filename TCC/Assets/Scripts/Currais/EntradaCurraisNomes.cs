@@ -48,7 +48,7 @@ public partial class EntradaCurrais
     {
         if (examineNomesAtual == null) return false;
         if (examineNomesAtual.PanelIsOpen && Time.frameCount > quadroExamineNomes &&
-            Input.GetMouseButtonDown(0) && !SobreControle()) examineNomesAtual.HidePanel();
+            Input.GetMouseButtonDown(0)) ExamineObject.TryCloseCurrentPanelFromPointer();
         return true;
     }
 

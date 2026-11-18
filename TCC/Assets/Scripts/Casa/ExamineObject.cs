@@ -17,6 +17,7 @@ public class ExamineObject : MonoBehaviour
     private bool isShowing = false;
     private bool showingTutorialLupa = false;
     private int lastClosedFrame = -1;
+    private int lastOpenedFrame = -1;
 
     public bool PanelIsOpen => currentObject == this && isShowing && examinePanel != null && examinePanel.activeInHierarchy;
 
@@ -108,7 +109,7 @@ public class ExamineObject : MonoBehaviour
             examinePanel != null &&
             examinePanel.activeInHierarchy)
         {
-            HidePanel();
+            TryCloseCurrentPanelFromPointer();
             return;
         }
 
@@ -200,6 +201,10 @@ public class ExamineObject : MonoBehaviour
 
     public void ShowMessage(string text)
     {
+        lastOpenedFrame = Time.frameCount;
+        // Currais also opens disabled Examine components through its controller.
+        // Bind the shared panel when it opens, rather than relying on Start.
+        AddClickDetector();
         if (currentObject != null && currentObject != this)
             currentObject.HidePanel();
 
@@ -247,6 +252,14 @@ public class ExamineObject : MonoBehaviour
         }
 
         return false;
+    }
+
+    public static bool TryCloseCurrentPanelFromPointer()
+    {
+        if (currentObject == null || !currentObject.PanelIsOpen || PauseHelper.BlockInput() ||
+            Time.frameCount <= currentObject.lastOpenedFrame) return false;
+        currentObject.HidePanel();
+        return true;
     }
 
     public static void HideCurrentPanel()

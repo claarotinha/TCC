@@ -341,6 +341,12 @@ public partial class EntradaCurrais : MonoBehaviour
     private void Update()
     {
         if (!pronto || PauseHelper.BlockInput() || Time.timeScale <= 0f) return;
+        // Closing Examine takes priority over UI controls and exploration.
+        if (ExamineObject.IsShowing())
+        {
+            if (Input.GetMouseButtonDown(0)) ExamineObject.TryCloseCurrentPanelFromPointer();
+            return;
+        }
         if (AtualizarExamineNomes()) return;
         if (AtualizarExamineDistribuicao() || AtualizarExamineLuzia()) return;
         AtualizarPatrulha();
@@ -1080,6 +1086,14 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (ConsultaDisponivel && Dados.curraisEtapaConsulta >= 1)
         { RestaurarFamiliaConsulta(); return; }
+        if (PostoDisponivel && Dados.curraisEtapaPosto <= 2 && !VoltouDoQuarto)
+        {
+            SeguidorFamilia companhia = Dados.curraisEscolhaAgua == 1 ? seguidoraMae : seguidoraLuzia;
+            Vector3 perto = companhia.transform.position;
+            perto.x = mari.transform.position.x - companhia.DistanciaAtras;
+            companhia.transform.position = perto;
+            return;
+        }
         if (PostoDisponivel && Dados.curraisEtapaPosto >= 2)
         { Posicionar(luzia.transform, Dados.curraisEtapaPosto == 4 ? luziaNoite : luziaRepouso); return; }
         if (Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 1)
@@ -1126,12 +1140,10 @@ public partial class EntradaCurrais : MonoBehaviour
             seguidoraLuzia.enabled = livre && Dados.curraisEscolhaAgua == 2;
             return;
         }
-        bool buscaComLuzia = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 1 &&
-            (!PostoDisponivel || Dados.curraisEtapaPosto < 2);
-        bool luziaAcompanha = buscaComLuzia || (!PostoDisponivel && Dados.curraisDistribuicaoIniciada && Dados.curraisEscolhaAgua != 1);
-        if (seguidoraLuzia.enabled != (livre && luziaAcompanha)) seguidoraLuzia.enabled = livre && luziaAcompanha;
-        bool maeAcompanha = livre && !PostoDisponivel && !buscaComLuzia && Dados.curraisEscolhaAgua == 1;
-        if (seguidoraMae.enabled != maeAcompanha) seguidoraMae.enabled = maeAcompanha;
+        bool acompanharPosto = PostoDisponivel && Dados.curraisEtapaPosto <= 2 && !VoltouDoQuarto;
+        bool acompanharDistribuicao = !PostoDisponivel && Dados.curraisDistribuicaoIniciada;
+        seguidoraLuzia.enabled = livre && (acompanharPosto || acompanharDistribuicao) && Dados.curraisEscolhaAgua == 2;
+        seguidoraMae.enabled = livre && (acompanharPosto || acompanharDistribuicao) && Dados.curraisEscolhaAgua == 1;
     }
 
     private void FecharMenu()
@@ -1142,7 +1154,7 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private IEnumerator Examinar(Exame exame)
     {
-        yield return Dizer(new[] { new Fala { personagem = exame.titulo, texto = exame.texto } });
+        yield return ExaminarPosto(string.Empty, exameFolhasNomes, exame.texto);
     }
 
     private IEnumerator Mover(Transform alvo, Vector3 destino, float duracao)

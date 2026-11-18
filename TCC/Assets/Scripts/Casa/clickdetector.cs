@@ -1,29 +1,28 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PanelClickHandler : MonoBehaviour, IPointerClickHandler
+public class PanelClickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHandler
 {
-    private MonoBehaviour examineObject;
+    private bool examineOnPress;
 
     public void SetExamineObject(MonoBehaviour obj)
     {
-        examineObject = obj;
-        Debug.Log("🔗 PanelClickHandler vinculado a: " + (obj != null ? obj.name : "null"));
+        // The panel is shared. The static active object determines which message closes.
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (eventData.button != PointerEventData.InputButton.Left) return;
+        examineOnPress = ExamineObject.IsShowing();
+        if (examineOnPress) ExamineObject.TryCloseCurrentPanelFromPointer();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("🖱 CLICOU NO PAINEL!");
-
-        if (ExamineObject.IsShowing())
-        {
-            ExamineObject.HideCurrentPanel();
-            return;
-        }
-
-        if (CollectableExamine.IsShowing())
-        {
-            CollectableExamine.HandleCurrentPanelClick();
-        }
+        if (eventData.button != PointerEventData.InputButton.Left) return;
+        // Releasing the same click must not close the next message or collect an item.
+        if (examineOnPress) { examineOnPress = false; return; }
+        if (ExamineObject.IsShowing()) return;
+        if (CollectableExamine.IsShowing()) CollectableExamine.HandleCurrentPanelClick();
     }
 }

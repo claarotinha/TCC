@@ -61,8 +61,8 @@ public partial class EntradaCurrais
         PausarExploracao();
         if (exameDistribuicao.PanelIsOpen)
         {
-            if (Time.frameCount > quadroExamineDistribuicao && Input.GetMouseButtonDown(0) && !SobreControle())
-                exameDistribuicao.HidePanel();
+            if (Time.frameCount > quadroExamineDistribuicao && Input.GetMouseButtonDown(0))
+                ExamineObject.TryCloseCurrentPanelFromPointer();
             return true;
         }
         exameDistribuicaoEmCurso = false;

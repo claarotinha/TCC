@@ -51,8 +51,8 @@ public partial class EntradaCurrais
         PausarExploracao();
         if (examePrimeiroCliqueLuzia.PanelIsOpen)
         {
-            if (Time.frameCount > quadroExamineLuzia && Input.GetMouseButtonDown(0) && !SobreControle())
-                examePrimeiroCliqueLuzia.HidePanel();
+            if (Time.frameCount > quadroExamineLuzia && Input.GetMouseButtonDown(0))
+                ExamineObject.TryCloseCurrentPanelFromPointer();
             return true;
         }
         exameLuziaEmCurso = false;
