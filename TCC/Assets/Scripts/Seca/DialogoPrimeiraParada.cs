@@ -93,7 +93,7 @@ public class DialogoPrimeiraParada : MonoBehaviour
         // Keep just the authored Hierarchy text if an older persistent canvas carries the same hint.
         if (aberto != inventarioDicaAnterior || Time.unscaledTime >= proximaChecagemDica)
         {
-            foreach (TMP_Text texto in FindObjectsByType<TMP_Text>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            foreach (TMP_Text texto in FindObjectsByType<TMP_Text>(FindObjectsInactive.Include))
                 if (texto != dicaCombinacao && texto.text != null &&
                     texto.text.Contains("Arraste um item sobre o outro") && texto.text.Contains("Confirme"))
                     texto.enabled = false;

@@ -13,7 +13,6 @@ public partial class EntradaCurrais
     [SerializeField] private Transform guardaRonda, rondaInicio, rondaFim, retornoRonda, fimPassagem;
     [SerializeField] private Collider2D abrigoDosSacos;
     [SerializeField, Min(.1f)] private float velocidadeRonda = 2f;
-    [SerializeField, Min(.1f)] private float alcanceVigia = 3.5f;
     private bool rondaVaiAoFim;
     private float pausaRonda;
     private bool rondaPreparada;

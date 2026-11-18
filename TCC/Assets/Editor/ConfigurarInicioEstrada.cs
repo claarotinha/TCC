@@ -15,7 +15,7 @@ public static class ConfigurarInicioEstrada
         const string prefabPath = "Assets/prefab/Canvas.prefab";
 
         Scene scene = EditorSceneManager.OpenScene(scenePath);
-        PlayerMovement player = Object.FindFirstObjectByType<PlayerMovement>();
+        PlayerMovement player = Object.FindAnyObjectByType<PlayerMovement>();
         if (player == null)
         {
             Debug.LogError("Estrada: Mari com PlayerMovement nao encontrada.");

@@ -66,8 +66,6 @@ public partial class EntradaCurrais : MonoBehaviour
     [SerializeField] private Fala promessa, semPromessa, respostaZefinha;
     [SerializeField] private Fala[] entrada, revista, abrigo;
     [SerializeField] private Exame[] exames;
-    [SerializeField] private string objetivoBusca = "Descobrir para onde levaram Mariquinha.";
-    [SerializeField] private string objetivoLaco = "Clique no pedaço do laço que caiu no chão.";
 
     [Header("Etapa 2 - exploração e escolhas")]
     [SerializeField] private Button[] botoesEtapa2;

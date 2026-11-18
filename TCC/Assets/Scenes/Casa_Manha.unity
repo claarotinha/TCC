@@ -6323,8 +6323,6 @@ GameObject:
       fileID: 1274720393
   - component:
       fileID: 1274720392
-  - component:
-      fileID: 7600110001412
   m_Layer: 5
   m_Name: DiaryPanel
   m_TagString: Untagged
@@ -6341,7 +6339,7 @@ RectTransform:
   m_GameObject: {fileID: 1274720390}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 602895070}
@@ -11295,8 +11293,6 @@ GameObject:
       fileID: 9832000003
   - component:
       fileID: 9832000004
-  - component:
-      fileID: 7600110001513
   m_Layer: 5
   m_Name: "Di\xE1rio - leitura na cama"
   m_TagString: Untagged
@@ -11313,7 +11309,7 @@ RectTransform:
   m_GameObject: {fileID: 9832000000}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9832000006}
@@ -13362,48 +13358,6 @@ SceneRoots:
   - {fileID: 1666423874}
   - {fileID: 778963561}
   - {fileID: 805986833}
---- !u!114 &7600110001412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject:
-    fileID: 0
-  m_PrefabInstance:
-    fileID: 0
-  m_PrefabAsset:
-    fileID: 0
-  m_GameObject:
-    fileID: 1274720390
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script:
-    fileID: 11500000
-    guid: 86710e43de46f6f4b8d017d8d2088042
-    type: 3
-  m_Name: ''
-  m_EditorClassIdentifier: ''
-  m_AspectMode: 3
-  m_AspectRatio: 1.35
---- !u!114 &7600110001513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject:
-    fileID: 0
-  m_PrefabInstance:
-    fileID: 0
-  m_PrefabAsset:
-    fileID: 0
-  m_GameObject:
-    fileID: 9832000000
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script:
-    fileID: 11500000
-    guid: 86710e43de46f6f4b8d017d8d2088042
-    type: 3
-  m_Name: ''
-  m_EditorClassIdentifier: ''
-  m_AspectMode: 3
-  m_AspectRatio: 1.35
 --- !u!1 &7600110001614
 GameObject:
   m_ObjectHideFlags: 0

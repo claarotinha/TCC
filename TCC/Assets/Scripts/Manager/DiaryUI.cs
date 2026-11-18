@@ -50,6 +50,13 @@ public class DiaryUI : MonoBehaviour
     private readonly List<DiaryEntry> availableEntries =
         new List<DiaryEntry>();
 
+    [Header("Enquadramento do livro durante o jogo")]
+    [SerializeField] private bool ajustarProporcaoLivro = true;
+    [SerializeField, Min(.1f)] private float proporcaoLivro = 1.35f;
+    private Vector2 tamanhoPaiAnterior;
+    private RectTransform retanguloLivro;
+    private RectTransform paiDoLivro;
+
     private int currentIndex;
     private bool configured;
     private GameProgress subscribedProgress;
@@ -97,6 +104,24 @@ public class DiaryUI : MonoBehaviour
         nextButton.onClick.AddListener(Next);
     }
 
+    private void LateUpdate()
+    {
+        if (!ajustarProporcaoLivro) return;
+        if (retanguloLivro == null) retanguloLivro = transform as RectTransform;
+        if (retanguloLivro == null) return;
+        if (paiDoLivro == null) paiDoLivro = retanguloLivro.parent as RectTransform;
+        if (paiDoLivro == null) return;
+        Vector2 disponivel = paiDoLivro.rect.size;
+        if (disponivel.x <= 0f || disponivel.y <= 0f || disponivel == tamanhoPaiAnterior) return;
+        tamanhoPaiAnterior = disponivel;
+        float altura = Mathf.Min(disponivel.y, disponivel.x / proporcaoLivro) * .9f;
+        retanguloLivro.anchorMin = retanguloLivro.anchorMax = new Vector2(.5f, .5f);
+        retanguloLivro.pivot = new Vector2(.5f, .5f);
+        retanguloLivro.localScale = Vector3.one;
+        retanguloLivro.anchoredPosition = Vector2.zero;
+        retanguloLivro.sizeDelta = new Vector2(altura * proporcaoLivro, altura);
+    }
+
     private static void PrepararTexto(TMP_Text texto, float tamanho, float minimo)
     {
         texto.color = new Color(0.22f, 0.13f, 0.08f, 1f);
@@ -113,6 +138,7 @@ public class DiaryUI : MonoBehaviour
 
     private void OnEnable()
     {
+        tamanhoPaiAnterior = Vector2.zero;
         if (!configured)
             return;
 
