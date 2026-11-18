@@ -94,7 +94,7 @@ public partial class EntradaCurrais
 
     private Collider2D[] AlvosChegada() => Dados.curraisEtapaEntrada == 2
         ? new[] { AreaCabacaMesa, areaDiarioEntrada, areaDiarioRetido, areaFiscalEntrada, areaMesaRevista }
-        : new[] { AreaCabacaMesa, areaPanoAbrigo, areaLuzia, areaMae, areaPaiAbrigo };
+        : new[] { AreaCabacaMesa, areaDistribuicaoAgua, areaAgua, areaPanoAbrigo, areaLuzia, areaMae, areaPaiAbrigo };
 
     private bool PonteiroSobreChegada(Vector2 ponto)
     {
@@ -136,6 +136,7 @@ public partial class EntradaCurrais
         else if (alvo == areaFiscalEntrada || alvo == areaMesaRevista) MenuRevista();
         else if (alvo == areaDiarioRetido) Iniciar(Dizer(cadernoEmConferencia));
         else if (alvo == areaDiarioEntrada) Iniciar(RecuperarDiarioEntrada());
+        else if (alvo == areaAgua || alvo == areaDistribuicaoAgua) MenuFuncionarioAgua();
         else if (alvo == areaPanoAbrigo) Iniciar(RecolherPanoAbrigo());
         else if (alvo == areaLuzia) MenuPrimeiroAbrigo();
         else if (alvo == areaMae) MenuMaePrimeiroAbrigo();
@@ -161,7 +162,8 @@ public partial class EntradaCurrais
             if (alvo == null || !alvo.enabled || !alvo.gameObject.activeInHierarchy || !alvo.OverlapPoint(ponto)) continue;
 
             InventoryManager.Instance.SelectItem(item);
-            return UsarItemArrastado(alvo, item);
+            // Uma área sem uso para este item não deve bloquear outro alvo sobreposto.
+            if (UsarItemArrastado(alvo, item)) return true;
         }
         return false;
     }

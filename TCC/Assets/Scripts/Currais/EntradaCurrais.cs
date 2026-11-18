@@ -842,7 +842,7 @@ public partial class EntradaCurrais : MonoBehaviour
         { Iniciar(RecolherPanoAbrigo()); return true; }
         if (InteragirCriancaERegistros(ponto)) return true;
         if (Dados.curraisPanelaConcluida) return InteragirCampo(ponto);
-        Collider2D[] areas = { areaLotePanos, areaLuzia, areaAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela };
+        Collider2D[] areas = { areaLotePanos, areaLuzia, areaAgua, areaDistribuicaoAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela };
         foreach (Collider2D area in areas)
         {
             if (area == null || !area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
@@ -852,7 +852,7 @@ public partial class EntradaCurrais : MonoBehaviour
             {
                 AbrirMenuLuzia();
             }
-            else if (area == areaAgua)
+            else if (area == areaAgua || area == areaDistribuicaoAgua)
             {
                 MenuFuncionarioAgua();
             }
@@ -951,6 +951,11 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private IEnumerator ReceberAgua()
     {
+        if (Dados.curraisEtapaEntrada != 4)
+        {
+            yield return Dizer(aguaAguardar);
+            yield break;
+        }
         if (!Dados.curraisCabacaDevolvida)
         {
             yield return Dizer(cabacaSeparadaMesa);
@@ -971,6 +976,7 @@ public partial class EntradaCurrais : MonoBehaviour
         }
         InventoryManager.Instance.RemoveItem(cabacaVaziaBusca);
         InventoryManager.Instance.AddItem(cabacaCheiaBusca);
+        Dados.curraisDistribuicaoIniciada = true;
         Dados.curraisAguaRecebida = true;
         AtualizarEstadoBusca(); Salvar();
         yield return Dizer(aguaFuncionario);

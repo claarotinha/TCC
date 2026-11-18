@@ -191,13 +191,20 @@ public partial class EntradaCurrais
     }
 
     [SerializeField] private Fala[] cabacaSeparadaMesa;
+    [SerializeField] private Collider2D areaDistribuicaoAgua;
+
+    private Fala[] OrientacaoDaDistribuicao()
+    {
+        if (!Dados.curraisCabacaDevolvida) return cabacaSeparadaMesa;
+        if (Dados.curraisEtapaEntrada != 4) return aguaAguardar;
+        return Dados.curraisAguaRecebida ? aguaJaRecebida : aguaApresentar;
+    }
 
     private void MenuFuncionarioAgua()
     {
         MenuAssuntoNPC("Funcionário", "Diga. A fila tá andando.", "Perguntar pela água",
-            () => Dizer(!Dados.curraisCabacaDevolvida ? cabacaSeparadaMesa :
-                !Dados.curraisDistribuicaoIniciada ? aguaAguardar : aguaApresentar),
-            "Como é a distribuição?", () => Dizer(!Dados.curraisCabacaDevolvida ? cabacaSeparadaMesa : aguaApresentar));
+            () => Dizer(OrientacaoDaDistribuicao()),
+            "Como é a distribuição?", () => Dizer(OrientacaoDaDistribuicao()));
     }
 
     private void MenuPrimeiroRegistro()
@@ -217,9 +224,11 @@ public partial class EntradaCurrais
         if (Dados.curraisFamiliaParou && (alvo == areaMae || alvo == areaPaiAbrigo) &&
             item == itemPanoAbrigo && !Dados.curraisPaiAcomodado)
         { Iniciar(AcomodarPai()); return true; }
-        if (Dados.curraisEtapaEntrada != 4) return false;
-        if (antesBusca && alvo == areaAgua && item == cabacaVaziaBusca && Dados.curraisDistribuicaoIniciada && !Dados.curraisAguaRecebida)
+        // O recipiente pode ser apresentado na mesa ou à funcionária, sem uma opção de conversa obrigatória.
+        if (antesBusca && (alvo == areaAgua || (areaDistribuicaoAgua != null && alvo == areaDistribuicaoAgua)) &&
+            item == cabacaVaziaBusca && Dados.curraisEtapaEntrada >= 3 && Dados.curraisEtapaEntrada <= 4)
         { Iniciar(ReceberAgua()); return true; }
+        if (Dados.curraisEtapaEntrada != 4) return false;
         if (antesBusca && (alvo == areaMae || alvo == areaLuzia) && item == cabacaCheiaBusca && Dados.curraisEscolhaAgua == 0)
         { Iniciar(DestinarAgua(alvo == areaMae ? 1 : 2)); return true; }
         if (Dados.curraisEtapaBusca == 1 && alvo == areaLavadeira && item == itemLotePanos && !Dados.curraisLotePanosEntregue)
