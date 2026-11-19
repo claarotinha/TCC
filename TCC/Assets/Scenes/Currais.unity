@@ -18753,8 +18753,6 @@ MonoBehaviour:
   antesSeparacao:
   - personagem: Cabo
     texto: Ei! Nenhum passo pra frente! Larguem as trouxas e fiquem na fila. Agora andem atrás de mim.
-  - personagem: Mãe
-    texto: Fique perto da sua irmã, Josefa.
   barreira:
   - personagem: "M\xE3e"
     texto: "Aquela ali tamb\xE9m \xE9 minha! Olhe pra ela!"
@@ -19925,15 +19923,11 @@ MonoBehaviour:
   maeAmparoEntrada: {fileID: 9933000111}
   chegadaFamilia:
   - personagem: Mulher da fila
-    texto: "Fique comigo. A fila t\xE1 andando."
-  - personagem: "Crian\xE7a da fila"
-    texto: "Mainha, \xE9 pra entrar aqui?"
+    texto: Fique comigo. A fila tá andando.
+  - personagem: Criança da fila
+    texto: Mainha, é pra entrar aqui?
   - personagem: Mulher da fila
-    texto: "\xC9. Num se afaste de mim."
-  - personagem: Mariquinha
-    texto: Fica pertinho de mim, Zefinha.
-  - personagem: Zefinha
-    texto: "T\xF4 aqui."
+    texto: É. Num se afaste de mim.
   areaGuardaRonda: {fileID: 9807000203}
   panoEmLavagem: {fileID: 9977000012}
   panoMergulhoLavagem: {fileID: 9977000021}
@@ -21170,8 +21164,6 @@ MonoBehaviour:
   chegadaAlegreFamilia:
   - personagem: Mariquinha
     texto: Mainha! Painho! Nós chegamu! É Fortaleza!
-  - personagem: Mãe
-    texto: É, minha filha. Nós chegou.
   - personagem: Zefinha
     texto: Até que enfim!
   chegadaAlegreFortaleza:
@@ -21181,6 +21173,11 @@ MonoBehaviour:
     texto: Será que aqui tem sorvete?
   - personagem: Pai
     texto: Vamos procurar um canto pra descansar primeiro.
+  irmasAntesSeparacao:
+  - personagem: Mariquinha
+    texto: Fique comigo, Zefinha.
+  - personagem: Zefinha
+    texto: Tô aqui.
 --- !u!1 &4200000000
 GameObject:
   m_ObjectHideFlags: 0

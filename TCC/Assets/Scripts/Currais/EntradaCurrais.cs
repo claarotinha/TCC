@@ -243,7 +243,7 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         bool referenciasPresentes = true;
         referenciasPresentes &= ConferirReferencia(fundoPretoSeparacao, nameof(fundoPretoSeparacao));
-        referenciasPresentes &= FalasValidas(chegadaAlegreFamilia) & FalasValidas(chegadaAlegreFortaleza);
+        referenciasPresentes &= FalasValidas(chegadaAlegreFamilia) & FalasValidas(chegadaAlegreFortaleza) & FalasValidas(irmasAntesSeparacao);
         if (quadrosEntrada == null || quadrosEntrada.Length != 12)
         {
             Debug.LogError("EntradaCurrais: configure os 12 quadrosEntrada na ordem da cutscene.", this);
@@ -571,7 +571,7 @@ public partial class EntradaCurrais : MonoBehaviour
 
     [Header("Cutscene de entrada — ordem das imagens na Hierarchy")]
     [SerializeField] private GameObject[] quadrosEntrada;
-    [SerializeField] private Fala[] chegadaAlegreFamilia, chegadaAlegreFortaleza;
+    [SerializeField] private Fala[] chegadaAlegreFamilia, chegadaAlegreFortaleza, irmasAntesSeparacao;
 
     private void MostrarQuadroEntrada(int indice)
     {
@@ -607,6 +607,7 @@ public partial class EntradaCurrais : MonoBehaviour
         MostrarQuadroEntrada(4);
         yield return Esperar(1.2f);
         MostrarQuadroEntrada(5);
+        yield return Dizer(irmasAntesSeparacao);
         yield return DizerTrechoEntrada(ordemSeparar, 0, ordemSeparar.Length - 1);
         MostrarQuadroEntrada(6);
         yield return DizerTrechoEntrada(ordemSeparar, ordemSeparar.Length - 1, 1);
