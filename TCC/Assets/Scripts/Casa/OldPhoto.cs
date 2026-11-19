@@ -51,6 +51,7 @@ public class OldPhoto : MonoBehaviour
         if (!dialogueOpen)
         {
             dialogueOpen = true;
+            CurraisEffectsDirector.Play("fotografia", 0.55f);
 
             investigationPanel.SetActive(true);
             investigationText.gameObject.SetActive(true);

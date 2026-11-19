@@ -75,6 +75,7 @@ public class RadioInteraction : MonoBehaviour
     private void TurnOn()
     {
         if (!confirming) return;
+        CurraisEffectsDirector.Play("clique", 0.6f);
         if (radioAudio != null && radioAudio.clip != null && !radioAudio.isPlaying)
             radioAudio.Play();
         Close();
@@ -83,6 +84,7 @@ public class RadioInteraction : MonoBehaviour
     private void TurnOff()
     {
         if (!confirming) return;
+        CurraisEffectsDirector.Play("clique", 0.6f);
         if (radioAudio != null && radioAudio.isPlaying) radioAudio.Stop();
         Close();
     }

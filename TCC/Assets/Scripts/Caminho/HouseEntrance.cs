@@ -111,6 +111,7 @@ public class HouseEntrance : MonoBehaviour
         if (!IsPanelOpen || !CanFinishTutorial() || isTransitioning)
             return;
 
+        CurraisEffectsDirector.Play("porta", 0.8f);
         isTransitioning = true;
         transitioningDoor = this;
         FecharConfirmacao();

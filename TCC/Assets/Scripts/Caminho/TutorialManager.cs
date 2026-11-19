@@ -147,6 +147,8 @@ public class TutorialManager : MonoBehaviour
     public void ReportCryingBoy()
     {
         if (CurrentStep == TutorialStep.CryingBoy)
+            CurraisEffectsDirector.Play("choro", 0.45f);
+        if (CurrentStep == TutorialStep.CryingBoy)
             SetStep(TutorialStep.Boys);
     }
 

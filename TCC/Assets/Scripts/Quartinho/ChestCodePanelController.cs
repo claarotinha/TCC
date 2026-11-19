@@ -156,6 +156,7 @@ public class ChestCodePanelController : MonoBehaviour
             return;
 
         // Depois de 9 vem 0. Antes de 0 vem 9.
+        CurraisEffectsDirector.Play("cadeado", 0.65f);
         digits[index] = (digits[index] + amount + 10) % 10;
         digitTexts[index].text = digits[index].ToString();
 
@@ -174,11 +175,13 @@ public class ChestCodePanelController : MonoBehaviour
 
         if (enteredCode != CorrectCode)
         {
+            CurraisEffectsDirector.Play("senha", 0.75f);
             if (feedbackRoutine != null) StopCoroutine(feedbackRoutine);
             feedbackRoutine = StartCoroutine(ShowWrongCode());
             return;
         }
 
+        CurraisEffectsDirector.Play("bau", 0.85f);
         unlockedThisSession = true;
         GameProgress.Instance?.MarkChestOpened();
         Close();

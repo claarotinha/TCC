@@ -240,6 +240,7 @@ public class DiaryUI : MonoBehaviour
             return;
 
         currentIndex--;
+        CurraisEffectsDirector.Play("folha", 0.6f);
         ShowCurrentEntry();
     }
 
@@ -249,6 +250,7 @@ public class DiaryUI : MonoBehaviour
             return;
 
         currentIndex++;
+        CurraisEffectsDirector.Play("folha", 0.6f);
         ShowCurrentEntry();
     }
 

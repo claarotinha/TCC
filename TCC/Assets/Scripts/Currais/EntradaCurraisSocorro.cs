@@ -188,6 +188,7 @@ public partial class EntradaCurrais
             cobertura.color = new Color(corCobertura.r, corCobertura.g, corCobertura.b, 0f);
             yield return Esperar(.5f);
             yield return Escurecer(0f);
+            CurraisEffectsDirector.Play("bento", 0.6f);
             yield return MostrarCoberturaBento(corCobertura);
             MostrarReacaoBento();
         }
