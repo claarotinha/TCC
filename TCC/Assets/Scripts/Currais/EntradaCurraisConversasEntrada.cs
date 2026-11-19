@@ -85,6 +85,9 @@ public partial class EntradaCurrais
 
     private void MenuPresencaSemRepetir(PessoaPresente pessoa)
     {
+        if (ConsultaDisponivel && Dados.curraisEtapaConsulta == 2)
+            foreach (Collider2D guarda in guardasPorcosSaida)
+                if (pessoa.personagem == guarda.gameObject) { MenuPedidoSaida(); return; }
         if (ConsultaDisponivel && Dados.curraisEtapaConsulta >= 3) return;
         if (Dados.curraisEtapaBusca <= 4 && pessoa.personagem == bento.gameObject)
         { Iniciar(AbrirBentoPatioLinear()); return; }

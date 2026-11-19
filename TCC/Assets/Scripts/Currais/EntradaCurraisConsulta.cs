@@ -24,6 +24,9 @@ public partial class EntradaCurrais
     [SerializeField] private GameObject canhotoApresentadoConsulta;
     [SerializeField] private Fala[] consultaConcluida, semCanhotoConsulta, retornoAbrigoOrientacao;
     [SerializeField] private Fala[] luziaConsultaFinal, luziaRetornoFinal;
+    [Header("Porteira — saída recusada")]
+    [SerializeField] private GameObject marcadorPorteira;
+    [SerializeField] private Collider2D[] guardasPorcosSaida;
     private bool papelEmConsulta;
     private readonly Dictionary<SpriteRenderer, int> ordensSaida = new Dictionary<SpriteRenderer, int>();
 
@@ -77,7 +80,8 @@ public partial class EntradaCurrais
             opcoesRetornoConsulta.Length != 2 || objetivosConsulta == null || objetivosConsulta.Length != 5) valido = false;
         string[] textos = { perguntaConsulta, rotuloLugar, rotuloNome, lugarConsulta, nomeConsulta, naoConfirmado };
         foreach (string texto in textos) valido &= !string.IsNullOrWhiteSpace(texto);
-        return valido && ConferirReferencia(puzzleRegistro, nameof(puzzleRegistro)) && ConferirReferencia(exameMesaUltimaConsulta, nameof(exameMesaUltimaConsulta)) && ConferirReferencia(exameRaimundoManha, nameof(exameRaimundoManha)) &&
+        return valido && ConferirReferencia(marcadorPorteira, nameof(marcadorPorteira)) &&
+            guardasPorcosSaida != null && guardasPorcosSaida.Length > 0 && ConferirReferencia(puzzleRegistro, nameof(puzzleRegistro)) && ConferirReferencia(exameMesaUltimaConsulta, nameof(exameMesaUltimaConsulta)) && ConferirReferencia(exameRaimundoManha, nameof(exameRaimundoManha)) &&
             ConferirReferencia(exameRaimundoManha.examinePanel, "Painel Examine — manhã") &&
             ConferirReferencia(exameRaimundoManha.examineText, "Texto Examine — manhã");
     }
@@ -88,7 +92,15 @@ public partial class EntradaCurrais
         (Dados.curraisDestinoConfirmado ? lugarConsulta : naoConfirmado) + "\n" + rotuloNome + ": " +
         (Dados.curraisIdentidadeConfirmada ? nomeConsulta : naoConfirmado);
 
-    private Collider2D[] AlvosConsulta() => MemoriaDisponivel ? AlvosMemoria() : new[] { areaBaldeRaimundo, areaPanoLavagem, areaRaimundo, areaMae, areaPaiAbrigo, areaLuzia, areaAmanhecer, areaEsteiraNoite, areaUltimaConsulta, areaSaidaConsulta, areaRetornoConsulta };
+    private Collider2D[] AlvosConsulta()
+    {
+        if (MemoriaDisponivel) return AlvosMemoria();
+        var alvos = new List<Collider2D> { areaBaldeRaimundo, areaPanoLavagem, areaRaimundo, areaMae,
+            areaPaiAbrigo, areaLuzia, areaAmanhecer, areaEsteiraNoite, areaUltimaConsulta,
+            areaSaidaConsulta, areaRetornoConsulta };
+        if (Dados.curraisEtapaConsulta == 2) alvos.AddRange(guardasPorcosSaida);
+        return alvos.ToArray();
+    }
 
     private void AtualizarConsulta()
     {
@@ -96,6 +108,9 @@ public partial class EntradaCurrais
         int etapa = Dados.curraisEtapaConsulta;
         setorConsulta.SetActive(true);
         bloqueioSaida.enabled = false;
+        marcadorPorteira.SetActive(ativa && etapa == 2);
+        if (ativa)
+            foreach (Collider2D guarda in guardasPorcosSaida) guarda.enabled = etapa == 2;
         AtualizarFamiliaAlternativa();
         if (!ativa) { AtualizarMemoria(); return; }
         objetivoTexto.text = string.Empty;
@@ -183,7 +198,7 @@ public partial class EntradaCurrais
             else if (area == areaAmanhecer && Dados.curraisEtapaConsulta == 0) Iniciar(AmanhecerNoCampo());
             else if (area == areaEsteiraNoite && Dados.curraisEtapaConsulta == 3) MenuEsteiraFinal();
             else if (area == areaUltimaConsulta) MenuUltimaConsulta();
-            else if (area == areaSaidaConsulta) MenuPedidoSaida();
+            else if (area == areaSaidaConsulta) Iniciar(PedirSaida());
             else if (Dados.curraisEtapaConsulta == 3) Iniciar(ChegarAbrigoFinal());
             else if (area == areaMae || area == areaPaiAbrigo) MenuFamiliaConsulta();
             return true;
@@ -246,6 +261,24 @@ public partial class EntradaCurrais
     private IEnumerator OrientarPortaoConsulta()
     {
         yield return FalarPosto("Pai", "Vamos ao portão. Se num dizem onde ela tá, precisam deixar nós procurar.");
+    }
+
+    private bool SobreGuardaPorcoSaida(Vector2 ponto)
+    {
+        if (!ConsultaDisponivel || Dados.curraisEtapaConsulta != 2) return false;
+        foreach (Collider2D guarda in guardasPorcosSaida)
+            if (guarda.enabled && guarda.gameObject.activeInHierarchy && guarda.OverlapPoint(ponto)) return true;
+        return false;
+    }
+
+    private bool AtualizarTentativaDePassagem()
+    {
+        if (ocupado || menuAberto || InventarioAbertoMemoria() || PainelAuxiliarAberto() ||
+            !ConsultaDisponivel || Dados.curraisEtapaConsulta != 2) return false;
+        float ladoDeDentro = Mathf.Sign(mariAbrigo.position.x - areaSaidaConsulta.bounds.center.x);
+        if ((mari.transform.position.x - areaSaidaConsulta.bounds.center.x) * ladoDeDentro > 0f) return false;
+        Iniciar(PedirSaida());
+        return true;
     }
 
     private void MenuPedidoSaida()

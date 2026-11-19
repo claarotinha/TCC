@@ -452,6 +452,7 @@ public partial class EntradaCurrais : MonoBehaviour
             AtualizarInteracaoChegada();
             return;
         }
+        if (Dados.curraisEtapaEntrada == 4 && AtualizarTentativaDePassagem()) return;
         if (Dados.curraisEtapaEntrada == 4 && AtualizarChegadaAbrigoFinal()) return;
         if (!ocupado && !menuAberto && Dados.curraisEtapaEntrada == 4 && !InventarioAbertoMemoria() && Input.GetKeyDown(KeyCode.E))
         {
@@ -969,6 +970,7 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private bool InteragirBusca(Vector2 ponto)
     {
+        if (SobreGuardaPorcoSaida(ponto)) { MenuPedidoSaida(); return true; }
         if (PodeRecolherCabacaMesa && AreaCabacaMesa != null && AreaCabacaMesa.gameObject.activeInHierarchy && AreaCabacaMesa.OverlapPoint(ponto))
         { Iniciar(RecolherCabacaMesa()); return true; }
         if (areaPanoAbrigo.enabled && areaPanoAbrigo.OverlapPoint(ponto))
