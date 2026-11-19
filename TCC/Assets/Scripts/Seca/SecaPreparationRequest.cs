@@ -158,6 +158,7 @@ public class SecaPreparationRequest : MonoBehaviour
         waitingForClick = false;
         dialogueUI.SetActive(false);
 
+        InvestigationGuard.BlockCurrentClick();
         RequestCompleted = true;
         running = false;
 

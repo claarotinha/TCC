@@ -109,6 +109,12 @@ public class ExamineObject : MonoBehaviour
             examinePanel != null &&
             examinePanel.activeInHierarchy)
         {
+            if (Time.frameCount > lastOpenedFrame && !PauseHelper.BlockInput() &&
+                TryGetComponent(out SecaCabinetItem cabinet) &&
+                InvestigationGuard.TryGetPointerPosition(out Vector2 cabinetPoint) &&
+                cabinet.Contains(cabinetPoint) && cabinet.TryCollect())
+                return;
+
             TryCloseCurrentPanelFromPointer();
             return;
         }
@@ -127,17 +133,25 @@ public class ExamineObject : MonoBehaviour
         if (!InvestigationGuard.TryGetPointerPosition(out Vector2 mousePosition))
             return;
 
-        if (!myCollider.OverlapPoint(mousePosition))
+        bool isSeca = gameObject.scene.name == "Seca";
+        if (!myCollider.OverlapPoint(mousePosition) &&
+            !(isSeca && SecaTableVisual.IsTableAt(this, mousePosition)))
             return;
 
-        SecaMotherReturn mesa = GetComponent<SecaMotherReturn>();
-        if (mesa != null && mesa.TryCollectCabaca()) return;
+        if (isSeca)
+        {
+            if (SecaCabinetItem.CoversBackgroundExamine(this, mousePosition)) return;
 
-        // Na Seca, o item sobre a mesa/rede tem prioridade sobre o cenário
-        // atrás dele. Os outros objetos e cenas mantêm sua interação.
-        if (gameObject.scene.name == "Seca" &&
-            (SecaPreparationItem.HasCollectableAt(mousePosition) ||
-             SecaTableVisual.CoversBackgroundExamine(this, mousePosition))) return;
+            if (!TryGetComponent<SecaCabinetItem>(out _))
+            {
+                SecaMotherReturn mesa = GetComponent<SecaMotherReturn>();
+                if (mesa != null && mesa.TryCollectCabaca()) return;
+
+                // A mesa e os coletáveis da Seca recebem o clique antes do cenário.
+                if (SecaPreparationItem.HasCollectableAt(mousePosition) ||
+                    SecaTableVisual.CoversBackgroundExamine(this, mousePosition)) return;
+            }
+        }
 
         QuartoBaguncaDoor door = GetComponent<QuartoBaguncaDoor>();
 

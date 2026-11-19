@@ -31,8 +31,19 @@ public class SecaTableVisual : MonoBehaviour
     public static bool CoversBackgroundExamine(ExamineObject target, Vector2 point)
     {
         return activeTable != null && activeTable.interaction != null &&
-            activeTable.interaction != target && activeTable.interaction.enabled &&
-            activeTable.area != null && activeTable.area.OverlapPoint(point);
+            activeTable.interaction != target && activeTable.interaction.isActiveAndEnabled &&
+            activeTable.Contains(point);
+    }
+
+    public static bool IsTableAt(ExamineObject target, Vector2 point) =>
+        activeTable != null && activeTable.interaction == target && activeTable.Contains(point);
+
+    private bool Contains(Vector2 point)
+    {
+        if (table == null || !table.enabled || table.sprite == null) return false;
+        Bounds bounds = table.bounds;
+        return point.x >= bounds.min.x && point.x <= bounds.max.x &&
+               point.y >= bounds.min.y && point.y <= bounds.max.y;
     }
 
     private SpriteRenderer table;

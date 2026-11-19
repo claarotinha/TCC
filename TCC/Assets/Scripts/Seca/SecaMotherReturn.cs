@@ -35,7 +35,9 @@ public class SecaMotherReturn : MonoBehaviour
     {
         if (preparationRequest == null || !preparationRequest.RequestCompleted ||
             cabacaNaMesa == null || !cabacaNaMesa.CanCollect) return false;
-        return cabacaNaMesa.TryCollectDirect();
+        if (!cabacaNaMesa.TryCollectDirect()) return false;
+        InvestigationGuard.BlockCurrentClick();
+        return true;
     }
 
     private ExamineObject examineObject;
