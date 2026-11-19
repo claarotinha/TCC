@@ -105,6 +105,7 @@ public partial class EntradaCurrais
     private void AtualizarDetalhesPosto()
     {
         bool ativo = PostoDisponivel;
+        if (ativo && !ConsultaDisponivel) areaRaimundo.enabled = Dados.curraisEtapaPosto <= 2;
         dobradicaPortaQuarto.gameObject.SetActive(false);
         portaQuartoFechada.SetActive(false);
         quartoInterior.SetActive(false);
