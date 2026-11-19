@@ -22,9 +22,6 @@ public partial class EntradaCurrais
     private bool noiteEmCurso;
 
     private bool PaisNoFuneral => Dados.curraisEscolhaFuneral == 2 && !VoltouDoQuarto;
-    private bool MaeAcompanhaPosto => Dados.curraisEscolhaAgua == 1 && Dados.curraisEscolhaFuneral != 2;
-    private string NomeAcompanhantePosto => MaeAcompanhaPosto ? "Mãe" : "Luzia";
-
     private bool PostoDisponivel => Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 6;
 
     private bool ReferenciasPostoValidas()

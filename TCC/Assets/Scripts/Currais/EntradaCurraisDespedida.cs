@@ -125,7 +125,6 @@ public partial class EntradaCurrais
 
     private bool InteragirDetalhesDoPosto(Vector2 ponto)
     {
-        if (ClicouAcompanhanteQuarto(ponto)) return true;
         if (areaAnotacaoPosto.enabled && areaAnotacaoPosto.gameObject.activeInHierarchy && areaAnotacaoPosto.OverlapPoint(ponto))
         { Iniciar(RecolherAnotacaoPosto()); return true; }
         foreach (Collider2D alvo in new[] { areaTrabalhadoraQuarto, areaDoenteUm, areaDoenteDois,
@@ -241,3 +240,4 @@ public partial class EntradaCurrais
         }
     }
 }
+

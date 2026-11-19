@@ -1210,16 +1210,7 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (ConsultaDisponivel && Dados.curraisEtapaConsulta >= 1)
         { RestaurarFamiliaConsulta(); return; }
-        if (PostoDisponivel && Dados.curraisEtapaPosto <= 2 && !VoltouDoQuarto)
-        {
-            SeguidorFamilia companhia = MaeAcompanhaPosto ? seguidoraMae : seguidoraLuzia;
-            Vector3 perto = companhia.transform.position;
-            perto.x = mari.transform.position.x - companhia.DistanciaAtras;
-            companhia.transform.position = perto;
-            return;
-        }
-        if (PostoDisponivel && Dados.curraisEtapaPosto >= 2)
-        { Posicionar(luzia.transform, Dados.curraisEtapaPosto == 4 ? luziaNoite : luziaRepouso); return; }
+        if (PostoDisponivel) return;
         if (Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 1)
         { RestaurarLuziaNaBusca(); return; }
         if (!Dados.curraisDistribuicaoIniciada) return;
@@ -1264,12 +1255,9 @@ public partial class EntradaCurrais : MonoBehaviour
             seguidoraLuzia.enabled = livre && Dados.curraisEscolhaAgua == 2;
             return;
         }
-        bool acompanharPosto = PostoDisponivel && Dados.curraisEtapaPosto <= 2 && !VoltouDoQuarto;
         bool acompanharDistribuicao = !PostoDisponivel && Dados.curraisDistribuicaoIniciada;
-        seguidoraLuzia.enabled = livre && ((acompanharPosto && !MaeAcompanhaPosto) ||
-            (acompanharDistribuicao && Dados.curraisEscolhaAgua == 2));
-        seguidoraMae.enabled = livre && ((acompanharPosto && MaeAcompanhaPosto) ||
-            (acompanharDistribuicao && Dados.curraisEscolhaAgua == 1));
+        seguidoraLuzia.enabled = livre && acompanharDistribuicao && Dados.curraisEscolhaAgua == 2;
+        seguidoraMae.enabled = livre && acompanharDistribuicao && Dados.curraisEscolhaAgua == 1;
     }
 
     private void FecharMenu()

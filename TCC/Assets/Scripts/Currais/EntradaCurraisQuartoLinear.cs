@@ -42,6 +42,11 @@ public partial class EntradaCurrais
         if (Dados.curraisEscolhaPosto == 0) yield break;
         if (InvestigouQuarto)
         {
+            if (!VoltouDoQuarto)
+            {
+                MenuAssuntoNPC("Zefinha", string.Empty, "Voltar para contar à família", VoltarFamiliaQuarto);
+                yield break;
+            }
             yield return ExaminarPosto("", examePassagemQuarto,
                 "As mesmas pessoas continuam no quarto. Mariquinha não está entre elas.");
             yield break;
@@ -60,17 +65,11 @@ public partial class EntradaCurrais
         if (!Dados.curraisQuartoAberto) yield return AbrirPortaDoQuarto();
         yield return FalarPosto("Zefinha", "Mariquinha?", "Trabalhadora",
             "Aqui num tem menina, minha filha. Essas pessoas chegaram de manhã.");
-        if (MaeAcompanhaPosto)
-            yield return FalarPosto("Zefinha", "Mainha, eu ouvi ela.", "Mãe", "Eu sei que tu ouviu. Mas vamos olhar quem tá aqui.");
-        else yield return FalarPosto("Zefinha", "Dona Luzia, era a voz dela.", "Luzia", "Eu num ouvi, menina. Vamos perguntar com calma.");
+        yield return FalarPosto("Zefinha (em pensamento)", "Eu podia jurar que ouvi a voz dela.");
         yield return FalarPosto("Cabo", "Já olhou. Deixe o atendimento seguir.",
             "Zefinha (em pensamento)", "Ele tá vendo que eu tô procurando. Ele sabe.");
         if (Dados.curraisEscolhaPosto == 1)
             yield return Mover(areaRaimundo.transform, raimundoSentado.position, tempoPlano);
-        Transform companhia = MaeAcompanhaPosto ? mae : luzia.transform;
-        Vector3 pertoDoQuarto = companhia.position;
-        pertoDoQuarto.x = areaTrabalhadoraQuarto.transform.position.x - 1.3f;
-        yield return Mover(companhia, pertoDoQuarto, tempoPlano);
         Dados.curraisEtapaPosto = 2;
         GameProgress.Instance.UnlockDiaryPage("currais-quarto");
         AtualizarEstadoBusca(); Salvar();
@@ -107,6 +106,11 @@ public partial class EntradaCurrais
         { rotulos.Add("Deixar o nome de Mariquinha"); acoes.Add(() => Iniciar(InformarNomeQuarto())); }
         if (!Dados.curraisAjudouAtendimentoQuarto)
         { rotulos.Add("O que tá faltando?"); acoes.Add(() => Iniciar(PedirRecipienteQuarto())); }
+        if (!VoltouDoQuarto && rotulos.Count == 0)
+        {
+            rotulos.Add("Voltar para contar à família");
+            acoes.Add(() => Iniciar(VoltarFamiliaQuarto()));
+        }
         rotulos.Add("Sair"); acoes.Add(FecharMenu);
         if (rotulos.Count > 1) MostrarOpcoes("Trabalhadora", string.Empty, rotulos.ToArray(), acoes.ToArray());
     }
@@ -115,10 +119,8 @@ public partial class EntradaCurrais
     {
         if (ViuConversaEntrada("quarto-nome-informado")) yield break;
         yield return FalarPosto("Zefinha", "O nome dela é Maria Severina. Nós chama ela de Mariquinha.");
-        if (MaeAcompanhaPosto)
-            yield return FalarPosto("Mãe", "É minha outra filha. Separaram ela de nós na entrada.",
-                "Trabalhadora", "Se ela passar por aqui, eu aviso vocês. Dona Luzia sabe onde encontrar sua família?");
-        else yield return FalarPosto("Luzia", "Se ouvir esse nome, pode me procurar.", "Trabalhadora", "Procuro, sim.");
+        yield return FalarPosto("Zefinha", "Separaram ela de nós na entrada. Se ouvir esse nome, pode me procurar.",
+            "Trabalhadora", "Procuro, sim.");
         yield return FalarPosto("Zefinha", "Obrigada.");
         RegistrarConversaEntrada("quarto-nome-informado"); Salvar();
     }
@@ -138,23 +140,10 @@ public partial class EntradaCurrais
         RegistrarConversaEntrada("quarto-cabo-revisita"); Salvar();
     }
 
-    private bool ClicouAcompanhanteQuarto(Vector2 ponto)
-    {
-        if (!InvestigouQuarto || VoltouDoQuarto || ConsultaDisponivel) return false;
-        Collider2D alvo = MaeAcompanhaPosto ? areaMae : areaLuzia;
-        if (!alvo.enabled || !alvo.gameObject.activeInHierarchy || !alvo.OverlapPoint(ponto)) return false;
-        MenuAssuntoNPC(NomeAcompanhantePosto, string.Empty, "Voltar para contar à família", VoltarFamiliaQuarto);
-        return true;
-    }
-
     private IEnumerator VoltarFamiliaQuarto()
     {
         if (!InvestigouQuarto || VoltouDoQuarto) yield break;
-        if (PaisNoFuneral)
-            yield return FalarPosto("Luzia", "Teus pais devem estar voltando do enterro. Vamos encontrar eles nas esteiras.");
-        else yield return FalarPosto(NomeAcompanhantePosto, MaeAcompanhaPosto ?
-            "Teu pai ficou perto das esteiras, com Baleia." : "Sua mãe ficou com Baleia, perto das esteiras.",
-            "Zefinha", MaeAcompanhaPosto ? "Vamos falar com ele." : "Vamos contar pra ela.");
+        yield return FalarPosto("Zefinha (em pensamento)", "Vou procurar meus pais perto das esteiras.");
         yield return Escurecer(1f);
         RegistrarConversaEntrada("quarto-retorno-familia");
         Posicionar(pai, paiAbrigo); Posicionar(mae, maeAbrigo); Posicionar(luzia.transform, luziaRepouso);
@@ -170,9 +159,9 @@ public partial class EntradaCurrais
     {
         if (ViuConversaEntrada("quarto-noticia-contada")) yield break;
         RegistrarConversaEntrada("quarto-retorno-familia");
-        if (MaeAcompanhaPosto)
-            yield return FalarPosto("Pai", "Vocês conseguiram perguntar?", "Zefinha", "Conseguimos. Mariquinha num tava lá.");
-        else yield return FalarPosto("Mãe", "Encontraram alguma coisa?", "Zefinha",
+        if (Dados.curraisEscolhaAgua == 1)
+            yield return FalarPosto("Pai", "Tu conseguiu perguntar?", "Zefinha", "Consegui. Mariquinha num tava lá.");
+        else yield return FalarPosto("Mãe", "Tu descobriu alguma coisa?", "Zefinha",
             "Eu pensei que tinha ouvido Mariquinha. Mas ela num tava no quarto.");
         if (ViuConversaEntrada("quarto-nome-informado")) yield return FalarPosto("Zefinha",
             "Deixei o nome dela com a mulher que cuida das pessoas. Ela disse que avisa se souber.");

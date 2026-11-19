@@ -210,7 +210,7 @@ public partial class EntradaCurrais
         try
         {
             yield return FalarPosto("Zefinha", "Eu num consigo ir.", "Mãe",
-                "Tá bem, minha filha. Eu e teu pai vamos com a família de Bento. Dona Luzia fica contigo.");
+                "Tá bem, minha filha. Eu e teu pai vamos com a família de Bento. Quando nós voltar, tu conta se soube de alguma coisa.");
             Dados.curraisEscolhaFuneral = 2;
             RegistrarConversaEntrada("bento-funeral-recusado");
             yield return Escurecer(1f);

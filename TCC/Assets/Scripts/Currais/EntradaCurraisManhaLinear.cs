@@ -69,7 +69,7 @@ public partial class EntradaCurrais
         GameProgress.Instance.UnlockDiaryPage("currais-nair"); Salvar();
         if (Dados.curraisEscolhaAgua == 1)
             yield return FalarPosto("Zefinha", "Vamos contar a painho.", "Mãe", "Vamos. Depois nós pergunta por esse nome.");
-        else yield return FalarPosto("Zefinha", "Vou contar a mainha e painho.", "Luzia", "Eu vou contigo.");
+        else yield return FalarPosto("Zefinha", "Vou contar a mainha e painho.", "Luzia", "Vai lá, menina.");
     }
 
     private IEnumerator SolicitarBaldeLinear()
@@ -136,6 +136,7 @@ public partial class EntradaCurrais
         bool maeAcompanha = Dados.curraisEscolhaAgua == 1;
         seguidorPaiConsulta.enabled = false;
         seguidoraMae.enabled = livre && maeAcompanha;
-        seguidoraLuzia.enabled = livre && !maeAcompanha;
+        seguidoraLuzia.enabled = false;
     }
 }
+
