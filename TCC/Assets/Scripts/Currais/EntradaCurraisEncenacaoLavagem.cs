@@ -78,8 +78,7 @@ public partial class EntradaCurrais
         areaPanosUso.GetComponent<SpriteRenderer>().enabled = !uso;
         areaPanosAtendimento.GetComponent<SpriteRenderer>().enabled = !atendimento;
         varalPanosUso.SetActive(Dados.curraisPanelaConcluida && uso);
-        areaPanoLavagem.gameObject.SetActive(Dados.curraisPanelaConcluida &&
-            Dados.curraisEtapaBusca == 2 && RetalhoAutorizado && !Dados.curraisTiraPanoRecolhida);
+        areaPanoLavagem.gameObject.SetActive(false);
         areaGuardaRonda.enabled = PrimeiraBuscaEmCurso && Dados.curraisEtapaBusca >= 3;
     }
 

@@ -110,8 +110,14 @@ public class CursorManager : MonoBehaviour
         // A mesma projeção usada pelos controladores de clique, inclusive com câmera inclinada.
         if (!InvestigationGuard.TryGetPointerPosition(out Vector2 mousePosition))
         { SetNormal(); return; }
-        if ((currais != null && currais.PonteiroSobreInteracao(mousePosition)) ||
-            (jornada != null && jornada.PonteiroSobreInteracao(mousePosition)))
+        if (currais != null && currais.PonteiroSobreInteracao(mousePosition))
+        {
+            bool jaEstavaComLupa = lupaAtiva;
+            SetLupa();
+            if (!jaEstavaComLupa && lupaAtiva) AudioManager.PlayItem("clique", 0.24f);
+            return;
+        }
+        if (jornada != null && jornada.PonteiroSobreInteracao(mousePosition))
         { SetLupa(); return; }
 
         // Inclui triggers explicitamente e não deixa o chão interceptar a lupa.

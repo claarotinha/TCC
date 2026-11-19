@@ -140,7 +140,7 @@ public partial class EntradaCurrais
             });
         yield return Dizer((Dados.curraisPerguntasRaimundo & 4) != 0 ? retalhoPedidoZefinha : retalhoOferecidoLavadeira);
         RegistrarConversaEntrada("lavagem-retalho-autorizado");
-        AtualizarEstadoBusca(); Salvar();
+        yield return EntregarRetalhoDaLavadeira();
     }
 
     private bool AtualizarAproximacaoLavagem(bool livre)
@@ -153,8 +153,11 @@ public partial class EntradaCurrais
             if (direcao != 0f && direcao * (mari.transform.position.x - areaLembranca.bounds.center.x) >= 0f)
                 EncerrarOportunidadeLavadeira();
         }
-        if (Dados.curraisEtapaBusca == 2 && Dados.curraisPanosSeparados == 3 && !RetalhoAutorizado)
-        { Iniciar(ConcluirLavagemLinear()); return true; }
+        if (Dados.curraisEtapaBusca == 2 && Dados.curraisPanosSeparados == 3)
+        {
+            Iniciar(RetalhoAutorizado ? EntregarRetalhoDaLavadeira() : ConcluirLavagemLinear());
+            return true;
+        }
         if (ViuConversaEntrada("lavagem-chegada") ||
             Mathf.Abs(mari.transform.position.x - areaLavadeira.bounds.center.x) > alcanceChegadaLavagem) return false;
         Iniciar(ComentarChegadaLavagem()); return true;

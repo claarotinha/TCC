@@ -1074,7 +1074,7 @@ public partial class EntradaCurrais : MonoBehaviour
     private void AtualizarCabacaMesa()
     {
         if (cabacaMesa == null) return;
-        cabacaMesa.SetActive(!Dados.curraisCabacaDevolvida);
+        cabacaMesa.SetActive(PodeRecolherCabacaMesa);
         if (AreaCabacaMesa != null) AreaCabacaMesa.enabled = PodeRecolherCabacaMesa;
     }
 

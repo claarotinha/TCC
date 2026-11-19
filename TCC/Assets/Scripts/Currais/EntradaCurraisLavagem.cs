@@ -88,11 +88,10 @@ public partial class EntradaCurrais
         yield return RemendarPanoLavagem();
     }
 
-    private IEnumerator RecolherTiraLavagem()
+    private IEnumerator EntregarRetalhoDaLavadeira()
     {
-        if (!RetalhoAutorizado || Dados.curraisTiraPanoRecolhida) yield break;
-        yield return ExaminarOuColetar(tiraPanoLavagem);
-        if (!coletaDoCenarioConfirmada) yield break;
+        if (!RetalhoAutorizado || Dados.curraisEtapaBusca != 2) yield break;
+        if (!TemItem(tiraPanoLavagem)) InventoryManager.Instance.AddItem(tiraPanoLavagem);
         Dados.curraisTiraPanoRecolhida = true;
         AvancarCampo(3);
         yield return Dizer(saidaLavagemMae);

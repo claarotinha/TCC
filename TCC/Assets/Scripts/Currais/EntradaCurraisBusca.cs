@@ -64,7 +64,7 @@ public partial class EntradaCurrais
         objetivoTexto.text = string.Empty;
         areaRaimundo.enabled = PrimeiraBuscaEmCurso;
         areaLavadeira.enabled = PrimeiraBuscaEmCurso;
-        areaPanoLavagem.enabled = etapa == 2 && RetalhoAutorizado;
+        areaPanoLavagem.enabled = false;
         AtualizarVisuaisLavagem();
         areaLembranca.enabled = etapa == 3;
         areaPatio.enabled = etapa == 4;
@@ -127,7 +127,6 @@ public partial class EntradaCurrais
             else if (area == areaLavadeira && PrimeiraBuscaEmCurso) MenuLavadeiraNaBusca();
             else if (area == areaLuzia && PrimeiraBuscaEmCurso) ConversarLuziaNaBusca();
             else if (area == areaGuardaRonda && PrimeiraBuscaEmCurso) Iniciar(AbrirGuardaPassagem());
-            else if (area == areaPanoLavagem && etapa == 2) Iniciar(RecolherTiraLavagem());
             else if (area == areaLembranca && etapa == 3)
             {
                 Iniciar(LembrarLenda());
@@ -197,37 +196,8 @@ public partial class EntradaCurrais
         lembrancaEmCurso = true;
         try
         {
-            int historia = Dados.estradaHistoriaEscolhida;
-            if (historia == 1)
-            {
-                yield return MostrarPercepcaoGradual(sombraGalho);
-                yield return Dizer(lembrancaCorpo);
-                yield return MostrarPercepcaoGradual(pessoaNaCerca);
-                yield return Esperar(tempoPlano);
-            }
-            else if (historia == 2)
-            {
-                yield return MostrarPercepcaoGradual(sinalGuarda);
-                yield return Dizer(lembrancaComadre);
-                yield return Esperar(tempoPlano);
-            }
-            else if (historia == 3)
-            {
-                yield return MostrarPercepcaoGradual(reflexoIrma);
-                yield return Dizer(lembrancaAgua);
-                reflexoIrma.SetActive(false);
-                yield return MostrarPercepcaoGradual(reflexoZefinha);
-                yield return Esperar(tempoPlano);
-            }
-            yield return OrientarAcompanhanteNaLembranca();
-            yield return Dizer(chamadaPassagemMae);
-            Fala[] reacao = historia == 1 ? reacaoCorpoPassagem :
-                historia == 2 ? reacaoComadrePassagem : historia == 3 ? reacaoAguaPassagem : reacaoSemLendaPassagem;
-            yield return Dizer(new[] { reacao[0] });
             OcultarPercepcao();
-            Fala[] resposta = new Fala[reacao.Length - 1];
-            Array.Copy(reacao, 1, resposta, 0, resposta.Length);
-            yield return Dizer(ComAcompanhante(resposta));
+            yield return OrientarAcompanhanteNaLembranca();
             yield return Dizer(continuarPassagemMae);
             Dados.curraisPassagemVigiadaConcluida = true;
             GameProgress.Instance.UnlockDiaryPage("currais-corredor");
