@@ -100,8 +100,7 @@ public partial class EntradaCurrais
         panoAlca.SetActive(Dados.curraisBaldeApoiado);
         AtualizarFamiliaAlternativa();
         curativoRaimundo.SetActive(Dados.curraisEscolhaPosto == 1);
-        Posicionar(areaRaimundo.transform, etapa == 0 ? raimundoNoPosto :
-            Dados.curraisEscolhaPosto == 1 ? (etapa == 1 ? raimundoApoiadoPosto : raimundoSentado) : raimundoOutroSetor);
+        Posicionar(areaRaimundo.transform, raimundoNoPosto);
         areaRaimundo.transform.localRotation = Quaternion.identity;
         if (etapa >= 2 && VoltouDoQuarto && (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))
         {

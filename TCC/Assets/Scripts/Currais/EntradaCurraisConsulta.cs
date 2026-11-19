@@ -100,7 +100,7 @@ public partial class EntradaCurrais
         if (!ativa) { AtualizarMemoria(); return; }
         objetivoTexto.text = string.Empty;
         areaAmanhecer.enabled = etapa == 0;
-        areaUltimaConsulta.enabled = etapa >= 1 && (etapa > 1 || Dados.curraisConsultaApresentada ||
+        areaUltimaConsulta.enabled = etapa >= 1 && (etapa > 1 || FamiliaNaConsulta || Dados.curraisConsultaApresentada ||
             ViuConversaEntrada("raimundo-manha-encontro") || Dados.curraisIdentidadeConfirmada);
         areaMae.enabled = etapa >= 1;
         areaPaiAbrigo.enabled = etapa >= 1;

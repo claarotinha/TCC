@@ -9,7 +9,8 @@ public partial class EntradaCurrais
     [SerializeField] private ExamineObject exameMesaUltimaConsulta;
 
     private bool FamiliaNaConsulta => Dados.curraisConsultaApresentada || ViuConversaEntrada("consulta-familia-reunida");
-    private bool MaeNaConsulta => Dados.curraisEscolhaAgua == 1 || ViuConversaEntrada("consulta-familia-portao");
+    private bool MaeNaConsulta => Dados.curraisEscolhaAgua == 1 ||
+        ViuConversaEntrada("consulta-familia-apos-semanas") || ViuConversaEntrada("consulta-familia-portao");
 
     private IEnumerator PrepararMesaConsulta()
     {

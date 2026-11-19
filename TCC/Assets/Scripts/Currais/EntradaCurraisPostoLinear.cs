@@ -8,8 +8,6 @@ public partial class EntradaCurrais
     [SerializeField] private ExamineObject exameMesaPosto, exameRaimundoPosto;
     [SerializeField] private Collider2D areaAnotacaoPosto;
     [SerializeField] private ItemData anotacaoPosto;
-    private bool recipientePostoGuardado, recipientePostoApoiado;
-    private Vector3 recipientePostoOrigem;
 
     private bool PapelAvulsoPostoPendente => Dados.curraisEscolhaPosto == 2 &&
         Dados.curraisDiarioRecusado && !ViuConversaEntrada("posto-anotacao-recolhida") && !TemItem(anotacaoPosto);
@@ -96,23 +94,17 @@ public partial class EntradaCurrais
 
     private void AtualizarRecipientePosto()
     {
-        if (!recipientePostoGuardado)
-        {
-            recipientePostoOrigem = baldesApoiadosPosto.transform.position;
-            recipientePostoGuardado = true;
-        }
-        bool apoiado = recipientePostoApoiado || Dados.curraisEscolhaPosto != 0;
-        baldesApoiadosPosto.transform.position = recipientePostoOrigem +
-            (apoiado ? Vector3.zero : Vector3.up * .45f);
+        baldesApoiadosPosto.SetActive(false);
         areaAnotacaoPosto.enabled = PostoDisponivel && PapelAvulsoPostoPendente;
     }
 
     private IEnumerator ApoiarRecipientePosto(bool zefinhaAjuda)
     {
-        if (zefinhaAjuda)
-            yield return Mover(mari.transform, baldesApoiadosPosto.transform.position + Vector3.left * .7f, .45f);
-        yield return DeslocarFolhaRegistro(baldesApoiadosPosto.transform, recipientePostoOrigem, .65f);
-        recipientePostoApoiado = true;
+        if (!zefinhaAjuda) yield break;
+        Vector3 pertoDeRaimundo = mari.transform.position;
+        float lado = mari.transform.position.x <= areaRaimundo.transform.position.x ? -1f : 1f;
+        pertoDeRaimundo.x = areaRaimundo.transform.position.x + lado * 1.2f;
+        yield return Mover(mari.transform, pertoDeRaimundo, .65f);
     }
 
     private IEnumerator RecolherFolhaPosto()
@@ -129,7 +121,7 @@ public partial class EntradaCurrais
         yield return ExaminarPosto("posto-raimundo-examinado", exameRaimundoPosto);
         yield return ExaminarPosto("posto-mesa-examinada", exameMesaPosto);
         yield return FalarPosto("Zefinha", "O senhor num consegue baixar isso?",
-            "Raimundo", "Se eu soltar de uma vez, derrama.", "Zefinha", "Espere. Eu ajudo.",
+            "Raimundo", "Se eu soltar de uma vez, derrama.", "Zefinha", "Tá pesado assim?",
             "Funcionário", "Vou recolher estas folhas.", "Zefinha", Dados.curraisDestinoConfirmado ?
             "Aquele papel tem a marca do carro. Pode confirmar o que disseram pra nós." :
             "Aquele papel tem a marca do carro que levou o outro grupo.",
@@ -141,10 +133,9 @@ public partial class EntradaCurrais
         bool destinoAnterior = Dados.curraisDestinoConfirmado;
         if (opcao == 0)
         {
-            yield return FalarPosto("Zefinha", "Eu seguro desse lado.",
-                "Raimundo", "Devagar. Num bote o pé embaixo.", "Zefinha", "Pode baixar. Eu tô segurando.");
             yield return ApoiarRecipientePosto(true);
-            yield return FalarPosto("Zefinha", "A mão abriu de novo?", "Raimundo", "Abriu. Obrigado por num me deixar largar tudo.");
+            yield return FalarPosto("Zefinha", "Eu ajudo o senhor.",
+                "Raimundo", "Obrigado, menina. Minha mão já num tava aguentando.");
             if (Dados.curraisBaldeApoiado)
                 yield return FalarPosto("Zefinha", "Até com o pano tá machucando?", "Raimundo", "Hoje foi o peso. A mão ainda num fechou.");
             else if (TemItem(tiraPanoLavagem))
@@ -170,8 +161,6 @@ public partial class EntradaCurrais
             yield return RecolherFolhaPosto();
         }
 
-        // A mudança de setor é mostrada antes de registrar a nova posição.
-        yield return Mover(areaRaimundo.transform, (opcao == 0 ? raimundoApoiadoPosto : raimundoOutroSetor).position, tempoPlano);
         Dados.curraisEscolhaPosto = opcao + 1;
         Dados.curraisEtapaPosto = 2;
         if (opcao == 0) Dados.curraisIdentidadeConfirmada = true;
@@ -210,11 +199,18 @@ public partial class EntradaCurrais
         Dados.curraisEtapaPosto = 4;
         Dados.curraisEtapaConsulta = 1;
         RegistrarConversaEntrada("quarto-retorno-familia");
-        Posicionar(mari.transform, mariUltimaConsulta);
-        AtualizarEstadoBusca(); Salvar();
+        RegistrarConversaEntrada("consulta-familia-reunida");
+        RegistrarConversaEntrada("consulta-familia-apos-semanas");
+        AtualizarEstadoBusca();
+        Posicionar(mari.transform, mariAbrigo);
+        Posicionar(pai, paiAbrigo); Posicionar(mae, maeAbrigo);
+        Posicionar(baleia, baleiaAbrigo); Posicionar(luzia.transform, luziaRepouso);
+        pai.gameObject.SetActive(true); mae.gameObject.SetActive(true);
+        Physics2D.SyncTransforms();
+        seguirCamera.RestaurarEnquadramentoDoAlvo();
+        Salvar();
         yield return ChapterCard.Show("josefa-10");
         yield return Escurecer(0f);
-        yield return PrepararMesaConsulta();
     }
 
     private IEnumerator RecolherAnotacaoPosto()

@@ -68,8 +68,6 @@ public partial class EntradaCurrais
         yield return FalarPosto("Zefinha (em pensamento)", "Eu podia jurar que ouvi a voz dela.");
         yield return FalarPosto("Cabo", "Já olhou. Deixe o atendimento seguir.",
             "Zefinha (em pensamento)", "Ele tá vendo que eu tô procurando. Ele sabe.");
-        if (Dados.curraisEscolhaPosto == 1)
-            yield return Mover(areaRaimundo.transform, raimundoSentado.position, tempoPlano);
         Dados.curraisEtapaPosto = 2;
         GameProgress.Instance.UnlockDiaryPage("currais-quarto");
         AtualizarEstadoBusca(); Salvar();

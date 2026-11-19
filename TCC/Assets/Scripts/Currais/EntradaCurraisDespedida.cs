@@ -114,7 +114,7 @@ public partial class EntradaCurrais
         areaCaboQuarto.enabled = false;
         registroCopiado.SetActive(ativo && (PapelAvulsoPostoPendente ||
             ((noiteEmCurso || Dados.curraisEtapaPosto == 4) && TemItem(anotacaoPosto))));
-        baldesApoiadosPosto.SetActive(ativo);
+        baldesApoiadosPosto.SetActive(false);
         AtualizarRecipientePosto();
         cabacaComTrabalhadora.gameObject.SetActive(false);
         if (ativo && !ConsultaDisponivel) areaRaimundo.enabled = true;
