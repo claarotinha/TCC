@@ -20,7 +20,7 @@ public partial class EntradaCurrais
         objetivoTexto.gameObject.SetActive(mostrarAjudaTemporaria);
         objetivoTexto.enabled = mostrarAjudaTemporaria;
         if (!mostrarAjudaTemporaria) return;
-        if (GameProgress.Instance == null || !pronto)
+        if (!PodeAtualizarCena)
         { objetivoTexto.text = "TESTE CURRAIS | Inicializando a cena.\nSe esta mensagem permanecer, confira os erros no Console.\nF2: ocultar ajuda"; return; }
         string estado = ExamineObject.IsShowing() ? "Examine aberto: clique novamente para fechar." :
             menuAberto ? "Escolha uma opção no balão. Sair fecha o menu." :

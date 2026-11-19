@@ -88,6 +88,8 @@ public partial class EntradaCurrais : MonoBehaviour
     private int escolhaRecebida = -1;
 
     private GameProgressData Dados => GameProgress.Instance.Data;
+    private bool PodeAtualizarCena => pronto && !encerrando && isActiveAndEnabled &&
+        !GameSaveSystem.IsRestoring && GameProgress.Instance != null && GameProgress.Instance.Data != null;
     private bool pronto, ocupado, dialogando, aguardandoClique, menuAberto, encerrando;
     private int quadroBloqueado;
     private Quaternion rotacaoPai;
@@ -412,7 +414,7 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void Update()
     {
-        if (!pronto || PauseHelper.BlockInput() || Time.timeScale <= 0f) return;
+        if (!PodeAtualizarCena || PauseHelper.BlockInput() || Time.timeScale <= 0f) return;
         // Closing Examine takes priority over UI controls and exploration.
         if (ExamineObject.IsShowing())
         {
@@ -1220,7 +1222,7 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void AtualizarCenaNoFimDoQuadro()
     {
-        if (!pronto) return;
+        if (!PodeAtualizarCena) return;
         AtualizarCompanhiaSepultamento();
         if (sepultamentoNaTela) AjustarCompanhiaBentoNoPlano();
         ManterPessoasPresentes();
@@ -1354,6 +1356,7 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private void OnDisable()
     {
+        pronto = false;
         encerrando = true;
         if (examineNomesAtual != null && examineNomesAtual.PanelIsOpen) examineNomesAtual.HidePanel();
         examineNomesAtual = null;

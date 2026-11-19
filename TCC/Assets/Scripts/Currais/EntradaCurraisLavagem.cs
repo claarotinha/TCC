@@ -113,6 +113,7 @@ public partial class EntradaCurrais
 
     private void AtualizarPatrulha()
     {
+        if (!PodeAtualizarCena || guardaRonda == null || rondaInicio == null || rondaFim == null) return;
         if (!Dados.curraisPanelaConcluida || Dados.curraisEtapaBusca < 3 || Dados.curraisEtapaBusca > 5 ||
             !guardaRonda.gameObject.activeInHierarchy) return;
         if (ocupado || menuAberto || dialogando || PainelAuxiliarAberto() || PauseHelper.BlockInput() || Time.timeScale <= 0f ||
@@ -133,7 +134,7 @@ public partial class EntradaCurrais
             { rondaVaiAoFim = !rondaVaiAoFim; pausaRonda = 1.2f; }
         }
         if (Dados.curraisEtapaBusca != 3 || !Dados.curraisTiraPanoRecolhida || Dados.curraisPassagemVigiadaConcluida) return;
-        if (mari.transform.position.x >= inicioLembranca.position.x)
+        if (mari != null && inicioLembranca != null && mari.transform.position.x >= inicioLembranca.position.x)
         {
             Iniciar(LembrarLenda());
             return;
