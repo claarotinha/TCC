@@ -127,8 +127,7 @@ public partial class EntradaCurrais
     {
         if (PertencesBentoResolvidos || !Dados.curraisBentoMorto) yield break;
         yield return ExamineNomesUmaVez("bento-exame-pertences", examePertencesBento);
-        yield return DizerEntradaUmaVez("bento-pedido-pertences", bentoPertencesPedido);
-        MostrarOpcoes("Trabalhador", string.Empty,
+        MostrarOpcoes("Pertences de Bento", string.Empty,
             new[] { "Levar os pertences", "Prefiro ficar aqui", "Sair" },
             new Action[] { () => Iniciar(RecolherEmbrulhoBento()), () => Iniciar(TrabalhadorLevarEmbrulhoBento()), FecharMenu });
     }

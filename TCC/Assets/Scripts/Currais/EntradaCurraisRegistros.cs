@@ -59,6 +59,12 @@ public partial class EntradaCurrais
 
     private bool InteragirCriancaERegistros(Vector2 ponto)
     {
+        // No último capítulo, o escrivão e os papéis do abrigo abrem o mesmo puzzle.
+        if (ConsultaDisponivel && (areaRegistro.OverlapPoint(ponto) || areaFolhasRegistro.OverlapPoint(ponto)))
+        {
+            Iniciar(ClicarMesaUltimaConsulta());
+            return true;
+        }
         if (areaLataMenino.enabled && areaLataMenino.gameObject.activeInHierarchy && areaLataMenino.OverlapPoint(ponto))
         { Iniciar(ExaminarLataMenino()); return true; }
         if (areaMenino.enabled && areaMenino.gameObject.activeInHierarchy && areaMenino.OverlapPoint(ponto))
@@ -82,7 +88,8 @@ public partial class EntradaCurrais
         bool presente = Dados.curraisEtapaEntrada == 4;
         folhasAntesRegistro.SetActive(presente && !Dados.curraisRegistroConcluido);
         folhasDepoisRegistro.SetActive(presente && Dados.curraisRegistroConcluido);
-        areaFolhasRegistro.enabled = presente && !Dados.curraisPanelaConcluida;
+        areaFolhasRegistro.enabled = presente && (!Dados.curraisPanelaConcluida ||
+            (ConsultaDisponivel && Dados.curraisEtapaConsulta == 1));
         areaCanhotoMesa.enabled = presente && Dados.curraisLotePanosRecolhido && (!Dados.curraisPanelaConcluida || CanhotoPendenteDeColeta);
         lotePanosComMari.SetActive(false);
         areaLataMenino.enabled = presente && Dados.curraisEscolhaAgua != 0 && Dados.curraisMeninoVisitado;

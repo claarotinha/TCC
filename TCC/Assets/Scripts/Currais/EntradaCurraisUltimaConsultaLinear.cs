@@ -44,7 +44,9 @@ public partial class EntradaCurrais
             yield return Dizer(manhaOrdens);
             RegistrarConversaEntrada("consulta-ordens-ouvidas"); Salvar();
         }
-        yield return ExamineNomesUmaVez("consulta-mesa-examinada", exameMesaUltimaConsulta);
+        if (!ViuConversaEntrada("consulta-mesa-examinada"))
+            yield return ExaminarPosto("consulta-mesa-examinada", exameMesaUltimaConsulta,
+                "As folhas do registro estão misturadas sobre a mesa. O escrivão espera que Zefinha organize a sequência.");
         yield return OrganizarFolhasRegistro();
         if (!RegistroOrganizado) yield break;
         if (Dados.curraisConsultaApresentada) { yield return ConsultaFinalLinear(); yield break; }
@@ -83,7 +85,9 @@ public partial class EntradaCurrais
             yield return Dizer(manhaOrdens);
             RegistrarConversaEntrada("consulta-ordens-ouvidas"); Salvar();
         }
-        yield return ExamineNomesUmaVez("consulta-mesa-examinada", exameMesaUltimaConsulta);
+        if (!ViuConversaEntrada("consulta-mesa-examinada"))
+            yield return ExaminarPosto("consulta-mesa-examinada", exameMesaUltimaConsulta,
+                "As folhas do registro estão misturadas sobre a mesa. O escrivão espera que Zefinha organize a sequência.");
         yield return OrganizarFolhasRegistro();
         if (!RegistroOrganizado) yield break;
         if (!Dados.curraisConsultaApresentada)

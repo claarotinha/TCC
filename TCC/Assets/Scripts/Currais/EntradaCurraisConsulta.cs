@@ -53,7 +53,7 @@ public partial class EntradaCurrais
         // São as mesmas áreas reutilizadas da etapa 4, não novos objetos.
         // Recupera a ligação caso uma cópia antiga da cena tenha importado o campo vazio.
         if (areaAmanhecer == null) areaAmanhecer = areaEsteiraNoite;
-        if (areaUltimaConsulta == null) areaUltimaConsulta = areaPostoEscolha;
+        if (areaUltimaConsulta == null) areaUltimaConsulta = areaRegistro;
         if (areaRetornoConsulta == null) areaRetornoConsulta = areaFamiliaAbrigo;
 
         UnityEngine.Object[] referencias = { setorConsulta, papelConsulta, testemunhaConsulta, lacoRemendadoCenario,
@@ -116,6 +116,9 @@ public partial class EntradaCurrais
         papelConsulta.SetActive(Dados.curraisEscolhaConsulta == 0);
         if (!papelEmConsulta) canhotoApresentadoConsulta.SetActive(false);
         testemunhaConsulta.SetActive(true);
+        Vector3 pertoDoEscrivao = testemunhaConsulta.transform.position;
+        pertoDoEscrivao.x = areaRegistro.transform.position.x + 3f;
+        testemunhaConsulta.transform.position = pertoDoEscrivao;
         trabalhadorRetorno.SetActive(true);
         lacoRemendadoCenario.SetActive(false);
         Posicionar(areaRaimundo.transform, Dados.curraisEscolhaPosto == 1 ? raimundoConsultaPerto : raimundoConsultaLonge);

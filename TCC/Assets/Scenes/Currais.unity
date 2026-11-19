@@ -20763,8 +20763,6 @@ MonoBehaviour:
   - personagem: Pai
     texto: Num precisa achar palavra agora.
   bentoPertencesPedido:
-  - personagem: Trabalhador
-    texto: Isso aqui era de Bento.
   - personagem: Zefinha
     texto: Vai ficar com quem?
   - personagem: Trabalhador
@@ -21088,11 +21086,11 @@ MonoBehaviour:
   - personagem: Mulher
     texto: Eu sou Luzia. Pode contar comigo no que eu puder.
   setorConsulta: {fileID: 4500000000}
-  papelConsulta: {fileID: 4500000006}
+  papelConsulta: {fileID: 9966000030}
   testemunhaConsulta: {fileID: 4500000014}
   lacoRemendadoCenario: {fileID: 4500000019}
   areaAmanhecer: {fileID: 4400000105}
-  areaUltimaConsulta: {fileID: 4400000026}
+  areaUltimaConsulta: {fileID: 4200000031}
   areaSaidaConsulta: {fileID: 4100000143}
   areaRetornoConsulta: {fileID: 4400000102}
   bloqueioSaida: {fileID: 4500000018}
@@ -22537,7 +22535,7 @@ MonoBehaviour:
     texto: Vou levar os panos. Depois procuro quem sabe daquele carro.
   objetivoLotePanos: 
   iniciarNoPatioParaTeste: 1
-  exameMesaUltimaConsulta: {fileID: 9911880031}
+  exameMesaUltimaConsulta: {fileID: 9933000012}
 --- !u!1 &4200000000
 GameObject:
   m_ObjectHideFlags: 0
@@ -32219,7 +32217,7 @@ Transform:
   m_GameObject: {fileID: 4400000106}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 221.6, y: 0.900537, z: 0}
+  m_LocalPosition: {x: 219.1, y: 0.900537, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -33342,7 +33340,7 @@ Transform:
   m_GameObject: {fileID: 4500000029}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 220.072, y: 0.900537, z: 0}
+  m_LocalPosition: {x: 217.572, y: 0.900537, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -33435,7 +33433,7 @@ Transform:
   m_GameObject: {fileID: 4500000035}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 213.025, y: 0.900537, z: 0}
+  m_LocalPosition: {x: 210.525, y: 0.900537, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
