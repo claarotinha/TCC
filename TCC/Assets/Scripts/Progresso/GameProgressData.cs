@@ -156,6 +156,8 @@ public class GameProgressData
     // Etapa 5: 0 amanhecer, 1 consulta, 2 pedido de saída, 3 retorno, 4 concluída.
     public int curraisEtapaConsulta;
     // 0 sem decisão, 1 confirmar destino, 2 confirmar acompanhante.
+    // Permutação das três folhas do registro; 0 começa embaralhada.
+    public int curraisOrdemFolhasRegistro;
     public int curraisEscolhaConsulta;
     public bool curraisConsultaApresentada;
     public bool curraisLacoRemendado;

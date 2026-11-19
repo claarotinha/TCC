@@ -45,6 +45,8 @@ public partial class EntradaCurrais
             RegistrarConversaEntrada("consulta-ordens-ouvidas"); Salvar();
         }
         yield return ExamineNomesUmaVez("consulta-mesa-examinada", exameMesaUltimaConsulta);
+        yield return OrganizarFolhasRegistro();
+        if (!RegistroOrganizado) yield break;
         if (Dados.curraisConsultaApresentada) { yield return ConsultaFinalLinear(); yield break; }
         MostrarAssuntosEscrivao();
     }
@@ -82,6 +84,8 @@ public partial class EntradaCurrais
             RegistrarConversaEntrada("consulta-ordens-ouvidas"); Salvar();
         }
         yield return ExamineNomesUmaVez("consulta-mesa-examinada", exameMesaUltimaConsulta);
+        yield return OrganizarFolhasRegistro();
+        if (!RegistroOrganizado) yield break;
         if (!Dados.curraisConsultaApresentada)
         {
             yield return FalarPosto("Pai", "Separaram minha filha da irmã na entrada. Nós tá tentando saber pra onde levaram ela.");
@@ -192,4 +196,71 @@ public partial class EntradaCurrais
         AtualizarEstadoBusca(); Salvar();
         yield return DizerEntradaUmaVez("encerramento-abertura", aberturaEncerramento);
     }
+
+    private bool RegistroOrganizado => ViuConversaEntrada("consulta-registro-organizado");
+
+    // As seis ordens possíveis permitem guardar e retomar o puzzle no save existente.
+    private static readonly int[][] ordensFolhasRegistro = {
+        new[] { 2, 0, 1 }, new[] { 0, 1, 2 }, new[] { 0, 2, 1 },
+        new[] { 1, 0, 2 }, new[] { 1, 2, 0 }, new[] { 2, 1, 0 }
+    };
+    private static readonly string[] folhasRegistro = {
+        "ADMISSÃO — Família recebida; irmãs juntas.",
+        "TRIAGEM — Menina separada com acompanhante.",
+        "REMESSA — Grupo enviado; destino no anexo."
+    };
+
+    private string TextoFolhasRegistro()
+    {
+        int[] ordem = ordensFolhasRegistro[Mathf.Clamp(Dados.curraisOrdemFolhasRegistro, 0, 5)];
+        return "Organize os registros, do primeiro ao último.\n\n" +
+            "1. " + folhasRegistro[ordem[0]] + "\n" +
+            "2. " + folhasRegistro[ordem[1]] + "\n" +
+            "3. " + folhasRegistro[ordem[2]];
+    }
+
+    private void TrocarFolhasRegistro(int primeiro, int segundo)
+    {
+        int[] ordem = (int[])ordensFolhasRegistro[Mathf.Clamp(Dados.curraisOrdemFolhasRegistro, 0, 5)].Clone();
+        int folha = ordem[primeiro]; ordem[primeiro] = ordem[segundo]; ordem[segundo] = folha;
+        Dados.curraisOrdemFolhasRegistro = Array.FindIndex(ordensFolhasRegistro,
+            candidata => candidata[0] == ordem[0] && candidata[1] == ordem[1] && candidata[2] == ordem[2]);
+        Salvar();
+    }
+
+    private IEnumerator OrganizarFolhasRegistro()
+    {
+        if (RegistroOrganizado) yield break;
+        yield return DizerEntradaUmaVez("consulta-puzzle-apresentado", new[] {
+            new Fala { personagem = "Escrivão", texto = "Essas folhas se misturaram. Separa a ordem dos registros enquanto eu procuro o anexo." },
+            new Fala { personagem = "Zefinha (em pensamento)", texto = "Primeiro nós chegou junto. Foi depois que separaram Mariquinha. Preciso seguir o caminho que fizeram com ela." }
+        });
+        while (!RegistroOrganizado)
+        {
+            yield return Escolher("Mesa do registro", TextoFolhasRegistro(),
+                new[] { "Trocar as folhas", "Conferir a ordem", "Sair" });
+            int acao = escolhaRecebida;
+            if (acao == 2) { FecharMenu(); yield break; }
+            if (acao == 0)
+            {
+                yield return Escolher("Mesa do registro", TextoFolhasRegistro(),
+                    new[] { "Trocar 1 e 2", "Trocar 2 e 3", "Voltar" });
+                if (escolhaRecebida == 0) TrocarFolhasRegistro(0, 1);
+                else if (escolhaRecebida == 1) TrocarFolhasRegistro(1, 2);
+            }
+            else if (acao == 1)
+            {
+                if (Dados.curraisOrdemFolhasRegistro == 1)
+                {
+                    yield return FalarPosto("Zefinha", "Admissão, triagem e remessa... Foi depois de separar ela de nós que mandaram o grupo embora.",
+                        "Escrivão", "É essa a sequência. Agora posso conferir o anexo ou chamar quem viu a menina.");
+                    RegistrarConversaEntrada("consulta-registro-organizado"); Salvar();
+                }
+                else
+                    yield return FalarPosto("Zefinha (em pensamento)",
+                        "Ainda num tá certo. A família chegou junta. A separação veio depois, e só então o grupo foi mandado embora.");
+            }
+        }
+    }
+
 }
