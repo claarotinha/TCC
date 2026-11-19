@@ -2015,10 +2015,18 @@ public partial class SegundaParada : MonoBehaviour
 
     }
 
+    [SerializeField] private bool usarGatilhoFortaleza;
+    private bool entradaFortalezaSolicitada;
+
+    public void SolicitarEntradaFortaleza()
+    {
+        entradaFortalezaSolicitada = true;
+    }
+
     private void AtualizarFortaleza()
     {
         if (cidadeCenario == null || restaurandoFamilia || finalEmAndamento || encerramentoMostrado ||
-            GameSaveSystem.IsRestoring || !acampamentoConcluido) return;
+            GameSaveSystem.IsRestoring || (!acampamentoConcluido && !entradaFortalezaSolicitada)) return;
         // Se o progresso ja chegou a Fortaleza, nao exigir novamente o
         // gatilho da quinta parada apos carregar o jogo.
         ControleJornada jornadaFortaleza = ControleJornada.Instance;
@@ -2031,12 +2039,18 @@ public partial class SegundaParada : MonoBehaviour
             MostrarFimAto();
             return;
         }
-        if (conversando || (dialogueUI != null && dialogueUI.activeInHierarchy)) return;
-        if (abordagemIniciada || (dialogoFortalezaConcluido && mari.transform.position.x >= chegadaFortaleza.position.x))
+        if (conversando || NarrativaOcupada || (dialogueUI != null && dialogueUI.activeInHierarchy)) return;
+        if (usarGatilhoFortaleza && !entradaFortalezaSolicitada) return;
+        if (entradaFortalezaSolicitada && GameProgress.Instance != null)
+        {
+            GameProgress.Instance.Data.curraisSeparacaoFundoPreto = true;
+            GameProgress.Instance.Data.curraisEtapaEntrada = 0;
+        }
+        if (abordagemIniciada || (dialogoFortalezaConcluido && (entradaFortalezaSolicitada || mari.transform.position.x >= chegadaFortaleza.position.x)))
         {
             IniciarAbordagem(); return;
         }
-        if (!dialogoFortalezaConcluido && (fortalezaIniciada || mari.transform.position.x >= chegadaFortaleza.position.x))
+        if (!dialogoFortalezaConcluido && (entradaFortalezaSolicitada || fortalezaIniciada || mari.transform.position.x >= chegadaFortaleza.position.x))
         {
             fortalezaIniciada = true; SalvarFortaleza();
             Falar(new[] { "Mariquinha", "Mãe", "Mariquinha", "Pai" }, new[] {

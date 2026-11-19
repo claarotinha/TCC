@@ -105,8 +105,11 @@ public partial class EntradaCurrais : MonoBehaviour
         if (seguirCamera != null) seguirCamera.DefinirLimites(limites, true);
     }
 
+    [SerializeField] private GameObject fundoPretoSeparacao;
+
     private void Awake()
     {
+        if (fundoPretoSeparacao != null) fundoPretoSeparacao.SetActive(true);
         ConfigurarLimitesExternos();
         if (objetivoTexto != null) objetivoTexto.gameObject.SetActive(false);
         if (mari != null) inicioMariNaRua = mari.transform.position;
@@ -126,6 +129,7 @@ public partial class EntradaCurrais : MonoBehaviour
             Debug.LogError("EntradaCurrais: inicialização interrompida. Confira os campos identificados acima no objeto " + name + ".", this);
             FecharDialogo();
             if (fade != null) CorFade(0f);
+            if (fundoPretoSeparacao != null) fundoPretoSeparacao.SetActive(false);
             LiberarMari();
             yield break;
         }
@@ -140,6 +144,7 @@ public partial class EntradaCurrais : MonoBehaviour
             Debug.LogError("EntradaCurrais: confira os prefabs existentes de progresso e inventário.", this);
             FecharDialogo();
             if (fade != null) CorFade(0f);
+            if (fundoPretoSeparacao != null) fundoPretoSeparacao.SetActive(false);
             LiberarMari();
             yield break;
         }
@@ -177,6 +182,7 @@ public partial class EntradaCurrais : MonoBehaviour
         PrepararDespedidaEQuarto();
         pronto = true;
         int etapa = Mathf.Clamp(Dados.curraisEtapaEntrada, 0, 4);
+        if (fundoPretoSeparacao != null) fundoPretoSeparacao.SetActive(etapa == 0 && Dados.curraisSeparacaoFundoPreto);
         Dados.curraisEtapaEntrada = etapa;
         if (etapa == 0) Iniciar(Separar());
         else if (etapa == 2 && Dados.curraisRevistaApresentada)
@@ -603,6 +609,8 @@ public partial class EntradaCurrais : MonoBehaviour
         yield return Dizer(depoisSeparacao);
         yield return ChapterCard.Show("josefa-06");
         Dados.curraisEtapaEntrada = 2;
+        Dados.curraisSeparacaoFundoPreto = false;
+        if (fundoPretoSeparacao != null) fundoPretoSeparacao.SetActive(false);
         Salvar();
         yield return Entrar();
     }
