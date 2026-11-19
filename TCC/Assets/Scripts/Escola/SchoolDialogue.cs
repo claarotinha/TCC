@@ -39,15 +39,11 @@ public class SchoolDialogue : MonoBehaviour
 
     IEnumerator PlaySchoolScene()
     {
-        // Espera 5 segundos antes de tocar o alarme
-        yield return new WaitForSeconds(5f);
-
+        // O sinal toca na entrada; a conversa começa logo, sem esperar o áudio inteiro.
         if (alarmSound != null)
             alarmSound.Play();
 
-        // Espera o alarme terminar
-        if (alarmSound != null && alarmSound.clip != null)
-            yield return new WaitForSeconds(alarmSound.clip.length);
+        yield return new WaitForSeconds(0.6f);
 
         // Começa o som ambiente da escola
         if (schoolAmbient != null)
