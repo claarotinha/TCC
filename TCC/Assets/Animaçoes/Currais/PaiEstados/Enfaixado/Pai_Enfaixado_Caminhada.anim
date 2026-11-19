@@ -83,8 +83,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - &id001
-      fileID: 21300000
+    - fileID: 21300000
       guid: b94a47d9b4fb41ab9aec98bd358aa6bb
       type: 3
     - fileID: 21300000
@@ -99,7 +98,9 @@ AnimationClip:
     - fileID: 21300000
       guid: 64c3c11f601b438b82d184452be36596
       type: 3
-    - *id001
+    - fileID: 21300000
+      guid: b94a47d9b4fb41ab9aec98bd358aa6bb
+      type: 3
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip:
