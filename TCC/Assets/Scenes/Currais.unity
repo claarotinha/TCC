@@ -20863,7 +20863,7 @@ MonoBehaviour:
     texto: "Guarde a caba\xE7a, minha filha. N\xF3s ainda vai precisar dela."
   esperaChamadaAgua: 2
   alcanceRetornoAgua: 4
-  mostrarAjudaTemporaria: 1
+  mostrarAjudaTemporaria: 0
   painelAjudaTemporaria: {fileID: 9911880100}
   exameAtendimentoBento: {fileID: 9934000060}
   examePertencesBento: {fileID: 9934000061}
@@ -22623,7 +22623,7 @@ MonoBehaviour:
   cadernoAutorizado:
   - personagem: Fiscal
     texto: O caderno ficou separado. Esse a menina pode levar.
-  dispensarPertencesParaTeste: 1
+  dispensarPertencesParaTeste: 0
   areaAguaPatio: {fileID: 9808000003}
   areaPanosPatio: {fileID: 9808000103}
   areaSocorroBento: {fileID: 9808000203}
@@ -22732,7 +22732,7 @@ MonoBehaviour:
   - personagem: Zefinha
     texto: Vou levar os panos. Depois procuro quem sabe daquele carro.
   objetivoLotePanos: 
-  iniciarNoPatioParaTeste: 1
+  iniciarNoPatioParaTeste: 0
   acolhimentoMaoUI: {fileID: 7976000009999}
   limitesNegacao: {fileID: 7989000000002}
   exameMesaUltimaConsulta: {fileID: 9933000012}
@@ -43570,7 +43570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9911880101
 RectTransform:
   m_ObjectHideFlags: 0
@@ -67892,7 +67892,7 @@ GameObject:
     fileID: 0
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7977000000001
 Transform:
   m_ObjectHideFlags: 0

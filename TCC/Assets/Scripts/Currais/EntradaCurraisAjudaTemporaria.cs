@@ -3,7 +3,7 @@ using UnityEngine;
 public partial class EntradaCurrais
 {
     [Header("Ajuda temporária para testar Currais — F2")]
-    [SerializeField] private bool mostrarAjudaTemporaria = true;
+    [SerializeField] private bool mostrarAjudaTemporaria = false;
     [SerializeField] private GameObject painelAjudaTemporaria;
 
     private void LateUpdate()
