@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: CurraisEffectsCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::CurraisEffectsCatalog
+  arvore: {fileID: 8300000, guid: 5ce921ef4f370684e865966c43e2f3fd, type: 3}
+  choroMenino: {fileID: 8300000, guid: 11aa044449eb92349974daf798380ad7, type: 3}
+  bola: {fileID: 8300000, guid: 71f5cb8f62bc8c646859e3eb3fd3c5a9, type: 3}
+  fotografia: {fileID: 8300000, guid: 35a7ce879fd446640bd7a6f4868ee8b5, type: 3}
+  folhaVelha: {fileID: 8300000, guid: fda10c63efd4afd4fb5452731290d258, type: 3}
+  caixa: {fileID: 8300000, guid: 501be322c104f0f45926f3f46ad80a26, type: 3}
+  cliqueCadeado: {fileID: 8300000, guid: 4742a3f0c2c80bf4caed04ee7f9ec464, type: 3}
+  erroSenha: {fileID: 8300000, guid: 91366e1d117a256479697a12bff0e2c7, type: 3}
+  bau: {fileID: 8300000, guid: 4f145eb98d725264b911c5a25bf730b2, type: 3}
+  porta: {fileID: 8300000, guid: 2feff45bb2920ae46b002894f0a7760e, type: 3}
+  galho: {fileID: 8300000, guid: 2716a3e06ba25c64aa1c97d2d1f7fc0c, type: 3}
+  folhas: {fileID: 8300000, guid: c3bd102eeca746943a4e7bc2530516d1, type: 3}
+  passaro: {fileID: 8300000, guid: 44e433843eaaddc42a78809f2311559f, type: 3}
+  estilingue: {fileID: 8300000, guid: 218da24d745d894429672cf59f825ea6, type: 3}
+  faca: {fileID: 8300000, guid: b7b2fbdaaacba7a4698e8e42afe40ba5, type: 3}
+  comer: {fileID: 8300000, guid: 94832564e035a7942bc4f20540e54895, type: 3}
+  espelho: {fileID: 8300000, guid: 18950c7440dd3f746abcfdc6ae6be53f, type: 3}
+  vento: {fileID: 8300000, guid: fefde4c88768bf54892a07d6b2eef299, type: 3}
+  agua: {fileID: 8300000, guid: 6ec44c8a056556d4b96ba83fcb81e737, type: 3}
+  passos: {fileID: 8300000, guid: 9c5bda52ec76b8f4d86989151d6888fb, type: 3}
+  corrida: {fileID: 8300000, guid: 9c2ba0b02e56ebc4593818f07df67d94, type: 3}
+  passosGuardas: {fileID: 8300000, guid: 30486888c1a20374d8fe58ee99956355, type: 3}
+  pig: {fileID: 8300000, guid: c4e7da0d0589f4044b73d05e2bffcce8, type: 3}
+  pig2: {fileID: 8300000, guid: 112dc17cee78c5b479aaf6106ae149ad, type: 3}
+  lavagem: {fileID: 8300000, guid: 666e587eaf314d74b80520722e35b26f, type: 3}
+  tosse: {fileID: 8300000, guid: c5d75d4b7704ed04a8e027cc6b6ad485, type: 3}
+  murmuro: {fileID: 8300000, guid: 0327474581768584daedff7e509a8338, type: 3}
+  bento: {fileID: 8300000, guid: 9a13fd5bccf52154ebcd606e623a718e, type: 3}
+  escrita: {fileID: 8300000, guid: 4933a53806893ef43b928dce40e6e9c5, type: 3}
+  clique: {fileID: 8300000, guid: 44a4c4beb0437244188520f0d20f7aa1, type: 3}
+  botao: {fileID: 8300000, guid: 2d7cdb0bccdf5234296d8feec4f229b7, type: 3}
+  inventarioErro: {fileID: 8300000, guid: a771e8069c4559c4aac0a5b6320ed443, type: 3}
+  inventarioCombinar: {fileID: 8300000, guid: e6a108e0e697b30468db64c88ce5cd6a, type: 3}
+  voz: {fileID: 8300000, guid: 3b9d8320dd25d5f42a48879698c2a9f0, type: 3}
+  escolaSino: {fileID: 8300000, guid: 82223377e91ca6b4a982fd51e8069d4e, type: 3}
+  escolaCriancas: {fileID: 8300000, guid: d20e024999ab81048b5e30ccc8e80247, type: 3}
