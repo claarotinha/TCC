@@ -121,6 +121,9 @@ public partial class EntradaCurrais
         yield return FalarPosto("Zefinha", "O nome dela é Maria Severina. Nós chama ela de Mariquinha.");
         yield return FalarPosto("Zefinha", "Separaram ela de nós na entrada. Se ouvir esse nome, pode me procurar.",
             "Trabalhadora", "Procuro, sim.");
+        if (Dados.curraisIdentidadeConfirmada)
+            yield return FalarPosto("Zefinha", "Minha irmã tava com Nair Pereira. A senhora viu ela por aqui?",
+                "Trabalhadora", "De nome eu num conheço. Vou perguntar por ela também.");
         yield return FalarPosto("Zefinha", "Obrigada.");
         RegistrarConversaEntrada("quarto-nome-informado"); Salvar();
     }
@@ -173,7 +176,8 @@ public partial class EntradaCurrais
                 yield return FalarPosto("Zefinha", Dados.curraisEscolhaPosto == 2 ? "No encaminhamento tava escrito Lagoa do Meio." :
                     "Quando perguntei pelo carro, disseram Lagoa do Meio.",
                     "Pai", "E tua irmã?", "Zefinha", "O nome dela num tava no que eu vi. Ainda preciso perguntar.");
-            else yield return FalarPosto("Zefinha", "Raimundo viu uma menina parecida com ela, mas ainda num confirmou quem tava junto.");
+            else if (!Dados.curraisIdentidadeConfirmada)
+                yield return FalarPosto("Zefinha", "Raimundo viu uma menina parecida com ela, mas ainda num confirmou quem tava junto.");
             RegistrarConversaEntrada(id);
         }
         yield return FalarPosto("Pai", "Então nós continua procurando, minha filha.");

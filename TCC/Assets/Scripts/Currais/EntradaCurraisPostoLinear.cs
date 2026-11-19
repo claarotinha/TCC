@@ -131,7 +131,7 @@ public partial class EntradaCurrais
             "Aquele papel tem a marca do carro que levou o outro grupo.",
             "Raimundo", "É dos encaminhamentos. Se precisa olhar, pergunte agora.");
         yield return Escolher("Zefinha", string.Empty,
-            new[] { "Ajudar Raimundo", "Pedir para copiar a folha", "Sair" });
+            new[] { "Ajudar Raimundo", "Copiar o registro", "Sair" });
         int opcao = escolhaRecebida;
         if (opcao < 0 || opcao > 1) yield break;
         bool destinoAnterior = Dados.curraisDestinoConfirmado;
@@ -146,8 +146,8 @@ public partial class EntradaCurrais
             else if (TemItem(tiraPanoLavagem))
                 yield return FalarPosto("Zefinha", "A lavadeira me deu um retalho pra essa alça.", "Raimundo", "Guarde. Depois nós ajeita.");
             yield return RecolherFolhaPosto();
-            yield return FalarPosto("Raimundo", "Perguntei às mulheres da lavagem. Ainda num consegui confirmar o nome daquela mulher.",
-                "Zefinha", "Mas o senhor vai continuar perguntando?", "Raimundo", "Vou. Se souber, eu te procuro.");
+            yield return FalarPosto("Raimundo", "Nair Pereira. A lavadeira confirmou. Tua irmã tava com ela.",
+                "Zefinha", "E pra onde Nair foi?", "Raimundo", "Isso eu num vi. Mas agora tu tem um nome pra perguntar.");
             if (destinoAnterior) yield return FalarPosto("Zefinha", "Levaram a folha, mas eu sei o lugar. Lagoa do Meio.",
                 "Raimundo", "Ainda dá pra perguntar por esse lugar.");
             else yield return FalarPosto("Zefinha", "Agora levaram o papel…", "Raimundo", "Num era o único encaminhamento. Vamos procurar outra notícia.");
@@ -158,25 +158,26 @@ public partial class EntradaCurrais
             yield return Mover(mari.transform, papelPostoLeitura.position + Vector3.left * .6f, .45f);
             yield return LerFolhaDoPosto();
             yield return FalarPosto("Zefinha", "Lagoa do Meio…", "Zefinha", destinoAnterior ?
-                "É o mesmo lugar que disseram quando eu vi o canhoto." : "Foi pra lá que mandaram o grupo.",
+                "É o mesmo lugar do canhoto." : "Foi pra lá que mandaram o grupo.",
                 "Zefinha (em pensamento)", "Só tem o lugar e o grupo. Cadê o nome de Mariquinha?");
             yield return ApoiarRecipientePosto(false);
             yield return FalarPosto("Zefinha", "Desculpe, seu Raimundo. Eu precisava olhar antes que levassem.",
                 "Raimundo", "Eu sei, menina. Conseguiu ler?", "Zefinha", "Lagoa do Meio.", "Raimundo", "Então guarde esse nome.");
             yield return RecolherFolhaPosto();
         }
+        yield return IndicarQuartoPosto();
         // A mudança de setor é mostrada antes de registrar a nova posição.
         yield return Mover(areaRaimundo.transform, (opcao == 0 ? raimundoApoiadoPosto : raimundoOutroSetor).position, tempoPlano);
         Dados.curraisEscolhaPosto = opcao + 1;
         Dados.curraisEtapaPosto = 1;
-        if (opcao == 1)
+        if (opcao == 0) Dados.curraisIdentidadeConfirmada = true;
+        else
         {
             Dados.curraisDestinoConfirmado = true;
             if (!Dados.curraisDiarioRecusado) GameProgress.Instance.UnlockDiaryPage("currais-copia");
         }
         AtualizarEstadoBusca(); Salvar();
         if (PapelAvulsoPostoPendente) yield return RecolherAnotacaoPosto();
-        yield return IndicarQuartoPosto();
     }
 
     private IEnumerator RecolherAnotacaoPosto()
@@ -191,8 +192,8 @@ public partial class EntradaCurrais
     {
         if (ViuConversaEntrada("posto-quarto-indicado")) yield break;
         yield return FalarPosto("Zefinha", "Tem mais algum lugar onde eu possa perguntar pela minha irmã?",
-            "Raimundo", "Tem um quarto de atendimento perto do tanque grande. Pergunte lá.");
-        RegistrarConversaEntrada("posto-quarto-indicado"); Salvar();
+            "Raimundo", "Tem um quarto de atendimento logo à esquerda da mesa. Pergunte lá.");
+        RegistrarConversaEntrada("posto-quarto-indicado");
     }
 
     private void MenuNoticiasPosto()
@@ -211,7 +212,8 @@ public partial class EntradaCurrais
         if (Dados.curraisDestinoConfirmado)
             yield return FalarPosto("Zefinha", "O grupo foi encaminhado pra Lagoa do Meio.",
                 "Pai", "E tua irmã?", "Zefinha", "O nome dela num tava no que eu vi. Ainda preciso perguntar.");
-        else yield return FalarPosto("Zefinha", "Raimundo viu uma menina parecida com ela, mas ainda num confirmou quem tava junto.",
+        else if (!Dados.curraisIdentidadeConfirmada)
+            yield return FalarPosto("Zefinha", "Raimundo viu uma menina parecida com ela, mas ainda num confirmou quem tava junto.",
             "Pai", "Nós continua procurando, minha filha.");
         RegistrarConversaEntrada(id); Salvar();
     }
