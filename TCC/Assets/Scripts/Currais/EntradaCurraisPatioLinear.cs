@@ -88,9 +88,28 @@ public partial class EntradaCurrais
     private IEnumerator AbrirApoioPatioLinear()
     {
         yield return ExamineNomesUmaVez("patio-exame-apoio", exameApoioTrabalho);
-        if (Dados.curraisEtapaBusca != 4 || !Dados.curraisTrabalhoPatioIniciado || ApoioPatioAutorizado) yield break;
-        MostrarOpcoes("Trabalhador", string.Empty, new[] { "Perguntar pela água", "Sair" },
-            new Action[] { () => Iniciar(AutorizarApoioPatioLinear()), FecharMenu });
+        if (Dados.curraisEtapaBusca != 4 || !Dados.curraisTrabalhoPatioIniciado) yield break;
+        if (!ApoioPatioAutorizado)
+        {
+            MostrarOpcoes("Trabalhador", string.Empty, new[] { "Perguntar pelo apoio", "Sair" },
+                new Action[] { () => Iniciar(AutorizarApoioPatioLinear()), FecharMenu });
+            yield break;
+        }
+        MostrarEntregasDoApoio();
+    }
+
+    private void MostrarEntregasDoApoio()
+    {
+        var rotulos = new System.Collections.Generic.List<string>();
+        var acoes = new System.Collections.Generic.List<Action>();
+        if (!Dados.curraisPanosPatioEntregues && TemItem(panoAuxilio))
+        { rotulos.Add("Entregar o pano do pai"); acoes.Add(() => Iniciar(EntregarPanoNoApoio())); }
+        if (!Dados.curraisAguaPatioPreparada && TemItem(cabacaVaziaBusca))
+        { rotulos.Add("Encher a cabaça"); acoes.Add(() => Iniciar(EncherCabacaNoApoio())); }
+        rotulos.Add("Sair"); acoes.Add(FecharMenu);
+        MostrarOpcoes("Trabalhador", Dados.curraisPanosPatioEntregues
+            ? "O pano já tá aqui no apoio." : "Pode deixar o pano aqui no apoio.",
+            rotulos.ToArray(), acoes.ToArray());
     }
 
     private IEnumerator AutorizarApoioPatioLinear()

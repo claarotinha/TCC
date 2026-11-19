@@ -206,10 +206,10 @@ public partial class EntradaCurrais
         if (Dados.curraisEtapaBusca == 2 && (alvo == areaPanosUso || alvo == areaPanosAtendimento) &&
             (item == panoUsoLavagem || item == panoAtendimentoLavagem))
         { Iniciar(SepararPanoLavagem(alvo == areaPanosAtendimento)); return true; }
-        if (Dados.curraisEtapaBusca == 4 && ApoioPatioAutorizado && !Dados.curraisAguaPatioPreparada && alvo == areaAguaPatio && item == cabacaVaziaBusca)
-        { Iniciar(PrepararAguaPatio()); return true; }
-        if (Dados.curraisEtapaBusca == 4 && ApoioPatioAutorizado && !Dados.curraisPanosPatioEntregues && alvo == areaPanosPatio && item == panoAuxilio)
-        { Iniciar(EntregarPanosPatio()); return true; }
+        if (Dados.curraisEtapaBusca == 4 && Dados.curraisTrabalhoPatioIniciado && !Dados.curraisAguaPatioPreparada && alvo == areaAguaPatio && item == cabacaVaziaBusca)
+        { Iniciar(EncherCabacaNoApoio()); return true; }
+        if (Dados.curraisEtapaBusca == 4 && Dados.curraisTrabalhoPatioIniciado && !Dados.curraisPanosPatioEntregues && alvo == areaPanosPatio && item == panoAuxilio)
+        { Iniciar(EntregarPanoNoApoio()); return true; }
         if (Dados.curraisEtapaBusca == 5 && Dados.curraisBentoMorto &&
             alvo == areaFamiliarBento && item == itemEmbrulhoBento && !PertencesBentoResolvidos)
         { Iniciar(EntregarEmbrulhoBento()); return true; }

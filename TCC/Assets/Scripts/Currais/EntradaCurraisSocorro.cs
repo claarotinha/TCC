@@ -81,7 +81,7 @@ public partial class EntradaCurrais
     private IEnumerator PrepararAguaPatio()
     {
         if (Dados.curraisEtapaBusca != 4 || !ApoioPatioAutorizado || Dados.curraisAguaPatioPreparada ||
-            !TemItem(cabacaVaziaBusca) || InventoryManager.Instance.SelectedItem != cabacaVaziaBusca) yield break;
+            !TemItem(cabacaVaziaBusca)) yield break;
         InventoryManager.Instance.RemoveItem(cabacaVaziaBusca);
         InventoryManager.Instance.AddItem(cabacaCheiaBusca);
         Dados.curraisAguaPatioPreparada = true;
@@ -89,10 +89,26 @@ public partial class EntradaCurrais
         yield return Dizer(patioAguaRecebida);
     }
 
+    private IEnumerator EntregarPanoNoApoio()
+    {
+        if (Dados.curraisEtapaBusca != 4 || !Dados.curraisTrabalhoPatioIniciado ||
+            Dados.curraisPanosPatioEntregues || !TemItem(panoAuxilio)) yield break;
+        if (!ApoioPatioAutorizado) yield return AutorizarApoioPatioLinear();
+        yield return EntregarPanosPatio();
+    }
+
+    private IEnumerator EncherCabacaNoApoio()
+    {
+        if (Dados.curraisEtapaBusca != 4 || !Dados.curraisTrabalhoPatioIniciado ||
+            Dados.curraisAguaPatioPreparada || !TemItem(cabacaVaziaBusca)) yield break;
+        if (!ApoioPatioAutorizado) yield return AutorizarApoioPatioLinear();
+        yield return PrepararAguaPatio();
+    }
+
     private IEnumerator EntregarPanosPatio()
     {
         if (Dados.curraisEtapaBusca != 4 || !ApoioPatioAutorizado || Dados.curraisPanosPatioEntregues ||
-            !TemItem(panoAuxilio) || InventoryManager.Instance.SelectedItem != panoAuxilio) yield break;
+            !TemItem(panoAuxilio)) yield break;
         Dados.curraisPanosPatioEntregues = true;
         InventoryManager.Instance.RemoveItem(panoAuxilio);
         AtualizarEstadoBusca(); Salvar();
