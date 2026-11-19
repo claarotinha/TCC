@@ -19,7 +19,6 @@ public partial class EntradaCurrais
     [SerializeField] private Fala[] bentoCabacaRecuperada, bentoLembrarCabaca, bentoAnuncioSaida, bentoEsperar;
     [SerializeField] private Fala[] bentoPermissaoSepultamento, bentoReunirGrupo, bentoSepultamentoInicio, bentoNomeSepultamento;
     [SerializeField] private Fala[] bentoSepultamentoFamilia, bentoRetornoCruzes;
-    private bool familiarBentoEmMovimento;
 
     private bool PaiBuscandoFamiliaBento => Dados.curraisEtapaBusca == 5 && !Dados.curraisBentoMorto &&
         ViuConversaEntrada("bento-pai-foi-buscar") && !ViuConversaEntrada("bento-pai-voltou");
@@ -98,19 +97,6 @@ public partial class EntradaCurrais
         if (ficar) yield return Esperar(tempoPlano);
         RegistrarConversaEntrada("bento-reacao-escolhida");
         RegistrarConversaEntrada(ficar ? "bento-reacao-ficar" : "bento-reacao-familia"); Salvar();
-    }
-
-    private IEnumerator TrazerFamiliarBento()
-    {
-        familiarBentoEmMovimento = true;
-        try
-        {
-            // A família vem após o aviso do trabalhador; o pai nunca sai do atendimento.
-            FecharDialogo();
-            yield return Mover(familiarBento, chegadaFamiliarBento.position, tempoCaminhadaBento);
-            yield return Esperar(1.5f);
-        }
-        finally { familiarBentoEmMovimento = false; Physics2D.SyncTransforms(); }
     }
 
     private bool InteragirPertencesBento(Vector2 ponto)
@@ -247,10 +233,10 @@ public partial class EntradaCurrais
     private void AtualizarVisuaisBentoLinear()
     {
         bool etapa = Dados.curraisEtapaBusca == 5 && !Dados.curraisSepultamentoConcluido;
-        bool chegou = ViuConversaEntrada("bento-pai-voltou") || Dados.curraisBentoMorto;
-        if (!familiarBentoEmMovimento)
-            familiarBento.position = chegou ? chegadaFamiliarBento.position : origemFamiliarBento.position;
-        marcadorFamiliarBento.gameObject.SetActive(etapa && (chegou || familiarBentoEmMovimento) && arteFamiliarBento.sprite == null);
+        bool chegou = Dados.curraisBentoMorto;
+        familiarBento.position = chegou ? chegadaFamiliarBento.position : origemFamiliarBento.position;
+        familiarBento.gameObject.SetActive(etapa && chegou);
+        marcadorFamiliarBento.gameObject.SetActive(etapa && chegou && arteFamiliarBento.sprite == null);
         areaFamiliarBento.enabled = etapa && Dados.curraisBentoMorto && !PertencesBentoResolvidos;
         bool recolhido = ViuConversaEntrada("bento-embrulho-recolhido") || TemItem(itemEmbrulhoBento);
         pertencesBentoCobertos.gameObject.SetActive(etapa && Dados.curraisBentoMorto && (!recolhido || PertencesBentoResolvidos));

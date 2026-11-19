@@ -6,6 +6,7 @@ using UnityEngine.UI;
 // Folhas, textos, marcas de tinta e botões existem no Canvas da cena.
 public sealed class PuzzleRegistro : MonoBehaviour
 {
+    [SerializeField] private RectTransform painel;
     [SerializeField] private Button[] folhas;
     [SerializeField] private TMP_Text instrucao;
     [SerializeField] private Button conferir, sair;
@@ -38,6 +39,8 @@ public sealed class PuzzleRegistro : MonoBehaviour
     public void Abrir(int estado, Action<int> salvar)
     {
         gameObject.SetActive(true);
+        Canvas.ForceUpdateCanvases();
+        AjustarProporcoes();
         ordem = (int[])ordens[Mathf.Clamp(estado, 0, 5)].Clone();
         aoTrocar = salvar;
         selecionada = -1;
@@ -92,8 +95,20 @@ public sealed class PuzzleRegistro : MonoBehaviour
         instrucao.text = "Registro reconstituído.";
     }
 
+    private void AjustarProporcoes()
+    {
+        if (painel == null) return;
+        Rect area = ((RectTransform)transform).rect;
+        if (area.width <= 0f || area.height <= 0f) return;
+        float escala = Mathf.Min(1f, area.width * .9f / 1080f, area.height * .9f / 680f);
+        painel.localScale = Vector3.one * escala;
+    }
+
+    private void OnRectTransformDimensionsChange() => AjustarProporcoes();
+
     private void Update()
     {
+        AjustarProporcoes();
         if (!Concluido || PauseHelper.BlockInput() || Time.timeScale <= 0f) return;
         tempoConclusao += Time.deltaTime;
         if (tempoConclusao >= 1.2f) Fechar();

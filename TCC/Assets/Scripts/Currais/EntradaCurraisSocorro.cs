@@ -159,6 +159,7 @@ public partial class EntradaCurrais
         Color corCobertura = cobertura.color;
         try
         {
+            yield return EnquadrarBentoNoPatio();
             yield return DizerEntradaUmaVez("bento-pai-vai-chamar", bentoPaiBuscarFamilia);
             if (!ViuConversaEntrada("bento-pai-foi-buscar"))
             {
@@ -174,11 +175,6 @@ public partial class EntradaCurrais
             yield return Esperar(1.5f);
             yield return DizerEntradaUmaVez("bento-pergunta-levantar",
                 bentoPerguntaMae);
-            if (!ViuConversaEntrada("bento-pai-voltou"))
-            {
-                yield return TrazerFamiliarBento();
-                RegistrarConversaEntrada("bento-pai-voltou"); Salvar();
-            }
             FecharDialogo();
             yield return Esperar(2f);
             yield return DizerEntradaUmaVez("bento-noticia", bentoNoticiaLinear);
@@ -186,6 +182,7 @@ public partial class EntradaCurrais
             yield return Esperar(2.5f);
             yield return Escurecer(1f);
             Dados.curraisBentoMorto = true;
+            RegistrarConversaEntrada("bento-pai-voltou");
             GameProgress.Instance.UnlockDiaryPage("currais-bento");
             AtualizarEstadoBusca(); Salvar();
             cobertura.color = new Color(corCobertura.r, corCobertura.g, corCobertura.b, 0f);
@@ -198,7 +195,6 @@ public partial class EntradaCurrais
         {
             cobertura.color = corCobertura;
             atendimentoBentoEmCurso = false;
-            familiarBentoEmMovimento = false;
         }
     }
 

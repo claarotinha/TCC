@@ -70,7 +70,7 @@ public partial class EntradaCurrais
         areaPatio.enabled = etapa == 4;
         areaPanoAtendimento.enabled = false;
         panoCarregado.SetActive(false);
-        manchaRoda.SetActive(etapa >= 5);
+        manchaRoda.SetActive(etapa >= 5 && Dados.curraisBentoMorto);
         corpoCoberto.SetActive((etapa >= 6 || Dados.curraisBentoMorto) && !Dados.curraisSepultamentoConcluido);
         trabalhadorRetorno.SetActive(true);
         bento.gameObject.SetActive(true);
@@ -253,6 +253,7 @@ public partial class EntradaCurrais
         bool cicloAtivo = cicloBento != null && cicloBento.enabled;
         try
         {
+            yield return EnquadrarBentoNoPatio();
             yield return Dizer(patioLevarAgua);
             yield return Dizer(patioAntesQueda);
             yield return Escurecer(1f);
@@ -260,7 +261,7 @@ public partial class EntradaCurrais
             Posicionar(bento, bentoCaido);
             bento.rotation = bentoEmPe.rotation;
             bentoEmSocorroEmCena = true;
-            manchaRoda.SetActive(true);
+            manchaRoda.SetActive(false);
             AtualizarDetalhesPatio();
             yield return Esperar(.35f);
             yield return Escurecer(0f);

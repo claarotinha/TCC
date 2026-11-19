@@ -55,6 +55,7 @@ public partial class EntradaCurrais
     {
         if (Dados.curraisEtapaBusca != 4 || Dados.curraisTrabalhoPatioIniciado) yield break;
         yield return ComentarChegadaPatio();
+        yield return EnquadrarBentoNoPatio();
         yield return DizerEntradaUmaVez("patio-pai-abertura", patioPaiAbertura);
         yield return DizerEntradaUmaVez("patio-protesto-acompanhante",
             patioProtestoMae);
@@ -152,7 +153,17 @@ public partial class EntradaCurrais
         return false;
     }
 
-    private IEnumerator ComentarChegadaPatio() => DizerEntradaUmaVez("patio-chegada",
-        patioChegadaMae);
-}
+    private IEnumerator EnquadrarBentoNoPatio()
+    {
+        Vector3 enquadramento = cameraCena.transform.position;
+        enquadramento.x = (paiTrabalhoMarca.position.x + bentoEmPe.position.x) * .5f;
+        yield return Mover(cameraCena.transform, enquadramento, .4f);
+    }
 
+    private IEnumerator ComentarChegadaPatio()
+    {
+        if (ViuConversaEntrada("patio-chegada")) yield break;
+        yield return EnquadrarBentoNoPatio();
+        yield return DizerEntradaUmaVez("patio-chegada", patioChegadaMae);
+    }
+}
