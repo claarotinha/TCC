@@ -26,12 +26,15 @@ public partial class EntradaCurrais
     {
         if (ViuConversaEntrada("posto-retorno")) yield break;
         yield return Esperar(tempoPlano);
-        if (Dados.curraisEscolhaAgua == 1)
+        if (PaisNoFuneral)
+            yield return FalarPosto("Zefinha", "Dona Luzia, nós pode continuar procurando?",
+                "Luzia", "Pode. Teus pais foram com a família de Bento. Eu vou contigo.");
+        else if (MaeAcompanhaPosto)
             yield return FalarPosto("Zefinha", "Mainha, eu quero continuar procurando.",
                 "Mãe", "Eu vou contigo. Teu pai precisa sentar um pouco.");
         else yield return FalarPosto("Zefinha", "Nós pode perguntar no posto agora?",
             "Luzia", "Pode. Eu vou contigo.", "Mãe", "Se souberem de alguma coisa, voltem pra dizer.");
-        yield return FalarPosto(NomeAcompanhantePatio,
+        yield return FalarPosto(NomeAcompanhantePosto,
             "Raimundo tá no posto, junto da mesa dos papéis. Vamos perguntar a ele.");
         RegistrarConversaEntrada("posto-retorno"); Salvar();
     }
@@ -85,14 +88,17 @@ public partial class EntradaCurrais
     private void AtualizarCompanhiaPosto()
     {
         if (!PostoDisponivel || ConsultaDisponivel || Dados.curraisEtapaPosto > 2 || VoltouDoQuarto) return;
-        Transform acompanhante = Dados.curraisEscolhaAgua == 1 ? mae : luzia.transform;
+        Transform acompanhante = MaeAcompanhaPosto ? mae : luzia.transform;
         Vector3 perto = (InvestigouQuarto ? areaTrabalhadoraQuarto.transform.position : areaRaimundo.transform.position) + Vector3.left * 1.3f;
-        if (InvestigouQuarto) (Dados.curraisEscolhaAgua == 1 ? areaMae : areaLuzia).enabled = true;
+        if (InvestigouQuarto) (MaeAcompanhaPosto ? areaMae : areaLuzia).enabled = true;
         perto.y = acompanhante.position.y;
         acompanhante.position = perto;
-        Posicionar(pai, paiAbrigo);
-        if (Dados.curraisEscolhaAgua != 1) Posicionar(mae, maeAbrigo);
-        else Posicionar(luzia.transform, luziaRepouso);
+        if (!PaisNoFuneral)
+        {
+            Posicionar(pai, paiAbrigo);
+            if (!MaeAcompanhaPosto) Posicionar(mae, maeAbrigo);
+        }
+        if (MaeAcompanhaPosto) Posicionar(luzia.transform, luziaRepouso);
     }
 
     private void AtualizarRecipientePosto()
@@ -110,11 +116,11 @@ public partial class EntradaCurrais
 
     private IEnumerator ApoiarRecipientePosto(bool zefinhaAjuda)
     {
-        Transform pessoa = zefinhaAjuda ? mari.transform : (Dados.curraisEscolhaAgua == 1 ? mae : luzia.transform);
+        Transform pessoa = zefinhaAjuda ? mari.transform : (MaeAcompanhaPosto ? mae : luzia.transform);
         yield return Mover(pessoa, baldesApoiadosPosto.transform.position + Vector3.left * .7f, .45f);
         if (zefinhaAjuda)
         {
-            Transform acompanhante = Dados.curraisEscolhaAgua == 1 ? mae : luzia.transform;
+            Transform acompanhante = MaeAcompanhaPosto ? mae : luzia.transform;
             yield return Mover(acompanhante, baldesApoiadosPosto.transform.position + Vector3.right * .7f, .45f);
         }
         yield return DeslocarFolhaRegistro(baldesApoiadosPosto.transform, recipientePostoOrigem, .65f);
@@ -148,8 +154,8 @@ public partial class EntradaCurrais
         if (opcao == 0)
         {
             yield return FalarPosto("Zefinha", "Eu seguro desse lado.",
-                "Raimundo", "Devagar. Num bote o pé embaixo.", NomeAcompanhantePatio,
-                Dados.curraisEscolhaAgua == 1 ? "Pode baixar. Eu tô segurando." : "Deixe o peso comigo. Isso.");
+                "Raimundo", "Devagar. Num bote o pé embaixo.", NomeAcompanhantePosto,
+                MaeAcompanhaPosto ? "Pode baixar. Eu tô segurando." : "Deixe o peso comigo. Isso.");
             yield return ApoiarRecipientePosto(true);
             yield return FalarPosto("Zefinha", "A mão abriu de novo?", "Raimundo", "Abriu. Obrigado por num me deixar largar tudo.");
             if (Dados.curraisBaldeApoiado)
@@ -160,7 +166,7 @@ public partial class EntradaCurrais
             yield return FalarPosto("Raimundo", "Perguntei às mulheres da lavagem. Ainda num consegui confirmar o nome daquela mulher.",
                 "Zefinha", "Mas o senhor vai continuar perguntando?", "Raimundo", "Vou. Se souber, procuro vocês.");
             if (destinoAnterior) yield return FalarPosto("Zefinha", "Levaram a folha, mas eu sei o lugar. Lagoa do Meio.",
-                NomeAcompanhantePatio, "Nós ainda pode perguntar por esse nome.");
+                NomeAcompanhantePosto, "Nós ainda pode perguntar por esse nome.");
             else yield return FalarPosto("Zefinha", "Agora levaram o papel…", "Raimundo", "Num era o único encaminhamento. Vamos procurar outra notícia.");
         }
         else
@@ -170,8 +176,8 @@ public partial class EntradaCurrais
             yield return LerFolhaDoPosto();
             yield return FalarPosto("Zefinha", "Lagoa do Meio…", "Zefinha", destinoAnterior ?
                 "É o mesmo lugar que disseram quando eu vi o canhoto." : "Foi pra lá que mandaram o grupo.",
-                NomeAcompanhantePatio, "Tem o nome de Mariquinha?", "Zefinha", "Num tô achando. Só o lugar e o grupo.",
-                NomeAcompanhantePatio, "Então guarde isso. Nós continua perguntando.");
+                NomeAcompanhantePosto, "Tem o nome de Mariquinha?", "Zefinha", "Num tô achando. Só o lugar e o grupo.",
+                NomeAcompanhantePosto, "Então guarde isso. Nós continua perguntando.");
             yield return ApoiarRecipientePosto(false);
             yield return FalarPosto("Zefinha", "Desculpe, seu Raimundo. Eu precisava olhar antes que levassem.",
                 "Raimundo", "Eu sei, menina. Conseguiu ler?", "Zefinha", "Lagoa do Meio.", "Raimundo", "Então guarde esse nome.");
@@ -202,7 +208,7 @@ public partial class EntradaCurrais
     private IEnumerator IndicarQuartoPosto()
     {
         if (ViuConversaEntrada("posto-quarto-indicado")) yield break;
-        if (Dados.curraisEscolhaAgua == 1)
+        if (MaeAcompanhaPosto)
             yield return FalarPosto("Mãe", "Vamos perguntar no quarto perto do tanque.",
                 "Zefinha", "A senhora acha que ela passou por lá?", "Mãe", "Eu quero perguntar pra quem viu, minha filha.");
         else yield return FalarPosto("Luzia", "Tem um quarto de atendimento perto do tanque grande.",

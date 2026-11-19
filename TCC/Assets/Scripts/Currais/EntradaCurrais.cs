@@ -1212,7 +1212,7 @@ public partial class EntradaCurrais : MonoBehaviour
         { RestaurarFamiliaConsulta(); return; }
         if (PostoDisponivel && Dados.curraisEtapaPosto <= 2 && !VoltouDoQuarto)
         {
-            SeguidorFamilia companhia = Dados.curraisEscolhaAgua == 1 ? seguidoraMae : seguidoraLuzia;
+            SeguidorFamilia companhia = MaeAcompanhaPosto ? seguidoraMae : seguidoraLuzia;
             Vector3 perto = companhia.transform.position;
             perto.x = mari.transform.position.x - companhia.DistanciaAtras;
             companhia.transform.position = perto;
@@ -1266,8 +1266,10 @@ public partial class EntradaCurrais : MonoBehaviour
         }
         bool acompanharPosto = PostoDisponivel && Dados.curraisEtapaPosto <= 2 && !VoltouDoQuarto;
         bool acompanharDistribuicao = !PostoDisponivel && Dados.curraisDistribuicaoIniciada;
-        seguidoraLuzia.enabled = livre && (acompanharPosto || acompanharDistribuicao) && Dados.curraisEscolhaAgua == 2;
-        seguidoraMae.enabled = livre && (acompanharPosto || acompanharDistribuicao) && Dados.curraisEscolhaAgua == 1;
+        seguidoraLuzia.enabled = livre && ((acompanharPosto && !MaeAcompanhaPosto) ||
+            (acompanharDistribuicao && Dados.curraisEscolhaAgua == 2));
+        seguidoraMae.enabled = livre && ((acompanharPosto && MaeAcompanhaPosto) ||
+            (acompanharDistribuicao && Dados.curraisEscolhaAgua == 1));
     }
 
     private void FecharMenu()

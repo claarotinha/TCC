@@ -194,7 +194,11 @@ public partial class EntradaCurrais
     private void MostrarPartidaBento()
     {
         if (!DespedidaBentoPronta) return;
-        MostrarOpcoes(NomeAcompanhantePatio, string.Empty,
+        Vector3 pertoDaZefinha = mae.position;
+        pertoDaZefinha.x = mari.transform.position.x - seguidoraMae.DistanciaAtras;
+        mae.position = pertoDaZefinha;
+        Physics2D.SyncTransforms();
+        MostrarOpcoes("Mãe", string.Empty,
             new[] { "Eu quero ir", "Não vou ao funeral", "Sair" },
             new Action[] { () => Iniciar(SepultarBento()), () => Iniciar(RecusarFuneralBento()), FecharMenu });
     }
@@ -205,8 +209,8 @@ public partial class EntradaCurrais
         sepultamentoEmCurso = true;
         try
         {
-            yield return FalarPosto("Zefinha", "Eu num consigo ir.", NomeAcompanhantePatio,
-                "Tá bem. Nós fica aqui. A família dele num vai sozinha.");
+            yield return FalarPosto("Zefinha", "Eu num consigo ir.", "Mãe",
+                "Tá bem, minha filha. Eu e teu pai vamos com a família de Bento. Dona Luzia fica contigo.");
             Dados.curraisEscolhaFuneral = 2;
             RegistrarConversaEntrada("bento-funeral-recusado");
             yield return Escurecer(1f);
@@ -258,13 +262,6 @@ public partial class EntradaCurrais
 
     private void AjustarCompanhiaBentoNoPlano()
     {
-        // A posição dos quatro participantes continua editável no plano original.
-        // Ao escolher a mãe, troca apenas os lugares de mãe e Luzia, mantendo a acompanhante junto de Josefa.
-        if (companhiaSepultamento.Length == 4 && origensCompanhiaSepultamento.Length == 4 && Dados.curraisEscolhaAgua == 1)
-        {
-            companhiaSepultamento[0].sprite = origensCompanhiaSepultamento[3].sprite;
-            companhiaSepultamento[3].sprite = origensCompanhiaSepultamento[0].sprite;
-        }
         familiarNoSepultamento.sprite = arteFamiliarBento.sprite != null ? arteFamiliarBento.sprite : marcadorFamiliarBento.sprite;
         familiarNoSepultamento.gameObject.SetActive(sepultamentoNaTela && quadroFuneralProvisorio == null);
     }

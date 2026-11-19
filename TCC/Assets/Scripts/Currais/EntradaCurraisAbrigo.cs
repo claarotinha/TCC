@@ -270,8 +270,12 @@ public partial class EntradaCurrais
     {
         if (pessoasPresentes == null) return;
         foreach (PessoaPresente pessoa in pessoasPresentes)
-            if (pessoa != null && pessoa.personagem != null && !pessoa.personagem.activeSelf)
-                pessoa.personagem.SetActive(true);
+        {
+            if (pessoa == null || pessoa.personagem == null || pessoa.personagem.activeSelf) continue;
+            if (PaisNoFuneral && (pessoa.personagem == pai.gameObject || pessoa.personagem == mae.gameObject))
+                continue;
+            pessoa.personagem.SetActive(true);
+        }
     }
 
     private PessoaPresente PessoaNoPonto(Vector2 ponto)

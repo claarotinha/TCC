@@ -21,6 +21,10 @@ public partial class EntradaCurrais
     private Color[] coresAntesDaNoite;
     private bool noiteEmCurso;
 
+    private bool PaisNoFuneral => Dados.curraisEscolhaFuneral == 2 && !VoltouDoQuarto;
+    private bool MaeAcompanhaPosto => Dados.curraisEscolhaAgua == 1 && Dados.curraisEscolhaFuneral != 2;
+    private string NomeAcompanhantePosto => MaeAcompanhaPosto ? "Mãe" : "Luzia";
+
     private bool PostoDisponivel => Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 6;
 
     private bool ReferenciasPostoValidas()
@@ -75,12 +79,20 @@ public partial class EntradaCurrais
         maoNaRoupa.SetActive(ativo && (noiteEmCurso || Dados.curraisEtapaPosto == 4) && !Dados.curraisLacoGuardado);
         cabacaNoite.SetActive(ativo && Dados.curraisEtapaPosto == 4);
         AplicarNoite(ativo && (noiteEmCurso || Dados.curraisEtapaPosto == 4));
-        if (!ativo) { AtualizarConsulta(); return; }
+        if (!ativo)
+        {
+            if (Dados.curraisBentoMorto)
+                Posicionar(areaRaimundo.transform, raimundoNoPosto);
+            AtualizarConsulta();
+            return;
+        }
+        pai.gameObject.SetActive(!PaisNoFuneral);
+        mae.gameObject.SetActive(!PaisNoFuneral);
         int etapa = Dados.curraisEtapaPosto;
         objetivoTexto.text = string.Empty;
         areaPostoEscolha.enabled = etapa == 0;
         areaPortaQuarto.enabled = etapa == 1;
-        areaFamiliaAbrigo.enabled = etapa >= 2;
+        areaFamiliaAbrigo.enabled = etapa >= 2 && !PaisNoFuneral;
         areaEsteiraNoite.enabled = etapa == 3;
         papelPosto.SetActive(Dados.curraisEscolhaPosto == 0);
         quartoInterior.SetActive(true);

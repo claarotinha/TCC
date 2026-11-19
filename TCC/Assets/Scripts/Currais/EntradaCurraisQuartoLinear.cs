@@ -60,14 +60,14 @@ public partial class EntradaCurrais
         if (!Dados.curraisQuartoAberto) yield return AbrirPortaDoQuarto();
         yield return FalarPosto("Zefinha", "Mariquinha?", "Trabalhadora",
             "Aqui num tem menina, minha filha. Essas pessoas chegaram de manhã.");
-        if (Dados.curraisEscolhaAgua == 1)
+        if (MaeAcompanhaPosto)
             yield return FalarPosto("Zefinha", "Mainha, eu ouvi ela.", "Mãe", "Eu sei que tu ouviu. Mas vamos olhar quem tá aqui.");
         else yield return FalarPosto("Zefinha", "Dona Luzia, era a voz dela.", "Luzia", "Eu num ouvi, menina. Vamos perguntar com calma.");
         yield return FalarPosto("Cabo", "Já olhou. Deixe o atendimento seguir.",
             "Zefinha (em pensamento)", "Ele tá vendo que eu tô procurando. Ele sabe.");
         if (Dados.curraisEscolhaPosto == 1)
             yield return Mover(areaRaimundo.transform, raimundoSentado.position, tempoPlano);
-        Transform companhia = Dados.curraisEscolhaAgua == 1 ? mae : luzia.transform;
+        Transform companhia = MaeAcompanhaPosto ? mae : luzia.transform;
         Vector3 pertoDoQuarto = companhia.position;
         pertoDoQuarto.x = areaTrabalhadoraQuarto.transform.position.x - 1.3f;
         yield return Mover(companhia, pertoDoQuarto, tempoPlano);
@@ -115,7 +115,7 @@ public partial class EntradaCurrais
     {
         if (ViuConversaEntrada("quarto-nome-informado")) yield break;
         yield return FalarPosto("Zefinha", "O nome dela é Maria Severina. Nós chama ela de Mariquinha.");
-        if (Dados.curraisEscolhaAgua == 1)
+        if (MaeAcompanhaPosto)
             yield return FalarPosto("Mãe", "É minha outra filha. Separaram ela de nós na entrada.",
                 "Trabalhadora", "Se ela passar por aqui, eu aviso vocês. Dona Luzia sabe onde encontrar sua família?");
         else yield return FalarPosto("Luzia", "Se ouvir esse nome, pode me procurar.", "Trabalhadora", "Procuro, sim.");
@@ -141,18 +141,20 @@ public partial class EntradaCurrais
     private bool ClicouAcompanhanteQuarto(Vector2 ponto)
     {
         if (!InvestigouQuarto || VoltouDoQuarto || ConsultaDisponivel) return false;
-        Collider2D alvo = Dados.curraisEscolhaAgua == 1 ? areaMae : areaLuzia;
+        Collider2D alvo = MaeAcompanhaPosto ? areaMae : areaLuzia;
         if (!alvo.enabled || !alvo.gameObject.activeInHierarchy || !alvo.OverlapPoint(ponto)) return false;
-        MenuAssuntoNPC(NomeAcompanhantePatio, string.Empty, "Voltar para contar à família", VoltarFamiliaQuarto);
+        MenuAssuntoNPC(NomeAcompanhantePosto, string.Empty, "Voltar para contar à família", VoltarFamiliaQuarto);
         return true;
     }
 
     private IEnumerator VoltarFamiliaQuarto()
     {
         if (!InvestigouQuarto || VoltouDoQuarto) yield break;
-        yield return FalarPosto(NomeAcompanhantePatio, Dados.curraisEscolhaAgua == 1 ?
+        if (PaisNoFuneral)
+            yield return FalarPosto("Luzia", "Teus pais devem estar voltando do enterro. Vamos encontrar eles nas esteiras.");
+        else yield return FalarPosto(NomeAcompanhantePosto, MaeAcompanhaPosto ?
             "Teu pai ficou perto das esteiras, com Baleia." : "Sua mãe ficou com Baleia, perto das esteiras.",
-            "Zefinha", Dados.curraisEscolhaAgua == 1 ? "Vamos falar com ele." : "Vamos contar pra ela.");
+            "Zefinha", MaeAcompanhaPosto ? "Vamos falar com ele." : "Vamos contar pra ela.");
         yield return Escurecer(1f);
         RegistrarConversaEntrada("quarto-retorno-familia");
         Posicionar(pai, paiAbrigo); Posicionar(mae, maeAbrigo); Posicionar(luzia.transform, luziaRepouso);
@@ -168,7 +170,7 @@ public partial class EntradaCurrais
     {
         if (ViuConversaEntrada("quarto-noticia-contada")) yield break;
         RegistrarConversaEntrada("quarto-retorno-familia");
-        if (Dados.curraisEscolhaAgua == 1)
+        if (MaeAcompanhaPosto)
             yield return FalarPosto("Pai", "Vocês conseguiram perguntar?", "Zefinha", "Conseguimos. Mariquinha num tava lá.");
         else yield return FalarPosto("Mãe", "Encontraram alguma coisa?", "Zefinha",
             "Eu pensei que tinha ouvido Mariquinha. Mas ela num tava no quarto.");
