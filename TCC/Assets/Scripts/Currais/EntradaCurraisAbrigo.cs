@@ -51,10 +51,10 @@ public partial class EntradaCurrais
             Dados.curraisEtapaEntrada <= 4 && !Dados.curraisPanelaConcluida;
         areaPaiAbrigo.enabled = primeiroAbrigo;
         if (Dados.curraisEtapaEntrada == 3) areaMae.enabled = true;
-        bool agua = primeiroAbrigo && Dados.curraisAguaRecebida;
-        cabacaComMari.gameObject.SetActive(agua && Dados.curraisEscolhaAgua == 0 && recebendoAguaAbrigo == 0);
-        cabacaComMae.gameObject.SetActive(agua && recebendoAguaAbrigo == 1);
-        cabacaComLuzia.gameObject.SetActive(agua && recebendoAguaAbrigo == 2);
+        // O inventário representa o transporte; não desenha cópias nas mãos.
+        cabacaComMari.gameObject.SetActive(false);
+        cabacaComMae.gameObject.SetActive(false);
+        cabacaComLuzia.gameObject.SetActive(false);
         cabacaComMari.color = new Color(.65f, .85f, 1f, 1f);
         Color corEntrega = recebendoAguaAbrigo != 0 ? cabacaComMari.color : Color.white;
         cabacaComMae.color = corEntrega;

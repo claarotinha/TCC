@@ -69,8 +69,8 @@ public partial class EntradaCurrais
         bool separando = Dados.curraisEtapaBusca == 2 && Dados.curraisPanelaConcluida;
         areaPanosUso.enabled = separando && (Dados.curraisPanosSeparados & 1) == 0;
         areaPanosAtendimento.enabled = separando && (Dados.curraisPanosSeparados & 2) == 0;
-        panoUsoEntregue.SetActive((Dados.curraisPanosSeparados & 1) != 0);
-        panoAtendimentoEntregue.SetActive((Dados.curraisPanosSeparados & 2) != 0);
+        panoUsoEntregue.SetActive(false);
+        panoAtendimentoEntregue.SetActive(false);
         bool vigiaAtiva = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 3 && Dados.curraisEtapaBusca <= 5;
         guardaRonda.gameObject.SetActive(true);
         if (vigiaAtiva && !rondaPreparada)

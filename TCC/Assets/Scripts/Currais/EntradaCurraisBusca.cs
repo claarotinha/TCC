@@ -62,8 +62,7 @@ public partial class EntradaCurrais
         areaLembranca.enabled = etapa == 3;
         areaPatio.enabled = etapa == 4;
         areaPanoAtendimento.enabled = false;
-        panoCarregado.SetActive((etapa == 3 && Dados.curraisEscolhaAgua == 1) ||
-            (etapa == 4 && TemItem(panoAuxilio)));
+        panoCarregado.SetActive(false);
         manchaRoda.SetActive(etapa >= 5);
         corpoCoberto.SetActive((etapa >= 6 || Dados.curraisBentoMorto) && !Dados.curraisSepultamentoConcluido);
         trabalhadorRetorno.SetActive(true);

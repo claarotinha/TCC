@@ -64,7 +64,10 @@ public class SeguidorFamilia : MonoBehaviour
             }
             Ponto ultimo = pontos[pontos.Count - 1];
             float deslocamento = Mathf.Abs(x - ultimo.x);
-            velocidadeMari = deslocamento / Mathf.Max(Time.deltaTime, 0.0001f);
+            Rigidbody2D corpoLider = lider.GetComponent<Rigidbody2D>();
+            velocidadeMari = corpoLider != null
+                ? Mathf.Abs(corpoLider.linearVelocity.x)
+                : deslocamento / Mathf.Max(Time.deltaTime, 0.0001f);
             if (deslocamento > 0.00001f)
                 pontos.Add(new Ponto(x, ultimo.distancia + deslocamento));
             float removerAntes = pontos[pontos.Count - 1].distancia - comprimento;

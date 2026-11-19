@@ -103,9 +103,7 @@ public partial class EntradaCurrais
         panoNoSocorro.gameObject.SetActive(vivoNoSocorro && (Dados.curraisItensAtendimentoBento & 1) != 0);
         pertencesBentoCobertos.gameObject.SetActive(ativo && Dados.curraisBentoMorto &&
             Dados.curraisPanoSepultamentoEntregue && !Dados.curraisSepultamentoConcluido);
-        bool aguaNaMao = ativo && Dados.curraisAguaPatioPreparada &&
-            ((etapa == 4) || (etapa == 5 && !Dados.curraisBentoMorto && (Dados.curraisItensAtendimentoBento & 2) == 0));
-        cabacaPatioComMari.gameObject.SetActive(aguaNaMao && TemItem(cabacaCheiaBusca));
+        cabacaPatioComMari.gameObject.SetActive(false);
         cabacaPatioComMari.color = new Color(.65f, .85f, 1f, 1f);
         cabacaSocorro.GetComponent<SpriteRenderer>().color = Dados.curraisBentoMorto
             ? Color.white : new Color(.65f, .85f, 1f, 1f);
