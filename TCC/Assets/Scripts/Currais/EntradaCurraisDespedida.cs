@@ -14,7 +14,7 @@ public partial class EntradaCurrais
     [SerializeField] private Transform dobradicaPortaQuarto, papelPostoLeitura, raimundoApoiadoPosto;
     [SerializeField] private GameObject registroCopiado, baldesApoiadosPosto;
     [SerializeField] private SpriteRenderer cabacaComTrabalhadora;
-    [SerializeField] private Collider2D areaMesaDocumento, areaTrabalhadoraQuarto, areaCaboQuarto, areaDoenteUm, areaDoenteDois;
+    [SerializeField] private Collider2D areaMesaDocumento, areaTrabalhadoraQuarto, areaCaboQuarto;
     [SerializeField] private Fala[] postoSeguinte, registroRevisado, folhaRetirada, quartoRevisita;
     [SerializeField] private Fala[] quartoVoltarFamilia, quartoSemCabaca, caboQuartoFalas, doenteUmFalas, doenteDoisFalas;
     private Quaternion portaAbertaOriginal;
@@ -29,10 +29,10 @@ public partial class EntradaCurrais
                 ConferirReferencia(origensCompanhiaSepultamento[i], nameof(origensCompanhiaSepultamento));
         UnityEngine.Object[] refs = { cruzDeBento, dobradicaPortaQuarto, papelPostoLeitura, raimundoApoiadoPosto,
             registroCopiado, baldesApoiadosPosto, cabacaComTrabalhadora, areaMesaDocumento,
-            areaTrabalhadoraQuarto, areaCaboQuarto, areaDoenteUm, areaDoenteDois };
+            areaTrabalhadoraQuarto, areaCaboQuarto };
         string[] nomes = { nameof(cruzDeBento), nameof(dobradicaPortaQuarto), nameof(papelPostoLeitura), nameof(raimundoApoiadoPosto),
             nameof(registroCopiado), nameof(baldesApoiadosPosto), nameof(cabacaComTrabalhadora), nameof(areaMesaDocumento),
-            nameof(areaTrabalhadoraQuarto), nameof(areaCaboQuarto), nameof(areaDoenteUm), nameof(areaDoenteDois) };
+            nameof(areaTrabalhadoraQuarto), nameof(areaCaboQuarto) };
         for (int i = 0; i < refs.Length; i++) ok &= ConferirReferencia(refs[i], nomes[i]);
         foreach (Fala[] falas in new[] { postoSeguinte, registroRevisado, folhaRetirada, quartoRevisita,
             quartoVoltarFamilia, quartoSemCabaca, caboQuartoFalas, doenteUmFalas, doenteDoisFalas }) ok &= FalasValidas(falas);
@@ -95,7 +95,7 @@ public partial class EntradaCurrais
     private Collider2D[] ComAlvosDetalhadosDoPosto(Collider2D[] alvos)
     {
         Collider2D[] extras = { areaMesaDocumento, areaTrabalhadoraQuarto, areaCaboQuarto,
-            areaDoenteUm, areaDoenteDois, areaRaimundo, areaLuzia, areaPortaQuarto, areaAnotacaoPosto, areaMae };
+            areaRaimundo, areaLuzia, areaPortaQuarto, areaAnotacaoPosto, areaMae };
         Collider2D[] resultado = new Collider2D[alvos.Length + extras.Length];
         Array.Copy(alvos, resultado, alvos.Length);
         Array.Copy(extras, 0, resultado, alvos.Length, extras.Length);
@@ -112,8 +112,6 @@ public partial class EntradaCurrais
         areaMesaDocumento.enabled = ativo && !ConsultaDisponivel;
         areaTrabalhadoraQuarto.enabled = false;
         areaCaboQuarto.enabled = false;
-        areaDoenteUm.enabled = false;
-        areaDoenteDois.enabled = false;
         registroCopiado.SetActive(ativo && (PapelAvulsoPostoPendente ||
             ((noiteEmCurso || Dados.curraisEtapaPosto == 4) && TemItem(anotacaoPosto))));
         baldesApoiadosPosto.SetActive(ativo);
@@ -126,7 +124,7 @@ public partial class EntradaCurrais
     {
         if (areaAnotacaoPosto.enabled && areaAnotacaoPosto.gameObject.activeInHierarchy && areaAnotacaoPosto.OverlapPoint(ponto))
         { Iniciar(RecolherAnotacaoPosto()); return true; }
-        foreach (Collider2D alvo in new[] { areaTrabalhadoraQuarto, areaDoenteUm, areaDoenteDois,
+        foreach (Collider2D alvo in new[] { areaTrabalhadoraQuarto,
             areaMesaDocumento, areaCaboQuarto, areaRaimundo, areaLuzia })
         {
             if (!alvo.enabled || !alvo.gameObject.activeInHierarchy || !alvo.OverlapPoint(ponto)) continue;
@@ -134,8 +132,6 @@ public partial class EntradaCurrais
             if (alvo == areaMesaDocumento) Iniciar(ExaminarMesaPosto());
             else if (alvo == areaRaimundo) ClicarRaimundoPosto();
             else if (alvo == areaTrabalhadoraQuarto) MenuTrabalhadoraDoQuarto();
-            else if (alvo == areaDoenteUm) Iniciar(ClicarDoenteQuarto(true));
-            else if (alvo == areaDoenteDois) Iniciar(ClicarDoenteQuarto(false));
             else if (alvo == areaCaboQuarto) Iniciar(ReverCaboQuarto());
             return true;
         }

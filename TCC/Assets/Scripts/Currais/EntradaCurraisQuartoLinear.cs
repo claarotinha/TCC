@@ -6,7 +6,7 @@ using UnityEngine;
 public partial class EntradaCurrais
 {
     [Header("Quarto de atendimento — Examine")]
-    [SerializeField] private ExamineObject examePassagemQuarto, exameMulherQuarto, exameHomemQuarto;
+    [SerializeField] private ExamineObject examePassagemQuarto;
 
     private bool InvestigouQuarto => Dados.curraisEtapaPosto >= 2;
     private bool VoltouDoQuarto => Dados.curraisEtapaPosto >= 3 || ViuConversaEntrada("quarto-retorno-familia");
@@ -14,7 +14,7 @@ public partial class EntradaCurrais
     private bool ReferenciasQuartoLinearValidas()
     {
         bool ok = true;
-        foreach (ExamineObject exame in new[] { examePassagemQuarto, exameMulherQuarto, exameHomemQuarto })
+        foreach (ExamineObject exame in new[] { examePassagemQuarto })
             ok &= ConferirReferencia(exame, "Examine do quarto") &&
                 ConferirReferencia(exame.examinePanel, "Painel de Examine do quarto") &&
                 ConferirReferencia(exame.examineText, "Texto de Examine do quarto");
@@ -73,29 +73,6 @@ public partial class EntradaCurrais
         Dados.curraisEtapaPosto = 2;
         GameProgress.Instance.UnlockDiaryPage("currais-quarto");
         AtualizarEstadoBusca(); Salvar();
-    }
-
-    private IEnumerator ClicarDoenteQuarto(bool mulher)
-    {
-        if (!InvestigouQuarto) yield break;
-        string id = mulher ? "quarto-mulher" : "quarto-homem";
-        yield return ExaminarPosto(id + "-examine", mulher ? exameMulherQuarto : exameHomemQuarto);
-        MenuAssuntoNPC(mulher ? "Mulher" : "Homem", string.Empty,
-            mulher ? "Como a senhora tá?" : "O senhor viu uma menina?", () => ConversarDoenteQuarto(mulher));
-    }
-
-    private IEnumerator ConversarDoenteQuarto(bool mulher)
-    {
-        string id = mulher ? "quarto-mulher-conversa" : "quarto-homem-conversa";
-        if (mulher) yield return Dizer(doenteUmFalas);
-        else if (Dados.curraisAjudouAtendimentoQuarto)
-            yield return FalarPosto("Zefinha", "O senhor viu uma menina parecida comigo?", "Homem", "Num vi, não…");
-        else
-        {
-            yield return FalarPosto("Zefinha", "O senhor viu uma menina parecida comigo?",
-                "Homem", "Num vi, não… Água… por favor.", "Trabalhadora", "Eu já trago. Espere um pouco.");
-        }
-        RegistrarConversaEntrada(id); Salvar();
     }
 
     private void MenuTrabalhadoraLinear()

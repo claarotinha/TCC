@@ -20534,18 +20534,6 @@ MonoBehaviour:
     conversa:
     - personagem: Trabalhadora
       texto: "T\xF4 cuidando de quem ficou aqui dentro."
-  - personagem: {fileID: 0}
-    desenho: {fileID: 0}
-    nome: Mulher
-    conversa:
-    - personagem: Mulher
-      texto: "S\xF3 queria um pouco de sossego."
-  - personagem: {fileID: 0}
-    desenho: {fileID: 0}
-    nome: Homem
-    conversa:
-    - personagem: Homem
-      texto: O dia custa a passar aqui dentro.
   - personagem: {fileID: 4400000065}
     desenho: {fileID: 4400000067}
     nome: Cabo
@@ -21294,8 +21282,6 @@ MonoBehaviour:
   areaMesaDocumento: {fileID: 4400000011}
   areaTrabalhadoraQuarto: {fileID: 4400000052}
   areaCaboQuarto: {fileID: 4400000068}
-  areaDoenteUm: {fileID: 0}
-  areaDoenteDois: {fileID: 0}
   postoSeguinte:
   - personagem: Luzia
     texto: O quarto de atendimento fica perto do tanque grande.
@@ -21941,7 +21927,7 @@ MonoBehaviour:
   examePaiTrabalho: {fileID: 9933000050}
   exameBentoTrabalho: {fileID: 9933000051}
   exameFiscalTrabalho: {fileID: 9933000052}
-  exameApoioTrabalho: {fileID: 0}
+  exameApoioTrabalho: {fileID: 9933000053}
   areaPanoLimpoApoio: {fileID: 9933000054}
   alcanceLevarAguaPatio: 5
   alcanceChegadaPatio: 7
@@ -22283,8 +22269,6 @@ MonoBehaviour:
   areaAnotacaoPosto: {fileID: 9992000003}
   anotacaoPosto: {fileID: 11400000, guid: 97965bb5d6354031a7359f2637c87ef1, type: 2}
   examePassagemQuarto: {fileID: 9911880011}
-  exameMulherQuarto: {fileID: 0}
-  exameHomemQuarto: {fileID: 0}
   examePrimeiroRaimundo: {fileID: 9933000020}
   aproximacaoRaimundoMae:
   - personagem: "M\xE3e"
@@ -22445,7 +22429,7 @@ MonoBehaviour:
     texto: O caderno ficou separado. Esse a menina pode levar.
   dispensarPertencesParaTeste: 1
   areaAguaPatio: {fileID: 9808000003}
-  areaPanosPatio: {fileID: 0}
+  areaPanosPatio: {fileID: 9808000103}
   areaSocorroBento: {fileID: 9808000203}
   areaCabacaSocorro: {fileID: 9808000303}
   panoAuxilio: {fileID: 11400000, guid: f31807764a384b018ba6a34686b89559, type: 2}
@@ -43992,6 +43976,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 9808000101}
   - {fileID: 4300000060}
   - {fileID: 4300000067}
   - {fileID: 4300000071}
@@ -56437,3 +56422,159 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &9808000100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9808000101}
+  - component: {fileID: 9808000102}
+  - component: {fileID: 9808000103}
+  - component: {fileID: 9933000053}
+  m_Layer: 0
+  m_Name: "Apoio do p\xE1tio - entregar pano"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9808000101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9808000100}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 206, y: -0.1, z: 0}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9922000151}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &9808000102
+SpriteRenderer:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9808000100}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 33
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 21300007, guid: 2a893ab3a14054f8b015a14fb15b731e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
+--- !u!61 &9808000103
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9808000100}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 2.33, y: 1.04}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 5, y: 4}
+  m_EdgeRadius: 0
+--- !u!114 &9933000053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9808000100}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01563f0e1bb2d514aba7eb7c4a3d5e20, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineObject
+  examinePanel: {fileID: 3000000053}
+  examineText: {fileID: 3000000061}
+  message: "H\xE1 um espa\xE7o separado para os feridos. O trabalhador procura alguma
+    coisa entre os poucos materiais."
