@@ -242,6 +242,14 @@ public partial class EntradaCurrais : MonoBehaviour
     private bool ReferenciasValidas()
     {
         bool referenciasPresentes = true;
+        referenciasPresentes &= ConferirReferencia(fundoPretoSeparacao, nameof(fundoPretoSeparacao));
+        if (quadrosEntrada == null || quadrosEntrada.Length != 12)
+        {
+            Debug.LogError("EntradaCurrais: configure os 12 quadrosEntrada na ordem da cutscene.", this);
+            referenciasPresentes = false;
+        }
+        else for (int i = 0; i < quadrosEntrada.Length; i++)
+            referenciasPresentes &= ConferirReferencia(quadrosEntrada[i], "quadrosEntrada[" + i + "]");
         referenciasPresentes &= ConferirReferencia(progressoPrefab, nameof(progressoPrefab));
         referenciasPresentes &= ConferirReferencia(inventarioPrefab, nameof(inventarioPrefab));
         referenciasPresentes &= ConferirReferencia(mari, nameof(mari));
@@ -560,57 +568,62 @@ public partial class EntradaCurrais : MonoBehaviour
         catch (Exception erro) { Debug.LogException(erro, this); }
     }
 
+    [Header("Cutscene de entrada — ordem das imagens na Hierarchy")]
+    [SerializeField] private GameObject[] quadrosEntrada;
+
+    private void MostrarQuadroEntrada(int indice)
+    {
+        fundoPretoSeparacao.SetActive(true);
+        for (int i = 0; i < quadrosEntrada.Length; i++)
+            quadrosEntrada[i].SetActive(i == indice);
+    }
+
+    private IEnumerator DizerTrechoEntrada(Fala[] falas, int inicio, int quantidade)
+    {
+        Fala[] trecho = new Fala[quantidade];
+        Array.Copy(falas, inicio, trecho, 0, quantidade);
+        yield return Dizer(trecho);
+    }
+
     private IEnumerator Separar()
     {
-        // Um checkpoint de chegada repete a separação a partir da posição da própria cena.
-        // Não reaproveita uma posição da Estrada ou de uma inicialização interrompida.
-        mari.transform.position = inicioMariNaRua;
-        Rigidbody2D corpoInicial = mari.GetComponent<Rigidbody2D>();
-        if (corpoInicial != null)
-        {
-            corpoInicial.position = inicioMariNaRua;
-            corpoInicial.linearVelocity = Vector2.zero;
-        }
-        Physics2D.SyncTransforms();
+        // A chegada é contada pelas imagens; os atores do cenário não encenam
+        // novamente a escolta por baixo da cutscene.
         rua.SetActive(true); campo.SetActive(false);
-        ConfigurarLimitesExternos();
-        irma.gameObject.SetActive(true);
-        carroca.gameObject.SetActive(true);
-        outraFila.SetActive(true);
-        guardaRetaguarda.gameObject.SetActive(true);
         luzia.SetActive(true); lacoChao.SetActive(false); lacoPanela.SetActive(false);
-        cameraCena.transform.position = cameraRua.position;
-        FormarFilaDaFamilia(true);
         CorFade(1f);
-        yield return Esperar(tempoPlano);
+        MostrarQuadroEntrada(0);
         yield return Escurecer(0f);
         yield return DizerEntradaUmaVez("aviso-pertences", new[] { entrada[0] });
+        MostrarQuadroEntrada(1);
+        yield return Esperar(1.2f);
+        MostrarQuadroEntrada(2);
         yield return Dizer(chegadaFamilia);
+        MostrarQuadroEntrada(3);
         yield return Dizer(antesSeparacao);
-        yield return MarcharEscolta();
-        yield return Dizer(ordemSeparar);
-        yield return Mover(guardaRetaguarda, guardaSeparacao.position, tempoPlano);
-        yield return Mover(irma, irmaSeparada.position + Vector3.up * ajustePivoIrma, tempoSeparacao);
-        yield return Mover(cabo, caboBarreira.position, tempoPlano);
+        MostrarQuadroEntrada(4);
+        yield return Esperar(1.2f);
+        MostrarQuadroEntrada(5);
+        yield return DizerTrechoEntrada(ordemSeparar, 0, ordemSeparar.Length - 1);
+        MostrarQuadroEntrada(6);
+        yield return DizerTrechoEntrada(ordemSeparar, ordemSeparar.Length - 1, 1);
+        MostrarQuadroEntrada(7);
         yield return Dizer(barreira);
-        yield return Mover(pai, paiReacao.position, tempoPlano);
+        MostrarQuadroEntrada(8);
+        yield return Esperar(1f);
+        MostrarQuadroEntrada(9);
         yield return Dizer(protestoPai);
-        // O avanço da guarda, o corte e as falas mostram a origem da lesão.
-        yield return Mover(guardaRetaguarda, guardaGolpe.position, tempoPlano * .5f);
-        CorFade(1f);
-        pai.localRotation = rotacaoPai;
-        yield return Esperar(.15f);
-        CorFade(0f);
+        MostrarQuadroEntrada(10);
         Dados.curraisPaiFerido = true;
-        yield return AmpararPaiNaEntrada();
         yield return Dizer(reacaoGolpe);
+        MostrarQuadroEntrada(11);
         yield return Dizer(new[] { Dados.estradaSegundaEscolhaNoturna == 1 ? promessa : semPromessa, respostaZefinha });
-        yield return PartirOutraFila();
         yield return Dizer(depoisSeparacao);
+        yield return Escurecer(1f);
+        fundoPretoSeparacao.SetActive(false);
         yield return ChapterCard.Show("josefa-06");
         Dados.curraisEtapaEntrada = 2;
         Dados.curraisSeparacaoFundoPreto = false;
-        if (fundoPretoSeparacao != null) fundoPretoSeparacao.SetActive(false);
         Salvar();
         yield return Entrar();
     }
