@@ -691,8 +691,9 @@ public partial class SegundaParada : MonoBehaviour
         while (fugindo) yield return null;
         GameProgress.Instance?.UnlockDiaryPage("josefa-04");
         etapa = 2;
-        foreach (GameObject pista in pistasBusca) pista.SetActive(true);
-        alvoBaleia.SetActive(true);
+        // Pegadas podem ter sido removidas ao reduzir o cenário.
+        // A ausência de uma pista visual não pode interromper a busca.
+        if (alvoBaleia != null) alvoBaleia.SetActive(true);
         AtualizarPegadas();
         preparandoBusca = false;
         LiberarMovimento();
@@ -787,8 +788,9 @@ public partial class SegundaParada : MonoBehaviour
             baleiaSeguraPrea = false;
             MostrarBaleia(spriteBaleia);
             if (seguidorBaleia != null) seguidorBaleia.enabled = baleiaSeguia;
-            foreach (GameObject pista in pistasBusca) pista.SetActive(false);
-            alvoBaleia.SetActive(false);
+            foreach (GameObject pista in pistasBusca)
+                if (pista != null) pista.SetActive(false);
+            if (alvoBaleia != null) alvoBaleia.SetActive(false);
             Falar(new[] { "Mariquinha", "Zefinha", "Mariquinha" }, new[] {
                 "Baleia! Tu deu foi um susto na gente... Olha, Zefinha, ela pegou um preá!",
                 "Foi atrás de comida... Vamo levar pra painho e mainha.",
@@ -1314,7 +1316,8 @@ public partial class SegundaParada : MonoBehaviour
         RegistrarAlvo(interiorAbrigo, "interiorAbrigo");
         RegistrarAlvo(cidadeCenario, "cidade"); RegistrarAlvo(familiaFinal, "familiaFinal");
         RegistrarAlvo(alvoBaleia, "baleia");
-        for (int i = 0; i < pistasBusca.Length; i++) RegistrarAlvo(pistasBusca[i], "pegada" + i);
+        for (int i = 0; i < pistasBusca.Length; i++)
+            if (pistasBusca[i] != null) RegistrarAlvo(pistasBusca[i], "pegada" + i);
         for (int i = 0; i < materiaisCenario.Length; i++) RegistrarAlvo(materiaisCenario[i], "materialAcampamento" + i);
         for (int i = 0; i < policiais.Length; i++) RegistrarAlvo(policiais[i], "policial" + i);
     }
