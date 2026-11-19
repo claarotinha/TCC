@@ -101,8 +101,9 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         Collider2D limites = campo != null && campo.activeInHierarchy
             ? limitesExternosCampo : limitesExternosRua;
+        if (NegacaoEmCurso && limitesNegacao != null) limites = limitesNegacao;
         if (limites == null) return;
-        // São bordas do cenário completo; o progresso não fecha setores internos.
+        // A negação usa temporariamente o espaço do abrigo; depois restaura o cenário completo.
         if (mari != null) mari.DefinirLimites(limites);
         if (seguirCamera != null) seguirCamera.DefinirLimites(limites, true);
     }

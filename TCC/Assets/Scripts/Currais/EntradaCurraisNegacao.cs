@@ -3,6 +3,10 @@ using UnityEngine;
 
 public partial class EntradaCurrais
 {
+    [Header("Negação — espaço de movimento junto ao abrigo")]
+    [SerializeField] private Collider2D limitesNegacao;
+    private bool NegacaoEmCurso => GameProgress.Instance != null && ConsultaDisponivel &&
+        Dados.curraisEtapaConsulta == 3 && ViuConversaEntrada("negacao-inicio") && !NegacaoAcolhida;
     private bool NegacaoAcolhida => ViuConversaEntrada("negacao-mao-da-mae");
     private int InsistenciasNaBusca => ViuConversaEntrada("negacao-insistencia-2") ? 2 :
         ViuConversaEntrada("negacao-insistencia-1") ? 1 : 0;
@@ -15,6 +19,7 @@ public partial class EntradaCurrais
             new Fala { personagem = "Pai", texto = "Nós passou o dia perguntando, minha filha." },
             new Fala { personagem = "Zefinha", texto = "Então a gente perguntou errado." }
         });
+        ConfigurarLimitesExternos();
         while (!NegacaoAcolhida)
         {
             if (InsistenciasNaBusca < 2)
@@ -54,7 +59,8 @@ public partial class EntradaCurrais
                 "Mãe", "Eu sei. Tu num precisa prometer mais nada agora.",
                 "Pai", "Nós guarda os nomes e o lugar. Amanhã nós vê o que ainda pode fazer.",
                 "Zefinha (em pensamento)", "A mão de mainha tava quente. Eu ainda queria levantar. Mas fiquei.");
-            RegistrarConversaEntrada("negacao-mao-da-mae"); Salvar();
+            RegistrarConversaEntrada("negacao-mao-da-mae");
+            ConfigurarLimitesExternos(); Salvar();
         }
     }
 
@@ -63,6 +69,7 @@ public partial class EntradaCurrais
         Vector3 destino = mari.transform.position;
         // Passos curtos dentro do abrigo: os pais interceptam sem mudar de cenário.
         destino.x += reverPistas ? 1f : -1f;
+        destino.x = Mathf.Clamp(destino.x, limitesNegacao.bounds.min.x + 1f, limitesNegacao.bounds.max.x - 1f);
         yield return Mover(mari.transform, destino, .65f);
         if (reverPistas)
         {
@@ -83,6 +90,67 @@ public partial class EntradaCurrais
                 "Pai", "Eu num sei, minha filha.");
         }
         yield return FalarPosto("Mãe", "Venha pra perto de nós.");
+        yield return NpcProximoAcalmar();
+    }
+
+    private bool PodeAcolherNegacao(PessoaPresente pessoa)
+    {
+        if (pessoa == null || pessoa.personagem == null || pessoa.desenho == null ||
+            !pessoa.personagem.activeInHierarchy || !pessoa.desenho.enabled) return false;
+        GameObject alvo = pessoa.personagem;
+        if (alvo == pai.gameObject || alvo == mae.gameObject || alvo == mari.gameObject ||
+            alvo == bento.gameObject || alvo == baleia.gameObject || alvo == irma.gameObject) return false;
+        foreach (Collider2D guarda in guardasPorcosSaida) if (alvo == guarda.gameObject) return false;
+        if (alvo == guardaRonda.gameObject || alvo == cabo.gameObject || alvo == guardaRetaguarda.gameObject) return false;
+        return Mathf.Abs(alvo.transform.position.x - mari.transform.position.x) <= 8f;
+    }
+
+    private IEnumerator NpcProximoAcalmar()
+    {
+        PessoaPresente proximo = null;
+        float distancia = 8.01f;
+        foreach (PessoaPresente pessoa in pessoasPresentes)
+        {
+            if (!PodeAcolherNegacao(pessoa) || ViuConversaEntrada("negacao-acolhimento:" + pessoa.personagem.name)) continue;
+            float atual = Mathf.Abs(pessoa.personagem.transform.position.x - mari.transform.position.x);
+            if (atual < distancia) { distancia = atual; proximo = pessoa; }
+        }
+        if (proximo != null) yield return ConversarNpcNaNegacao(proximo);
+    }
+
+    private IEnumerator ConversarNpcNaNegacao(PessoaPresente pessoa)
+    {
+        if (!PodeAcolherNegacao(pessoa)) yield break;
+        string id = "negacao-acolhimento:" + pessoa.personagem.name;
+        if (ViuConversaEntrada(id))
+        {
+            yield return FalarPosto(pessoa.nome, "Eu tô por aqui, menina. Fique perto de tua família.");
+            yield break;
+        }
+        OlharParaMari(pessoa.personagem.transform);
+        if (pessoa.personagem == luzia)
+            yield return FalarPosto("Luzia", "Zefinha, eu tô ouvindo. Tu num precisa sair correndo pra eu saber que tu ama tua irmã.",
+                "Zefinha", "Eu num quero que ninguém esqueça dela.",
+                "Luzia", "Eu num esqueci o nome. Se chegar alguma notícia, eu procuro vocês. Agora fique um pouco com tua mãe.");
+        else
+            yield return FalarPosto(pessoa.nome, "Menina, eu vi tu perguntando por ela. Hoje eu num tenho outra notícia.",
+                "Zefinha", "Mas se alguém falar dela...",
+                pessoa.nome, "Eu digo a vocês. Tu num precisa perguntar tudo de novo agora. Teus pais tão aqui.");
+        RegistrarConversaEntrada(id); Salvar();
+    }
+
+    private void MenuAcolhimentoLuzia()
+    {
+        foreach (PessoaPresente pessoa in pessoasPresentes)
+            if (pessoa.personagem == luzia)
+            {
+                PessoaPresente luziaPresente = pessoa;
+                MostrarOpcoes("Luzia", "Eu tô aqui, Zefinha.",
+                    new[] { "Falar de Mariquinha", "Voltar para perto da mãe", "Sair" },
+                    new System.Action[] { () => Iniciar(ConversarNpcNaNegacao(luziaPresente)),
+                        () => Iniciar(RetomarNegacaoDaBusca()), FecharMenu });
+                return;
+            }
     }
 
     private IEnumerator ApertarMaoDaMae()

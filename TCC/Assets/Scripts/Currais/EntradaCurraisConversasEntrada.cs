@@ -88,6 +88,8 @@ public partial class EntradaCurrais
         if (ConsultaDisponivel && Dados.curraisEtapaConsulta == 2)
             foreach (Collider2D guarda in guardasPorcosSaida)
                 if (pessoa.personagem == guarda.gameObject) { MenuPedidoSaida(); return; }
+        if (NegacaoEmCurso && PodeAcolherNegacao(pessoa))
+        { Iniciar(ConversarNpcNaNegacao(pessoa)); return; }
         if (ConsultaDisponivel && Dados.curraisEtapaConsulta >= 3) return;
         if (Dados.curraisEtapaBusca <= 4 && pessoa.personagem == bento.gameObject)
         { Iniciar(AbrirBentoPatioLinear()); return; }

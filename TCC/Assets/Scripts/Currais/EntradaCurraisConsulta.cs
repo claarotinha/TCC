@@ -201,6 +201,7 @@ public partial class EntradaCurrais
             else if (area == areaEsteiraNoite && Dados.curraisEtapaConsulta == 3) MenuEsteiraFinal();
             else if (area == areaUltimaConsulta) MenuUltimaConsulta();
             else if (area == areaSaidaConsulta) Iniciar(PedirSaida());
+            else if (NegacaoEmCurso && area == areaLuzia) MenuAcolhimentoLuzia();
             else if (Dados.curraisEtapaConsulta == 3) Iniciar(ChegarAbrigoFinal());
             else if (area == areaMae || area == areaPaiAbrigo) MenuFamiliaConsulta();
             return true;
