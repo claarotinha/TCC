@@ -2671,10 +2671,11 @@ public class SegundaParada : MonoBehaviour
         Physics2D.SyncTransforms(); RestaurarCamera();
         yield return Escurecer(0f); RestaurarFade();
         ControleJornada jornada = ControleJornada.Instance;
+        // Registra o amanhecer mesmo se um checkpoint restaurado perdeu o
+        // estado transitorio do gatilho. Nunca deixa a ultima caminhada presa.
+        acampamentoConcluido = true;
         if (jornada != null && jornada.ParadaAtiva && jornada.ParadaAtual == 5)
-        {
-            acampamentoConcluido = true; jornada.ConcluirParada(5);
-        }
+            jornada.ConcluirParada(5);
         noiteEmAndamento = false; sequenciaAbrigo = false;
         RestaurarInventarioAbrigo(); LiberarMovimento();
         quadro = Time.frameCount; SalvarAcampamento();
@@ -2729,6 +2730,11 @@ public class SegundaParada : MonoBehaviour
     {
         if (cidadeCenario == null || restaurandoFamilia || finalEmAndamento || encerramentoMostrado ||
             GameSaveSystem.IsRestoring || !acampamentoConcluido) return;
+        // Se o progresso ja chegou a Fortaleza, nao exigir novamente o
+        // gatilho da quinta parada apos carregar o jogo.
+        ControleJornada jornadaFortaleza = ControleJornada.Instance;
+        if (jornadaFortaleza != null && jornadaFortaleza.ParadaAtiva && jornadaFortaleza.ParadaAtual == 5)
+            jornadaFortaleza.ConcluirParada(5);
         if (atoConcluido)
         {
             BloquearMovimento(); CapturarGrupoAbrigo();
