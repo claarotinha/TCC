@@ -224,6 +224,7 @@ public partial class SegundaParada
     private IEnumerator MontarAcampamento()
     {
         sequenciaAbrigo = true; BloquearMovimento(); CapturarGrupoAbrigo();
+        CurraisMusicDirector.PlayMoment("fogueira");
         PrepararFadeAcampamento(); yield return EscurecerAcampamento(1f);
         Vector3 lugar = mari.transform.position; lugar.x = quintaParada.position.x + 3f; Posicionar(mari.transform, lugar);
         lugar = mariquinha.transform.position; lugar.x = mari.transform.position.x - mariquinha.DistanciaAtras; Posicionar(mariquinha.transform, lugar);
@@ -645,6 +646,7 @@ public partial class SegundaParada
 
     private IEnumerator AmanhecerAcampamento()
     {
+        CurraisMusicDirector.StopMoment("fogueira");
         // A fotografia da casa pertence apenas ao abrigo da segunda parada.
         MostrarImagemPais();
         yield return new WaitForSeconds(2.5f);

@@ -219,6 +219,7 @@ public partial class EntradaCurrais
             yield return DizerEntradaUmaVez("bento-grupo-reunido", bentoReunirGrupo);
             // A transição mostra a reunião do grupo; a acompanhante continua ao lado de Josefa.
             yield return Escurecer(1f);
+            CurraisMusicDirector.PlayMoment("funeral");
             sepultamentoNaTela = true;
             planoSepultamento.SetActive(true);
             corpoNoPlano.SetActive(true);
@@ -246,6 +247,7 @@ public partial class EntradaCurrais
         }
         finally
         {
+            CurraisMusicDirector.StopMoment("funeral");
             sepultamentoEmCurso = false;
             RestaurarPlanoSepultamento();
             if (objetivoTexto != null) objetivoTexto.gameObject.SetActive(false);

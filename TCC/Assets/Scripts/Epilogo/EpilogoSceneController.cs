@@ -122,6 +122,7 @@ public class EpilogoSceneController : MonoBehaviour
             PesquisaConcluida = true;
             FinalCartaConcluido = dados.epilogoFinalVisto == 1;
             FinalSemNoticiasConcluido = dados.epilogoFinalVisto == 2;
+            CurraisMusicDirector.PlayEnding(FinalComCarta);
             yield return EncerramentoComum(false);
             yield break;
         }
@@ -303,6 +304,7 @@ public class EpilogoSceneController : MonoBehaviour
     {
         if (finalEncaminhado) return;
         finalEncaminhado = true;
+        CurraisMusicDirector.PlayEnding(FinalComCarta);
         // Apenas identidade E destino confirmados permitem localizar a carta.
         // Cada caminho mantém os mesmos fatos e pistas do salvamento.
         if (FinalComCarta) aoEncontrarCarta.Invoke();

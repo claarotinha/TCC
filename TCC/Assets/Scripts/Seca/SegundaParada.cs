@@ -2099,6 +2099,7 @@ public partial class SegundaParada : MonoBehaviour
     {
         if (finalEmAndamento || carregandoCurrais) return;
         finalEmAndamento = true; abordagemIniciada = true;
+        CurraisMusicDirector.PlayMoment("captura");
         BloquearMovimento(); CapturarGrupoAbrigo();
         if (seguirCamera != null) seguirCamera.enabled = false;
         SalvarFortaleza();
