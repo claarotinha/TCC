@@ -63,6 +63,13 @@ public partial class EntradaCurrais
         // Recupera somente o pano da tarefa interrompida; nunca altera a tira de Raimundo.
         if (Dados.curraisEtapaBusca == 4 && Dados.curraisTrabalhoPatioIniciado &&
             !Dados.curraisPanosPatioEntregues && !TemItem(panoAuxilio)) InventoryManager.Instance.AddItem(panoAuxilio);
+        // Migra saves em que a água já foi usada, mas a cabaça ainda estava no chão.
+        if (Dados.curraisEtapaBusca == 5 && (Dados.curraisItensAtendimentoBento & 2) != 0)
+        {
+            if (!TemItem(cabacaVaziaBusca) && !TemItem(cabacaCheiaBusca))
+                InventoryManager.Instance.AddItem(cabacaVaziaBusca);
+            Dados.curraisCabacaSocorroRecolhida = true;
+        }
         PrepararAtendimentoLinear();
         AtualizarSocorro();
     }
@@ -76,8 +83,8 @@ public partial class EntradaCurrais
         areaAguaPatio.enabled = patio && Dados.curraisTrabalhoPatioIniciado;
         areaPanosPatio.enabled = patio && Dados.curraisTrabalhoPatioIniciado && !Dados.curraisPanosPatioEntregues;
         areaSocorroBento.enabled = socorro;
-        cabacaSocorro.SetActive(socorro && (Dados.curraisItensAtendimentoBento & 2) != 0 && !Dados.curraisCabacaSocorroRecolhida);
-        areaCabacaSocorro.enabled = cabacaSocorro.activeSelf && Dados.curraisBentoMorto;
+        cabacaSocorro.SetActive(false);
+        areaCabacaSocorro.enabled = false;
         panosEntreguesPatio.SetActive(false);
         areaPanoLimpoApoio.enabled = false;
         if (patio || socorro) areaMae.enabled = true;
@@ -133,6 +140,11 @@ public partial class EntradaCurrais
         if (!TemItem(selecionado)) yield break;
         Dados.curraisItensAtendimentoBento |= pano ? 1 : 2;
         InventoryManager.Instance.RemoveItem(selecionado);
+        if (agua)
+        {
+            if (!TemItem(cabacaVaziaBusca)) InventoryManager.Instance.AddItem(cabacaVaziaBusca);
+            Dados.curraisCabacaSocorroRecolhida = true;
+        }
         AtualizarEstadoBusca(); Salvar();
         yield return Dizer(pano ? bentoReceberPano : bentoReceberAgua);
         if ((Dados.curraisItensAtendimentoBento & 3) == 3) yield return ConcluirAtendimentoBento();

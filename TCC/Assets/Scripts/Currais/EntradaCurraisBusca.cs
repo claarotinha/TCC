@@ -105,6 +105,8 @@ public partial class EntradaCurrais
     private bool InteragirCampo(Vector2 ponto)
     {
         if (PostoDisponivel) return InteragirPosto(ponto);
+        if (Dados.curraisEtapaBusca == 4 && areaAguaPatio.enabled && areaAguaPatio.OverlapPoint(ponto))
+        { MenuAguaDoPatio(); return true; }
         if (InteragirPessoasDoPatio(ponto)) return true;
         if (areaRecebimentoLavagem.enabled && areaRecebimentoLavagem.gameObject.activeInHierarchy && areaRecebimentoLavagem.OverlapPoint(ponto))
         { MenuLavadeiraNaBusca(); return true; }

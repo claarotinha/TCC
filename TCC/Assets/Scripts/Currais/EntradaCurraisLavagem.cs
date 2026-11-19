@@ -106,20 +106,7 @@ public partial class EntradaCurrais
         if (ocupado || menuAberto || dialogando || PainelAuxiliarAberto() || PauseHelper.BlockInput() || Time.timeScale <= 0f ||
             (InventoryTabController.Instance != null && InventoryTabController.Instance.IsOpen))
         { AnimarEscolta(guardaRonda, false); return; }
-        if (pausaRonda > 0f) { pausaRonda -= Time.deltaTime; AnimarEscolta(guardaRonda, false); }
-        else
-        {
-            Vector3 destino = rondaVaiAoFim ? rondaFim.position : rondaInicio.position;
-            destino.y = guardaRonda.position.y;
-            float direcao = destino.x - guardaRonda.position.x;
-            guardaRonda.position = Vector3.MoveTowards(guardaRonda.position, destino, velocidadeRonda * Time.deltaTime);
-            AnimarEscolta(guardaRonda, true);
-            SpriteRenderer visual = guardaRonda.GetComponent<SpriteRenderer>();
-            if (visual != null && Mathf.Abs(direcao) > .01f)
-                visual.flipX = direcao * guardaRonda.lossyScale.x < 0f;
-            if (Vector3.Distance(guardaRonda.position, destino) < .01f)
-            { rondaVaiAoFim = !rondaVaiAoFim; pausaRonda = 1.2f; }
-        }
+        AnimarEscolta(guardaRonda, false);
         if (Dados.curraisEtapaBusca != 3 || !Dados.curraisTiraPanoRecolhida || Dados.curraisPassagemVigiadaConcluida) return;
         if (mari != null && inicioLembranca != null && mari.transform.position.x >= inicioLembranca.position.x)
         {

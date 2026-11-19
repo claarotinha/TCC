@@ -99,7 +99,11 @@ public partial class EntradaCurrais
             { ConversarAcompanhantePatioLinear(); return; }
         }
         if (pessoa.personagem == guardaRonda.gameObject)
-        { Iniciar(AbrirGuardaPassagem()); return; }
+        {
+            if (Dados.curraisEtapaBusca == 4) MenuAguaDoPatio();
+            else Iniciar(AbrirGuardaPassagem());
+            return;
+        }
         if (pessoa.nome == "Lavadeira") { MenuLavadeiraNaBusca(); return; }
         if (pessoa.personagem == areaRaimundo.gameObject && !NomeRaimundoConhecido)
         { PrimeiroContatoRaimundo(); return; }

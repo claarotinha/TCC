@@ -83,7 +83,25 @@ public partial class EntradaCurrais
 
     private void MenuSocorroBento() => Iniciar(AbrirAtendimentoBentoLinear());
 
-    private void MenuAguaDoPatio() => Iniciar(AbrirApoioPatioLinear());
+    private void MenuAguaDoPatio() => Iniciar(AbrirAguaComCabo());
+
+    private IEnumerator AbrirAguaComCabo()
+    {
+        if (Dados.curraisEtapaBusca != 4 || !Dados.curraisTrabalhoPatioIniciado) yield break;
+        if (Dados.curraisAguaPatioPreparada)
+        {
+            yield return FalarPosto("Cabo", "Já encheu. Leve a água pro atendimento.");
+            yield break;
+        }
+        MenuAssuntoNPC("Cabo", "Encha a cabaça e leve a água até o atendimento.",
+            "Encher a cabaça", ReceberAguaDoCabo);
+    }
+
+    private IEnumerator ReceberAguaDoCabo()
+    {
+        RegistrarConversaEntrada("patio-apoio-autorizado");
+        yield return PrepararAguaPatio();
+    }
 
     private void MenuApoioDoPatio() => Iniciar(AbrirApoioPatioLinear());
 
