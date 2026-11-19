@@ -245,6 +245,15 @@ public class ControleJornada : MonoBehaviour
         Debug.Log("Parada concluída: " + numero);
     }
 
+    public void ConcluirAcampamento()
+    {
+        if (paradaAtiva && paradaAtual == 5) { ConcluirParada(5); return; }
+        if (paradasConcluidas < 4 || paradaAtiva) return;
+        paradasConcluidas = 5;
+        aguardandoNarrativa = false;
+        if (GameProgress.Instance != null) GameProgress.Instance.Data.estradaParadasConcluidas = 5;
+    }
+
     private void OnDestroy()
     {
         if (Instance == this)
