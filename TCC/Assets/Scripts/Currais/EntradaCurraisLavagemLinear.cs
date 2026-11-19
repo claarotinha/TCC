@@ -41,28 +41,23 @@ public partial class EntradaCurrais
 
     private IEnumerator TentarEntregarLoteLavagem()
     {
-        if (!EncontroRaimundoEncerrado)
-        {
-            yield return Dizer(new[] { new Fala { personagem = "Lavadeira",
-                texto = "Fale com Raimundo primeiro, menina. Ele tá ali junto dos baldes." } });
-            yield break;
-        }
         yield return ReceberLoteLavagemLinear();
     }
 
     private IEnumerator AbrirLavadeiraLinear()
     {
         yield return ExamineNomesUmaVez("lavagem-examine-mulher", exameLavadeiraLinear);
-        if (!EncontroRaimundoEncerrado || Dados.curraisEtapaBusca > 3 ||
+        if (!Dados.curraisLotePanosRecolhido || Dados.curraisEtapaBusca > 3 ||
             ViuConversaEntrada("lavagem-oportunidade-encerrada")) yield break;
         if (!Dados.curraisLotePanosEntregue)
         {
-            AbrirAssuntosEntrada("lavagem-lote", "Lavadeira", string.Empty,
-                new[] { "lavagem-orientacao-lote" }, new[] { "Falar do lote" },
-                new Func<IEnumerator>[] { () => Dizer(loteLavagemOrientacao) });
+            MostrarOpcoes("Lavadeira", string.Empty,
+                new[] { "Entregar o lote de panos", "Falar do lote", "Sair" },
+                new Action[] { () => Iniciar(ReceberLoteLavagemLinear()),
+                    () => Iniciar(Dizer(loteLavagemOrientacao)), FecharMenu });
             yield break;
         }
-        if (Dados.curraisEtapaBusca == 1)
+        if (Dados.curraisEtapaBusca <= 1)
         { yield return ReceberLoteLavagemLinear(); yield break; }
         if (Dados.curraisPanosSeparados == 3 && !RetalhoAutorizado)
             yield return ConcluirLavagemLinear();
@@ -79,7 +74,7 @@ public partial class EntradaCurrais
 
     private IEnumerator ReceberLoteLavagemLinear()
     {
-        if (!EncontroRaimundoEncerrado || Dados.curraisEtapaBusca != 1) yield break;
+        if (!Dados.curraisLotePanosRecolhido || Dados.curraisEtapaBusca > 1) yield break;
         if (!Dados.curraisLotePanosEntregue &&
             !TemItem(itemLotePanos)) yield break;
         yield return ExamineNomesUmaVez("lavagem-examine-mulher", exameLavadeiraLinear);
@@ -129,6 +124,12 @@ public partial class EntradaCurrais
     {
         if (Dados.curraisPanosSeparados != 3 || RetalhoAutorizado) yield break;
         yield return DizerEntradaUmaVez("lavagem-conclusao", conclusaoLavagem);
+        if (!EncontroRaimundoEncerrado)
+            yield return DizerEntradaUmaVez("lavagem-indicacao-raimundo", new[]
+            {
+                new Fala { personagem = "Lavadeira", texto = "Ah, tu tá procurando tua irmã? Tente falar com Raimundo. Ele conhece muita gente por aqui." },
+                new Fala { personagem = "Lavadeira", texto = "É aquele homem perto dos baldes." }
+            });
         yield return Dizer((Dados.curraisPerguntasRaimundo & 4) != 0 ? retalhoPedidoZefinha : retalhoOferecidoLavadeira);
         RegistrarConversaEntrada("lavagem-retalho-autorizado");
         AtualizarEstadoBusca(); Salvar();
@@ -136,7 +137,7 @@ public partial class EntradaCurrais
 
     private bool AtualizarAproximacaoLavagem(bool livre)
     {
-        if (!livre || !EncontroRaimundoEncerrado || Dados.curraisEtapaBusca < 1 || Dados.curraisEtapaBusca > 3 ||
+        if (!livre || !Dados.curraisLotePanosRecolhido || Dados.curraisEtapaBusca > 3 ||
             PainelAuxiliarAberto() || InventarioAbertoMemoria()) return false;
         if (Dados.curraisTiraPanoRecolhida)
         {

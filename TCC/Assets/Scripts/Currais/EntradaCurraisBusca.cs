@@ -162,7 +162,14 @@ public partial class EntradaCurrais
     private IEnumerator DeixarRaimundo()
     {
         if (EncontroRaimundoEncerrado) yield break;
-        yield return Dizer(raimundoSaida);
+        Fala[] despedida = raimundoSaida;
+        if (Dados.curraisLotePanosEntregue)
+        {
+            despedida = (Fala[])raimundoSaida.Clone();
+            despedida[0] = new Fala { personagem = "Zefinha",
+                texto = "Já deixei os panos na lavagem. Se souber da menina, procure nós perto das esteiras." };
+        }
+        yield return Dizer(despedida);
         RegistrarConversaEntrada("raimundo-encontro-encerrado");
         if (Dados.curraisEtapaBusca == 0) AvancarCampo(1);
         else Salvar();

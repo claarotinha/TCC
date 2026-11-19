@@ -13,9 +13,8 @@ public partial class EntradaCurrais
 
     private bool PodeConversarRaimundo => Dados.curraisEscolhaAgua != 0 &&
         Dados.curraisLotePanosRecolhido && Dados.curraisPanelaConcluida;
-    private bool NomeRaimundoConhecido => Dados.curraisRaimundoConhecido || Dados.curraisEtapaBusca > 0;
-    private bool EncontroRaimundoEncerrado => ViuConversaEntrada("raimundo-encontro-encerrado") ||
-        Dados.curraisEtapaBusca > 0;
+    private bool NomeRaimundoConhecido => Dados.curraisRaimundoConhecido || ViuConversaEntrada("lavagem-indicacao-raimundo");
+    private bool EncontroRaimundoEncerrado => ViuConversaEntrada("raimundo-encontro-encerrado");
 
     private bool ReferenciasRaimundoLinearValidas()
     {
