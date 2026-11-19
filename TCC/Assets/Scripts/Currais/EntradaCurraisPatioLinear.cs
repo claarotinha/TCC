@@ -88,6 +88,14 @@ public partial class EntradaCurrais
     private IEnumerator AbrirApoioPatioLinear()
     {
         yield return ExamineNomesUmaVez("patio-exame-apoio", exameApoioTrabalho);
+        if (Dados.curraisEtapaBusca == 5 && !Dados.curraisBentoMorto)
+        {
+            if (PanoDoApoioDisponivel)
+                MostrarOpcoes("Trabalhador", "Pode levar aquele pano limpo para ajudar Bento.",
+                    new[] { "Recolher o pano para Bento", "Sair" },
+                    new Action[] { () => Iniciar(AjudarBento()), FecharMenu });
+            yield break;
+        }
         if (Dados.curraisEtapaBusca != 4 || !Dados.curraisTrabalhoPatioIniciado) yield break;
         if (!ApoioPatioAutorizado)
         {

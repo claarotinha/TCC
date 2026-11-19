@@ -63,9 +63,7 @@ public partial class EntradaCurrais
         {
             if ((Dados.curraisItensAtendimentoBento & 3) == 3)
             { yield return ConcluirAtendimentoBento(); yield break; }
-            AbrirAssuntosEntrada("bento-ouvir", NomeAcompanhantePatio, string.Empty,
-                new[] { "bento-ouvir" }, new[] { "Ele tá ouvindo nós?" },
-                new Func<IEnumerator>[] { () => Dizer(Dados.curraisEscolhaAgua == 1 ? bentoOuvirMae : bentoOuvirLuzia) });
+            MostrarItensAtendimentoBento();
             yield break;
         }
         if (PertencesBentoResolvidos)
@@ -80,6 +78,38 @@ public partial class EntradaCurrais
             yield break;
         }
         MostrarReacaoBento();
+    }
+
+    private void MostrarItensAtendimentoBento()
+    {
+        var rotulos = new System.Collections.Generic.List<string>();
+        var acoes = new System.Collections.Generic.List<Action>();
+        if ((Dados.curraisItensAtendimentoBento & 1) == 0)
+        {
+            if (TemItem(panoAuxilio))
+            {
+                rotulos.Add("Oferecer o pano limpo");
+                acoes.Add(() => Iniciar(UsarNoSocorro(panoAuxilio)));
+            }
+            else
+            {
+                rotulos.Add("Onde buscar um pano?");
+                acoes.Add(() => Iniciar(FalarPosto(NomeAcompanhantePatio,
+                    "O pano limpo ficou no apoio. Fale com o trabalhador para buscar ele.")));
+            }
+        }
+        if ((Dados.curraisItensAtendimentoBento & 2) == 0 && TemItem(cabacaCheiaBusca))
+        {
+            rotulos.Add("Oferecer água da cabaça");
+            acoes.Add(() => Iniciar(UsarNoSocorro(cabacaCheiaBusca)));
+        }
+        if (rotulos.Count == 0)
+        {
+            rotulos.Add("Ele tá ouvindo nós?");
+            acoes.Add(() => Iniciar(Dizer(Dados.curraisEscolhaAgua == 1 ? bentoOuvirMae : bentoOuvirLuzia)));
+        }
+        rotulos.Add("Sair"); acoes.Add(FecharMenu);
+        MostrarOpcoes(NomeAcompanhantePatio, string.Empty, rotulos.ToArray(), acoes.ToArray());
     }
 
     private void MostrarReacaoBento()

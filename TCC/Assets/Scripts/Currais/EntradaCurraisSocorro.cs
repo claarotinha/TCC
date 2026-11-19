@@ -64,7 +64,7 @@ public partial class EntradaCurrais
         bool patio = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca == 4;
         bool socorro = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca == 5;
         areaAguaPatio.enabled = patio && Dados.curraisTrabalhoPatioIniciado;
-        areaPanosPatio.enabled = patio && Dados.curraisTrabalhoPatioIniciado;
+        areaPanosPatio.enabled = (patio && Dados.curraisTrabalhoPatioIniciado) || PanoDoApoioDisponivel;
         areaSocorroBento.enabled = socorro;
         cabacaSocorro.SetActive(socorro && (Dados.curraisItensAtendimentoBento & 2) != 0 && !Dados.curraisCabacaSocorroRecolhida);
         areaCabacaSocorro.enabled = cabacaSocorro.activeSelf && Dados.curraisBentoMorto;
@@ -115,10 +115,9 @@ public partial class EntradaCurrais
         yield return Dizer(patioPanoEntregue);
     }
 
-    private IEnumerator UsarNoSocorro()
+    private IEnumerator UsarNoSocorro(ItemData selecionado)
     {
         if (Dados.curraisEtapaBusca != 5 || Dados.curraisBentoMorto) yield break;
-        ItemData selecionado = InventoryManager.Instance.SelectedItem;
         bool pano = selecionado == panoAuxilio && TemItem(panoAuxilio) && (Dados.curraisItensAtendimentoBento & 1) == 0;
         bool agua = selecionado == cabacaCheiaBusca && TemItem(cabacaCheiaBusca) && (Dados.curraisItensAtendimentoBento & 2) == 0;
         if (!pano && !agua) yield break;

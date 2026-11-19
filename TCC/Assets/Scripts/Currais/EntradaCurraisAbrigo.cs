@@ -215,7 +215,7 @@ public partial class EntradaCurrais
         { Iniciar(EntregarEmbrulhoBento()); return true; }
         if (Dados.curraisEtapaBusca == 5 && !Dados.curraisBentoMorto && (alvo == areaSocorroBento || alvo == areaBentoPatio || alvo == areaPaiPatio) &&
             (item == panoAuxilio || item == cabacaCheiaBusca))
-        { Iniciar(UsarNoSocorro()); return true; }
+        { Iniciar(UsarNoSocorro(item)); return true; }
         if (Dados.curraisQuartoAberto && alvo == areaTrabalhadoraQuarto && item == cabacaVaziaBusca)
         { Iniciar(AjudarNoQuarto()); return true; }
         if (ConsultaDisponivel && Dados.curraisEtapaConsulta == 1 && alvo == areaRaimundo && (item == baldeProtegidoItem || item == baldeRaimundoItem))
