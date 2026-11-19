@@ -26,6 +26,10 @@ public partial class EntradaCurrais
 
     private bool ReferenciasPostoValidas()
     {
+        // A lista só aplica cor aos desenhos presentes. Remover um objeto do cenário
+        // não deve deixar um slot vazio impedindo a inicialização de toda a história.
+        if (cenarioNoturno != null)
+            cenarioNoturno = Array.FindAll(cenarioNoturno, desenho => desenho != null);
         UnityEngine.Object[] referencias = { setorPosto, quartoInterior, portaQuartoFechada, papelPosto,
             areaPostoEscolha, areaPortaQuarto, areaFamiliaAbrigo, areaEsteiraNoite, raimundoNoPosto,
             raimundoSentado, raimundoOutroSetor, mariNoite, maeNoite, paiNoite, luziaNoite, baleiaCarinho, panoAlca,
