@@ -156,6 +156,8 @@ public class CollectPrompt : MonoBehaviour
         }
 
         InventoryManager.Instance.AddItem(pendingItem);
+        // O som confirma a coleta; acoes especificas continuam com seus efeitos proprios.
+        CurraisEffectsDirector.PlayItem("botao", 0.35f);
 
         Action callback = onCollected;
         Close();

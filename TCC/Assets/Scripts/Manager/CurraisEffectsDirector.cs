@@ -17,6 +17,8 @@ public sealed class CurraisEffectsDirector : MonoBehaviour
     private CurraisEffectsCatalog catalog;
     private AudioSource oneShots, ambience;
     private string ambienceName;
+    private float lastItemSoundTime = -1f;
+    private string lastItemSound;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Bootstrap()
@@ -57,6 +59,16 @@ public sealed class CurraisEffectsDirector : MonoBehaviour
         if (instance == null || instance.catalog == null) return;
         AudioClip clip = instance.Resolve(name);
         if (clip != null) instance.oneShots.PlayOneShot(clip, Mathf.Clamp01(gain) * AudioVolumeChannel.EffectsVolume);
+    }
+
+    // Evita o mesmo som duplicado quando dois sistemas notificam a mesma interacao no mesmo frame.
+    public static void PlayItem(string name, float gain = 0.65f)
+    {
+        if (instance == null || instance.catalog == null) return;
+        if (instance.lastItemSound == name && Time.unscaledTime - instance.lastItemSoundTime < 0.08f) return;
+        instance.lastItemSound = name;
+        instance.lastItemSoundTime = Time.unscaledTime;
+        Play(name, gain);
     }
 
     public static void PlayAmbience(string name)
