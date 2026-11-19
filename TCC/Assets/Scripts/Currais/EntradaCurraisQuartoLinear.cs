@@ -162,13 +162,7 @@ public partial class EntradaCurrais
     {
         if (ViuConversaEntrada("quarto-noticia-contada")) yield break;
         RegistrarConversaEntrada("quarto-retorno-familia");
-        if (Dados.curraisEscolhaAgua == 1)
-            yield return FalarPosto("Pai", "Tu conseguiu perguntar?", "Zefinha", "Consegui. Mariquinha num tava lá.");
-        else yield return FalarPosto("Mãe", "Tu descobriu alguma coisa?", "Zefinha",
-            "Eu pensei que tinha ouvido Mariquinha. Mas ela num tava no quarto.");
-        if (ViuConversaEntrada("quarto-nome-informado")) yield return FalarPosto("Zefinha",
-            "Deixei o nome dela com a mulher que cuida das pessoas. Ela disse que avisa se souber.");
-        // A notícia do quarto tem seu próprio marcador: conhecer o destino não a silencia.
+        yield return FalarPosto("Pai", "Tu descobriu alguma coisa sobre tua irmã?");
         string id = "posto-noticia-destino-" + Dados.curraisDestinoConfirmado;
         if (!ViuConversaEntrada(id))
         {

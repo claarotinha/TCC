@@ -83,17 +83,20 @@ public partial class EntradaCurrais
             AtualizarConsulta();
             return;
         }
+        // Saves que pararam no posto ou no quarto retomam no reencontro com a família.
+        if (Dados.curraisEscolhaPosto != 0 && Dados.curraisEtapaPosto <= 2)
+        {
+            Dados.curraisEtapaPosto = 2;
+            if (!VoltouDoQuarto) RegistrarConversaEntrada("quarto-retorno-familia");
+        }
         pai.gameObject.SetActive(!PaisNoFuneral);
         mae.gameObject.SetActive(!PaisNoFuneral);
         int etapa = Dados.curraisEtapaPosto;
         objetivoTexto.text = string.Empty;
         areaPostoEscolha.enabled = etapa == 0;
-        areaPortaQuarto.enabled = etapa == 1;
         areaFamiliaAbrigo.enabled = etapa >= 2 && !PaisNoFuneral;
         areaEsteiraNoite.enabled = etapa == 3;
         papelPosto.SetActive(Dados.curraisEscolhaPosto == 0);
-        quartoInterior.SetActive(true);
-        portaQuartoFechada.SetActive(etapa < 2);
         panoAlca.SetActive(Dados.curraisBaldeApoiado);
         AtualizarFamiliaAlternativa();
         curativoRaimundo.SetActive(Dados.curraisEscolhaPosto == 1);
@@ -122,7 +125,6 @@ public partial class EntradaCurrais
             if (!area.enabled || !area.gameObject.activeInHierarchy || !area.OverlapPoint(ponto)) continue;
 
             if (area == areaPostoEscolha) ClicarRaimundoPosto();
-            else if (area == areaPortaQuarto) Iniciar(ClicarPassagemQuarto());
             else if (area == areaFamiliaAbrigo)
             {
                 if (Dados.curraisEtapaPosto == 2) MenuNoticiasPosto();

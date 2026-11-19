@@ -105,21 +105,20 @@ public partial class EntradaCurrais
     private void AtualizarDetalhesPosto()
     {
         bool ativo = PostoDisponivel;
-        bool aberto = ativo && (Dados.curraisQuartoAberto || Dados.curraisEtapaPosto >= 2 || portaEmMovimento);
-        if (!portaEmMovimento) dobradicaPortaQuarto.gameObject.SetActive(aberto);
-        portaQuartoFechada.SetActive(ativo && !aberto);
-        quartoInterior.SetActive(true);
-        areaPortaQuarto.enabled = ativo && Dados.curraisEscolhaPosto != 0;
+        dobradicaPortaQuarto.gameObject.SetActive(false);
+        portaQuartoFechada.SetActive(false);
+        quartoInterior.SetActive(false);
+        areaPortaQuarto.enabled = false;
         areaMesaDocumento.enabled = ativo && !ConsultaDisponivel;
-        areaTrabalhadoraQuarto.enabled = aberto && InvestigouQuarto;
-        areaCaboQuarto.enabled = ativo && Dados.curraisEscolhaPosto != 0;
+        areaTrabalhadoraQuarto.enabled = false;
+        areaCaboQuarto.enabled = false;
         areaDoenteUm.enabled = aberto && InvestigouQuarto;
         areaDoenteDois.enabled = aberto && InvestigouQuarto;
         registroCopiado.SetActive(ativo && (PapelAvulsoPostoPendente ||
             ((noiteEmCurso || Dados.curraisEtapaPosto == 4) && TemItem(anotacaoPosto))));
         baldesApoiadosPosto.SetActive(ativo);
         AtualizarRecipientePosto();
-        cabacaComTrabalhadora.gameObject.SetActive(aberto && Dados.curraisCabacaEmprestadaQuarto);
+        cabacaComTrabalhadora.gameObject.SetActive(false);
         if (ativo && !ConsultaDisponivel) areaRaimundo.enabled = true;
     }
 

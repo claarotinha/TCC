@@ -165,11 +165,11 @@ public partial class EntradaCurrais
                 "Raimundo", "Eu sei, menina. Conseguiu ler?", "Zefinha", "Lagoa do Meio.", "Raimundo", "Então guarde esse nome.");
             yield return RecolherFolhaPosto();
         }
-        yield return IndicarQuartoPosto();
+        yield return FalarPosto("Zefinha (em pensamento)", "Vou procurar meus pais perto das esteiras e contar o que descobri.");
         // A mudança de setor é mostrada antes de registrar a nova posição.
         yield return Mover(areaRaimundo.transform, (opcao == 0 ? raimundoApoiadoPosto : raimundoOutroSetor).position, tempoPlano);
         Dados.curraisEscolhaPosto = opcao + 1;
-        Dados.curraisEtapaPosto = 1;
+        Dados.curraisEtapaPosto = 2;
         if (opcao == 0) Dados.curraisIdentidadeConfirmada = true;
         else
         {
@@ -186,14 +186,6 @@ public partial class EntradaCurrais
         yield return ExaminarOuColetar(anotacaoPosto);
         if (coletaDoCenarioConfirmada) { RegistrarConversaEntrada("posto-anotacao-recolhida"); Salvar(); }
         AtualizarDetalhesPosto();
-    }
-
-    private IEnumerator IndicarQuartoPosto()
-    {
-        if (ViuConversaEntrada("posto-quarto-indicado")) yield break;
-        yield return FalarPosto("Zefinha", "Tem mais algum lugar onde eu possa perguntar pela minha irmã?",
-            "Raimundo", "Tem um quarto de atendimento logo à esquerda da mesa. Pergunte lá.");
-        RegistrarConversaEntrada("posto-quarto-indicado");
     }
 
     private void MenuNoticiasPosto()
