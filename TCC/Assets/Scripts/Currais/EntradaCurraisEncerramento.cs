@@ -17,6 +17,12 @@ public partial class EntradaCurrais
 
     private void MostrarAssuntosFamiliaFinal()
     {
+        if (!NegacaoAcolhida)
+        {
+            MenuAssuntoNPC("Zefinha", "Eu ainda preciso procurar Mariquinha.",
+                "Continuar a conversa", RetomarNegacaoDaBusca);
+            return;
+        }
         var rotulos = new List<string>(); var acoes = new List<Action>();
         if ((Dados.curraisAssuntosEncerramento & 4) == 0)
         { rotulos.Add("Lembrar Bento"); acoes.Add(() => Iniciar(RelembrarAssuntoFinal(4, bentoEncerramento))); }
@@ -44,6 +50,11 @@ public partial class EntradaCurrais
     private IEnumerator FecharConversaFinal()
     {
         if (Dados.curraisEtapaConsulta < 3 || !ViuConversaEntrada("consulta-relato-final")) yield break;
+        if (!NegacaoAcolhida)
+        {
+            yield return NegarFimDaBusca();
+            if (!NegacaoAcolhida) yield break;
+        }
         // Descansar não exige esgotar os assuntos opcionais.
         yield return Escurecer(1f);
         Posicionar(mari.transform, mariNoite); Posicionar(mae, maeNoite);

@@ -209,20 +209,26 @@ public partial class EntradaCurrais
     private IEnumerator RelatoFinalLinear()
     {
         if (Dados.curraisEtapaConsulta != 3 || ViuConversaEntrada("consulta-relato-final")) yield break;
-        if (Dados.curraisDestinoConfirmado && Dados.curraisIdentidadeConfirmada) yield return Dizer(retornoDuasPistas);
-        else if (Dados.curraisDestinoConfirmado) yield return Dizer(retornoDestino);
-        else if (Dados.curraisIdentidadeConfirmada) yield return Dizer(retornoNome);
-        if (TemCadernoNaNoite)
-            yield return FalarPosto("Zefinha", "Meu caderno tá comigo. Vou guardar o que conseguimos saber.",
-                "Mãe", "E eu guardo contigo. Tu num precisa carregar isso sozinha.");
-        else if (TemItem(anotacaoPosto))
-            yield return FalarPosto("Zefinha", "O papel tá comigo. O resto eu vou lembrando.", "Mãe", "Me conte também. Nós guarda junto.");
-        else yield return FalarPosto("Zefinha", "Eu num quero esquecer o que disseram.", "Mãe", "Conte pra nós. Tu num precisa lembrar sozinha.");
-        yield return FalarPosto("Zefinha", "Eu prometi que ia buscar ela, mainha. E agora nem deixam eu sair.",
-            "Mãe", "Eu sei, minha filha.", "Zefinha", "E se ela achar que eu esqueci?",
-            "Pai", "Tu num esqueceu. Nós sabe o quanto tu procurou.",
-            "Zefinha", "Mas ela num sabe, painho. Ela num sabe.");
-        yield return Esperar(2f);
+        if (!ViuConversaEntrada("negacao-relato-contado"))
+        {
+            if (Dados.curraisDestinoConfirmado && Dados.curraisIdentidadeConfirmada) yield return Dizer(retornoDuasPistas);
+            else if (Dados.curraisDestinoConfirmado) yield return Dizer(retornoDestino);
+            else if (Dados.curraisIdentidadeConfirmada) yield return Dizer(retornoNome);
+            if (TemCadernoNaNoite)
+                yield return FalarPosto("Zefinha", "Meu caderno tá comigo. Vou guardar o que conseguimos saber.",
+                    "Mãe", "E eu guardo contigo. Tu num precisa carregar isso sozinha.");
+            else if (TemItem(anotacaoPosto))
+                yield return FalarPosto("Zefinha", "O papel tá comigo. O resto eu vou lembrando.", "Mãe", "Me conte também. Nós guarda junto.");
+            else yield return FalarPosto("Zefinha", "Eu num quero esquecer o que disseram.", "Mãe", "Conte pra nós. Tu num precisa lembrar sozinha.");
+            yield return FalarPosto("Zefinha", "Eu prometi que ia buscar ela, mainha. E agora nem deixam eu sair.",
+                "Mãe", "Eu sei, minha filha.", "Zefinha", "E se ela achar que eu esqueci?",
+                "Pai", "Tu num esqueceu. Nós sabe o quanto tu procurou.",
+                "Zefinha", "Mas ela num sabe, painho. Ela num sabe.");
+            yield return Esperar(2f);
+            RegistrarConversaEntrada("negacao-relato-contado"); Salvar();
+        }
+        yield return NegarFimDaBusca();
+        if (!NegacaoAcolhida) yield break;
         RegistrarConversaEntrada("consulta-relato-final");
         AtualizarEstadoBusca(); Salvar();
         yield return DizerEntradaUmaVez("encerramento-abertura", aberturaEncerramento);
