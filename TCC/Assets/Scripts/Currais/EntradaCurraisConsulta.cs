@@ -77,7 +77,7 @@ public partial class EntradaCurrais
             opcoesRetornoConsulta.Length != 2 || objetivosConsulta == null || objetivosConsulta.Length != 5) valido = false;
         string[] textos = { perguntaConsulta, rotuloLugar, rotuloNome, lugarConsulta, nomeConsulta, naoConfirmado };
         foreach (string texto in textos) valido &= !string.IsNullOrWhiteSpace(texto);
-        return valido && ConferirReferencia(exameMesaUltimaConsulta, nameof(exameMesaUltimaConsulta)) && ConferirReferencia(exameRaimundoManha, nameof(exameRaimundoManha)) &&
+        return valido && ConferirReferencia(puzzleRegistro, nameof(puzzleRegistro)) && ConferirReferencia(exameMesaUltimaConsulta, nameof(exameMesaUltimaConsulta)) && ConferirReferencia(exameRaimundoManha, nameof(exameRaimundoManha)) &&
             ConferirReferencia(exameRaimundoManha.examinePanel, "Painel Examine — manhã") &&
             ConferirReferencia(exameRaimundoManha.examineText, "Texto Examine — manhã");
     }

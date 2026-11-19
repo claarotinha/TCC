@@ -1362,6 +1362,7 @@ public partial class EntradaCurrais : MonoBehaviour
         pronto = false;
         encerrando = true;
         if (puzzleRetalhos != null) puzzleRetalhos.Fechar();
+        if (puzzleRegistro != null) puzzleRegistro.Fechar();
         if (examineNomesAtual != null && examineNomesAtual.PanelIsOpen) examineNomesAtual.HidePanel();
         examineNomesAtual = null;
         if (examePrimeiroCliqueLuzia != null && examePrimeiroCliqueLuzia.PanelIsOpen)
