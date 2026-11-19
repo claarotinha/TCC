@@ -665,7 +665,6 @@ public partial class EntradaCurrais : MonoBehaviour
         yield return Dizer(antesSeparacao);
         MostrarQuadroEntrada(3);
         yield return DizerEntradaUmaVez("aviso-pertences", new[] { entrada[0] });
-        yield return Dizer(chegadaFamilia);
         MostrarQuadroEntrada(4);
         yield return Esperar(1.2f);
         MostrarQuadroEntrada(5);

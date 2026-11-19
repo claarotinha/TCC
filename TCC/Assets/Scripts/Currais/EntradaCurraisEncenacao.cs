@@ -5,12 +5,10 @@ public partial class EntradaCurrais
 {
     [Header("Entrada — animações existentes e marcas editáveis")]
     [SerializeField] private Transform maeAmparoEntrada;
-    [SerializeField] private Fala[] chegadaFamilia;
 
     private bool ReferenciasEncenacaoValidas()
     {
-        return ConferirReferencia(maeAmparoEntrada, nameof(maeAmparoEntrada)) &
-            FalasValidas(chegadaFamilia);
+        return ConferirReferencia(maeAmparoEntrada, nameof(maeAmparoEntrada));
     }
 
     private void PrepararEncenacaoEntrada()
