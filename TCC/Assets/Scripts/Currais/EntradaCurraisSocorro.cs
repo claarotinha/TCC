@@ -50,6 +50,15 @@ public partial class EntradaCurrais
                 InventoryManager.Instance.AddItem(cabacaCheiaBusca);
             }
         }
+        // Compatibilidade: o fluxo antigo retirava o pano ao entregá-lo no apoio.
+        // Antes do atendimento, restaura apenas a unidade ainda não usada em Bento.
+        if ((Dados.curraisEtapaBusca == 4 && Dados.curraisTrabalhoPatioIniciado) ||
+            (Dados.curraisEtapaBusca == 5 && !Dados.curraisBentoMorto &&
+             (Dados.curraisItensAtendimentoBento & 1) == 0))
+        {
+            if (!TemItem(panoAuxilio)) InventoryManager.Instance.AddItem(panoAuxilio);
+            Dados.curraisPanosPatioEntregues = true;
+        }
         // Recupera somente o pano da tarefa interrompida; nunca altera a tira de Raimundo.
         if (Dados.curraisEtapaBusca == 4 && Dados.curraisTrabalhoPatioIniciado &&
             !Dados.curraisPanosPatioEntregues && !TemItem(panoAuxilio)) InventoryManager.Instance.AddItem(panoAuxilio);
@@ -64,14 +73,12 @@ public partial class EntradaCurrais
         bool patio = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca == 4;
         bool socorro = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca == 5;
         areaAguaPatio.enabled = patio && Dados.curraisTrabalhoPatioIniciado;
-        areaPanosPatio.enabled = (patio && Dados.curraisTrabalhoPatioIniciado) || PanoDoApoioDisponivel;
+        areaPanosPatio.enabled = patio && Dados.curraisTrabalhoPatioIniciado && !Dados.curraisPanosPatioEntregues;
         areaSocorroBento.enabled = socorro;
         cabacaSocorro.SetActive(socorro && (Dados.curraisItensAtendimentoBento & 2) != 0 && !Dados.curraisCabacaSocorroRecolhida);
         areaCabacaSocorro.enabled = cabacaSocorro.activeSelf && Dados.curraisBentoMorto;
-        bool panoDisponivel = Dados.curraisPanosPatioEntregues &&
-            !ViuConversaEntrada("patio-pano-retomado") && !(socorro && TemItem(panoAuxilio));
-        panosEntreguesPatio.SetActive(panoDisponivel);
-        areaPanoLimpoApoio.enabled = PanoDoApoioDisponivel;
+        panosEntreguesPatio.SetActive(false);
+        areaPanoLimpoApoio.enabled = false;
         if ((patio || socorro) && Dados.curraisEscolhaAgua == 1) areaMae.enabled = true;
         areaPanoAtendimento.gameObject.SetActive(false);
         AtualizarDetalhesPatio();
@@ -110,7 +117,7 @@ public partial class EntradaCurrais
         if (Dados.curraisEtapaBusca != 4 || !ApoioPatioAutorizado || Dados.curraisPanosPatioEntregues ||
             !TemItem(panoAuxilio)) yield break;
         Dados.curraisPanosPatioEntregues = true;
-        InventoryManager.Instance.RemoveItem(panoAuxilio);
+        // O pano fica reservado com Zefinha para o atendimento.
         AtualizarEstadoBusca(); Salvar();
         yield return Dizer(patioPanoEntregue);
     }

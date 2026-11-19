@@ -72,7 +72,7 @@ public partial class EntradaCurrais
                     if (!Dados.curraisPanosPatioEntregues) return "Arraste o pano entregue pelo pai até o apoio do pátio. Preserve o retalho de Raimundo.";
                     return "Leve a água até perto do pai e acompanhe o que acontece no pátio.";
                 case 5:
-                    if (!Dados.curraisBentoMorto) return (Dados.curraisItensAtendimentoBento & 3) == 3 ? "Aguarde o atendimento de Bento e a chegada da família." : "No atendimento, arraste o pano e a cabaça cheia até Bento. Se faltar pano, recolha-o no apoio.";
+                    if (!Dados.curraisBentoMorto) return (Dados.curraisItensAtendimentoBento & 3) == 3 ? "Aguarde o atendimento de Bento e a chegada da família." : "No atendimento, arraste o pano do pai e a cabaça cheia do inventário até Bento.";
                     if (!PertencesBentoResolvidos) return "Converse com o familiar de Bento e resolva a entrega dos pertences.";
                     if (!Dados.curraisCabacaSocorroRecolhida) return "Recolha sua cabaça vazia junto do atendimento.";
                     return "Converse com a acompanhante para seguir com a família ao sepultamento.";

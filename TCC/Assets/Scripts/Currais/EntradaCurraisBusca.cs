@@ -275,7 +275,8 @@ public partial class EntradaCurrais
             panoCarregado.SetActive(false);
             yield return Dizer(patioPensamentoMari);
             yield return Dizer(Dados.curraisEscolhaAgua == 1 ? patioReacaoMae : patioReacaoLuzia);
-            yield return Dizer(patioAutorizarPano);
+            yield return FalarPosto(NomeAcompanhantePatio,
+                "Tu tá com o pano limpo e a água. Eu fico aqui com ele.");
             AvancarCampo(5);
         }
         finally

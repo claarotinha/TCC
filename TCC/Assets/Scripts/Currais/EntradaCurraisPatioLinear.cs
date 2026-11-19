@@ -64,6 +64,7 @@ public partial class EntradaCurrais
         // Este pano é do pai. O retalho destinado à alça de Raimundo não é consumido.
         if (!TemItem(panoAuxilio)) InventoryManager.Instance.AddItem(panoAuxilio);
         Dados.curraisTrabalhoPatioIniciado = true;
+        Dados.curraisPanosPatioEntregues = true; // Pano reservado no inventário, antes da queda.
         AtualizarEstadoBusca(); Salvar();
     }
 
@@ -88,14 +89,6 @@ public partial class EntradaCurrais
     private IEnumerator AbrirApoioPatioLinear()
     {
         yield return ExamineNomesUmaVez("patio-exame-apoio", exameApoioTrabalho);
-        if (Dados.curraisEtapaBusca == 5 && !Dados.curraisBentoMorto)
-        {
-            if (PanoDoApoioDisponivel)
-                MostrarOpcoes("Trabalhador", "Pode levar aquele pano limpo para ajudar Bento.",
-                    new[] { "Recolher o pano para Bento", "Sair" },
-                    new Action[] { () => Iniciar(AjudarBento()), FecharMenu });
-            yield break;
-        }
         if (Dados.curraisEtapaBusca != 4 || !Dados.curraisTrabalhoPatioIniciado) yield break;
         if (!ApoioPatioAutorizado)
         {
