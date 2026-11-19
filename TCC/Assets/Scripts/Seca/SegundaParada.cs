@@ -2318,13 +2318,16 @@ public class SegundaParada : MonoBehaviour
         // A composição sentada usa as posições editadas na Hierarchy.
         // Bounds de renderers desativados podem incluir a origem do mundo.
         // A geometria local dos sprites funciona também no primeiro quadro da cena.
-        Bounds area = new Bounds(paisCenario.transform.position, Vector3.zero);
+        Bounds area = new Bounds(fogueiraCenario.transform.position, Vector3.zero);
         IncluirDesenhosNoite(ref area, paisCenario);
         IncluirDesenhosNoite(ref area, irmasCenario);
         IncluirDesenhosNoite(ref area, fogueiraCenario);
         float espacoUtil = Mathf.Max(.35f, 1f - fracaoPainelNoite);
-        float zoom = Mathf.Max(zoomOriginal, (area.size.y + 1.2f) / (2f * espacoUtil),
-            (area.size.x + 2f) / (2f * cameraAbrigo.aspect));
+        // Nao herdar o zoom da caminhada: a cena da fogueira e um plano
+        // aproximado. Limita o afastamento causado por sprites com bounds
+        // excessivos e deixa os personagens legiveis.
+        float zoom = Mathf.Clamp(Mathf.Max(3.5f, (area.size.y + 1.2f) / (2f * espacoUtil),
+            (area.size.x + 2f) / (2f * cameraAbrigo.aspect)), 3.5f, 8f);
         cameraAbrigo.orthographicSize = zoom;
         cameraAbrigo.transform.position = new Vector3(LimitarCameraNoiteX(area.center.x, zoom),
             area.min.y - .6f + zoom * (1f - 2f * fracaoPainelNoite), cameraOriginal.z);
@@ -2370,6 +2373,8 @@ public class SegundaParada : MonoBehaviour
             filho.gameObject.SetActive(true);
             filho.enabled = true;
             filho.color = Color.white;
+            // Personagens sentados precisam ficar acima do fundo.
+            filho.sortingOrder = Mathf.Max(filho.sortingOrder, 14);
             possuiPersonagens = true;
         }
 
