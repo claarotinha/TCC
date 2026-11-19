@@ -166,6 +166,21 @@ public class GameProgressData
     public bool curraisMemoriaIniciada;
     public int curraisPaginaMemoria;
     public bool ato2Concluido;
+    public bool finalAvaliado;
+    public int pontosFinal;
+    public bool finalComCarta;
+
+    // Cada ação é contada uma vez. As duas pistas continuam necessárias.
+    public void AvaliarFinal()
+    {
+        pontosFinal = (curraisDestinoConfirmado ? 2 : 0) +
+            (curraisIdentidadeConfirmada ? 2 : 0) +
+            (curraisAjudouAtendimentoQuarto ? 1 : 0) +
+            (curraisEscolhaPosto == 1 ? 1 : 0) +
+            (curraisEscolhaFuneral == 1 ? 1 : curraisEscolhaFuneral == 2 ? -1 : 0);
+        finalComCarta = curraisDestinoConfirmado && curraisIdentidadeConfirmada && pontosFinal >= 4;
+        finalAvaliado = true;
+    }
 
     // Epilogo: 0 despertar, 1 pesquisa na cozinha, 2 pesquisa concluida.
     public int epilogoEtapa;

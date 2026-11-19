@@ -59,12 +59,10 @@ public partial class EntradaCurrais
             }
             yield return ApertarMaoDaMae();
             if (acolhimentoInterrompido) continue;
-            yield return FalarPosto("Zefinha", "Eu prometi, mainha... Eu prometi pra ela.",
-                "Mãe", "Eu sei. Tu num precisa prometer mais nada agora.",
-                "Pai", "Nós guarda os nomes e o lugar. Amanhã nós vê o que ainda pode fazer.",
-                "Zefinha (em pensamento)", "A mão de mainha tava quente. Eu ainda queria levantar. Mas fiquei.");
             RegistrarConversaEntrada("negacao-mao-da-mae");
-            ConfigurarLimitesExternos(); Salvar();
+            RegistrarConversaEntrada("consulta-relato-final");
+            yield return DespedidaParaPresente();
+            yield break;
         }
     }
 
@@ -202,7 +200,7 @@ public partial class EntradaCurrais
     private IEnumerator RetomarNegacaoDaBusca()
     {
         yield return NegarFimDaBusca();
-        if (!NegacaoAcolhida) yield break;
+        if (!NegacaoAcolhida || Dados.ato2Concluido) yield break;
         RegistrarConversaEntrada("consulta-relato-final");
         AtualizarEstadoBusca(); Salvar();
         MenuNomesFinais();

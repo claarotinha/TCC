@@ -63212,7 +63212,7 @@ MonoBehaviour:
     r: 0
     g: 0
     b: 0
-    a: 0
+    a: 1
   m_RaycastTarget: 1
   m_RaycastPadding:
     x: 0
@@ -63393,7 +63393,7 @@ GameObject:
   - component:
       fileID: 7976000000023
   m_Layer: 5
-  m_Name: Papel - fundo quente
+  m_Name: Ilustração - mão da mãe
   m_TagString: Untagged
   m_Icon:
     fileID: 0
@@ -63440,10 +63440,10 @@ RectTransform:
     y: 0.5
   m_AnchoredPosition:
     x: 0
-    y: 0
+    y: 45
   m_SizeDelta:
-    x: 878
-    y: 568
+    x: 800
+    y: 390
   m_Pivot:
     x: 0.5
     y: 0.5
@@ -63481,9 +63481,9 @@ MonoBehaviour:
   m_Material:
     fileID: 0
   m_Color:
-    r: 0.91
-    g: 0.82
-    b: 0.65
+    r: 1
+    g: 1
+    b: 1
     a: 1
   m_RaycastTarget: 0
   m_RaycastPadding:
@@ -63496,9 +63496,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite:
-    fileID: 0
+    fileID: 21300000
+    guid: 24b72d9821c74fcba33354b4389df121
+    type: 3
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -63996,7 +63998,7 @@ GameObject:
     fileID: 0
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7976000000051
 RectTransform:
   m_ObjectHideFlags: 0
@@ -65447,7 +65449,7 @@ GameObject:
     fileID: 0
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7976000000161
 RectTransform:
   m_ObjectHideFlags: 0
@@ -68316,6 +68318,8 @@ MonoBehaviour:
     fileID: 7976000000283
   mensagem:
     fileID: 7976000000313
+  ilustracaoMao:
+    fileID: 7976000000023
 --- !u!1 &7977000000000
 GameObject:
   m_ObjectHideFlags: 0

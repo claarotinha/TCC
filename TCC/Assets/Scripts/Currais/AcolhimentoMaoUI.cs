@@ -7,6 +7,7 @@ public sealed class AcolhimentoMaoUI : MonoBehaviour
 {
     [SerializeField] private RectTransform painel, maoMae, maoMenina;
     [SerializeField] private Image preenchimento;
+    [SerializeField] private Image ilustracaoMao;
     [SerializeField] private TMP_Text porcentagem, mensagem;
     [SerializeField] private Button sair;
     private float tempo, esperaFinal;
@@ -48,8 +49,7 @@ public sealed class AcolhimentoMaoUI : MonoBehaviour
         porcentagem.text = Mathf.RoundToInt(progresso * 100f) + "%";
         mensagem.text = Concluido ? "Ainda dói. Mas você não está sozinha." :
             "Segure E ou o botão esquerdo do mouse.\nPode soltar e continuar quando quiser.";
-        maoMae.anchoredPosition = new Vector2(Mathf.Lerp(-155f, -70f, progresso), 15f);
-        maoMenina.anchoredPosition = new Vector2(Mathf.Lerp(155f, 70f, progresso), 0f);
+        // Ilustração fixa: o gesto já está acontecendo ao abrir o painel.
         AjustarPainel();
     }
 

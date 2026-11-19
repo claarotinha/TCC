@@ -53,7 +53,7 @@ public partial class EntradaCurrais
         if (!NegacaoAcolhida)
         {
             yield return NegarFimDaBusca();
-            if (!NegacaoAcolhida) yield break;
+            if (!NegacaoAcolhida || Dados.ato2Concluido) yield break;
         }
         // Descansar não exige esgotar os assuntos opcionais.
         yield return Escurecer(1f);

@@ -228,7 +228,7 @@ public partial class EntradaCurrais
             RegistrarConversaEntrada("negacao-relato-contado"); Salvar();
         }
         yield return NegarFimDaBusca();
-        if (!NegacaoAcolhida) yield break;
+        if (!NegacaoAcolhida || Dados.ato2Concluido) yield break;
         RegistrarConversaEntrada("consulta-relato-final");
         AtualizarEstadoBusca(); Salvar();
         yield return DizerEntradaUmaVez("encerramento-abertura", aberturaEncerramento);
