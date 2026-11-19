@@ -16,7 +16,7 @@ public partial class EntradaCurrais
     [SerializeField] private Fala[] patioLevarAgua, patioAntesQueda, patioDepoisQueda, patioPensamentoMari;
     [SerializeField] private Fala[] patioReacaoMae, patioReacaoLuzia, patioAutorizarPano;
 
-    private string NomeAcompanhantePatio => Dados.curraisEscolhaAgua == 1 ? "Mãe" : "Luzia";
+    private string NomeAcompanhantePatio => "Mãe";
     private bool BentoApresentadoPatio => ViuConversaEntrada("patio-bento-apresentado") ||
         Dados.curraisTrabalhoPatioIniciado || Dados.curraisEtapaBusca >= 5;
     private bool ApoioPatioAutorizado => Dados.curraisTrabalhoPatioIniciado &&
@@ -57,7 +57,7 @@ public partial class EntradaCurrais
         yield return ComentarChegadaPatio();
         yield return DizerEntradaUmaVez("patio-pai-abertura", patioPaiAbertura);
         yield return DizerEntradaUmaVez("patio-protesto-acompanhante",
-            Dados.curraisEscolhaAgua == 1 ? patioProtestoMae : patioProtestoLuzia);
+            patioProtestoMae);
         yield return DizerEntradaUmaVez("patio-fiscal-replica", patioFiscalReplica);
         yield return DizerEntradaUmaVez("patio-bento-apresentado", patioApresentarBento);
         yield return DizerEntradaUmaVez("patio-pai-entrega-pano", patioPaiEntregaPano);
@@ -153,5 +153,6 @@ public partial class EntradaCurrais
     }
 
     private IEnumerator ComentarChegadaPatio() => DizerEntradaUmaVez("patio-chegada",
-        Dados.curraisEscolhaAgua == 1 ? patioChegadaMae : patioChegadaLuzia);
+        patioChegadaMae);
 }
+

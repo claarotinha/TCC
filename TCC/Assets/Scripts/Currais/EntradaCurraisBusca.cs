@@ -83,7 +83,7 @@ public partial class EntradaCurrais
         if (etapa >= 1 && (!ConsultaDisponivel || Dados.curraisEtapaConsulta == 0))
         {
             if (seguidoraMae != null) seguidoraMae.enabled = false;
-            if (Dados.curraisEscolhaAgua != 1 || Dados.curraisEtapaBusca > 5)
+            if (Dados.curraisEtapaBusca > 5)
                 Posicionar(mae, maeAbrigo);
             luzia.transform.localRotation = Quaternion.identity;
             if (etapa >= 4)
@@ -175,22 +175,14 @@ public partial class EntradaCurrais
         else Salvar();
     }
 
-    private void RestaurarLuziaNaBusca()
+    private void RestaurarMaeNaBusca()
     {
-        if (!Dados.curraisPanelaConcluida || Dados.curraisEtapaBusca < 1) return;
-        if (Dados.curraisEscolhaAgua == 1 && Dados.curraisEtapaBusca <= 5)
-        {
-            Vector3 posicaoMae = mae.position;
-            SpriteRenderer visual = mari.GetComponent<SpriteRenderer>();
-            float direcao = visual != null && visual.flipX ? -1f : 1f;
-            posicaoMae.x = mari.transform.position.x - direcao * seguidoraMae.DistanciaAtras;
-            mae.position = posicaoMae;
-            Physics2D.SyncTransforms();
-            return;
-        }
-        Vector3 posicao = luzia.transform.position;
-        posicao.x = mari.transform.position.x - seguidoraLuzia.DistanciaAtras;
-        luzia.transform.position = posicao;
+        if (!Dados.curraisPanelaConcluida || Dados.curraisEtapaBusca < 1 || PostoDisponivel) return;
+        Vector3 posicaoMae = mae.position;
+        SpriteRenderer visual = mari.GetComponent<SpriteRenderer>();
+        float direcao = visual != null && visual.flipX ? -1f : 1f;
+        posicaoMae.x = mari.transform.position.x - direcao * seguidoraMae.DistanciaAtras;
+        mae.position = posicaoMae;
         Physics2D.SyncTransforms();
     }
 
@@ -227,7 +219,7 @@ public partial class EntradaCurrais
                 yield return Esperar(tempoPlano);
             }
             yield return OrientarAcompanhanteNaLembranca();
-            yield return Dizer(Dados.curraisEscolhaAgua == 1 ? chamadaPassagemMae : chamadaPassagemLuzia);
+            yield return Dizer(chamadaPassagemMae);
             Fala[] reacao = historia == 1 ? reacaoCorpoPassagem :
                 historia == 2 ? reacaoComadrePassagem : historia == 3 ? reacaoAguaPassagem : reacaoSemLendaPassagem;
             yield return Dizer(new[] { reacao[0] });
@@ -235,7 +227,7 @@ public partial class EntradaCurrais
             Fala[] resposta = new Fala[reacao.Length - 1];
             Array.Copy(reacao, 1, resposta, 0, resposta.Length);
             yield return Dizer(ComAcompanhante(resposta));
-            yield return Dizer(Dados.curraisEscolhaAgua == 1 ? continuarPassagemMae : continuarPassagemLuzia);
+            yield return Dizer(continuarPassagemMae);
             Dados.curraisPassagemVigiadaConcluida = true;
             GameProgress.Instance.UnlockDiaryPage("currais-corredor");
             AvancarCampo(4);
@@ -274,7 +266,7 @@ public partial class EntradaCurrais
             yield return Dizer(patioRetirada);
             panoCarregado.SetActive(false);
             yield return Dizer(patioPensamentoMari);
-            yield return Dizer(Dados.curraisEscolhaAgua == 1 ? patioReacaoMae : patioReacaoLuzia);
+            yield return Dizer(patioReacaoMae);
             yield return FalarPosto(NomeAcompanhantePatio,
                 "Tu tá com o pano limpo e a água. Eu fico aqui com ele.");
             AvancarCampo(5);
@@ -298,3 +290,4 @@ public partial class EntradaCurrais
         AtualizarEstadoBusca(); Salvar();
     }
 }
+

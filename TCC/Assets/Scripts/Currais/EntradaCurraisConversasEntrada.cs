@@ -95,7 +95,7 @@ public partial class EntradaCurrais
             if (pessoa.personagem == pai.gameObject) { Iniciar(AbrirPaiPatioLinear()); return; }
             if (pessoa.personagem == bento.gameObject) { Iniciar(AbrirBentoPatioLinear()); return; }
             if (pessoa.personagem == fiscalTrabalho.gameObject) { Iniciar(AbrirFiscalPatioLinear()); return; }
-            if (pessoa.personagem == mae.gameObject && Dados.curraisEscolhaAgua == 1)
+            if (pessoa.personagem == mae.gameObject)
             { ConversarAcompanhantePatioLinear(); return; }
         }
         if (pessoa.personagem == guardaRonda.gameObject)
@@ -113,3 +113,4 @@ public partial class EntradaCurrais
             new[] { "Como estão as coisas por aqui?" }, new Func<IEnumerator>[] { () => Dizer(pessoa.conversa) });
     }
 }
+

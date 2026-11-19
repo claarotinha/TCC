@@ -94,7 +94,7 @@ public partial class EntradaCurrais
         }
         yield return DizerEntradaUmaVez("lavagem-lote-inicio", loteLavagemInicio);
         yield return DizerEntradaUmaVez("lavagem-lote-acompanhante",
-            Dados.curraisEscolhaAgua == 1 ? loteLavagemMae : loteLavagemLuzia);
+            loteLavagemMae);
         yield return DizerEntradaUmaVez("lavagem-lote-pista", loteLavagemPista);
         yield return DizerEntradaUmaVez("lavagem-instrucoes", instrucoesLavagem);
         Dados.curraisEtapaBusca = 2;
@@ -161,7 +161,7 @@ public partial class EntradaCurrais
     }
 
     private IEnumerator ComentarChegadaLavagem() => DizerEntradaUmaVez("lavagem-chegada",
-        Dados.curraisEscolhaAgua == 1 ? chegadaLavagemMae : chegadaLavagemLuzia);
+        chegadaLavagemMae);
 
     private void EncerrarOportunidadeLavadeira()
     {
@@ -169,3 +169,4 @@ public partial class EntradaCurrais
         RegistrarConversaEntrada("lavagem-oportunidade-encerrada"); Salvar();
     }
 }
+

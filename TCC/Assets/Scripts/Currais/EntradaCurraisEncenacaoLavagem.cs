@@ -145,7 +145,7 @@ public partial class EntradaCurrais
     private IEnumerator OrientarAcompanhanteNaLembranca()
     {
         // A acompanhante já está junto de Josefa. Não busca Luzia em outra parte da cena.
-        Transform acompanhante = Dados.curraisEscolhaAgua == 1 ? mae : luzia.transform;
+        Transform acompanhante = mae;
         OlharParaMari(acompanhante);
         AnimarEscolta(acompanhante, false);
         yield break;
@@ -159,3 +159,4 @@ public partial class EntradaCurrais
     }
 
 }
+

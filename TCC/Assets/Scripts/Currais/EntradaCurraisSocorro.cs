@@ -80,7 +80,7 @@ public partial class EntradaCurrais
         areaCabacaSocorro.enabled = cabacaSocorro.activeSelf && Dados.curraisBentoMorto;
         panosEntreguesPatio.SetActive(false);
         areaPanoLimpoApoio.enabled = false;
-        if ((patio || socorro) && Dados.curraisEscolhaAgua == 1) areaMae.enabled = true;
+        if (patio || socorro) areaMae.enabled = true;
         areaPanoAtendimento.gameObject.SetActive(false);
         AtualizarDetalhesPatio();
         AtualizarVisuaisBentoLinear();
@@ -161,7 +161,7 @@ public partial class EntradaCurrais
             FecharDialogo();
             yield return Esperar(1.5f);
             yield return DizerEntradaUmaVez("bento-pergunta-levantar",
-                Dados.curraisEscolhaAgua == 1 ? bentoPerguntaMae : bentoPerguntaLuzia);
+                bentoPerguntaMae);
             if (!ViuConversaEntrada("bento-pai-voltou"))
             {
                 yield return TrazerFamiliarBento();
@@ -278,4 +278,5 @@ public partial class EntradaCurrais
         sepultamentoNaTela = false;
     }
 }
+
 

@@ -133,6 +133,7 @@ public partial class EntradaCurrais
         RegistrarConversaEntrada("nomes-canhoto-recolhido");
         GameProgress.Instance.UnlockDiaryPage("currais-canhoto");
         AtualizarEstadoBusca(); Salvar();
-        yield return Dizer(Dados.curraisEscolhaAgua == 1 ? canhotoGuardadoMae : canhotoGuardadoLuzia);
+        yield return Dizer(canhotoGuardadoMae);
     }
 }
+

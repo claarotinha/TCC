@@ -39,6 +39,7 @@ public partial class EntradaCurrais
     private IEnumerator ConversarGuardaPassagem()
     {
         yield return Dizer(guardaPassagemPergunta);
-        yield return Dizer(Dados.curraisEscolhaAgua == 1 ? guardaPassagemMae : guardaPassagemLuzia);
+        yield return Dizer(guardaPassagemMae);
     }
 }
+

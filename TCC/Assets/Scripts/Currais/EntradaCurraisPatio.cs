@@ -49,7 +49,7 @@ public partial class EntradaCurrais
         if (areaPanoLimpoApoio.enabled && areaPanoLimpoApoio.gameObject.activeInHierarchy &&
             areaPanoLimpoApoio.OverlapPoint(ponto))
         { Iniciar(AjudarBento()); return true; }
-        if ((Dados.curraisEtapaBusca == 4 || Dados.curraisEtapaBusca == 5) && Dados.curraisEscolhaAgua == 1 &&
+        if ((Dados.curraisEtapaBusca == 4 || Dados.curraisEtapaBusca == 5) &&
             areaMae.enabled && areaMae.gameObject.activeInHierarchy && areaMae.OverlapPoint(ponto))
         { if (Dados.curraisEtapaBusca == 5) AbrirSocorroOuUsarItem(); else ConversarAcompanhantePatioLinear(); return true; }
         foreach (Collider2D alvo in new[] { areaPaiPatio, areaBentoPatio, areaFiscalPatio })
@@ -67,8 +67,7 @@ public partial class EntradaCurrais
 
     private void ConversarLuziaNoPatio()
     {
-        if (Dados.curraisEtapaBusca == 5) { AbrirSocorroOuUsarItem(); return; }
-        if (Dados.curraisEscolhaAgua == 2) ConversarAcompanhantePatioLinear();
+        if (Dados.curraisEtapaBusca == 5) AbrirSocorroOuUsarItem();
     }
 
     private void AbrirSocorroOuUsarItem() => MenuSocorroBento();
@@ -135,3 +134,4 @@ public partial class EntradaCurrais
         bentoEmSocorroEmCena = false;
     }
 }
+

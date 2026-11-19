@@ -65,7 +65,7 @@ public partial class EntradaCurrais
             { yield return ConcluirAtendimentoBento(); yield break; }
             AbrirAssuntosEntrada("bento-ouvir", NomeAcompanhantePatio, string.Empty,
                 new[] { "bento-ouvir" }, new[] { "Ele tá ouvindo nós?" },
-                new Func<IEnumerator>[] { () => Dizer(Dados.curraisEscolhaAgua == 1 ? bentoOuvirMae : bentoOuvirLuzia) });
+                new Func<IEnumerator>[] { () => Dizer(bentoOuvirMae) });
             yield break;
         }
         if (PertencesBentoResolvidos)

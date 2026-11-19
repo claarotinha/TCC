@@ -95,7 +95,7 @@ public partial class EntradaCurrais
         if (!coletaDoCenarioConfirmada) yield break;
         Dados.curraisTiraPanoRecolhida = true;
         AvancarCampo(3);
-        yield return Dizer(Dados.curraisEscolhaAgua == 1 ? saidaLavagemMae : saidaLavagemLuzia);
+        yield return Dizer(saidaLavagemMae);
     }
 
     private void AtualizarPatrulha()
@@ -134,3 +134,4 @@ public partial class EntradaCurrais
         yield break;
     }
 }
+

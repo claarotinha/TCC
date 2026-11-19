@@ -129,6 +129,7 @@ public partial class EntradaCurrais
     private IEnumerator ComentarRaimundo()
     {
         yield return DizerEntradaUmaVez("raimundo-aproximacao",
-            Dados.curraisEscolhaAgua == 1 ? aproximacaoRaimundoMae : aproximacaoRaimundoLuzia);
+            aproximacaoRaimundoMae);
     }
 }
+

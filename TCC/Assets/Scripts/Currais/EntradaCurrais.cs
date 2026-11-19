@@ -1106,7 +1106,9 @@ public partial class EntradaCurrais : MonoBehaviour
     private IEnumerator DestinarAgua(int destinatario = 0)
     {
         if (!PodeEscolherAgua || destinatario < 1 || destinatario > 2 || !TemItem(cabacaCheiaBusca)) yield break;
-        yield return Dizer(destinatario == 1 ? ofertaAguaMae : ofertaAguaLuzia);
+        if (destinatario == 1) yield return Dizer(ofertaAguaMae);
+        else yield return FalarPosto("Zefinha", "Tome, dona Luzia.", "Luzia", "E tua mãe?",
+            "Mãe", "Pode beber. Eu tô bem.");
         yield return BeberAguaAbrigo(destinatario);
         if (!TemItem(cabacaCheiaBusca)) yield break;
         InventoryManager.Instance.RemoveItem(cabacaCheiaBusca);
@@ -1114,7 +1116,9 @@ public partial class EntradaCurrais : MonoBehaviour
         Dados.curraisEscolhaAgua = destinatario;
         GameProgress.Instance.UnlockDiaryPage(destinatario == 1 ? "currais-agua-mae" : "currais-agua-luzia");
         AtualizarEstadoBusca(); Salvar();
-        yield return Dizer(destinatario == 1 ? depoisAguaMae : depoisAguaLuzia);
+        if (destinatario == 1) yield return Dizer(depoisAguaMae);
+        else yield return FalarPosto("Luzia", "Obrigada, Josefa. Eu fico aqui com teu pai.",
+            "Mãe", "Venha, minha filha. Nós vai perguntar pela tua irmã.");
         yield return Dizer(guardarCabacaAgua);
     }
 
@@ -1146,7 +1150,7 @@ public partial class EntradaCurrais : MonoBehaviour
         for (int i = 0; i < falas.Length; i++)
             resultado[i] = new Fala {
                 personagem = falas[i].personagem == "ACOMPANHANTE"
-                    ? (Dados.curraisEscolhaAgua == 1 ? "Mãe" : "Luzia") : falas[i].personagem,
+                    ? ("Mãe") : falas[i].personagem,
                 texto = falas[i].texto };
         return resultado;
     }
@@ -1155,10 +1159,10 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (Dados.curraisEscolhaAgua == 0 || Dados.curraisRegistroConcluido) yield break;
         yield return Dizer(pedidoNomeInicio);
-        yield return Dizer(Dados.curraisEscolhaAgua == 1 ? pedidoNomeMae : pedidoNomeLuzia);
+        yield return Dizer(pedidoNomeMae);
         yield return ConsultarFolhaNaMesa();
         yield return Dizer(pedidoNomeServico);
-        yield return Dizer(Dados.curraisEscolhaAgua == 1 ? pedidoNomeProtestoMae : pedidoNomeProtestoLuzia);
+        yield return Dizer(pedidoNomeProtestoMae);
         yield return Dizer(pedidoNomeFinal);
         Dados.curraisTarefaPanosIniciada = true;
         Dados.curraisRegistroConcluido = true;
@@ -1169,7 +1173,7 @@ public partial class EntradaCurrais : MonoBehaviour
     private IEnumerator RelembrarRegistro()
     {
         yield return Dizer(ComAcompanhante(registroInicio));
-        yield return Dizer(Dados.curraisEscolhaAgua == 1 ? registroMae : registroLuzia);
+        yield return Dizer(registroMae);
         yield return ConsultarFolhaNaMesa();
     }
 
@@ -1196,7 +1200,7 @@ public partial class EntradaCurrais : MonoBehaviour
         areaPanela.enabled = panelaAcessivel;
         meninoBusca.gameObject.SetActive(true);
         // Conversar não muda a posição editada da criança.
-        if (Dados.curraisEscolhaAgua == 1 &&
+        if (Dados.curraisEscolhaAgua != 0 &&
             (!Dados.curraisPanelaConcluida || Dados.curraisEtapaBusca == 0))
         {
             luzia.transform.position = luziaRepouso.position;
@@ -1212,9 +1216,9 @@ public partial class EntradaCurrais : MonoBehaviour
         { RestaurarFamiliaConsulta(); return; }
         if (PostoDisponivel) return;
         if (Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 1)
-        { RestaurarLuziaNaBusca(); return; }
+        { RestaurarMaeNaBusca(); return; }
         if (!Dados.curraisDistribuicaoIniciada) return;
-        SeguidorFamilia seguidor = Dados.curraisEscolhaAgua == 1 ? seguidoraMae : seguidoraLuzia;
+        SeguidorFamilia seguidor = seguidoraMae;
         Vector3 posicao = seguidor.transform.position;
         posicao.x = mari.transform.position.x - seguidor.DistanciaAtras;
         seguidor.transform.position = posicao;
@@ -1251,13 +1255,13 @@ public partial class EntradaCurrais : MonoBehaviour
         if (!PostoDisponivel && Dados.curraisPanelaConcluida &&
             Dados.curraisEtapaBusca >= 1 && Dados.curraisEtapaBusca <= 5)
         {
-            seguidoraMae.enabled = livre && Dados.curraisEscolhaAgua == 1;
-            seguidoraLuzia.enabled = livre && Dados.curraisEscolhaAgua == 2;
+            seguidoraMae.enabled = livre;
+            seguidoraLuzia.enabled = false;
             return;
         }
         bool acompanharDistribuicao = !PostoDisponivel && Dados.curraisDistribuicaoIniciada;
-        seguidoraLuzia.enabled = livre && acompanharDistribuicao && Dados.curraisEscolhaAgua == 2;
-        seguidoraMae.enabled = livre && acompanharDistribuicao && Dados.curraisEscolhaAgua == 1;
+        seguidoraLuzia.enabled = false;
+        seguidoraMae.enabled = livre && acompanharDistribuicao && Dados.curraisEscolhaAgua != 0;
     }
 
     private void FecharMenu()
