@@ -31,6 +31,8 @@ public partial class EntradaCurrais
                 "Mãe", "Eu vou contigo. Teu pai precisa sentar um pouco.");
         else yield return FalarPosto("Zefinha", "Nós pode perguntar no posto agora?",
             "Luzia", "Pode. Eu vou contigo.", "Mãe", "Se souberem de alguma coisa, voltem pra dizer.");
+        yield return FalarPosto(NomeAcompanhantePatio,
+            "Raimundo tá no posto, junto da mesa dos papéis. Vamos perguntar a ele.");
         RegistrarConversaEntrada("posto-retorno"); Salvar();
     }
 

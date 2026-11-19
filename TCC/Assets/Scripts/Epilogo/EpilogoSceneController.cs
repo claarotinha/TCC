@@ -352,6 +352,7 @@ public class EpilogoSceneController : MonoBehaviour
         yield return AnimarGesto(zefinhaIdosa, 1.2f, 0.6f);
         yield return Dizer(gestoZefinha);
         foreach (Fala fala in depoisDaCarta) yield return Dizer(fala);
+        yield return LembrarEscolhaFuneral();
         yield return AproximarMari();
         yield return Dizer(gestoFinal);
         FecharDialogo();
@@ -369,6 +370,23 @@ public class EpilogoSceneController : MonoBehaviour
         FinalCartaConcluido = true;
         narrativaEmCurso = false;
         aoConcluirFinalCarta.Invoke();
+    }
+
+    private IEnumerator LembrarEscolhaFuneral()
+    {
+        int escolha = GameProgress.Instance != null ? GameProgress.Instance.Data.curraisEscolhaFuneral : 0;
+        if (escolha == 0) yield break; // Saves antigos não recebem uma decisão inventada.
+        if (escolha == 2)
+        {
+            yield return Dizer(new Fala { personagem = "Mari", texto = "No diário... a senhora não conseguiu ir à despedida de Bento." });
+            yield return Dizer(new Fala { personagem = "Zefinha", texto = "Eu fiquei. Mas num esqueci o nome dele." });
+            yield return Dizer(new Fala { personagem = "Mari", texto = "Agora eu também sei o nome dele, bisa." });
+        }
+        else
+        {
+            yield return Dizer(new Fala { personagem = "Mari", texto = "A senhora escreveu o nome de Bento. E foi se despedir dele." });
+            yield return Dizer(new Fala { personagem = "Zefinha", texto = "Alguém tinha que lembrar que ele tava ali." });
+        }
     }
 
     private IEnumerator ApresentarFinalSemNoticias()
@@ -392,6 +410,7 @@ public class EpilogoSceneController : MonoBehaviour
         yield return TrocarAmbiente(2);
         yield return AnimarGesto(zefinhaIdosa, 1f, 0.6f);
         foreach (Fala fala in quartoSemNoticias) yield return Dizer(fala);
+        yield return LembrarEscolhaFuneral();
         yield return AproximarMari();
         FecharDialogo();
         imagemPesquisa.gameObject.SetActive(true);

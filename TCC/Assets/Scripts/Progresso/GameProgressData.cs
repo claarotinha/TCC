@@ -132,6 +132,8 @@ public class GameProgressData
     public bool curraisPanoSepultamentoEntregue;
     public bool curraisCabacaSocorroRecolhida;
     public bool curraisSepultamentoConcluido;
+    // 0: save anterior/sem decisão; 1: acompanhou; 2: recusou o funeral.
+    public int curraisEscolhaFuneral;
     public bool curraisAjudouAtendimentoQuarto;
     public bool curraisQuartoAberto;
     public bool curraisCabacaEmprestadaQuarto;

@@ -194,12 +194,31 @@ public partial class EntradaCurrais
     private void MostrarPartidaBento()
     {
         if (!DespedidaBentoPronta) return;
-        if (ViuConversaEntrada("bento-esperou"))
-            MostrarOpcoes(NomeAcompanhantePatio, string.Empty, new[] { "Eu quero ir", "Sair" },
-                new Action[] { () => Iniciar(SepultarBento()), FecharMenu });
-        else MostrarOpcoes(NomeAcompanhantePatio, string.Empty,
-            new[] { "Eu quero ir", "Preciso de um instante", "Sair" },
-            new Action[] { () => Iniciar(SepultarBento()), () => Iniciar(EsperarDespedidaBento()), FecharMenu });
+        MostrarOpcoes(NomeAcompanhantePatio, string.Empty,
+            new[] { "Eu quero ir", "Não vou ao funeral", "Sair" },
+            new Action[] { () => Iniciar(SepultarBento()), () => Iniciar(RecusarFuneralBento()), FecharMenu });
+    }
+
+    private IEnumerator RecusarFuneralBento()
+    {
+        if (!DespedidaBentoPronta || sepultamentoEmCurso) yield break;
+        sepultamentoEmCurso = true;
+        try
+        {
+            yield return FalarPosto("Zefinha", "Eu num consigo ir.", NomeAcompanhantePatio,
+                "Tá bem. Nós fica aqui. A família dele num vai sozinha.");
+            Dados.curraisEscolhaFuneral = 2;
+            RegistrarConversaEntrada("bento-funeral-recusado");
+            yield return Escurecer(1f);
+            yield return Esperar(2f);
+            // Resolvido também por recusa, sem fingir que Josefa acompanhou o enterro.
+            Dados.curraisSepultamentoConcluido = true;
+            GameProgress.Instance.UnlockDiaryPage("josefa-09");
+            AvancarCampo(6);
+            yield return Escurecer(0f);
+            yield return RetomarBuscaPosto();
+        }
+        finally { sepultamentoEmCurso = false; }
     }
 
     private IEnumerator EsperarDespedidaBento()
