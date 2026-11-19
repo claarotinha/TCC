@@ -97,8 +97,16 @@ public class ControleJornada : MonoBehaviour
 
             float limiteX = limite.position.x;
             if (paradasConcluidas == 2)
-                limiteX += (aguaTerceiraLiberada || encontroTerceiraLiberado)
-                    ? trechoAposAguaTerceira : trechoAguaTerceira;
+            {
+                if (aguaTerceiraLiberada || encontroTerceiraLiberado)
+                {
+                    // A saída do encontro encerra a parada: ela precisa ser alcançável
+                    // mesmo quando as árvores e os gatilhos são reposicionados.
+                    float saida = caminhada != null ? caminhada.LimiteAposBarrigudaX : float.NegativeInfinity;
+                    limiteX = Mathf.Max(limiteX + trechoAposAguaTerceira, saida);
+                }
+                else limiteX += trechoAguaTerceira;
+            }
             if (paradasConcluidas == 3) limiteX += trechoJuazeiro;
             // Antes da introdução, espera na árvore: uma fala anterior não permite
             // atravessar o acampamento inteiro antes de o gatilho poder iniciar.

@@ -507,6 +507,17 @@ public partial class SegundaParada : MonoBehaviour
         return false;
     }
 
+    public float LimiteAposBarrigudaX
+    {
+        get
+        {
+            float limite = barriguda != null ? barriguda.position.x + 5f : float.NegativeInfinity;
+            if (inicioEncontro != null) limite = Mathf.Max(limite, inicioEncontro.position.x + 1f);
+            if (saidaEncontro != null) limite = Mathf.Max(limite, saidaEncontro.position.x + 1f);
+            return limite;
+        }
+    }
+
     public float InicioCaminhadaDaManhaX => casa != null ? casa.position.x + 4f : terceiraParada.position.x - 1.8f;
 
     [SerializeField] private Transform inicioBuscaBaleia;
