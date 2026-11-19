@@ -87,19 +87,48 @@ public partial class SegundaParada
             conversaPaisConcluida = d.estradaConversaPaisConcluida;
             acampamentoConcluido = d.estradaAcampamentoConcluido;
         }
-        acampamentoConfigurado = quintaParada != null && arvoreAcampamento != null &&
-            fogueiraCenario != null && irmasCenario != null && paisCenario != null &&
-            enquadramentoFogueira != null && cortinaAcampamento != null && visualFogueira != null &&
-            personagensFogueira != null && personagensFogueira.Length == 4 &&
-            Array.TrueForAll(personagensFogueira, pessoa => pessoa != null && pessoa.sprite != null) &&
-            galhosSecos != null && folhasSecas != null && galhosAlecrim != null && passaro != null && prea != null &&
-            noiteTelaCheia != null && imagemNoite != null && imagemIrmasDormindo != null && imagemPaisDormindo != null &&
-            quadrosIrmasAcordadas != null && quadrosIrmasAcordadas.Length > 0 &&
-            quadrosIrmasDormindo != null && quadrosIrmasDormindo.Length > 0 &&
-            quadrosPaisDeitados != null && quadrosPaisDeitados.Length > 0;
+        RecuperarReferenciasAcampamento();
+        var faltando = new List<string>();
+        void Exigir(UnityEngine.Object referencia, string campo)
+        {
+            if (referencia == null) faltando.Add(campo);
+        }
+        Exigir(quintaParada, nameof(quintaParada));
+        Exigir(arvoreAcampamento, nameof(arvoreAcampamento));
+        Exigir(fogueiraCenario, nameof(fogueiraCenario));
+        Exigir(irmasCenario, nameof(irmasCenario));
+        Exigir(paisCenario, nameof(paisCenario));
+        Exigir(enquadramentoFogueira, nameof(enquadramentoFogueira));
+        Exigir(cortinaAcampamento, nameof(cortinaAcampamento));
+        Exigir(visualFogueira, nameof(visualFogueira));
+        Exigir(galhosSecos, nameof(galhosSecos));
+        Exigir(folhasSecas, nameof(folhasSecas));
+        Exigir(galhosAlecrim, nameof(galhosAlecrim));
+        Exigir(passaro, nameof(passaro));
+        Exigir(prea, nameof(prea));
+        Exigir(noiteTelaCheia, nameof(noiteTelaCheia));
+        Exigir(imagemNoite, nameof(imagemNoite));
+        Exigir(imagemIrmasDormindo, nameof(imagemIrmasDormindo));
+        Exigir(imagemPaisDormindo, nameof(imagemPaisDormindo));
+        if (personagensFogueira == null || personagensFogueira.Length != 4)
+            faltando.Add("personagensFogueira (quatro personagens)");
+        else
+            for (int i = 0; i < personagensFogueira.Length; i++)
+            {
+                Exigir(personagensFogueira[i], $"personagensFogueira[{i}]");
+                if (personagensFogueira[i] != null)
+                    Exigir(personagensFogueira[i].sprite, personagensFogueira[i].name + ".sprite");
+            }
+        if (quadrosIrmasAcordadas == null || quadrosIrmasAcordadas.Length == 0)
+            faltando.Add(nameof(quadrosIrmasAcordadas));
+        if (quadrosIrmasDormindo == null || quadrosIrmasDormindo.Length == 0)
+            faltando.Add(nameof(quadrosIrmasDormindo));
+        if (quadrosPaisDeitados == null || quadrosPaisDeitados.Length == 0)
+            faltando.Add(nameof(quadrosPaisDeitados));
+        acampamentoConfigurado = faltando.Count == 0;
         if (!acampamentoConfigurado)
         {
-            Debug.LogError("Fogueira: confira os quatro personagens, a câmera e os painéis da quinta parada.", this);
+            Debug.LogError("Fogueira: referências ausentes: " + string.Join(", ", faltando), this);
             return;
         }
         faseAcampamento = RestaurarFaseAcampamento();
@@ -107,6 +136,28 @@ public partial class SegundaParada
         RestaurarFadeAcampamento();
         noiteTelaCheia.SetActive(false);
         AtualizarMateriaisAcampamento();
+    }
+
+    private void RecuperarReferenciasAcampamento()
+    {
+        // Recupera componentes dos próprios objetos editados na Hierarchy, sem criar outra cena.
+        if (visualFogueira == null && fogueiraCenario != null)
+            visualFogueira = fogueiraCenario.GetComponent<FogueiraEstradaVisual>();
+        if ((personagensFogueira == null || personagensFogueira.Length != 4) &&
+            paisCenario != null && irmasCenario != null)
+        {
+            var pessoas = new List<SpriteRenderer>();
+            pessoas.AddRange(paisCenario.GetComponentsInChildren<SpriteRenderer>(true));
+            pessoas.AddRange(irmasCenario.GetComponentsInChildren<SpriteRenderer>(true));
+            personagensFogueira = pessoas.ToArray();
+        }
+        if (enquadramentoFogueira == null && quintaParada != null && quintaParada.parent != null)
+            enquadramentoFogueira = quintaParada.parent.Find("Câmera da fogueira - EDITAR enquadramento");
+        if (cortinaAcampamento == null && noiteTelaCheia != null)
+        {
+            Transform cortina = noiteTelaCheia.transform.parent.Find("Transição da fogueira - cortina preta");
+            if (cortina != null) cortinaAcampamento = cortina.GetComponent<Image>();
+        }
     }
 
     private bool AcampamentoEmAndamento()

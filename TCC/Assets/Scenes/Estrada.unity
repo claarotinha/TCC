@@ -5980,15 +5980,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - fileID: 845846474
-  - fileID: 3900000074
-  - fileID: 3900000078
-  - fileID: 3900000082
-  - fileID: 3900000086
-  - fileID: 3900000090
-  - fileID: 3900000098
-  - fileID: 3900000102
-  - fileID: 7120000000301
+  - {fileID: 845846474}
+  - {fileID: 3900000074}
+  - {fileID: 3900000078}
+  - {fileID: 3900000082}
+  - {fileID: 3900000086}
+  - {fileID: 3900000090}
+  - {fileID: 3900000098}
+  - {fileID: 3900000102}
+  - {fileID: 7120000000301}
   m_Father: {fileID: 789316125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1071842523
@@ -13260,17 +13260,17 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - fileID: 9890000001
-  - fileID: 3000000054
-  - fileID: 3000000010
-  - fileID: 3000000024
-  - fileID: 3000000068
-  - fileID: 3000000090
-  - fileID: 3000000020
-  - fileID: 9892000001
-  - fileID: 9891000001
-  - fileID: 7106000000001
-  - fileID: 7120000000401
+  - {fileID: 9890000001}
+  - {fileID: 3000000054}
+  - {fileID: 3000000010}
+  - {fileID: 3000000024}
+  - {fileID: 3000000068}
+  - {fileID: 3000000090}
+  - {fileID: 3000000020}
+  - {fileID: 9892000001}
+  - {fileID: 9891000001}
+  - {fileID: 7106000000001}
+  - {fileID: 7120000000401}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -16429,7 +16429,7 @@ MonoBehaviour:
   policialBloqueio: {fileID: 21300003, guid: c9a90000000040008000000000000002, type: 3}
   familiaSurpresa: {fileID: 21300000, guid: c9a90000000040008000000000000003, type: 3}
   familiaSurpresaCurativo: {fileID: 21300001, guid: c9a90000000040008000000000000003, type: 3}
-  cidadeCenario: {fileID: 0}
+  cidadeCenario: {fileID: 1913817583}
   familiaFinal: {fileID: 3900000125}
   policiais:
   - {fileID: 3900000113}
@@ -16461,18 +16461,15 @@ MonoBehaviour:
   - {fileID: 3900000136}
   - {fileID: 3900000138}
   - {fileID: 3900000140}
-  visualFogueira:
-    fileID: 7120000000200
+  visualFogueira: {fileID: 7120000000200}
   personagensFogueira:
-  - fileID: 9885000002
-  - fileID: 9885000012
-  - fileID: 9885000032
-  - fileID: 9885000042
-  enquadramentoFogueira:
-    fileID: 7120000000301
+  - {fileID: 9885000002}
+  - {fileID: 9885000012}
+  - {fileID: 9885000032}
+  - {fileID: 9885000042}
+  enquadramentoFogueira: {fileID: 7120000000301}
   zoomFogueira: 4.7
-  cortinaAcampamento:
-    fileID: 7120000000403
+  cortinaAcampamento: {fileID: 7120000000403}
 --- !u!1 &3500000010
 GameObject:
   m_ObjectHideFlags: 0
@@ -16787,7 +16784,10 @@ Transform:
   m_GameObject: {fileID: 3900000001}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 845.31, y: 3.79, z: 0}
+  m_LocalPosition:
+    x: 746.96738
+    y: 3.79
+    z: 0
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19213,14 +19213,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component:
-      fileID: 3900000078
-  - component:
-      fileID: 3900000079
-  - component:
-      fileID: 3900000080
-  - component:
-      fileID: 7120000000200
+  - component: {fileID: 3900000078}
+  - component: {fileID: 3900000079}
+  - component: {fileID: 3900000080}
+  - component: {fileID: 7120000000200}
   m_Layer: 0
   m_Name: Fogueira - preparo e refeicao
   m_TagString: Untagged
@@ -19269,9 +19265,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - fileID: 10754
-    guid: 0000000000000000f000000000000000
-    type: 0
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19294,10 +19288,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 12
   m_MaskInteraction: 0
-  m_Sprite:
-    fileID: -3414632849480974069
-    guid: e94c0d650ea268b4eb515ba157f2bd64
-    type: 3
+  m_Sprite: {fileID: -3414632849480974069, guid: e94c0d650ea268b4eb515ba157f2bd64, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -19779,8 +19770,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component:
-      fileID: 3900000098
+  - component: {fileID: 3900000098}
   m_Layer: 0
   m_Name: "01 Fogueira - irm\xE3s sentadas"
   m_TagString: Untagged
@@ -19813,8 +19803,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component:
-      fileID: 3900000102
+  - component: {fileID: 3900000102}
   m_Layer: 0
   m_Name: 01 Fogueira - pais sentados
   m_TagString: Untagged
@@ -20591,7 +20580,10 @@ Transform:
   m_GameObject: {fileID: 3900000131}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.55, y: -6.14, z: 0}
+  m_LocalPosition:
+    x: 0.98
+    y: -6.14
+    z: 0
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20622,7 +20614,10 @@ Transform:
   m_GameObject: {fileID: 3900000133}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.91, y: -5.79, z: 0}
+  m_LocalPosition:
+    x: 14.5
+    y: -5.79
+    z: 0
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22422,12 +22417,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component:
-      fileID: 9885000001
-  - component:
-      fileID: 9885000002
-  - component:
-      fileID: 7120000000000
+  - component: {fileID: 9885000001}
+  - component: {fileID: 9885000002}
+  - component: {fileID: 7120000000000}
   m_Layer: 0
   m_Name: Pai sentado
   m_TagString: Untagged
@@ -22476,9 +22468,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - fileID: 10754
-    guid: 0000000000000000f000000000000000
-    type: 0
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22501,10 +22491,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 14
   m_MaskInteraction: 0
-  m_Sprite:
-    fileID: 7199680572340872079
-    guid: b3b610f982818104c8fd28ea714b68fa
-    type: 3
+  m_Sprite: {fileID: 7199680572340872079, guid: b3b610f982818104c8fd28ea714b68fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -22523,12 +22510,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component:
-      fileID: 9885000011
-  - component:
-      fileID: 9885000012
-  - component:
-      fileID: 7120000000010
+  - component: {fileID: 9885000011}
+  - component: {fileID: 9885000012}
+  - component: {fileID: 7120000000010}
   m_Layer: 0
   m_Name: "M\xE3e sentada"
   m_TagString: Untagged
@@ -22577,9 +22561,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - fileID: 10754
-    guid: 0000000000000000f000000000000000
-    type: 0
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22602,10 +22584,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 14
   m_MaskInteraction: 0
-  m_Sprite:
-    fileID: 717921788111681634
-    guid: 891a597b8da4fb7428a082d36fa6beb0
-    type: 3
+  m_Sprite: {fileID: 717921788111681634, guid: 891a597b8da4fb7428a082d36fa6beb0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -22624,12 +22603,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component:
-      fileID: 9885000031
-  - component:
-      fileID: 9885000032
-  - component:
-      fileID: 7120000000030
+  - component: {fileID: 9885000031}
+  - component: {fileID: 9885000032}
+  - component: {fileID: 7120000000030}
   m_Layer: 0
   m_Name: Zefinha sentada
   m_TagString: Untagged
@@ -22678,9 +22654,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - fileID: 10754
-    guid: 0000000000000000f000000000000000
-    type: 0
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22703,10 +22677,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 14
   m_MaskInteraction: 0
-  m_Sprite:
-    fileID: 6086901714615726184
-    guid: 2064bfed92d998947a34928f514dfe93
-    type: 3
+  m_Sprite: {fileID: 6086901714615726184, guid: 2064bfed92d998947a34928f514dfe93, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -22725,12 +22696,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component:
-      fileID: 9885000041
-  - component:
-      fileID: 9885000042
-  - component:
-      fileID: 7120000000040
+  - component: {fileID: 9885000041}
+  - component: {fileID: 9885000042}
+  - component: {fileID: 7120000000040}
   m_Layer: 0
   m_Name: Mariquinha sentada
   m_TagString: Untagged
@@ -22779,9 +22747,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - fileID: 10754
-    guid: 0000000000000000f000000000000000
-    type: 0
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22804,10 +22770,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 14
   m_MaskInteraction: 0
-  m_Sprite:
-    fileID: -2129341193338576315
-    guid: c303355df0e7163429dc3c13a1df0f90
-    type: 3
+  m_Sprite: {fileID: -2129341193338576315, guid: c303355df0e7163429dc3c13a1df0f90, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -25442,35 +25405,20 @@ SceneRoots:
 --- !u!114 &7120000000030
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject:
-    fileID: 0
-  m_PrefabInstance:
-    fileID: 0
-  m_PrefabAsset:
-    fileID: 0
-  m_GameObject:
-    fileID: 9885000030
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9885000030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script:
-    fileID: 11500000
-    guid: e0ef47f980de5451aa397bbcb649400b
-    type: 3
+  m_Script: {fileID: 11500000, guid: e0ef47f980de5451aa397bbcb649400b, type: 3}
   m_Name: null
   m_EditorClassIdentifier: null
   quadros:
-  - fileID: 6086901714615726184
-    guid: 2064bfed92d998947a34928f514dfe93
-    type: 3
-  - fileID: 2897792499856136679
-    guid: c950c6b9d7be4c645a7da3be0ff974f9
-    type: 3
-  - fileID: -4579754656041061967
-    guid: 5d916343317cc5e43a5558c39fec399d
-    type: 3
-  - fileID: 6277957576299329260
-    guid: e9a52d7f839303e448c94c647e46c12f
-    type: 3
+  - {fileID: 6086901714615726184, guid: 2064bfed92d998947a34928f514dfe93, type: 3}
+  - {fileID: 2897792499856136679, guid: c950c6b9d7be4c645a7da3be0ff974f9, type: 3}
+  - {fileID: -4579754656041061967, guid: 5d916343317cc5e43a5558c39fec399d, type: 3}
+  - {fileID: 6277957576299329260, guid: e9a52d7f839303e448c94c647e46c12f, type: 3}
   intervalo: 0.25
   preservarGeometriaDaCena: 1
   aposEntregaBola: 0
@@ -25478,35 +25426,20 @@ MonoBehaviour:
 --- !u!114 &7120000000040
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject:
-    fileID: 0
-  m_PrefabInstance:
-    fileID: 0
-  m_PrefabAsset:
-    fileID: 0
-  m_GameObject:
-    fileID: 9885000040
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9885000040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script:
-    fileID: 11500000
-    guid: e0ef47f980de5451aa397bbcb649400b
-    type: 3
+  m_Script: {fileID: 11500000, guid: e0ef47f980de5451aa397bbcb649400b, type: 3}
   m_Name: null
   m_EditorClassIdentifier: null
   quadros:
-  - fileID: -2129341193338576315
-    guid: c303355df0e7163429dc3c13a1df0f90
-    type: 3
-  - fileID: 2034839723575886004
-    guid: 88a5e8cc0181c614e9976011cc0d211a
-    type: 3
-  - fileID: 1826427646126164071
-    guid: 3094b8aeeb5905143b6250f3d74e2f44
-    type: 3
-  - fileID: -7826730318620106131
-    guid: e833e17538206eb45abe3683503016cc
-    type: 3
+  - {fileID: -2129341193338576315, guid: c303355df0e7163429dc3c13a1df0f90, type: 3}
+  - {fileID: 2034839723575886004, guid: 88a5e8cc0181c614e9976011cc0d211a, type: 3}
+  - {fileID: 1826427646126164071, guid: 3094b8aeeb5905143b6250f3d74e2f44, type: 3}
+  - {fileID: -7826730318620106131, guid: e833e17538206eb45abe3683503016cc, type: 3}
   intervalo: 0.25
   preservarGeometriaDaCena: 1
   aposEntregaBola: 0
@@ -25514,35 +25447,20 @@ MonoBehaviour:
 --- !u!114 &7120000000000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject:
-    fileID: 0
-  m_PrefabInstance:
-    fileID: 0
-  m_PrefabAsset:
-    fileID: 0
-  m_GameObject:
-    fileID: 9885000000
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9885000000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script:
-    fileID: 11500000
-    guid: e0ef47f980de5451aa397bbcb649400b
-    type: 3
+  m_Script: {fileID: 11500000, guid: e0ef47f980de5451aa397bbcb649400b, type: 3}
   m_Name: null
   m_EditorClassIdentifier: null
   quadros:
-  - fileID: 7199680572340872079
-    guid: b3b610f982818104c8fd28ea714b68fa
-    type: 3
-  - fileID: 851504558623592937
-    guid: e7c9b8753acba284b815938e017baff6
-    type: 3
-  - fileID: 4054352618319931956
-    guid: 7b7643513b061584e8d404ebf390ab9a
-    type: 3
-  - fileID: -365630665396688406
-    guid: 937bbce58ff9e8545a681ceacc778b94
-    type: 3
+  - {fileID: 7199680572340872079, guid: b3b610f982818104c8fd28ea714b68fa, type: 3}
+  - {fileID: 851504558623592937, guid: e7c9b8753acba284b815938e017baff6, type: 3}
+  - {fileID: 4054352618319931956, guid: 7b7643513b061584e8d404ebf390ab9a, type: 3}
+  - {fileID: -365630665396688406, guid: 937bbce58ff9e8545a681ceacc778b94, type: 3}
   intervalo: 0.25
   preservarGeometriaDaCena: 1
   aposEntregaBola: 0
@@ -25550,35 +25468,20 @@ MonoBehaviour:
 --- !u!114 &7120000000010
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject:
-    fileID: 0
-  m_PrefabInstance:
-    fileID: 0
-  m_PrefabAsset:
-    fileID: 0
-  m_GameObject:
-    fileID: 9885000010
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9885000010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script:
-    fileID: 11500000
-    guid: e0ef47f980de5451aa397bbcb649400b
-    type: 3
+  m_Script: {fileID: 11500000, guid: e0ef47f980de5451aa397bbcb649400b, type: 3}
   m_Name: null
   m_EditorClassIdentifier: null
   quadros:
-  - fileID: 717921788111681634
-    guid: 891a597b8da4fb7428a082d36fa6beb0
-    type: 3
-  - fileID: 3531482608770354031
-    guid: 477a07767b2947a42ae657882484e18a
-    type: 3
-  - fileID: -4947924622899555035
-    guid: 98b91bfa348721444b3240bb91202a37
-    type: 3
-  - fileID: -1407406957870611865
-    guid: d900304ffab3a6a469bfa04343f19247
-    type: 3
+  - {fileID: 717921788111681634, guid: 891a597b8da4fb7428a082d36fa6beb0, type: 3}
+  - {fileID: 3531482608770354031, guid: 477a07767b2947a42ae657882484e18a, type: 3}
+  - {fileID: -4947924622899555035, guid: 98b91bfa348721444b3240bb91202a37, type: 3}
+  - {fileID: -1407406957870611865, guid: d900304ffab3a6a469bfa04343f19247, type: 3}
   intervalo: 0.25
   preservarGeometriaDaCena: 1
   aposEntregaBola: 0
@@ -25586,79 +25489,47 @@ MonoBehaviour:
 --- !u!114 &7120000000200
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject:
-    fileID: 0
-  m_PrefabInstance:
-    fileID: 0
-  m_PrefabAsset:
-    fileID: 0
-  m_GameObject:
-    fileID: 3900000077
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3900000077}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script:
-    fileID: 11500000
-    guid: f5a35208e5ce4d2180f75f3c03639f2e
-    type: 3
+  m_Script: {fileID: 11500000, guid: f5a35208e5ce4d2180f75f3c03639f2e, type: 3}
   m_Name: null
   m_EditorClassIdentifier: null
-  acesa:
-    fileID: 21300001
-    guid: c8a80000000040008000000000000001
-    type: 3
-  brasas:
-    fileID: 21300003
-    guid: c8a80000000040008000000000000001
-    type: 3
+  acesa: {fileID: 21300001, guid: c8a80000000040008000000000000001, type: 3}
+  brasas: {fileID: 21300003, guid: c8a80000000040008000000000000001, type: 3}
   assando:
-  - fileID: -3414632849480974069
-    guid: e94c0d650ea268b4eb515ba157f2bd64
-    type: 3
-  - fileID: -1292190139899694319
-    guid: 6331727094454404b8d4a58474ba542b
-    type: 3
-  - fileID: 6226263224082158656
-    guid: 6ab0aa4314eeec84a802bc9559ec55ee
-    type: 3
-  - fileID: 9192864192034117387
-    guid: 6be9372a7d41a5243803061acbd13fa4
-    type: 3
-  - fileID: -1711603480702790762
-    guid: 4973a2bbbd9547e4d891e7ebf8655834
-    type: 3
+  - {fileID: -3414632849480974069, guid: e94c0d650ea268b4eb515ba157f2bd64, type: 3}
+  - {fileID: -1292190139899694319, guid: 6331727094454404b8d4a58474ba542b, type: 3}
+  - {fileID: 6226263224082158656, guid: 6ab0aa4314eeec84a802bc9559ec55ee, type: 3}
+  - {fileID: 9192864192034117387, guid: 6be9372a7d41a5243803061acbd13fa4, type: 3}
+  - {fileID: -1711603480702790762, guid: 4973a2bbbd9547e4d891e7ebf8655834, type: 3}
   intervalo: 0.22
 --- !u!1 &7120000000300
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject:
-    fileID: 0
-  m_PrefabInstance:
-    fileID: 0
-  m_PrefabAsset:
-    fileID: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component:
-      fileID: 7120000000301
+  - component: {fileID: 7120000000301}
   m_Layer: 0
   m_Name: Câmera da fogueira - EDITAR enquadramento
   m_TagString: Untagged
-  m_Icon:
-    fileID: 0
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7120000000301
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject:
-    fileID: 0
-  m_PrefabInstance:
-    fileID: 0
-  m_PrefabAsset:
-    fileID: 0
-  m_GameObject:
-    fileID: 7120000000300
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7120000000300}
   serializedVersion: 2
   m_LocalRotation:
     x: 0
@@ -25675,8 +25546,7 @@ Transform:
     z: 1
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father:
-    fileID: 1024783715
+  m_Father: {fileID: 1024783715}
   m_LocalEulerAnglesHint:
     x: 0
     y: 0

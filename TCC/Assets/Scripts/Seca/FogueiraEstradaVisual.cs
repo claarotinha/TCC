@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[DefaultExecutionOrder(-50)]
 [DisallowMultipleComponent]
 [RequireComponent(typeof(SpriteRenderer))]
 public class FogueiraEstradaVisual : MonoBehaviour
@@ -15,6 +16,8 @@ public class FogueiraEstradaVisual : MonoBehaviour
     {
         desenho = GetComponent<SpriteRenderer>();
         Sprite referencia = desenho.sprite;
+        // A prévia da edição nunca deve iniciar a partida com o fogo aceso.
+        desenho.enabled = false;
         fogoPreparado = Preparar(new[] { acesa }, referencia);
         comidaPreparada = Preparar(assando, referencia);
         fimPreparado = Preparar(new[] { brasas }, referencia);
