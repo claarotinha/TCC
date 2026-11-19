@@ -141,6 +141,13 @@ public class TutorialManager : MonoBehaviour
         Debug.Log("Tutorial: " + target.name + " investigado (" +
                   investigated.Count + "/" + investigationTargets.Length + ").", target);
 #endif
+        // Som especifico de cada objeto do tutorial, disparado ao investigar de verdade.
+        string objeto = target.name.ToLowerInvariant();
+        string efeito = objeto.Contains("arvor") || objeto.Contains("árvor") ? "arvore" :
+            objeto.Contains("bola") ? "bola" :
+            objeto.Contains("padaria") ? "botao" :
+            objeto.Contains("bicic") ? "clique" : "porta";
+        CurraisEffectsDirector.PlayItem(efeito, 0.8f);
         ShowInvestigationProgress();
     }
 
@@ -161,7 +168,10 @@ public class TutorialManager : MonoBehaviour
     public void ReportBallCollected()
     {
         if (CurrentStep == TutorialStep.FindBall)
+        {
+            CurraisEffectsDirector.PlayItem("bola", 0.9f);
             SetStep(TutorialStep.OpenInventory);
+        }
     }
 
     public void ReportBallReturned()

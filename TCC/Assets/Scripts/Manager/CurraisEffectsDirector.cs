@@ -23,6 +23,7 @@ public sealed class CurraisEffectsDirector : MonoBehaviour
     {
         if (instance != this) { Destroy(gameObject); return; }
         catalog = Resources.Load<CurraisEffectsCatalog>("CurraisEffectsCatalog");
+        if (catalog == null) Debug.LogError("CURRAIS AUDIO: CurraisEffectsCatalog nao carregou de Resources. Verifique importacao e erros de compilacao.");
         oneShots = gameObject.AddComponent<AudioSource>();
         ambience = gameObject.AddComponent<AudioSource>();
         oneShots.playOnAwake = ambience.playOnAwake = false;
@@ -46,9 +47,13 @@ public sealed class CurraisEffectsDirector : MonoBehaviour
 
     public static void Play(string name, float gain = 1f)
     {
-        if (instance == null || instance.catalog == null) return;
+        if (instance == null) { Debug.LogWarning("CURRAIS AUDIO: controlador de efeitos nao inicializado: " + name); return; }
+        if (instance.catalog == null) { Debug.LogWarning("CURRAIS AUDIO: catalogo ausente ao tocar: " + name); return; }
         AudioClip clip = instance.Resolve(name);
-        if (clip != null) instance.oneShots.PlayOneShot(clip, Mathf.Clamp01(gain) * AudioVolumeChannel.EffectsVolume);
+        if (clip == null) { Debug.LogWarning("CURRAIS AUDIO: efeito sem AudioClip: " + name); return; }
+        if (AudioVolumeChannel.EffectsVolume <= 0f || AudioListener.volume <= 0f)
+            Debug.LogWarning("CURRAIS AUDIO: volume de efeitos ou volume geral esta zerado.");
+        instance.oneShots.PlayOneShot(clip, Mathf.Clamp01(gain) * AudioVolumeChannel.EffectsVolume);
     }
 
     // Evita o mesmo som duplicado quando dois sistemas notificam a mesma interacao no mesmo frame.
