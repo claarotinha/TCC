@@ -68,11 +68,7 @@ public partial class EntradaCurrais
 
     private void MenuLavadeiraNaBusca() => Iniciar(AbrirLavadeiraLinear());
 
-    private void MenuPilhaLavagem(bool atendimento)
-    {
-        Iniciar(ExamineNomesUmaVez(atendimento ? "lavagem-examine-atendimento" : "lavagem-examine-uso",
-            atendimento ? examePilhaAtendimento : examePilhaUso));
-    }
+    private void MenuPilhaLavagem(bool atendimento) => Iniciar(RemendarPanoLavagem());
 
     private void AtualizarDetalhesLavagem()
     {

@@ -60,15 +60,15 @@ public partial class EntradaCurrais
 
     private void GarantirPanosLavagem()
     {
-        if ((Dados.curraisPanosSeparados & 1) == 0 && !TemItem(panoUsoLavagem)) InventoryManager.Instance.AddItem(panoUsoLavagem);
-        if ((Dados.curraisPanosSeparados & 2) == 0 && !TemItem(panoAtendimentoLavagem)) InventoryManager.Instance.AddItem(panoAtendimentoLavagem);
+        // Retira apenas peças do puzzle antigo em partidas já iniciadas.
+        if (TemItem(panoUsoLavagem)) InventoryManager.Instance.RemoveItem(panoUsoLavagem);
+        if (TemItem(panoAtendimentoLavagem)) InventoryManager.Instance.RemoveItem(panoAtendimentoLavagem);
     }
 
     private void AtualizarVisuaisLavagem()
     {
-        bool separando = Dados.curraisEtapaBusca == 2 && Dados.curraisPanelaConcluida;
-        areaPanosUso.enabled = separando && (Dados.curraisPanosSeparados & 1) == 0;
-        areaPanosAtendimento.enabled = separando && (Dados.curraisPanosSeparados & 2) == 0;
+        areaPanosUso.enabled = false;
+        areaPanosAtendimento.enabled = false;
         panoUsoEntregue.SetActive(false);
         panoAtendimentoEntregue.SetActive(false);
         bool vigiaAtiva = Dados.curraisPanelaConcluida && Dados.curraisEtapaBusca >= 3 && Dados.curraisEtapaBusca <= 5;
@@ -82,23 +82,10 @@ public partial class EntradaCurrais
         AtualizarDetalhesLavagem();
     }
 
+    // Mantém a entrada usada por arrastes antigos, sem exigir peças no inventário.
     private IEnumerator SepararPanoLavagem(bool atendimento)
     {
-        if (Dados.curraisEtapaBusca != 2 || !ViuConversaEntrada("lavagem-instrucoes")) yield break;
-        ItemData esperado = atendimento ? panoAtendimentoLavagem : panoUsoLavagem;
-        ItemData selecionado = InventoryManager.Instance.SelectedItem;
-        if (selecionado != esperado || !TemItem(esperado))
-        { yield return CorrigirPilhaLavagem(selecionado); yield break; }
-        int bit = atendimento ? 2 : 1;
-        if ((Dados.curraisPanosSeparados & bit) != 0) yield break;
-        bool primeira = Dados.curraisPanosSeparados == 0;
-        yield return LavarPecaLavagem(atendimento);
-        if (!TemItem(esperado)) yield break;
-        Dados.curraisPanosSeparados |= bit;
-        InventoryManager.Instance.RemoveItem(esperado);
-        AtualizarEstadoBusca(); Salvar();
-        if (primeira) yield return Dizer(atendimento ? lavagemAtendimentoRecebido : lavagemUsoRecebido);
-        if (Dados.curraisPanosSeparados == 3) yield return ConcluirLavagemLinear();
+        yield return RemendarPanoLavagem();
     }
 
     private IEnumerator RecolherTiraLavagem()

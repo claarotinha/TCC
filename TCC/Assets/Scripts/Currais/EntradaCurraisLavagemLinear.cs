@@ -18,7 +18,8 @@ public partial class EntradaCurrais
 
     private bool ReferenciasLavagemLinearValidas()
     {
-        bool ok = ConferirReferencia(areaRecebimentoLavagem, nameof(areaRecebimentoLavagem));
+        bool ok = ConferirReferencia(areaRecebimentoLavagem, nameof(areaRecebimentoLavagem)) &
+            ConferirReferencia(puzzleRetalhos, nameof(puzzleRetalhos));
         foreach (ExamineObject exame in new[] { exameLavadeiraLinear, examePilhaUso, examePilhaAtendimento })
             ok &= ConferirReferencia(exame, "Examine da lavagem") &&
                 ConferirReferencia(exame.examinePanel, "Painel de Examine da lavagem") &&
@@ -59,6 +60,12 @@ public partial class EntradaCurrais
         }
         if (Dados.curraisEtapaBusca <= 1)
         { yield return ReceberLoteLavagemLinear(); yield break; }
+        if (Dados.curraisEtapaBusca == 2 && Dados.curraisPanosSeparados != 3)
+        {
+            MostrarOpcoes("Lavadeira", string.Empty, new[] { "Remendar o pano", "Sair" },
+                new Action[] { () => Iniciar(RemendarPanoLavagem()), FecharMenu });
+            yield break;
+        }
         if (Dados.curraisPanosSeparados == 3 && !RetalhoAutorizado)
             yield return ConcluirLavagemLinear();
         MostrarConversaOpcionalLavagem();
@@ -93,6 +100,7 @@ public partial class EntradaCurrais
         Dados.curraisEtapaBusca = 2;
         GarantirPanosLavagem(); AvancarCampo(2);
         GameProgress.Instance.UnlockDiaryPage("currais-lavagem"); Salvar();
+        yield return RemendarPanoLavagem();
     }
 
     private IEnumerator CorrigirPilhaLavagem(ItemData item)

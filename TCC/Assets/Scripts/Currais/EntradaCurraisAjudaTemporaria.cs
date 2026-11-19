@@ -22,7 +22,8 @@ public partial class EntradaCurrais
         if (!mostrarAjudaTemporaria) return;
         if (!PodeAtualizarCena)
         { objetivoTexto.text = "TESTE CURRAIS | Inicializando a cena.\nSe esta mensagem permanecer, confira os erros no Console.\nF2: ocultar ajuda"; return; }
-        string estado = ExamineObject.IsShowing() ? "Examine aberto: clique novamente para fechar." :
+        string estado = puzzleRetalhos != null && puzzleRetalhos.Aberto ? "Clique nos três retalhos para unir a costura. Sair permite tentar depois." :
+            ExamineObject.IsShowing() ? "Examine aberto: clique novamente para fechar." :
             menuAberto ? "Escolha uma opção no balão. Sair fecha o menu." :
             dialogando ? "Clique para avançar a fala." :
             ocupado ? "Aguarde a ação em andamento." : ProximaAcaoTemporaria();
@@ -60,9 +61,9 @@ public partial class EntradaCurrais
         {
             switch (Dados.curraisEtapaBusca)
             {
-                case 0: return "Fale com Raimundo sobre a irmã; conclua a conversa para seguir à lavagem.";
+                case 0: return "Entregue o lote à lavadeira por arraste ou pela opção Entregar o lote de panos.";
                 case 1: return "Arraste o lote de panos até a lavadeira para entregar e receber as instruções.";
-                case 2: return Dados.curraisPanosSeparados != 3 ? "Separe os panos: arraste cada tipo até sua pilha correspondente na lavagem." : "Recolha o retalho limpo separado pela lavadeira. Guarde-o para Raimundo.";
+                case 2: return Dados.curraisPanosSeparados != 3 ? "Clique na lavadeira e escolha Remendar o pano. Gire os retalhos para unir a costura." : "Recolha o retalho limpo separado pela lavadeira. Guarde-o para Raimundo.";
                 case 3: return "Siga pela passagem vigiada. Converse com o guarda e acompanhe a lembrança.";
                 case 4:
                     if (!Dados.curraisTrabalhoPatioIniciado) return "No pátio, fale com seu pai e acompanhe o trabalho de Bento.";
