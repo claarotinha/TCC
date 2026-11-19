@@ -168,12 +168,10 @@ public partial class EntradaCurrais
     // Fundo preto provisório para a futura imagem da família abraçada.
     private IEnumerator DespedidaParaPresente()
     {
-        yield return Escurecer(1f);
-        yield return FalarPosto("Zefinha", "Eu prometi, mainha... Eu prometi pra ela.",
-            "Mãe", "Eu sei, minha filha. Venha cá. Fique perto de nós.",
-            "Zefinha (em pensamento)", "Mainha me abraçou. Painho ficou junto de nós. Ninguém sabia o que dizer.");
+        // Corte direto: nenhuma fala oculta exige clique sob a tela preta.
         FecharDialogo();
-        yield return Esperar(2f);
+        CorFade(1f);
+        yield return Esperar(1.2f);
         Dados.curraisEtapaConsulta = 4;
         Dados.curraisMemoriaIniciada = true;
         Dados.curraisPaginaMemoria = 3;

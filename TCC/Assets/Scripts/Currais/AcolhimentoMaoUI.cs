@@ -9,19 +9,13 @@ public sealed class AcolhimentoMaoUI : MonoBehaviour
     [SerializeField] private Image preenchimento;
     [SerializeField] private Image ilustracaoMao;
     [SerializeField] private TMP_Text porcentagem, mensagem;
-    [SerializeField] private Button sair;
     private float tempo, esperaFinal;
     public bool Concluido { get; private set; }
     public bool Aberto => gameObject.activeInHierarchy;
 
-    private void Awake() => sair.onClick.AddListener(() => {
-        if (!PauseHelper.BlockInput() && !Concluido) Fechar();
-    });
-
     public void Abrir()
     {
         tempo = 0f; esperaFinal = 0f; Concluido = false;
-        sair.interactable = true;
         gameObject.SetActive(true);
         Canvas.ForceUpdateCanvases();
         AtualizarVisual();
@@ -38,7 +32,7 @@ public sealed class AcolhimentoMaoUI : MonoBehaviour
             return;
         }
         if (Input.GetKey(KeyCode.E) || Input.GetMouseButton(0)) tempo = Mathf.Min(3f, tempo + Time.deltaTime);
-        if (tempo >= 3f) { Concluido = true; sair.interactable = false; }
+        if (tempo >= 3f) { Concluido = true; }
         AtualizarVisual();
     }
 
@@ -57,7 +51,7 @@ public sealed class AcolhimentoMaoUI : MonoBehaviour
     {
         Rect area = ((RectTransform)transform).rect;
         if (area.width <= 0f || area.height <= 0f) return;
-        painel.localScale = Vector3.one * Mathf.Min(1f, area.width * .9f / 900f, area.height * .9f / 590f);
+        painel.localScale = Vector3.one * Mathf.Min(1f, area.width * .9f / 900f, area.height * .9f / 650f);
     }
 
     public void Fechar() => gameObject.SetActive(false);
