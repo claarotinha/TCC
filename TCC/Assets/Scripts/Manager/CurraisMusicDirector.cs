@@ -3,13 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[CreateAssetMenu(menuName = "Currais/Musicas", fileName = "CurraisMusicCatalog")]
-public sealed class CurraisMusicCatalog : ScriptableObject
-{
-    public AudioClip introducao, menu, antesA, antesB, seca, estrada, currais;
-    public AudioClip fogueira, captura, funeral, negacao, finalCarta, finalRuim;
-}
-
 /// <summary>Trilhas persistentes e momentos narrativos, sem duplicar AudioSources entre cenas.</summary>
 public sealed class CurraisMusicDirector : MonoBehaviour
 {
