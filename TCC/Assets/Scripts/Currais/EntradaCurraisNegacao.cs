@@ -173,9 +173,30 @@ public partial class EntradaCurrais
         yield return Mover(mae, PosicaoAoLadoDaMenina(mae, true), .35f);
     }
 
+    private AcolhimentoMaoUI RecuperarAcolhimentoMao()
+    {
+        if (acolhimentoMaoUI != null) return acolhimentoMaoUI;
+        // A interface começa inativa: buscas que ignoram inativos não a encontram.
+        // Limita a recuperação à própria cena para não usar um Canvas de outra cena.
+        foreach (GameObject raiz in gameObject.scene.GetRootGameObjects())
+        {
+            AcolhimentoMaoUI encontrada = raiz.GetComponentInChildren<AcolhimentoMaoUI>(true);
+            if (encontrada == null) continue;
+            acolhimentoMaoUI = encontrada;
+            return encontrada;
+        }
+        return null;
+    }
+
     private IEnumerator ApertarMaoDaMae()
     {
         acolhimentoInterrompido = true;
+        AcolhimentoMaoUI interfaceMao = RecuperarAcolhimentoMao();
+        if (interfaceMao == null)
+        {
+            Debug.LogError("Currais: a interface AcolhimentoMaoUI não foi encontrada na cena. Confira o Canvas da mão da mãe.", this);
+            yield break;
+        }
         yield return OrganizarPaisNaNegacao();
         FecharDialogo();
         dialogando = false; menuAberto = false;
@@ -184,13 +205,16 @@ public partial class EntradaCurrais
         if (inventario != null) { inventario.Close(); inventario.enabled = false; }
         try
         {
-            acolhimentoMaoUI.Abrir();
-            while (acolhimentoMaoUI.Aberto) yield return null;
-            acolhimentoInterrompido = !acolhimentoMaoUI.Concluido;
+            // O objeto pode ser destruído ao encerrar o Play ou descarregar a cena.
+            if (interfaceMao == null) yield break;
+            interfaceMao.Abrir();
+            while (interfaceMao != null && interfaceMao.Aberto) yield return null;
+            acolhimentoInterrompido = interfaceMao == null || !interfaceMao.Concluido;
         }
         finally
         {
-            acolhimentoMaoUI.Fechar();
+            // Unity considera objetos destruídos nulos; não acessar na limpeza.
+            if (interfaceMao != null) interfaceMao.Fechar();
             if (inventario != null) inventario.enabled = habilitado;
             quadroBloqueado = Time.frameCount;
             InvestigationGuard.BlockCurrentClick();
