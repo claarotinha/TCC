@@ -111,7 +111,7 @@ public partial class EntradaCurrais
         if (etapa == 0) { AtualizarMemoria(); return; } // A noite permanece até a interação da manhã.
         areaPanoLavagem.gameObject.SetActive(RetalhoDisponivelManha);
         areaPanoLavagem.enabled = RetalhoDisponivelManha;
-        AplicarNoite(false);
+        AplicarNoite(etapa >= 3);
         lacoNaMao.SetActive(false); maoNaRoupa.SetActive(false); cabacaNoite.SetActive(false);
         papelConsulta.SetActive(Dados.curraisEscolhaConsulta == 0);
         if (!papelEmConsulta) canhotoApresentadoConsulta.SetActive(false);
@@ -120,7 +120,8 @@ public partial class EntradaCurrais
         lacoRemendadoCenario.SetActive(false);
         Posicionar(areaRaimundo.transform, Dados.curraisEscolhaPosto == 1 ? raimundoConsultaPerto : raimundoConsultaLonge);
         Posicionar(portaoConsulta, etapa >= 3 ? portaoConsultaFechado : portaoConsultaAberto);
-        if (FamiliaNaConsulta || !AntesDaUltimaConsulta || Dados.curraisEscolhaAgua == 1) Posicionar(luzia.transform, luziaRepouso);
+        if (FamiliaNaConsulta || !AntesDaUltimaConsulta || Dados.curraisEscolhaAgua == 1)
+            Posicionar(luzia.transform, etapa >= 3 ? luziaNoite : luziaRepouso);
         if (AntesDaUltimaConsulta && !FamiliaNaConsulta)
         {
             Posicionar(pai, paiAbrigo);
@@ -139,7 +140,7 @@ public partial class EntradaCurrais
     {
         if (AntesDaUltimaConsulta && !FamiliaNaConsulta) { AtualizarCompanhiaManha(livre); return; }
         int etapa = Dados.curraisEtapaConsulta;
-        bool acompanhar = etapa >= 1 && etapa <= 3;
+        bool acompanhar = etapa >= 1 && etapa <= 3 && !ViuConversaEntrada("consulta-retorno-chegada");
         seguidorPaiConsulta.enabled = livre && acompanhar;
         seguidoraLuzia.enabled = false;
         bool maeAcompanha = acompanhar && (etapa == 3 || MaeNaConsulta);
@@ -149,7 +150,8 @@ public partial class EntradaCurrais
 
     private void RestaurarFamiliaConsulta()
     {
-        if (Dados.curraisEtapaConsulta < 1 || Dados.curraisEtapaConsulta > 3) return;
+        if (Dados.curraisEtapaConsulta < 1 || Dados.curraisEtapaConsulta > 3 ||
+            ViuConversaEntrada("consulta-retorno-chegada")) return;
         if (AntesDaUltimaConsulta && !FamiliaNaConsulta) return;
         Vector3 destinoPai = pai.position;
         destinoPai.x = mari.transform.position.x - seguidorPaiConsulta.DistanciaAtras;

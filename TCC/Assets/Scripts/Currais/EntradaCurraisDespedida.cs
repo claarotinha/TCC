@@ -112,8 +112,8 @@ public partial class EntradaCurrais
         areaMesaDocumento.enabled = ativo && !ConsultaDisponivel;
         areaTrabalhadoraQuarto.enabled = false;
         areaCaboQuarto.enabled = false;
-        areaDoenteUm.enabled = aberto && InvestigouQuarto;
-        areaDoenteDois.enabled = aberto && InvestigouQuarto;
+        areaDoenteUm.enabled = false;
+        areaDoenteDois.enabled = false;
         registroCopiado.SetActive(ativo && (PapelAvulsoPostoPendente ||
             ((noiteEmCurso || Dados.curraisEtapaPosto == 4) && TemItem(anotacaoPosto))));
         baldesApoiadosPosto.SetActive(ativo);

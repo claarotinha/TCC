@@ -66,7 +66,11 @@ public partial class EntradaCurrais
 
     private void ClicarRaimundoPosto()
     {
-        if (Dados.curraisEscolhaPosto != 0) return;
+        if (Dados.curraisEscolhaPosto != 0)
+        {
+            if (Dados.curraisEtapaPosto == 2) Iniciar(FinalizarBuscaNoPosto());
+            return;
+        }
         Iniciar(ApresentarRaimundoPosto());
     }
 
@@ -165,7 +169,7 @@ public partial class EntradaCurrais
                 "Raimundo", "Eu sei, menina. Conseguiu ler?", "Zefinha", "Lagoa do Meio.", "Raimundo", "Então guarde esse nome.");
             yield return RecolherFolhaPosto();
         }
-        yield return FalarPosto("Zefinha (em pensamento)", "Vou procurar meus pais perto das esteiras e contar o que descobri.");
+
         // A mudança de setor é mostrada antes de registrar a nova posição.
         yield return Mover(areaRaimundo.transform, (opcao == 0 ? raimundoApoiadoPosto : raimundoOutroSetor).position, tempoPlano);
         Dados.curraisEscolhaPosto = opcao + 1;
@@ -178,6 +182,39 @@ public partial class EntradaCurrais
         }
         AtualizarEstadoBusca(); Salvar();
         if (PapelAvulsoPostoPendente) yield return RecolherAnotacaoPosto();
+        yield return FinalizarBuscaNoPosto();
+    }
+
+
+    private IEnumerator FinalizarBuscaNoPosto()
+    {
+        if (Dados.curraisEtapaPosto != 2) yield break;
+        if (!ViuConversaEntrada("posto-despedida-melancolica"))
+        {
+            if (Dados.curraisDestinoConfirmado)
+                yield return FalarPosto("Raimundo", "Lagoa do Meio é o destino daquele grupo. Mas isso já faz uns dias... Num sei se tua irmã ainda tá lá.");
+            else
+                yield return FalarPosto("Raimundo", "Nair Pereira tava com tua irmã. Mas isso já faz uns dias... Num consegui saber onde elas estão agora.");
+            yield return FalarPosto("Zefinha", "Mas tem alguém que sabe, num tem? Alguém deve ter visto ela.",
+                "Raimundo", "Devia ter. Mas levam esse povo de um canto pro outro e nem o nome anotam direito.",
+                "Zefinha", "Eu disse que ia buscar ela.",
+                "Raimundo", "Tu pode continuar procurando, menina. Mas preciso te dizer... Pode ser que tu nunca mais veja tua irmã.",
+                "Zefinha", "Ela deve tá esperando por mim.");
+            yield return Esperar(2f);
+            yield return FalarPosto("Raimundo", "Eu queria ter uma notícia melhor pra te dar.");
+            RegistrarConversaEntrada("posto-despedida-melancolica"); Salvar();
+        }
+        yield return Escurecer(1f);
+        for (int i = 1; i <= 4; i++) yield return ChapterCard.Show("busca-semanas-" + i);
+        // Mantém as pistas de cada escolha e usa a consulta existente, sem quarto nem noite intermediária.
+        Dados.curraisEtapaPosto = 4;
+        Dados.curraisEtapaConsulta = 1;
+        RegistrarConversaEntrada("quarto-retorno-familia");
+        Posicionar(mari.transform, mariUltimaConsulta);
+        AtualizarEstadoBusca(); Salvar();
+        yield return ChapterCard.Show("josefa-10");
+        yield return Escurecer(0f);
+        yield return PrepararMesaConsulta();
     }
 
     private IEnumerator RecolherAnotacaoPosto()

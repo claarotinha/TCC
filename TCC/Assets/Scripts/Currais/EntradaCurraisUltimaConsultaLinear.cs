@@ -150,6 +150,13 @@ public partial class EntradaCurrais
     {
         if (!ViuConversaEntrada("consulta-retorno-chegada"))
         {
+            yield return Escurecer(1f);
+            yield return ChapterCard.Show("josefa-11");
+            Posicionar(mari.transform, mariNoite); Posicionar(pai, paiNoite);
+            Posicionar(mae, maeNoite); Posicionar(luzia.transform, luziaNoite);
+            AplicarNoite(true);
+            Physics2D.SyncTransforms();
+            yield return Escurecer(0f);
             yield return FalarPosto("Luzia", "Sente um pouco. Conseguiram ouvir alguma coisa?",
                 "Pai", "Ouviram nós no portão. Sair, num deixaram.");
             RegistrarConversaEntrada("consulta-retorno-chegada"); Salvar();
@@ -177,6 +184,11 @@ public partial class EntradaCurrais
         else if (TemItem(anotacaoPosto))
             yield return FalarPosto("Zefinha", "O papel tá comigo. O resto eu vou lembrando.", "Mãe", "Me conte também. Nós guarda junto.");
         else yield return FalarPosto("Zefinha", "Eu num quero esquecer o que disseram.", "Mãe", "Conte pra nós. Tu num precisa lembrar sozinha.");
+        yield return FalarPosto("Zefinha", "Eu prometi que ia buscar ela, mainha. E agora nem deixam eu sair.",
+            "Mãe", "Eu sei, minha filha.", "Zefinha", "E se ela achar que eu esqueci?",
+            "Pai", "Tu num esqueceu. Nós sabe o quanto tu procurou.",
+            "Zefinha", "Mas ela num sabe, painho. Ela num sabe.");
+        yield return Esperar(2f);
         RegistrarConversaEntrada("consulta-relato-final");
         AtualizarEstadoBusca(); Salvar();
         yield return DizerEntradaUmaVez("encerramento-abertura", aberturaEncerramento);

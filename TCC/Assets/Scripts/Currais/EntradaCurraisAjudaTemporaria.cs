@@ -79,8 +79,8 @@ public partial class EntradaCurrais
             }
         }
         if (Dados.curraisEtapaPosto == 0) return "No posto, examine Raimundo e a mesa. Escolha ajudar ou copiar a folha; Sair adia.";
-        if (Dados.curraisEtapaPosto == 1) return "Vá à porta do quarto de atendimento. Examine a passagem e pergunte pela menina.";
-        if (Dados.curraisEtapaPosto == 2) return "Investigue o quarto; emprestar a cabaça é opcional. Fale com a acompanhante para voltar à família.";
+        if (Dados.curraisEtapaPosto == 1) return "Volte a Raimundo no posto para concluir a conversa.";
+        if (Dados.curraisEtapaPosto == 2) return "Fale com Raimundo ou com a família para concluir a conversa e acompanhar as semanas de procura.";
         if (Dados.curraisEtapaPosto == 3) return "Converse com a família se quiser. Na esteira, escolha ficar perto da mãe para iniciar a noite.";
         if (Dados.curraisEtapaConsulta == 0) return "Clique na esteira para passar ao amanhecer.";
         if (Dados.curraisEtapaConsulta == 1)

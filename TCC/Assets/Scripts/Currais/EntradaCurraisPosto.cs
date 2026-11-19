@@ -160,13 +160,7 @@ public partial class EntradaCurrais
 
     private IEnumerator ContarAosPais()
     {
-        yield return RelatarQuartoFamilia();
-        yield return NoticiasNovasFamilia();
-        yield return EncerrarRelatoDoQuarto();
-        Dados.curraisEtapaPosto = 3;
-        GameProgress.Instance.UnlockDiaryPage("currais-pais");
-        AtualizarEstadoBusca(); Salvar();
-        MenuAbrigo();
+        yield return FinalizarBuscaNoPosto();
     }
 
     private void MenuAbrigo()
