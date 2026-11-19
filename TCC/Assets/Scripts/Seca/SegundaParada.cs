@@ -2059,10 +2059,14 @@ public class SegundaParada : MonoBehaviour
                     (materiaisAcampamento & (1 << i)) == 0);
         if (fogueiraCenario != null)
         {
-            // A área continua clicável, mas não há lenha antes da montagem.
+            // A area continua clicavel, mas o fogo nao pode aparecer antes
+            // da montagem. O objeto filho permanece editavel na Hierarchy.
             fogueiraCenario.SetActive(true);
             SpriteRenderer desenho = fogueiraCenario.GetComponent<SpriteRenderer>();
             if (desenho != null) desenho.enabled = fogueiraPreparada || acampamentoConcluido;
+            foreach (SpriteRenderer filho in fogueiraCenario.GetComponentsInChildren<SpriteRenderer>(true))
+                if (filho.gameObject != fogueiraCenario)
+                    filho.enabled = fogueiraPreparada && !acampamentoConcluido;
             Sprite sprite = acampamentoConcluido || conversaFogueiraConcluida ? fogueiraBrasas :
                 refeicaoPreparada && !conversaFogueiraConcluida ? fogueiraAssando :
                 fogueiraPreparada ? fogueiraAcesa : fogueiraMontada;
@@ -2330,7 +2334,9 @@ public class SegundaParada : MonoBehaviour
     {
         foreach (SpriteRenderer desenho in grupo.GetComponentsInChildren<SpriteRenderer>(true))
         {
-            if (desenho.sprite == null) continue;
+            // O enquadramento deve considerar apenas personagens realmente
+            // visiveis, nao os sprites agrupados ocultos na Hierarchy.
+            if (!desenho.enabled || !desenho.gameObject.activeInHierarchy || desenho.sprite == null) continue;
             Bounds local = desenho.sprite.bounds;
             for (int x = 0; x < 2; x++)
                 for (int y = 0; y < 2; y++)
