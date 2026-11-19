@@ -13,6 +13,7 @@ public partial class EntradaCurrais
 
     [Header("Plano estático do sepultamento — mesma cena")]
     [SerializeField] private GameObject planoSepultamento, corpoNoPlano;
+    [SerializeField] private GameObject quadroFuneralProvisorio;
     private bool sepultamentoNaTela;
 
     private bool ReferenciasSocorroValidas()
@@ -216,10 +217,12 @@ public partial class EntradaCurrais
             cruzDeBento.SetActive(false);
             AtualizarCompanhiaSepultamento();
             AjustarCompanhiaBentoNoPlano();
+            PrepararImagemFuneralProvisoria();
             objetivoTexto.gameObject.SetActive(false);
             yield return Escurecer(0f);
             yield return Dizer(ComAcompanhante(bentoSepultamentoInicio));
-            yield return BaixarBentoNoPlano();
+            if (quadroFuneralProvisorio == null) yield return BaixarBentoNoPlano();
+            else yield return Esperar(2.5f);
             yield return Dizer(bentoNomeSepultamento);
             yield return Esperar(tempoPlano);
             yield return Dizer(bentoSepultamentoFamilia);
@@ -257,6 +260,14 @@ public partial class EntradaCurrais
             yield return Dizer(devolucaoQuarto);
         }
         finally { emprestandoNoQuarto = false; }
+    }
+
+    private void PrepararImagemFuneralProvisoria()
+    {
+        if (quadroFuneralProvisorio == null) return;
+        // Fundo estático provisório; basta limpar a referência para voltar à encenação.
+        foreach (Transform filho in planoSepultamento.transform)
+            filho.gameObject.SetActive(filho.gameObject == quadroFuneralProvisorio);
     }
 
     private void RestaurarPlanoSepultamento()

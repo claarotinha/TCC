@@ -247,6 +247,6 @@ public partial class EntradaCurrais
             companhiaSepultamento[3].sprite = origensCompanhiaSepultamento[0].sprite;
         }
         familiarNoSepultamento.sprite = arteFamiliarBento.sprite != null ? arteFamiliarBento.sprite : marcadorFamiliarBento.sprite;
-        familiarNoSepultamento.gameObject.SetActive(sepultamentoNaTela);
+        familiarNoSepultamento.gameObject.SetActive(sepultamentoNaTela && quadroFuneralProvisorio == null);
     }
 }
