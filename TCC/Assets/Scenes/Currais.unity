@@ -18752,10 +18752,9 @@ MonoBehaviour:
   tempoCarroca: 2.8
   antesSeparacao:
   - personagem: Cabo
-    texto: "Parados! Ningu\xE9m passa. Larguem as trouxas e fiquem na fila. Agora
-      andem atr\xE1s de mim."
-  - personagem: "M\xE3e"
-    texto: "Fique perto da sua irm\xE3, Josefa."
+    texto: Ei! Nenhum passo pra frente! Larguem as trouxas e fiquem na fila. Agora andem atrás de mim.
+  - personagem: Mãe
+    texto: Fique perto da sua irmã, Josefa.
   barreira:
   - personagem: "M\xE3e"
     texto: "Aquela ali tamb\xE9m \xE9 minha! Olhe pra ela!"
@@ -21168,6 +21167,20 @@ MonoBehaviour:
   - {fileID: 7150000000090}
   - {fileID: 7150000000100}
   - {fileID: 7150000000110}
+  chegadaAlegreFamilia:
+  - personagem: Mariquinha
+    texto: Mainha! Painho! Nós chegamu! É Fortaleza!
+  - personagem: Mãe
+    texto: É, minha filha. Nós chegou.
+  - personagem: Zefinha
+    texto: Até que enfim!
+  chegadaAlegreFortaleza:
+  - personagem: Zefinha
+    texto: Olha quanta casa, Mariquinha!
+  - personagem: Mariquinha
+    texto: Será que aqui tem sorvete?
+  - personagem: Pai
+    texto: Vamos procurar um canto pra descansar primeiro.
 --- !u!1 &4200000000
 GameObject:
   m_ObjectHideFlags: 0
