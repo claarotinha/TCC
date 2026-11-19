@@ -1630,11 +1630,26 @@ public partial class SegundaParada : MonoBehaviour
         else if (alvo == "mulherRetirante")
             Falar(new[] { "Mulher" }, new[] {
                 "Num acorda mais… Dormiu ontem. Hoje tá frio. Sempre dizia que ia morrê de velho. Mentiroso, morreu na paz, dormindo…"
-            }, SalvarAguaTerceira);
+            }, () =>
+            {
+                RegistrarConversaComRetirantes();
+                SalvarAguaTerceira();
+            });
         else if (alvo == "meninoRetirante")
             Falar(new[] { "Menino" }, new[] {
                 "Ela ja vinha reclamando de uma dor forte no coração, dormiu ontem e não acordou mais."
-            }, MostrarPerguntasAntonio);
+            }, () =>
+            {
+                RegistrarConversaComRetirantes();
+                SalvarAguaTerceira();
+                MostrarPerguntasAntonio();
+            });
+    }
+
+    private void RegistrarConversaComRetirantes()
+    {
+        if (GameProgress.Instance != null)
+            GameProgress.Instance.Data.estradaConversouComRetirantes = true;
     }
 
     private bool AcertouMariquinha(Vector3 ponto)

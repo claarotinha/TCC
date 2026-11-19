@@ -47,6 +47,7 @@ public class GameProgressData
     public bool estradaCurativoPreparado;
     public bool estradaCurativoAplicado;
     public bool estradaEncontroVisitado;
+    public bool estradaConversouComRetirantes;
     public bool estradaEncontroConcluido;
     // Bits 0, 1 e 2: perguntas respondidas; nenhuma e obrigatoria.
     public int estradaPerguntasAntonio;
@@ -175,6 +176,7 @@ public class GameProgressData
     {
         pontosFinal = (curraisDestinoConfirmado ? 2 : 0) +
             (curraisIdentidadeConfirmada ? 2 : 0) +
+            ((estradaConversouComRetirantes || estradaPerguntasAntonio != 0) ? 1 : 0) +
             (curraisAjudouAtendimentoQuarto ? 1 : 0) +
             (curraisEscolhaPosto == 1 ? 1 : 0) +
             (curraisEscolhaFuneral == 1 ? 1 : curraisEscolhaFuneral == 2 ? -1 : 0);

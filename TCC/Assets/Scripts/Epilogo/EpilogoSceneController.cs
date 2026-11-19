@@ -91,9 +91,9 @@ public class EpilogoSceneController : MonoBehaviour
     public bool EmTransicao => transitionRunning;
     public bool PesquisaConcluida { get; private set; }
     public bool FinalComCarta => GameProgress.Instance != null &&
-        (GameProgress.Instance.Data.finalAvaliado ? GameProgress.Instance.Data.finalComCarta :
-        GameProgress.Instance.Data.curraisDestinoConfirmado &&
-        GameProgress.Instance.Data.curraisIdentidadeConfirmada);
+        (GameProgress.Instance.Data.epilogoConcluido
+            ? GameProgress.Instance.Data.epilogoFinalVisto == 1
+            : GameProgress.Instance.Data.finalComCarta);
 
     private IEnumerator Start()
     {
@@ -126,6 +126,7 @@ public class EpilogoSceneController : MonoBehaviour
             yield return EncerramentoComum(false);
             yield break;
         }
+        dados?.AvaliarFinal();
         int etapa = dados != null ? dados.epilogoEtapa : 0;
         AtivarAmbiente(etapa == 0 ? 0 : 1);
         yield return FadePara(0f);
