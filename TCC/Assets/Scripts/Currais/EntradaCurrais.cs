@@ -153,6 +153,7 @@ public partial class EntradaCurrais : MonoBehaviour
         }
         Vector3 posicaoRestaurada = mari.transform.position;
         GameProgress.Instance.NormalizeData();
+        bool testePatio = PrepararTestePatio(restaurandoPartida);
         GameProgress.Instance.UnlockDiaryPage("josefa-06");
         rotacaoPai = pai.localRotation;
         if (Dados.estradaMariquinhaFerida && visualIrma != null)
@@ -184,6 +185,15 @@ public partial class EntradaCurrais : MonoBehaviour
         PrepararFamiliaAlternativa();
         PrepararDespedidaEQuarto();
         pronto = true;
+        if (testePatio)
+        {
+            MostrarAbrigo();
+            AtualizarEstadoBusca();
+            PosicionarInicioTestePatio();
+            RetomarExploracao(mari.transform.position, false, false);
+            RestaurarAcompanhante();
+            yield break;
+        }
         int etapa = Mathf.Clamp(Dados.curraisEtapaEntrada, 0, 4);
         if (fundoPretoSeparacao != null) fundoPretoSeparacao.SetActive(etapa == 0 && Dados.curraisSeparacaoFundoPreto);
         Dados.curraisEtapaEntrada = etapa;
