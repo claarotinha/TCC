@@ -160,10 +160,10 @@ public partial class EntradaCurrais
         {
             yield return Escurecer(1f);
             yield return ChapterCard.Show("josefa-11");
-            Posicionar(mari.transform, mariNoite); Posicionar(pai, paiNoite);
-            Posicionar(mae, maeNoite); Posicionar(luzia.transform, luziaNoite);
-            AplicarNoite(true);
+            ReunirFamiliaAbrigoFinal(true);
+            AplicarNoite(false);
             Physics2D.SyncTransforms();
+            seguirCamera.RestaurarEnquadramentoDoAlvo();
             yield return Escurecer(0f);
             yield return FalarPosto("Luzia", "Sente um pouco. Conseguiram ouvir alguma coisa?",
                 "Pai", "Ouviram nós no portão. Sair, num deixaram.");
@@ -172,6 +172,32 @@ public partial class EntradaCurrais
         if (ViuConversaEntrada("consulta-relato-final"))
             yield return DizerEntradaUmaVez("encerramento-abertura", aberturaEncerramento);
         MenuRelatoFinal();
+    }
+
+    private void ReunirFamiliaAbrigoFinal(bool incluirZefinha)
+    {
+        seguidorPaiConsulta.enabled = false;
+        seguidoraMae.enabled = false;
+        seguidoraLuzia.enabled = false;
+        EncerrarNoiteFamilia();
+        if (incluirZefinha) Posicionar(mari.transform, mariAbrigo);
+        Posicionar(pai, paiAbrigo); Posicionar(mae, maeAbrigo);
+        Posicionar(baleia, baleiaAbrigo); Posicionar(luzia.transform, luziaRepouso);
+        // Mantém todos no mesmo plano junto do barracão, sem espalhar a família.
+        Vector3 ponto = pai.position; ponto.x = mariAbrigo.position.x - 2f; pai.position = ponto;
+        ponto = mae.position; ponto.x = mariAbrigo.position.x + 2f; mae.position = ponto;
+        ponto = baleia.position; ponto.x = mariAbrigo.position.x - 3.5f; baleia.position = ponto;
+        Transform[] pessoas = { mari.transform, pai, mae, baleia, luzia.transform };
+        foreach (Transform pessoa in pessoas)
+        {
+            pessoa.gameObject.SetActive(true);
+            SpriteRenderer desenho = pessoa.GetComponent<SpriteRenderer>();
+            if (desenho != null) { desenho.enabled = true; Color cor = desenho.color; cor.a = 1f; desenho.color = cor; }
+        }
+        foreach (SpriteRenderer desenho in personagensNoAbrigo)
+            if (desenho != null) desenho.enabled = true;
+        foreach (SpriteRenderer pose in posesDeRepouso)
+            if (pose != null) pose.gameObject.SetActive(false);
     }
 
     private void MenuRelatoFinal()

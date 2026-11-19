@@ -139,7 +139,7 @@ public partial class EntradaCurrais
         Posicionar(areaRaimundo.transform, Dados.curraisEscolhaPosto == 1 ? raimundoConsultaPerto : raimundoConsultaLonge);
         Posicionar(portaoConsulta, etapa >= 3 ? portaoConsultaFechado : portaoConsultaAberto);
         if (FamiliaNaConsulta || !AntesDaUltimaConsulta || Dados.curraisEscolhaAgua == 1)
-            Posicionar(luzia.transform, etapa >= 3 ? luziaNoite : luziaRepouso);
+            Posicionar(luzia.transform, luziaRepouso);
         if (AntesDaUltimaConsulta && !FamiliaNaConsulta)
         {
             Posicionar(pai, paiAbrigo);
@@ -150,6 +150,8 @@ public partial class EntradaCurrais
             Posicionar(pai, paiAbrigo); Posicionar(mae, maeAbrigo);
         }
         else if (etapa <= 2 && FamiliaNaConsulta && !MaeNaConsulta) Posicionar(mae, maeAbrigo);
+        if (etapa == 3 && ViuConversaEntrada("consulta-retorno-chegada"))
+            ReunirFamiliaAbrigoFinal(false);
         AtualizarMemoria();
         Physics2D.SyncTransforms();
     }
@@ -330,6 +332,8 @@ public partial class EntradaCurrais
             // Mantém a composição do portão; ninguém é puxado pelo seguidor durante a fala.
             Salvar();
             yield return Dizer(retornoAbrigoOrientacao);
+            RestaurarDesenhoSaida();
+            yield return ChegarAbrigoFinal();
         }
         finally
         {

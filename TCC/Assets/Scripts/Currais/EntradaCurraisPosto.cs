@@ -68,7 +68,7 @@ public partial class EntradaCurrais
         }
         for (int i = 0; i < cenarioNoturno.Length; i++)
             if (cenarioNoturno[i] != null)
-                cenarioNoturno[i].color = ativa ? coresAntesDaNoite[i] * tomNoite : coresAntesDaNoite[i];
+                cenarioNoturno[i].color = coresAntesDaNoite[i];
     }
 
     private void AtualizarPosto()
