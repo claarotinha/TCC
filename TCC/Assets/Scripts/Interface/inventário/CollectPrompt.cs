@@ -7,9 +7,13 @@ using UnityEngine.UI;
 
 public class CollectPrompt : MonoBehaviour
 {
-    public bool IsOpen => collectPanel != null && collectPanel.activeInHierarchy;
+    public bool IsOpen => (collectPanel != null && collectPanel.activeInHierarchy) ||
+        (examinationPanel != null && examinationPanel.activeInHierarchy);
 
     [SerializeField] private GameObject collectPanel;
+    [Header("Examine — mesmo painel inferior das cenas")]
+    [SerializeField] private GameObject examinationPanel;
+    [SerializeField] private TMP_Text examinationText;
     [SerializeField] private Image itemImage;
     [SerializeField] private TMP_Text collectText;
     [SerializeField] private Button yesButton;
@@ -24,8 +28,8 @@ public class CollectPrompt : MonoBehaviour
 
     private void Awake()
     {
-        if (collectPanel != null)
-            collectPanel.SetActive(false);
+        if (collectPanel != null) collectPanel.SetActive(false);
+        if (examinationPanel != null) examinationPanel.SetActive(false);
     }
 
     private void OnEnable()
@@ -48,8 +52,7 @@ public class CollectPrompt : MonoBehaviour
             return false;
         }
 
-        if (collectPanel.activeSelf)
-            return false;
+        if (IsOpen) return false;
 
         pendingItem = item;
         onCollected = afterCollect;
@@ -72,7 +75,10 @@ public class CollectPrompt : MonoBehaviour
         if (examining)
         {
             SetItemVisible(false);
-            collectText.text = string.IsNullOrWhiteSpace(item.description) ? item.itemName : item.description;
+            string description = string.IsNullOrWhiteSpace(item.description) ? item.itemName : item.description;
+            if (examinationPanel != null && examinationText != null)
+                examinationText.text = description;
+            else collectText.text = description; // Compatibility with an older prefab.
             yesButton.gameObject.SetActive(false);
             noButton.gameObject.SetActive(false);
         }
@@ -82,7 +88,9 @@ public class CollectPrompt : MonoBehaviour
             noButton.gameObject.SetActive(true);
         }
         openedFrame = Time.frameCount;
-        collectPanel.SetActive(true);
+        bool separateExamine = examining && examinationPanel != null && examinationText != null;
+        collectPanel.SetActive(!separateExamine);
+        if (examinationPanel != null) examinationPanel.SetActive(separateExamine);
         return true;
     }
 
@@ -121,6 +129,8 @@ public class CollectPrompt : MonoBehaviour
             !Input.GetMouseButtonDown(0)) return;
         examinedItems.Add(pendingItem);
         examining = false;
+        if (examinationPanel != null) examinationPanel.SetActive(false);
+        collectPanel.SetActive(true);
         SetItemVisible(pendingItem != null && pendingItem.icon != null);
         collectText.text = "Você deseja coletar " + pendingItem.itemName + "?";
         yesButton.gameObject.SetActive(true);
@@ -167,8 +177,8 @@ public class CollectPrompt : MonoBehaviour
         ReleasePreview();
         examining = false;
         InvestigationGuard.BlockCurrentClick();
-        if (collectPanel != null)
-            collectPanel.SetActive(false);
+        if (collectPanel != null) collectPanel.SetActive(false);
+        if (examinationPanel != null) examinationPanel.SetActive(false);
 
         if (yesButton != null)
             yesButton.onClick.RemoveAllListeners();

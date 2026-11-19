@@ -134,7 +134,6 @@ public partial class EntradaCurrais
         Vector3 pertoDoEscrivao = testemunhaConsulta.transform.position;
         pertoDoEscrivao.x = areaRegistro.transform.position.x + 3f;
         testemunhaConsulta.transform.position = pertoDoEscrivao;
-        trabalhadorRetorno.SetActive(true);
         lacoRemendadoCenario.SetActive(false);
         Posicionar(areaRaimundo.transform, Dados.curraisEscolhaPosto == 1 ? raimundoConsultaPerto : raimundoConsultaLonge);
         Posicionar(portaoConsulta, etapa >= 3 ? portaoConsultaFechado : portaoConsultaAberto);

@@ -9,7 +9,7 @@ public partial class EntradaCurrais
     [SerializeField] private GameObject setorBusca;
     [SerializeField] private Collider2D areaRaimundo, areaLavadeira, areaPanoLavagem, areaLembranca, areaPatio, areaPanoAtendimento;
     [SerializeField] private Transform paiTrabalhoMarca, bento, bentoCaido, bentoEmPe, fiscalTrabalho;
-    [SerializeField] private GameObject panoCarregado, manchaRoda, corpoCoberto, trabalhadorRetorno;
+    [SerializeField] private GameObject panoCarregado, manchaRoda, corpoCoberto;
     [SerializeField] private GameObject sombraGalho, pessoaNaCerca, reflexoIrma, reflexoZefinha, sinalGuarda;
     [SerializeField] private Fala[] raimundoInicio, raimundoBando, raimundoMulher, raimundoSaida;
     [SerializeField] private Fala[] lavagemFalas, lembrancaCorpo, lembrancaComadre, lembrancaAgua, lembrancaRetorno;
@@ -21,11 +21,11 @@ public partial class EntradaCurrais
         UnityEngine.Object[] referencias = { setorBusca, areaRaimundo, areaLavadeira, areaPanoLavagem,
             areaLembranca, areaPatio, areaPanoAtendimento, paiTrabalhoMarca, bento,
             bentoCaido, bentoEmPe, fiscalTrabalho, panoCarregado, manchaRoda, corpoCoberto,
-            trabalhadorRetorno, sombraGalho, pessoaNaCerca, reflexoIrma, reflexoZefinha, sinalGuarda };
+            sombraGalho, pessoaNaCerca, reflexoIrma, reflexoZefinha, sinalGuarda };
         string[] nomes = { nameof(setorBusca), nameof(areaRaimundo), nameof(areaLavadeira), nameof(areaPanoLavagem),
             nameof(areaLembranca), nameof(areaPatio), nameof(areaPanoAtendimento),
             nameof(paiTrabalhoMarca), nameof(bento), nameof(bentoCaido), nameof(bentoEmPe), nameof(fiscalTrabalho),
-            nameof(panoCarregado), nameof(manchaRoda), nameof(corpoCoberto), nameof(trabalhadorRetorno),
+            nameof(panoCarregado), nameof(manchaRoda), nameof(corpoCoberto),
             nameof(sombraGalho), nameof(pessoaNaCerca), nameof(reflexoIrma), nameof(reflexoZefinha), nameof(sinalGuarda) };
         bool valido = true;
         for (int i = 0; i < referencias.Length; i++) valido &= ConferirReferencia(referencias[i], nomes[i]);
@@ -72,7 +72,6 @@ public partial class EntradaCurrais
         panoCarregado.SetActive(false);
         manchaRoda.SetActive(etapa >= 5 && Dados.curraisBentoMorto);
         corpoCoberto.SetActive((etapa >= 6 || Dados.curraisBentoMorto) && !Dados.curraisSepultamentoConcluido);
-        trabalhadorRetorno.SetActive(true);
         bento.gameObject.SetActive(true);
         Posicionar(bento, etapa >= 5 ? bentoCaido : bentoEmPe);
         // Não gira nem inclina o sprite para representar ferimentos.
