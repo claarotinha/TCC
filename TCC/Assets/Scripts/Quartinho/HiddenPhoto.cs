@@ -129,7 +129,7 @@ public class HiddenPhoto : MonoBehaviour
             current.ClosePhoto();
 
         current = this;
-        CurraisEffectsDirector.PlayItem("fotografia", 0.55f);
+        AudioManager.PlayItem("fotografia", 0.55f);
 
         ExamineObject.HideCurrentPanel();
         panelImage.sprite = photoSprite;
@@ -188,7 +188,7 @@ public class HiddenPhoto : MonoBehaviour
 
     private void ReadPhoto()
     {
-        CurraisEffectsDirector.PlayItem("folha", 0.5f);
+        AudioManager.PlayItem("folhaVelha", 0.5f);
         if (current != this)
             return;
 

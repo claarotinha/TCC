@@ -7,21 +7,25 @@ public class MenuManager : MonoBehaviour
 
     public void AbrirCreditos()
     {
+        AudioManager.PlayItem("botao", 0.55f);
         painelCreditos.SetActive(true);
     }
 
     public void FecharCreditos()
     {
+        AudioManager.PlayItem("botao", 0.55f);
         painelCreditos.SetActive(false);
     }
 
     public void AbrirConfiguracoes()
     {
+        AudioManager.PlayItem("botao", 0.55f);
         painelConfiguracoes.SetActive(true);
     }
 
     public void FecharConfiguracoes()
     {
+        AudioManager.PlayItem("botao", 0.55f);
         painelConfiguracoes.SetActive(false);
     }
 

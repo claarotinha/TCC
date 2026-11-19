@@ -73,13 +73,13 @@ public class AvisoInicial : MonoBehaviour
             orientacoes.gameObject.SetActive(false);
         }
 
-        if (typingSound != null) typingSound.Play();
+        AudioManager.PlayAmbience("giz", typingSound != null ? typingSound.clip : null);
         foreach (char letra in mensagem)
         {
             textoAviso.text += letra;
             yield return WaitUnpaused(Mathf.Max(0f, tempoEntreLetras));
         }
-        if (typingSound != null) typingSound.Stop();
+        AudioManager.StopAmbience("giz");
         yield return WaitUnpaused(Mathf.Max(0f, tempoDepoisDoTexto));
         SceneManager.LoadScene("Escola");
     }
@@ -99,7 +99,7 @@ public class AvisoInicial : MonoBehaviour
 
     private void OnDisable()
     {
-        if (typingSound != null) typingSound.Stop();
+        AudioManager.StopAmbience("giz");
     }
     private IEnumerator WaitUnpaused(float seconds)
     {

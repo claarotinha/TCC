@@ -60,7 +60,7 @@ public class RadioInteraction : MonoBehaviour
             Debug.LogError("RadioInteraction: confira o áudio e o painel do rádio.", this);
             return;
         }
-        questionText.text = radioAudio.isPlaying
+        questionText.text = AudioManager.RadioPlaying
             ? "O rádio está ligado. Deseja manter a música tocando?"
             : "O rádio está desligado. Deseja ligar a música?";
         confirmPanel.transform.SetAsLastSibling();
@@ -75,17 +75,16 @@ public class RadioInteraction : MonoBehaviour
     private void TurnOn()
     {
         if (!confirming) return;
-        CurraisEffectsDirector.Play("clique", 0.6f);
-        if (radioAudio != null && radioAudio.clip != null && !radioAudio.isPlaying)
-            radioAudio.Play();
+        AudioManager.Play("clique", 0.6f);
+        AudioManager.SetRadio(true, radioAudio != null ? radioAudio.clip : null);
         Close();
     }
 
     private void TurnOff()
     {
         if (!confirming) return;
-        CurraisEffectsDirector.Play("clique", 0.6f);
-        if (radioAudio != null && radioAudio.isPlaying) radioAudio.Stop();
+        AudioManager.Play("clique", 0.6f);
+        AudioManager.SetRadio(false);
         Close();
     }
 

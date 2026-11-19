@@ -16,7 +16,7 @@ public partial class EntradaCurrais
     private IEnumerator NegarFimDaBusca()
     {
         if (NegacaoAcolhida) yield break;
-        CurraisMusicDirector.PlayMoment("negacao");
+        AudioManager.PlayMoment("negacao");
         yield return OrganizarPaisNaNegacao();
         yield return DizerEntradaUmaVez("negacao-inicio", new[] {
             new Fala { personagem = "Zefinha", texto = "Eu num vou deitar. Ainda tem coisa que eu num perguntei." },
@@ -32,7 +32,7 @@ public partial class EntradaCurrais
                     "Tem que ter alguma coisa que eu deixei passar." : "Num pode acabar só nisso. Eu preciso de outra pista.",
                     new[] { "Conferir as pistas de novo", "Voltar à porteira", "Sair" });
                 int opcao = escolhaRecebida;
-                if (opcao == 2) { CurraisMusicDirector.StopMoment("negacao"); FecharMenu(); yield break; }
+                if (opcao == 2) { AudioManager.StopMoment("negacao"); FecharMenu(); yield break; }
                 yield return InsistirEmMariquinha(opcao == 0);
                 int tentativa = InsistenciasNaBusca + 1;
                 RegistrarConversaEntrada("negacao-insistencia-" + tentativa);
@@ -50,7 +50,7 @@ public partial class EntradaCurrais
             yield return Escolher("Mãe", "Eu num vou pedir pra tu esquecer tua irmã. Só fique perto de mim agora.",
                 new[] { "Apertar a mão da mãe", "Eu preciso continuar procurando", "Sair" });
             int resposta = escolhaRecebida;
-            if (resposta == 2) { CurraisMusicDirector.StopMoment("negacao"); FecharMenu(); yield break; }
+            if (resposta == 2) { AudioManager.StopMoment("negacao"); FecharMenu(); yield break; }
             if (resposta == 1)
             {
                 yield return FalarPosto("Zefinha", "Se eu parar, parece que eu tô deixando ela lá.",
@@ -62,7 +62,7 @@ public partial class EntradaCurrais
             if (acolhimentoInterrompido) continue;
             RegistrarConversaEntrada("negacao-mao-da-mae");
             RegistrarConversaEntrada("consulta-relato-final");
-            CurraisMusicDirector.StopMoment("negacao");
+            AudioManager.StopMoment("negacao");
             yield return DespedidaParaPresente();
             yield break;
         }

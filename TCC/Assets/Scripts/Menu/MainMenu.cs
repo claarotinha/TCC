@@ -5,6 +5,7 @@ public class MainMenu : MonoBehaviour
 {
     public void StartGame()
     {
+        AudioManager.PlayItem("botao", 0.55f);
         // Novo jogo inicia uma sessão limpa, mantendo o arquivo salvo até o próximo checkpoint.
         GameProgress.Instance?.ResetProgress();
         MotherDialogue.ResetSession();

@@ -1492,6 +1492,7 @@ public partial class SegundaParada : MonoBehaviour
 
     private IEnumerator RecolherAguaBarriguda()
     {
+        AudioManager.Play("faca", 0.65f);
         float tempo = 0f;
         while (tempo < 0.6f)
         {
@@ -1502,6 +1503,7 @@ public partial class SegundaParada : MonoBehaviour
         }
         barriguda.position = posicaoBarriguda;
         MostrarBarriguda(barrigudaAberta);
+        AudioManager.Play("aguaEstrada", 0.65f);
         if (TrocarCabaca(cabacaVazia, cabacaCheia))
         {
             aguaTerceiraConcluida = true;
@@ -1828,6 +1830,7 @@ public partial class SegundaParada : MonoBehaviour
     {
         ControleJornada jornada = ControleJornada.Instance;
         if (juazeiroConcluido || conversando || jornada == null || !jornada.ParadaAtiva || jornada.ParadaAtual != 4) return;
+        AudioManager.Play("arvoreEstrada", 0.45f);
         juazeiroIniciado = true;
         juazeiroConcluido = true;
         placaJuazeiroLida = true;
@@ -2099,8 +2102,8 @@ public partial class SegundaParada : MonoBehaviour
     {
         if (finalEmAndamento || carregandoCurrais) return;
         finalEmAndamento = true; abordagemIniciada = true;
-        CurraisMusicDirector.PlayMoment("captura");
-        CurraisEffectsDirector.Play("guardas", 0.65f);
+        AudioManager.PlayMoment("captura");
+        AudioManager.Play("guardas", 0.65f);
         BloquearMovimento(); CapturarGrupoAbrigo();
         if (seguirCamera != null) seguirCamera.enabled = false;
         SalvarFortaleza();

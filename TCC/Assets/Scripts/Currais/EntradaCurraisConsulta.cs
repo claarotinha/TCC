@@ -324,7 +324,9 @@ public partial class EntradaCurrais
             cameraCena.transform.position = cameraSaidaConsulta.position;
             PrepararDesenhoSaida();
             yield return Escurecer(0f);
+            AudioManager.Play("porco", 0.6f);
             yield return Dizer(saidaRecusada);
+            AudioManager.Play("porco2", 0.55f);
             yield return Mover(portaoConsulta, portaoConsultaFechado.position, tempoPlano);
             Dados.curraisEtapaConsulta = 3;
             GameProgress.Instance.UnlockDiaryPage("currais-saida");

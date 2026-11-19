@@ -38,6 +38,7 @@ public partial class EntradaCurrais
 
     private IEnumerator ConversarGuardaPassagem()
     {
+        AudioManager.Play("guardas", 0.5f);
         yield return Dizer(guardaPassagemPergunta);
         yield return Dizer(guardaPassagemMae);
     }

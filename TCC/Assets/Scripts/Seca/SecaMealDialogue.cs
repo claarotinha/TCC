@@ -315,6 +315,7 @@ public class SecaMealDialogue : MonoBehaviour
             return;
         }
 
+        AudioManager.Play("comer", 0.5f);
         FoodChoiceIndex = index;
         showingChoices = false;
         showingResponse = true;

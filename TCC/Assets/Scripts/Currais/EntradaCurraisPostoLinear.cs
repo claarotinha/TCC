@@ -152,6 +152,7 @@ public partial class EntradaCurrais
             yield return FalarPosto("Zefinha", "Espere, moço. Posso copiar esse lugar?", "Funcionário", "Copie logo. A folha vai comigo.");
             yield return Mover(mari.transform, papelPostoLeitura.position + Vector3.left * .6f, .45f);
             yield return LerFolhaDoPosto();
+            AudioManager.Play("escrita", 0.5f);
             yield return FalarPosto("Zefinha", "Lagoa do Meio…", "Zefinha", destinoAnterior ?
                 "É o mesmo lugar do canhoto." : "Foi pra lá que mandaram o grupo.",
                 "Zefinha (em pensamento)", "Só tem o lugar e o grupo. Cadê o nome de Mariquinha?");

@@ -188,7 +188,7 @@ public partial class EntradaCurrais
             cobertura.color = new Color(corCobertura.r, corCobertura.g, corCobertura.b, 0f);
             yield return Esperar(.5f);
             yield return Escurecer(0f);
-            CurraisEffectsDirector.Play("bento", 0.6f);
+            AudioManager.Play("bento", 0.6f);
             yield return MostrarCoberturaBento(corCobertura);
             MostrarReacaoBento();
         }
@@ -220,7 +220,7 @@ public partial class EntradaCurrais
             yield return DizerEntradaUmaVez("bento-grupo-reunido", bentoReunirGrupo);
             // A transição mostra a reunião do grupo; a acompanhante continua ao lado de Josefa.
             yield return Escurecer(1f);
-            CurraisMusicDirector.PlayMoment("funeral");
+            AudioManager.PlayMoment("funeral");
             sepultamentoNaTela = true;
             planoSepultamento.SetActive(true);
             corpoNoPlano.SetActive(true);
@@ -248,7 +248,7 @@ public partial class EntradaCurrais
         }
         finally
         {
-            CurraisMusicDirector.StopMoment("funeral");
+            AudioManager.StopMoment("funeral");
             sepultamentoEmCurso = false;
             RestaurarPlanoSepultamento();
             if (objetivoTexto != null) objetivoTexto.gameObject.SetActive(false);

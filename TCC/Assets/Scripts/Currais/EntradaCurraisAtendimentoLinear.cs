@@ -62,6 +62,7 @@ public partial class EntradaCurrais
         {
             if ((Dados.curraisItensAtendimentoBento & 3) == 3)
             { yield return ConcluirAtendimentoBento(); yield break; }
+            AudioManager.PlayItem("tosseMulher", 0.4f);
             AbrirAssuntosEntrada("bento-ouvir", NomeAcompanhantePatio, string.Empty,
                 new[] { "bento-ouvir" }, new[] { "Ele tá ouvindo nós?" },
                 new Func<IEnumerator>[] { () => Dizer(bentoOuvirMae) });

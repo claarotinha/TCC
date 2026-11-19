@@ -156,8 +156,14 @@ public class CollectPrompt : MonoBehaviour
         }
 
         InventoryManager.Instance.AddItem(pendingItem);
-        // O som confirma a coleta; acoes especificas continuam com seus efeitos proprios.
-        CurraisEffectsDirector.PlayItem("botao", 0.35f);
+        string efeito = pendingItem.itemName switch
+        {
+            "Galho" => "galho",
+            "Galhos secos" or "Galhos de alecrim" or "Folhas secas" or "Planta medicinal" => "folhas",
+            "Chave do quartinho" => "chave",
+            _ => "botao"
+        };
+        AudioManager.PlayItem(efeito, efeito == "botao" ? 0.35f : 0.65f);
 
         Action callback = onCollected;
         Close();

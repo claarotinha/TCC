@@ -39,6 +39,7 @@ public class SecaMirrorDiscovery : MonoBehaviour
 
     private void OnMirrorOpened()
     {
+        AudioManager.Play("espelho", 0.6f);
         if (reflectionImage != null)
         {
             SetReflectionVisible(true);

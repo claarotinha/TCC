@@ -33,6 +33,7 @@ public partial class EntradaCurrais
     private IEnumerator OuvirVozQuarto()
     {
         if (InvestigouQuarto || ViuConversaEntrada("quarto-voz-ouvida")) yield break;
+        AudioManager.Play("voz", 0.6f);
         yield return Dizer(quartoVoz);
         RegistrarConversaEntrada("quarto-voz-ouvida"); Salvar();
     }

@@ -101,7 +101,7 @@ public class PhotoCollect : MonoBehaviour
         collected = true;
 
         photosCollected++;
-        CurraisEffectsDirector.Play("fotografia", 0.65f);
+        AudioManager.Play("fotografia", 0.65f);
 
         Debug.Log("Fotos coletadas: " + photosCollected);
 

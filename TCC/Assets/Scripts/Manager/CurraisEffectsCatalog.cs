@@ -8,4 +8,6 @@ public sealed class CurraisEffectsCatalog : ScriptableObject
     public AudioClip passos, corrida, passosGuardas, pig, pig2, lavagem, tosse, murmuro, bento, escrita;
     public AudioClip clique, botao, inventarioErro, inventarioCombinar, voz;
     public AudioClip escolaSino, escolaCriancas;
+    public AudioClip giz, chave, abrirBau, folhaNova, tosseMulher, aveAmbiente;
+    public AudioClip criancaCidade, criancasBrincando, blop, erroCombinacao, aguaEstrada, arvoreEstrada;
 }

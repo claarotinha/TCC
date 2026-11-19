@@ -157,7 +157,7 @@ public class CombinationPrompt : MonoBehaviour
             InventoryManager.Instance == null ||
             !InventoryManager.Instance.TryCombine(first, second, selectedRecipe))
         {
-            CurraisEffectsDirector.PlayItem("inventarioErro", 0.65f);
+            AudioManager.PlayItem(selectedRecipe == null ? "erroCombinacao" : "inventarioErro", 0.65f);
             combineText.text = "Estes itens não podem ser combinados.";
             yesButton.gameObject.SetActive(false);
 
@@ -166,7 +166,7 @@ public class CombinationPrompt : MonoBehaviour
             return;
         }
 
-        CurraisEffectsDirector.PlayItem("inventarioCombinar", 0.7f);
+        AudioManager.PlayItem("inventarioCombinar", 0.7f);
         combinationLearned = true;
         SetCombinationHint(false);
         Close();

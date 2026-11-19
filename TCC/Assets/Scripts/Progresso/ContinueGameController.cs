@@ -55,6 +55,7 @@ public class ContinueGameController : MonoBehaviour
             return;
         }
 
+        AudioManager.PlayItem("botao", 0.55f);
         StartCoroutine(LoadCheckpoint(save));
     }
 

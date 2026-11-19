@@ -753,6 +753,7 @@ public partial class EntradaCurrais : MonoBehaviour
         yield return Escurecer(0f);
         if (!Dados.curraisRevistaApresentada)
         {
+            AudioManager.Play("tosse", 0.45f);
             int inicio = ViuConversaEntrada("aviso-pertences") ? 1 : 0;
             Fala[] chegadaRevista = new Fala[entrada.Length - inicio];
             Array.Copy(entrada, inicio, chegadaRevista, 0, chegadaRevista.Length);
@@ -972,7 +973,11 @@ public partial class EntradaCurrais : MonoBehaviour
         for (int i = 0; i < acoes.Length; i++)
         {
             int opcao = i;
-            acoes[i] = () => escolhaRecebida = opcao;
+            acoes[i] = () =>
+            {
+                AudioManager.PlayItem("blop", 0.4f);
+                escolhaRecebida = opcao;
+            };
         }
         MostrarOpcoes(personagem, texto, rotulos, acoes);
         while (escolhaRecebida < 0) yield return null;
@@ -1103,6 +1108,7 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (!PodeEncherCabaca || !TemItem(cabacaVaziaBusca)) yield break;
         yield return Dizer(apresentacaoPorcaoAgua);
+        AudioManager.Play("agua", 0.65f);
         // A pausa permite mostrar o recipiente durante o enchimento.
         yield return Esperar(.7f);
         if (!TemItem(cabacaVaziaBusca)) yield break;
@@ -1137,6 +1143,7 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         // A arte existente possui idle; a criança permanece no lugar enquanto responde.
         OlharParaMari(meninoBusca);
+        AudioManager.Play("choro", 0.35f);
         yield return Dizer(meninoApresentacao);
         Dados.curraisMeninoVisitado = true;
         Salvar();

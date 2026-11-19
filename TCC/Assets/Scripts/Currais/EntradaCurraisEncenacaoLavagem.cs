@@ -85,6 +85,7 @@ public partial class EntradaCurrais
 
     private IEnumerator LavarPecaLavagem(bool atendimento)
     {
+        AudioManager.Play("lavagem", 0.65f);
         Transform peca = panoEmLavagem.transform;
         Vector3 origem = peca.position, escala = peca.localScale;
         Quaternion rotacao = peca.localRotation;

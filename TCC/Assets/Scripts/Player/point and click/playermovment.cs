@@ -62,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontalInput = 0f;
             isRunning = false;
+            AudioManager.SetFootsteps(false, false);
             animator.SetBool("IsWalking", false);
             animator.SetBool("IsRunning", false);
             return;
@@ -193,6 +194,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDisable()
     {
+        AudioManager.SetFootsteps(false, false);
         horizontalInput = 0f;
         isRunning = false;
         if (rb != null)
@@ -213,6 +215,7 @@ public class PlayerMovement : MonoBehaviour
              (horizontalInput > 0f && rb.position.x >= max - 0.001f));
         bool isMoving = speed > 0.1f && !blocked;
         bool running = isRunning && isMoving;
+        AudioManager.SetFootsteps(isMoving && horizontalInput != 0f, running);
 
         animator.SetBool("IsWalking", isMoving);
         animator.SetBool("IsRunning", running);

@@ -135,6 +135,7 @@ public class ChestContentsController : MonoBehaviour
     public void Open()
     {
         if (!configured) return;
+        AudioManager.PlayItem("abrirBau", 0.7f);
         selectedItem = -1;
         if (diaryConfirmPanel != null)
             diaryConfirmPanel.SetActive(false);
@@ -155,6 +156,7 @@ public class ChestContentsController : MonoBehaviour
             (index == 0 && DiaryCollected))
             return;
 
+        AudioManager.PlayItem("caixa", 0.5f);
         selectedItem = index;
         itemText.text = descriptions[index];
         collectDiaryButton.gameObject.SetActive(index == 0);

@@ -57,6 +57,18 @@ public static class CurraisEffectsCatalogBuilder
         catalog.voz = Get(s+"voizinha.wav");
         catalog.escolaSino = Get(s+"sino.wav");
         catalog.escolaCriancas = Get(s+"criancas_escola_fade.wav");
+        catalog.giz = Get("Assets/Audio/398491__anthousai__writing-chalk-center-01.wav");
+        catalog.chave = Get("Assets/Audio/efeito sonoro/casa manha - quartinho/chave.wav");
+        catalog.abrirBau = Get("Assets/Audio/efeito sonoro/casa manha - quartinho/abrir bau.wav");
+        catalog.folhaNova = Get("Assets/Audio/efeito sonoro/folha passando.wav");
+        catalog.tosseMulher = Get("Assets/Audio/efeito sonoro/tosse mulher retirante.wav");
+        catalog.aveAmbiente = Get("Assets/Audio/efeito sonoro/estrada/bird.wav");
+        catalog.criancaCidade = Get("Assets/Audio/efeito sonoro/criança cidade.wav");
+        catalog.criancasBrincando = Get("Assets/Audio/efeito sonoro/crianças brincando.mp3");
+        catalog.blop = Get("Assets/Audio/efeito sonoro/interface/blop.mp3");
+        catalog.erroCombinacao = Get("Assets/Audio/efeito sonoro/interface/erro combinaçao.wav");
+        catalog.aguaEstrada = Get("Assets/Audio/efeito sonoro/estrada/agua.aiff");
+        catalog.arvoreEstrada = Get("Assets/Audio/efeito sonoro/arvore.mp3");
         EditorUtility.SetDirty(catalog);
         AssetDatabase.SaveAssets();
     }

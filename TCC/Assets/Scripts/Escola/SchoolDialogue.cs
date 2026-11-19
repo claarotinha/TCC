@@ -40,14 +40,12 @@ public class SchoolDialogue : MonoBehaviour
     IEnumerator PlaySchoolScene()
     {
         // O sinal toca na entrada; a conversa começa logo, sem esperar o áudio inteiro.
-        if (alarmSound != null)
-            alarmSound.Play();
+        AudioManager.Play("sino", 0.5f, alarmSound != null ? alarmSound.clip : null);
 
         yield return new WaitForSeconds(0.6f);
 
         // Começa o som ambiente da escola
-        if (schoolAmbient != null)
-            schoolAmbient.Play();
+        AudioManager.PlayAmbience("criancas", schoolAmbient != null ? schoolAmbient.clip : null);
 
         dialoguePanel.SetActive(true);
 

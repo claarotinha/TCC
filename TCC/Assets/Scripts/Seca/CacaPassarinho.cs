@@ -59,8 +59,8 @@ public class CacaPassarinho : MonoBehaviour
             return true;
         }
 
-        CurraisEffectsDirector.Play("estilingue", 0.8f);
-        CurraisEffectsDirector.Play("passaro", 0.7f);
+        AudioManager.Play("estilingue", 0.8f);
+        AudioManager.Play("passaro", 0.7f);
         if (passaro != null) InventoryManager.Instance.AddItem(passaro);
         acertou = true;
         Collider2D colliderPassaro = GetComponent<Collider2D>();
