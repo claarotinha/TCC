@@ -107,6 +107,7 @@ public class QuartoBaguncaDoor : MonoBehaviour
     public void Unlock()
     {
         unlocked = true;
+        CurraisEffectsDirector.PlayItem("bau", 0.7f);
         GameProgress.Instance?.UnlockQuartinho();
         AtualizarVisual();
         FecharConfirmacao();
@@ -119,6 +120,7 @@ public class QuartoBaguncaDoor : MonoBehaviour
         FecharConfirmacao();
         ExamineObject.HideCurrentPanel();
         InventoryTabController.Instance?.Close();
+        CurraisEffectsDirector.PlayItem("porta", 0.65f);
         SceneManager.LoadScene("Quartinho");
     }
 

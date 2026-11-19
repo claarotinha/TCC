@@ -64,7 +64,8 @@ public sealed class CurraisMusicDirector : MonoBehaviour
     {
         switch (scene)
         {
-            case "Intro": case "Splash": case "AvisoInicial": return catalog.introducao;
+            case "Intro": case "Splash": case "AvisoInicial": case "Cutscene": return catalog.introducao;
+            case "Escola": return null; // O sinal e as vozes da escola sao a paisagem sonora desta cena.
             case "MenuPrincipal": return catalog.menu;
             case "CaminhoParaCasa": case "Casa_Manha": return catalog.antesB;
             case "Quartinho": return catalog.antesA;

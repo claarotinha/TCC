@@ -59,6 +59,8 @@ public class ItemUseTarget : MonoBehaviour
         if (consumeOnUse)
             GameProgress.Instance?.MarkTargetUsed(progressId);
         onUsed?.Invoke();
+        // Feedback compartilhado por todos os alvos de uso de itens em qualquer cena.
+        CurraisEffectsDirector.PlayItem("botao", 0.35f);
         if (boys != null)
             boys.OnBallReturned();
         Debug.Log("Item usado: " + item.itemName);

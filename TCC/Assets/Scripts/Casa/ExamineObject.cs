@@ -225,6 +225,8 @@ public class ExamineObject : MonoBehaviour
 
         isShowing = true;
         currentObject = this;
+        // Feedback discreto para examines de todas as cenas, sem substituir efeitos proprios.
+        CurraisEffectsDirector.PlayItem("clique", 0.22f);
         Opened?.Invoke();
     }
 
