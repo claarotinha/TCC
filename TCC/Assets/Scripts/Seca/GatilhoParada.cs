@@ -14,6 +14,20 @@ public class GatilhoParada : MonoBehaviour
     [SerializeField] private PlayerMovement personagem;
     private bool iniciada;
 
+    [Header("Marco do cenário")]
+    [SerializeField] private Transform marcoCenario;
+    [SerializeField, Min(0f)] private float distanciaAntesDoMarco = 4f;
+
+    private void AlinharAoCenario()
+    {
+        if (marcoCenario == null) return;
+        Vector3 posicao = transform.position;
+        posicao.x = marcoCenario.position.x - distanciaAntesDoMarco;
+        transform.position = posicao;
+    }
+
+    private void Start() => AlinharAoCenario();
+
     private void Awake()
     {
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
@@ -33,6 +47,7 @@ public class GatilhoParada : MonoBehaviour
 
     private void Update()
     {
+        AlinharAoCenario();
         // Also handles loading inside a trigger or concluding the previous stop after crossing it.
         BoxCollider2D area = GetComponent<BoxCollider2D>();
         if (!iniciada && personagem != null && area != null &&

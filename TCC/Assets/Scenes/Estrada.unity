@@ -1916,6 +1916,8 @@ MonoBehaviour:
   numeroDaParada: 2
   concluirComTeclaT: 0
   personagem: {fileID: 1304905420}
+  marcoCenario: {fileID: 1572562295}
+  distanciaAntesDoMarco: 0
 --- !u!61 &465652023
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2600,6 +2602,8 @@ MonoBehaviour:
   numeroDaParada: 3
   concluirComTeclaT: 0
   personagem: {fileID: 1304905420}
+  marcoCenario: {fileID: 3900000036}
+  distanciaAntesDoMarco: 4
 --- !u!61 &513277212
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -16013,6 +16017,7 @@ MonoBehaviour:
   cortinaAcampamento: {fileID: 7120000000403}
   visualFogueira: {fileID: 7120000000200}
   usarGatilhoFortaleza: 1
+  inicioBuscaBaleia: {fileID: 1572562295}
 --- !u!1 &3500000010
 GameObject:
   m_ObjectHideFlags: 0

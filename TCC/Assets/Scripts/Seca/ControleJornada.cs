@@ -107,7 +107,7 @@ public class ControleJornada : MonoBehaviour
             if (paradasConcluidas >= 5) limiteX = limiteFortaleza != null
                 ? limiteFortaleza.position.x : limiteX + trechoAposAcampamento;
             if (paradasConcluidas == 1 && caminhada != null)
-                limiteX = Mathf.Min(limiteX, caminhada.LimiteCaminhadaAntesDaBusca);
+                limiteX = caminhada.LimiteCaminhadaAntesDaBusca;
             return aguardandoNarrativa ? Mathf.Min(limiteX, limiteDuranteTransicao) : limiteX;
         }
     }

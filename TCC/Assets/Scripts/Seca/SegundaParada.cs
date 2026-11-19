@@ -509,14 +509,23 @@ public partial class SegundaParada : MonoBehaviour
 
     public float InicioCaminhadaDaManhaX => casa != null ? casa.position.x + 4f : terceiraParada.position.x - 1.8f;
 
+    [SerializeField] private Transform inicioBuscaBaleia;
     private float limiteConversa;
     // Reserva chão livre para caminhar entre falas, mesmo se o jogador ler andando até o limite.
     public float LimiteCaminhadaAntesDaBusca => familiaEsperando || etapa >= 2
-        ? float.PositiveInfinity : !iniciou ? transform.position.x + 5f : limiteConversa;
+        ? float.PositiveInfinity : !iniciou
+            ? (inicioBuscaBaleia != null ? inicioBuscaBaleia.position.x : transform.position.x + 5f)
+            : limiteConversa;
+
+    private float LimiteAntesDaCasa(float distancia)
+    {
+        if (inicioBuscaBaleia != null) return inicioBuscaBaleia.position.x;
+        return casa != null ? casa.position.x - distancia : transform.position.x + 90f;
+    }
 
     private void ContinuarCaminhada()
     {
-        limiteConversa = transform.position.x + 90f;
+        limiteConversa = LimiteAntesDaCasa(40f);
         StartCoroutine(ConversaDepoisDeCaminhar(5f, ConversaSorvete));
     }
 
@@ -524,7 +533,14 @@ public partial class SegundaParada : MonoBehaviour
     {
         ControleJornada jornada = ControleJornada.Instance;
         if (jornada == null) yield break;
-        yield return jornada.EsperarCaminhada(segundos);
+        // Um cenário encurtado pode acabar antes de completar o tempo previsto.
+        // Chegar ao marco também libera a próxima fala, sem avançar até a casa.
+        var espera = jornada.EsperarCaminhada(segundos);
+        while (mari != null && mari.transform.position.x < limiteConversa - .1f)
+        {
+            if (!espera.MoveNext()) break;
+            yield return espera.Current;
+        }
         // Nunca disputa o Canvas com a lenda, examine ou outro diálogo.
         while (PauseHelper.BlockInput() || InvestigationGuard.Blocked ||
             (dialogueUI != null && dialogueUI.activeInHierarchy)) yield return null;
@@ -543,7 +559,7 @@ public partial class SegundaParada : MonoBehaviour
                 "Eu acho que tem sim…", "Eu nunca vi. Nos pode comer quando chegar lá?",
                 "A gente pode pedir a painho e mainha sim."
             }, () => {
-                limiteConversa = transform.position.x + 180f;
+                limiteConversa = LimiteAntesDaCasa(30f);
                 StartCoroutine(ConversaDepoisDeCaminhar(5f, ConversaSertao));
             }, true);
     }
@@ -555,7 +571,7 @@ public partial class SegundaParada : MonoBehaviour
                 "Meu pai dizia que o sertão escuta. Quando o vento muda… É porque ele tá conversando. Quando num venta… É porque tá zangado. E quando chove… É porque perdoou nóis.",
                 "Que Deus nos conceda a graça da chuva."
             }, () => {
-                limiteConversa = transform.position.x + 270f;
+                limiteConversa = LimiteAntesDaCasa(20f);
                 StartCoroutine(ConversaDepoisDeCaminhar(3f, ConversaBaleia));
             }, true);
     }
