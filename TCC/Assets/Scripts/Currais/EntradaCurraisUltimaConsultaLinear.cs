@@ -97,22 +97,20 @@ public partial class EntradaCurrais
         bool conhecida = opcao == 0 ? Dados.curraisDestinoConfirmado : Dados.curraisIdentidadeConfirmada;
         if (opcao == 0)
         {
-            yield return DeslocarFolhaRegistro(papelConsulta.transform, mari.transform.position + Vector3.up, .45f);
+            yield return Esperar(.5f);
             yield return Dizer(consultaDestino);
             if (conhecida) yield return FalarPosto("Zefinha", "É o mesmo lugar que nós tinha ouvido.", "Pai", "Agora nós viu na relação também.");
         }
         else
         {
             testemunhaConsulta.SetActive(true);
-            Vector3 pertoDaMesa = testemunhaConsulta.transform.position;
-            pertoDaMesa.x = mari.transform.position.x + 1.7f;
-            yield return Mover(testemunhaConsulta.transform, pertoDaMesa, tempoPlano);
             yield return Dizer(consultaNome);
             if (conhecida) yield return FalarPosto("Zefinha", "Foi esse nome que seu Raimundo conseguiu.", "Trabalhadora", "Eu conheço ela. É esse o nome.");
         }
         yield return Dizer(consultaConcluida);
-        yield return DeslocarFolhaRegistro(papelConsulta.transform, papelConsulta.transform.position + Vector3.right * 2f, .45f);
-        yield return Mover(testemunhaConsulta.transform, testemunhaConsulta.transform.position + Vector3.right * 2f, tempoPlano);
+        yield return FalarPosto("Zefinha", "Mas eu ainda num sei onde minha irmã tá agora.",
+            "Escrivão", "Num tenho outra informação aqui.",
+            "Pai", "Então vamos pedir pra sair. Nós mesmo procura por ela.");
         Dados.curraisEscolhaConsulta = opcao + 1;
         if (opcao == 0) Dados.curraisDestinoConfirmado = true;
         else Dados.curraisIdentidadeConfirmada = true;
@@ -124,7 +122,7 @@ public partial class EntradaCurrais
     private IEnumerator ReunirFamiliaPortao()
     {
         if (ViuConversaEntrada("consulta-familia-portao")) yield break;
-        if (Dados.curraisEscolhaAgua == 1)
+        if (MaeNaConsulta)
             yield return FalarPosto("Pai", "Vamos falar com o cabo.", "Mãe", "Nós vai junto.");
         else
         {

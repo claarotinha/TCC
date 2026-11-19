@@ -180,7 +180,7 @@ public partial class EntradaCurrais
             else if (area == areaAmanhecer && Dados.curraisEtapaConsulta == 0) Iniciar(AmanhecerNoCampo());
             else if (area == areaEsteiraNoite && Dados.curraisEtapaConsulta == 3) MenuEsteiraFinal();
             else if (area == areaUltimaConsulta) MenuUltimaConsulta();
-            else if (area == areaSaidaConsulta) Iniciar(PedirSaida());
+            else if (area == areaSaidaConsulta) MenuPedidoSaida();
             else if (Dados.curraisEtapaConsulta == 3) Iniciar(ChegarAbrigoFinal());
             else if (area == areaMae || area == areaPaiAbrigo) MenuFamiliaConsulta();
             return true;
@@ -209,9 +209,49 @@ public partial class EntradaCurrais
 
     private void MenuFamiliaConsulta()
     {
-        if (Dados.curraisEtapaConsulta == 1 && !FamiliaNaConsulta && NomeNovoParaFamilia)
-            MenuAssuntoNPC("Família", string.Empty, "Contar o nome da mulher", ContarNomeFamiliaManha);
+        if (Dados.curraisEtapaConsulta == 1)
+        {
+            MostrarOpcoes("Pai", string.Empty,
+                new[] { "Tentar mais uma vez", "Relembrar as pistas", "Sair" },
+                new Action[] { () => Iniciar(OrientarUltimaTentativa()),
+                    () => Iniciar(RelembrarPistasConsulta()), FecharMenu });
+        }
+        else if (Dados.curraisEtapaConsulta == 2)
+            MenuAssuntoNPC("Pai", string.Empty, "E agora?", OrientarPortaoConsulta);
         else FecharMenu();
+    }
+
+    private IEnumerator OrientarUltimaTentativa()
+    {
+        if (Dados.curraisEtapaConsulta != 1) yield break;
+        yield return FalarPosto("Zefinha", "Faz tanto tempo, painho... E ninguém diz onde ela tá.",
+            "Pai", "Vamos tentar na mesa do registro mais uma vez. Eu e tua mãe vai contigo.",
+            "Mãe", "Pergunte pelo nome dela. Nós espera até escutarem.");
+        RegistrarConversaEntrada("consulta-ultima-tentativa-orientada"); Salvar();
+    }
+
+    private IEnumerator RelembrarPistasConsulta()
+    {
+        if (Dados.curraisDestinoConfirmado)
+            yield return FalarPosto("Zefinha", "Lagoa do Meio. Era o destino escrito pro grupo. Mas ninguém confirmou se ela chegou lá.");
+        if (Dados.curraisIdentidadeConfirmada)
+            yield return FalarPosto("Zefinha", "Nair Pereira tava com Mariquinha. Eu preciso saber o que aconteceu depois.");
+        if (!Dados.curraisDestinoConfirmado && !Dados.curraisIdentidadeConfirmada)
+            yield return FalarPosto("Zefinha", "Só sei que levaram ela com outro grupo. Preciso que procurem o nome dela no registro.");
+    }
+
+    private IEnumerator OrientarPortaoConsulta()
+    {
+        yield return FalarPosto("Pai", "Vamos ao portão. Se num dizem onde ela tá, precisam deixar nós procurar.");
+    }
+
+    private void MenuPedidoSaida()
+    {
+        if (Dados.curraisEtapaConsulta != 2) return;
+        MostrarOpcoes("Zefinha", string.Empty,
+            new[] { "Pedir para sair", "Relembrar as pistas", "Sair" },
+            new Action[] { () => Iniciar(PedirSaida()),
+                () => Iniciar(RelembrarPistasConsulta()), FecharMenu });
     }
 
     private IEnumerator ApresentarCanhotoConsulta()
