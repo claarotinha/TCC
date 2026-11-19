@@ -154,7 +154,8 @@ public partial class EntradaCurrais : MonoBehaviour
         }
         Vector3 posicaoRestaurada = mari.transform.position;
         GameProgress.Instance.NormalizeData();
-        bool testePatio = PrepararTestePatio(restaurandoPartida);
+        bool testeRecusa = PrepararTesteRecusa(restaurandoPartida);
+        bool testePatio = !testeRecusa && PrepararTestePatio(restaurandoPartida);
         GameProgress.Instance.UnlockDiaryPage("josefa-06");
         rotacaoPai = pai.localRotation;
         if (Dados.estradaMariquinhaFerida && visualIrma != null)
@@ -186,6 +187,14 @@ public partial class EntradaCurrais : MonoBehaviour
         PrepararFamiliaAlternativa();
         PrepararDespedidaEQuarto();
         pronto = true;
+        if (testeRecusa)
+        {
+            MostrarAbrigo();
+            AtualizarEstadoBusca();
+            PosicionarInicioTesteRecusa();
+            Iniciar(PedirSaida());
+            yield break;
+        }
         if (testePatio)
         {
             MostrarAbrigo();
@@ -1366,6 +1375,7 @@ public partial class EntradaCurrais : MonoBehaviour
         encerrando = true;
         if (puzzleRetalhos != null) puzzleRetalhos.Fechar();
         if (puzzleRegistro != null) puzzleRegistro.Fechar();
+        if (acolhimentoMaoUI != null) acolhimentoMaoUI.Fechar();
         if (examineNomesAtual != null && examineNomesAtual.PanelIsOpen) examineNomesAtual.HidePanel();
         examineNomesAtual = null;
         if (examePrimeiroCliqueLuzia != null && examePrimeiroCliqueLuzia.PanelIsOpen)

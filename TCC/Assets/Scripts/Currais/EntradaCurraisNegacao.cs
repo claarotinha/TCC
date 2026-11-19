@@ -5,6 +5,8 @@ public partial class EntradaCurrais
 {
     [Header("Negação — espaço de movimento junto ao abrigo")]
     [SerializeField] private Collider2D limitesNegacao;
+    [SerializeField] private AcolhimentoMaoUI acolhimentoMaoUI;
+    private bool acolhimentoInterrompido;
     private bool NegacaoEmCurso => GameProgress.Instance != null && ConsultaDisponivel &&
         Dados.curraisEtapaConsulta == 3 && ViuConversaEntrada("negacao-inicio") && !NegacaoAcolhida;
     private bool NegacaoAcolhida => ViuConversaEntrada("negacao-mao-da-mae");
@@ -14,6 +16,7 @@ public partial class EntradaCurrais
     private IEnumerator NegarFimDaBusca()
     {
         if (NegacaoAcolhida) yield break;
+        yield return OrganizarPaisNaNegacao();
         yield return DizerEntradaUmaVez("negacao-inicio", new[] {
             new Fala { personagem = "Zefinha", texto = "Eu num vou deitar. Ainda tem coisa que eu num perguntei." },
             new Fala { personagem = "Pai", texto = "Nós passou o dia perguntando, minha filha." },
@@ -55,6 +58,7 @@ public partial class EntradaCurrais
                 continue;
             }
             yield return ApertarMaoDaMae();
+            if (acolhimentoInterrompido) continue;
             yield return FalarPosto("Zefinha", "Eu prometi, mainha... Eu prometi pra ela.",
                 "Mãe", "Eu sei. Tu num precisa prometer mais nada agora.",
                 "Pai", "Nós guarda os nomes e o lugar. Amanhã nós vê o que ainda pode fazer.",
@@ -71,6 +75,7 @@ public partial class EntradaCurrais
         destino.x += reverPistas ? 1f : -1f;
         destino.x = Mathf.Clamp(destino.x, limitesNegacao.bounds.min.x + 1f, limitesNegacao.bounds.max.x - 1f);
         yield return Mover(mari.transform, destino, .65f);
+        yield return OrganizarPaisNaNegacao();
         if (reverPistas)
         {
             if (Dados.curraisDestinoConfirmado)
@@ -82,8 +87,6 @@ public partial class EntradaCurrais
         }
         else
         {
-            Vector3 perto = pai.position; perto.x = destino.x - 1.2f;
-            yield return Mover(pai, perto, .5f);
             yield return FalarPosto("Zefinha", "Eu vou falar com eles de novo. Eu mesma procuro lá fora.",
                 "Pai", "Tu ouviu o que aquele homem disse. Eu num vou deixar ele encostar em tu.",
                 "Zefinha", "E Mariquinha? Quem tá perto dela?",
@@ -153,28 +156,47 @@ public partial class EntradaCurrais
             }
     }
 
+    private Vector3 PosicaoAoLadoDaMenina(Transform pessoa, bool direita)
+    {
+        Vector3 destino = pessoa.position;
+        SpriteRenderer menina = mari.GetComponent<SpriteRenderer>();
+        SpriteRenderer adulto = pessoa.GetComponent<SpriteRenderer>();
+        if (menina != null && adulto != null && menina.sprite != null && adulto.sprite != null)
+            destino.x += direita ? menina.bounds.max.x + .35f - adulto.bounds.min.x :
+                menina.bounds.min.x - .35f - adulto.bounds.max.x;
+        else destino.x = mari.transform.position.x + (direita ? 2f : -2f);
+        return destino;
+    }
+
+    private IEnumerator OrganizarPaisNaNegacao()
+    {
+        // Usa a largura real dos sprites, não só a distância entre os pivôs.
+        yield return Mover(pai, PosicaoAoLadoDaMenina(pai, false), .35f);
+        yield return Mover(mae, PosicaoAoLadoDaMenina(mae, true), .35f);
+    }
+
     private IEnumerator ApertarMaoDaMae()
     {
-        Vector3 perto = mae.position; perto.x = mari.transform.position.x + 1.1f;
-        yield return Mover(mae, perto, .65f);
+        acolhimentoInterrompido = true;
+        yield return OrganizarPaisNaNegacao();
         FecharDialogo();
         dialogando = false; menuAberto = false;
-        escolhas.SetActive(false); AbrirPainelDialogo();
-        nomeTexto.text = "Mãe";
-        if (retrato != null) retrato.enabled = false;
-        float tempo = 0f;
+        InventoryTabController inventario = InventoryTabController.Instance;
+        bool habilitado = inventario != null && inventario.enabled;
+        if (inventario != null) { inventario.Close(); inventario.enabled = false; }
         try
         {
-            while (tempo < 2.5f)
-            {
-                if (!PauseHelper.BlockInput() && Time.timeScale > 0f && !InventarioAbertoMemoria() &&
-                    (Input.GetKey(KeyCode.E) || Input.GetMouseButton(0))) tempo += Time.deltaTime;
-                falaTexto.text = "Eu tô aqui. Aperte minha mão.\nSegure E ou o botão esquerdo do mouse.\n" +
-                    Mathf.Min(100, Mathf.FloorToInt(tempo / 2.5f * 100f)) + "%";
-                yield return null;
-            }
+            acolhimentoMaoUI.Abrir();
+            while (acolhimentoMaoUI.Aberto) yield return null;
+            acolhimentoInterrompido = !acolhimentoMaoUI.Concluido;
         }
-        finally { FecharDialogo(); InvestigationGuard.BlockCurrentClick(); quadroBloqueado = Time.frameCount; }
+        finally
+        {
+            acolhimentoMaoUI.Fechar();
+            if (inventario != null) inventario.enabled = habilitado;
+            quadroBloqueado = Time.frameCount;
+            InvestigationGuard.BlockCurrentClick();
+        }
     }
 
     private IEnumerator RetomarNegacaoDaBusca()
