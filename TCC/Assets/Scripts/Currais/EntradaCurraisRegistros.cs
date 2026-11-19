@@ -84,8 +84,7 @@ public partial class EntradaCurrais
         folhasDepoisRegistro.SetActive(presente && Dados.curraisRegistroConcluido);
         areaFolhasRegistro.enabled = presente && !Dados.curraisPanelaConcluida;
         areaCanhotoMesa.enabled = presente && Dados.curraisLotePanosRecolhido && (!Dados.curraisPanelaConcluida || CanhotoPendenteDeColeta);
-        lotePanosComMari.SetActive(presente && Dados.curraisLotePanosRecolhido &&
-            !Dados.curraisLotePanosEntregue && TemItem(itemLotePanos));
+        lotePanosComMari.SetActive(false);
         areaLataMenino.enabled = presente && Dados.curraisEscolhaAgua != 0 && Dados.curraisMeninoVisitado;
     }
 

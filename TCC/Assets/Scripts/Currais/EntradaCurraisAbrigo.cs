@@ -200,8 +200,9 @@ public partial class EntradaCurrais
         if (Dados.curraisEtapaEntrada != 4) return false;
         if (antesBusca && (alvo == areaMae || alvo == areaLuzia) && item == cabacaCheiaBusca && PodeEscolherAgua)
         { Iniciar(DestinarAgua(alvo == areaMae ? 1 : 2)); return true; }
-        if (Dados.curraisEtapaBusca == 1 && (alvo == areaLavadeira || alvo == areaRecebimentoLavagem) && item == itemLotePanos && !Dados.curraisLotePanosEntregue)
-        { Iniciar(ConversarLavadeira()); return true; }
+        if ((alvo == areaLavadeira || alvo == areaRecebimentoLavagem) && item == itemLotePanos &&
+            Dados.curraisLotePanosRecolhido && !Dados.curraisLotePanosEntregue && Dados.curraisEtapaBusca <= 1)
+        { Iniciar(RetomarCaminhoDoLote(false)); return true; }
         if (Dados.curraisEtapaBusca == 2 && (alvo == areaPanosUso || alvo == areaPanosAtendimento) &&
             (item == panoUsoLavagem || item == panoAtendimentoLavagem))
         { Iniciar(SepararPanoLavagem(alvo == areaPanosAtendimento)); return true; }

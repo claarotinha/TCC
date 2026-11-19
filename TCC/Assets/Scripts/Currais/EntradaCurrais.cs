@@ -963,6 +963,14 @@ public partial class EntradaCurrais : MonoBehaviour
         if (areaPanoAbrigo.enabled && areaPanoAbrigo.OverlapPoint(ponto))
         { Iniciar(RecolherPanoAbrigo()); return true; }
         if (InteragirCriancaERegistros(ponto)) return true;
+        if (!Dados.curraisPanelaConcluida && Dados.curraisLotePanosRecolhido)
+        {
+            if (areaRaimundo.enabled && areaRaimundo.OverlapPoint(ponto))
+            { Iniciar(RetomarCaminhoDoLote(true)); return true; }
+            if ((areaLavadeira.enabled && areaLavadeira.OverlapPoint(ponto)) ||
+                (areaRecebimentoLavagem.enabled && areaRecebimentoLavagem.OverlapPoint(ponto)))
+            { Iniciar(RetomarCaminhoDoLote(false)); return true; }
+        }
         if (Dados.curraisPanelaConcluida) return InteragirCampo(ponto);
         Collider2D[] areas = { areaLotePanos, areaLuzia, areaAgua, areaDistribuicaoAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela };
         foreach (Collider2D area in areas)

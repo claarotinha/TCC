@@ -30,6 +30,26 @@ public partial class EntradaCurrais
         return ok;
     }
 
+    private IEnumerator RetomarCaminhoDoLote(bool procurarRaimundo)
+    {
+        // Também recupera partidas que já estavam com o lote antes da correção.
+        if (!Dados.curraisPanelaConcluida) yield return DecidirCanhotoNomes();
+        if (!Dados.curraisPanelaConcluida) yield break;
+        if (procurarRaimundo) yield return AbrirContatoRaimundo();
+        else yield return TentarEntregarLoteLavagem();
+    }
+
+    private IEnumerator TentarEntregarLoteLavagem()
+    {
+        if (!EncontroRaimundoEncerrado)
+        {
+            yield return Dizer(new[] { new Fala { personagem = "Lavadeira",
+                texto = "Fale com Raimundo primeiro, menina. Ele tá ali junto dos baldes." } });
+            yield break;
+        }
+        yield return ReceberLoteLavagemLinear();
+    }
+
     private IEnumerator AbrirLavadeiraLinear()
     {
         yield return ExamineNomesUmaVez("lavagem-examine-mulher", exameLavadeiraLinear);
@@ -61,7 +81,7 @@ public partial class EntradaCurrais
     {
         if (!EncontroRaimundoEncerrado || Dados.curraisEtapaBusca != 1) yield break;
         if (!Dados.curraisLotePanosEntregue &&
-            (!TemItem(itemLotePanos) || InventoryManager.Instance.SelectedItem != itemLotePanos)) yield break;
+            !TemItem(itemLotePanos)) yield break;
         yield return ExamineNomesUmaVez("lavagem-examine-mulher", exameLavadeiraLinear);
         if (!ViuConversaEntrada("lavagem-chegada")) yield return ComentarChegadaLavagem();
         if (!Dados.curraisLotePanosEntregue)

@@ -43,7 +43,7 @@ public partial class EntradaCurrais
         if (PostoDisponivel) return ComCriancaERegistros(AlvosPosto());
         if (Dados.curraisPanelaConcluida)
             return ComCriancaERegistros(ComAlvosDoPatio(AlvosLavagemEPassagem()));
-        return ComCriancaERegistros(new[] { AreaCabacaMesa, areaPanoAbrigo, areaLotePanos, areaLuzia, areaAgua, areaDistribuicaoAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela });
+        return ComCriancaERegistros(new[] { AreaCabacaMesa, areaPanoAbrigo, areaLotePanos, areaLuzia, areaAgua, areaDistribuicaoAgua, areaMae, areaPaiAbrigo, areaMenino, areaRegistro, areaPanela, areaRaimundo, areaLavadeira, areaRecebimentoLavagem });
     }
 
     private string ObjetivoCampo() => string.Empty;
@@ -52,6 +52,13 @@ public partial class EntradaCurrais
     {
         bool ativo = Dados.curraisPanelaConcluida;
         setorBusca.SetActive(true);
+        bool levandoLote = Dados.curraisEtapaEntrada == 4 && Dados.curraisLotePanosRecolhido && !ativo;
+        if (levandoLote)
+        {
+            areaRaimundo.enabled = true;
+            areaLavadeira.enabled = true;
+            areaRecebimentoLavagem.enabled = true;
+        }
         if (!ativo) { AtualizarPosto(); return; }
         int etapa = Dados.curraisEtapaBusca;
         objetivoTexto.text = string.Empty;

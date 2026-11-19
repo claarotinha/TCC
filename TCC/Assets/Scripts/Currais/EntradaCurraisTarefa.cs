@@ -88,6 +88,7 @@ public partial class EntradaCurrais
         if (!coletaDoCenarioConfirmada) yield break;
         Dados.curraisLotePanosRecolhido = true;
         AtualizarEstadoBusca(); Salvar();
+        yield return DecidirCanhotoNomes();
 
     }
 }
