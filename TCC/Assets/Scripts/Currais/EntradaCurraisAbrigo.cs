@@ -237,11 +237,31 @@ public partial class EntradaCurrais
 
     private bool PresencasValidas()
     {
-        if (pessoasPresentes == null || pessoasPresentes.Length == 0) return false;
+        if (pessoasPresentes == null || pessoasPresentes.Length == 0)
+        {
+            Debug.LogError("EntradaCurrais: pessoasPresentes está vazia.", this);
+            return false;
+        }
         bool ok = true;
-        foreach (PessoaPresente pessoa in pessoasPresentes)
-            ok &= pessoa != null && pessoa.personagem != null && pessoa.desenho != null &&
-                !string.IsNullOrWhiteSpace(pessoa.nome) && FalasValidas(pessoa.conversa);
+        for (int i = 0; i < pessoasPresentes.Length; i++)
+        {
+            PessoaPresente pessoa = pessoasPresentes[i];
+            string campo = "pessoasPresentes[" + i + "]";
+            if (pessoa == null)
+            {
+                Debug.LogError("EntradaCurrais: entrada ausente: " + campo, this);
+                ok = false;
+                continue;
+            }
+            campo += " (" + pessoa.nome + ")";
+            ok &= ConferirReferencia(pessoa.personagem, campo + ".personagem");
+            ok &= ConferirReferencia(pessoa.desenho, campo + ".desenho");
+            if (string.IsNullOrWhiteSpace(pessoa.nome) || !FalasValidas(pessoa.conversa))
+            {
+                Debug.LogError("EntradaCurrais: nome ou conversa inválidos: " + campo, this);
+                ok = false;
+            }
+        }
         return ok;
     }
 
