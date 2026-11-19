@@ -177,7 +177,7 @@ public class TutorialManager : MonoBehaviour
     {
         if (CurrentStep == TutorialStep.ReturnBall)
         {
-            AudioManager.Play("criancasBrincando", 0.45f);
+            AudioManager.Play("criancasBrincando", 0.45f, stopOnSceneChange: true);
             SetStep(TutorialStep.Completed);
         }
     }

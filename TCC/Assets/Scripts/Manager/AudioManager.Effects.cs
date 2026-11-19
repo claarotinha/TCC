@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public sealed partial class AudioManager
 {
     private CurraisEffectsCatalog effectsCatalog;
-    private AudioSource oneShots, ambience, footsteps;
+    private AudioSource oneShots, sceneOneShots, ambience, footsteps;
     private string ambienceName;
     private float lastItemSoundTime = -1f;
     private string lastItemSound;
@@ -13,6 +13,8 @@ public sealed partial class AudioManager
     {
         effectsCatalog = Resources.Load<CurraisEffectsCatalog>("CurraisEffectsCatalog");
         oneShots = gameObject.AddComponent<AudioSource>();
+        sceneOneShots = gameObject.AddComponent<AudioSource>();
+        sceneOneShots.playOnAwake = false;
         ambience = gameObject.AddComponent<AudioSource>();
         oneShots.playOnAwake = ambience.playOnAwake = false;
         oneShots.spatialBlend = ambience.spatialBlend = 0f;
@@ -26,6 +28,7 @@ public sealed partial class AudioManager
 
     private void ChangeAmbience(Scene scene)
     {
+        sceneOneShots.Stop();
         StopAmbience();
         SetFootsteps(false, false);
         if (scene.name == "Currais") PlayAmbience("murmuro");
@@ -51,14 +54,15 @@ public sealed partial class AudioManager
         source.Play();
     }
 
-    public static void Play(string name, float gain = 1f, AudioClip fallback = null)
+    public static void Play(string name, float gain = 1f, AudioClip fallback = null, bool stopOnSceneChange = false)
     {
         if (instance == null) { Debug.LogWarning("CURRAIS AUDIO: controlador de efeitos nao inicializado: " + name); return; }
         if (instance.effectsCatalog == null) { Debug.LogWarning("CURRAIS AUDIO: catálogo ausente ao tocar: " + name); return; }
         AudioClip clip = instance.Resolve(name) ?? fallback;
         if (clip == null) { Debug.LogWarning("CURRAIS AUDIO: efeito sem AudioClip: " + name); return; }
-        instance.oneShots.volume = AudioVolumeChannel.EffectsVolume;
-        instance.oneShots.PlayOneShot(clip, Mathf.Clamp01(gain));
+        AudioSource source = stopOnSceneChange ? instance.sceneOneShots : instance.oneShots;
+        source.volume = AudioVolumeChannel.EffectsVolume;
+        source.PlayOneShot(clip, Mathf.Clamp01(gain));
     }
 
     // Evita o mesmo som duplicado quando dois sistemas notificam a mesma interacao no mesmo frame.
@@ -92,7 +96,7 @@ public sealed partial class AudioManager
 
     private void UpdateEffects()
     {
-        oneShots.volume = AudioVolumeChannel.EffectsVolume;
+        sceneOneShots.volume = oneShots.volume = AudioVolumeChannel.EffectsVolume;
         footsteps.volume = 0.28f * AudioVolumeChannel.EffectsVolume;
         if (ambience != null && ambience.isPlaying)
             ambience.volume = 0.24f * AudioVolumeChannel.EffectsVolume;
