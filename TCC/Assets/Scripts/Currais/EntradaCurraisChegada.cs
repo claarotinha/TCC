@@ -253,6 +253,29 @@ public partial class EntradaCurrais
         yield return Dizer(paiAcomodado);
     }
 
+    [Header("Pai — animações distintas de ferimento")]
+    [SerializeField] private RuntimeAnimatorController paiMachucadoController, paiEnfaixadoController;
+    private Animator animadorEstadosPai;
+    private RuntimeAnimatorController controllerOriginalPai;
+
+    private bool AtualizarAnimacaoFerimentoPai()
+    {
+        if (pai == null) return false;
+        if (animadorEstadosPai == null)
+        {
+            animadorEstadosPai = pai.GetComponent<Animator>();
+            if (animadorEstadosPai == null) return false;
+            controllerOriginalPai = animadorEstadosPai.runtimeAnimatorController;
+        }
+        RuntimeAnimatorController destino = !Dados.curraisPaiFerido ? controllerOriginalPai :
+            Dados.curraisPaiAcomodado ? paiEnfaixadoController : paiMachucadoController;
+        if (destino == null) return false;
+        // Troca apenas quando o estado muda, sem reiniciar os ciclos a cada quadro.
+        if (animadorEstadosPai.runtimeAnimatorController != destino)
+            animadorEstadosPai.runtimeAnimatorController = destino;
+        return Dados.curraisPaiFerido;
+    }
+
     private void AtualizarVisuaisChegada()
     {
         bool revistaAtiva = Dados.curraisEtapaEntrada == 2;
@@ -262,7 +285,10 @@ public partial class EntradaCurrais
         areaDiarioEntrada.enabled = revistaAtiva && diarioEntrada.activeSelf && !Dados.curraisDiarioRecusado;
         panoAbrigo.SetActive(Dados.curraisFamiliaParou && PedidoPanoConhecido && !Dados.curraisPanoAbrigoRecolhido && !Dados.curraisPaiAcomodado);
         areaPanoAbrigo.enabled = panoAbrigo.activeSelf;
-        panoNoPai.SetActive(Dados.curraisPaiAcomodado && (Dados.curraisEtapaBusca < 1 || Dados.curraisEtapaBusca == 4 || Dados.curraisEtapaBusca == 5));
+        bool ferimentoNoSprite = AtualizarAnimacaoFerimentoPai();
+        // A faixa já está desenhada nos novos sprites; evita sobrepor o pano antigo.
+        panoNoPai.SetActive(!ferimentoNoSprite && Dados.curraisPaiAcomodado &&
+            (Dados.curraisEtapaBusca < 1 || Dados.curraisEtapaBusca == 4 || Dados.curraisEtapaBusca == 5));
         AtualizarMesaRevista();
         AtualizarCabacaMesa();
         AtualizarAbrigoVisual();
