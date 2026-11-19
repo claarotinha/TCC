@@ -61,6 +61,10 @@ public class ControleJornada : MonoBehaviour
         if (dados.estradaAbrigoConcluido) salvo = Mathf.Max(salvo, 2);
         if (dados.estradaJuazeiroConcluido) salvo = Mathf.Max(salvo, 4);
         if (dados.estradaAcampamentoConcluido) salvo = 5;
+        // Recupera checkpoints antigos em que o amanhecer foi salvo, mas a
+        // contagem de paradas nao chegou a ser persistida.
+        if (dados.estradaFortalezaIniciada || dados.estradaDialogoFortalezaConcluido ||
+            dados.estradaAbordagemIniciada || dados.ato1Concluido) salvo = 5;
         paradasConcluidas = Mathf.Max(paradasConcluidas, salvo);
         aguaTerceiraLiberada = dados.estradaBarrigudaConcluida;
         encontroTerceiraLiberado = dados.estradaCurativoAplicado;
