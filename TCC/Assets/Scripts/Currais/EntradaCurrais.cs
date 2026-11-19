@@ -124,6 +124,7 @@ public partial class EntradaCurrais : MonoBehaviour
 
     private IEnumerator Start()
     {
+        PrepararFalasDasIrmas();
         if (!ReferenciasValidas())
         {
             Debug.LogError("EntradaCurrais: inicialização interrompida em " + name + ".\n" + DiagnosticarConfiguracaoEntrada(), this);
@@ -618,7 +619,21 @@ public partial class EntradaCurrais : MonoBehaviour
 
     [Header("Cutscene de entrada — ordem das imagens na Hierarchy")]
     [SerializeField] private GameObject[] quadrosEntrada;
-    [SerializeField] private Fala[] chegadaAlegreFamilia, chegadaAlegreFortaleza, irmasAntesSeparacao;
+    [SerializeField] private Fala[] chegadaAlegreFamilia, chegadaAlegreFortaleza;
+    [SerializeField] private Fala[] irmasAntesSeparacao;
+
+    private void PrepararFalasDasIrmas()
+    {
+        // Cenas salvas antes da inclusão deste campo podem carregá-lo vazio.
+        // Restaura o diálogo aprovado antes de validar a entrada; textos válidos
+        // editados na Hierarchy continuam sendo usados.
+        if (FalasValidas(irmasAntesSeparacao)) return;
+        irmasAntesSeparacao = new[]
+        {
+            new Fala { personagem = "Mariquinha", texto = "Fique comigo, Zefinha." },
+            new Fala { personagem = "Zefinha", texto = "Tô aqui." }
+        };
+    }
 
     private void MostrarQuadroEntrada(int indice)
     {
