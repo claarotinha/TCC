@@ -142,11 +142,6 @@ public partial class EntradaCurrais
         if (atendimentoBentoEmCurso || Dados.curraisBentoMorto ||
             Dados.curraisEtapaBusca != 5 || (Dados.curraisItensAtendimentoBento & 3) != 3) yield break;
         atendimentoBentoEmCurso = true;
-        if (PaiBuscandoFamiliaBento && !familiarBentoEmMovimento)
-        {
-            pai.position = origemFamiliarBento.position;
-            Physics2D.SyncTransforms();
-        }
         SpriteRenderer cobertura = corpoCoberto.GetComponent<SpriteRenderer>();
         Color corCobertura = cobertura.color;
         try
@@ -154,11 +149,16 @@ public partial class EntradaCurrais
             yield return DizerEntradaUmaVez("bento-pai-vai-chamar", bentoPaiBuscarFamilia);
             if (!ViuConversaEntrada("bento-pai-foi-buscar"))
             {
-                yield return Mover(pai, origemFamiliarBento.position, tempoCaminhadaBento);
+                // O trabalhador avisa a família fora de quadro. O pai fica com Josefa.
+                FecharDialogo();
+                yield return Esperar(1.5f);
                 RegistrarConversaEntrada("bento-pai-foi-buscar"); Salvar();
             }
-            yield return Esperar(pausaAtendimentoBento);
+            FecharDialogo();
+            yield return Esperar(Mathf.Max(3f, pausaAtendimentoBento));
             yield return DizerEntradaUmaVez("bento-atendimento-parou", bentoAtendimentoParou);
+            FecharDialogo();
+            yield return Esperar(1.5f);
             yield return DizerEntradaUmaVez("bento-pergunta-levantar",
                 Dados.curraisEscolhaAgua == 1 ? bentoPerguntaMae : bentoPerguntaLuzia);
             if (!ViuConversaEntrada("bento-pai-voltou"))
@@ -166,7 +166,11 @@ public partial class EntradaCurrais
                 yield return TrazerFamiliarBento();
                 RegistrarConversaEntrada("bento-pai-voltou"); Salvar();
             }
+            FecharDialogo();
+            yield return Esperar(2f);
             yield return DizerEntradaUmaVez("bento-noticia", bentoNoticiaLinear);
+            FecharDialogo();
+            yield return Esperar(2.5f);
             yield return Escurecer(1f);
             Dados.curraisBentoMorto = true;
             GameProgress.Instance.UnlockDiaryPage("currais-bento");

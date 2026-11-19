@@ -86,8 +86,8 @@ public partial class EntradaCurrais
             if (Dados.curraisEscolhaAgua != 1 || Dados.curraisEtapaBusca > 5)
                 Posicionar(mae, maeAbrigo);
             luzia.transform.localRotation = Quaternion.identity;
-            if (etapa >= 4 && !PaiBuscandoFamiliaBento)
-                Posicionar(pai, etapa == 5 && ViuConversaEntrada("bento-pai-voltou") ? paiRetornoBento : paiTrabalhoMarca);
+            if (etapa >= 4)
+                Posicionar(pai, paiTrabalhoMarca);
             if (etapa >= 6) Posicionar(pai, paiAbrigo);
         }
         AtualizarSocorro();
