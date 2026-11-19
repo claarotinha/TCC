@@ -48,6 +48,13 @@ public partial class EntradaCurrais
 
     private void PosicionarInicioTestePatio()
     {
+        // Awake ativa a cobertura da cutscene; o atalho não passa pelo fim dela.
+        if (fundoPretoSeparacao != null) fundoPretoSeparacao.SetActive(false);
+        foreach (GameObject quadro in quadrosEntrada)
+            if (quadro != null) quadro.SetActive(false);
+        mostrarAjudaTemporaria = false;
+        if (painelAjudaTemporaria != null) painelAjudaTemporaria.SetActive(false);
+        objetivoTexto.gameObject.SetActive(false);
         Vector3 posicao = mari.transform.position;
         posicao.x = paiTrabalhoMarca.position.x - alcanceChegadaPatio - 1f;
         mari.transform.position = posicao;
