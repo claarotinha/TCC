@@ -75,7 +75,7 @@ public partial class EntradaCurrais
     {
         bool ativo = PostoDisponivel;
         setorPosto.SetActive(true);
-        curativoPai.SetActive(ativo && Dados.curraisPaiFerido);
+        curativoPai.SetActive(false);
         lacoNaMao.SetActive(ativo && (noiteEmCurso || Dados.curraisEtapaPosto == 4) && Dados.curraisLacoGuardado);
         maoNaRoupa.SetActive(ativo && (noiteEmCurso || Dados.curraisEtapaPosto == 4) && !Dados.curraisLacoGuardado);
         cabacaNoite.SetActive(ativo && Dados.curraisEtapaPosto == 4);

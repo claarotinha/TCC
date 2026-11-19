@@ -108,7 +108,7 @@ public partial class EntradaCurrais
         int etapa = Dados.curraisEtapaConsulta;
         setorConsulta.SetActive(true);
         bloqueioSaida.enabled = false;
-        marcadorPorteira.SetActive(ativa && etapa == 2);
+        marcadorPorteira.SetActive(false);
         if (ativa)
             foreach (Collider2D guarda in guardasPorcosSaida) guarda.enabled = etapa == 2;
         AtualizarFamiliaAlternativa();
