@@ -126,7 +126,7 @@ public partial class EntradaCurrais : MonoBehaviour
     {
         if (!ReferenciasValidas())
         {
-            Debug.LogError("EntradaCurrais: inicialização interrompida. Confira os campos identificados acima no objeto " + name + ".", this);
+            Debug.LogError("EntradaCurrais: inicialização interrompida em " + name + ".\n" + DiagnosticarConfiguracaoEntrada(), this);
             FecharDialogo();
             if (fade != null) CorFade(0f);
             if (fundoPretoSeparacao != null) fundoPretoSeparacao.SetActive(false);
@@ -342,6 +342,53 @@ public partial class EntradaCurrais : MonoBehaviour
         return opcoesLuziaInicio != null && opcoesLuziaInicio.Length == 3 &&
             opcoesAgua != null && opcoesAgua.Length == 2 && opcoesMenino != null && opcoesMenino.Length == 3 &&
             opcoesRegistro != null && opcoesRegistro.Length == 2 && opcoesPanela != null && opcoesPanela.Length == 3;
+    }
+
+    private string DiagnosticarConfiguracaoEntrada()
+    {
+        var problemas = new List<string>();
+        const System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.Instance |
+            System.Reflection.BindingFlags.NonPublic;
+        // Os validadores antigos podem retornar false sem emitir mensagem.
+        // Executa cada setor separadamente para que um não esconda os demais.
+        foreach (var metodo in typeof(EntradaCurrais).GetMethods(flags))
+        {
+            if (!metodo.Name.StartsWith("Referencias") || !metodo.Name.EndsWith("Validas") ||
+                metodo.Name == nameof(ReferenciasValidas) || metodo.ReturnType != typeof(bool) ||
+                metodo.GetParameters().Length != 0) continue;
+            try
+            {
+                if (!(bool)metodo.Invoke(this, null)) problemas.Add("Setor inválido: " + metodo.Name);
+            }
+            catch (System.Reflection.TargetInvocationException erro)
+            {
+                problemas.Add(metodo.Name + ": " + (erro.InnerException ?? erro).Message);
+            }
+        }
+        foreach (var campo in typeof(EntradaCurrais).GetFields(flags))
+        {
+            if (!Attribute.IsDefined(campo, typeof(SerializeField))) continue;
+            object valor = campo.GetValue(this);
+            if (campo.FieldType == typeof(Fala[]) && !FalasValidas((Fala[])valor))
+                problemas.Add("Falas vazias ou incompletas: " + campo.Name);
+            else if (campo.FieldType == typeof(Fala) && !FalaValida((Fala)valor))
+                problemas.Add("Fala incompleta: " + campo.Name);
+            else if (typeof(UnityEngine.Object).IsAssignableFrom(campo.FieldType) &&
+                (UnityEngine.Object)valor == null)
+                problemas.Add("Campo vazio: " + campo.Name);
+            else if (valor is Array itens && typeof(UnityEngine.Object).IsAssignableFrom(campo.FieldType.GetElementType()))
+            {
+                for (int i = 0; i < itens.Length; i++)
+                    if ((UnityEngine.Object)itens.GetValue(i) == null)
+                        problemas.Add("Referência vazia: " + campo.Name + "[" + i + "]");
+            }
+        }
+        if (quadrosEntrada == null || quadrosEntrada.Length != 12)
+            problemas.Add("quadrosEntrada: são necessárias 12 imagens.");
+        if (!PresencasValidas()) problemas.Add("pessoasPresentes: confira os personagens e desenhos indicados no Console.");
+        if (problemas.Count == 0)
+            problemas.Add("A configuração mudou durante a validação. Reabra a cena salva e confira as mensagens anteriores do Console.");
+        return string.Join("\n", problemas);
     }
 
     private bool ConferirReferencia(UnityEngine.Object referencia, string campo)
