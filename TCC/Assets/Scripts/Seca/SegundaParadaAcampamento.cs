@@ -56,8 +56,16 @@ public partial class SegundaParada
         cortinaAcampamento.gameObject.SetActive(false);
     }
 
+    private void DefinirPersonagensFogueira(bool ativos)
+    {
+        if (personagensFogueira == null) return;
+        foreach (SpriteRenderer pessoa in personagensFogueira)
+            if (pessoa != null) pessoa.gameObject.SetActive(ativos);
+    }
+
     private void PrepararAcampamento()
     {
+        DefinirPersonagensFogueira(false);
         if (GameProgress.Instance != null)
         {
             GameProgressData d = GameProgress.Instance.Data;
@@ -372,6 +380,7 @@ public partial class SegundaParada
         tempoImagemNoite = 0f;
         imagemNoiteAtual.sprite = quadros[0];
         imagemNoiteAtual.preserveAspect = true;
+        DefinirPersonagensFogueira(false);
 
         noiteTelaCheia.SetActive(true);
         noiteTelaCheia.transform.SetAsLastSibling();
@@ -410,6 +419,8 @@ public partial class SegundaParada
         for (int i = 0; i < desenhosAbrigo.Length; i++)
             if (desenhosAbrigo[i] != null) desenhosAbrigo[i].enabled = false;
 
+        // A refeição já consumiu todos os itens; revela os sentados sob a tela escura.
+        DefinirPersonagensFogueira(!conversaFogueiraConcluida);
         MostrarFogueira(fogueiraAssando);
 
         if (conversaFogueiraConcluida)
