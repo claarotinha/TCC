@@ -764,6 +764,11 @@ public partial class EntradaCurrais : MonoBehaviour
     private bool ReterPertences()
     {
         if (Dados.curraisPertencesRetidos) return true;
+        if (dispensarPertencesParaTeste)
+        {
+            Dados.curraisPertencesRetidos = true;
+            return true;
+        }
         // As entregas individuais já registraram os itens retidos. Não remover
         // silenciosamente o que ainda não foi entregue pelo jogador.
         if (InventoryManager.Instance == null || InventoryManager.Instance.Items.Count > 0) return false;

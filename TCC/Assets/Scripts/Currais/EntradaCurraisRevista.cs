@@ -10,6 +10,9 @@ public partial class EntradaCurrais
     [SerializeField] private MesaRevistaCurrais mesaPertences;
     [SerializeField] private Transform fiscalConferencia;
     [SerializeField] private Fala[] revistaPendente, cadernoEmConferencia, cadernoAutorizado;
+    [Header("Teste temporário — somente revista inicial")]
+    [Tooltip("Permite concluir a conferência sem arrastar os pertences. Mantém o inventário e as entregas posteriores. Desative para testar o fluxo normal.")]
+    [SerializeField] private bool dispensarPertencesParaTeste;
     private bool revistaEmConferencia;
 
     private bool ReferenciasRevistaValidas()
@@ -68,7 +71,7 @@ public partial class EntradaCurrais
         rotulos.Add("Sair"); acoes.Add(FecharMenu);
         MostrarMenuEntrada("revista-pertences", "Fiscal", "Os pertences ficam juntos na mesa. Depois confiro o caderno.",
             rotulos.ToArray(), acoes.ToArray());
-        if (ViuConversaEntrada("revista-pendente") && InventoryManager.Instance.Items.Count > 0)
+        if (!dispensarPertencesParaTeste && ViuConversaEntrada("revista-pendente") && InventoryManager.Instance.Items.Count > 0)
         {
             int indice = rotulos.IndexOf("Terminou a conferência?");
             if (indice >= 0 && indice < botoesEtapa2.Length) botoesEtapa2[indice].interactable = false;
@@ -106,7 +109,7 @@ public partial class EntradaCurrais
         if (Dados.curraisPertencesRetidos)
         { yield break; }
         if (InventoryManager.Instance == null) yield break;
-        if (InventoryManager.Instance.Items.Count > 0)
+        if (!dispensarPertencesParaTeste && InventoryManager.Instance.Items.Count > 0)
         { yield return DizerEntradaUmaVez("revista-pendente", revistaPendente); yield break; }
         try
         {
