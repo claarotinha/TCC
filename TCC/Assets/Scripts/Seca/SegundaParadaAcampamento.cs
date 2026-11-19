@@ -56,21 +56,8 @@ public partial class SegundaParada
         cortinaAcampamento.gameObject.SetActive(false);
     }
 
-    private void MostrarFamiliaFogueira(bool mostrar)
-    {
-        irmasCenario.SetActive(mostrar);
-        paisCenario.SetActive(mostrar);
-        foreach (SpriteRenderer pessoa in personagensFogueira)
-        {
-            pessoa.enabled = mostrar;
-            pessoa.forceRenderingOff = false;
-        }
-    }
-
     private void PrepararAcampamento()
     {
-        if (irmasCenario != null) irmasCenario.SetActive(false);
-        if (paisCenario != null) paisCenario.SetActive(false);
         if (GameProgress.Instance != null)
         {
             GameProgressData d = GameProgress.Instance.Data;
@@ -96,8 +83,6 @@ public partial class SegundaParada
         Exigir(quintaParada, nameof(quintaParada));
         Exigir(arvoreAcampamento, nameof(arvoreAcampamento));
         Exigir(fogueiraCenario, nameof(fogueiraCenario));
-        Exigir(irmasCenario, nameof(irmasCenario));
-        Exigir(paisCenario, nameof(paisCenario));
         Exigir(enquadramentoFogueira, nameof(enquadramentoFogueira));
         Exigir(cortinaAcampamento, nameof(cortinaAcampamento));
         Exigir(visualFogueira, nameof(visualFogueira));
@@ -132,7 +117,7 @@ public partial class SegundaParada
             return;
         }
         faseAcampamento = RestaurarFaseAcampamento();
-        MostrarFamiliaFogueira(false);
+
         RestaurarFadeAcampamento();
         noiteTelaCheia.SetActive(false);
         AtualizarMateriaisAcampamento();
@@ -143,14 +128,6 @@ public partial class SegundaParada
         // Recupera componentes dos próprios objetos editados na Hierarchy, sem criar outra cena.
         if (visualFogueira == null && fogueiraCenario != null)
             visualFogueira = fogueiraCenario.GetComponent<FogueiraEstradaVisual>();
-        if ((personagensFogueira == null || personagensFogueira.Length != 4) &&
-            paisCenario != null && irmasCenario != null)
-        {
-            var pessoas = new List<SpriteRenderer>();
-            pessoas.AddRange(paisCenario.GetComponentsInChildren<SpriteRenderer>(true));
-            pessoas.AddRange(irmasCenario.GetComponentsInChildren<SpriteRenderer>(true));
-            personagensFogueira = pessoas.ToArray();
-        }
         if (enquadramentoFogueira == null && quintaParada != null && quintaParada.parent != null)
             enquadramentoFogueira = quintaParada.parent.Find("Câmera da fogueira - EDITAR enquadramento");
         if (cortinaAcampamento == null && noiteTelaCheia != null)
@@ -395,7 +372,7 @@ public partial class SegundaParada
         tempoImagemNoite = 0f;
         imagemNoiteAtual.sprite = quadros[0];
         imagemNoiteAtual.preserveAspect = true;
-        MostrarFamiliaFogueira(false);
+
         noiteTelaCheia.SetActive(true);
         noiteTelaCheia.transform.SetAsLastSibling();
         dialogueUI.transform.SetAsLastSibling();
@@ -433,7 +410,6 @@ public partial class SegundaParada
         for (int i = 0; i < desenhosAbrigo.Length; i++)
             if (desenhosAbrigo[i] != null) desenhosAbrigo[i].enabled = false;
 
-        MostrarFamiliaFogueira(true);
         MostrarFogueira(fogueiraAssando);
 
         if (conversaFogueiraConcluida)
@@ -665,7 +641,6 @@ public partial class SegundaParada
         yield return new WaitForSeconds(1.4f);
         if (noiteTelaCheia != null) noiteTelaCheia.SetActive(false);
         quadrosNoiteAtuais = null;
-        irmasCenario.SetActive(false); paisCenario.SetActive(false);
         MostrarFogueira(fogueiraBrasas);
         Vector3 lugar = mari.transform.position; lugar.x = quintaParada.position.x + 2.8f; Posicionar(mari.transform, lugar);
         foreach (SeguidorFamilia familiar in seguidoresAbrigo)

@@ -76,7 +76,7 @@ public partial class SegundaParada : MonoBehaviour
     [SerializeField] private ItemData materialFogueira;
     [SerializeField] private ItemCombination combinacaoFogueira;
     [SerializeField] private Sprite fogueiraAssando, fogueiraBrasas;
-    [SerializeField] private GameObject arvoreAcampamento, fogueiraCenario, irmasCenario, paisCenario;
+    [SerializeField] private GameObject arvoreAcampamento, fogueiraCenario;
     [SerializeField] private GameObject[] materiaisCenario = new GameObject[3];
     [Header("Novas artes da passagem de tempo")]
     [SerializeField] private Sprite[] fundosDaJornada;
@@ -1311,7 +1311,6 @@ public partial class SegundaParada : MonoBehaviour
         RegistrarAlvo(meninoCenario, "meninoRetirante"); RegistrarAlvo(pessoaCenario, "pessoaDeitada");
         RegistrarAlvo(juazeiroCenario, "juazeiro"); RegistrarAlvo(familiaDescanso, "descansoJuazeiro");
         RegistrarAlvo(arvoreAcampamento, "arvoreAcampamento"); RegistrarAlvo(fogueiraCenario, "fogueira");
-        RegistrarAlvo(irmasCenario, "irmasNoite"); RegistrarAlvo(paisCenario, "paisNoite");
         RegistrarAlvo(interiorAbrigo, "interiorAbrigo");
         RegistrarAlvo(cidadeCenario, "cidade"); RegistrarAlvo(familiaFinal, "familiaFinal");
         RegistrarAlvo(alvoBaleia, "baleia");
@@ -2279,8 +2278,6 @@ public partial class SegundaParada : MonoBehaviour
         RestaurarFundoFim();
         if (familiaFinal != null) familiaFinal.SetActive(false);
         finalEmAndamento = false; encerramentoMostrado = false;
-        if (irmasCenario != null) irmasCenario.SetActive(false);
-        if (paisCenario != null) paisCenario.SetActive(false);
         noiteEmAndamento = false; retomouAcampamento = false;
         escolhaNoturnaAberta = false;
         if (familiaDescanso != null) familiaDescanso.SetActive(false);
