@@ -1488,7 +1488,7 @@ MonoBehaviour:
   - {fileID: 3500000011}
   - {fileID: 513277210}
   - {fileID: 1574179965}
-  - {fileID: 845846474}
+  - {fileID: 3900000090}
   trechoAguaTerceira: 5
   trechoAposAguaTerceira: 75
   trechoJuazeiro: 14
@@ -4122,7 +4122,10 @@ Transform:
   m_GameObject: {fileID: 845846473}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -107.86, y: -0.97, z: 0}
+  m_LocalPosition:
+    x: -206.77001999999993
+    y: -0.97
+    z: 0
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4144,8 +4147,8 @@ MonoBehaviour:
   numeroDaParada: 5
   concluirComTeclaT: 0
   personagem: {fileID: 1304905420}
-  marcoCenario: {fileID: 0}
-  distanciaAntesDoMarco: 4
+  marcoCenario: {fileID: 3900000110}
+  distanciaAntesDoMarco: 0
 --- !u!61 &845846476
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8775,7 +8778,7 @@ MonoBehaviour:
   numeroDaParada: 4
   concluirComTeclaT: 0
   personagem: {fileID: 1304905420}
-  marcoCenario: {fileID: 0}
+  marcoCenario: {fileID: 3900000062}
   distanciaAntesDoMarco: 4
 --- !u!61 &1574179967
 BoxCollider2D:
@@ -16196,7 +16199,7 @@ MonoBehaviour:
   familiaJuazeiroCurativo: {fileID: 21300001, guid: c7a70000000040008000000000000002, type: 3}
   juazeiroCenario: {fileID: 3900000061}
   familiaDescanso: {fileID: 3900000069}
-  quintaParada: {fileID: 845846474}
+  quintaParada: {fileID: 3900000078}
   limitesEstrada: {fileID: 1750010630}
   galhosSecos: {fileID: 11400000, guid: c8a80000000040008000000000000010, type: 2}
   folhasSecas: {fileID: 11400000, guid: c8a80000000040008000000000000011, type: 2}
@@ -22460,7 +22463,10 @@ Transform:
   m_GameObject: {fileID: 7120000000300}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -103.7, y: -0.12, z: -10}
+  m_LocalPosition:
+    x: -151.61001999999996
+    y: -0.12
+    z: -10
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22568,7 +22574,10 @@ Transform:
   m_GameObject: {fileID: 7132000000000}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -108.11, y: -2.022389, z: -0.1}
+  m_LocalPosition:
+    x: -156.02001999999993
+    y: -2.022389
+    z: -0.1
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22679,7 +22688,10 @@ Transform:
   m_GameObject: {fileID: 7132000000010}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -106.56, y: -2.022389, z: -0.1}
+  m_LocalPosition:
+    x: -154.47001999999998
+    y: -2.022389
+    z: -0.1
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22790,7 +22802,10 @@ Transform:
   m_GameObject: {fileID: 7132000000020}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -103.26, y: -2.022389, z: -0.1}
+  m_LocalPosition:
+    x: -151.1700199999998
+    y: -2.022389
+    z: -0.1
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22901,7 +22916,10 @@ Transform:
   m_GameObject: {fileID: 7132000000030}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -101.71, y: -2.022389, z: -0.1}
+  m_LocalPosition:
+    x: -149.62002000000007
+    y: -2.022389
+    z: -0.1
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
